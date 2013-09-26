@@ -42,17 +42,17 @@ class SchoolsController < ApplicationController
   private
 
   def bps_api_connector(url)
-    if Rails.env == 'production'
-      connection = Faraday.new(:url => url)
-      @response = connection.get
-    else
-      uri = URI(url)
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      http.ssl_version = :SSLv3
-      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      @response = http.get(url)
-    end
+    # if Rails.env == 'production'
+    #   connection = Faraday.new(:url => url)
+    #   @response = connection.get
+    # else
+    uri = URI(url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.ssl_version = :SSLv3
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    @response = http.get(url)
+    # end
     MultiJson.load(@response.body, :symbolize_keys => true)
   end
 
