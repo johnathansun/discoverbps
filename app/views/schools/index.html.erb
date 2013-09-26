@@ -1,0 +1,1961 @@
+<!-- dialog welcome -->
+<div class='dialog_box' id='dialog_welcome' style='display:none;'>
+	<div class='title'>Welcome !</div>
+	<p>Your lists are saved, so you can log in anytime to view or edit them. Access your settings in the upper left to manage your account.</p>
+	<div class='btn_success'>Done</div>
+</div>
+<!-- dialog BPSExpress -->
+<div class='dialog_box' id='dialog_BPSExpress' style='display:none;'>
+	<div class='title'>BPSExpress</div>
+	<p>Available December 15, pre-register your list online with BPSExpress!</p>
+	<div class='btn_success'>Done</div>
+</div>
+<!-- dialog Share via email -->
+<div class='dialog_box' id='dialog_share_via_email' style='display:none;'>
+	<div class='title'>Share via email</div>
+	<p>Send to friends and family to help with your decision, or send a copy to yourself!</p>
+	<form method='' action='' name=''>
+		<textarea name='email_addresses' placeholder='email addresses (separate with commas)'></textarea>
+		<label>Custom message</label>
+		<textarea name='custom_message' >Check out this ranked list of Boston Public School choices I created for Elizabeth!</textarea>
+		<div class='btn_success'>Send</div>
+	</form>
+</div>
+
+
+<!-- dialog welcome tutoriel-->
+<div class='dialog_box' id='dialog_welcome_tutoriel' style='display:none;'>
+	<div class='content'>
+		<div class='title'>Welcome !</div>
+		<p>This is your list of available schools.Drag to reorder them to suit your needs best.</p>
+		<div class='btn_success'>Next</div>
+		<div class='triangle'></div>
+	</div>
+</div>
+<!-- dialog discover the detail tutoriel-->
+<div class='dialog_box' id='dialog_discover_detail' style='display:none;'>
+	<div class='content'>
+		<div class='title'>Discover the detail</div>
+		<p>Click on any school to expand the full details about each</p>
+		<div class='btn_success'>Next</div>
+	</div>
+</div>
+
+<!-- dialog Sort by criteria tutoriel-->
+<div class='dialog_box' id='dialog_sort_criteria' style='display:none;'>
+	<div class='content'>
+		<div class='title'>Sort by criteria</div>
+		<p>Click any column header to re-sort the list according to that metric. Some columns expand to show detailed subsections.</p>
+		<div class='btn_success'>Next</div>
+	</div>
+</div>
+
+<!-- dialog specify your needs tutoriel-->
+<div class='dialog_box' id='dialog_specify_your_needs' style='display:none;'>
+	<div class='content'>
+		<div class='title'>Specify your needs</div>
+		<p>Select features that matter to you from these options to see which schools fit best.</p>
+		<div class='btn_success'>Next</div>
+	</div>
+</div>
+
+<!-- dialog Dont miss deadlines tutoriel-->
+<div class='dialog_box' id='dialog_dont_miss_deadlines' style='display:none;'>
+	<div class='content'>
+		<div class='title'>Don't miss deadlines</div>
+		<p>Click on the Registration Timeline to see the complete process and all important dates.</p>
+		<div class='btn_success'>Next</div>
+	</div>
+</div>
+
+<!-- dialog ready to register tutoriel-->
+<div class='dialog_box' id='dialog_ready_register' style='display:none;'>
+	<div class='title'>Ready to register?</div>
+	<p>Once you've ordered your list of schools, scroll down to prepare for the next steps!</p>
+	<div class='btn_success'>Done</div>
+</div>
+
+<header>
+	<div class="wrap">
+		<section class="content_wrap">
+			<p class='title'>Discover</p>
+			<div class='logo'><a href='javascript:void();'><img src='assets/bps-logo.png'/></a></div>
+			<div class='clr'></div>
+		</section>
+	</div>
+</header>
+
+<!-- start timeline -->
+<div class="wrap timeline_menu">
+	<!-- start timeline -->
+	<div class="timeline">
+		<div class="months">
+			<div class="month">Oct 2013</div>
+			<div class="month">Nov</div>
+			<div class="month">Dec</div>
+			<div class="month">Jan 2014</div>
+			<div class="month">Feb</div>
+			<div class="month">Mar</div>
+			<div class="month">Apr</div>
+			<div class="month">May</div>
+			<div class="month">Jun</div>
+			<div class="month">Jul</div>
+			<div class="month">Aug</div>
+			<div class="month last">Sep</div>
+		</div>	
+		
+		<div class="day_indicator"  style="left:20%;">
+			<span class="text">Today</span>
+		</div>
+		
+		<div class="event_indicator"  style="left:15%;"><span class='icon-DBPS-Dev-Assets-SRG-38'></span></div>
+		<div class="event_indicator"  style="left:18%;"><span class='icon_horizontal-event'></span></div>
+		<div class="event_indicator"  style="left:46%;"><span class='icon_horizontal-event'></span></div>
+		<div class="event_indicator"  style="left:52%;"><span class='icon-DBPS-Dev-Assets-SRG-38'></span></div>
+		<div class="event_indicator"  style="left:92%;"><span class='icon_horizontal-event'></span></div>
+		
+        <div id="registration_contaner">
+        	<div id="registration_btn">
+            	Registration
+            </div>
+			<div class="clr"></div>
+        	<div class='register_timeline_contaner' style='display:none; '>
+				<div class='event_zone' id='regis_1' style='left:0%;'>
+					<div class='event'  >
+						<div class='box_info' style='display:none;'>
+							<div class='triangle'></div>
+							<div class='date_event'>Jan 22–25</div>
+							<div class='txt_event'>Last names R–Z<br>K, 6, 9 New-Student Registration</div>
+							<span>Your registration period</span>
+						</div>
+					</div>
+				</div>
+				<div class='event_zone' id='regis_2' style='left:6%;'>
+					<div class='event'  >
+						<div class='box_info' style='display:none;'>
+							<div class='triangle'></div>
+							<div class='date_event'>Jan 22–25</div>
+							<div class='txt_event'>Last names R–Z<br>K, 6, 9 New-Student Registration</div>
+							<span>Your registration period</span>
+						</div>
+					</div>
+				</div>
+				<div class='event_zone' id='regis_3' style='left:14%;'>
+					<div class='event'  >
+						<div class='box_info' style='display:none;'>
+							<div class='triangle'></div>
+							<div class='date_event'>Jan 22–25</div>
+							<div class='txt_event'>Last names R–Z<br>K, 6, 9 New-Student Registration</div>
+							<span>Your registration period</span>
+						</div>
+					</div>
+				</div>
+				<div class='event_zone' id='regis_4' style='left:22%;'>
+					<div class='event your_registration_period'  >
+						<div class='box_info' style='display:none;'>
+							<div class='triangle'></div>
+							<div class='date_event'>Jan 22–25</div>
+							<div class='txt_event'>Last names R–Z<br>K, 6, 9 New-Student Registration</div>
+							<span>Your registration period</span>
+						</div>
+					</div>
+				</div>
+				<div class='event_zone' id='regis_5' style='left:30%;'>
+					<div class='event'  >
+						<div class='box_info' style='display:none;'>
+							<div class='triangle'></div>
+							<div class='date_event'>Jan 22–25</div>
+							<div class='txt_event'>Last names R–Z<br>K, 6, 9 New-Student Registration</div>
+							<span>Your registration period</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class='event_zone' id='regis_6' style='left:45%;'>
+					<div class='event'  >
+						<div class='box_info' style='display:none;'>
+							<div class='triangle'></div>
+							<div class='date_event'>Jan 22–25</div>
+							<div class='txt_event'>Last names R–Z<br>K, 6, 9 New-Student Registration</div>
+							<span>Your registration period</span>
+						</div>
+					</div>
+				</div>
+
+				
+			</div>
+
+        </div>
+	</div>
+	<!-- end timeline -->
+	
+	<!--  navigation menu desktop and mobile -->
+	<section class="content_wrap ">
+		<nav class="menu_nav">
+            <span id="menu_nav_mobile" aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-25"></span>
+			<ul id="menu_items" class='mobile_only'>
+				<li class='first'><a href="#" title="">Discover</a></li>
+				<li><a href="#" title="">Register</a></li>
+				<li><a href="#" title="">Succeed!</a></li>
+				<li class='languages_mobile'>
+					<a href="#" title="">languages <span data-icon="&#xe003;" aria-hidden="true"></span></a>
+					<ul class='list_languages'>
+						<li><a href='#' class='language current_language'>English</a></li>
+						<li><a href='#' class='language'>Español</a></li>
+						<li><a href='#' class='language'>Kreyòl Ayisyen</a></li>
+						<li><a href='#' class='language'>??</a></li>
+						<li><a href='#' class='language'>Português</a></li>
+						<li><a href='#' class='language'>Kriolu Kabuverdianu</a></li>
+						<li><a href='#' class='language'>Ti?ng Vi?t</a></li>
+						<li><a href='#' class='language'>Français</a></li>
+						<li><a href='#' class='language'><span data-icon="&#xe003;" aria-hidden="true"></span> Other</a></li>
+					</ul>
+				</li>
+				<li class='visit'><a href='http://www.BostonPublicSchools.org'>Visit BostonPublicSchools.org</a></li>
+			</ul>
+			<ul class='no_mobile'>
+				<li class="succeed"><a href="#" title=""><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-05"></span></a></li>
+				<li class="register"><a href="#" title=""><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-06"></span></a></li>
+			</ul>
+		</nav>
+		<div class="logo_discover" >
+			<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-01"></span>
+		</div>
+		<div class="clr"></div>
+	</section>
+	<!-- end navigation menu desktop and mobile -->
+	<div class="clr"></div>
+</div>
+
+<!-- script for timeline and registration -->
+<script>
+
+var is_open_menu_languages_mobile= false;
+
+$(".languages_mobile").click(function() {
+		if (is_open_menu_languages_mobile) {
+		// Close mobile
+		is_open_menu_languages_mobile= false;
+		$(".list_languages").css("display", "none");
+	 } else {
+		// Open mobile
+		is_open_menu_languages_mobile= true;
+		$(".list_languages").css("display", "block");
+
+	 }
+});
+var is_open_menu_mobile= false;
+
+$("#menu_nav_mobile").click(function() {
+
+	if (is_open_menu_mobile) {
+		// Close mobile
+		is_open_menu_mobile= false;
+		
+		$("#menu_items").animate({
+			height: "0"
+		  }, 200, function() {
+			// Animation complete.
+			$(this).css("display", "none");
+			$(".menu_nav").width("31px");
+			$("#menu_nav_mobile").removeClass( "icon-DBPS-Dev-Assets-SRG-07" ).addClass( " icon-DBPS-Dev-Assets-SRG-25" );
+		
+		});
+	 } else {
+		// Open mobile
+		$(".menu_nav").width("100%");	
+		is_open_menu_mobile= true;
+		$("#menu_items").css("display", "block");
+		$('#menu_items').css('height', 'auto');
+		var autoHeight = $('#menu_items').height();
+		$("#menu_items").css("height", "0");
+		
+		$("#menu_items").animate({
+			height: autoHeight
+		  }, 200, function() {
+			$('#menu_items').css('height', 'auto');
+			$("#menu_nav_mobile").removeClass( "icon-DBPS-Dev-Assets-SRG-25" ).addClass( " icon-DBPS-Dev-Assets-SRG-07" );
+		});
+	 }
+});
+
+
+function initializeRegistrationTimeline() {
+
+
+	// Ex. (2 1/3) months approximate
+	$("#registration_contaner").width(Math.floor((2.333*$(".months .month").outerWidth())));
+
+	
+	
+	
+	// Ex. 2 days approximate
+	$("#regis_1").width(2*($(".months .month").outerWidth()/30));
+
+	// Ex. 4 days approximate
+	$("#regis_2").width(4*($(".months .month").outerWidth()/30));
+	$("#regis_3").width(4*($(".months .month").outerWidth()/30));
+	$("#regis_4").width(4*($(".months .month").outerWidth()/30));
+	$("#regis_5").width(4*($(".months .month").outerWidth()/30));
+
+
+	$("#regis_6").width(37*($(".months .month").outerWidth()/30));
+	
+
+	var arr= jQuery.makeArray($(".months .month"));
+	console.log($($(".months .month")[3]).width());
+
+	
+	// Set position registration_contaner on 1 January
+	// 3 is position January
+	var position = $($(".months .month")[3]).position();
+	$("#registration_contaner").css("left",position.left)
+}
+
+
+initializeRegistrationTimeline();
+
+window.onresize = function(event) {
+	initializeRegistrationTimeline();
+	$("#menu_items").css("display", "none");
+	$(".menu_nav").width("auto");
+	$("#menu_nav_mobile").removeClass( "icon-DBPS-Dev-Assets-SRG-07" ).addClass( " icon-DBPS-Dev-Assets-SRG-25" );
+	is_open_menu_mobile= false;
+}
+
+$(".event_zone").hover(
+	function() {
+		// Position the box in the center of the event.
+		$(this).find(".box_info").css("left", -( ($(".box_info").outerWidth()/2) - ($(this).width()/2) )+"px");
+		$(this).find(".box_info").css("display", "block");
+	},
+	function () {
+		$(this).find(".box_info").css("display", "none");
+		
+	}
+ );
+
+ /*
+var is_open_register_contaner= false;
+$("#registration_btn").click(function() {
+	 if (is_open_register_contaner) {
+		// Close contaner
+		is_open_register_contaner= false;
+		$(".register_timeline_contaner").css("display", "none");
+		$(".wrap.timeline_menu .timeline").stop(true, true).animate({
+			height: "80"
+		  }, 100, function() {
+			// Animation complete.
+		  });
+	 } else {
+		// Open contaner
+		$(".wrap.timeline_menu .timeline").stop(true, true).animate({
+			height: "175"
+		  }, 100, function() {
+			// Animation complete.
+		  });
+		is_open_register_contaner= true;
+		$(".register_timeline_contaner").css("display", "block");
+	 }
+	 
+	 return false;
+});*/
+
+
+$(".timeline").hover(
+	function() {
+		$(".wrap.timeline_menu .timeline").stop(true, true).animate({
+			height: "175"
+		  }, 100, function() {
+			// Animation complete.
+		  });
+		$(".register_timeline_contaner").css("display", "block");
+	}, 
+	function() {
+		$(".register_timeline_contaner").css("display", "none");
+		$(".wrap.timeline_menu .timeline").stop(true, true).animate({
+			height: "80"
+		  }, 100, function() {
+			// Animation complete.
+		  });
+	}
+);
+</script>
+<!-- END script for timeline and registration -->
+
+<!-- End timeline -->
+
+<!-- start languages -->
+<div class="wrap no_mobile">
+<!--languages selection and his list-->
+	<ul class='languages'>
+		<li>
+			<div class='current_language'><span data-icon="&#xe003;" aria-hidden="true"></span>English</div>
+			<div class='clr'></div>
+			<ul >
+				<li><a href='#' class='language'>Español</a></li>
+				<li><a href='#' class='language'>Kreyòl Ayisyen</a></li>
+				<li><a href='#' class='language'>中文</a></li>
+				<li><a href='#' class='language'>Português</a></li>
+				<li><a href='#' class='language'>Kriolu Kabuverdianu</a></li>
+				<li><a href='#' class='language'>Tiếng Việt</a></li>
+				<li><a href='#' class='language'>Français</a></li>
+				<li><a href='#' class='language'><span data-icon="&#xe003;" aria-hidden="true"></span>Other</a></li>
+			</ul>
+		</li>
+	</ul>
+<!--END list-->
+</div>
+<!-- end languages -->
+
+<!-- start google map -->
+<div class="wrap global_map">
+	
+	<section class="content_wrap">
+    	<?php include ('-includes-/account_menu.php'); ?>
+		
+	</section>
+	
+	<!-- zone where google map in integrated -->
+	<div id='googleMap'></div>
+	<!-- END zone where google map in integrated -->
+	
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
+
+
+<!-- script to integrat and personnalize google map for screen (difference with zoom)-->
+
+<script>
+function initialize(){
+
+  // Create an array of styles.
+  var styles = [
+    {
+    "featureType": "poi.attraction",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi.business",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi.place_of_worship",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "transit.line",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi.attraction",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi.medical",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi.school",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "landscape.man_made",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      { "lightness": 41 }
+    ]
+  },{
+    "featureType": "transit.station.airport",
+    "stylers": [
+      { "lightness": 49 }
+    ]
+  },{
+    "featureType": "administrative",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      { "saturation": -100 },
+      { "lightness": 24 }
+    ]
+  },{
+    "featureType": "road.highway",
+    "stylers": [
+      { "lightness": 26 }
+    ]
+  },{
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [
+      { "visibility": "simplified" },
+      { "color": "#d6cfc6" },
+      { "lightness": 43 }
+    ]
+  },{
+    "featureType": "road.local",
+    "elementType": "geometry.fill",
+    "stylers": [
+      { "color": "#d6cfc6" },
+      { "lightness": 42 }
+    ]
+  },{
+    "featureType": "road.local",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "road.arterial",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "road.arterial",
+    "elementType": "geometry.fill",
+    "stylers": [
+      { "visibility": "on" }
+    ]
+  },{
+    "featureType": "poi.park",
+    "elementType": "labels",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "transit.station.rail",
+    "elementType": "labels",
+    "stylers": [
+      { "saturation": -73 },
+      { "lightness": 27 }
+    ]
+  },{
+    "featureType": "road.highway",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "road.highway",
+    "elementType": "geometry.fill",
+    "stylers": [
+      { "visibility": "on" },
+      { "lightness": -5 }
+    ]
+  },{
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+  }
+];
+
+   // Create a new StyledMapType object, passing it the array of styles,
+	  // as well as the name to be displayed on the map type control.
+	 	var styledMap = new google.maps.StyledMapType(styles,{name: "Styled Map"});	
+		var myLatlng = 	new google.maps.LatLng(42.358431,-71.059773);
+		var mapProp = {
+		  center:myLatlng,
+		  zoom:14,
+		  //panControl: false,
+		    //zoomControl: false,
+		    //scaleControl: false,
+		    //mapTypeControl: false,
+			//streetViewControl:false,
+			//scrollwheel: false,
+			//draggable: true,
+			panControl: false,
+			zoomControl: false,
+			mapTypeControl: false,
+			scaleControl: false,
+			draggable: false,
+			scrollwheel: false,
+			streetViewControl: false,
+			overviewMapControl: false,
+			
+			mapTypeControlOptions: {
+			  mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+			}
+		};
+		  
+		var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+		
+		//Associate the styled map with the MapTypeId and set it to display.
+		  map.mapTypes.set('map_style', styledMap);
+		  map.setMapTypeId('map_style');
+		
+			
+	}
+		
+		
+	google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+	<!--END script to integrat and personnalize google map-->
+
+</div>
+<!-- end google map -->
+
+<!-- start bar list children -->
+<div class="wrap">
+	<!-- menu with compare button, student's name button and add_child button -->
+	<div class="menu_compare_name ">
+		<div class="flexible_content" style="width:1600px;">
+			<div class="compare">
+				Compare your lists:
+			</div>
+			<div class="name_list">
+				<div class="name_info active" id="name_1">
+					<span class="name">Elizabeth <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span> </span>
+					<span class="grade">Grade<br/><span class="number">3</span></span>
+					<div class="clr"></div>
+				</div>
+				<div class="name_info" id="name_2">
+					<span class="name">Tommy <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span></span>
+					<span class="grade">Grade<br/><span class="number">7</span></span>
+					<div class="clr"></div>
+				</div>
+			</div>	
+			<div class="add_child" >
+				+ Add a child
+			</div>
+			
+			<div class="clr"></div>
+		</div>
+		
+	</div>
+	<!-- END menu with compare button, student's name button and add_child button -->
+
+</div>
+<!-- end bar list children -->
+
+
+<div class="wrap">
+	<div data-icon="&#xe001;" aria-hidden="true" class='arrow_slide no_mobile'></div>
+
+	<div class=" result">
+		<!-- preferences menu side bar for shool listing -->
+		<div class="preferences">
+		<!-- header only in tablet -->
+		<div class="header_preferences">
+			<p class="font_21">Choose what matters to Elizabeth: <span id="hide_btn">Hide Criteria &nbsp;<span aria-hidden="true" class="down_arrow icon-DBPS-Dev-Assets-SRG-41"></span></span><span id="show_btn">Show Criteria &nbsp;<span aria-hidden="true" class="up_arrow icon-DBPS-Dev-Assets-SRG-39"></span></span></p>
+		</div>
+		<!-- END header only in tablet -->
+		
+		<!-- preferences list for desktop and tablet situation -->
+		<div id="preference_content">
+			<div class="colonn">
+				<div class="preference">
+				
+					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">School Start Time</span></p>
+					<label class='font_13_14'><input type='radio' name='pref_school_start_time' value='7:30 am'/><span class="text">7:30 am</span></label>
+					<label class='font_13_14'><input type='radio' name='pref_school_start_time' value='8:30 am' /><span class="text">8:30 am</span></label>
+					<label class='font_13_14'><input type='radio' name='pref_school_start_time' value='9:30 am' /><span class="text">9:30 am</span></label>
+				</div>
+				<div class="preference">
+					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Surround Care</span></p>
+					<label class='font_13_14'><input type='checkbox' name='pref_surround_care_before' value='before_school' /><span class="text">Before School</span></label>
+					<label class='font_13_14'><input type='checkbox' name='pref_surround_care_after' value='after_school'  /><span class="text">After School</span></label>
+				</div>
+			</div>
+			<div class="colonn">
+				<div class="preference">
+					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Grades</span></p>
+					<label class='font_13_14'><input type='radio' name='pref_grades' value='Early Learning Center' /><span class="text">Early Learning Center</span></label>
+					<label class='font_13_14'><input type='radio' name='pref_grades' value='K-5' /><span class="text">K-5</span></label>
+					<label class='font_13_14'><input type='radio' name='pref_grades' value='K-8' /><span class="text">K-8</span></label>
+					<label class='font_13_14'><input type='radio' name='pref_grades' value='6-8' /><span class="text">6-8</span></label>
+					<label class='font_13_14'><input type='radio' name='pref_grades' value='6-12' /><span class="text">6-12</span></label>
+					<label class='font_13_14'><input type='radio' name='pref_grades' value='7-12 (Exam Schools)' /><span class="text">7-12 (Exam Schools)</span></label>
+					<label class='font_13_14'><input type='radio' name='pref_grades' value='9-12' /><span class="text">9-12</span></label>
+				</div>
+				<div class="preference">
+					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Enrollment</span></p>
+					<label class='font_13_14'><input type='checkbox' name='pref_enrollment_small' value='small' /><span class="text">Small</span></label>
+					<label class='font_13_14'><input type='checkbox' name='pref_enrollment_medium' value='medium' /><span class="text">Medium</span></label>
+					<label class='font_13_14'><input type='checkbox' name='pref_enrollment_large' value='large' /><span class="text">Large</span></label>
+				</div>
+				<div class="preference">
+					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Uniform Policy</span></p>
+					<label class='font_13_14'><input type='radio' name='pref_uniform_policy' value='yes' /><span class="text">Yes</span></label>
+					<label class='font_13_14'><input type='radio' name='pref_uniform_policy' value='no' /><span class="text">No</span></label>
+				</div>
+			</div>
+			<div class="colonn">
+				<div class="preference">
+					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Special Programs</span></p>
+					<label class='font_13_14'><input type='checkbox' name='pref_special_programs' value='Advanced Work Class' /><span class="text">Advanced Work Class</span></label>
+				</div>
+				<div class="preference">
+					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">School Focus</span></p>
+					<label class='font_13_14'><input type='checkbox' name='pref_school_focus_arts' value='arts' /><span class="text">Arts</span></label>
+					<label class='font_13_14'><input type='checkbox' name='pref_school_focus_health_careers' value='health_careers' /><span class="text">Health Careers</span></label>
+					<label class='font_13_14'><span class='icon_pref' aria-hidden="true" data-icon="&#xe00c;"></span>More</label>
+				</div>
+				<div class="preference">
+					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Facility Features</span></p>
+					<label class='font_13_14'><input type='checkbox' name='pref_facility_features_swimming_pool' value='swimming pool' /><span class="text">Swimming Pool</span></label>
+					<label class='font_13_14'><input type='checkbox' name='pref_facility_features_wheelchair_access' value='wheelchair access' /><span class="text">Wheelchair Access</span></label>
+					<label class='font_13_14'><span class='icon_pref' aria-hidden="true" data-icon="&#xe00c;"></span>More</label>
+				</div>
+			</div>
+			<div class="colonn last">
+				<div class="preference">
+					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Sports</span></p>
+					<label class='font_13_14'><input type='checkbox' name='pref_sports_basketball' value='basketball' /><span class="text">Basketball</span></label>
+					<label class='font_13_14'><input type='checkbox' name='pref_sports_football' value='football' /><span class="text">Football</span></label>
+					<label class='font_13_14'><span class='icon_pref' aria-hidden="true" data-icon="&#xe00c;"></span>More</label>
+				</div>
+				<div class="preference">
+					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Health & Wellness</span></p>
+					<label class='font_13_14'><input type='checkbox' name='pref_health_wellness_full_time_nurse' value='Full-time Nurse' /><span class="text">Full-time Nurse</span></label>
+					<label class='font_13_14'><input type='checkbox' name='pref_health_wellness_part_time_nurse' value='Part-time Nurse' /><span class="text">Part-time Nurse Physical education</span></label>
+					<label class='font_13_14'><input type='checkbox' name='pref_health_wellness_physical_education' value='Physical education' /><span class="text">Physical education</span></label>
+					<label class='font_13_14'><input type='checkbox' name='pref_health_wellness_program_alternative' value='Program or alternative' /><span class="text">Program or alternative</span></label>
+					<label class='font_13_14'><input type='checkbox' name='pref_health_wellness_outdoor_play_space' value='Outdoor play space' /><span class="text">Outdoor play space</span></label>
+				</div>
+			</div>
+			<div class="clr"></div>
+		</div>
+	</div>
+	<!-- preferences list-->
+	<div id="school_list">
+	
+	<!-- shadow on the left show when list move on the left.  Display none in normal situation-->
+	<div class="shadow"></div>
+	<!-- END shadow-->
+	
+	<!-- listing of schools  -->
+	<div class="list_content">
+	
+		<!-- ajust the div width when "getting there" and/or "Your fit" glass_icon is clic (to create left and right draggable effect of the school list)  -->	
+		<div class="flexible_content" style="width:2000px;">
+			<!-- school list header -->
+			<div class="menu_list">
+				<div class="li_frame">
+					<div class="arrow menu_bloc">
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-31"></span>
+					</div>
+					<div class="choice menu_bloc">
+						Choice order
+					</div>
+					
+					<!-- add class "open" to show "Walk time" and "Drive time"-->
+					<div id="getting_there" class=" menu_bloc ">
+						<div class="first_block">
+							Getting there 
+						</div>
+						<div class="second_block">
+							Walk Time
+						</div>
+						<div class="second_block">
+							Drive Time
+						</div>
+						<span aria-hidden="true" class="glass_open icon-DBPS-Dev-Assets-SRG-24"></span>
+						<span aria-hidden="true" class="glass_close icon-DBPS-Dev-Assets-SRG-23"></span>
+					</div>
+					<div class=" menu_bloc">
+						School hours
+					</div>
+					<div class=" menu_bloc">
+						Surround Care
+					</div>
+					<div class="your_fit menu_bloc activ">
+						<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-31"></span> Your Fit 
+						<span aria-hidden="true" class="glass_open icon-DBPS-Dev-Assets-SRG-24"></span>
+					</div>
+					<div class="your_fit_show menu_bloc">
+							Enrollement
+					</div>
+					<div class="your_fit_show menu_bloc active">
+							Arts Focus
+					</div>
+					<div class="clr"></div>
+				</div>
+			</div>
+			<!-- END school list header -->
+			
+			<!-- School listing -->
+			<ul id="sortable">
+				
+				<!-- full model for one school info (brief and full info) -->
+				<li id="list_1" class="  ">
+					<div class="li_frame">
+						<!-- brief school information -->
+						<div class="no_order line">
+							<span class="middle">1</span>
+						</div>
+						<div class="school_name select line">
+							<span class="middle">
+		                    	Eliot K-8 
+		                        <span aria-hidden="true" class="full_descrip_link icon-DBPS-Dev-Assets-SRG-11"></span> 
+		                    	<span aria-hidden="true" class="select_icon icon-DBPS-Dev-Assets-SRG-12"></span>
+		                     </span>
+						</div>
+						
+						<!-- add class "open" to show "Walk time info" and "Drive time info"-->
+						<div class="box line getting_there ">
+							<div class="first_block middle">
+								<span class="icon middle">
+									<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-14"></span>
+								</span>
+								<span class="middle"><span>3.2</span> mi</span>
+							</div>
+							<div class="second_bloc middle">
+								<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+									
+							</div>
+							<div class="second_bloc middle last">
+								<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+							</div>	
+							
+						</div>
+						<div class="box line school_hours">
+							<span  class="middle"> 7:30-2:30<br/>
+								<div class="max_range">
+									<div class="ajust_range" style="margin-left:0%;margin-right:30%;">
+										
+									</div>
+								</div>
+							</span>
+						</div>
+						<div class="box line surround_care">
+							<span class="middle"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<br/>
+							<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school</span>
+						</div>
+						<div class="box line your_fit_icon">
+							<span class="middle">
+								<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> 
+								<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+								<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+							</span>
+						</div>
+						<div class="box line your_fit_descrip">
+							<span class="middle">
+								<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Small
+							</span>
+						</div>
+						<div class="box line your_fit_descrip">
+							<span class="middle">
+								<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Yes
+							</span>
+						</div>
+						<div class="clr"></div>
+						<!--END brief school information -->
+						
+						<!-- School information initially display none -->
+			            <div class="school_descrip">
+			            	
+			               
+			             	<div class="right_side">
+			                	<p class="adress">16 Charter St, boston 02113</p>
+			                		<!-- school's picture -->
+			                    <div class="photos school_name ">
+			                    	<div class="principal">
+			                    		<div class="glass">
+			                    			<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-29"></span>
+			                    		</div>
+			                    		<img src="img/schools/eliotk8/school_large.jpg" alt=""  />
+			                    	</div>
+			                    	<div class="second small">
+			                        	<img src="img/schools/eliotk8/school_1.jpg" alt="" />
+			                        </div>
+			                    	<div class="third small">
+			                        	<img src="img/schools/eliotk8/school_2.jpg" alt="" />
+			                        </div>
+			                    	<div class="fourth small last">
+			                        	<img src="img/schools/eliotk8/school_3.jpg" alt="" />
+			                        </div>
+			                        <div class="clr"></div>
+			                        
+			                    </div>
+			                    <!--END  school's picture -->
+			                    
+			                    
+			                    <!-- show in desktop and tablet -->
+			                    <div class="desktop_tablet">
+				                    <div class="box">
+				                    	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> 5.6 min from home</p>
+				                        <p class="descrip">
+				                        	<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span><br/>
+											<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+										</p>
+				                    </div>
+				                    <div class="box">
+				                    	<p  class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> School hours</p>
+										<p class="descrip">8am – 3pm</p>
+										
+										<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Surround care </p>
+										<p class="descrip">7:30am – 6:45pm<br />
+										<span  class="text_G1">Cost:</span> $30/month<br />
+										<span  class="text_G1">Before:</span> Music, chorus, drama<br />
+										<span  class="text_G1">After:</span> Champions after school program</p>
+				                    </div>
+				                    <div class="box">
+				                    </div>
+				                    <div class="clr"></div>
+			                    </div>
+			                     <!--END show in desktop and tablet -->
+			                     
+			                     
+			                    <div class="separation_line"></div>
+			                    <div class="school_name ">
+			                    <p class="font_17">About Eliot K-8</p>
+			                    
+			                    <!-- website link -->
+			                    <p><a class="text_B0" href="" title="School Website">School Website</a> <br/>
+			                    
+			                    <!-- email link -->
+			                    Email: <a class="text_B0" href="mailto:eliotboston.k12.ma.us" title="Email adress">eliotboston.k12.ma.us</a></p>
+			                    
+			                    <!-- print logo link -->
+			                    <p class="desktop_tablet"><a href="" title="Print Details"><span aria-hidden="true" class="font_20 icon-DBPS-Dev-Assets-SRG-28"></span> Print Details</a></p>
+			                    
+			                    <p class="descritiv">We are one of the newest K-8 schools in Boston. Our school is located in the heart of the North End along the Freedom Trail. We offer an enrichment (advanced) class for students in grades 4-8 in ELA and Math. Read Boston provides each of our classrooms with a home lending library. Also, we have established a new partnership with City Connects to link school and families with community resources and provide students with an onsite guidance counselor. Our Italian Language program, partnered through CASIT, is offered to all grade levels, including daily instruction in our Middle School.</p>
+			                    </div>
+			                    <div class="full_details">
+			                    	<p class="font_17" style="margin-left:19px;">Full Details</p>
+			                    	
+			                    	<!-- 3 different presentation of the "Full school details" (desktop, tablet and mobile)-->
+			                    	
+			                    	 <!-- show in mobile -->
+			                    	<div class="mobile">
+					                    <div class="box">
+					                    	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> 5.6 min from home</p>
+					                        <p class="descrip">
+					                        	<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span><br/>
+												<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+											</p>
+					                    </div>
+					                    <div class="box">
+					                    	<p  class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> School hours</p>
+											<p class="descrip">8am – 3pm</p>
+											
+											<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Surround care </p>
+											<p class="descrip">7:30am – 6:45pm<br />
+											<span  class="text_G1">Cost:</span> $30/month<br />
+											<span  class="text_G1">Before:</span> Music, chorus, drama<br />
+											<span  class="text_G1">After:</span> Champions after school program</p>
+					                    </div>
+					                   
+						                	<div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Grades Offered</p>
+				                                <p class="descrip">K0 – 8</p>
+						                    </div>
+						                    <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Classes Per Grade</p>
+				                                <p class="descrip">3</p>
+						                    </div>
+						                    <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> School Type</p>
+				                                <p class="descrip">Charter</p>
+						                    </div>
+						                    
+						                    <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Special Application</p>
+				                                <p class="descrip">None</p>
+						                    </div>
+						                    <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Uniform Policy</p>
+				                                <p class="descrip">None</p>
+						                    </div>
+						                    <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Eligibility</p>
+				                                <p class="descrip">Walk Zone, Tier I</p>
+						                    </div>
+						                    <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> MCAS Tier</p>
+				                                <p class="descrip">Tier I</p>
+						                    </div>
+						                    <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> School Focus</p>
+				                                <p class="descrip">Math & Science, Technology</p>
+						                    </div>
+						                    <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Special Programs</p>
+				                                <p class="descrip">AWC</p>
+						                    </div>
+						                    <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> State Designation</p>
+				                                <p class="descrip">Level 1</p>
+						                    </div>
+				                            <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Facility Features</p>
+				                                <p class="descrip">Swimming Pool, Playground, Wheelchair Access</p>
+						                    </div>
+				                            <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Sports</p>
+				                                <p class="descrip">Baseball, Basketball, Football, Soccer, Track, Volleyball</p>
+						                    </div>
+				                            <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Health & Wellness</p>
+				                                <p class="descrip">Full-Time Nurse</p>
+						                    </div>
+				                            <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Community Partners</p>
+				                                <p class="descrip">None</p>
+						                    </div>
+				                        
+				                    </div>
+				                    <!-- END show in mobile-->
+				                    
+				                     <!-- show in DESKTOP only -->
+				                    <div class="desktop">
+				                    	<div class="detail_row">
+						                	<div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Grades Offered</p>
+				                                <p class="descrip">K0 – 8</p>
+						                    </div>
+						                    <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> MCAS Tier</p>
+				                                <p class="descrip">Tier I</p>
+						                    </div>
+				                            <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Facility Features</p>
+				                                <p class="descrip">Swimming Pool, Playground, Wheelchair Access</p>
+						                    </div>
+					                        <div class="clr"></div>
+				                        </div>
+				                        <div class="detail_row">
+						                	<div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Classes Per Grade</p>
+				                                <p class="descrip">3</p>
+						                    </div>
+						                    <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> School Focus</p>
+				                                <p class="descrip">Math & Science, Technology</p>
+						                    </div>
+				                            <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Sports</p>
+				                                <p class="descrip">Baseball, Basketball, Football, Soccer, Track, Volleyball</p>
+						                    </div>
+					                        <div class="clr"></div>
+				                        </div>
+				                        <div class="detail_row">
+						                	<div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> School Type</p>
+				                                <p class="descrip">Charter</p>
+						                    </div>
+						                    <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Special Programs</p>
+				                                <p class="descrip">AWC</p>
+						                    </div>
+				                            <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Health & Wellness</p>
+				                                <p class="descrip">Full-Time Nurse</p>
+						                    </div>
+					                        <div class="clr"></div>
+				                        </div>
+				                        <div class="detail_row">
+						                	<div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Special Application</p>
+				                                <p class="descrip">None</p>
+						                    </div>
+						                    <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> State Designation</p>
+				                                <p class="descrip">Level 1</p>
+						                    </div>
+				                            <div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Community Partners</p>
+				                                <p class="descrip">None</p>
+						                    </div>
+					                        <div class="clr"></div>
+				                        </div>
+				                        <div class="detail_row">
+						                	<div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Uniform Policy</p>
+				                                <p class="descrip">None</p>
+						                    </div>
+						                    <div class="box">
+				                            	<p class="title"></p>
+				                                <p class="descrip"></p>
+						                    </div>
+				                            <div class="box">
+				                            	<p class="title"></p>
+				                                <p class="descrip"></p>
+						                    </div>
+					                        <div class="clr"></div>
+				                        </div>
+				                        <div class="detail_row">
+						                	<div class="box">
+				                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Eligibility</p>
+				                                <p class="descrip">Walk Zone, Tier I</p>
+						                    </div>
+						                    <div class="box">
+				                            	<p class="title"></p>
+				                                <p class="descrip"></p>
+						                    </div>
+				                            <div class="box">
+				                            	<p class="title"></p>
+				                                <p class="descrip"></p>
+						                    </div>
+					                        <div class="clr"></div>
+				                        </div>
+				                    </div>
+				                    
+			                    
+				                     <!--END show in desktop only -->
+				                     
+				                      <!-- show in TABLET  only -->
+				                    <div class="tablet">
+					                    	<div class="detail_row">
+							                	<div class="box">
+					                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Grades Offered</p>
+					                                <p class="descrip">K0 – 8</p>
+							                    </div>
+							                    <div class="box">
+					                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> MCAS Tier</p>
+					                                <p class="descrip">Tier I</p>
+							                    </div>
+							                    <div class="clr"></div>
+					                        </div>
+					                        <div class="detail_row">
+					                            <div class="box">
+					                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Classes Per Grade</p>
+					                                <p class="descrip">3</p>
+							                    </div>
+							                    <div class="box">
+					                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> School Focus</p>
+					                                <p class="descrip">Math & Science, Technology</p>
+							                    </div>
+							                    <div class="clr"></div>
+					                        </div>
+					                        <div class="detail_row">
+							                    <div class="box">
+					                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> School Type</p>
+					                                <p class="descrip">Charter</p>
+							                    </div>
+							                    <div class="box">
+					                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Special Programs</p>
+					                                <p class="descrip">AWC</p>
+							                    </div>
+					                            <div class="clr"></div>
+					                        </div>
+					                        <div class="detail_row">
+							                	<div class="box">
+					                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Special Application</p>
+					                                <p class="descrip">None</p>
+							                    </div>
+							                    <div class="box">
+					                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> State Designation</p>
+					                                <p class="descrip">Level 1</p>
+							                    </div>
+							                    
+							                    <div class="clr"></div>
+					                        </div>
+					                        <div class="detail_row">
+					                        	<div class="box">
+					                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Uniform Policy</p>
+					                                <p class="descrip">None</p>
+							                    </div>
+					                        	<div class="box">
+					                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Facility Features</p>
+					                                <p class="descrip">Swimming Pool, Playground, Wheelchair Access</p>
+							                    </div>
+							                    <div class="clr"></div>
+					                        </div>
+					                        <div class="detail_row">
+							                    <div class="box">
+					                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Eligibility</p>
+					                                <p class="descrip">Walk Zone, Tier I</p>
+							                    </div>
+							                    <div class="box">
+					                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Sports</p>
+					                                <p class="descrip">Baseball, Basketball, Football, Soccer, Track, Volleyball</p>
+							                    </div>
+						                        <div class="clr"></div>
+					                        </div>
+					                        <div class="detail_row">
+							                    <div class="box">
+					                            	<p class="title"></p>
+					                                <p class="descrip"></p>
+							                    </div>
+							                    <div class="box">
+					                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Health & Wellness</p>
+					                                <p class="descrip">Full-Time Nurse</p>
+							                    </div>
+							                   <div class="clr"></div>
+					                        </div>
+					                        <div class="detail_row">
+					                            <div class="box">
+					                            	<p class="title"></p>
+					                                <p class="descrip"></p>
+							                    </div>
+							                    <div class="box">
+					                            	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Community Partners</p>
+					                                <p class="descrip">None</p>
+							                    </div>
+							                   <div class="clr"></div>
+					                        </div>
+					                        
+					                    </div>
+					                    
+				                    
+										<!-- show in tablet  only -->
+				                    	<div class="clr"></div>
+				                    </div>
+				                    <div class="clr"></div>
+			                    </div>
+			                </div>
+			            
+			            </div>
+			            <!--END  School information -->
+					
+				</li>
+				<!-- END full model for one school info (brief and full info) -->
+				
+				<!-- simple info of one school -->
+				<li id="list_2" class=" ">
+					<div class="li_frame">
+					<div class="no_order line">
+						<span class="middle">2</span>
+					</div>
+					<div class="school_name line">
+						<span class="middle">Margarita Muniz Academy</span>
+					</div>
+					<div class="box line getting_there ">
+						<div class="first_block middle">
+							<span class="icon middle">
+								<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-15"></span>
+							</span>
+							<span class="middle"><span>5.6</span> mi</span>
+						</div>
+						<div class="second_bloc middle">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 10 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+								
+						</div>
+						<div class="second_bloc middle last">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 5 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+						</div>	
+						
+					</div>
+					<div class="box line school_hours">
+						<span  class="middle"> 9:30-3:30<br/>
+							<div class="max_range">
+								<div class="ajust_range" style="margin-left:20%;margin-right:10%;">
+									
+								</div>
+							</div>
+						</span>
+					</div>
+					<div class="box line surround_care">
+						<span class="middle"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<!--<br/>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school--></span>
+					</div>
+					<div class="box line your_fit_icon">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> 
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Small
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Yes
+						</span>
+					</div>
+					<div class="clr"></div>
+					</div>
+				</li>
+				<!-- END  simple info of one school -->
+				<li id="list_3" class=" ">
+					<div class="li_frame">
+					<div class="no_order line">
+						<span class="middle">3</span>
+					</div>
+					<div class="school_name line">
+						<span class="middle">Edwards Middle School</span>
+					</div>
+					
+					<div class="box line getting_there ">
+						<div class="first_block middle">
+							<span class="icon middle">
+								<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-15"></span>
+							</span>
+							<span class="middle"><span>5.6</span> mi</span>
+						</div>
+						<div class="second_bloc middle">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 12 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+								
+						</div>
+						<div class="second_bloc middle last">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 6 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+						</div>	
+						
+					</div>
+					<div class="box line school_hours">
+						<span  class="middle"> 9:30-3:30<br/>
+							<div class="max_range">
+								<div class="ajust_range" style="margin-left:20%;margin-right:10%;">
+									
+								</div>
+							</div>
+						</span>
+					</div>
+					<div class="box line surround_care">
+						<span class="middle"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<br/>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school</span>
+					</div>
+					<div class="box line your_fit_icon">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> 
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Small
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Yes
+						</span>
+					</div>
+					<div class="clr"></div>
+					</div>
+				</li>
+				<li id="list_4" class=" ">
+					<div class="li_frame">
+					<div class="no_order line">
+						<span class="middle">4</span>
+					</div>
+					<div class="school_name line">
+						<span class="middle">Mission Hill K-8</span>
+					</div>
+					
+					<div class="box line getting_there ">
+						<div class="first_block middle">
+							<span class="icon middle">
+								<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-14"></span>
+							</span>
+							<span class="middle"><span>1.6</span> mi</span>
+						</div>
+						<div class="second_bloc middle">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 2 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+								
+						</div>
+						<div class="second_bloc middle last">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 5 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+						</div>	
+						
+					</div>
+					<div class="box line school_hours">
+						<span  class="middle"> 7:30-2:30<br/>
+							<div class="max_range">
+								<div class="ajust_range" style="margin-left:0%;margin-right:20%;">
+									
+								</div>
+							</div>
+						</span>
+					</div>
+					<div class="box line surround_care">
+						<span class="middle"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<br/>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school</span>
+					</div>
+					<div class="box line your_fit_icon">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> 
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Small
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Yes
+						</span>
+					</div>
+					<div class="clr"></div>
+					</div>
+				</li>
+				<li id="list_5" class=" ">
+					<div class="li_frame">
+					<div class="no_order line">
+						<span class="middle">5</span>
+					</div>
+					<div class="school_name line">
+						<span class="middle">Rogers Middle School</span>
+					</div>
+					<div class="box line getting_there ">
+						<div class="first_block middle">
+							<span class="icon middle">
+								<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-16"></span>
+							</span>
+							<span class="middle"><span>10.6</span> mi</span>
+						</div>
+						<div class="second_bloc middle">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 22 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+								
+						</div>
+						<div class="second_bloc middle last">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 16 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+						</div>	
+						
+					</div>
+					<div class="box line school_hours">
+						<span  class="middle"> 9:30-4:30<br/>
+							<div class="max_range">
+								<div class="ajust_range" style="margin-left:20%;margin-right:0;">
+									
+								</div>
+							</div>
+						</span>
+					</div>
+					<div class="box line surround_care">
+						<span class="middle"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<!--<br/>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school--></span>
+					</div>
+					<div class="box line your_fit_icon">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> 
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Small
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Yes
+						</span>
+					</div>
+					<div class="clr"></div>
+					</div>
+				</li>
+				<li id="list_6" class=" ">
+					<div class="li_frame">
+					<div class="no_order line">
+						<span class="middle">6</span>
+					</div>
+					<div class="school_name line">
+						<span class="middle">Eliot K-8</span>
+					</div>
+					<div class="box line getting_there ">
+						<div class="first_block middle">
+							<span class="icon middle">
+								<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-14"></span>
+							</span>
+							<span class="middle"><span>3.2</span> mi</span>
+						</div>
+						<div class="second_bloc middle">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+								
+						</div>
+						<div class="second_bloc middle last">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+						</div>	
+						
+					</div>
+					<div class="box line school_hours">
+						<span  class="middle"> 7:30-2:30<br/>
+							<div class="max_range">
+								<div class="ajust_range" style="margin-left:0%;margin-right:30%;">
+									
+								</div>
+							</div>
+						</span>
+					</div>
+					<div class="box line surround_care">
+						<span class="middle"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<br/>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school</span>
+					</div>
+					<div class="box line your_fit_icon">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> 
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Small
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Yes
+						</span>
+					</div>
+					<div class="clr"></div>
+					</div>
+				</li>
+				<li id="list_7" class=" ">
+					<div class="li_frame">
+					<div class="no_order line">
+						<span class="middle">7</span>
+					</div>
+					<div class="school_name line">
+						<span class="middle">Margarita Muniz Academy</span>
+					</div>
+					<div class="box line getting_there ">
+						<div class="first_block middle">
+							<span class="icon middle">
+								<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-15"></span>
+							</span>
+							<span class="middle"><span>5.6</span> mi</span>
+						</div>
+						<div class="second_bloc middle">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+								
+						</div>
+						<div class="second_bloc middle last">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+						</div>	
+						
+					</div>
+					<div class="box line school_hours">
+						<span  class="middle"> 9:30-3:30<br/>
+							<div class="max_range">
+								<div class="ajust_range" style="margin-left:20%;margin-right:10%;">
+									
+								</div>
+							</div>
+						</span>
+					</div>
+					<div class="box line surround_care">
+						<span class="middle"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<!--<br/>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school--></span>
+					</div>
+					<div class="box line your_fit_icon">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> 
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Small
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Yes
+						</span>
+					</div>
+					<div class="clr"></div>
+					</div>
+				</li>
+				<li id="list_8" class=" ">
+					<div class="li_frame">
+					<div class="no_order line">
+						<span class="middle">8</span>
+					</div>
+					<div class="school_name line">
+						<span class="middle">Edwards Middle School</span>
+					</div>
+					<div class="box line getting_there ">
+						<div class="first_block middle">
+							<span class="icon middle">
+								<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-15"></span>
+							</span>
+							<span class="middle"><span>5.6</span> mi</span>
+						</div>
+						<div class="second_bloc middle">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+								
+						</div>
+						<div class="second_bloc middle last">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+						</div>	
+						
+					</div>
+					<div class="box line school_hours">
+						<span  class="middle"> 9:30-3:30<br/>
+							<div class="max_range">
+								<div class="ajust_range" style="margin-left:20%;margin-right:10%;">
+									
+								</div>
+							</div>
+						</span>
+					</div>
+					<div class="box line surround_care">
+						<span class="middle"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<br/>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school</span>
+					</div>
+					<div class="box line your_fit_icon">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> 
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Small
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Yes
+						</span>
+					</div>
+					<div class="clr"></div>
+					</div>
+				</li>
+				<li id="list_9" class=" ">
+					<div class="li_frame">
+					<div class="no_order line">
+						<span class="middle">9</span>
+					</div>
+					<div class="school_name line">
+						<span class="middle">Mission Hill K-8</span>
+					</div>
+					<div class="box line getting_there ">
+						<div class="first_block middle">
+							<span class="icon middle">
+								<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-15"></span>
+							</span>
+							<span class="middle"><span>5.6</span> mi</span>
+						</div>
+						<div class="second_bloc middle">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+								
+						</div>
+						<div class="second_bloc middle last">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+						</div>	
+						
+					</div>
+					<div class="box line school_hours">
+						<span  class="middle"> 7:30-2:30<br/>
+							<div class="max_range">
+								<div class="ajust_range" style="margin-left:0%;margin-right:20%;">
+									
+								</div>
+							</div>
+						</span>
+					</div>
+					<div class="box line surround_care">
+						<span class="middle"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<br/>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school</span>
+					</div>
+					<div class="box line your_fit_icon">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> 
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Small
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Yes
+						</span>
+					</div>
+					<div class="clr"></div>
+					</div>
+				</li>
+				<li id="list_10" class=" ">
+					<div class="li_frame">
+					<div class="no_order line">
+						<span class="middle">10</span>
+					</div>
+					<div class="school_name line">
+						<span class="middle">Rogers Middle School</span>
+					</div>
+					<div class="box line getting_there ">
+						<div class="first_block middle">
+							<span class="icon middle">
+								<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-15"></span>
+							</span>
+							<span class="middle"><span>5.6</span> mi</span>
+						</div>
+						<div class="second_bloc middle">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+								
+						</div>
+						<div class="second_bloc middle last">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+						</div>	
+						
+					</div>
+					<div class="box line school_hours">
+						<span  class="middle"> 9:30-4:30<br/>
+							<div class="max_range">
+								<div class="ajust_range" style="margin-left:20%;margin-right:0;">
+									
+								</div>
+							</div>
+						</span>
+					</div>
+					<div class="box line surround_care">
+						<span class="middle"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<!--<br/>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school--></span>
+					</div>
+					<div class="box line your_fit_icon">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> 
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Small
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Yes
+						</span>
+					</div>
+					<div class="clr"></div>
+					</div>
+				</li>
+				<li id="list_11" class=" ">
+					<div class="li_frame">
+					<div class="no_order line">
+						<span class="middle">11</span>
+					</div>
+					<div class="school_name line">
+						<span class="middle">Edwards Middle School</span>
+					</div>
+					<div class="box line getting_there ">
+						<div class="first_block middle">
+							<span class="icon middle">
+								<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-15"></span>
+							</span>
+							<span class="middle"><span>5.6</span> mi</span>
+						</div>
+						<div class="second_bloc middle">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+								
+						</div>
+						<div class="second_bloc middle last">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+						</div>	
+						
+					</div>
+					<div class="box line school_hours">
+						<span  class="middle"> 9:30-3:30<br/>
+							<div class="max_range">
+								<div class="ajust_range" style="margin-left:20%;margin-right:10%;">
+									
+								</div>
+							</div>
+						</span>
+					</div>
+					<div class="box line surround_care">
+						<span class="middle"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<!--<br/>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school--></span>
+					</div>
+					<div class="box line your_fit_icon">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> 
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Small
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Yes
+						</span>
+					</div>
+					<div class="clr"></div>
+					</div>
+				</li>
+				<li id="list_12" class=" ">
+					<div class="li_frame">
+					<div class="no_order line">
+						<span class="middle">12</span>
+					</div>
+					<div class="school_name line">
+						<span class="middle">Edwards Middle School</span>
+					</div>
+					<div class="box line getting_there ">
+						<div class="first_block middle">
+							<span class="icon middle">
+								<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-15"></span>
+							</span>
+							<span class="middle"><span>5.6</span> mi</span>
+						</div>
+						<div class="second_bloc middle">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+								
+						</div>
+						<div class="second_bloc middle last">
+							<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+						</div>	
+						
+					</div>
+					<div class="box line school_hours">
+						<span  class="middle"> 9:30-3:30<br/>
+							<div class="max_range">
+								<div class="ajust_range" style="margin-left:20%;margin-right:10%;">
+									
+								</div>
+							</div>
+						</span>
+					</div>
+					<div class="box line surround_care">
+						<span class="middle"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<!--<br/>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school--></span>
+					</div>
+					<div class="box line your_fit_icon">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> 
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Small
+						</span>
+					</div>
+					<div class="box line your_fit_descrip">
+						<span class="middle">
+							<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Yes
+						</span>
+					</div>
+					<div class="clr"></div>
+					</div>
+				</li>
+						
+			</ul>
+			<!-- END School listing -->
+		</div>
+		
+		
+	</div>
+	<!-- END  listing of schools  -->
+	
+	<!-- info box at the end of listing -->
+	<div class="footer_list">
+		<div class="footer_left">
+			<p style="color:#000;margin-bottom: 1.6em;">Next Steps</p>
+			<p>Once your student’s list of schools has been sorted in the order of your choosing, registration begins by submitting the list and visiting a Welcome Center.</p>
+			<p style="color:#000;">How to register:</p>
+			<p><a href="" title="Submit your list to BPSExpress">Submit your list to BPSExpress</a></p>
+			<p><a href="" title="Collect the required documents">Collect the required documents</a></p>
+			<p><a href="" title="Plan a visit to a Welcome Center">Plan a visit to a Welcome Center</a></p>
+		</div>
+		<div class="footer_right">
+			<p style="color:#000;margin-bottom: 1.6em;">Need to think it over?</p>
+			<p>My lists</p>
+			<p><a href="" title="Download">Download</a></p>
+			<p><a href="" title="Print">Print</a></p>
+			<p><a href="" title="Share via email">Share via email</a></p>
+			<p><a href="" title="Save">Save</a></p>
+			<br/>
+			<p>Account</p>
+			<p><a href="" title="Sign Up">Sign Up</a></p>
+			<p><a href="" title="Login">Login</a></p>
+		</div>
+		<div class="clr"></div>
+	</div>
+	<!-- END info box at the end of listing -->
+
+</div>
+
+
+		
+	</div>
+</div>
+
+<div class="footer_top">
+</div>
+<footer class="footer">
+	<div class="wrap">
+		<section class="content_wrap">
+			<p class='title_footer'>Boston Public Schools<br/>
+			<span class="copyright">Copyright &copy; 2011-2013 Boston Public Schools. All Rights Reserved. | Legal | Credits</p>
+			<div class='logo'><a href='javascript:void();'><img src='assets/bps-logo.png'/></a></div>
+			<div class='clr'></div>
+		</section>
+	</div>
+</footer>
+
+<script>
+	$( document ).ready(function() {
+		//Click on school name to open the full school description in the school line
+		$("#school_list li .li_frame > .school_name").click(
+			function() {
+			$(this).parent().parent().addClass("descrip_open");
+			$(this).parent().parent().find(".school_descrip").fadeIn();
+			}
+		);
+		
+		//Getting there button to show more(titles and descrip of each school lines)
+		$("#getting_there .glass_open").click(function(){
+			$("#getting_there").addClass("open");
+			$("#sortable .getting_there").addClass("open");
+		})
+		
+		//Getting there button to close the extra info about Getting there
+		$("#getting_there .glass_close").click(function(){
+			$("#getting_there").removeClass("open");
+			$("#sortable .getting_there").removeClass("open");
+		})
+		
+		//Your fit button to show the different fits added, add class open in the menu and each line of the list to display the titles and the description of each fit
+		$(".your_fit .glass_open").click(function(){
+			$(".your_fit_show").addClass("open");
+			$(".your_fit_descrip").addClass("open");
+		})
+		
+		//compare button => add class to compare_list, close school list and preferences, and show the comparaison list
+		/*$(".menu_compare_name .compare").click(function(){
+			
+			$(this).parent().addClass("compare_action");
+			$("#school_list").css("display","none");
+			$(".preferences").css("display","none");
+			$("#compare_list").css("display","block");
+			
+			
+		})*/
+		
+		//btn close preference choice in tablet size
+		$(".header_preferences #hide_btn").click(function(){
+			
+			//$("#preference_content").css("display","none");
+			//$(".header_preferences #hide_btn").css("display","none");
+			//$(".header_preferences #show_btn").css("display","inline-block");
+			$(".preferences").addClass("hide");
+		})
+		//btn show preference choice in tablet size
+		$(".header_preferences #show_btn").click(function(){
+			
+			//$("#preference_content").css("display","block");
+			//$(".header_preferences #hide_btn").css("display","inline-block");
+			//$(".header_preferences #show_btn").css("display","none");
+			$(".preferences").removeClass("hide");
+		})
+			
+		
+	});
+</script>
