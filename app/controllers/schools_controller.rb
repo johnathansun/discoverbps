@@ -2,7 +2,10 @@ class SchoolsController < ApplicationController
   # GET /schools
   # GET /schools.json
   def index
-    @schools = School.all
+    url = 'https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=23&Street=Becket+st&ZipCode=02108'
+    connection = Faraday.new(:url => url)
+    response = connection.get
+    @schools = MultiJson.load(response.body, :symbolize_keys => true)
 
     respond_to do |format|
       format.html # index.html.erb

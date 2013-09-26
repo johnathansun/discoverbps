@@ -7,6 +7,7 @@ gem 'rails', '3.2.14'
 
 gem 'aws-s3'
 gem 'devise'
+gem 'faraday'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'multi_json'
