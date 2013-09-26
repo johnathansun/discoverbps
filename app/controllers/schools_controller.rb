@@ -15,10 +15,10 @@ class SchoolsController < ApplicationController
       school_hash[:basic_info] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/schools.svc/GetSchool?schyear=2013&sch=#{id}")[0]
       school_hash[:description] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolDescriptions?schyear=2013&sch=#{id}")
       school_hash[:facilities] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolFacilities?schyear=2013&sch=#{id}")
-      school_hash[:hours] = bps_api_connector("http://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolHours?schyear=2013&sch=#{id}&TranslationLanguage=")
-      school_hash[:grades] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolGrades?schyear=2013&sch=#{id}")
+      # school_hash[:hours] = bps_api_connector("http://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolHours?schyear=2013&sch=#{id}&TranslationLanguage=")
+      # school_hash[:grades] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolGrades?schyear=2013&sch=#{id}")
       school_hash[:partners] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolPartners?schyear=2013&sch=#{id}&TranslationLanguage=")
-      school_hash[:photos] = bps_api_connector("http://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolPhotos?schyear=2013&sch=#{id}")
+      # school_hash[:photos] = bps_api_connector("http://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolPhotos?schyear=2013&sch=#{id}")
       @schools << school_hash
     end
     
@@ -51,9 +51,9 @@ class SchoolsController < ApplicationController
     http.use_ssl = true
     http.ssl_version = :SSLv3
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    @response = http.get(url)
+    response = http.get(url)
     # end
-    MultiJson.load(@response.body, :symbolize_keys => true)
+    MultiJson.load(response.body, :symbolize_keys => true)
   end
 
 end
