@@ -2,11 +2,26 @@ class SchoolsController < ApplicationController
   # GET /schools
   # GET /schools.json
   def index
-    url = 'https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=23&Street=Becket+st&ZipCode=02108'
-    connection = Faraday.new(:url => url)
-    response = connection.get
-    @schools = MultiJson.load(response.body, :symbolize_keys => true)
+    # GET eligible schools
+    response = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=23&Street=Becket+st&ZipCode=02108")
+    eligible_schools = response[:List]
 
+    # GET school information
+    @schools = []
+    eligible_schools.each do |school|
+      id = school[:School]
+      school_hash = {}
+      school_hash[:eligibility] = school
+      school_hash[:basic_info] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/schools.svc/GetSchool?schyear=2013&sch=#{id}")[0]
+      school_hash[:description] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolDescriptions?schyear=2013&sch=#{id}")
+      school_hash[:facilities] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolFacilities?schyear=2013&sch=#{id}")
+      school_hash[:hours] = bps_api_connector("http://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolHours?schyear=2013&sch=#{id}&TranslationLanguage=")
+      school_hash[:grades] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolGrades?schyear=2013&sch=#{id}")
+      school_hash[:partners] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolPartners?schyear=2013&sch=#{id}&TranslationLanguage=")
+      school_hash[:photos] = bps_api_connector("http://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolPhotos?schyear=2013&sch=#{id}")
+      @schools << school_hash
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @schools }
@@ -24,63 +39,21 @@ class SchoolsController < ApplicationController
     end
   end
 
-  # GET /schools/new
-  # GET /schools/new.json
-  def new
-    @school = School.new
+  private
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @school }
+  def bps_api_connector(url)
+    if Rails.env == 'production'
+      connection = Faraday.new(:url => url)
+      @response = connection.get
+    else
+      uri = URI(url)
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.ssl_version = :SSLv3
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      @response = http.get(url)
     end
+    MultiJson.load(@response.body, :symbolize_keys => true)
   end
 
-  # GET /schools/1/edit
-  def edit
-    @school = School.find(params[:id])
-  end
-
-  # POST /schools
-  # POST /schools.json
-  def create
-    @school = School.new(params[:school])
-
-    respond_to do |format|
-      if @school.save
-        format.html { redirect_to @school, notice: 'School was successfully created.' }
-        format.json { render json: @school, status: :created, location: @school }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @school.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /schools/1
-  # PUT /schools/1.json
-  def update
-    @school = School.find(params[:id])
-
-    respond_to do |format|
-      if @school.update_attributes(params[:school])
-        format.html { redirect_to @school, notice: 'School was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @school.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /schools/1
-  # DELETE /schools/1.json
-  def destroy
-    @school = School.find(params[:id])
-    @school.destroy
-
-    respond_to do |format|
-      format.html { redirect_to schools_url }
-      format.json { head :no_content }
-    end
-  end
 end
