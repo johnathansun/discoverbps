@@ -11,6 +11,7 @@ gem 'faraday'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'multi_json'
+gem 'newrelic_rpm'
 gem 'pg'
 gem 'rails_12factor'
 
