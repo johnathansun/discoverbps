@@ -12,6 +12,7 @@ gem 'haml-rails'
 gem 'jquery-rails'
 gem 'multi_json'
 gem 'pg'
+gem 'rails_12factor'
 
 
 # Gems used only for assets and not required
