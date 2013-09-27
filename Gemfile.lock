@@ -54,6 +54,8 @@ GEM
     execjs (2.0.1)
     faraday (0.8.7)
       multipart-post (~> 1.1)
+    friendly_id (4.0.10.1)
+      activerecord (>= 3.0, < 4.0)
     haml (4.0.3)
       tilt
     haml-rails (0.4)
@@ -148,6 +150,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
   faraday
+  friendly_id (~> 4.0.10)
   haml-rails
   jquery-rails
   less
