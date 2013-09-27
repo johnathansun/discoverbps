@@ -11,11 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130925234500) do
+ActiveRecord::Schema.define(:version => 20130926205106) do
 
   create_table "schools", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.text     "api_basic_info"
+    t.text     "api_awards"
+    t.text     "api_calendar"
+    t.text     "api_description"
+    t.text     "api_extra_curricular"
+    t.text     "api_facilities"
+    t.text     "api_grades"
+    t.text     "api_hours"
+    t.text     "api_languages"
+    t.text     "api_partners"
+    t.text     "api_photos"
+    t.string   "name"
+    t.integer  "bps_id"
+    t.string   "slug"
   end
+
+  add_index "schools", ["slug"], :name => "index_schools_on_slug", :unique => true
 
 end
