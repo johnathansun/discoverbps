@@ -2,6 +2,7 @@ class School < ActiveRecord::Base
 	extend FriendlyId
 	friendly_id :name, use: :slugged
 
+	attr_protected
 	# attr_accessible :name, :bps_id, :api_basic_info, :api_awards, :api_calendar, :api_description, :api_extra_curricular, :api_facilities, :api_grades, :api_hours, :api_languages, :api_partners, :api_photos
 
 	serialize :api_basic_info     
