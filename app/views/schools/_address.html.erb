@@ -1,0 +1,6 @@
+<div class='row' id="address_matche_row_#{index}">
+	<%= link_to "#{address[:StreetNum]} #{address[:Street].try(:titleize)} #{address[:ZipCode]}", schools_path(street_number: address[:StreetNum], street_name: address[:Street], zipcode: address[:ZipCode]) %>
+	<% if index == 0 %>
+		<span class='icon_selected icon-DBPS-Dev-Assets-SRG-42 ' ></span>
+	<% end %>
+</div>

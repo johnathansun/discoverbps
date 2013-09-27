@@ -1,9 +1,33 @@
 class SchoolsController < ApplicationController
-  # GET /schools
-  # GET /schools.json
+  
+  def home
+  end
+
+  def search
+    session[:first_name]    = params[:first_name].try(:strip)
+    session[:last_name]     = params[:last_name].try(:strip)
+    session[:street_number] = params[:street_number].try(:strip)
+    session[:street_name]   = params[:street_name].try(:strip)
+    session[:zipcode]       = params[:zipcode].try(:strip)
+
+    street_number = URI.escape(params[:street_number].try(:strip))
+    street_name   = URI.escape(params[:street_name].try(:strip))
+    zipcode       = URI.escape(params[:zipcode].try(:strip))
+    
+    addresses     = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
+    @addresses    = addresses[:List]
+  end
+
   def index
-    # GET eligible schools
-    response = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=23&Street=Becket+st&ZipCode=02108")
+    session[:street_number] = params[:street_number].try(:strip)
+    session[:street_name]   = params[:street_name].try(:strip)
+    session[:zipcode]       = params[:zipcode].try(:strip)
+
+    street_number = URI.escape(params[:street_number].strip)
+    street_name   = URI.escape(params[:street_name].strip)
+    zipcode       = URI.escape(params[:zipcode].strip)
+    
+    response      = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
     eligible_schools = response[:List]
 
     # GET school information
