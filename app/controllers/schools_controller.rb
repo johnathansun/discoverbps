@@ -23,10 +23,10 @@ class SchoolsController < ApplicationController
     session[:street_name]   = params[:street_name].try(:strip)
     session[:zipcode]       = params[:zipcode].try(:strip)
 
-    street_number = URI.escape(params[:street_number].strip)
-    street_name   = URI.escape(params[:street_name].strip)
-    zipcode       = URI.escape(params[:zipcode].strip)
-    
+    street_number = URI.escape(params[:street_number].try(:strip))
+    street_name   = URI.escape(params[:street_name].try(:strip))
+    zipcode       = URI.escape(params[:zipcode].try(:strip))
+
     response      = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
     eligible_schools = response[:List]
 
