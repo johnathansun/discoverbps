@@ -12,13 +12,25 @@ class SchoolsController < ApplicationController
       id = school[:School]
       school_hash = {}
       school_hash[:eligibility] = school
-      school_hash[:basic_info] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/schools.svc/GetSchool?schyear=2013&sch=#{id}")[0]
-      school_hash[:description] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolDescriptions?schyear=2013&sch=#{id}")
-      school_hash[:facilities] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolFacilities?schyear=2013&sch=#{id}")
-      # school_hash[:hours] = bps_api_connector("http://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolHours?schyear=2013&sch=#{id}&TranslationLanguage=")
-      # school_hash[:grades] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolGrades?schyear=2013&sch=#{id}")
-      school_hash[:partners] = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolPartners?schyear=2013&sch=#{id}&TranslationLanguage=")
-      # school_hash[:photos] = bps_api_connector("http://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolPhotos?schyear=2013&sch=#{id}")
+
+      # bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetTierList")
+      # bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/get?SearchToken={TOKEN}")
+      # bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetAddressMatches?StreetNumber={STREETNUMBER}&Street={STREET}&ZipCode={ZIPCODE}")
+      # bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolChoices?SchoolYear={SCHOOLYEAR}&Grade={GRADE}&StreetNumber={STREETNUMBER}&Street={STREET}&ZipCode={ZIPCODE}")
+      # bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolList?schyear=2013")
+
+      school_hash[:basic_info]        = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchool?schyear=2013&sch=#{id}")[0]
+      school_hash[:awards]            = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolAwards?schyear=2013&sch=#{id}&TranslationLanguage=")
+      school_hash[:description]       = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolDescriptions?schyear=2013&sch=#{id}&TranslationLanguage=")
+      school_hash[:facilities]        = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolFacilities?schyear=2013&sch=#{id}")
+      school_hash[:grades]            = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolGrades?schyear=2013&sch=#{id}")
+      school_hash[:hours]             = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolHours?schyear=2013&sch=#{id}&TranslationLanguage=")
+      school_hash[:partners]          = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolPartners?schyear=2013&sch=#{id}&TranslationLanguage=")
+      # school_hash[:calendar]          = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolCalendar?schyear=2013&sch=#{id}")
+      # school_hash[:extra_curricular]  = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolExtraCurricular?schyear=2013&sch=#{id}&TranslationLanguage=")
+      # school_hash[:languages]         = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolLanguages?schyear=2013&sch=#{id}")
+      # school_hash[:photos]            = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolPhotos?schyear=2013&sch=#{id}")
+
       @schools << school_hash
     end
     
@@ -28,8 +40,6 @@ class SchoolsController < ApplicationController
     end
   end
 
-  # GET /schools/1
-  # GET /schools/1.json
   def show
     @school = School.find(params[:id])
 
@@ -42,18 +52,10 @@ class SchoolsController < ApplicationController
   private
 
   def bps_api_connector(url)
-    # if Rails.env == 'production'
-    #   connection = Faraday.new(:url => url)
-    #   @response = connection.get
-    # else
-    uri = URI(url)
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.ssl_version = :SSLv3
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    response = http.get(url)
-    # end
-    MultiJson.load(response.body, :symbolize_keys => true)
+    response = Faraday.new(:url => url, :ssl => {:version => :SSLv3}).get
+    if response.body.present?
+      MultiJson.load(response.body, :symbolize_keys => true)
+    end
   end
 
 end
