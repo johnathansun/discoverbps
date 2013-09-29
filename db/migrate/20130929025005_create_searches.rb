@@ -8,7 +8,7 @@ class CreateSearches < ActiveRecord::Migration
       t.string :last_name
       t.string :grade_level
       t.string :iep
-      t.string :language
+      t.string :primary_language
       t.text :session_key
 
       t.timestamps

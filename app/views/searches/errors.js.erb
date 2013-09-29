@@ -1,2 +1,2 @@
-$('#dialog_errors').show();
-$('#error_messages').val('<%= @errors %>')
+$('#dialog_box').show();
+$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/errors', locals: {search: @search}) %>");

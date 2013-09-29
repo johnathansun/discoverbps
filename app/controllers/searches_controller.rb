@@ -23,6 +23,10 @@ class SearchesController < ApplicationController
     
     respond_to do |format|
       if @search.update_attributes(params[:search])
+      	session[:street_number] = @search.street_number
+      	session[:street_name] 	= @search.street_name
+      	session[:zipcode] 			= @search.zipcode
+
         format.js { render template: "searches/iep" }         
       else
         format.js { render template: "searches/errors" }
@@ -35,7 +39,14 @@ class SearchesController < ApplicationController
     
     respond_to do |format|
       if @search.update_attributes(params[:search])
-        format.js { render template: "searches/ell" }         
+      	session[:iep] 							= @search.iep
+      	session[:primary_language] 	= @search.primary_language
+
+      	if params[:search][:primary_language].present? && params[:search][:primary_language] != 'English'
+	        format.js { render template: "searches/ell" }
+	      else
+	        format.js { render template: "searches/preferences" }
+	      end
       else
         format.js { render template: "searches/errors" }
       end
@@ -59,18 +70,15 @@ class SearchesController < ApplicationController
     
     respond_to do |format|
       if @search.update_attributes(params[:search])
+
       	street_number = @search.street_number.present? ? URI.escape(@search.street_number) : ''
     		street_name   = @search.street_name.present? ? URI.escape(@search.street_name) : ''
     		zipcode       = @search.zipcode.present? ? URI.escape(@search.zipcode) : ''
 
-    eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
-
-    # GET school information
-    @schools = School.where('bps_id IN (?)', eligible_schools.collect {|x| x[:School]})
+		    eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
+		    @schools = School.where('bps_id IN (?)', eligible_schools.collect {|x| x[:School]})
     
-    respond_to do |format|
-      format.js { render action: "schools/index" }  
-    end        
+	      format.js { render :js => "window.location = '/schools/'" }        
       else
         format.js { render template: "searches/errors" }
       end

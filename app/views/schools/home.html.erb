@@ -1,16 +1,6 @@
 
 	<div id='dialog_box' class='dialog_box dialog_box_dicover' style='display:none;'>
 	</div>
-
-	<header>
-		<div class="wrap">
-			<section class="content_wrap">
-				<p class='title'>Discover</p>
-				<div class='logo'><a href='javascript:void();'><img src='assets/bps-logo.png'/></a></div>
-				<div class='clr'></div>
-			</section>
-		</div>
-	</header>
 	
 	
 	<div class="wrap ">
@@ -185,6 +175,11 @@
 					 
 					 return false;
 				});
+
+				$('.btn_grade').click(function() {
+					$('#grade_level_placeholder').html(this.innerText);
+					$('#_searchgrade_level').val(this.innerText);				
+				});
 			});
 
 			</script>
@@ -225,7 +220,6 @@
 
 										<!-- Address and zip info -->
 									<div class="form_line">
-												
 										<input id="street_number" name="[search]street_number" class="bloc_3" type="text" placeholder="Street number" />
 										<div class="separation_bloc">
 											<div class="separation"></div>
@@ -236,7 +230,7 @@
 										</div>
 											<input id="zipcode" name="[search]zipcode" class="bloc_2" type="text" placeholder="ZIP" />
 													
-													<!-- Use current location button -->
+												<!-- Use current location button -->
 												<div class="current_location btn">
 													<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-37"></span>
 														<span class="text">
@@ -261,7 +255,7 @@
 											</div>
 											<div class="bloc_2 select_grade" >
 												<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
-												<span>Grade</span>
+												<span id="grade_level_placeholder">Grade</span>
 												<div class='option_grade'>
 													<div class='btn_grade'>K0</div>
 													<div class='btn_grade'>K1</div>
@@ -283,7 +277,7 @@
 													<div class='btn_grade'>12</div>
 													<div class="clr"></div>
 												</div>
-												<input type='hidden'/>
+												<%= hidden_field_tag '[search]grade_level', '' %>
 											</div>      
 																	
 															<div class="add_child btn">
@@ -303,18 +297,36 @@
 																		<input type="text" placeholder="Set Sibling's school" />
 																		<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
 																	</div>
-																	<div class="bloc_5">
+																	<div id="search_form_submit" class="bloc_5">
 																	<input type="image" src="assets/btn_next.jpg" alt="Submit" />
 																	</div>
 																<div class="bloc_6">
 																	<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
-																		<input type="text" placeholder="Set Sibling's school" />
+																		<%= hidden_field_tag '[search]sibling_school_id', '' %>
+																		<input id="sibling_school_typeahead" name="[search]sibling_school_name" type="text" placeholder="Set Sibling's school" />
 																		<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
 																	</div>
 																	
 																
 																	<div class="clr"></div>
 														</div>
+														<script>
+															$(function() {
+																var availableTags = <%= raw School.all.collect {|x| {label: x.name, id: x.bps_id}}.to_json %>;
+																$( "#sibling_school_typeahead" ).autocomplete({
+																	source: availableTags,
+																	minLength: 2,
+																	select: function (event, ui) {
+																		$("#sibling_school_name").val(ui.item.label); // display the selected text
+																		$("#_searchsibling_school_id").val(ui.item.id); // save selected id to hidden input
+																	},
+																	messages: {
+																		noResults: '',
+																		results: function() {}
+																	}
+																});
+															});
+														</script>
 														<!--END    NEXT and Sibling school buttons -->
 												<% end %>
 						</div>
@@ -456,14 +468,3 @@
 						</div>
 		</div>
 	</div>
-	<div class="footer_top"></div>
-	<footer class="footer">
-		<div class="wrap">
-			<section class="content_wrap">
-				<p class='title_footer'>Boston Public Schools<br/>
-				<span class="copyright">Copyright &copy; 2011-2013 Boston Public Schools. All Rights Reserved. | Legal | Credits</p>
-				<div class='logo'><a href='javascript:void();'><img src='assets/bps-logo.png'/></a></div>
-				<div class='clr'></div>
-			</section>
-		</div>
-	</footer>
