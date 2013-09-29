@@ -11,10 +11,12 @@ gem 'faraday'
 gem 'friendly_id', "~> 4.0.10"
 gem 'haml-rails'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'multi_json'
 gem 'newrelic_rpm'
 gem 'pg'
 gem 'rails_12factor'
+gem 'ranked-model'
 
 # Gems used only for assets and not required
 # in production environments by default.
