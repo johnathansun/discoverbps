@@ -1,0 +1,27 @@
+<!-- dialog hello -->
+<div class='content'>
+	<%= form_tag ell_search_path(search), :method => :post, :remote => true do %>
+		<span class='title'>Hello! ¡Hola! Olá! Xin chào!</span>
+		<div class='bloc'>
+			<p class='first'>English Language Learner students have access to a special list of eligible schools which can best suit their language needs. To talk with a counselor in order to learn about your student's options, please call us Monday – Friday from 9am – 5pm at:</p>
+		</div>
+		<div class='tel'>800-246-6753</div>
+		<div class='btn'><input type="image" src="assets/btn_next.jpg" alt="Submit"></div>
+	<% end %>
+</div>
+<ul class='languages dialog_box_lang'>
+	<li>
+		<div class='current_language'><span data-icon="&#xe003;" aria-hidden="true"></span>English</div>
+		<div class='clr'></div>
+		<ul >
+			<li><a href='#' class='language'>Español</a></li>
+			<li><a href='#' class='language'>Kreyòl Ayisyen</a></li>
+			<li><a href='#' class='language'>中文</a></li>
+			<li><a href='#' class='language'>Português</a></li>
+			<li><a href='#' class='language'>Kriolu Kabuverdianu</a></li>
+			<li><a href='#' class='language'>Tiếng Việt</a></li>
+			<li><a href='#' class='language'>Français</a></li>
+			<li><a href='#' class='language'><span data-icon="&#xe003;" aria-hidden="true"></span>Other</a></li>
+		</ul>
+	</li>
+</ul>

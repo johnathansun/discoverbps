@@ -13,7 +13,7 @@ module SchoolsHelper
 		list << 'Playground, ' 					if hash[:hasplayground] == 'True'
 		list << 'Pool, ' 								if hash[:haspool] == 'True'
 		list << 'Science Lab, ' 				if hash[:hassciencelab] == 'True'
-		return list
+		return list.gsub(/,$/, '')
 	end
 
 	def partners_list_helper(array)
@@ -21,6 +21,20 @@ module SchoolsHelper
 		array.each do |partner|
 			list << "#{partner[:description]}, "
 		end
-		return list
+		return list.gsub(/,$/, '')
+	end
+
+	def school_hours_start_time_helper(hours)
+		if hours.present?
+			start_hour 	= hours.gsub(/am/, '').gsub(/pm/, '').match(/^\d*/).to_s.to_i
+			end_hour 		= hours.gsub(/am/, '').gsub(/pm/, '').match(/\d*$/).gsub(/:..$/,'').to_s.to_s
+		end
+	end
+
+	def school_hours_end_time_helper(hours)
+		if hours.present?
+			start_hour 	= hours.gsub(/am/, '').gsub(/pm/, '').match(/^\d*/).to_s.to_i
+			end_hour 		= hours.gsub(/am/, '').gsub(/pm/, '').match(/\d*$/).gsub(/:..$/,'').to_s.to_s
+		end
 	end
 end

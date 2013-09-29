@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130926205106) do
+ActiveRecord::Schema.define(:version => 20130929025005) do
 
   create_table "schools", :force => true do |t|
     t.datetime "created_at",           :null => false
@@ -33,5 +33,19 @@ ActiveRecord::Schema.define(:version => 20130926205106) do
   end
 
   add_index "schools", ["slug"], :name => "index_schools_on_slug", :unique => true
+
+  create_table "searches", :force => true do |t|
+    t.string   "street_number"
+    t.string   "street_name"
+    t.string   "zipcode"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "grade_level"
+    t.string   "iep"
+    t.string   "language"
+    t.text     "session_key"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
 end

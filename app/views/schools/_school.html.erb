@@ -7,7 +7,7 @@
 		</div>
 		<div class="school_name select line">
 			<span class="middle">
-				<%= school[:basic_info][:schname_23] %>
+				<%= school.api_basic_info[0][:schname_23] %>
 			</span>
 		</div>
 		
@@ -29,9 +29,9 @@
 			
 		</div>
 		<div class="box line school_hours">
-			<span  class="middle"> <%= school[:hours][0][:schhours1] %><br/>
+			<span  class="middle"> <%= school.api_hours[0][:schhours1] %><br/>
 				<div class="max_range">
-					<div class="ajust_range" style="margin-left:0%;margin-right:30%;">
+					<div class="ajust_range" style="margin-left:0%;margin-right:10%;">
 						
 					</div>
 				</div>
@@ -39,10 +39,10 @@
 		</div>
 		<div class="box line surround_care">
 			<span class="middle">
-				<% if school[:basic_info][:BeforeSchPrograms].present? %>
+				<% if school.api_basic_info[0][:BeforeSchPrograms].present? %>
 					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span>Before school<br/>
 				<% end %> 
-				<% if school[:basic_info][:AfterSchPrograms].present? %>
+				<% if school.api_basic_info[0][:AfterSchPrograms].present? %>
 					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school<% end %>
 			</span>
 		</div>
@@ -71,7 +71,7 @@
 						
 						 
 						<div class="right_side">
-								<p class="adress"><%= school[:basic_info][:campus1address1] %>, <%= school[:basic_info][:campus1city] %> <%= school[:basic_info][:campus1zip] %></p>
+								<p class="adress"><%= school.api_basic_info[0][:campus1address1] %>, <%= school.api_basic_info[0][:campus1city] %> <%= school.api_basic_info[0][:campus1zip] %></p>
 									<!-- school's picture -->
 									<div class="photos school_name ">
 										<div class="principal">
@@ -106,13 +106,13 @@
 										</div>
 										<div class="box">
 											<p  class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> School hours</p>
-						<p class="descrip"><%= school[:hours][0][:schhours1] %></p>
+						<p class="descrip"><%= school.api_hours[0][:schhours1] %></p>
 						
 						<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Surround care </p>
 						<p class="descrip">7:30am – 6:45pm<br />
 						<span  class="text_G1">Cost:</span> $30/month<br />
-						<span  class="text_G1">Before:</span> <%= school[:basic_info][:BeforeSchPrograms] %><br />
-						<span  class="text_G1">After:</span> <%= school[:basic_info][:AfterSchPrograms] %></p>
+						<span  class="text_G1">Before:</span> <%= school.api_basic_info[0][:BeforeSchPrograms] %><br />
+						<span  class="text_G1">After:</span> <%= school.api_basic_info[0][:AfterSchPrograms] %></p>
 										</div>
 										<div class="box">
 										</div>
@@ -123,18 +123,18 @@
 									 
 									<div class="separation_line"></div>
 									<div class="school_name ">
-									<p class="font_17">About <%= school[:basic_info][:schname_23] %></p>
+									<p class="font_17">About <%= school.api_basic_info[0][:schname_23] %></p>
 									
 									<!-- website link -->
 									<p><a class="text_B0" href="" title="School Website">School Website</a> <br/>
 									
 									<!-- email link -->
-									Email: <a class="text_B0" href="mailto:eliotboston.k12.ma.us" title="Email adress"><%= school[:basic_info][:schemail] %></a></p>
+									Email: <a class="text_B0" href="mailto:eliotboston.k12.ma.us" title="Email adress"><%= school.api_basic_info[0][:schemail] %></a></p>
 									
 									<!-- print logo link -->
-									<p class="desktop_tablet"><a href="" title="Print Details"><span aria-hidden="true" class="font_20 icon-DBPS-Dev-Assets-SRG-28"></span> Print Details</a></p>
+									<p class="desktop_tablet"><a href="/schools/<%= school.slug %>/print" title="Print Details"><span aria-hidden="true" class="font_20 icon-DBPS-Dev-Assets-SRG-28"></span> Print Details</a></p>
 									
-									<p class="descritiv"><%= school[:description][0][:schoolspecial] %></p>
+									<p class="descritiv"><%= school.api_description[0][:schoolspecial] %></p>
 									</div>
 									<div class="full_details">
 										<p class="font_17" style="margin-left:19px;">Full Details</p>
@@ -152,18 +152,18 @@
 											</div>
 											<div class="box">
 												<p  class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> School hours</p>
-							<p class="descrip"><%= school[:hours][0][:schhours1] %></p>
+							<p class="descrip"><%= school.api_hours[0][:schhours1] %></p>
 							
 							<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Surround care </p>
 							<p class="descrip">7:30am – 6:45pm<br />
 							<span  class="text_G1">Cost:</span> $30/month<br />
-							<span  class="text_G1">Before:</span> <%= school[:basic_info][:BeforeSchPrograms] %><br />
-							<span  class="text_G1">After:</span> <%= school[:basic_info][:AfterSchPrograms] %></p>
+							<span  class="text_G1">Before:</span> <%= school.api_basic_info[0][:BeforeSchPrograms] %><br />
+							<span  class="text_G1">After:</span> <%= school.api_basic_info[0][:AfterSchPrograms] %></p>
 											</div>
 										 
 											<div class="box">
 															<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Grades Offered</p>
-																<p class="descrip"><%= school[:grades][0][:grade] %></p>
+																<p class="descrip"><%= school.api_grades[0][:grade] %></p>
 												</div>
 												<div class="box">
 															<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Classes Per Grade</p>
@@ -171,7 +171,7 @@
 												</div>
 												<div class="box">
 															<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> School Type</p>
-																<p class="descrip"><% if school[:basic_info][:ischarter] == 'True' %>Charter<% end %></p>
+																<p class="descrip"><% if school.api_basic_info[0][:ischarter] == 'True' %>Charter<% end %></p>
 												</div>
 												
 												<div class="box">
@@ -204,7 +204,7 @@
 												</div>
 														<div class="box">
 															<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Facility Features</p>
-																<p class="descrip"><%= facilities_list_helper(school[:facilities][0]) %></p>
+																<p class="descrip"><%= facilities_list_helper(school.api_facilities[0]) %></p>
 												</div>
 														<div class="box">
 															<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Sports</p>
@@ -216,7 +216,7 @@
 												</div>
 														<div class="box">
 															<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Community Partners</p>
-																<p class="descrip"><%= partners_list_helper(school[:partners]) %></p>
+																<p class="descrip"><%= school.api_partners %></p>
 												</div>
 												
 										</div>
@@ -227,7 +227,7 @@
 											<div class="detail_row">
 											<div class="box">
 															<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Grades Offered</p>
-																<p class="descrip"><%= school[:grades][0][:grade] %></p>
+																<p class="descrip"><%= school.api_grades[0][:grade] %></p>
 												</div>
 												<div class="box">
 															<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> MCAS Tier</p>
@@ -235,7 +235,7 @@
 												</div>
 														<div class="box">
 															<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Facility Features</p>
-																<p class="descrip"><%= facilities_list_helper(school[:facilities][0]) %></p>
+																<p class="descrip"><%= facilities_list_helper(school.api_facilities[0]) %></p>
 												</div>
 													<div class="clr"></div>
 												</div>
@@ -257,7 +257,7 @@
 												<div class="detail_row">
 											<div class="box">
 															<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> School Type</p>
-																<p class="descrip"><% if school[:basic_info][:ischarter] == 'True' %>Charter<% end %></p>
+																<p class="descrip"><% if school.api_basic_info[0][:ischarter] == 'True' %>Charter<% end %></p>
 												</div>
 												<div class="box">
 															<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Special Programs</p>
@@ -280,7 +280,7 @@
 												</div>
 														<div class="box">
 															<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Community Partners</p>
-																<p class="descrip"><%= partners_list_helper(school[:partners]) %></p>
+																<p class="descrip"><%= school.api_partners %></p>
 												</div>
 													<div class="clr"></div>
 												</div>
@@ -324,7 +324,7 @@
 												<div class="detail_row">
 												<div class="box">
 																<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Grades Offered</p>
-																	<p class="descrip"><%= school[:grades][0][:grade] %></p>
+																	<p class="descrip"><%= school.api_grades[0][:grade] %></p>
 													</div>
 													<div class="box">
 																<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> MCAS Tier</p>
@@ -346,7 +346,7 @@
 													<div class="detail_row">
 													<div class="box">
 																<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> School Type</p>
-																	<p class="descrip"><% if school[:basic_info][:ischarter] == 'True' %>Charter<% end %></p>
+																	<p class="descrip"><% if school.api_basic_info[0][:ischarter] == 'True' %>Charter<% end %></p>
 													</div>
 													<div class="box">
 																<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Special Programs</p>
@@ -373,7 +373,7 @@
 													</div>
 														<div class="box">
 																<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Facility Features</p>
-																	<p class="descrip"><%= facilities_list_helper(school[:facilities][0]) %></p>
+																	<p class="descrip"><%= facilities_list_helper(school.api_facilities[0]) %></p>
 													</div>
 													<div class="clr"></div>
 													</div>
@@ -406,7 +406,7 @@
 													</div>
 													<div class="box">
 																<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Dev-Assets-SRG-35"></span> Community Partners</p>
-																	<p class="descrip"><%= partners_list_helper(school[:partners]) %></p>
+																	<p class="descrip"><%= school.api_partners %></p>
 													</div>
 												 <div class="clr"></div>
 													</div>

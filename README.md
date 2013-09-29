@@ -1,4 +1,1 @@
-discoverbps_v2
-==============
-
-discoverbps
+School.all.each {|x| x.update_attributes(api_grades: MultiJson.load(Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolGrades?schyear=2013&sch=#{x.bps_id}", :ssl => {:version => :SSLv3}).get.body, :symbolize_keys => true)) if x.api_grades.blank? && Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolGrades?schyear=2013&sch=#{x.bps_id}", :ssl => {:version => :SSLv3}).get.body.present?}

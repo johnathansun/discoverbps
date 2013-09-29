@@ -1,4 +1,0 @@
-$('#dialog_address_matches').show();
-<% @addresses.each_with_index do |address, index| %>
-	$("<%= escape_javascript(render partial: 'schools/address', locals: {address: address, index: index}) %>").appendTo("#address_matches");
-<% end %>

@@ -1,0 +1,34 @@
+<!-- dialog select address matches -->
+<div class='content'>
+	<%= form_tag address_verification_search_path(search), :method => :put, :remote => true do %>
+		<p class='first'>Select your address from our matches to be sure:</p>
+		
+		<%= hidden_field_tag '[search]street_number', addresses.first[:StreetNum] %>
+		<%= hidden_field_tag '[search]street_name', addresses.first[:Street].try(:titleize) %>
+		<%= hidden_field_tag '[search]zipcode', addresses.first[:ZipCode] %>
+
+		<div id="address_matches" class='selection'>
+			<% addresses.each_with_index do |address, index| %>
+				<%= render partial: 'schools/dialog_boxes/address', locals: {address: address, index: index} %>
+			<% end %>
+		</div>
+		<br/>
+		<div class='btn'><input type="image" src="assets/btn_next.jpg" alt="Submit"></div>
+	<% end %>
+</div>
+<ul class='languages dialog_box_lang'>
+	<li>
+		<div class='current_language'><span data-icon="&#xe003;" aria-hidden="true"></span>English</div>
+		<div class='clr'></div>
+		<ul >
+			<li><a href='#' class='language'>Español</a></li>
+			<li><a href='#' class='language'>Kreyòl Ayisyen</a></li>
+			<li><a href='#' class='language'>中文</a></li>
+			<li><a href='#' class='language'>Português</a></li>
+			<li><a href='#' class='language'>Kriolu Kabuverdianu</a></li>
+			<li><a href='#' class='language'>Tiếng Việt</a></li>
+			<li><a href='#' class='language'>Français</a></li>
+			<li><a href='#' class='language'><span data-icon="&#xe003;" aria-hidden="true"></span>Other</a></li>
+		</ul>
+	</li>
+</ul>

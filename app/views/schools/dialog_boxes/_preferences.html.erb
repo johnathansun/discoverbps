@@ -1,0 +1,61 @@
+<!-- dialog preferences -->
+<div class='content'>
+	<%= form_tag preferences_search_path(search), :method => :get do %>
+		<p class='first'>What matters most to <span class='name_child'>Elizabeth</span>?</p>
+		<div class='bloc'>
+			<div class="preference column_1">
+				<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Special Programs</span></p>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_special_programs' value='Advanced Work Class' /><span class="text">Advanced Work Class</span></label>
+			</div>
+			<div class="preference column_2">
+				<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">School Focus</span></p>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_school_focus_arts' value='arts' /><span class="text">Arts</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_school_focus_health_careers' value='health_careers' /><span class="text">Health Careers</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_school_focus_' value='' /><span class="text">Technology</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_school_focus_' value='' /><span class="text">Vocational training</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_school_focus_' value='' /><span class="text">STEM</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_school_focus_' value='' /><span class="text">STEAM</span></label>
+			</div>
+			<div class="preference column_3">
+				<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Facility Features</span></p>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_facility_features_swimming_pool' value='swimming pool' /><span class="text">Swimming Pool</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_facility_features_wheelchair_access' value='wheelchair access' /><span class="text">Wheelchair Access</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_facility_features_' value='' /><span class="text">Playground</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_facility_features_' value='' /><span class="text">Library</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_facility_features_' value='' /><span class="text">Cafeteria</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_facility_features_' value='' /><span class="text">Health Center</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_facility_features_' value='' /><span class="text">Outdoor classroom</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_facility_features_' value='' /><span class="text">Sports ﬁelds</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_facility_features_' value='' /><span class="text">Adjacent community&nbsp;center</span></label>
+			</div>
+			<div class="preference column_4">
+				<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Sports</span></p>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_sports_basketball' value='basketball' /><span class="text">Basketball</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_sports_football' value='football' /><span class="text">Football</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_sports_' value='' /><span class="text">Hockey</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_sports_' value='' /><span class="text">Soccer </span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_sports_' value='' /><span class="text">Volleyball</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_sports_' value='' /><span class="text">Tennis</span></label>
+				<label class='font_13_14'><input type='checkbox' name='[search]pref_sports_' value='' /><span class="text">Track</span></label>
+			</div>
+			<div class='clr'></div>
+		</div>
+		<div class='btn'><input type="image" src="assets/btn_next.jpg" alt="Submit"></div>
+	<% end %>
+</div>
+<ul class='languages dialog_box_lang'>
+	<li>
+		<div class='current_language'><span data-icon="&#xe003;" aria-hidden="true"></span>English</div>
+		<div class='clr'></div>
+		<ul >
+			<li><a href='#' class='language'>Español</a></li>
+			<li><a href='#' class='language'>Kreyòl Ayisyen</a></li>
+			<li><a href='#' class='language'>中文</a></li>
+			<li><a href='#' class='language'>Português</a></li>
+			<li><a href='#' class='language'>Kriolu Kabuverdianu</a></li>
+			<li><a href='#' class='language'>Tiếng Việt</a></li>
+			<li><a href='#' class='language'>Français</a></li>
+			<li><a href='#' class='language'><span data-icon="&#xe003;" aria-hidden="true"></span>Other</a></li>
+		</ul>
+	</li>
+</ul>

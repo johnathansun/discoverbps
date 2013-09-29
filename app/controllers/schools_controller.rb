@@ -3,60 +3,61 @@ class SchoolsController < ApplicationController
   def home
   end
 
-  def search
-    session[:first_name]    = params[:first_name].try(:strip)
-    session[:last_name]     = params[:last_name].try(:strip)
-    session[:street_number] = params[:street_number].try(:strip)
-    session[:street_name]   = params[:street_name].try(:strip)
-    session[:zipcode]       = params[:zipcode].try(:strip)
+  def address_search
+    respond_to do |format|
+      if params[:street_number].blank? || params[:street_name].blank? || params[:zipcode].blank? || params[:first_name].blank?
+        logger.info "************** This is an error"
+        @errors = 'Please complete all of the form fields before submitting.'
+        format.js { render action: "errors" }
+      else
+        session[:first_name]    = params[:first_name].try(:strip)
+        session[:last_name]     = params[:last_name].try(:strip)
+        session[:grade_level]   = params[:grade_level].try(:strip)
 
-    street_number = URI.escape(params[:street_number].try(:strip))
-    street_name   = URI.escape(params[:street_name].try(:strip))
-    zipcode       = URI.escape(params[:zipcode].try(:strip))
-    
-    addresses     = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
-    @addresses    = addresses[:List]
+        street_number = URI.escape(params[:street_number].try(:strip))
+        street_name   = URI.escape(params[:street_name].try(:strip))
+        zipcode       = URI.escape(params[:zipcode].try(:strip))
+        
+        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
+        format.js { render action: "address_verification" }
+      end
+    end
+  end
+
+  def address_verification
+    respond_to do |format|
+      session[:street_number] = params[:hidden_street_number].try(:strip)
+      session[:street_name]   = params[:hidden_street_name].try(:strip)
+      session[:zipcode]       = params[:hidden_zipcode].try(:strip)
+      format.js { render action: "iep_needs" }
+    end
+  end
+
+  def iep_needs
+    respond_to do |format|
+      session[:iep_needs]         = params[:iep_needs]
+      session[:primary_language]  = params[:primary_language]
+      format.js { render action: "ell_needs" }
+    end
+  end
+
+  def ell_needs
+    respond_to do |format|
+      # session[:iep_needs]         = params[:iep_needs]
+      # session[:primary_language]  = params[:primary_language]
+      format.js { render action: "preferences" }
+    end
   end
 
   def index
-    session[:street_number] = params[:street_number].try(:strip)
-    session[:street_name]   = params[:street_name].try(:strip)
-    session[:zipcode]       = params[:zipcode].try(:strip)
+    street_number = session[:street_number].present? ? URI.escape(session[:street_number]) : ''
+    street_name   = session[:street_name].present? ? URI.escape(session[:street_name]) : ''
+    zipcode       = session[:zipcode].present? ? URI.escape(session[:zipcode]) : ''
 
-    street_number = URI.escape(params[:street_number].try(:strip))
-    street_name   = URI.escape(params[:street_name].try(:strip))
-    zipcode       = URI.escape(params[:zipcode].try(:strip))
-
-    response      = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
-    eligible_schools = response[:List]
+    eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
 
     # GET school information
-    @schools = []
-    eligible_schools.each do |school|
-      id = school[:School]
-      school_hash = {}
-      school_hash[:eligibility] = school
-
-      # bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetTierList")
-      # bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/get?SearchToken={TOKEN}")
-      # bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetAddressMatches?StreetNumber={STREETNUMBER}&Street={STREET}&ZipCode={ZIPCODE}")
-      # bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolChoices?SchoolYear={SCHOOLYEAR}&Grade={GRADE}&StreetNumber={STREETNUMBER}&Street={STREET}&ZipCode={ZIPCODE}")
-      # bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolList?schyear=2013")
-
-      school_hash[:basic_info]        = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchool?schyear=2013&sch=#{id}")[0]
-      school_hash[:awards]            = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolAwards?schyear=2013&sch=#{id}&TranslationLanguage=")
-      school_hash[:description]       = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolDescriptions?schyear=2013&sch=#{id}&TranslationLanguage=")
-      school_hash[:facilities]        = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolFacilities?schyear=2013&sch=#{id}")
-      school_hash[:grades]            = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolGrades?schyear=2013&sch=#{id}")
-      school_hash[:hours]             = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolHours?schyear=2013&sch=#{id}&TranslationLanguage=")
-      school_hash[:partners]          = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolPartners?schyear=2013&sch=#{id}&TranslationLanguage=")
-      # school_hash[:calendar]          = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolCalendar?schyear=2013&sch=#{id}")
-      # school_hash[:extra_curricular]  = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolExtraCurricular?schyear=2013&sch=#{id}&TranslationLanguage=")
-      # school_hash[:languages]         = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolLanguages?schyear=2013&sch=#{id}")
-      # school_hash[:photos]            = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetSchoolPhotos?schyear=2013&sch=#{id}")
-
-      @schools << school_hash
-    end
+    @schools = School.where('bps_id IN (?)', eligible_schools.collect {|x| x[:School]})
     
     respond_to do |format|
       format.html # index.html.erb
@@ -65,6 +66,15 @@ class SchoolsController < ApplicationController
   end
 
   def show
+    @school = School.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @school }
+    end
+  end
+
+  def print
     @school = School.find(params[:id])
 
     respond_to do |format|

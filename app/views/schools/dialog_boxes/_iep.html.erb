@@ -1,0 +1,31 @@
+<!-- dialog individualized education plan -->
+<div class='content'>
+	<%= form_tag iep_search_path(search), :method => :put, :remote => true do %>
+		If either of the following apply, please specify below.
+		<div class='bloc'>
+			<p class='first'>My child has an Individualized Education Plan (IEP) for special needs:</p>
+			<div class='input_select'><input name='[search]iep_needs' type='text' placeholder='Select IEP needs'/><span class='arrow icon-DBPS-Dev-Assets-SRG-41'></span></div>
+		</div>
+		<div class='bloc'>
+			<p class='first'>My child may need specialized language support:</p>
+			<div class='input_select'><input name='[searc]primary_language' type='text' placeholder='Select child’s primary language'/><span class='arrow icon-DBPS-Dev-Assets-SRG-41'></span></div>
+		</div>
+		<div class='btn'><input type="image" src="assets/btn_next.jpg" alt="Submit"></div>
+	<% end %>
+</div>
+<ul class='languages dialog_box_lang'>
+	<li>
+		<div class='current_language'><span data-icon="&#xe003;" aria-hidden="true"></span>English</div>
+		<div class='clr'></div>
+		<ul >
+			<li><a href='#' class='language'>Español</a></li>
+			<li><a href='#' class='language'>Kreyòl Ayisyen</a></li>
+			<li><a href='#' class='language'>中文</a></li>
+			<li><a href='#' class='language'>Português</a></li>
+			<li><a href='#' class='language'>Kriolu Kabuverdianu</a></li>
+			<li><a href='#' class='language'>Tiếng Việt</a></li>
+			<li><a href='#' class='language'>Français</a></li>
+			<li><a href='#' class='language'><span data-icon="&#xe003;" aria-hidden="true"></span>Other</a></li>
+		</ul>
+	</li>
+</ul>

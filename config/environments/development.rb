@@ -36,4 +36,5 @@ DiscoverbpsV2::Application.configure do
   config.assets.debug = false
 
   config.assets.precompile += %w( .svg .eot .woff .ttf )
+
 end
