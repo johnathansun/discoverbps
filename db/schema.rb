@@ -11,7 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130929025005) do
+ActiveRecord::Schema.define(:version => 20130929150858) do
+
+  create_table "preference_categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.integer  "sort_order"
+    t.boolean  "include_in_dialog_box", :default => true
+  end
+
+  create_table "preferences", :force => true do |t|
+    t.integer  "preference_category_id"
+    t.string   "name"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.integer  "sort_order"
+  end
+
+  add_index "preferences", ["preference_category_id"], :name => "index_preferences_on_preference_category_id"
 
   create_table "schools", :force => true do |t|
     t.datetime "created_at",           :null => false
@@ -42,10 +60,12 @@ ActiveRecord::Schema.define(:version => 20130929025005) do
     t.string   "last_name"
     t.string   "grade_level"
     t.string   "iep"
-    t.string   "language"
+    t.string   "primary_language"
     t.text     "session_key"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "sibling_school_name"
+    t.integer  "sibling_school_id"
   end
 
 end

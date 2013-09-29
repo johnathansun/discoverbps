@@ -324,34 +324,71 @@ td {
    ========================================================================== */
 @media print {
   * {
-    /*background: transparent !important; color: black !important;  filter:none !important; -ms-filter: none !important;*/
+    background: transparent !important;
+    color: black !important;
     text-shadow: none !important;
+    filter: none !important;
+    -ms-filter: none !important;
   }
   /* Black prints faster: h5bp.com/s */
-  /*a, a:visited { text-decoration: underline; }
-    a[href]:after { content: " (" attr(href) ")"; }
-    abbr[title]:after { content: " (" attr(title) ")"; }
-    .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  /* Don't show links for images, or javascript/internal links 
-    pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
-    thead { display: table-header-group; }  h5bp.com/t 
-    tr, img { page-break-inside: avoid; }
-    img { max-width: 100% !important; }
-    @page { margin: 0.5cm; }
-    p, h2, h3 { orphans: 3; widows: 3; }
-    h2, h3 { page-break-after: avoid; }*/
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+  /* Don't show links for images, or javascript/internal links */
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  thead {
+    display: table-header-group;
+  }
+  /* h5bp.com/t */
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  @page  {
+    margin: 0.5cm;
+  }
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
 }
 /* Mixins */
 /* !SITE SETTINGS
 -------------------------------------------------------------------------- */
 @font-face {
   font-family: 'AvenirLT-Black';
-  src: url('/assets/284C19_0_0.eot');
-  src: url('/assets/284C19_0_0.eot') format('embedded-opentype'), url('/assets/284C19_0_0.woff') format('woff'), url('/assets/284C19_0_0.ttf') format('truetype');
+  src: url('284C19_0_0.eot');
+  src: url('284C19_0_0.eot') format('embedded-opentype'), url('284C19_0_0.woff') format('woff'), url('284C19_0_0.ttf') format('truetype');
 }
 @font-face {
   font-family: 'DBPS-UI';
-  src: url('/assets/DBPS-UI.eot');
-  src: url('/assets/DBPS-UI.eot?#iefix') format('embedded-opentype'), url('/assets/DBPS-UI.woff') format('woff'), url('/assets/DBPS-UI.ttf') format('truetype'), url('/assets/DBPS-UI.svg#DBPS-UI') format('svg');
+  src: url('DBPS-UI.eot');
+  src: url('DBPS-UI.eot?#iefix') format('embedded-opentype'), url('DBPS-UI.woff') format('woff'), url('DBPS-UI.ttf') format('truetype'), url('DBPS-UI.svg#DBPS-UI') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -750,7 +787,7 @@ body {
 .dialog_box {
   position: absolute;
   z-index: 100;
-  top: 700px;
+  top: 650px;
   left: 50%;
   margin: 0 0 0 -185px;
   width: 330px;
@@ -936,7 +973,7 @@ body {
 
   /*-webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.3));*/
 
-  /*background:url(../../../img/bg_box_welcome_triangle.png);
+  /*background:url(..//assets/bg_box_welcome_triangle.png);
 			width: 422px;
 			height: 295px;
 			left: -20px;
@@ -1082,9 +1119,6 @@ footer.footer {
   height: 56px;
   padding: 19px 0 25px;
   clear: both;
-}
-footer.footer .wrap {
-  padding-bottom: 0 !important;
 }
 footer.footer .title_footer {
   color: #0077cf;
@@ -2351,7 +2385,7 @@ footer.footer .logo {
   width: 760px;
   font-size: 15px;
   line-height: 20px;
-  margin-bottom: 11px;
+  margin-left: 192px;
 }
 .wrap .footer_list p {
   margin-bottom: .9em;
@@ -2742,6 +2776,18 @@ footer.footer .logo {
   width: 60px;
   height: 38px;
 }
+.ui-widget-content {
+  background-color: #0059a3;
+  width: 400px;
+  padding: 10px;
+  color: #80bce7;
+}
+.ui-menu-item { 
+  cursor: pointer; 
+}
+a.ui-corner-all:hover { 
+  color: #ffffff !important;
+}
 .wrap .search .search_section .content_left .text form .form_line .bloc_6 {
   width: 220px;
   display: block;
@@ -2868,9 +2914,6 @@ footer.footer .logo {
 .wrap .account {
   color: #ffffff;
   padding-bottom: 20px;
-}
-.wrap .account input {
-  font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
 }
 .wrap .account .account_header {
   padding-top: 88px;
@@ -3129,7 +3172,6 @@ footer.footer .logo {
   height: 31px;
   width: 456px;
   display: block;
-  cursor: pointer;
   font-size: 12px;
   line-height: 14px;
   color: #80bce7;
@@ -3170,9 +3212,6 @@ footer.footer .logo {
   top: -42px;
   position: relative;
 }
-.wrap.compare_list .footer_list {
-  margin-left: 192px;
-}
 .glass_open,
 .glass_close {
   display: inline-block;
@@ -3194,6 +3233,16 @@ footer.footer .logo {
 }
 .li_frame {
   width: 100%;
+}
+.ie8 .wrap,
+.ie7 .wrap,
+ie6 .wrap {
+  min-width: 1210px;
+}
+.ie8 .print1 .wrap,
+.ie7 .print1 .wrap,
+ie6 .print1 .wrap {
+  min-width: auto;
 }
 /*}*/
 .print1 {
@@ -3261,7 +3310,6 @@ footer.footer .logo {
   width: 100%;
   height: 20px;
   padding: 7px 0 0;
-  position: relative;
 }
 .print1 .wrap .menu_student_info .name_list .name_info .indicator {
   display: none;
@@ -3269,24 +3317,15 @@ footer.footer .logo {
 .print1 .wrap .menu_student_info .name_list .name_info .name {
   font-size: 15px;
   margin-left: 13px;
-  position: relative;
 }
 .print1 .wrap .menu_student_info .name_list .name_info .grade {
   font-size: 5.5px;
   float: right;
   text-align: right;
   margin-right: 13px;
-  position: relative;
 }
 .print1 .wrap .menu_student_info .name_list .name_info .grade .number {
   font-size: 5.5px;
-}
-.print1 .wrap .menu_student_info .name_list .name_info .bg_or {
-  position: absolute;
-  width: 216px;
-  height: 27px;
-  top: 0;
-  left: 0;
 }
 .print1 .wrap .menu_student_info .name_list .student_info {
   padding: 13px 13px 5px;
@@ -3325,7 +3364,6 @@ footer.footer .logo {
   font-size: 10px;
   line-height: 11px;
   width: 16px;
-  color: #0077cf;
 }
 .print1 .wrap #school_list ul li .school_name {
   width: 192px;
@@ -3422,37 +3460,28 @@ footer.footer .logo {
 .print1 .wrap #school_list .li_frame {
   width: auto;
 }
-.print1 .footer .wrap {
+.print1 footer .wrap {
   border-top: 1px solid #565656;
   padding-top: 14px;
   padding-bottom: 13px;
 }
-.print1 .footer .wrap .site_link {
+.print1 footer .wrap .site_link {
   font-family: Georgia, "Times New Roman", Times, serif;
   color: #72c900;
   font-size: 14px;
   margin-top: 14px;
   display: inline-block;
 }
-.print1 .footer.footer {
+.print1 footer.footer {
   padding-top: 0;
 }
-.print1 .footer.footer .logo {
+.print1 footer.footer .logo {
   width: 74px;
 }
-.print1 .footer.footer .logo img {
+.print1 footer.footer .logo img {
   width: 100%;
 }
-:root {
-  -webkit-print-color-adjust: exact;
-}
 .mobile_only {
-  display: none;
-}
-:root {
-  -webkit-print-color-adjust: exact;
-}
-.print_only {
   display: none;
 }
 /* -Screen - tablet */
@@ -3538,21 +3567,6 @@ footer.footer .logo {
   }
   .wrap #school_list .footer_list .footer_right p,
   .wrap #compare_list .footer_list .footer_right p {
-    margin-bottom: .4em;
-  }
-  .wrap#compare_list .footer_list {
-    margin-left: 11px;
-    width: auto;
-    margin-right: 11px;
-    margin-bottom: 11px;
-  }
-  .wrap#compare_list .footer_list .footer_left {
-    width: 327px;
-  }
-  .wrap#compare_list .footer_list .footer_right {
-    width: 182px;
-  }
-  .wrap#compare_list .footer_list .footer_right p {
     margin-bottom: .4em;
   }
   .wrap #compare_list ul li .no_order {
@@ -4295,22 +4309,6 @@ footer.footer .logo {
   .wrap .account #save {
     width: 100%;
   }
-  .wrap#compare_list .footer_list {
-    width: auto;
-    padding: 28px 11px 10px;
-    margin-right: 11px;
-  }
-  .wrap#compare_list .footer_list .footer_left {
-    width: 100%;
-    float: none;
-  }
-  .wrap#compare_list .footer_list .footer_right {
-    width: 100%;
-    float: none;
-    border: 0;
-    border-top: 1px solid #ffffff;
-    padding: 14px 0 0 0;
-  }
   footer.footer {
     padding: 19px;
     height: auto;
@@ -4778,22 +4776,6 @@ footer.footer .logo {
   .wrap .account #save {
     width: 100%;
   }
-  .wrap#compare_list .footer_list {
-    width: auto;
-    padding: 28px 11px 10px;
-    margin-right: 11px;
-  }
-  .wrap#compare_list .footer_list .footer_left {
-    width: 100%;
-    float: none;
-  }
-  .wrap#compare_list .footer_list .footer_right {
-    width: 100%;
-    float: none;
-    border: 0;
-    border-top: 1px solid #ffffff;
-    padding: 14px 0 0 0;
-  }
   footer.footer {
     padding: 19px;
     height: auto;
@@ -5196,170 +5178,5 @@ footer.footer .logo {
   }
   .mobile_only {
     display: block;
-  }
-}
-/* Base shared Layout */
-/* !IE SPECIFICS
------------------------------------------------ */
-.ie8 .wrap,
-.ie7 .wrap,
-.ie6 .wrap {
-  min-width: 1210px !important;
-}
-.ie8 .print1 .wrap,
-.ie7 .print1 .wrap,
-.ie6 .print1 .wrap {
-  min-width: auto;
-}
-/* ----------------------------------------------
-	 ELEMENT LAYOUT - print1
----------------------------------------------- */
-@media print {
-  .print_single_school {
-    background: none;
-    font-size: 10px;
-  }
-  .print_single_school .no_print {
-    display: none;
-  }
-  .print_single_school .print_only {
-    display: block;
-  }
-  .print_single_school header {
-    display: none;
-  }
-  .print_single_school .wrap {
-    width: 540px;
-    margin: 0 auto;
-  }
-  .print_single_school .wrap .content_wrap {
-    width: 100%;
-    margin: 0;
-  }
-  .print_single_school .wrap .content_wrap .account_box {
-    display: none;
-  }
-  .print_single_school .wrap.timeline_menu .timeline {
-    display: none;
-  }
-  .print_single_school .wrap.timeline_menu .logo_discover {
-    color: #0077cf;
-    font-size: 44px;
-    left: -24px;
-  }
-  .print_single_school .wrap.timeline_menu .menu_nav {
-    display: none;
-  }
-  .print_single_school .wrap .languages {
-    display: none;
-  }
-  .print_single_school .wrap.global_map {
-    background: #ebebeb;
-    height: 100px;
-    position: relative;
-  }
-  .print_single_school .wrap.global_map #googleMap {
-    width: 100%;
-    float: left;
-    height: 100px;
-  }
-  .print_single_school .wrap .single_school {
-    padding: 15px 0 0 0;
-  }
-  .print_single_school .wrap .single_school .name_school {
-    font-size: 18px;
-    line-height: 24px;
-  }
-  .print_single_school .wrap .single_school .name_school span {
-    font-size: 14px;
-  }
-  .print_single_school .wrap .single_school p {
-    font-size: 8px;
-    line-height: 12px;
-  }
-  .print_single_school .wrap .single_school .school_to_home {
-    position: absolute;
-    left: 0px;
-    top: -25px;
-    font-size: 8px;
-    line-height: 12px;
-  }
-  .print_single_school .wrap .single_school .school_to_home .itinerary {
-    color: #969696;
-    padding: 0 0 0 15px;
-  }
-  .print_single_school .wrap .single_school .address_school {
-    font-size: 8px;
-    line-height: 15px;
-  }
-  .print_single_school .wrap .single_school .photos {
-    max-width: 200px;
-  }
-  .print_single_school .wrap .single_school .photos .principal {
-    height: 150px;
-    margin-bottom: 6px;
-  }
-  .print_single_school .wrap .single_school .photos .small {
-    height: 46px;
-  }
-  .print_single_school .wrap .single_school .separation_line {
-    height: 10px;
-    margin: 0 0 10px 0;
-  }
-  .print_single_school .wrap .single_school .school_descrip {
-    width: 270px;
-    position: relative;
-  }
-  .print_single_school .wrap .single_school .school_descrip .descritiv {
-    font-size: 8px;
-    line-height: 12px;
-  }
-  .print_single_school .wrap .single_school .detail_row .box {
-    font-size: 8px;
-    line-height: 12px;
-    width: 98px;
-    padding-left: 10px;
-    min-height: 40px;
-    margin-bottom: 5px;
-  }
-  .print_single_school .wrap .single_school .detail_row .box.first {
-    padding: 0;
-  }
-  .print_single_school .wrap .single_school .detail_row .box .absolute {
-    width: 98px;
-  }
-  .print_single_school .wrap .single_school .detail_row .box .descrip {
-    margin-left: 14px;
-  }
-  .print_single_school .wrap .single_school .tablet {
-    display: none;
-  }
-  .print_single_school .wrap .single_school .desktop {
-    display: block;
-  }
-  .print_single_school .footer_top {
-    background: none;
-    display: none;
-  }
-  .print_single_school .footer .wrap {
-    border-top: 1px solid #565656;
-    padding-top: 14px;
-    padding-bottom: 13px;
-  }
-  .print_single_school .footer .wrap .site_link {
-    font-family: Georgia, "Times New Roman", Times, serif;
-    color: #72c900;
-    font-size: 14px;
-    margin-top: 14px;
-    display: inline-block;
-  }
-  .print_single_school .footer.footer {
-    padding-top: 0;
-  }
-  .print_single_school .footer.footer .logo {
-    width: 74px;
-  }
-  .print_single_school .footer.footer .logo img {
-    width: 100%;
   }
 }
