@@ -5,6 +5,14 @@ class SearchesController < ApplicationController
     
     respond_to do |format|
       if @search.save
+      	if @search.sibling_school_name.present?
+	      	sibling_school = School.where(name: @search.sibling_school_name).first
+  	    	session[:sibling_school_id] = sibling_school.bps_id
+  	    end
+      	session[:first_name] 	= @search.first_name
+      	session[:last_name] 	= @search.last_name
+      	session[:grade_level] = @search.grade_level
+      	
       	street_number = URI.escape(params[:search][:street_number].try(:strip))
         street_name   = URI.escape(params[:search][:street_name].try(:strip))
         zipcode       = URI.escape(params[:search][:zipcode].try(:strip))

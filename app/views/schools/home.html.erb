@@ -239,96 +239,76 @@
 												</div>
 												<!-- END  Use current location button -->
 												
-													<div class="clr"></div>
+											<div class="clr"></div>
 										</div>
 										<!--END  Address and zip info -->
-										
-										<!-- Student info -->
-										<div class="form_line">                    	
-											<input id="first_name" name="[search]first_name" class="bloc_3" type="text" placeholder="Student's first name" />
-											<div class="separation_bloc">
-												<div class="separation"></div>
+										<div id="search_form_students_list">
+											<div id="student_1_info">
+												<%= render partial: 'schools/student_info', locals: {add_more: true, row: 1} %>
 											</div>
-											<input id="last_name" name="[search]last_name" class="bloc_4" type="text" placeholder="Last name" />
-											<div class="separation_bloc">
-												<div class="separation"></div>
+											<div id="student_2_info" style="display: none;">
+												<%= render partial: 'schools/student_info', locals: {add_more: true, row: 2} %>
 											</div>
-											<div class="bloc_2 select_grade" >
-												<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
-												<span id="grade_level_placeholder">Grade</span>
-												<div class='option_grade'>
-													<div class='btn_grade'>K0</div>
-													<div class='btn_grade'>K1</div>
-													<div class='btn_grade'>K2</div>
-													<div class="clr"></div>
-													<div class='btn_grade'>1</div>
-													<div class='btn_grade'>2</div>
-													<div class='btn_grade'>3</div>
-													<div class='btn_grade'>4</div>
-													<div class='btn_grade'>5</div>
-													<div class="clr"></div>
-													<div class='btn_grade'>6</div>
-													<div class='btn_grade'>7</div>
-													<div class='btn_grade'>8</div>
-													<div class="clr"></div>
-													<div class='btn_grade'>9</div>
-													<div class='btn_grade'>10</div>
-													<div class='btn_grade'>11</div>
-													<div class='btn_grade'>12</div>
-													<div class="clr"></div>
-												</div>
-												<%= hidden_field_tag '[search]grade_level', '' %>
-											</div>      
-																	
-															<div class="add_child btn">
-																<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-10"></span>
-																	<span class="text">
-																		Add another child
-																	</span>
-															</div>
-															<div class="clr"></div>
-														</div>
-														<!--END  Student info -->
-														
-														<!-- NEXT and Sibling school buttons -->
-														<div class="form_line">
-																<div class="bloc_6 portrait">
-																	<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
-																		<input type="text" placeholder="Set Sibling's school" />
-																		<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
-																	</div>
-																	<div id="search_form_submit" class="bloc_5">
-																	<input type="image" src="assets/btn_next.jpg" alt="Submit" />
-																	</div>
-																<div class="bloc_6">
-																	<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
-																		<%= hidden_field_tag '[search]sibling_school_id', '' %>
-																		<input id="sibling_school_typeahead" name="[search]sibling_school_name" type="text" placeholder="Set Sibling's school" />
-																		<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
-																	</div>
-																	
-																
-																	<div class="clr"></div>
-														</div>
-														<script>
-															$(function() {
-																var availableTags = <%= raw School.all.collect {|x| {label: x.name, id: x.bps_id}}.to_json %>;
-																$( "#sibling_school_typeahead" ).autocomplete({
-																	source: availableTags,
-																	minLength: 2,
-																	select: function (event, ui) {
-																		$("#sibling_school_name").val(ui.item.label); // display the selected text
-																		$("#_searchsibling_school_id").val(ui.item.id); // save selected id to hidden input
-																	},
-																	messages: {
-																		noResults: '',
-																		results: function() {}
-																	}
-																});
-															});
-														</script>
-														<!--END    NEXT and Sibling school buttons -->
-												<% end %>
+											<div id="student_3_info" style="display: none;">
+												<%= render partial: 'schools/student_info', locals: {add_more: true, row: 3} %>
+											</div>
+											<div id="student_4_info" style="display: none;">
+												<%= render partial: 'schools/student_info', locals: {add_more: true, row: 4} %>
+											</div>
+											<div id="student_5_info" style="display: none;">
+												<%= render partial: 'schools/student_info', locals: {add_more: false, row: 5} %>
+											</div>
+										</div>
+										<script>
+											$("#add_student_2_button").click(function() {
+												$('#add_student_2_button').hide();
+												$('#student_2_info').show();
+											});
+											$("#add_student_3_button").click(function() {
+												$('#add_student_3_button').hide();
+												$('#student_3_info').show();
+											});
+											$("#add_student_4_button").click(function() {
+												$('#add_student_4_button').hide();
+												$('#student_4_info').show();
+											});
+											$("#add_student_5_button").click(function() {
+												$('#add_student_5_button').hide();
+												$('#student_5_info').show();
+											});
+										</script>
+									<!-- NEXT and Sibling school buttons -->
+									<div class="form_line">
+										<div class="bloc_6 portrait">
+											<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
+											<input type="text" placeholder="Set Sibling's school" />
+											<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
+										</div>
+										<div id="search_form_submit" class="bloc_5">
+											<input type="image" src="assets/btn_next.jpg" alt="Submit" />
+										</div>
+										<div class="bloc_6">
+											<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
+											<input id="sibling_school_autocomplete" name="[search]sibling_school_name" type="text" placeholder="Set Sibling's school" />
+											<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
+										</div>
+										<div class="clr"></div>
+									</div>
+									<script>
+										$(function() {
+											var schoolNames = <%= raw School.all.collect {|x| x.name} %>;
+											$( "#sibling_school_autocomplete" ).autocomplete({
+												source: schoolNames,
+												minLength: 2,
+												messages: {
+													noResults: '',
+													results: function() {}
+												}
+											});
+										});
+									</script>
+									<!--END    NEXT and Sibling school buttons -->
+							<% end %>
 						</div>
 										 
 					</div>

@@ -2776,15 +2776,6 @@ footer.footer .logo {
   width: 60px;
   height: 38px;
 }
-.ui-widget-content {
-  background-color: #0059a3;
-  width: 400px;
-  padding: 10px;
-  color: #80bce7;
-}
-.ui-menu-item { 
-  cursor: pointer; 
-}
 a.ui-corner-all:hover { 
   color: #ffffff !important;
 }
@@ -5179,4 +5170,16 @@ ie6 .print1 .wrap {
   .mobile_only {
     display: block;
   }
+}
+.ui-widget-content {
+  background-color: #0059a3;
+  width: 400px;
+  padding: 10px;
+  color: #80bce7;
+}
+.ui-menu-item { 
+  cursor: pointer; 
+}
+.add_child {
+	cursor: pointer;
 }

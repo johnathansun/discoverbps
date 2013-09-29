@@ -1,0 +1,51 @@
+<div class="form_line">                    	
+	<input id="first_name" name="[search]student_<%= row %>_first_name" class="bloc_3" type="text" placeholder="Student's first name" />
+	<div class="separation_bloc">
+		<div class="separation"></div>
+	</div>
+	<input id="last_name" name="[search]student_<%= row %>_last_name" class="bloc_4" type="text" placeholder="Last name" />
+	<div class="separation_bloc">
+		<div class="separation"></div>
+	</div>
+	<div class="bloc_2 select_grade" >
+		<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
+		<span id="student_<%= row %>_grade_level_placeholder">Grade</span>
+		<div class='option_grade'>
+			<div class='student_<%= row %> btn_grade'>K0</div>
+			<div class='student_<%= row %> btn_grade'>K1</div>
+			<div class='student_<%= row %> btn_grade'>K2</div>
+			<div class="clr"></div>
+			<div class='student_<%= row %> btn_grade'>1</div>
+			<div class='student_<%= row %> btn_grade'>2</div>
+			<div class='student_<%= row %> btn_grade'>3</div>
+			<div class='student_<%= row %> btn_grade'>4</div>
+			<div class='student_<%= row %> btn_grade'>5</div>
+			<div class="clr"></div>
+			<div class='student_<%= row %> btn_grade'>6</div>
+			<div class='student_<%= row %> btn_grade'>7</div>
+			<div class='student_<%= row %> btn_grade'>8</div>
+			<div class="clr"></div>
+			<div class='student_<%= row %> btn_grade'>9</div>
+			<div class='student_<%= row %> btn_grade'>10</div>
+			<div class='student_<%= row %> btn_grade'>11</div>
+			<div class='student_<%= row %> btn_grade'>12</div>
+			<div class="clr"></div>
+		</div>
+		<%= hidden_field_tag "[search]student_#{row}_grade_level", '' %>
+	</div>      
+	<% if add_more == true %>
+		<div id="add_student_<%= row + 1 %>_button" class="add_child btn">
+			<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-10"></span>
+				<span class="text">
+					Add another child
+				</span>
+		</div>
+	<% end %>
+	<div class="clr"></div>
+</div>
+<script>
+	$('.student_<%= row %>.btn_grade').click(function() {
+		$('#student_<%= row %>_grade_level_placeholder').html(this.innerText);
+		$('#_searchstudent_<%= row %>_grade_level').val(this.innerText);
+	});
+</script>

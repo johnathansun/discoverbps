@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130929150858) do
+ActiveRecord::Schema.define(:version => 20130929224717) do
 
   create_table "preference_categories", :force => true do |t|
     t.string   "name"
@@ -56,16 +56,28 @@ ActiveRecord::Schema.define(:version => 20130929150858) do
     t.string   "street_number"
     t.string   "street_name"
     t.string   "zipcode"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "grade_level"
     t.string   "iep"
     t.string   "primary_language"
     t.text     "session_key"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.string   "sibling_school_name"
     t.integer  "sibling_school_id"
+    t.string   "student_1_first_name"
+    t.string   "student_1_last_name"
+    t.string   "student_1_grade_level"
+    t.string   "student_2_first_name"
+    t.string   "student_2_last_name"
+    t.string   "student_2_grade_level"
+    t.string   "student_3_first_name"
+    t.string   "student_3_last_name"
+    t.string   "student_3_grade_level"
+    t.string   "student_4_first_name"
+    t.string   "student_4_last_name"
+    t.string   "student_4_grade_level"
+    t.string   "student_5_first_name"
+    t.string   "student_5_last_name"
+    t.string   "student_5_grade_level"
   end
 
 end

@@ -1,7 +1,7 @@
 <!-- dialog select address matches -->
 <div class='content'>
 	<%= form_tag address_verification_search_path(search), :method => :put, :remote => true do %>
-		<p class='first'>Select your address from our matches to be sure:</p>
+		<p class='first'>Please verify your student's home address:</p>
 
 		<%= hidden_field_tag '[search]street_number', addresses.first[:StreetNum] %>
 		<%= hidden_field_tag '[search]street_name', addresses.first[:Street].try(:titleize) %>
@@ -16,7 +16,7 @@
 		<div class='btn'><input type="image" src="assets/btn_next.jpg" alt="Submit"></div>
 	<% end %>
 </div>
-<ul class='languages dialog_box_lang'>
+<!-- <ul class='languages dialog_box_lang'>
 	<li>
 		<div class='current_language'><span data-icon="&#xe003;" aria-hidden="true"></span>English</div>
 		<div class='clr'></div>
@@ -31,4 +31,4 @@
 			<li><a href='#' class='language'><span data-icon="&#xe003;" aria-hidden="true"></span>Other</a></li>
 		</ul>
 	</li>
-</ul>
+</ul> -->

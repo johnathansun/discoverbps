@@ -1,0 +1,12 @@
+.ui-widget-content {
+  background-color: #0059a3;
+  width: 400px;
+  padding: 10px;
+  color: #80bce7;
+}
+.ui-menu-item { 
+  cursor: pointer; 
+}
+.add_child {
+	cursor: pointer;
+}
