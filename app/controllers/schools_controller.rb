@@ -1,7 +1,7 @@
 class SchoolsController < ApplicationController
-  
+  layout :layout_selector
+
   def home
-    # reset_session
   end
 
   def index
@@ -44,6 +44,15 @@ class SchoolsController < ApplicationController
     response = Faraday.new(:url => url, :ssl => {:version => :SSLv3}).get
     if response.body.present?
       MultiJson.load(response.body, :symbolize_keys => true)
+    end
+  end
+
+  def layout_selector
+    case action_name
+    when "home"
+      "home"
+    else
+      "application"
     end
   end
 
