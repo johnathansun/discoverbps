@@ -1,7 +1,7 @@
 DiscoverbpsV2::Application.routes.draw do
   root :to => 'schools#home'
 
-  resources :searches do
+  resources :students do
     put 'address_verification', on: :member
     put 'iep', on: :member
     put 'ell', on: :member

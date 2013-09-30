@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130929224717) do
+ActiveRecord::Schema.define(:version => 20130930002312) do
 
   create_table "preference_categories", :force => true do |t|
     t.string   "name"
@@ -79,5 +79,32 @@ ActiveRecord::Schema.define(:version => 20130929224717) do
     t.string   "student_5_last_name"
     t.string   "student_5_grade_level"
   end
+
+  create_table "student_preferences", :id => false, :force => true do |t|
+    t.integer "student_id",    :null => false
+    t.integer "preference_id", :null => false
+  end
+
+  add_index "student_preferences", ["student_id", "preference_id"], :name => "index_student_preferences_on_student_id_and_preference_id", :unique => true
+
+  create_table "students", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "session_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "grade_level"
+    t.string   "street_number"
+    t.string   "street_name"
+    t.string   "zipcode"
+    t.string   "iep"
+    t.string   "primary_language"
+    t.string   "sibling_school_name"
+    t.integer  "sibling_school_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "students", ["session_id"], :name => "index_students_on_session_id"
+  add_index "students", ["user_id"], :name => "index_students_on_user_id"
 
 end

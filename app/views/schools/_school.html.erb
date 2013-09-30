@@ -3,11 +3,14 @@
 	<div class="li_frame">
 		<!-- brief school information -->
 		<div class="no_order line">
-			<span class="middle"><%= index + 2 %></span>
+			<span class="middle"><%= index + 1 %></span>
 		</div>
 		<div class="school_name select line">
 			<span class="middle">
 				<%= school.api_basic_info[0][:schname_23] %>
+				<% if current_student.sibling_school_id == school.bps_id %>
+					<span aria-hidden="true" class="select_icon icon-DBPS-Dev-Assets-SRG-12"></span>
+				<% end %>
 			</span>
 		</div>
 		

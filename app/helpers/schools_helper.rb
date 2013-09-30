@@ -37,4 +37,13 @@ module SchoolsHelper
 			end_hour 		= hours.gsub(/am/, '').gsub(/pm/, '').match(/\d*$/).gsub(/:..$/,'').to_s.to_s
 		end
 	end
+
+	# def link_to_add_student(link_name, partial)
+ #    new_object = .page_fields.new
+ #    id = new_object.object_id
+ #    fields = f.fields_for('page_fields_attributes[]', new_object, index: id) do |builder|
+ #      render :partial => partial, locals: {f: builder, object: new_object}
+ #    end
+ #    return link_to(link_name, '#', class: 'add_fields btn btn-small btn-success', data: {id: id, fields: fields.gsub('\n', '')})
+ #  end
 end

@@ -1,11 +1,11 @@
 <!-- dialog select address matches -->
 <div class='content'>
 	<h3>
-		Please complete the following <%= pluralize(search.errors.count, "field") %>:
+		Please complete the following <%= pluralize(student.errors.count, "field") %>:
 	</h3>
 	<br />
 	<ul>
-  	<% search.errors.full_messages.each do |msg| %>
+  	<% student.errors.full_messages.each do |msg| %>
   		<li><%= msg %></li>
   	<% end %>
 	</ul>

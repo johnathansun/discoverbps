@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  session_id: MyString
+  first_name: MyString
+  last_name: MyString
+  grade_level: MyString
+  street_number: MyString
+  street_name: MyString
+  zipcode: MyString
+  iep: MyString
+  primary_language: MyString
+  sibling_school_name: MyString
+  sibling_school_id: 1
+
+two:
+  user_id: 1
+  session_id: MyString
+  first_name: MyString
+  last_name: MyString
+  grade_level: MyString
+  street_number: MyString
+  street_name: MyString
+  zipcode: MyString
+  iep: MyString
+  primary_language: MyString
+  sibling_school_name: MyString
+  sibling_school_id: 1

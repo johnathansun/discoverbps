@@ -772,7 +772,7 @@ body {
 .dialog_box {
   position: absolute;
   z-index: 100;
-  top: 650px;
+  top: 450px;
   left: 50%;
   margin: 0 0 0 -185px;
   width: 330px;

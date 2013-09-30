@@ -1,15 +1,15 @@
 <!-- dialog individualized education plan -->
 <div class='content'>
-	<%= form_tag iep_search_path(search), :method => :put, :remote => true do %>
+	<%= form_tag iep_student_path(student), :method => :put, :remote => true do %>
 		If either of the following apply, please specify below.
 		<div class='bloc'>
 			<p class='first'>My child has an Individualized Education Plan (IEP) for special needs:</p>
-			<div class='input_select'><input name='[search]iep' type='text' placeholder='Select IEP needs'/><span class='arrow icon-DBPS-Dev-Assets-SRG-41'></span></div>
+			<div class='input_select'><input name='[student]iep' type='text' placeholder='Select IEP needs'/><span class='arrow icon-DBPS-Dev-Assets-SRG-41'></span></div>
 		</div>
 		<div class='bloc'>
 			<p class='first'>My child may need specialized language support:</p>
 			<div class='input_select'>
-				<input id='primary_language_autocomplete' name='[search]primary_language' type="text" placeholder='Enter child’s primary language'/>
+				<input id='primary_language_autocomplete' name='[student]primary_language' type="text" placeholder='Enter child’s primary language'/>
 			</div>
 		</div>
 		<div class='btn'><input type="image" src="assets/btn_next.jpg" alt="Submit"></div>

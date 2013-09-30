@@ -1,11 +1,11 @@
 <!-- dialog select address matches -->
 <div class='content'>
-	<%= form_tag address_verification_search_path(search), :method => :put, :remote => true do %>
+	<%= form_tag address_verification_student_path(student), :method => :put, :remote => true do %>
 		<p class='first'>Please verify your student's home address:</p>
 
-		<%= hidden_field_tag '[search]street_number', addresses.first[:StreetNum] %>
-		<%= hidden_field_tag '[search]street_name', addresses.first[:Street].try(:titleize) %>
-		<%= hidden_field_tag '[search]zipcode', addresses.first[:ZipCode] %>
+		<%= hidden_field_tag '[student]street_number', addresses.first[:StreetNum] %>
+		<%= hidden_field_tag '[student]street_name', addresses.first[:Street].try(:titleize) %>
+		<%= hidden_field_tag '[student]zipcode', addresses.first[:ZipCode] %>
 
 		<div id="address_matches" class='selection'>
 			<% addresses.each_with_index do |address, index| %>
