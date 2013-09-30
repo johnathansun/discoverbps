@@ -2852,7 +2852,7 @@ a.ui-corner-all:hover {
   display: none;
 }
 .wrap .search .search_section.first {
-  padding-bottom: 10px;
+  padding-bottom: 50px;
   min-height: 500px;
   border-right: 9px solid #80bce7;
 }
