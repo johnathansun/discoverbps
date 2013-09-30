@@ -17,6 +17,9 @@ gem 'newrelic_rpm'
 gem 'pg'
 gem 'rails_12factor'
 gem 'ranked-model'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 # Gems used only for assets and not required
 # in production environments by default.
