@@ -11,14 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130930002312) do
+ActiveRecord::Schema.define(:version => 20130930173125) do
 
   create_table "preference_categories", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
     t.integer  "sort_order"
-    t.boolean  "include_in_dialog_box", :default => true
+    t.boolean  "qualitative_criteria",                :default => true
+    t.boolean  "include_in_special_needs_dialog_box", :default => false
   end
 
   create_table "preferences", :force => true do |t|
@@ -106,5 +107,26 @@ ActiveRecord::Schema.define(:version => 20130930002312) do
 
   add_index "students", ["session_id"], :name => "index_students_on_session_id"
   add_index "students", ["user_id"], :name => "index_students_on_user_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0,  :null => false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

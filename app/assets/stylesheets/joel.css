@@ -10,3 +10,19 @@
 .add_child {
 	cursor: pointer;
 }
+a.orange_button {
+	padding: 13px 12px 10px 12px;
+	background-color: #fc5b00;
+	text-decoration: none;
+}
+a.orange_button:hover {
+	text-decoration: none;
+}
+ul.horizontal_list {
+	margin-bottom: 30px;
+}
+ul.horizontal_list li {
+	float: left;
+	height: 80px;
+	margin-right: 12px;
+}

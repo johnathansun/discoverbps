@@ -1,0 +1,155 @@
+<!-- account button ans his listing-->
+<div class="account_box">
+	<div class="btn_account">Account<span class='icon_excla'></span></div>
+	<!-- Start section menu account -->
+	<div class='account_menu_box font_15'>
+		<!-- Start menu account -->
+		<div class='menu'>
+			<div class='box'>
+				<span>My lists</span>
+				<a href='#'>View</a>
+				<a href='#'>Download</a>
+				<a href='#'>Print</a>
+				<a href='#'>Share via email</a>
+				<a id='btn_save' href='#'>Save <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
+			</div>
+			<div class='mobile_only box list_child'>
+				<span>&nbsp;</span>
+				<a class='child' href='#'>Elizabeth</a>
+				<a class='child' href='#'>Tommy</a>
+				<a href='#'>+ Add a child</a>
+			</div>
+			<!-- <div class='clr box last'>
+				<span>Account</span>
+				<%= link_to 'Sign Up', new_user_registration_path %>
+				<% if current_user.present? %>
+					<%= link_to 'Settings', edit_user_registration_path %>
+				<% end %>
+				<%= link_to 'Login', new_user_session_path %>
+				<% if current_user.present? %>
+					<%= link_to 'Logout', destroy_user_session_path %>
+				<% end %>
+			</div> -->
+			<div class='clr'></div>
+		</div>
+		<!-- End menu account -->
+		
+		<!-- Start save box -->
+		<div class='action_box save_box' style="<%= current_user.present? ? 'display:none;' : '' %>">
+			<div class='actions'>
+				<span class='txt_join_list' style='display:none;'>Join to save your lists:</span>
+				<span class='txt_login'>Log in with:</span>
+				
+				<div class='btn first facebook'><%= link_to 'Facebook', user_omniauth_authorize_path(:facebook) %><span class='icon' data-icon="&#xe019;" aria-hidden="true"></span></div>
+				<div class='btn twitter'><%= link_to 'Twitter', user_omniauth_authorize_path(:twitter) %> <span class='icon' data-icon="&#xe018;" aria-hidden="true"></span></div>
+				<form method='' action='' name=''>
+					<div class='btn input_box'>
+						<input type='email' name='email' placeholder="Email address"/>
+
+						<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
+						<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
+					</div>
+					<div class='btn input_box'>
+						<input type='password' name='password' placeholder="Password"/>
+
+						<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
+						<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
+					</div>
+					<div class='btn create_box'>Create account</div>
+												
+					<a href='#' class='btn_login txt_btn_login' style='display:none;'>Log in<span class='note_login'>if you've already registered</span></a>
+					<a href='#' class='btn_login txt_btn_sign_up'>Sign up<span class='note_login'>if you haven't yet</span></a>
+					
+					<div class='clr'></div>
+				</form>
+			</div>
+			<div class='clr'></div>
+		</div>
+		<!-- End save box -->
+		
+		<!-- Start register box -->
+		<div class='action_box register_box' style='display:none;'>
+			<div class='actions'>
+				<span class='text'>Registration Checklist:</span><br/>
+				<label><input type='checkbox' name='register_check_bpsexpress' value='BPSExpress'/>Submit your lists to <a href='#'>BPSExpress</a></label><br/>
+				<span class='warning'>Available soon!</span><br/>
+				<label><input type='checkbox' name='register_check_required_documents' value='required documents'/>Collect the <a href='#'>required documents</a></label><br/>
+				<label><input  type='checkbox' name='register_check_welcome_center' value='Welcome Center'/>Visit to a <a href='#'>Welcome Center</a></label>		
+			</div>
+			<div class='clr'></div>
+		</div>
+		<!-- End register box -->
+		
+		<div class='clr'></div>
+	</div>
+	<!-- Start section menu account -->
+</div>
+<!--END account button ans his listing-->
+
+<!-- script account button-->
+<script>
+$(document).ready(function(){
+	if(!Modernizr.input.placeholder) {
+		$("input[placeholder]").each(function() {
+			var placeholder = $(this).attr("placeholder");
+
+			$(this).val(placeholder).focus(function() {
+				if($(this).val() == placeholder) {
+					$(this).val("")
+				}
+			}).blur(function() {
+				if($(this).val() == "") {
+					$(this).val(placeholder)
+				}
+			});
+		});
+	} // Modernizr placeholder
+});
+
+$(document).ready(function(){
+	/*var is_open_menu_account= false;
+	$(".btn_account").click(function() {
+		 if (is_open_menu_account) {
+			// Close box
+			is_open_menu_account= false;
+		
+			$(".account_menu_box").css("display", "none");
+			$(".register_box").css("display", "none");
+	
+		 } else {
+			// Open box
+			is_open_menu_account= true;
+			$(".account_menu_box").css("display", "block");
+			$(".register_box").css("display", "block");
+			$(".save_box").css("display", "none");
+			//$(".account_menu_box").width("410");
+		 }
+		 
+		 return false;
+	});*/
+	
+	
+	var is_open_save_box= false;
+	$("#btn_save").click(function() {
+		 if (is_open_save_box) {
+			// Close box
+			is_open_save_box= false;
+		
+			$(".save_box").css("display", "none");
+			$(".account_menu_box").width("auto");
+	
+		 } else {
+			// Open box
+			is_open_save_box= true;
+			//console.log("open box");
+			$(".save_box").css("display", "block");
+			$(".register_box").css("display", "none");
+			//$(".account_menu_box").width("410");
+		 }
+		 
+		 return false;
+	});
+});
+
+</script>
+<!-- END script account button-->

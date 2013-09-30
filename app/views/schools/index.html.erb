@@ -182,7 +182,7 @@
 	<!--  navigation menu desktop and mobile -->
 	<section class="content_wrap ">
 		<nav class="menu_nav">
-            <span id="menu_nav_mobile" aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-25"></span>
+			<span id="menu_nav_mobile" aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-25"></span>
 			<ul id="menu_items" class='mobile_only'>
 				<li class='first'><a href="#" title="">Discover</a></li>
 				<li><a href="#" title="">Register</a></li>
@@ -402,8 +402,7 @@ $(".timeline").hover(
 <div class="wrap global_map">
 	
 	<section class="content_wrap">
-    	<?php include ('-includes-/account_menu.php'); ?>
-		
+			<%= render partial: 'schools/account_tab' %>		
 	</section>
 	
 	<!-- zone where google map in integrated -->
@@ -605,8 +604,8 @@ function initialize(){
 				Compare your lists:
 			</div>
 			<div class="name_list">
-				<% if session[:current_student_id].present? %>
-					<%= render partial: 'schools/student_tab', locals: {student: current_student} %>
+				<% for student in @students %>
+					<%= render partial: 'schools/student_tab', locals: {student: student} %>
 				<% end %>
 			</div>	
 			<div class="add_child" >
@@ -715,7 +714,7 @@ function initialize(){
 	<div id="school_list">
 	
 	<!-- shadow on the left show when list move on the left.  Display none in normal situation-->
-	<div class="shadow"></div>
+	<div class="shadow" style="display: none;"></div>
 	<!-- END shadow-->
 	
 	<!-- listing of schools  -->

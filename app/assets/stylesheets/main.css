@@ -795,7 +795,6 @@ body {
 }
 .dialog_box.dialog_box_dicover .content {
   float: left;
-  width: 545px;
   color: #000000;
 }
 .dialog_box.dialog_box_dicover .content .first {
@@ -2370,7 +2369,7 @@ footer.footer .logo {
   width: 760px;
   font-size: 15px;
   line-height: 20px;
-  margin-left: 192px;
+  margin-left: 0;
 }
 .wrap .footer_list p {
   margin-bottom: .9em;

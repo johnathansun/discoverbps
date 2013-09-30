@@ -1,7 +1,13 @@
 class StudentsController < ApplicationController
 	def create
-    @student = Student.where(session_id: session[:session_id], first_name: params[:student][:first_name], last_name: params[:student][:last_name]).first_or_create
-    
+		if current_user.present?
+			@student = Student.where(user_id: current_user.id, first_name: params[:student][:first_name], last_name: params[:student][:last_name]).first_or_create
+		else
+			@student = Student.where(session_id: session[:session_id], first_name: params[:student][:first_name], last_name: params[:student][:last_name]).first_or_create
+		end
+
+ 
+
     respond_to do |format|
       if @student.update_attributes(params[:student])
       	logger.info "*********** setting current_student_id to #{@student.id}"

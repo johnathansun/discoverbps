@@ -1,4 +1,4 @@
-<div class="name_info active" id="student_<%= student.id %>_tab">
+<div class="name_info <%= student == current_student ? 'active' : '' %>" id="student_<%= student.id %>_tab">
 	<span class="name"><%= student.first_name %> <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span> </span>
 	<span class="grade">Grade<br/><span class="number"><%= student.grade_level %></span></span>
 	<div class="clr"></div>

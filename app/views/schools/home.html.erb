@@ -6,7 +6,7 @@
 	<div class="wrap ">
 		<div class="content_wrap">
 			<!--languages selection and his list-->
-			<ul class='languages'>
+			<!-- <ul class='languages'>
 				<li>
 					<div class='current_language'><span data-icon="&#xe003;" aria-hidden="true"></span>English</div>
 					<div class='clr'></div>
@@ -21,164 +21,14 @@
 						<li><a href='#' class='language'><span data-icon="&#xe003;" aria-hidden="true"></span>Other</a></li>
 					</ul>
 				</li>
-			</ul>
+			</ul> -->
 			<!--END list-->
 		</div>
 	</div>
 	<div class="wrap ">
 		<div class="content_wrap search">
-					<!-- account button ans his listing-->
-			<div class="account_box">
-				<div class="btn_account">Account<span class='icon_excla'></span></div>
-				<!-- Start section menu account -->
-				<div class='account_menu_box font_15'>
-					<!-- Start menu account -->
-					<div class='menu'>
-					
-						<div class='box'>
-							<span>My lists</span>
-							<a href='#'>View</a>
-							<a href='#'>Download</a>
-							<a href='#'>Print</a>
-							<a href='#'>Share via email</a>
-							<a id='btn_save' href='#'>Save <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
-						</div>
-						<div class='mobile_only box list_child'>
-							<span>&nbsp;</span>
-							<a class='child' href='#'>Elizabeth</a>
-							<a class='child' href='#'>Tommy</a>
-							<a href='#'>+ Add a child</a>
-						</div>
-						<div class='clr box last'>
-							<span>Account</span>
-							<a href='#'>Sign Up</a>
-							<a href='#'>Setting</a>
-							<a href='#'>Login</a>
-							<a href='#'>Logout</a>
-						</div>
-						<div class='clr'></div>
-					</div>
-					<!-- End menu account -->
-					
-					<!-- Start save box -->
-					<div class='action_box save_box' style='display:none;'>
-						<div class='actions'>
-							<span class='txt_join_list' style='display:none;'>Join to save your lists:</span>
-							<span class='txt_login'>Log in with:</span>
-							
-							<div class='btn first facebook'>Facebook<span class='icon' data-icon="&#xe019;" aria-hidden="true"></span></div>
-							<div class='btn twitter'>Twitter <span class='icon' data-icon="&#xe018;" aria-hidden="true"></span></div>
-							<form method='' action='' name=''>
-								<div class='btn input_box'>
-									<input type='email' name='email' placeholder="Email address"/>
+			<%= render partial: 'schools/account_tab' %>
 
-									<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
-									<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
-								</div>
-								<div class='btn input_box'>
-									<input type='password' name='password' placeholder="Password"/>
-
-									<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
-									<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
-								</div>
-								<div class='btn create_box'>Create account</div>
-															
-								<a href='#' class='btn_login txt_btn_login' style='display:none;'>Log in<span class='note_login'>if you've already registered</span></a>
-								<a href='#' class='btn_login txt_btn_sign_up'>Sign up<span class='note_login'>if you haven't yet</span></a>
-								
-								<div class='clr'></div>
-							</form>
-						</div>
-						<div class='clr'></div>
-					</div>
-					<!-- End save box -->
-					
-					<!-- Start register box -->
-					<div class='action_box register_box' style='display:block;'>
-						<div class='actions'>
-							<span class='text'>Registration Checklist:</span><br/>
-							<label><input type='checkbox' name='register_check_bpsexpress' value='BPSExpress'/>Submit your lists to <a href='#'>BPSExpress</a></label><br/>
-							<span class='warning'>Available soon!</span><br/>
-							<label><input type='checkbox' name='register_check_required_documents' value='required documents'/>Collect the <a href='#'>required documents</a></label><br/>
-							<label><input  type='checkbox' name='register_check_welcome_center' value='Welcome Center'/>Visit to a <a href='#'>Welcome Center</a></label>		
-						</div>
-						<div class='clr'></div>
-					</div>
-					<!-- End register box -->
-					
-					<div class='clr'></div>
-				</div>
-				<!-- Start section menu account -->
-			</div>
-			<!--END account button ans his listing-->
-
-			<!-- script account button-->
-			<script>
-			$(document).ready(function(){
-				if(!Modernizr.input.placeholder) {
-					$("input[placeholder]").each(function() {
-						var placeholder = $(this).attr("placeholder");
-
-						$(this).val(placeholder).focus(function() {
-							if($(this).val() == placeholder) {
-								$(this).val("")
-							}
-						}).blur(function() {
-							if($(this).val() == "") {
-								$(this).val(placeholder)
-							}
-						});
-					});
-				} // Modernizr placeholder
-			});
-
-			$(document).ready(function(){
-				/*var is_open_menu_account= false;
-				$(".btn_account").click(function() {
-					 if (is_open_menu_account) {
-						// Close box
-						is_open_menu_account= false;
-					
-						$(".account_menu_box").css("display", "none");
-						$(".register_box").css("display", "none");
-				
-					 } else {
-						// Open box
-						is_open_menu_account= true;
-						$(".account_menu_box").css("display", "block");
-						$(".register_box").css("display", "block");
-						$(".save_box").css("display", "none");
-						//$(".account_menu_box").width("410");
-					 }
-					 
-					 return false;
-				});*/
-				
-				
-				var is_open_save_box= false;
-				$("#btn_save").click(function() {
-					 if (is_open_save_box) {
-						// Close box
-						is_open_save_box= false;
-					
-						$(".save_box").css("display", "none");
-						$(".account_menu_box").width("auto");
-				
-					 } else {
-						// Open box
-						is_open_save_box= true;
-						//console.log("open box");
-						$(".save_box").css("display", "block");
-						$(".register_box").css("display", "none");
-						//$(".account_menu_box").width("410");
-					 }
-					 
-					 return false;
-				});
-			});
-
-			</script>
-			<!-- END script account button-->
 					<div class="search_header">
 						<div class="title_bloc">
 					<h1>Welcome to Boston Public Schools Registration</h1>
@@ -200,16 +50,26 @@
 							
 							<!-- Discover section -->
 				<section class="search_section first">
-					<p class="small_text no_tablet">Looking for the 2013-2014 school year?</p>				
+					<p class="small_text no_tablet">Looking for the 2013-2014 school year?</p>	
 					<div class="content_left">
 						
 						<div class="logo discover" >
 							<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-01"></span>
 						</div>
 						<div class="text">
-							<p>The first step in the registration for any parent, guardian or student is to learn about the process and explore the eligible schools. Many personal factors influence which schools will be good fits for each individual student. By filling out the simple form below, we can guide you on the registration process personalized to your family.</p>
-							<p class="K">To get started, enter your home address and your student's name and grade level in the form below:</p>
-								
+							<p>The first step in the school registration process is to identify the student's eligible schools. Many personal factors influence which schools will be a good fit for an individual student. By filling out the simple form below, we can guide you on the registration process.</p>
+
+							<% if @students.present? %>
+								<p class="K">Please select from your previous searches, or start a new search by entering your home address and your student's name and grade level in the form below:</p>
+								<ul class="horizontal_list">
+									<% for student in @students %>
+										<li><%= link_to student.first_name, schools_path(student: student.first_name), class: 'orange_button' %></li>
+									<% end %>
+								</ul>
+								<div class='clr'></div>
+							<% else %>
+								<p class="K">To get started, enter your home address and your student's name and grade level in the form below:</p>
+							<% end %>							
 								<%= form_tag students_path, :method => :post, :remote => true do %>
 
 										<!-- Address and zip info -->

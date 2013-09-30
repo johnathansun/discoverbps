@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
 
   private
   def current_student
-  	Student.find(session[:current_student_id])
+  	if session[:current_student_id].present?
+	  	Student.find(session[:current_student_id]) rescue nil
+	  end
   end
 end
