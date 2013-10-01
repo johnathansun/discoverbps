@@ -8,7 +8,7 @@ class SchoolsController < ApplicationController
   def index
     @students = Student.where(session_id: session[:session_id])
     if @students.blank?
-      render 'home'
+      render 'home', layout: 'home'
     else
       if params[:student].present? && Student.where(first_name: params[:student], session_id: session[:session_id]).present?
         student = Student.where(first_name: params[:student], session_id: session[:session_id]).first
