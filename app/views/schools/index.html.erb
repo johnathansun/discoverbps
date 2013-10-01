@@ -522,7 +522,7 @@ $(".timeline").hover(
 					<div class="footer_right">
 						<p style="color:#000;margin-bottom: 1.6em;">Need to think it over?</p>
 						<p>My lists</p>
-						<p><a href="" title="Download">Download</a></p>
+						<p><%= link_to 'Download', schools_path(format: :csv) %></p>
 						<p><a href="" title="Print">Print</a></p>
 						<p><a href="" title="Share via email">Share via email</a></p>
 						<p><a href="" title="Save">Save</a></p>
@@ -595,7 +595,10 @@ $(".timeline").hover(
 			//$(".header_preferences #show_btn").css("display","none");
 			$(".preferences").removeClass("hide");
 		})
-			
-		
 	});
+
+	$(function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  });
 </script>
