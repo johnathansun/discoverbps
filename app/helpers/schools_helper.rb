@@ -26,15 +26,22 @@ module SchoolsHelper
 
 	def school_hours_start_time_helper(hours)
 		if hours.present?
-			start_hour 	= hours.gsub(/am/, '').gsub(/pm/, '').match(/^\d*/).to_s.to_i
-			end_hour 		= hours.gsub(/am/, '').gsub(/pm/, '').match(/\d*$/).gsub(/:..$/,'').to_s.to_s
+			hour 			= hours.match(/^\d*/).to_s.to_i
+			minutes 	= hours.match(/^\d*:\d*/).to_s.gsub(/^\d*:/,'').to_s.to_i
+			decimal 	= hour + (minutes / 60.0)
+			range_percent = (decimal - 7) / 17
+			(range_percent * 100).to_i
 		end
 	end
 
 	def school_hours_end_time_helper(hours)
 		if hours.present?
-			start_hour 	= hours.gsub(/am/, '').gsub(/pm/, '').match(/^\d*/).to_s.to_i
-			end_hour 		= hours.gsub(/am/, '').gsub(/pm/, '').match(/\d*$/).gsub(/:..$/,'').to_s.to_s
+			hour 		= hours.gsub(/am/,'').gsub(/pm/,'').match(/-\s?\d*:/).to_s.gsub(/-\s?/,'').gsub(/:/,'').to_s.to_i
+			minutes = hours.gsub(/am/,'').gsub(/pm/,'').match(/-\s?\d*:\d*/).to_s.gsub(/-\s?\d*:/,'').to_s.to_i
+			hour += 12 if (hour > 0 && hour < 8) # add 12 if it's pm
+			decimal = hour + (minutes / 60.0)
+			range_percent = (17 - decimal) / 17
+			(range_percent * 100).to_i
 		end
 	end
 

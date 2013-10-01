@@ -57,16 +57,17 @@
 							<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-01"></span>
 						</div>
 						<div class="text">
-							<p>The first step in the school registration process is to identify the student's eligible schools. Many personal factors influence which schools will be a good fit for an individual student. By filling out the simple form below, we can guide you on the registration process.</p>
+							<p>The first step in the school registration process is to identify the student's eligible schools. Many personal factors influence which schools will be a good fit for an individual student. By filling out the form below, and answering a few questions in the following dialog boxes, we will show you the schools that will be the best fit for your student.</p>
 
 							<% if @students.present? %>
-								<p class="K">Please select from your previous searches, or start a new search by entering your home address and your student's name and grade level in the form below:</p>
+								<p class="K">Please select from your previous searches:</p>
 								<ul class="horizontal_list">
 									<% for student in @students %>
 										<li><%= link_to student.first_name, schools_path(student: student.first_name), class: 'orange_button' %></li>
 									<% end %>
 								</ul>
 								<div class='clr'></div>
+								<p class="K">Or search for a new student using the form below:</p>
 							<% else %>
 								<p class="K">To get started, enter your home address and your student's name and grade level in the form below:</p>
 							<% end %>							
@@ -148,7 +149,7 @@
 											<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
 										</div>
 										<div id="search_form_submit" class="bloc_5">
-											<input type="image" src="assets/btn_next.jpg" alt="Submit" />
+											<%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit' %>
 										</div>
 										<div class="bloc_6">
 											<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
@@ -280,7 +281,7 @@
 							<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-03"></span>
 						</div>
 						<div class="text">
-							<p>Hear from current Boston student who've succeeded in schools across th city. Learn about services and programs offered by Boston Public Schools you never knew existed!
+							<p>Hear from current Boston student who've succeeded in schools across the city. Learn about services and programs offered by Boston Public Schools you never knew existed!
 													</p>
 													<a class="K" href="#" title="Explore" style="margin-bottom:0;">Explore</a>
 						</div>

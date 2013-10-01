@@ -1,18 +1,23 @@
 <!-- dialog individualized education plan -->
 <div class='content'>
 	<%= form_tag iep_student_path(student), :method => :put, :remote => true do %>
-		If either of the following apply, please specify below.
-		<div class='bloc'>
-			<p class='first'>My child has an Individualized Education Plan (IEP) for special needs:</p>
-			<div class='input_select'><input name='[student]iep' type='text' placeholder='Select IEP needs'/><span class='arrow icon-DBPS-Dev-Assets-SRG-41'></span></div>
-		</div>
-		<div class='bloc'>
-			<p class='first'>My child may need specialized language support:</p>
-			<div class='input_select'>
-				<input id='primary_language_autocomplete' name='[student]primary_language' type="text" placeholder='Enter child’s primary language'/>
+		<h3>Does your child have specialized language or educational needs?</h3>
+		
+		<% PreferenceCategory.special_needs.each_with_index do |category, i| %>
+			<div class='bloc'>
+				<p class='first'><%= category.description %>:</p>
+				<%= select_tag '[student][preference_ids][]', options_from_collection_for_select(category.preferences, 'id', 'name'), include_blank: true %>
+				
+				<div class="clr"></div>
 			</div>
-		</div>
-		<div class='btn'><input type="image" src="assets/btn_next.jpg" alt="Submit"></div>
+			<script>
+				$('.option_preference_<%= i %>').click(function() {
+					$('#category_<%= i %>_preference_ids').val(this.innerText);
+				});
+			</script>
+		<% end %>
+
+		<div class='btn'><%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit' %></div>
 	<% end %>
 </div>
 

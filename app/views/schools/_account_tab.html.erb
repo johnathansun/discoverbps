@@ -19,53 +19,103 @@
 				<a class='child' href='#'>Tommy</a>
 				<a href='#'>+ Add a child</a>
 			</div>
-			<!-- <div class='clr box last'>
+			<div class='clr box last'>
 				<span>Account</span>
-				<%= link_to 'Sign Up', new_user_registration_path %>
 				<% if current_user.present? %>
 					<%= link_to 'Settings', edit_user_registration_path %>
+					<%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+				<% else %>
+					<a id='login_button' href='#'>Login <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
+					<a id='signup_button' href='#'>Sign Up <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
+					<script>	
+						$('#login_button').click(function() {
+							$('#signup_panel').hide();
+							$('#login_panel').show();
+							return false;
+						});
+						$('#signup_button').click(function() {
+							$('#login_panel').hide();
+							$('#signup_panel').show();
+							return false;
+						});
+
+					</script>
 				<% end %>
-				<%= link_to 'Login', new_user_session_path %>
-				<% if current_user.present? %>
-					<%= link_to 'Logout', destroy_user_session_path %>
-				<% end %>
-			</div> -->
+			</div>
 			<div class='clr'></div>
 		</div>
 		<!-- End menu account -->
 		
-		<!-- Start save box -->
-		<div class='action_box save_box' style="<%= current_user.present? ? 'display:none;' : '' %>">
+		<!-- Login panel -->
+		<div id='login_panel' class='action_box save_box' style="display:none;">
 			<div class='actions'>
 				<span class='txt_join_list' style='display:none;'>Join to save your lists:</span>
 				<span class='txt_login'>Log in with:</span>
 				
-				<div class='btn first facebook'><%= link_to 'Facebook', user_omniauth_authorize_path(:facebook) %><span class='icon' data-icon="&#xe019;" aria-hidden="true"></span></div>
-				<div class='btn twitter'><%= link_to 'Twitter', user_omniauth_authorize_path(:twitter) %> <span class='icon' data-icon="&#xe018;" aria-hidden="true"></span></div>
-				<form method='' action='' name=''>
-					<div class='btn input_box'>
-						<input type='email' name='email' placeholder="Email address"/>
+				<div><%= link_to image_tag('/assets/oauth-facebook.png'), user_omniauth_authorize_path(:facebook) %></div>
+				<div><%= link_to image_tag('/assets/oauth-twitter.png'), user_omniauth_authorize_path(:twitter) %></div>
+				
+				<%= form_for(:user, :as => 'user', :url => session_path(:user)) do |f| %>
+					<form method='' action='' name=''>
+						<div class='btn input_box'>
+							<%= f.email_field :email, placeholder: 'Email address' %>
 
-						<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
-						<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
-					</div>
-					<div class='btn input_box'>
-						<input type='password' name='password' placeholder="Password"/>
+							<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
+							<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
+						</div>
+						<div class='btn input_box'>
+							<%= f.password_field :password, placeholder: 'Password' %>
 
-						<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
-						<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
-					</div>
-					<div class='btn create_box'>Create account</div>
-												
-					<a href='#' class='btn_login txt_btn_login' style='display:none;'>Log in<span class='note_login'>if you've already registered</span></a>
-					<a href='#' class='btn_login txt_btn_sign_up'>Sign up<span class='note_login'>if you haven't yet</span></a>
-					
-					<div class='clr'></div>
-				</form>
+							<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
+							<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
+						</div>
+						<div class="signup"><%= image_submit_tag('/assets/oauth-login.png') %></div>
+						
+						<div class='clr'></div>
+					</form>
+				<% end %>
 			</div>
 			<div class='clr'></div>
 		</div>
-		<!-- End save box -->
+		<!-- End login panel -->
+
+		<!-- Sinup panel -->
+		<div id='signup_panel' class='action_box save_box' style="display:none;">
+			<div class='actions'>
+				<span class='txt_join_list' style='display:none;'>Join to save your lists:</span>
+				<span class='txt_login'>Sign Up with:</span>
+				
+				<div><%= link_to image_tag('/assets/oauth-facebook.png'), user_omniauth_authorize_path(:facebook) %></div>
+				<div><%= link_to image_tag('/assets/oauth-twitter.png'), user_omniauth_authorize_path(:twitter) %></div>
+				
+				<%= form_for(:user, :as => 'user', :url => session_path(:user)) do |f| %>
+					<form method='' action='' name=''>
+						<div class='btn input_box'>
+							<%= f.email_field :email, placeholder: 'Email address' %>
+
+							<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
+							<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
+						</div>
+						<div class='btn input_box'>
+							<%= f.password_field :password, placeholder: 'Password' %>
+
+							<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
+							<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
+						</div>
+						<div class='btn input_box'>
+							<%= f.password_field :password_confirmation, placeholder: 'Password Confirmation' %>
+
+							<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
+							<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
+						</div>
+						<div class="signup"><%= image_submit_tag('/assets/oauth-login.png') %></div>													
+						<div class='clr'></div>
+					</form>
+				<% end %>
+			</div>
+			<div class='clr'></div>
+		</div>
+		<!-- End signup panel -->
 		
 		<!-- Start register box -->
 		<div class='action_box register_box' style='display:none;'>

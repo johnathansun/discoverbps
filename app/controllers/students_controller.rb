@@ -42,7 +42,7 @@ class StudentsController < ApplicationController
     
     respond_to do |format|
       if @student.update_attributes(params[:student])
-      	if params[:student][:primary_language].present? && params[:student][:primary_language] != 'English'
+      	if (@student.preference_ids & PreferenceCategory.where(name: 'Specialized Language Support').first.preferences.collect {|x| x.id}).present?
 	        format.js { render template: "students/ell" }
 	      else
 	        format.js { render template: "students/preferences" }
@@ -82,9 +82,7 @@ class StudentsController < ApplicationController
 		    
 		    @schools = School.where('bps_id IN (?)', eligible_school_ids)
     
-	      format.js { render :js => "window.location = '/schools/'" }        
-      else
-        format.js { render template: "students/errors" }
+	      format.html { redirect_to schools_url }
       end
     end
   end

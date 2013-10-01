@@ -18,11 +18,44 @@ a.orange_button {
 a.orange_button:hover {
 	text-decoration: none;
 }
-ul.horizontal_list {
-	margin-bottom: 30px;
+a.green_button {
+	padding: 13px 12px 10px 12px;
+	background-color: #72c900;
+	text-decoration: none;
+}
+a.green_button:hover {
+	text-decoration: none;
 }
 ul.horizontal_list li {
 	float: left;
-	height: 80px;
+	height: 45px;
 	margin-right: 12px;
+}
+.name_info {
+	cursor: pointer;
+}
+a.student_tab {
+	text-decoration: none;
+}
+.orange_submit {
+	color: white !important;
+	font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+	font-size: 16px;
+	background-color: #fc5b00;
+	border: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	width: auto !important;
+	padding-left: 12px;
+	padding-right: 12px;
+	height: 38px;
+}
+.signup {
+	margin-top: 10px;
+}
+.preference_category_title span {
+	color: #565656 !important;
+}
+.preference_category_title {
+	margin-bottom: 0.8em !important;
 }

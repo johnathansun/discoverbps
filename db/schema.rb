@@ -11,15 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130930173125) do
+ActiveRecord::Schema.define(:version => 20131001001637) do
 
   create_table "preference_categories", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                                             :null => false
-    t.datetime "updated_at",                                             :null => false
+    t.datetime "created_at",                                                    :null => false
+    t.datetime "updated_at",                                                    :null => false
     t.integer  "sort_order"
     t.boolean  "qualitative_criteria",                :default => true
     t.boolean  "include_in_special_needs_dialog_box", :default => false
+    t.text     "description"
+    t.string   "select_type",                         :default => "check_mark"
+    t.string   "glyph_id"
+    t.string   "glyph_class"
   end
 
   create_table "preferences", :force => true do |t|
@@ -31,6 +35,13 @@ ActiveRecord::Schema.define(:version => 20130930173125) do
   end
 
   add_index "preferences", ["preference_category_id"], :name => "index_preferences_on_preference_category_id"
+
+  create_table "preferences_students", :id => false, :force => true do |t|
+    t.integer "student_id",    :null => false
+    t.integer "preference_id", :null => false
+  end
+
+  add_index "preferences_students", ["student_id", "preference_id"], :name => "index_student_preferences_on_student_id_and_preference_id", :unique => true
 
   create_table "schools", :force => true do |t|
     t.datetime "created_at",           :null => false
@@ -80,13 +91,6 @@ ActiveRecord::Schema.define(:version => 20130930173125) do
     t.string   "student_5_last_name"
     t.string   "student_5_grade_level"
   end
-
-  create_table "student_preferences", :id => false, :force => true do |t|
-    t.integer "student_id",    :null => false
-    t.integer "preference_id", :null => false
-  end
-
-  add_index "student_preferences", ["student_id", "preference_id"], :name => "index_student_preferences_on_student_id_and_preference_id", :unique => true
 
   create_table "students", :force => true do |t|
     t.integer  "user_id"

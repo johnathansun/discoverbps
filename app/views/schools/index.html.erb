@@ -600,13 +600,19 @@ function initialize(){
 	<!-- menu with compare button, student's name button and add_child button -->
 	<div class="menu_compare_name ">
 		<div class="flexible_content" style="width:1600px;">
-			<div class="compare">
+			<div class="compare" style="visibility:hidden;">
 				Compare your lists:
 			</div>
 			<div class="name_list">
 				<% for student in @students %>
 					<%= render partial: 'schools/student_tab', locals: {student: student} %>
 				<% end %>
+				<script>
+					$(".name_info").click(function(){
+  			  	window.location=$(this).find("a").attr("href"); 
+     				return false;
+					});
+				</script>
 			</div>	
 			<div class="add_child" >
 				+ Add a child
@@ -626,89 +632,7 @@ function initialize(){
 	<div data-icon="&#xe001;" aria-hidden="true" class='arrow_slide no_mobile'></div>
 
 	<div class=" result">
-		<!-- preferences menu side bar for shool listing -->
-		<div class="preferences">
-		<!-- header only in tablet -->
-		<div class="header_preferences">
-			<p class="font_21">Choose what matters to Elizabeth: <span id="hide_btn">Hide Criteria &nbsp;<span aria-hidden="true" class="down_arrow icon-DBPS-Dev-Assets-SRG-41"></span></span><span id="show_btn">Show Criteria &nbsp;<span aria-hidden="true" class="up_arrow icon-DBPS-Dev-Assets-SRG-39"></span></span></p>
-		</div>
-		<!-- END header only in tablet -->
-		
-		<!-- preferences list for desktop and tablet situation -->
-		<div id="preference_content">
-			<div class="colonn">
-				<div class="preference">
-				
-					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">School Start Time</span></p>
-					<label class='font_13_14'><input type='radio' name='pref_school_start_time' value='7:30 am'/><span class="text">7:30 am</span></label>
-					<label class='font_13_14'><input type='radio' name='pref_school_start_time' value='8:30 am' /><span class="text">8:30 am</span></label>
-					<label class='font_13_14'><input type='radio' name='pref_school_start_time' value='9:30 am' /><span class="text">9:30 am</span></label>
-				</div>
-				<div class="preference">
-					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Surround Care</span></p>
-					<label class='font_13_14'><input type='checkbox' name='pref_surround_care_before' value='before_school' /><span class="text">Before School</span></label>
-					<label class='font_13_14'><input type='checkbox' name='pref_surround_care_after' value='after_school'  /><span class="text">After School</span></label>
-				</div>
-			</div>
-			<div class="colonn">
-				<div class="preference">
-					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Grades</span></p>
-					<label class='font_13_14'><input type='radio' name='pref_grades' value='Early Learning Center' /><span class="text">Early Learning Center</span></label>
-					<label class='font_13_14'><input type='radio' name='pref_grades' value='K-5' /><span class="text">K-5</span></label>
-					<label class='font_13_14'><input type='radio' name='pref_grades' value='K-8' /><span class="text">K-8</span></label>
-					<label class='font_13_14'><input type='radio' name='pref_grades' value='6-8' /><span class="text">6-8</span></label>
-					<label class='font_13_14'><input type='radio' name='pref_grades' value='6-12' /><span class="text">6-12</span></label>
-					<label class='font_13_14'><input type='radio' name='pref_grades' value='7-12 (Exam Schools)' /><span class="text">7-12 (Exam Schools)</span></label>
-					<label class='font_13_14'><input type='radio' name='pref_grades' value='9-12' /><span class="text">9-12</span></label>
-				</div>
-				<div class="preference">
-					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Enrollment</span></p>
-					<label class='font_13_14'><input type='checkbox' name='pref_enrollment_small' value='small' /><span class="text">Small</span></label>
-					<label class='font_13_14'><input type='checkbox' name='pref_enrollment_medium' value='medium' /><span class="text">Medium</span></label>
-					<label class='font_13_14'><input type='checkbox' name='pref_enrollment_large' value='large' /><span class="text">Large</span></label>
-				</div>
-				<div class="preference">
-					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Uniform Policy</span></p>
-					<label class='font_13_14'><input type='radio' name='pref_uniform_policy' value='yes' /><span class="text">Yes</span></label>
-					<label class='font_13_14'><input type='radio' name='pref_uniform_policy' value='no' /><span class="text">No</span></label>
-				</div>
-			</div>
-			<div class="colonn">
-				<div class="preference">
-					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Special Programs</span></p>
-					<label class='font_13_14'><input type='checkbox' name='pref_special_programs' value='Advanced Work Class' /><span class="text">Advanced Work Class</span></label>
-				</div>
-				<div class="preference">
-					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">School Focus</span></p>
-					<label class='font_13_14'><input type='checkbox' name='pref_school_focus_arts' value='arts' /><span class="text">Arts</span></label>
-					<label class='font_13_14'><input type='checkbox' name='pref_school_focus_health_careers' value='health_careers' /><span class="text">Health Careers</span></label>
-					<label class='font_13_14'><span class='icon_pref' aria-hidden="true" data-icon="&#xe00c;"></span>More</label>
-				</div>
-				<div class="preference">
-					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Facility Features</span></p>
-					<label class='font_13_14'><input type='checkbox' name='pref_facility_features_swimming_pool' value='swimming pool' /><span class="text">Swimming Pool</span></label>
-					<label class='font_13_14'><input type='checkbox' name='pref_facility_features_wheelchair_access' value='wheelchair access' /><span class="text">Wheelchair Access</span></label>
-					<label class='font_13_14'><span class='icon_pref' aria-hidden="true" data-icon="&#xe00c;"></span>More</label>
-				</div>
-			</div>
-			<div class="colonn last">
-				<div class="preference">
-					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Sports</span></p>
-					<label class='font_13_14'><input type='checkbox' name='pref_sports_basketball' value='basketball' /><span class="text">Basketball</span></label>
-					<label class='font_13_14'><input type='checkbox' name='pref_sports_football' value='football' /><span class="text">Football</span></label>
-					<label class='font_13_14'><span class='icon_pref' aria-hidden="true" data-icon="&#xe00c;"></span>More</label>
-				</div>
-				<div class="preference">
-					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text">Health & Wellness</span></p>
-					<label class='font_13_14'><input type='checkbox' name='pref_health_wellness_full_time_nurse' value='Full-time Nurse' /><span class="text">Full-time Nurse</span></label>
-					<label class='font_13_14'><input type='checkbox' name='pref_health_wellness_part_time_nurse' value='Part-time Nurse' /><span class="text">Part-time Nurse Physical education</span></label>
-					<label class='font_13_14'><input type='checkbox' name='pref_health_wellness_physical_education' value='Physical education' /><span class="text">Physical education</span></label>
-					<label class='font_13_14'><input type='checkbox' name='pref_health_wellness_program_alternative' value='Program or alternative' /><span class="text">Program or alternative</span></label>
-					<label class='font_13_14'><input type='checkbox' name='pref_health_wellness_outdoor_play_space' value='Outdoor play space' /><span class="text">Outdoor play space</span></label>
-				</div>
-			</div>
-			<div class="clr"></div>
-		</div>
+		<%= render partial: 'preference_panel' %>
 	</div>
 	<!-- preferences list-->
 	<div id="school_list">

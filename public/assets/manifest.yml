@@ -141,6 +141,14 @@ icon_exclamation.png: icon_exclamation.png
 icon_exclamation/index.png: icon_exclamation.png
 logo_beta.png: logo_beta.png
 logo_beta/index.png: logo_beta.png
+oauth-create.png: oauth-create.png
+oauth-create/index.png: oauth-create.png
+oauth-facebook.png: oauth-facebook.png
+oauth-facebook/index.png: oauth-facebook.png
+oauth-login.png: oauth-login.png
+oauth-login/index.png: oauth-login.png
+oauth-twitter.png: oauth-twitter.png
+oauth-twitter/index.png: oauth-twitter.png
 red_point.png: red_point.png
 red_point/index.png: red_point.png
 schools/eliotk8/school_1.jpg: schools/eliotk8/school_1.jpg

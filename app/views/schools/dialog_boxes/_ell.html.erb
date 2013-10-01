@@ -1,12 +1,12 @@
 <!-- dialog hello -->
 <div class='content'>
-	<%= form_tag ell_search_path(search), :method => :put, :remote => true do %>
+	<%= form_tag ell_student_path(student), :method => :put, :remote => true do %>
 		<span class='title'>Hello! ¡Hola! Olá! Xin chào!</span>
 		<div class='bloc'>
 			<p class='first'>English Language Learner students have access to a special list of eligible schools which can best suit their language needs. To talk with a counselor in order to learn about your student's options, please call us Monday – Friday from 9am – 5pm at:</p>
 		</div>
 		<div class='tel'>800-246-6753</div>
-		<div class='btn'><input type="image" src="assets/btn_next.jpg" alt="Submit"></div>
+		<div class='btn'><%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit' %></div>
 	<% end %>
 </div>
 <!-- <ul class='languages dialog_box_lang'>

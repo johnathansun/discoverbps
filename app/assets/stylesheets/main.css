@@ -438,7 +438,27 @@ you can use the generic selector below, but it's slower:
 .icon-DBPS-Dev-Assets-SRG-33,
 .icon-DBPS-Dev-Assets-SRG-32,
 .icon-DBPS-Dev-Assets-SRG-19,
-.icon-DBPS-Dev-Assets-SRG-06 {
+.icon-DBPS-Dev-Assets-SRG-06,
+.icon-DBPS-Preferences-Icons-20130930-SRG_walktime,
+.icon-DBPS-Preferences-Icons-20130930-SRG_sports,
+.icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours,
+.icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness,
+.icon-DBPS-Preferences-Icons-20130930-SRG_eligibility,
+.icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy,
+.icon-DBPS-Preferences-Icons-20130930-SRG_specialprograms,
+.icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus,
+.icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered,
+.icon-DBPS-Preferences-Icons-20130930-SRG_drivetime,
+.icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare,
+.icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication,
+.icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards,
+.icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures,
+.icon-DBPS-Preferences-Icons-20130930-SRG_distance,
+.icon-DBPS-Preferences-Icons-20130930-SRG_statedesignation,
+.icon-DBPS-Preferences-Icons-20130930-SRG_schooltype,
+.icon-DBPS-Preferences-Icons-20130930-SRG_mcastier,
+.icon-DBPS-Preferences-Icons-20130930-SRG_enrollment,
+.icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners {
   font-family: 'DBPS-UI';
   speak: none;
   font-style: normal;
@@ -580,6 +600,69 @@ you can use the generic selector below, but it's slower:
 .icon-DBPS-Dev-Assets-SRG-06:before {
   content: "\e026";
 }
+
+
+.icon-DBPS-Preferences-Icons-20130930-SRG_walktime:before {
+  content: "\e02c";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_sports:before {
+  content: "\e030";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours:before {
+  content: "\e034";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness:before {
+  content: "\e038";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_eligibility:before {
+  content: "\e03c";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy:before {
+  content: "\e02d";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_specialprograms:before {
+  content: "\e031";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus:before {
+  content: "\e035";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered:before {
+  content: "\e039";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_drivetime:before {
+  content: "\e03d";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare:before {
+  content: "\e02e";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication:before {
+  content: "\e032";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards:before {
+  content: "\e036";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures:before {
+  content: "\e03a";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_distance:before {
+  content: "\e03e";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_statedesignation:before {
+  content: "\e02f";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_schooltype:before {
+  content: "\e033";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_mcastier:before {
+  content: "\e037";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_enrollment:before {
+  content: "\e03b";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners:before {
+  content: "\e03f";
+}
+
 /* !BASE STYLES ---------------------------------------------------------------------
 ----------------------------------------------- */
 body {
@@ -730,6 +813,9 @@ body {
 }
 .font_17 {
   font-size: 17px !important;
+}
+.font_16 {
+  font-size: 16px;
 }
 .font_15 {
   font-size: 15px;
@@ -2751,13 +2837,12 @@ footer.footer .logo {
 								font-family: @current;
 								color: @W;*/
 
-  width: 60px;
   height: 38px;
   float: left;
   background: #fc5b00;
 }
 .wrap .search .search_section .content_left .text form .form_line .bloc_5 input {
-  width: 60px;
+  width: 65px;
   height: 38px;
 }
 a.ui-corner-all:hover { 

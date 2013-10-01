@@ -10,8 +10,8 @@
 	$("#address_verification_row_<%= index %>").click(function() {
 		$('.address_check_mark').hide();
 		$('#address_check_mark_<%= index %>').show();
-		$('#_searchstreet_number').val('<%= address[:StreetNum] %>');
-		$('#_searchstreet_name').val('<%= address[:Street].try(:titleize) %>');
-		$('#_searchzipcode').val('<%= address[:ZipCode] %>');
+		$('#_studentstreet_number').val('<%= address[:StreetNum] %>');
+		$('#_studentstreet_name').val('<%= address[:Street].try(:titleize) %>');
+		$('#_studentzipcode').val('<%= address[:ZipCode] %>');
 	});
 </script>

@@ -1,7 +1,8 @@
 <!-- dialog select address matches -->
 <div class='content'>
 	<%= form_tag address_verification_student_path(student), :method => :put, :remote => true do %>
-		<p class='first'>Please verify your student's home address:</p>
+		<h3>Please verify your student's home address:</h3>
+		<br />
 
 		<%= hidden_field_tag '[student]street_number', addresses.first[:StreetNum] %>
 		<%= hidden_field_tag '[student]street_name', addresses.first[:Street].try(:titleize) %>
@@ -13,7 +14,7 @@
 			<% end %>
 		</div>
 		<br/>
-		<div class='btn'><input type="image" src="assets/btn_next.jpg" alt="Submit"></div>
+		<div class='btn'><%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit' %></div>
 	<% end %>
 </div>
 <!-- <ul class='languages dialog_box_lang'>

@@ -34,7 +34,7 @@
 		<div class="box line school_hours">
 			<span  class="middle"> <%= school.api_hours[0][:schhours1] %><br/>
 				<div class="max_range">
-					<div class="ajust_range" style="margin-left:0%;margin-right:10%;">
+					<div class="ajust_range" style="margin-left:<%= school_hours_start_time_helper(school.api_hours[0][:schhours1]) %>%;margin-right:<%= school_hours_end_time_helper(school.api_hours[0][:schhours1]) %>%;">
 						
 					</div>
 				</div>
@@ -51,9 +51,9 @@
 		</div>
 		<div class="box line your_fit_icon">
 			<span class="middle">
-				<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> 
-				<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
-				<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span>
+				<% PreferenceCategory.preference_panel.each do |category| %>
+					<span aria-hidden="true" class="icon <%= category.glyph_class %>"></span> 
+				<% end %>
 			</span>
 		</div>
 		<div class="box line your_fit_descrip">

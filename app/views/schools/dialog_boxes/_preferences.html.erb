@@ -1,18 +1,18 @@
 <!-- dialog preferences -->
 <div class='content'>
-	<%= form_tag preferences_student_path(student), :method => :put, :remote => true do %>
-		<p class='first'>What matters most to <span class='name_child'><%= current_student.first_name %></span>?</p>
+	<%= form_tag preferences_student_path(student), :method => :put do %>
+		<h3>What matters most to <%= current_student.first_name %>?</h3>
 		<div class='bloc'>
 			<% PreferenceCategory.qualitative.rank(:sort_order).all.each_with_index do |category, i| %>
 				<div class="preference">
 					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text"><%= category.name %></span></p>
 					<% for preference in category.preferences.rank(:sort_order).all %>
-						<label class='font_13_14'><input type='checkbox' name='[student]pref_school_focus_arts' value='arts' /><span class="text"><%= preference.name %></span></label>
+						<label class='font_13_14'><input type='checkbox' name='[student][preference_ids][]' value='<%= preference.id %>' /><span class="text"><%= preference.name %></span></label>
 					<% end %>
 				</div>
 			<% end %>
 			<div class='clr'></div>
 		</div>
-		<div class='btn'><input type="image" src="assets/btn_next.jpg" alt="Submit"></div>
+		<div class='btn'><%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit' %></div>
 	<% end %>
 </div>
