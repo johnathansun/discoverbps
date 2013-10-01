@@ -1,0 +1,202 @@
+<!-- start google map -->
+<div class="wrap global_map">
+	
+	<section class="content_wrap">
+			<%= render partial: 'account_tab' %>		
+	</section>
+	
+	<!-- zone where google map in integrated -->
+	<div id='googleMap'></div>
+	<!-- END zone where google map in integrated -->
+	
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
+
+
+<!-- script to integrat and personnalize google map for screen (difference with zoom)-->
+
+<script>
+function initialize(){
+
+  // Create an array of styles.
+  var styles = [
+    {
+    "featureType": "poi.attraction",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi.business",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi.place_of_worship",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "transit.line",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi.attraction",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi.medical",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi.school",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "landscape.man_made",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      { "lightness": 41 }
+    ]
+  },{
+    "featureType": "transit.station.airport",
+    "stylers": [
+      { "lightness": 49 }
+    ]
+  },{
+    "featureType": "administrative",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      { "saturation": -100 },
+      { "lightness": 24 }
+    ]
+  },{
+    "featureType": "road.highway",
+    "stylers": [
+      { "lightness": 26 }
+    ]
+  },{
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [
+      { "visibility": "simplified" },
+      { "color": "#d6cfc6" },
+      { "lightness": 43 }
+    ]
+  },{
+    "featureType": "road.local",
+    "elementType": "geometry.fill",
+    "stylers": [
+      { "color": "#d6cfc6" },
+      { "lightness": 42 }
+    ]
+  },{
+    "featureType": "road.local",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "road.arterial",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "road.arterial",
+    "elementType": "geometry.fill",
+    "stylers": [
+      { "visibility": "on" }
+    ]
+  },{
+    "featureType": "poi.park",
+    "elementType": "labels",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "transit.station.rail",
+    "elementType": "labels",
+    "stylers": [
+      { "saturation": -73 },
+      { "lightness": 27 }
+    ]
+  },{
+    "featureType": "road.highway",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "road.highway",
+    "elementType": "geometry.fill",
+    "stylers": [
+      { "visibility": "on" },
+      { "lightness": -5 }
+    ]
+  },{
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+  }
+];
+
+   // Create a new StyledMapType object, passing it the array of styles,
+	  // as well as the name to be displayed on the map type control.
+	 	var styledMap = new google.maps.StyledMapType(styles,{name: "Styled Map"});	
+		var myLatlng = 	new google.maps.LatLng(42.358431,-71.059773);
+		var mapProp = {
+		  center:myLatlng,
+		  zoom:13,
+			panControl: true,
+			zoomControl: false,
+			mapTypeControl: false,
+			scaleControl: false,
+			draggable: false,
+			scrollwheel: false,
+			streetViewControl: false,
+			overviewMapControl: false,
+			
+			mapTypeControlOptions: {
+			  mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+			}
+		};
+		  
+		var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+		
+    <% schools.each_with_index do |school, i| %>
+      <% if school.latitude.present? && school.longitude.present? %>
+        var myLatLng = new google.maps.LatLng(<%= school.latitude %>, <%= school.longitude %>);
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: '<%= school.name %>'
+        });
+      <% end %>
+    <% end %>
+
+
+
+		//Associate the styled map with the MapTypeId and set it to display.
+		  map.mapTypes.set('map_style', styledMap);
+		  map.setMapTypeId('map_style');
+		
+			
+	}
+		
+		
+	google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+	<!--END script to integrat and personnalize google map-->
+
+</div>
+<!-- end google map -->

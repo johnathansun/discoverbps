@@ -9,6 +9,8 @@ gem 'aws-s3'
 gem 'devise'
 gem 'faraday'
 gem 'friendly_id', "~> 4.0.10"
+gem 'gon'
+gem 'geocoder'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
