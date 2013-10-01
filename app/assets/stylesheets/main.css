@@ -2552,6 +2552,17 @@ footer.footer .logo {
   height: 28px;
   cursor: pointer;
 }
+.wrap .menu_compare_name .add_child:hover {
+  float: left;
+  padding: 14px 0 0 16px;
+  background: #fc5b00;
+  color: #ffffff;
+  font-size: 15px;
+  display: inline-block;
+  width: 111px;
+  height: 28px;
+  cursor: pointer;
+}
 .wrap .menu_compare_name.compare_action .compare {
   background: #fc5b00;
   color: #ffffff;
@@ -2686,13 +2697,13 @@ footer.footer .logo {
   font-size: 15px;
   line-height: 20px;
 }
-.wrap .search .search_section .content_left .text form .form_line {
+.search .search_section .content_left form .form_line {
   margin-bottom: 12px;
   display: block;
   height: 38px;
   width: 100%;
 }
-.wrap .search .search_section .content_left .text form .form_line input {
+.search .search_section .content_left form .form_line input {
   border: 0;
   font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
   font-size: 16px;
@@ -2702,31 +2713,31 @@ footer.footer .logo {
   -moz-border-radius: 0;
   border-radius: 0;
 }
-.wrap .search .search_section .content_left .text form .form_line input:-moz-placeholder {
+.search .search_section .content_left form .form_line input:-moz-placeholder {
   color: #565656;
 }
-.wrap .search .search_section .content_left .text form .form_line input::-moz-placeholder {
+.search .search_section .content_left form .form_line input::-moz-placeholder {
   color: #565656;
 }
-.wrap .search .search_section .content_left .text form .form_line input:-ms-input-placeholder {
+.search .search_section .content_left form .form_line input:-ms-input-placeholder {
   color: #565656;
 }
-.wrap .search .search_section .content_left .text form .form_line input::-webkit-input-placeholder {
+.search .search_section .content_left form .form_line input::-webkit-input-placeholder {
   color: #565656;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_1 {
+.search .search_section .content_left form .form_line .bloc_1 {
   width: 315px;
   display: block;
   float: left;
   padding: 9px 0 0 11px;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_2 {
+.search .search_section .content_left form .form_line .bloc_2 {
   display: block;
   float: left;
   padding: 9px 0 0 8px;
   width: 70px;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_2.select_grade {
+.search .search_section .content_left form .form_line .bloc_2.select_grade {
   cursor: pointer;
   position: relative;
   height: 26px;
@@ -2738,13 +2749,13 @@ footer.footer .logo {
   color: #565656;
   font-size: 16px;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_2.select_grade .arrow {
+.search .search_section .content_left form .form_line .bloc_2.select_grade .arrow {
   position: absolute;
   top: 16px;
   right: 5px;
   font-size: 9px;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_2.select_grade .option_grade {
+.search .search_section .content_left form .form_line .bloc_2.select_grade .option_grade {
   display: none;
   width: 165px;
   height: auto;
@@ -2755,7 +2766,7 @@ footer.footer .logo {
   top: 37px;
   z-index: 500;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_2.select_grade .option_grade .btn_grade {
+.search .search_section .content_left form .form_line .bloc_2.select_grade .option_grade .btn_grade {
   width: 25px;
   height: 23px;
   text-align: center;
@@ -2768,37 +2779,37 @@ footer.footer .logo {
   padding-top: 2px;
   letter-spacing: 1px;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_2.select_grade:hover .option_grade {
+.search .search_section .content_left form .form_line .bloc_2.select_grade:hover .option_grade {
   display: block;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_2.select_grade:hover .option_grade .btn_grade:hover {
+.search .search_section .content_left form .form_line .bloc_2.select_grade:hover .option_grade .btn_grade:hover {
   background-position: 0 -25px;
   color: #ffffff;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_3 {
+.search .search_section .content_left form .form_line .bloc_3 {
   width: 165px;
   display: block;
   float: left;
   padding: 9px 0 0 11px;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_4 {
+.search .search_section .content_left form .form_line .bloc_4 {
   width: 136px;
   display: block;
   float: left;
   padding: 9px 0 0 11px;
 }
-.wrap .search .search_section .content_left .text form .form_line .separation_bloc {
+.search .search_section .content_left form .form_line .separation_bloc {
   background: #ffffff;
   float: left;
   height: 38px;
 }
-.wrap .search .search_section .content_left .text form .form_line .separation_bloc .separation {
+.search .search_section .content_left form .form_line .separation_bloc .separation {
   border-left: 1px solid #0059a3;
   width: 2px;
   height: 24px;
   margin-top: 7px;
 }
-.wrap .search .search_section .content_left .text form .form_line .btn {
+.search .search_section .content_left form .form_line .btn {
   background: #0059a3;
   padding: 6px 11px 0 6px;
   width: 99px;
@@ -2809,7 +2820,7 @@ footer.footer .logo {
   line-height: 14px;
   color: #80bce7;
 }
-.wrap .search .search_section .content_left .text form .form_line .btn .text {
+.search .search_section .content_left form .form_line .btn .text {
   vertical-align: middle;
   width: 80px;
   font-size: 12px;
@@ -2818,10 +2829,10 @@ footer.footer .logo {
   display: inline-block;
   text-align: center;
 }
-.wrap .search .search_section .content_left .text form .form_line .btn .icon {
+.search .search_section .content_left form .form_line .btn .icon {
   vertical-align: middle;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_5 {
+.search .search_section .content_left form .form_line .bloc_5 {
   /*
 								width:39px;
 								display:block;
@@ -2841,14 +2852,14 @@ footer.footer .logo {
   float: left;
   background: #fc5b00;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_5 input {
+.search .search_section .content_left form .form_line .bloc_5 input {
   width: 65px;
   height: 38px;
 }
 a.ui-corner-all:hover { 
   color: #ffffff !important;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_6 {
+.search .search_section .content_left form .form_line .bloc_6 {
   width: 220px;
   display: block;
   float: left;
@@ -2861,7 +2872,7 @@ a.ui-corner-all:hover {
   font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
   position: relative;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_6 input {
+.search .search_section .content_left form .form_line .bloc_6 input {
   background: none;
   border: 0;
   font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
@@ -2870,19 +2881,19 @@ a.ui-corner-all:hover {
   height: 29px;
   width: 149px;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_6 input:-moz-placeholder {
+.search .search_section .content_left form .form_line .bloc_6 input:-moz-placeholder {
   color: #80bce7;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_6 input::-moz-placeholder {
+.search .search_section .content_left form .form_line .bloc_6 input::-moz-placeholder {
   color: #80bce7;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_6 input:-ms-input-placeholder {
+.search .search_section .content_left form .form_line .bloc_6 input:-ms-input-placeholder {
   color: #80bce7;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_6 input::-webkit-input-placeholder {
+.search .search_section .content_left form .form_line .bloc_6 input::-webkit-input-placeholder {
   color: #80bce7;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_6 .select_school_icon {
+.search .search_section .content_left form .form_line .bloc_6 .select_school_icon {
   position: absolute;
   display: inline-block;
   top: 10px;
@@ -2890,7 +2901,7 @@ a.ui-corner-all:hover {
   color: #80bce7;
   font-size: 19px;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_6 .arrow {
+.search .search_section .content_left form .form_line .bloc_6 .arrow {
   position: absolute;
   display: inline-block;
   top: 16px;
@@ -2898,7 +2909,7 @@ a.ui-corner-all:hover {
   color: #80bce7;
   font-size: 9px;
 }
-.wrap .search .search_section .content_left .text form .form_line .bloc_6.portrait {
+.search .search_section .content_left form .form_line .bloc_6.portrait {
   display: none;
 }
 .wrap .search .search_section .content_right {

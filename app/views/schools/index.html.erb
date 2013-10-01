@@ -1,79 +1,8 @@
-<!-- dialog welcome -->
-<div class='dialog_box' id='dialog_welcome' style='display:none;'>
-	<div class='title'>Welcome !</div>
-	<p>Your lists are saved, so you can log in anytime to view or edit them. Access your settings in the upper left to manage your account.</p>
-	<div class='btn_success'>Done</div>
-</div>
-<!-- dialog BPSExpress -->
-<div class='dialog_box' id='dialog_BPSExpress' style='display:none;'>
-	<div class='title'>BPSExpress</div>
-	<p>Available December 15, pre-register your list online with BPSExpress!</p>
-	<div class='btn_success'>Done</div>
-</div>
-<!-- dialog Share via email -->
-<div class='dialog_box' id='dialog_share_via_email' style='display:none;'>
-	<div class='title'>Share via email</div>
-	<p>Send to friends and family to help with your decision, or send a copy to yourself!</p>
-	<form method='' action='' name=''>
-		<textarea name='email_addresses' placeholder='email addresses (separate with commas)'></textarea>
-		<label>Custom message</label>
-		<textarea name='custom_message' >Check out this ranked list of Boston Public School choices I created for Elizabeth!</textarea>
-		<div class='btn_success'>Send</div>
-	</form>
+<!-- partials are injected into this dialog box - don't delete -->
+<div id='dialog_box' class='dialog_box dialog_box_dicover' style='display:none;'>
+	<%= render partial: 'schools/dialog_boxes/address_search' %>
 </div>
 
-
-<!-- dialog welcome tutoriel-->
-<div class='dialog_box' id='dialog_welcome_tutoriel' style='display:none;'>
-	<div class='content'>
-		<div class='title'>Welcome !</div>
-		<p>This is your list of available schools.Drag to reorder them to suit your needs best.</p>
-		<div class='btn_success'>Next</div>
-		<div class='triangle'></div>
-	</div>
-</div>
-<!-- dialog discover the detail tutoriel-->
-<div class='dialog_box' id='dialog_discover_detail' style='display:none;'>
-	<div class='content'>
-		<div class='title'>Discover the detail</div>
-		<p>Click on any school to expand the full details about each</p>
-		<div class='btn_success'>Next</div>
-	</div>
-</div>
-
-<!-- dialog Sort by criteria tutoriel-->
-<div class='dialog_box' id='dialog_sort_criteria' style='display:none;'>
-	<div class='content'>
-		<div class='title'>Sort by criteria</div>
-		<p>Click any column header to re-sort the list according to that metric. Some columns expand to show detailed subsections.</p>
-		<div class='btn_success'>Next</div>
-	</div>
-</div>
-
-<!-- dialog specify your needs tutoriel-->
-<div class='dialog_box' id='dialog_specify_your_needs' style='display:none;'>
-	<div class='content'>
-		<div class='title'>Specify your needs</div>
-		<p>Select features that matter to you from these options to see which schools fit best.</p>
-		<div class='btn_success'>Next</div>
-	</div>
-</div>
-
-<!-- dialog Dont miss deadlines tutoriel-->
-<div class='dialog_box' id='dialog_dont_miss_deadlines' style='display:none;'>
-	<div class='content'>
-		<div class='title'>Don't miss deadlines</div>
-		<p>Click on the Registration Timeline to see the complete process and all important dates.</p>
-		<div class='btn_success'>Next</div>
-	</div>
-</div>
-
-<!-- dialog ready to register tutoriel-->
-<div class='dialog_box' id='dialog_ready_register' style='display:none;'>
-	<div class='title'>Ready to register?</div>
-	<p>Once you've ordered your list of schools, scroll down to prepare for the next steps!</p>
-	<div class='btn_success'>Done</div>
-</div>
 
 <!-- start timeline -->
 <div class="wrap timeline_menu">
@@ -94,7 +23,7 @@
 			<div class="month last">Sep</div>
 		</div>	
 		
-		<div class="day_indicator"  style="left:20%;">
+		<div class="day_indicator"  style="left:0%;">
 			<span class="text">Today</span>
 		</div>
 		
@@ -397,19 +326,19 @@ $(".timeline").hover(
 <!--END list-->
 </div>
 <!-- end languages -->
-<%= render partial: 'map', locals: {schools: @eligible_schools} %>
+<%= render partial: 'schools/map', locals: {schools: @eligible_schools} %>
 
 <!-- start bar list children -->
 <div class="wrap">
 	<!-- menu with compare button, student's name button and add_child button -->
 	<div class="menu_compare_name ">
-		<div class="flexible_content" style="width:1600px;">
+		<div class="flexible_content" style="width:100%;">
 			<div class="compare" style="visibility:hidden;">
 				Compare your lists:
 			</div>
 			<div class="name_list">
 				<% for student in @students %>
-					<%= render partial: 'student_tab', locals: {student: student} %>
+					<%= render partial: 'schools/student_tab', locals: {student: student} %>
 				<% end %>
 				<script>
 					$(".name_info").click(function(){
@@ -421,6 +350,12 @@ $(".timeline").hover(
 			<div class="add_child" >
 				+ Add a child
 			</div>
+			<script>
+				$(".add_child").click(function(){
+			  	$('#dialog_box').show();
+			  	return false;
+				});
+			</script>
 			
 			<div class="clr"></div>
 		</div>
@@ -436,7 +371,7 @@ $(".timeline").hover(
 	<div data-icon="&#xe001;" aria-hidden="true" class='arrow_slide no_mobile'></div>
 
 	<div class="result">
-		<%= render partial: 'preference_panel' %>
+		<%= render partial: 'schools/preference_panel' %>
 
 		<!-- preferences list-->
 		<div id="school_list">
@@ -499,7 +434,7 @@ $(".timeline").hover(
 						<ul id="sortable">
 							</li>
 							<% @eligible_schools.each_with_index do |school, i| %>
-								<%= render partial: 'school', locals: {school: school, index: i} %>
+								<%= render partial: 'schools/school', locals: {school: school, index: i} %>
 							<% end %>
 						</ul>
 						<!-- END School listing -->
@@ -546,7 +481,7 @@ $(".timeline").hover(
 		$("#school_list li .li_frame > .school_name").click(
 			function() {
 			$(this).parent().parent().addClass("descrip_open");
-			$(this).parent().parent().find(".school_descrip").fadeIn();
+			$(this).parent().parent().find(".school_descrip").toggle();
 			}
 		);
 		

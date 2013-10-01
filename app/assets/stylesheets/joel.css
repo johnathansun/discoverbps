@@ -41,7 +41,7 @@ a.student_tab {
 	color: white !important;
 	font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
 	font-size: 16px;
-	background-color: #fc5b00;
+	background-color: #fc5b00 !important;
 	border: 0;
 	-webkit-border-radius: 0;
 	border-radius: 0;
@@ -60,10 +60,34 @@ a.student_tab {
 	margin-bottom: 0.8em !important;
 }
 .school_description {
-	margin-left: 23px;
+	padding: 23px;
 	float: left;
 }
 .school_description p {
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: 15px;
+	width: auto !important;
+}
+#about_title {
+	padding-left: 20px;
+}
+.school_name {
+	cursor: pointer;
+}
+
+#dialog_box .search .search_section .content_left form .form_line input {
+  background: #ebebeb;
+  margin-bottom: 12px;
+}
+#dialog_box .search .search_section .content_left form .form_line .bloc_2.select_grade {
+  cursor: pointer;
+  position: relative;
+  height: 26px;
+  width: 71px;
+  padding-top: 12px;
+  background: #ebebeb;
+  color: #565656;
+  font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+  color: #565656;
+  font-size: 16px;
 }

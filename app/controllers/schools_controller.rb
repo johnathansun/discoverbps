@@ -17,6 +17,8 @@ class SchoolsController < ApplicationController
       street_number = current_student.street_number.present? ? URI.escape(current_student.street_number) : ''
       street_name   = current_student.street_name.present? ? URI.escape(current_student.street_name) : ''
       zipcode       = current_student.zipcode.present? ? URI.escape(current_student.zipcode) : ''
+      logger.info "******************** hitting the API from /schools"
+
       eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
       @eligible_schools = School.where('bps_id IN (?)', eligible_schools.collect {|x| x[:School]})
 

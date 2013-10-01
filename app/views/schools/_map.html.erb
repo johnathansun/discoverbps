@@ -2,7 +2,7 @@
 <div class="wrap global_map">
 	
 	<section class="content_wrap">
-			<%= render partial: 'account_tab' %>		
+			<%= render partial: 'schools/account_tab' %>		
 	</section>
 	
 	<!-- zone where google map in integrated -->
@@ -179,7 +179,7 @@ function initialize(){
         var marker = new google.maps.Marker({
           position: myLatLng,
           map: map,
-          title: '<%= school.name %>'
+          title: '<%= escape_javascript(school.name) %>'
         });
       <% end %>
     <% end %>
