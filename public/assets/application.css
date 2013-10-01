@@ -617,65 +617,65 @@ you can use the generic selector below, but it's slower:
 }
 
 
-.icon-DBPS-Preferences-Icons-20130930-SRG_walktime:before {
-  content: "\e02c";
-}
-.icon-DBPS-Preferences-Icons-20130930-SRG_sports:before {
-  content: "\e030";
-}
-.icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours:before {
-  content: "\e034";
-}
-.icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness:before {
-  content: "\e038";
-}
-.icon-DBPS-Preferences-Icons-20130930-SRG_eligibility:before {
-  content: "\e03c";
-}
-.icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy:before {
-  content: "\e02d";
-}
-.icon-DBPS-Preferences-Icons-20130930-SRG_specialprograms:before {
-  content: "\e031";
-}
-.icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus:before {
-  content: "\e035";
-}
-.icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered:before {
-  content: "\e039";
-}
-.icon-DBPS-Preferences-Icons-20130930-SRG_drivetime:before {
-  content: "\e03d";
-}
-.icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare:before {
-  content: "\e02e";
-}
-.icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication:before {
-  content: "\e032";
-}
-.icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards:before {
-  content: "\e036";
-}
-.icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures:before {
-  content: "\e03a";
+.icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners:before {
+  content: "\e03f";
 }
 .icon-DBPS-Preferences-Icons-20130930-SRG_distance:before {
   content: "\e03e";
 }
-.icon-DBPS-Preferences-Icons-20130930-SRG_statedesignation:before {
-  content: "\e02f";
+.icon-DBPS-Preferences-Icons-20130930-SRG_drivetime:before {
+  content: "\e03d";
 }
-.icon-DBPS-Preferences-Icons-20130930-SRG_schooltype:before {
-  content: "\e033";
-}
-.icon-DBPS-Preferences-Icons-20130930-SRG_mcastier:before {
-  content: "\e037";
+.icon-DBPS-Preferences-Icons-20130930-SRG_eligibility:before {
+  content: "\e03c";
 }
 .icon-DBPS-Preferences-Icons-20130930-SRG_enrollment:before {
   content: "\e03b";
 }
-.icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners:before {
-  content: "\e03f";
+.icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures:before {
+  content: "\e03a";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered:before {
+  content: "\e039";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness:before {
+  content: "\e038";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_mcastier:before {
+  content: "\e037";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards:before {
+  content: "\e036";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus:before {
+  content: "\e035";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours:before {
+  content: "\e034";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_schooltype:before {
+  content: "\e033";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication:before {
+  content: "\e032";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_specialprograms:before {
+  content: "\e031";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_sports:before {
+  content: "\e030";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_statedesignation:before {
+  content: "\e02f";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare:before {
+  content: "\e02e";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy:before {
+  content: "\e02d";
+}
+.icon-DBPS-Preferences-Icons-20130930-SRG_walktime:before {
+  content: "\e02c";
 }
 
 /* !BASE STYLES ---------------------------------------------------------------------
@@ -4455,7 +4455,7 @@ ie6 .print1 .wrap {
     width: 96.1%;
   }
   .wrap .single_school .photos {
-    float: none;
+    float: left;
   }
   .wrap .single_school .school_descrip {
     float: none;
@@ -5315,4 +5315,12 @@ a.student_tab {
 }
 .preference_category_title {
 	margin-bottom: 0.8em !important;
+}
+.school_description {
+	margin-left: 23px;
+	float: left;
+}
+.school_description p {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 15px;
 }

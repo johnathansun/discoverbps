@@ -59,3 +59,11 @@ a.student_tab {
 .preference_category_title {
 	margin-bottom: 0.8em !important;
 }
+.school_description {
+	margin-left: 23px;
+	float: left;
+}
+.school_description p {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 15px;
+}

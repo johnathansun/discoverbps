@@ -1,0 +1,91 @@
+ <!-- show in mobile -->
+<div class="mobile">
+	<div class="box">
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"></span> 5.6 min from home</p>
+			<p class="descrip">
+				<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span><br/>
+				<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+			</p>
+	</div>
+	<div class="box">
+		<p  class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"></span> School Hours</p>
+		<p class="descrip"><%= school.api_hours[0][:schhours1] %></p>
+
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"></span> Surround Care </p>
+			<span  class="text_G1">Before:</span> <%= school.api_basic_info[0][:BeforeSchPrograms] %><br />
+			<span  class="text_G1">After:</span> <%= school.api_basic_info[0][:AfterSchPrograms] %>
+		</p>
+	</div>
+ 
+	<div class="box">
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"></span> Grades Offered</p>
+		<p class="descrip"><%= school.api_grades[0][:grade] %></p>
+	</div>
+
+	<div class="box">
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"></span> Classes Per Grade</p>
+		<p class="descrip">3</p>
+	</div>
+
+	<div class="box">
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"></span> School Type</p>
+		<p class="descrip"><% if school.api_basic_info[0][:ischarter] == 'True' %>Charter<% end %></p>
+	</div>
+
+	<div class="box">
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"></span> School Focus</p>
+		<p class="descrip"><% if school.api_basic_info[0][:ischarter] == 'True' %>Charter<% end %></p>
+	</div>
+
+	<div class="box">
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"></span> Special Application</p>
+		<p class="descrip">None</p>
+	</div>
+
+	<div class="box">
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"></span> Uniform Policy</p>
+		<p class="descrip">None</p>
+	</div>
+
+	<div class="box">
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"></span> Eligibility</p>
+		<p class="descrip">Walk Zone, Tier I</p>
+	</div>
+
+	<div class="box">
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"></span> MCAS Tier</p>
+		<p class="descrip">Tier I</p>
+	</div>
+
+	<div class="box">
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialprograms"></span> Special Programs</p>
+		<p class="descrip">AWC</p>
+	</div>
+
+	<div class="box">
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_statedesignation"></span> State Designation</p>
+		<p class="descrip">Level 1</p>
+	</div>
+
+	<div class="box">
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"></span> Facility Features</p>
+		<p class="descrip"><%= facilities_list_helper(school.api_facilities[0]) %></p>
+	</div>
+
+	<div class="box">
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"></span> Sports</p>
+		<p class="descrip">Baseball, Basketball, Football, Soccer, Track, Volleyball</p>
+	</div>
+
+	<div class="box">
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"></span> Health & Wellness</p>
+		<p class="descrip">Full-Time Nurse</p>
+	</div>
+
+	<div class="box">
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"></span> Community Partners</p>
+		<p class="descrip"><%= school.api_partners %></p>
+	</div>					
+
+</div>
+<!-- END show in mobile-->

@@ -402,7 +402,7 @@ $(".timeline").hover(
 <div class="wrap global_map">
 	
 	<section class="content_wrap">
-			<%= render partial: 'schools/account_tab' %>		
+			<%= render partial: 'account_tab' %>		
 	</section>
 	
 	<!-- zone where google map in integrated -->
@@ -605,7 +605,7 @@ function initialize(){
 			</div>
 			<div class="name_list">
 				<% for student in @students %>
-					<%= render partial: 'schools/student_tab', locals: {student: student} %>
+					<%= render partial: 'student_tab', locals: {student: student} %>
 				<% end %>
 				<script>
 					$(".name_info").click(function(){
@@ -631,111 +631,111 @@ function initialize(){
 <div class="wrap">
 	<div data-icon="&#xe001;" aria-hidden="true" class='arrow_slide no_mobile'></div>
 
-	<div class=" result">
+	<div class="result">
 		<%= render partial: 'preference_panel' %>
-	</div>
-	<!-- preferences list-->
-	<div id="school_list">
-	
-	<!-- shadow on the left show when list move on the left.  Display none in normal situation-->
-	<div class="shadow" style="display: none;"></div>
-	<!-- END shadow-->
-	
-	<!-- listing of schools  -->
-	<div class="list_content">
-	
-		<!-- ajust the div width when "getting there" and/or "Your fit" glass_icon is clic (to create left and right draggable effect of the school list)  -->	
-		<div class="flexible_content" style="width:2000px;">
-			<!-- school list header -->
-			<div class="menu_list">
-				<div class="li_frame">
-					<div class="arrow menu_bloc">
-						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-31"></span>
-					</div>
-					<div class="choice menu_bloc">
-						Choice order
+
+		<!-- preferences list-->
+		<div id="school_list">
+		
+			<!-- shadow on the left show when list move on the left.  Display none in normal situation-->
+			<div class="shadow" style="display: none;"></div>
+			<!-- END shadow-->
+				
+				<!-- listing of schools  -->
+				<div class="list_content">
+				
+					<!-- ajust the div width when "getting there" and/or "Your fit" glass_icon is clic (to create left and right draggable effect of the school list)  -->	
+					<div class="flexible_content" style="width:2000px;">
+						<!-- school list header -->
+						<div class="menu_list">
+							<div class="li_frame">
+								<div class="arrow menu_bloc">
+									<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-31"></span>
+								</div>
+								<div class="choice menu_bloc">
+									Choice order
+								</div>
+								
+								<!-- add class "open" to show "Walk time" and "Drive time"-->
+								<div id="getting_there" class=" menu_bloc ">
+									<div class="first_block">
+										Getting there 
+									</div>
+									<div class="second_block">
+										Walk Time
+									</div>
+									<div class="second_block">
+										Drive Time
+									</div>
+									<span aria-hidden="true" class="glass_open icon-DBPS-Dev-Assets-SRG-24"></span>
+									<span aria-hidden="true" class="glass_close icon-DBPS-Dev-Assets-SRG-23"></span>
+								</div>
+								<div class=" menu_bloc">
+									School hours
+								</div>
+								<div class=" menu_bloc">
+									Surround Care
+								</div>
+								<div class="your_fit menu_bloc activ">
+									<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-31"></span> Your Fit 
+									<span aria-hidden="true" class="glass_open icon-DBPS-Dev-Assets-SRG-24"></span>
+								</div>
+								<div class="your_fit_show menu_bloc">
+										Enrollement
+								</div>
+								<div class="your_fit_show menu_bloc active">
+										Arts Focus
+								</div>
+								<div class="clr"></div>
+							</div>
+						</div>
+						<!-- END school list header -->
+						
+						<!-- School listing -->
+						<ul id="sortable">
+							</li>
+							<% @eligible_schools.each_with_index do |school, i| %>
+								<%= render partial: 'school', locals: {school: school, index: i} %>
+							<% end %>
+						</ul>
+						<!-- END School listing -->
 					</div>
 					
-					<!-- add class "open" to show "Walk time" and "Drive time"-->
-					<div id="getting_there" class=" menu_bloc ">
-						<div class="first_block">
-							Getting there 
-						</div>
-						<div class="second_block">
-							Walk Time
-						</div>
-						<div class="second_block">
-							Drive Time
-						</div>
-						<span aria-hidden="true" class="glass_open icon-DBPS-Dev-Assets-SRG-24"></span>
-						<span aria-hidden="true" class="glass_close icon-DBPS-Dev-Assets-SRG-23"></span>
+					
+				</div>
+				<!-- END  listing of schools  -->
+				
+				<!-- info box at the end of listing -->
+				<div class="footer_list">
+					<div class="footer_left">
+						<p style="color:#000;margin-bottom: 1.6em;">Next Steps</p>
+						<p>Once your student’s list of schools has been sorted in the order of your choosing, registration begins by submitting the list and visiting a Welcome Center.</p>
+						<p style="color:#000;">How to register:</p>
+						<p><a href="" title="Submit your list to BPSExpress">Submit your list to BPSExpress</a></p>
+						<p><a href="" title="Collect the required documents">Collect the required documents</a></p>
+						<p><a href="" title="Plan a visit to a Welcome Center">Plan a visit to a Welcome Center</a></p>
 					</div>
-					<div class=" menu_bloc">
-						School hours
-					</div>
-					<div class=" menu_bloc">
-						Surround Care
-					</div>
-					<div class="your_fit menu_bloc activ">
-						<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-31"></span> Your Fit 
-						<span aria-hidden="true" class="glass_open icon-DBPS-Dev-Assets-SRG-24"></span>
-					</div>
-					<div class="your_fit_show menu_bloc">
-							Enrollement
-					</div>
-					<div class="your_fit_show menu_bloc active">
-							Arts Focus
+					<div class="footer_right">
+						<p style="color:#000;margin-bottom: 1.6em;">Need to think it over?</p>
+						<p>My lists</p>
+						<p><a href="" title="Download">Download</a></p>
+						<p><a href="" title="Print">Print</a></p>
+						<p><a href="" title="Share via email">Share via email</a></p>
+						<p><a href="" title="Save">Save</a></p>
+						<br/>
+						<p>Account</p>
+						<p><a href="" title="Sign Up">Sign Up</a></p>
+						<p><a href="" title="Login">Login</a></p>
 					</div>
 					<div class="clr"></div>
 				</div>
+				<!-- END info box at the end of listing -->
+
 			</div>
-			<!-- END school list header -->
-			
-			<!-- School listing -->
-			<ul id="sortable">
-				</li>
-				<% @eligible_schools.each_with_index do |school, i| %>
-					<%= render partial: 'schools/school', locals: {school: school, index: i} %>
-				<% end %>
-			</ul>
-			<!-- END School listing -->
+					
 		</div>
-		
-		
-	</div>
-	<!-- END  listing of schools  -->
-	
-	<!-- info box at the end of listing -->
-	<div class="footer_list">
-		<div class="footer_left">
-			<p style="color:#000;margin-bottom: 1.6em;">Next Steps</p>
-			<p>Once your student’s list of schools has been sorted in the order of your choosing, registration begins by submitting the list and visiting a Welcome Center.</p>
-			<p style="color:#000;">How to register:</p>
-			<p><a href="" title="Submit your list to BPSExpress">Submit your list to BPSExpress</a></p>
-			<p><a href="" title="Collect the required documents">Collect the required documents</a></p>
-			<p><a href="" title="Plan a visit to a Welcome Center">Plan a visit to a Welcome Center</a></p>
-		</div>
-		<div class="footer_right">
-			<p style="color:#000;margin-bottom: 1.6em;">Need to think it over?</p>
-			<p>My lists</p>
-			<p><a href="" title="Download">Download</a></p>
-			<p><a href="" title="Print">Print</a></p>
-			<p><a href="" title="Share via email">Share via email</a></p>
-			<p><a href="" title="Save">Save</a></p>
-			<br/>
-			<p>Account</p>
-			<p><a href="" title="Sign Up">Sign Up</a></p>
-			<p><a href="" title="Login">Login</a></p>
-		</div>
-		<div class="clr"></div>
-	</div>
-	<!-- END info box at the end of listing -->
-
-</div>
-		
 	</div>
 </div>
-
 <script>
 	$( document ).ready(function() {
 		//Click on school name to open the full school description in the school line

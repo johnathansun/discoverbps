@@ -1,17 +1,17 @@
 <!-- account button ans his listing-->
 <div class="account_box">
-	<div class="btn_account">Account<span class='icon_excla'></span></div>
+	<div class="btn_account">Account<!-- <span class='icon_excla'></span> --></div>
 	<!-- Start section menu account -->
 	<div class='account_menu_box font_15'>
 		<!-- Start menu account -->
 		<div class='menu'>
 			<div class='box'>
 				<span>My lists</span>
-				<a href='#'>View</a>
-				<a href='#'>Download</a>
+				<%= link_to 'View', schools_path %>
 				<a href='#'>Print</a>
+				<%= link_to 'Download', schools_path(format: :csv) %>
 				<a href='#'>Share via email</a>
-				<a id='btn_save' href='#'>Save <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
+				<a id='save_btn' href='#'>Save <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
 			</div>
 			<div class='mobile_only box list_child'>
 				<span>&nbsp;</span>
@@ -21,30 +21,19 @@
 			</div>
 			<div class='clr box last'>
 				<span>Account</span>
+
 				<% if current_user.present? %>
 					<%= link_to 'Settings', edit_user_registration_path %>
 					<%= link_to 'Logout', destroy_user_session_path, method: :delete %>
 				<% else %>
-					<a id='login_button' href='#'>Login <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
-					<a id='signup_button' href='#'>Sign Up <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
-					<script>	
-						$('#login_button').click(function() {
-							$('#signup_panel').hide();
-							$('#login_panel').show();
-							return false;
-						});
-						$('#signup_button').click(function() {
-							$('#login_panel').hide();
-							$('#signup_panel').show();
-							return false;
-						});
-
-					</script>
+					<a id='login_btn' href='#'>Login <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
+					<a class='signup_btn' href='#'>Sign Up <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
 				<% end %>
 			</div>
 			<div class='clr'></div>
 		</div>
 		<!-- End menu account -->
+
 		
 		<!-- Login panel -->
 		<div id='login_panel' class='action_box save_box' style="display:none;">
@@ -70,7 +59,7 @@
 							<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
 						</div>
 						<div class="signup"><%= image_submit_tag('/assets/oauth-login.png') %></div>
-						
+						<a href='#' class='signup_btn btn_login txt_btn_sign_up'>Sign up<span class='note_login'>if you haven't yet</span></a>
 						<div class='clr'></div>
 					</form>
 				<% end %>
@@ -108,7 +97,7 @@
 							<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
 							<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
 						</div>
-						<div class="signup"><%= image_submit_tag('/assets/oauth-login.png') %></div>													
+						<div class="signup"><%= image_submit_tag('/assets/oauth-create.png') %></div>													
 						<div class='clr'></div>
 					</form>
 				<% end %>
@@ -138,68 +127,104 @@
 
 <!-- script account button-->
 <script>
-$(document).ready(function(){
-	if(!Modernizr.input.placeholder) {
-		$("input[placeholder]").each(function() {
-			var placeholder = $(this).attr("placeholder");
+	$(document).ready(function(){
+		if(!Modernizr.input.placeholder) {
+			$("input[placeholder]").each(function() {
+				var placeholder = $(this).attr("placeholder");
 
-			$(this).val(placeholder).focus(function() {
-				if($(this).val() == placeholder) {
-					$(this).val("")
-				}
-			}).blur(function() {
-				if($(this).val() == "") {
-					$(this).val(placeholder)
-				}
+				$(this).val(placeholder).focus(function() {
+					if($(this).val() == placeholder) {
+						$(this).val("")
+					}
+				}).blur(function() {
+					if($(this).val() == "") {
+						$(this).val(placeholder)
+					}
+				});
 			});
-		});
-	} // Modernizr placeholder
-});
-
-$(document).ready(function(){
-	/*var is_open_menu_account= false;
-	$(".btn_account").click(function() {
-		 if (is_open_menu_account) {
-			// Close box
-			is_open_menu_account= false;
-		
-			$(".account_menu_box").css("display", "none");
-			$(".register_box").css("display", "none");
-	
-		 } else {
-			// Open box
-			is_open_menu_account= true;
-			$(".account_menu_box").css("display", "block");
-			$(".register_box").css("display", "block");
-			$(".save_box").css("display", "none");
-			//$(".account_menu_box").width("410");
-		 }
-		 
-		 return false;
-	});*/
-	
-	
-	var is_open_save_box= false;
-	$("#btn_save").click(function() {
-		 if (is_open_save_box) {
-			// Close box
-			is_open_save_box= false;
-		
-			$(".save_box").css("display", "none");
-			$(".account_menu_box").width("auto");
-	
-		 } else {
-			// Open box
-			is_open_save_box= true;
-			//console.log("open box");
-			$(".save_box").css("display", "block");
-			$(".register_box").css("display", "none");
-			//$(".account_menu_box").width("410");
-		 }
-		 
-		 return false;
+		} // Modernizr placeholder
 	});
-});
+
+	$(document).ready(function(){
+		/*var is_open_menu_account= false;
+		$(".btn_account").click(function() {
+			 if (is_open_menu_account) {
+				// Close box
+				is_open_menu_account= false;
+			
+				$(".account_menu_box").css("display", "none");
+				$(".register_box").css("display", "none");
+		
+			 } else {
+				// Open box
+				is_open_menu_account= true;
+				$(".account_menu_box").css("display", "block");
+				$(".register_box").css("display", "block");
+				$(".save_box").css("display", "none");
+				//$(".account_menu_box").width("410");
+			 }
+			 
+			 return false;
+		});*/
+
+	});
+	$(document).ready(function(){
+		var login_panel_open = false;
+		var signup_panel_open = false;
+
+		$('#login_btn').click(function() {
+			if (login_panel_open) {
+				login_panel_open = false;
+				signup_panel_open = false;
+				$('#signup_panel').hide();
+				$("#login_panel").hide();
+				$(".account_menu_box").width("auto");
+			} else {
+				login_panel_open = true;
+				signup_panel_open = false;
+				//console.log("open box");
+				$('#signup_panel').css("display", "none");
+				$('#login_panel').css("display", "block");	
+			}
+			return false;
+		});
+		$('.signup_btn').click(function() {
+			if (signup_panel_open) {
+				// Close box
+				login_panel_open = false;
+				signup_panel_open = false;
+				$('#signup_panel').hide();
+				$("#login_panel").hide();
+				$(".account_menu_box").width("auto");
+			} else {
+				login_panel_open = false;
+				signup_panel_open = true;
+				//console.log("open box");
+				$('#login_panel').css("display", "none");
+				$('#signup_panel').css("display", "block");	
+			}
+			return false;
+		});
+		$("#save_btn").click(function() {
+			if (login_panel_open) {
+				// Close box
+				login_panel_open = false;
+				signup_panel_open = false;
+				$('#signup_panel').hide();
+				$("#login_panel").hide();
+				$(".account_menu_box").width("auto");
+			} else {
+				// Open box
+				signup_panel_open = false;
+				login_panel_open = true;
+				//console.log("open box");
+				$("#signup_panel").css("display", "none");
+				$("#login_panel").css("display", "block");
+				//$(".account_menu_box").width("410");
+			}
+			 return false;
+		});
+	});
 
 </script>
 <!-- END script account button-->

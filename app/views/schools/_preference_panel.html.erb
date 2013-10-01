@@ -1,29 +1,41 @@
 <!-- preferences menu side bar for shool listing -->
-		<div class="preferences">
-		<!-- header only in tablet -->
-		<div class="header_preferences">
-			<p class="font_21">Choose what matters to Elizabeth: <span id="hide_btn">Hide Criteria &nbsp;<span aria-hidden="true" class="down_arrow icon-DBPS-Dev-Assets-SRG-41"></span></span><span id="show_btn">Show Criteria &nbsp;<span aria-hidden="true" class="up_arrow icon-DBPS-Dev-Assets-SRG-39"></span></span></p>
-		</div>
-		<!-- END header only in tablet -->
-		
-		<!-- preferences list for desktop and tablet situation -->
-		<div id="preference_content">
-			<div class="colonn">
-				<% PreferenceCategory.preference_panel.rank(:sort_order).all.each do |category| %>
-					<div class="preference">
-						<p class='preference_category_title font_16'><span aria-hidden="true" class="<%= category.glyph_class %>"></span> <span class="text"><%= category.name %></span></p>
-						<% for preference in category.preferences.rank(:sort_order).all %>
-							<label class='font_13_14'>
-								<% if category.select_type == 'radio_button' %>
-									<input type='radio' name='[student][preference_ids][]' value='<%= preference.id %>', <%= current_student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
-								<% else %>
-									<input type='checkbox' name='[student][preference_ids][]' value='<%= preference.id %>', <%= current_student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
-								<% end %>
-								<span class="text"><%= preference.name %></span>
-							</label>
-						<% end %>
-					</div>					
-				<% end %>
-			</div>
-			<div class="clr"></div>
-		</div>
+<div class="preferences">
+<!-- header only in tablet -->
+	<div class="header_preferences">
+		<p class="font_17">Choose what matters to <%= current_student.first_name %>: <span id="hide_btn">Hide Criteria &nbsp;<span aria-hidden="true" class="down_arrow icon-DBPS-Dev-Assets-SRG-41"></span></span><span id="show_btn">Show Criteria &nbsp;<span aria-hidden="true" class="up_arrow icon-DBPS-Dev-Assets-SRG-39"></span></span></p>
+	</div>
+	<!-- END header only in tablet -->
+	
+	<!-- preferences list for desktop and tablet situation -->
+	<div id="preference_content">
+		<% @opening_tags = 0 %>
+		<% @closing_tags = 0 %>
+		<% PreferenceCategory.preference_panel.rank(:sort_order).all.each_with_index do |category, i| %>
+			<% if i.remainder(3) == 0 %>
+				<% @opening_tags += 1 %>
+				<div class="colonn">
+			<% end %>
+				<div class="preference">
+					<p class='preference_category_title font_16'><span aria-hidden="true" class="<%= category.glyph_class %>"></span> <span class="text"><%= category.name %></span></p>
+					<% for preference in category.preferences.rank(:sort_order).all %>
+						<label class='font_13_14'>
+							<% if category.select_type == 'radio_button' %>
+								<input type='radio' name='[student][preference_ids][]' value='<%= preference.id %>', <%= current_student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
+							<% else %>
+								<input type='checkbox' name='[student][preference_ids][]' value='<%= preference.id %>', <%= current_student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
+							<% end %>
+							<span class="text"><%= preference.name %></span>
+						</label>
+					<% end %>
+				</div>					
+			<% if i.remainder(3) == 2 %>
+				<% @closing_tags += 1 %>
+				</div>
+			<% end %>
+			<% if ((i + 1) == PreferenceCategory.preference_panel.rank(:sort_order).count) && (@opening_tags > @closing_tags) %>
+				</div>
+			<% end %>
+		<% end %>
+		<div class="clr"></div>
+	</div>
+</div>

@@ -22,6 +22,22 @@ class SchoolsController < ApplicationController
 
       respond_to do |format|
         format.html # index.html.erb
+        format.csv do
+          require 'csv'
+          csv_string = CSV.generate do |csv|
+            csv << ['Name', 'Distance', 'Walk Time', 'Drive Time', 'Hours', 'Grades Offered', 'Before School Programs', 'After School Programs', 'Facilities']
+                      
+            counter = 0
+            @eligible_schools.each do |school|
+              counter += 1
+              csv << [ school.name, '', '', '', school.api_hours.try(:[],0).try(:[], :schhours1), school.api_grades.try(:[], 0).try(:[], :grade), school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms), school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms), facilities_list_helper(school.api_facilities[0]) ]
+            end
+          end
+
+          send_data csv_string,
+                    :type => 'text/csv; charset=iso-8859-1; header=present',
+                    :disposition => "attachment; filename=#{current_student.first_name}_Schools.csv"
+        end
       end
     end
   end
@@ -60,6 +76,23 @@ class SchoolsController < ApplicationController
     else
       "application"
     end
+  end
+
+  def facilities_list_helper(hash)
+    list = ''
+    list << 'Art Room, '            if hash[:hasartroom] == 'True'
+    list << 'Athletic Field, '      if hash[:hasathleticfield] == 'True'
+    list << 'Auditorium, '          if hash[:hasauditorium] == 'True'
+    list << 'Cafeteria, '           if hash[:hascafeteria] == 'True'
+    list << 'Computer Lab, '        if hash[:hascomputerlab] == 'True'
+    list << 'Gymnasium, '           if hash[:hasgymnasium] == 'True'
+    list << 'Library, '             if hash[:haslibrary] == 'True'
+    list << 'Music Room, '          if hash[:hasmusicroom] == 'True'
+    list << 'Outdoor Classrooms, '  if hash[:hasoutdoorclassroom] == 'True'
+    list << 'Playground, '          if hash[:hasplayground] == 'True'
+    list << 'Pool, '                if hash[:haspool] == 'True'
+    list << 'Science Lab, '         if hash[:hassciencelab] == 'True'
+    return list.gsub(/,$/, '')
   end
 
 end
