@@ -1,6 +1,5 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 	def facebook
-		logger.info request.env["omniauth.auth"]
     @user = User.find_for_oauth(request.env["omniauth.auth"], current_user)
 
     if @user.persisted?
@@ -13,7 +12,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
 	def twitter
-		logger.info = request.env["omniauth.auth"]
     @user = User.find_for_oauth(request.env["omniauth.auth"], current_user)
 
     if @user.persisted?
