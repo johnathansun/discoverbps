@@ -5,7 +5,7 @@
 		<div class='bloc'>
 			<% PreferenceCategory.qualitative.rank(:sort_order).all.each_with_index do |category, i| %>
 				<div class="preference">
-					<p class='title font_15'><span class='icon_pref' aria-hidden="true" data-icon="&#xe011;"></span><span class="text"><%= category.name %></span></p>
+					<p class='title font_15'><span aria-hidden="true" class="fit_icon <%= category.glyph_class %>"></span><span class="text"><%= category.name %></span></p>
 					<% for preference in category.preferences.rank(:sort_order).all %>
 						<label class='font_13_14'><input type='checkbox' name='[student][preference_ids][]' value='<%= preference.id %>' /><span class="text"><%= preference.name %></span></label>
 					<% end %>
