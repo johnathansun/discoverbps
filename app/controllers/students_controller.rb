@@ -66,6 +66,7 @@ class StudentsController < ApplicationController
   end
 
   def preferences
+  	@students = Student.where(session_id: session[:session_id])
     @student = Student.find(params[:id])
     
     respond_to do |format|
@@ -76,11 +77,8 @@ class StudentsController < ApplicationController
     		zipcode       = @student.zipcode.present? ? URI.escape(@student.zipcode) : ''
 
 		    eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
-		    eligible_school_ids = eligible_schools.collect {|x| x[:School]}
-		    
-		    session[:school_ids] = eligible_school_ids
-		    
-		    @schools = School.where('bps_id IN (?)', eligible_school_ids)
+
+		    @eligible_schools = School.where('bps_id IN (?)', eligible_schools.collect {|x| x[:School]})
     
 	      format.html { redirect_to schools_url }
       end
