@@ -11,31 +11,29 @@
 		<% @opening_tags = 0 %>
 		<% @closing_tags = 0 %>
 		<% PreferenceCategory.preference_panel.rank(:sort_order).all.each_with_index do |category, i| %>
-			<% if category.preferences.present? %>
-				<% if i.remainder(3) == 0 %>
-					<% @opening_tags += 1 %>
-					<div class="colonn">
-				<% end %>
-					<div class="preference">
-						<p class='preference_category_title font_16'><span aria-hidden="true" class="<%= category.glyph_class %>"></span> <span class="text"><%= category.name %></span></p>
-						<% for preference in category.preferences.rank(:sort_order).all %>
-							<label class='font_13_14'>
-								<% if category.select_type == 'radio_button' %>
-									<input type='radio' name='[student][preference_ids][]' value='<%= preference.id %>', <%= current_student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
-								<% else %>
-									<input type='checkbox' name='[student][preference_ids][]' value='<%= preference.id %>', <%= current_student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
-								<% end %>
-								<span class="text"><%= preference.name %></span>
-							</label>
-						<% end %>
-					</div>					
-				<% if i.remainder(3) == 2 %>
-					<% @closing_tags += 1 %>
-					</div>
-				<% end %>
-				<% if ((i + 1) == PreferenceCategory.preference_panel.rank(:sort_order).count) && (@opening_tags > @closing_tags) %>
-					</div>
-				<% end %>
+			<% if i.remainder(3) == 0 %>
+				<% @opening_tags += 1 %>
+				<div class="colonn">
+			<% end %>
+				<div class="preference">
+					<p class='preference_category_title font_16'><span aria-hidden="true" class="<%= category.glyph_class %>"></span> <span class="text"><%= category.name %></span></p>
+					<% for preference in category.preferences.rank(:sort_order).all %>
+						<label class='font_13_14'>
+							<% if category.select_type == 'radio_button' %>
+								<input type='radio' name='[student][preference_ids][]' value='<%= preference.id %>', <%= current_student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
+							<% else %>
+								<input type='checkbox' name='[student][preference_ids][]' value='<%= preference.id %>', <%= current_student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
+							<% end %>
+							<span class="text"><%= preference.name %></span>
+						</label>
+					<% end %>
+				</div>					
+			<% if i.remainder(3) == 2 %>
+				<% @closing_tags += 1 %>
+				</div>
+			<% end %>
+			<% if ((i + 1) == PreferenceCategory.preference_panel.rank(:sort_order).count) && (@opening_tags > @closing_tags) %>
+				</div>
 			<% end %>
 		<% end %>
 		<div class="clr"></div>
