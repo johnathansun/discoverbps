@@ -268,14 +268,14 @@ input[type="search"] {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
-input[type="search"]:-webkit-search-decoration {
+input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 /* 
  * Remove inner padding and border in FF3/4: h5bp.com/l 
  */
-button:-moz-focus-inner,
-input:-moz-focus-inner {
+button::-moz-focus-inner,
+input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
@@ -716,12 +716,12 @@ a:visited {
 /* ----------------------------------------------
 	 GLOBAL STYLES
 ---------------------------------------------- */
-:-moz-selection {
+::-moz-selection {
   background: #000;
   color: #fff;
   text-shadow: none;
 }
-:selection {
+::selection {
   background: #000;
   color: #fff;
   text-shadow: none;
@@ -1592,7 +1592,7 @@ footer.footer .logo {
 .wrap .account_box .account_menu_box .action_box.save_box .btn.input_box input:-ms-input-placeholder {
   color: #000000;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn.input_box input:-webkit-input-placeholder {
+.wrap .account_box .account_menu_box .action_box.save_box .btn.input_box input::-webkit-input-placeholder {
   color: #000000;
 }
 .wrap .account_box .account_menu_box .action_box.save_box .btn.input_box .icon_success {
@@ -2673,13 +2673,13 @@ footer.footer .logo {
 .search .search_section .content_left form .form_line input:-moz-placeholder {
   color: #565656;
 }
-.search .search_section .content_left form .form_line input:-moz-placeholder {
+.search .search_section .content_left form .form_line input::-moz-placeholder {
   color: #565656;
 }
 .search .search_section .content_left form .form_line input:-ms-input-placeholder {
   color: #565656;
 }
-.search .search_section .content_left form .form_line input:-webkit-input-placeholder {
+.search .search_section .content_left form .form_line input::-webkit-input-placeholder {
   color: #565656;
 }
 .search .search_section .content_left form .form_line .bloc_1 {
@@ -2841,13 +2841,13 @@ a.ui-corner-all:hover {
 .search .search_section .content_left form .form_line .bloc_6 input:-moz-placeholder {
   color: #80bce7;
 }
-.search .search_section .content_left form .form_line .bloc_6 input:-moz-placeholder {
+.search .search_section .content_left form .form_line .bloc_6 input::-moz-placeholder {
   color: #80bce7;
 }
 .search .search_section .content_left form .form_line .bloc_6 input:-ms-input-placeholder {
   color: #80bce7;
 }
-.search .search_section .content_left form .form_line .bloc_6 input:-webkit-input-placeholder {
+.search .search_section .content_left form .form_line .bloc_6 input::-webkit-input-placeholder {
   color: #80bce7;
 }
 .search .search_section .content_left form .form_line .bloc_6 .select_school_icon {
@@ -3064,13 +3064,13 @@ a.ui-corner-all:hover {
 .wrap .account #personnal_info .sibling_school input:-moz-placeholder {
   color: #000000;
 }
-.wrap .account #personnal_info .sibling_school input:-moz-placeholder {
+.wrap .account #personnal_info .sibling_school input::-moz-placeholder {
   color: #000000;
 }
 .wrap .account #personnal_info .sibling_school input:-ms-input-placeholder {
   color: #000000;
 }
-.wrap .account #personnal_info .sibling_school input:-webkit-input-placeholder {
+.wrap .account #personnal_info .sibling_school input::-webkit-input-placeholder {
   color: #000000;
 }
 .wrap .account #personnal_info .sibling_school .select_school_icon {
