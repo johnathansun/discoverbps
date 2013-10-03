@@ -36,22 +36,29 @@
 		<!-- email link -->
 		Email: <a class="text_B0" href="mailto:eliotboston.k12.ma.us" title="Email adress"><%= school.api_basic_info[0][:schemail] %></a>
 	</p>
-	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"></span> 5.6 min from home</p>
+	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"></span> <%= raw school.distance %> from home</p>
 	<p class="descrip">
-		<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span><br/>
-		<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> 3 min <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+		<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> <%= raw school.walk_time %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span><br/>
+		<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> <%= raw school.drive_time %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
 	</p>
 
 	<p  class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"></span> School hours</p>
 
 	<p class="descrip"><%= school.api_hours[0][:schhours1] %></p>
 
-	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"></span> Surround care </p>
+	<% if school.api_basic_info[0][:BeforeSchPrograms].present? || school.api_basic_info[0][:AfterSchPrograms].present? %>
+		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"></span> Surround care </p>
 
-	<p class="descrip">
-		<span class="text_G1">Before:</span> <%= school.api_basic_info[0][:BeforeSchPrograms] %><br /><br />
-		<span class="text_G1">After:</span> <%= school.api_basic_info[0][:AfterSchPrograms] %>
-	</p>
+		<p class="descrip">
+			<% if school.api_basic_info[0][:BeforeSchPrograms].present? %>
+				<span class="text_G1">Before:</span> <%= school.api_basic_info[0][:BeforeSchPrograms] %><br /><br />
+			<% end %>
+			<% if school.api_basic_info[0][:AfterSchPrograms].present? %>
+				<span class="text_G1">After:</span> <%= school.api_basic_info[0][:AfterSchPrograms] %>
+			<% end %>
+		</p>
+	<% end %>
+	
 	<!-- print logo link -->
 	<p class="desktop_tablet">
 		<a href="/schools/<%= school.slug %>/print" title="Print Details"><span aria-hidden="true" class="font_20 icon-DBPS-Dev-Assets-SRG-28"></span> Print Details</a>
@@ -113,10 +120,6 @@
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"></span> Special Application</p>
 			<p class="descrip">None</p>
-		</div>
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_statedesignation"></span> State Designation</p>
-			<p class="descrip">Level 1</p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"></span> Community Partners</p>

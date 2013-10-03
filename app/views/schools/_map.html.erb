@@ -175,9 +175,9 @@ function initialize(){
 		
     <% schools.each_with_index do |school, i| %>
       <% if school.latitude.present? && school.longitude.present? %>
-        var myLatLng = new google.maps.LatLng(<%= school.latitude %>, <%= school.longitude %>);
+        var coordinates = new google.maps.LatLng(<%= school.latitude %>, <%= school.longitude %>);
         var marker = new google.maps.Marker({
-          position: myLatLng,
+          position: coordinates,
           map: map,
           title: '<%= escape_javascript(school.name) %>'
         });

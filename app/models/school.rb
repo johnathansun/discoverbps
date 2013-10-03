@@ -4,7 +4,7 @@ class School < ActiveRecord::Base
 	# geocoded_by :full_address
 
 	attr_protected
-	attr_accessor :tier, :transportation_eligibility, :walk_zone_eligibility
+	attr_accessor :tier, :transportation_eligibility, :walk_zone_eligibility, :walk_time, :drive_time, :distance
 	# attr_accessible :name, :bps_id, :api_basic_info, :api_awards, :api_calendar, :api_description, :api_extra_curricular, :api_facilities, :api_grades, :api_hours, :api_languages, :api_partners, :api_photos
 
 	serialize :api_basic_info     
