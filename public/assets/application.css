@@ -2107,90 +2107,47 @@ footer.footer .logo {
   width: 502px;
   float: left;
 }
-.wrap #school_list ul li#list_1,
-.wrap #school_list ul li#list_2,
-.wrap #school_list ul li#list_3,
-.wrap #school_list ul li#list_4,
-.wrap #school_list ul li#list_5 {
+
+.wrap #school_list ul li {
   background: #ffffff;
   margin-bottom: 12px;
   margin-top: 0;
   height: 82px;
 }
-.wrap #school_list ul li#list_1 .line,
-.wrap #school_list ul li#list_2 .line,
-.wrap #school_list ul li#list_3 .line,
-.wrap #school_list ul li#list_4 .line,
-.wrap #school_list ul li#list_5 .line {
+.wrap #school_list ul li .line {
   height: 82px;
 }
-.wrap #school_list ul li#list_1 .no_order,
-.wrap #school_list ul li#list_2 .no_order,
-.wrap #school_list ul li#list_3 .no_order,
-.wrap #school_list ul li#list_4 .no_order,
-.wrap #school_list ul li#list_5 .no_order {
+.wrap #school_list ul li .no_order {
   font-size: 27px;
   line-height: 28px;
 }
-.wrap #school_list ul li#list_1 .school_name,
-.wrap #school_list ul li#list_2 .school_name,
-.wrap #school_list ul li#list_3 .school_name,
-.wrap #school_list ul li#list_4 .school_name,
-.wrap #school_list ul li#list_5 .school_name {
+.wrap #school_list ul li .school_name {
   color: #565656;
   font-size: 27px;
   line-height: 28px;
 }
-.wrap #school_list ul li#list_1 .icon,
-.wrap #school_list ul li#list_2 .icon,
-.wrap #school_list ul li#list_3 .icon,
-.wrap #school_list ul li#list_4 .icon,
-.wrap #school_list ul li#list_5 .icon {
+.wrap #school_list ul li .icon {
   font-size: 30px;
 }
-.wrap #school_list ul li#list_1 .getting_there,
-.wrap #school_list ul li#list_2 .getting_there,
-.wrap #school_list ul li#list_3 .getting_there,
-.wrap #school_list ul li#list_4 .getting_there,
-.wrap #school_list ul li#list_5 .getting_there {
+.wrap #school_list ul li .getting_there {
   font-size: 15px;
 }
-.wrap #school_list ul li#list_1 .school_hours,
-.wrap #school_list ul li#list_2 .school_hours,
-.wrap #school_list ul li#list_3 .school_hours,
-.wrap #school_list ul li#list_4 .school_hours,
-.wrap #school_list ul li#list_5 .school_hours {
+.wrap #school_list ul li .school_hours {
   font-size: 15px;
 }
-.wrap #school_list ul li#list_1 .school_hours .max_range,
-.wrap #school_list ul li#list_2 .school_hours .max_range,
-.wrap #school_list ul li#list_3 .school_hours .max_range,
-.wrap #school_list ul li#list_4 .school_hours .max_range,
-.wrap #school_list ul li#list_5 .school_hours .max_range {
+.wrap #school_list ul li .school_hours .max_range {
   background: #e7f1f7;
 }
-.wrap #school_list ul li#list_1 .surround_care,
-.wrap #school_list ul li#list_2 .surround_care,
-.wrap #school_list ul li#list_3 .surround_care,
-.wrap #school_list ul li#list_4 .surround_care,
-.wrap #school_list ul li#list_5 .surround_care {
+.wrap #school_list ul li .surround_care {
   font-size: 13px;
   line-height: 15px;
 }
-.wrap #school_list ul li#list_1 .your_fit_icon,
-.wrap #school_list ul li#list_2 .your_fit_icon,
-.wrap #school_list ul li#list_3 .your_fit_icon,
-.wrap #school_list ul li#list_4 .your_fit_icon,
-.wrap #school_list ul li#list_5 .your_fit_icon {
+.wrap #school_list ul li .your_fit_icon {
   display: table;
   font-size: 17px;
   color: #0077cf;
 }
-.wrap #school_list ul li#list_1 .your_fit_icon .icon,
-.wrap #school_list ul li#list_2 .your_fit_icon .icon,
-.wrap #school_list ul li#list_3 .your_fit_icon .icon,
-.wrap #school_list ul li#list_4 .your_fit_icon .icon,
-.wrap #school_list ul li#list_5 .your_fit_icon .icon {
+.wrap #school_list ul li .your_fit_icon .icon {
   font-size: 17px;
 }
 .wrap #school_list .menu_list {
@@ -3484,39 +3441,19 @@ ie6 .print1 .wrap {
   padding-left: 9px;
   width: 95px;
 }
-.print1 .wrap #school_list ul li#list_1 .school_name,
-.print1 .wrap #school_list ul li#list_2 .school_name,
-.print1 .wrap #school_list ul li#list_3 .school_name,
-.print1 .wrap #school_list ul li#list_4 .school_name,
-.print1 .wrap #school_list ul li#list_5 .school_name,
-.print1 .wrap #school_list ul li#list_1 .no_order,
-.print1 .wrap #school_list ul li#list_2 .no_order,
-.print1 .wrap #school_list ul li#list_3 .no_order,
-.print1 .wrap #school_list ul li#list_4 .no_order,
-.print1 .wrap #school_list ul li#list_5 .no_order {
+.print1 .wrap #school_list ul li .school_name,
+.print1 .wrap #school_list ul li .no_order {
   font-size: 14px;
   line-height: 14px;
 }
-.print1 .wrap #school_list ul li#list_1 .getting_there,
-.print1 .wrap #school_list ul li#list_2 .getting_there,
-.print1 .wrap #school_list ul li#list_3 .getting_there,
-.print1 .wrap #school_list ul li#list_4 .getting_there,
-.print1 .wrap #school_list ul li#list_5 .getting_there {
+.print1 .wrap #school_list ul li .getting_there {
   font-size: 7px;
   line-height: 8px;
 }
-.print1 .wrap #school_list ul li#list_1 .school_hours,
-.print1 .wrap #school_list ul li#list_2 .school_hours,
-.print1 .wrap #school_list ul li#list_3 .school_hours,
-.print1 .wrap #school_list ul li#list_4 .school_hours,
-.print1 .wrap #school_list ul li#list_5 .school_hours {
+.print1 .wrap #school_list ul li .school_hours {
   font-size: 8px;
 }
-.print1 .wrap #school_list ul li#list_1 .surround_care,
-.print1 .wrap #school_list ul li#list_2 .surround_care,
-.print1 .wrap #school_list ul li#list_3 .surround_care,
-.print1 .wrap #school_list ul li#list_4 .surround_care,
-.print1 .wrap #school_list ul li#list_5 .surround_care {
+.print1 .wrap #school_list ul li .surround_care {
   font-size: 9px;
 }
 .print1 .wrap #school_list .shadow {
