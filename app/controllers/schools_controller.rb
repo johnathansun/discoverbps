@@ -17,7 +17,7 @@ class SchoolsController < ApplicationController
       street_number = current_student.street_number.present? ? URI.escape(current_student.street_number) : ''
       street_name   = current_student.street_name.present? ? URI.escape(current_student.street_name) : ''
       zipcode       = current_student.zipcode.present? ? URI.escape(current_student.zipcode) : ''
-
+      
       eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
       @eligible_schools = []
       eligible_schools.each do |school|
@@ -30,7 +30,6 @@ class SchoolsController < ApplicationController
         walking_directions = MultiJson.load(Faraday.new(url: "http://maps.googleapis.com/maps/api/directions/json?origin=#{street_number}+#{street_name}+#{zipcode}&destination=#{s.latitude},#{s.longitude}&sensor=false&avoid=highways&mode=walking").get.body, :symbolize_keys => true)
         s.walk_time = walking_directions.try(:[], :routes).try(:[], 0).try(:[], :legs).try(:[], 0).try(:[], :duration).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
         s.drive_time = driving_directions.try(:[], :routes).try(:[], 0).try(:[], :legs).try(:[], 0).try(:[], :duration).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
-        puts "******************** #{s.name} #{walking_directions.try(:[], :routes).try(:[], 0).try(:[], :legs).try(:[], 0).try(:[], :distance)}"
         s.distance = walking_directions.try(:[], :routes).try(:[], 0).try(:[], :legs).try(:[], 0).try(:[], :distance).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
         @eligible_schools << s
       end

@@ -153,7 +153,8 @@ function initialize(){
    // Create a new StyledMapType object, passing it the array of styles,
 	  // as well as the name to be displayed on the map type control.
 	 	var styledMap = new google.maps.StyledMapType(styles,{name: "Styled Map"});	
-		var myLatlng = 	new google.maps.LatLng(42.358431,-71.059773);
+		var myLatlng = 	new google.maps.LatLng(<%= current_student.latitude %>,<%= current_student.longitude %>);
+    var latlngbounds = new google.maps.LatLngBounds();
 		var mapProp = {
 		  center:myLatlng,
 		  zoom:13,
@@ -176,6 +177,7 @@ function initialize(){
     <% schools.each_with_index do |school, i| %>
       <% if school.latitude.present? && school.longitude.present? %>
         var coordinates = new google.maps.LatLng(<%= school.latitude %>, <%= school.longitude %>);
+        latlngbounds.extend(coordinates);
         var marker = new google.maps.Marker({
           position: coordinates,
           map: map,
@@ -187,7 +189,8 @@ function initialize(){
 
 
 		//Associate the styled map with the MapTypeId and set it to display.
-		  map.mapTypes.set('map_style', styledMap);
+		  map.fitBounds(latlngbounds);
+      map.mapTypes.set('map_style', styledMap);
 		  map.setMapTypeId('map_style');
 		
 			

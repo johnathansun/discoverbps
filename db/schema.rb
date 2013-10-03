@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131001153000) do
+ActiveRecord::Schema.define(:version => 20131003201445) do
 
   create_table "preference_categories", :force => true do |t|
     t.string   "name"
@@ -41,7 +41,8 @@ ActiveRecord::Schema.define(:version => 20131001153000) do
     t.integer "preference_id", :null => false
   end
 
-  add_index "preferences_students", ["student_id", "preference_id"], :name => "index_student_preferences_on_student_id_and_preference_id", :unique => true
+  add_index "preferences_students", ["preference_id"], :name => "index_preferences_students_on_preference_id"
+  add_index "preferences_students", ["student_id"], :name => "index_preferences_students_on_student_id"
 
   create_table "schools", :force => true do |t|
     t.datetime "created_at",           :null => false
@@ -71,7 +72,8 @@ ActiveRecord::Schema.define(:version => 20131001153000) do
     t.integer "school_id",  :null => false
   end
 
-  add_index "schools_students", ["student_id", "school_id"], :name => "index_schools_students_on_student_id_and_school_id", :unique => true
+  add_index "schools_students", ["school_id"], :name => "index_schools_students_on_school_id"
+  add_index "schools_students", ["student_id"], :name => "index_schools_students_on_student_id"
 
   create_table "searches", :force => true do |t|
     t.string   "street_number"
@@ -116,6 +118,8 @@ ActiveRecord::Schema.define(:version => 20131001153000) do
     t.integer  "sibling_school_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "students", ["session_id"], :name => "index_students_on_session_id"
