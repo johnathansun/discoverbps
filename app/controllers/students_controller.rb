@@ -55,7 +55,7 @@ class StudentsController < ApplicationController
 
   def ell
     @student = Student.find(params[:id])
-    
+
     respond_to do |format|
       if @student.update_attributes(params[:student])
         format.js { render template: "students/preferences" }         
@@ -70,7 +70,7 @@ class StudentsController < ApplicationController
     
     respond_to do |format|
       if @student.update_attributes(params[:student])
-    
+        session[:current_student_id] = @student.id    
 	      format.html { redirect_to schools_url }
       end
     end

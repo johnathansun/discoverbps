@@ -19,8 +19,16 @@ class SchoolsController < ApplicationController
       zipcode       = current_student.zipcode.present? ? URI.escape(current_student.zipcode) : ''
 
       eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
-      eligible_school_ids = eligible_schools.collect {|x| x[:School]}
-      @eligible_schools = School.where('bps_id IN (?)', eligible_school_ids)
+      @eligible_schools = []
+      eligible_schools.each do |school|
+        s = School.where(bps_id: school[:School]).first
+        s.tier = school[:Tier]
+        s.walk_zone_eligibility = school[:AssignmentWalkEligibilityStatus]
+        s.transportation_eligibility = school[:TransEligible]
+        @eligible_schools << s
+      end
+      # eligible_school_ids = eligible_schools.collect {|x| x[:School]}
+      # @eligible_schools = School.where('bps_id IN (?)', eligible_school_ids)
       current_student.school_ids.clear
       current_student.school_ids = @eligible_schools.collect {|x| x.id}
 

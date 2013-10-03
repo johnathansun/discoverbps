@@ -17,7 +17,11 @@
 		<div class="box line getting_there ">
 			<div class="first_block middle">
 				<span class="icon middle">
-					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-14"></span>
+					<% if school.walk_zone_eligibility == 'Y' %>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-14"></span>
+					<% elsif school.transportation_eligibility == 'Y' %>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-15"></span>
+					<% end %>
 				</span>
 				<span class="middle"><span>3.2</span> mi</span>
 			</div>
@@ -31,7 +35,7 @@
 			
 		</div>
 		<div class="box line school_hours">
-			<span  class="middle"> <%= school.api_hours[0][:schhours1] %><br/>
+			<span  class="middle"> <%= truncate(school.api_hours[0][:schhours1], length: 18) %><br/>
 				<div class="max_range">
 					<div class="ajust_range" style="margin-left:<%= school_hours_start_time_helper(school.api_hours[0][:schhours1]) %>%;margin-right:<%= school_hours_end_time_helper(school.api_hours[0][:schhours1]) %>%;">
 						
