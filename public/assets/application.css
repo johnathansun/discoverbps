@@ -5299,3 +5299,9 @@ a.student_tab {
 .list_row {
 	cursor: row-resize;
 }
+.icon-map-pin:before {
+	content: "\e024";
+}
+.icon-map-home:before {
+	content: "\e00a";
+}

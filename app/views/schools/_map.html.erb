@@ -17,142 +17,9 @@
 <script>
 function initialize(){
 
-  // Create an array of styles.
-  var styles = [
-    {
-    "featureType": "poi.attraction",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "poi.business",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "poi.place_of_worship",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "transit.line",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "poi.attraction",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "poi.medical",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "poi.school",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "landscape.man_made",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "poi.park",
-    "elementType": "geometry",
-    "stylers": [
-      { "lightness": 41 }
-    ]
-  },{
-    "featureType": "transit.station.airport",
-    "stylers": [
-      { "lightness": 49 }
-    ]
-  },{
-    "featureType": "administrative",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      { "saturation": -100 },
-      { "lightness": 24 }
-    ]
-  },{
-    "featureType": "road.highway",
-    "stylers": [
-      { "lightness": 26 }
-    ]
-  },{
-    "featureType": "road.arterial",
-    "elementType": "geometry",
-    "stylers": [
-      { "visibility": "simplified" },
-      { "color": "#d6cfc6" },
-      { "lightness": 43 }
-    ]
-  },{
-    "featureType": "road.local",
-    "elementType": "geometry.fill",
-    "stylers": [
-      { "color": "#d6cfc6" },
-      { "lightness": 42 }
-    ]
-  },{
-    "featureType": "road.local",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "road.arterial",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "road.arterial",
-    "elementType": "geometry.fill",
-    "stylers": [
-      { "visibility": "on" }
-    ]
-  },{
-    "featureType": "poi.park",
-    "elementType": "labels",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "transit.station.rail",
-    "elementType": "labels",
-    "stylers": [
-      { "saturation": -73 },
-      { "lightness": 27 }
-    ]
-  },{
-    "featureType": "road.highway",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "road.highway",
-    "elementType": "geometry.fill",
-    "stylers": [
-      { "visibility": "on" },
-      { "lightness": -5 }
-    ]
-  },{
-    "featureType": "administrative.land_parcel",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-  }
-];
-
    // Create a new StyledMapType object, passing it the array of styles,
 	  // as well as the name to be displayed on the map type control.
-	 	var styledMap = new google.maps.StyledMapType(styles,{name: "Styled Map"});	
+	 	var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});	
 		var myLatlng = 	new google.maps.LatLng(<%= current_student.latitude %>,<%= current_student.longitude %>);
     var latlngbounds = new google.maps.LatLngBounds();
 		var mapProp = {
@@ -171,8 +38,26 @@ function initialize(){
 			  mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
 			}
 		};
-		  
+
+
 		var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+    var coordinates = new google.maps.LatLng(<%= current_student.latitude %>, <%= current_student.longitude %>);
+    latlngbounds.extend(coordinates);
+    var marker = new google.maps.Marker({
+      position: coordinates,
+      icon: {
+        path: MAP_HOME,
+        fillColor: '#000000',
+        fillOpacity: 1,
+        strokeColor: '',
+        strokeWeight: 0,
+        rotation: 180,
+        scale: 1/22
+      },
+      label: '<i class="icon-map-home"></i>',
+      map: map
+    });
 		
     <% schools.each_with_index do |school, i| %>
       <% if school.latitude.present? && school.longitude.present? %>
@@ -180,6 +65,16 @@ function initialize(){
         latlngbounds.extend(coordinates);
         var marker = new google.maps.Marker({
           position: coordinates,
+          icon: {
+            path: MAP_PIN,
+            fillColor: '#f70009',
+            fillOpacity: 1,
+            strokeColor: '',
+            strokeWeight: 0,
+            rotation: 180,
+            scale: 1/15
+          },
+          label: '<i class="icon-map-pin"></i>',
           map: map,
           title: '<%= escape_javascript(school.name) %>'
         });
