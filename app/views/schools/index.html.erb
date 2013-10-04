@@ -330,7 +330,7 @@ $(".timeline").hover(
 			<script>
 				$(".add_child").click(function(){
 			  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/address_search') %>");
-			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)}))
+			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
 			  	$('#dialog_box').show();
 			  	return false;
 				});
@@ -513,14 +513,14 @@ $(".timeline").hover(
 
 		$("#sign_up_button").click(function(){
 	  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/account_signup_panel') %>");
-	  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)}))
+	  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
 	  	$('#signup_panel').show();
 	  	$('#dialog_box').show();
 	  	return false;
 		});
 		$("#login_button").click(function(){
 	  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/account_login_panel') %>");
-	  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)}))
+	  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
 	  	$('#login_panel').show();
 	  	$('#dialog_box').show();
 	  	return false;
