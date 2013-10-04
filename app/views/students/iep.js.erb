@@ -1,2 +1,3 @@
 $('#dialog_box').show();
 $('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/iep', locals: {student: @student}) %>");
+$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)}))
