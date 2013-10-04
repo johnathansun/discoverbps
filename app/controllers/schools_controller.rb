@@ -10,8 +10,8 @@ class SchoolsController < ApplicationController
     if @students.blank?
       render 'home', layout: 'home'
     else
-      if params[:student].present? && Student.where(first_name: params[:student], session_id: session[:session_id]).present?
-        student = Student.where(first_name: params[:student], session_id: session[:session_id]).first
+      if params[:name].present? && Student.where(first_name: params[:name], session_id: session[:session_id]).present?
+        student = Student.where(first_name: params[:name], session_id: session[:session_id]).first
         session[:current_student_id] = student.id
       end
       street_number = current_student.street_number.present? ? URI.escape(current_student.street_number) : ''
@@ -20,19 +20,34 @@ class SchoolsController < ApplicationController
       
       eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
       @eligible_schools = []
+      @school_coordinates = ''
+      
+      # add virtual attributes to schools
       eligible_schools.each do |school|
-        # add virtual attributes to schools
         s = School.where(bps_id: school[:School]).first
         s.tier = school[:Tier]
         s.walk_zone_eligibility = school[:AssignmentWalkEligibilityStatus]
         s.transportation_eligibility = school[:TransEligible]
-        driving_directions = MultiJson.load(Faraday.new(url: "http://maps.googleapis.com/maps/api/directions/json?origin=#{street_number}+#{street_name}+#{zipcode}&destination=#{s.latitude},#{s.longitude}&sensor=false&mode=driving").get.body, :symbolize_keys => true)
-        walking_directions = MultiJson.load(Faraday.new(url: "http://maps.googleapis.com/maps/api/directions/json?origin=#{street_number}+#{street_name}+#{zipcode}&destination=#{s.latitude},#{s.longitude}&sensor=false&avoid=highways&mode=walking").get.body, :symbolize_keys => true)
-        s.walk_time = walking_directions.try(:[], :routes).try(:[], 0).try(:[], :legs).try(:[], 0).try(:[], :duration).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
-        s.drive_time = driving_directions.try(:[], :routes).try(:[], 0).try(:[], :legs).try(:[], 0).try(:[], :duration).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
-        s.distance = walking_directions.try(:[], :routes).try(:[], 0).try(:[], :legs).try(:[], 0).try(:[], :distance).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
+        @school_coordinates += "#{s.latitude},#{s.longitude}|"
         @eligible_schools << s
       end
+      logger.info "http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_student.latitude},#{current_student.longitude}&destinations=#{@school_coordinates}&mode=walking&units=imperial&sensor=false"
+      @school_coordinates.gsub!(/\|$/,'')
+      @walk_info = MultiJson.load(Faraday.new(url: URI.escape("http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{street_number}+#{street_name}+#{zipcode}&destinations=#{@school_coordinates}&mode=walking&units=imperial&sensor=false")).get.body, :symbolize_keys => true)
+      @drive_info = MultiJson.load(Faraday.new(url: URI.escape("http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{street_number}+#{street_name}+#{zipcode}&destinations=#{@school_coordinates}&mode=driving&units=imperial&sensor=false")).get.body, :symbolize_keys => true)
+
+      # add virtual attributes to schools
+      @eligible_schools.each_with_index do |school, i|
+        school.walk_time = @walk_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text)
+        school.drive_time = @drive_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text)
+        school.distance = @drive_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :distance).try(:[], :text)
+      end
+      # driving_directions = MultiJson.load(Faraday.new(url: "http://maps.googleapis.com/maps/api/directions/json?origin=#{street_number}+#{street_name}+#{zipcode}&destination=#{s.latitude},#{s.longitude}&sensor=false&mode=driving").get.body, :symbolize_keys => true)
+      # walking_directions = MultiJson.load(Faraday.new(url: "http://maps.googleapis.com/maps/api/directions/json?origin=#{street_number}+#{street_name}+#{zipcode}&destination=#{s.latitude},#{s.longitude}&sensor=false&avoid=highways&mode=walking").get.body, :symbolize_keys => true)
+      # s.walk_time = walking_directions.try(:[], :routes).try(:[], 0).try(:[], :legs).try(:[], 0).try(:[], :duration).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
+      # s.drive_time = driving_directions.try(:[], :routes).try(:[], 0).try(:[], :legs).try(:[], 0).try(:[], :duration).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
+      # s.distance = walking_directions.try(:[], :routes).try(:[], 0).try(:[], :legs).try(:[], 0).try(:[], :distance).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
+
       # eligible_school_ids = eligible_schools.collect {|x| x[:School]}
       # @eligible_schools = School.where('bps_id IN (?)', eligible_school_ids)
       current_student.school_ids.clear
