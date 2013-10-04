@@ -1,6 +1,5 @@
 <!-- partials are injected into this dialog box - don't delete -->
 <div id='dialog_box' class='dialog_box dialog_box_dicover' style='display:none;'>
-	<%= render partial: 'schools/dialog_boxes/address_search' %>
 </div>
 
 
@@ -304,28 +303,6 @@ $(".timeline").hover(
 
 <!-- End timeline -->
 
-<!-- start languages -->
-<div class="wrap no_mobile">
-<!--languages selection and his list-->
-	<ul class='languages'>
-		<li>
-			<div class='current_language'><span data-icon="&#xe003;" aria-hidden="true"></span>English</div>
-			<div class='clr'></div>
-			<ul >
-				<li><a href='#' class='language'>Español</a></li>
-				<li><a href='#' class='language'>Kreyòl Ayisyen</a></li>
-				<li><a href='#' class='language'>中文</a></li>
-				<li><a href='#' class='language'>Português</a></li>
-				<li><a href='#' class='language'>Kriolu Kabuverdianu</a></li>
-				<li><a href='#' class='language'>Tiếng Việt</a></li>
-				<li><a href='#' class='language'>Français</a></li>
-				<li><a href='#' class='language'><span data-icon="&#xe003;" aria-hidden="true"></span>Other</a></li>
-			</ul>
-		</li>
-	</ul>
-<!--END list-->
-</div>
-<!-- end languages -->
 <%= render partial: 'schools/map', locals: {schools: @eligible_schools} %>
 
 <!-- start bar list children -->
@@ -352,6 +329,7 @@ $(".timeline").hover(
 			</div>
 			<script>
 				$(".add_child").click(function(){
+			  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/address_search') %>");
 			  	$('#dialog_box').show();
 			  	return false;
 				});
@@ -530,10 +508,10 @@ $(".timeline").hover(
 			//$(".header_preferences #show_btn").css("display","none");
 			$(".preferences").removeClass("hide");
 		})
-	});
 
-	$(function() {
-    $( "#sortable" ).sortable();
-    $( "#sortable" ).disableSelection();
-  });
+		$(function() {
+	    $( "#sortable" ).sortable();
+	    $( "#sortable" ).disableSelection();
+	  });
+	});
 </script>

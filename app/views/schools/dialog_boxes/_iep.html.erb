@@ -1,3 +1,4 @@
+<div id="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
 <!-- dialog individualized education plan -->
 <div class='content'>
 	<%= form_tag iep_student_path(student), :method => :put, :remote => true do %>
@@ -20,20 +21,13 @@
 		<div class='btn'><%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit' %></div>
 	<% end %>
 </div>
-
-<!-- <ul class='languages dialog_box_lang'>
-	<li>
-		<div class='current_language'><span data-icon="&#xe003;" aria-hidden="true"></span>English</div>
-		<div class='clr'></div>
-		<ul >
-			<li><a href='#' class='language'>Español</a></li>
-			<li><a href='#' class='language'>Kreyòl Ayisyen</a></li>
-			<li><a href='#' class='language'>中文</a></li>
-			<li><a href='#' class='language'>Português</a></li>
-			<li><a href='#' class='language'>Kriolu Kabuverdianu</a></li>
-			<li><a href='#' class='language'>Tiếng Việt</a></li>
-			<li><a href='#' class='language'>Français</a></li>
-			<li><a href='#' class='language'><span data-icon="&#xe003;" aria-hidden="true"></span>Other</a></li>
-		</ul>
-	</li>
-</ul> -->
+<script>	
+	$( document ).ready(function() {
+		$("#close_icon").click(function() {
+			$(".dialog_box").fadeOut("fast").removeClass("active");
+		});
+		$(".dialog_box").click(function(e){
+	  	e.stopPropagation();
+		});
+	});
+</script>

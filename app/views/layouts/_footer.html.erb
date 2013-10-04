@@ -12,11 +12,15 @@
 </footer>
 
 <script>	
-	$("body").click(function(){
-  	$(".dialog_box").fadeOut("fast").removeClass("active");
-	});
-
-	$(".dialog_box").click(function(e){
-  	e.stopPropagation();
+	$( document ).ready(function() {
+		$("body").click(function(){
+	  	$(".dialog_box").fadeOut("fast").removeClass("active");
+		});
+		$("#close_icon").click(function() {
+			$(".dialog_box").fadeOut("fast").removeClass("active");
+		});
+		$(".dialog_box").click(function(e){
+	  	e.stopPropagation();
+		});
 	});
 </script>

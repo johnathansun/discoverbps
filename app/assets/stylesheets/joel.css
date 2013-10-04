@@ -100,3 +100,7 @@ a.student_tab {
 .icon-map-home:before {
 	content: "\e00a";
 }
+#close_icon {
+	float: right;
+	cursor: pointer;
+}

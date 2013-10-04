@@ -1,3 +1,4 @@
+<div id="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
 <!-- dialog preferences -->
 <div class='content'>
 	<%= form_tag preferences_student_path(student), :method => :put do %>
@@ -16,3 +17,13 @@
 		<div class='btn'><%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit' %></div>
 	<% end %>
 </div>
+<script>	
+	$( document ).ready(function() {
+		$("#close_icon").click(function() {
+			$(".dialog_box").fadeOut("fast").removeClass("active");
+		});
+		$(".dialog_box").click(function(e){
+	  	e.stopPropagation();
+		});
+	});
+</script>
