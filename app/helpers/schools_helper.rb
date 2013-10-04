@@ -16,6 +16,15 @@ module SchoolsHelper
 		return list.gsub(/,$/, '')
 	end
 
+	def school_type_helper(hash)
+		list = ''
+		list += 'District, ' if hash[:isdistrict] == 'True'
+		list += 'Charter, ' if hash[:ischarter] == 'True'
+		list += 'Citywide,' if hash[:iscitywide] == 'True'
+		list += 'Pilot' if hash[:ispilot] == 'True'
+		return list.gsub(/,$/, '')
+	end
+
 	def partners_list_helper(array)
 		list = ''
 		array.each do |partner|

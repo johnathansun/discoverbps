@@ -6,19 +6,19 @@
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"></span> MCAS Tier</p>
-			<p class="descrip">Tier I</p>
+			<p class="descrip">Tier <%= school.tier %></p>
 		</div>
 		<div class="clr"></div>
 	</div>
 
 	<div class="detail_row">
 		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"></span> Classes Per Grade</p>
-			<p class="descrip">3</p>
+			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"></span> Enrollment</p>
+			<p class="descrip">WAITING</p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"></span> School Focus</p>
-			<p class="descrip">Math & Science, Technology</p>
+			<p class="descrip"><%= school.api_description[0][:schfocus] %></p>
 		</div>
 		<div class="clr"></div>
 	</div>
@@ -30,7 +30,7 @@
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialprograms"></span> Special Programs</p>
-			<p class="descrip">AWC</p>
+			<p class="descrip">WAITING</p>
 		</div>
 		<div class="clr"></div>
 	</div>
@@ -38,11 +38,11 @@
 	<div class="detail_row">
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"></span> Special Application</p>
-			<p class="descrip">None</p>
+			<p class="descrip"><%= school.api_description[0][:specialapplicationnarrative].present? ? school.api_description[0][:specialapplicationnarrative] : 'None' %></p>
 		</div>
 		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_statedesignation"></span> State Designation</p>
-			<p class="descrip">Level 1</p>
+			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"></span> Facility Features</p>
+			<p class="descrip"><%= facilities_list_helper(school.api_facilities[0]) %></p>
 		</div>
 	<div class="clr"></div>
 	</div>
@@ -50,11 +50,11 @@
 	<div class="detail_row">
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"></span> Uniform Policy</p>
-			<p class="descrip">None</p>
+			<p class="descrip"><%= school.api_description[0][:uniformpolicy].blank? ? 'None' : school.api_description[0][:uniformpolicy] %></p>
 		</div>
 		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"></span> Facility Features</p>
-			<p class="descrip"><%= facilities_list_helper(school.api_facilities[0]) %></p>
+			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"></span> Sports</p>
+			<p class="descrip">WAITING</p>
 		</div>
 		<div class="clr"></div>
 	</div>
@@ -62,23 +62,11 @@
 	<div class="detail_row">
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"></span> Eligibility</p>
-			<p class="descrip">Walk Zone, Tier I</p>
-		</div>
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"></span> Sports</p>
-			<p class="descrip">Baseball, Basketball, Football, Soccer, Track, Volleyball</p>
-		</div>
-		<div class="clr"></div>
-	</div>
-
-	<div class="detail_row">
-		<div class="box">
-			<p class="title"></p>
-			<p class="descrip"></p>
+			<p class="descrip"><%= school.walk_zone_eligibility == 'Y' ? 'Walk Zone Eligible' : '' %> <%= school.transportation_eligibility == 'Y' ? 'Transportation' : '' %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"></span> Health & Wellness</p>
-			<p class="descrip">Full-Time Nurse</p>
+			<p class="descrip"><%= school.api_basic_info[0][:ishasfulltimenurse] == 'True' ? 'Full-Time Nurse' : '' %></p>
 		</div>
 		<div class="clr"></div>
 	</div>
@@ -94,4 +82,5 @@
 		</div>
 		<div class="clr"></div>
 	</div>
+
 </div>
