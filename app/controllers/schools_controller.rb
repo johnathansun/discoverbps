@@ -38,15 +38,10 @@ class SchoolsController < ApplicationController
 
       # add virtual attributes to schools
       @eligible_schools.each_with_index do |school, i|
-        school.walk_time = @walk_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text)
-        school.drive_time = @drive_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text)
-        school.distance = @drive_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :distance).try(:[], :text)
+        school.walk_time = @walk_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
+        school.drive_time = @drive_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
+        school.distance = @drive_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :distance).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
       end
-      # driving_directions = MultiJson.load(Faraday.new(url: "http://maps.googleapis.com/maps/api/directions/json?origin=#{street_number}+#{street_name}+#{zipcode}&destination=#{s.latitude},#{s.longitude}&sensor=false&mode=driving").get.body, :symbolize_keys => true)
-      # walking_directions = MultiJson.load(Faraday.new(url: "http://maps.googleapis.com/maps/api/directions/json?origin=#{street_number}+#{street_name}+#{zipcode}&destination=#{s.latitude},#{s.longitude}&sensor=false&avoid=highways&mode=walking").get.body, :symbolize_keys => true)
-      # s.walk_time = walking_directions.try(:[], :routes).try(:[], 0).try(:[], :legs).try(:[], 0).try(:[], :duration).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
-      # s.drive_time = driving_directions.try(:[], :routes).try(:[], 0).try(:[], :legs).try(:[], 0).try(:[], :duration).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
-      # s.distance = walking_directions.try(:[], :routes).try(:[], 0).try(:[], :legs).try(:[], 0).try(:[], :distance).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
 
       # eligible_school_ids = eligible_schools.collect {|x| x[:School]}
       # @eligible_schools = School.where('bps_id IN (?)', eligible_school_ids)
