@@ -12,8 +12,8 @@ class SchoolsController < ApplicationController
     if @students.blank?
       render 'home', layout: 'home'
     else
-      if params[:name].present? && Student.where(first_name: params[:name], session_id: session[:session_id]).present?
-        student = Student.where(first_name: params[:name], session_id: session[:session_id]).first
+      if params[:student].present? && Student.where(first_name: params[:student], session_id: session[:session_id]).present?
+        student = Student.where(first_name: params[:student], session_id: session[:session_id]).first
         session[:current_student_id] = student.id
       end
       street_number = current_student.street_number.present? ? URI.escape(current_student.street_number) : ''
