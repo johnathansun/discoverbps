@@ -54,6 +54,10 @@ module SchoolsHelper
 		end
 	end
 
+	def spacer_helper(string)
+		raw string.try(:gsub, /\s/, '&nbsp;')
+	end
+
 	# def link_to_add_student(link_name, partial)
  #    new_object = .page_fields.new
  #    id = new_object.object_id
