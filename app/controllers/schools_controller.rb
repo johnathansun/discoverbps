@@ -3,11 +3,11 @@ class SchoolsController < ApplicationController
   layout :layout_selector
 
   def home
-    @students = Student.where(session_id: session[:session_id])
+    @students = Student.where(session_id: session[:session_id]).order(:first_name)
   end
 
   def index
-    @students = Student.where(session_id: session[:session_id])
+    @students = Student.where(session_id: session[:session_id]).order(:first_name)
 
     if @students.blank?
       render 'home', layout: 'home'
@@ -16,12 +16,14 @@ class SchoolsController < ApplicationController
         student = Student.where(first_name: params[:student], session_id: session[:session_id]).first
         session[:current_student_id] = student.id
       end
+
       street_number = current_student.street_number.present? ? URI.escape(current_student.street_number) : ''
       street_name   = current_student.street_name.present? ? URI.escape(current_student.street_name) : ''
       zipcode       = current_student.zipcode.present? ? URI.escape(current_student.zipcode) : ''
       grade_level   = current_student.grade_level.present? ? URI.escape(current_student.grade_level.try(:strip)) : ''
       
       eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
+      
       @eligible_schools = []
       @school_coordinates = ''
       
@@ -43,11 +45,11 @@ class SchoolsController < ApplicationController
       @eligible_schools.each_with_index do |school, i|
         school.walk_time = @walk_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text)
         school.drive_time = @drive_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text)
-        school.distance = @drive_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :distance).try(:[], :text)
+        school.distance = @walk_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :distance).try(:[], :text)
       end
 
-      # eligible_school_ids = eligible_schools.collect {|x| x[:School]}
-      # @eligible_schools = School.where('bps_id IN (?)', eligible_school_ids)
+      @eligible_schools.sort_by! {|x| x.distance}
+
       current_student.school_ids.clear
       current_student.school_ids = @eligible_schools.collect {|x| x.id}
 
