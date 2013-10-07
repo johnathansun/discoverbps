@@ -200,12 +200,8 @@ $("#menu_nav_mobile").click(function() {
 
 function initializeRegistrationTimeline() {
 
-
 	// Ex. (2 1/3) months approximate
 	$("#registration_contaner").width(Math.floor((2.333*$(".months .month").outerWidth())));
-
-	
-	
 	
 	// Ex. 2 days approximate
 	$("#regis_1").width(2*($(".months .month").outerWidth()/30));
@@ -317,12 +313,6 @@ $(".timeline").hover(
 				<% for student in @students %>
 					<%= render partial: 'schools/student_tab', locals: {student: student} %>
 				<% end %>
-				<script>
-					$(".name_info").click(function(){
-  			  	window.location=$(this).find("a").attr("href"); 
-     				return false;
-					});
-				</script>
 			</div>	
 			<div class="add_child" >
 				+ Add a child
@@ -370,38 +360,38 @@ $(".timeline").hover(
 								<div class="arrow menu_bloc">
 									<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-31"></span>
 								</div>
-								<div class="choice menu_bloc">
+								<div id="sortable_choice_order_button" class="choice menu_bloc sortable_column">
 									Choice order
 								</div>
 								
 								<!-- add class "open" to show "Walk time" and "Drive time"-->
 								<div id="getting_there" class=" menu_bloc ">
-									<div class="first_block">
+									<div id="sortable_distance_button" class="first_block sortable_column">
 										Getting there 
 									</div>
-									<div class="second_block">
+									<div class="second_block sortable_column">
 										Walk Time
 									</div>
-									<div class="second_block">
+									<div class="second_block sortable_column">
 										Drive Time
 									</div>
 									<span aria-hidden="true" class="glass_open icon-DBPS-Dev-Assets-SRG-24"></span>
 									<span aria-hidden="true" class="glass_close icon-DBPS-Dev-Assets-SRG-23"></span>
 								</div>
-								<div class=" menu_bloc">
+								<div id="sortable_hours_button" class=" menu_bloc sortable_column">
 									School hours
 								</div>
-								<div class=" menu_bloc">
+								<div class=" menu_bloc sortable_column">
 									Surround Care
 								</div>
-								<div class="your_fit menu_bloc">
+								<div class="your_fit menu_bloc sortable_column">
 									<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-31"></span> Your Fit 
 									<span aria-hidden="true" class="glass_open icon-DBPS-Dev-Assets-SRG-24"></span>
 								</div>
-								<div class="your_fit_show menu_bloc">
+								<div class="your_fit_show menu_bloc sortable_column">
 										Enrollement
 								</div>
-								<div class="your_fit_show menu_bloc active">
+								<div class="your_fit_show menu_bloc active sortable_column">
 										Arts Focus
 								</div>
 								<div class="clr"></div>
@@ -529,6 +519,39 @@ $(".timeline").hover(
 		$(function() {
 	    $( "#sortable" ).sortable();
 	    $( "#sortable" ).disableSelection();
+	  });
+
+	  var choice_order_ascending = false;
+	  $("#sortable_choice_order_button").click(function(){
+	  	if (choice_order_ascending) {
+	  		$('ul#sortable>li').tsort('span.sortable_school_name',{order:'desc'});
+	  		choice_order_ascending = false;
+	  	} else {
+	  		$('ul#sortable>li').tsort('span.sortable_school_name',{order:'asc'});
+	  		choice_order_ascending = true;
+	  	}
+	  });
+
+	  var getting_there_ascending = false;
+	  $("#sortable_distance_button").click(function(){
+	  	if (getting_there_ascending) {
+	  		$('ul#sortable>li').tsort('span.sortable_distance',{order:'desc'});
+	  		getting_there_ascending = false;
+	  	} else {
+	  		$('ul#sortable>li').tsort('span.sortable_distance',{order:'asc'});
+	  		getting_there_ascending = true;
+	  	}
+	  });
+
+	  var hours_ascending = false;
+	  $("#sortable_hours_button").click(function(){
+	  	if (hours_ascending) {
+	  		$('ul#sortable>li').tsort('span.sortable_hours',{order:'desc'});
+	  		hours_ascending = false;
+	  	} else {
+	  		$('ul#sortable>li').tsort('span.sortable_hours',{order:'asc'});
+	  		hours_ascending = true;
+	  	}
 	  });
 	});
 </script>

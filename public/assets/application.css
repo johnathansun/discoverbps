@@ -5309,3 +5309,6 @@ a.student_tab {
 	float: right;
 	cursor: pointer;
 }
+.sortable_column {
+	cursor: pointer;
+}

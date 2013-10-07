@@ -6,7 +6,7 @@
 		</div>
 		<div class="school_name select line">
 			<span class="middle">
-				<%= school.api_basic_info[0][:schname_23] %>
+				<span class="sortable_school_name"><%= school.api_basic_info[0][:schname_23] %></span>
 				<% if current_student.sibling_school_id == school.bps_id %>
 					<span aria-hidden="true" class="select_icon icon-DBPS-Dev-Assets-SRG-12"></span>
 				<% end %>
@@ -23,7 +23,7 @@
 						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-15"></span>
 					<% end %>
 				</span>
-				<span class="middle"><%= spacer_helper(school.distance) %></span>
+				<span class="middle sortable_distance"><%= spacer_helper(school.distance) %></span>
 			</div>
 			<div class="second_bloc middle">
 				<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> <%= spacer_helper(school.walk_time) %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
@@ -35,7 +35,7 @@
 			
 		</div>
 		<div class="box line school_hours">
-			<span  class="middle"> <%= truncate(school.api_hours[0][:schhours1], length: 18) %><br/>
+			<span class="middle sortable_hours"> <%= truncate(school.api_hours[0][:schhours1], length: 18) %><br/>
 				<div class="max_range">
 					<div class="ajust_range" style="margin-left:<%= school_hours_start_time_helper(school.api_hours[0][:schhours1]) %>%;margin-right:<%= school_hours_end_time_helper(school.api_hours[0][:schhours1]) %>%;">
 						
