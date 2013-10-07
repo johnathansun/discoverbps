@@ -1,4 +1,5 @@
 class SchoolsController < ApplicationController
+  include SchoolsHelper
   layout :layout_selector
 
   def home
@@ -7,6 +8,7 @@ class SchoolsController < ApplicationController
 
   def index
     @students = Student.where(session_id: session[:session_id])
+
     if @students.blank?
       render 'home', layout: 'home'
     else
@@ -17,8 +19,9 @@ class SchoolsController < ApplicationController
       street_number = current_student.street_number.present? ? URI.escape(current_student.street_number) : ''
       street_name   = current_student.street_name.present? ? URI.escape(current_student.street_name) : ''
       zipcode       = current_student.zipcode.present? ? URI.escape(current_student.zipcode) : ''
+      grade_level   = current_student.grade_level.present? ? URI.escape(current_student.grade_level.try(:strip)) : ''
       
-      eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=03&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
+      eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=#{grade}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
       @eligible_schools = []
       @school_coordinates = ''
       
@@ -38,9 +41,9 @@ class SchoolsController < ApplicationController
 
       # add virtual attributes to schools
       @eligible_schools.each_with_index do |school, i|
-        school.walk_time = @walk_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
-        school.drive_time = @drive_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
-        school.distance = @drive_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :distance).try(:[], :text).try(:gsub, /\s/, '&nbsp;')
+        school.walk_time = @walk_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text)
+        school.drive_time = @drive_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text)
+        school.distance = @drive_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :distance).try(:[], :text)
       end
 
       # eligible_school_ids = eligible_schools.collect {|x| x[:School]}
@@ -53,12 +56,12 @@ class SchoolsController < ApplicationController
         format.csv do
           require 'csv'
           csv_string = CSV.generate do |csv|
-            csv << ['Name', 'Distance', 'Walk Time', 'Drive Time', 'Hours', 'Grades Offered', 'Before School Programs', 'After School Programs', 'Facilities']
+            csv << ['Name', 'Distance from Home', 'Walk Time', 'Drive Time', 'Hours', 'Grades Offered', 'Before School Programs', 'After School Programs', 'Facilities', 'MCAS Tier', 'School Type', 'School Focus', 'Special Application', 'Uniform Policy', 'Walk Zone Eligible', 'Transportation Eligible', 'School Email']
                       
             counter = 0
             @eligible_schools.each do |school|
               counter += 1
-              csv << [ school.name, '', '', '', school.api_hours.try(:[],0).try(:[], :schhours1), school.api_grades.try(:[], 0).try(:[], :grade), school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms), school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms), facilities_list_helper(school.api_facilities[0]) ]
+              csv << [ school.name, school.distance, school.walk_time, school.drive_time, school.api_hours.try(:[],0).try(:[], :schhours1), school.api_grades.try(:[], 0).try(:[], :grade), school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms), school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms), facilities_list_helper(school.api_facilities[0]), "Tier #{school.tier}", school_type_helper(school.api_basic_info.try(:[], 0)), school.api_description.try(:[], 0).try(:[], :schfocus), school.api_description.try(:[], 0).try(:[], :specialapplicationnarrative), school.api_description.try(:[], 0).try(:[], :uniformpolicy), (school.walk_zone_eligibility == 'Y' ? 'Walk Zone Eligible' : ''), (school.transportation_eligibility == 'Y' ? 'Transportation' : ''), school.api_basic_info.try(:[], 0).try(:[], :schemail) ]
             end
           end
 
