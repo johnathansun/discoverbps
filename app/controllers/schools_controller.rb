@@ -21,7 +21,7 @@ class SchoolsController < ApplicationController
       zipcode       = current_student.zipcode.present? ? URI.escape(current_student.zipcode) : ''
       grade_level   = current_student.grade_level.present? ? URI.escape(current_student.grade_level.try(:strip)) : ''
       
-      eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=#{grade}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
+      eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
       @eligible_schools = []
       @school_coordinates = ''
       
