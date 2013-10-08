@@ -251,17 +251,7 @@ function initialize(){
         latlngbounds.extend(coordinates);
         var marker = new google.maps.Marker({
           position: coordinates,
-          icon: {
-            path: MAP_PIN,
-            fillColor: '#f70009',
-            fillOpacity: 1,
-            strokeColor: '',
-            strokeWeight: 0,
-            rotation: 180,
-            scale: 1/15,
-            title: '<%= school.name %>'
-          },
-          label: '<i class="icon-map-pin"></i>',
+          icon: '/assets/map_pins/DBPS_MapPins_Selected_<%= i + 1 %>.svg',
           map: map,
           title: '<%= escape_javascript(school.name) %>'
         });
