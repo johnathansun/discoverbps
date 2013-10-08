@@ -10,7 +10,7 @@
 	<div id="preference_content">
 		<% @opening_tags = 0 %>
 		<% @closing_tags = 0 %>
-		<% PreferenceCategory.preference_panel.rank(:sort_order).all.each_with_index do |category, i| %>
+		<% PreferenceCategory.preference_panel.grade_level_categories(current_student.grade_level).rank(:sort_order).all.each_with_index do |category, i| %>
 			<% if i.remainder(3) == 0 %>
 				<% @opening_tags += 1 %>
 				<div class="colonn">
@@ -32,7 +32,7 @@
 				<% @closing_tags += 1 %>
 				</div>
 			<% end %>
-			<% if ((i + 1) == PreferenceCategory.preference_panel.rank(:sort_order).count) && (@opening_tags > @closing_tags) %>
+			<% if ((i + 1) == PreferenceCategory.preference_panel.grade_level_categories(current_student.grade_level).rank(:sort_order).count) && (@opening_tags > @closing_tags) %>
 				</div>
 			<% end %>
 		<% end %>

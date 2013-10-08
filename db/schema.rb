@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131003201445) do
+ActiveRecord::Schema.define(:version => 20131008060726) do
 
   create_table "preference_categories", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,21 @@ ActiveRecord::Schema.define(:version => 20131003201445) do
     t.string   "select_type",                         :default => "check_mark"
     t.string   "glyph_id"
     t.string   "glyph_class"
+    t.boolean  "grade_k0",                            :default => false
+    t.boolean  "grade_k1",                            :default => false
+    t.boolean  "grade_k2",                            :default => false
+    t.boolean  "grade_1",                             :default => false
+    t.boolean  "grade_2",                             :default => false
+    t.boolean  "grade_3",                             :default => false
+    t.boolean  "grade_4",                             :default => false
+    t.boolean  "grade_5",                             :default => false
+    t.boolean  "grade_6",                             :default => false
+    t.boolean  "grade_7",                             :default => false
+    t.boolean  "grade_8",                             :default => false
+    t.boolean  "grade_9",                             :default => false
+    t.boolean  "grade_10",                            :default => false
+    t.boolean  "grade_11",                            :default => false
+    t.boolean  "grade_12",                            :default => false
   end
 
   create_table "preferences", :force => true do |t|

@@ -9,7 +9,6 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.update_attributes(params[:student])
-        session[:current_student_id] = @student.id  	
       	street_number = URI.escape(params[:student][:street_number].try(:strip))
         street_name   = URI.escape(params[:student][:street_name].try(:strip))
         zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
@@ -28,7 +27,6 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.update_attributes(params[:student])
-        session[:current_student_id] = @student.id  	
       	street_number = URI.escape(params[:student][:street_number].try(:strip))
         street_name   = URI.escape(params[:student][:street_name].try(:strip))
         zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
@@ -51,6 +49,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.update_attributes(params[:student])
+        session[:current_student_id] = @student.id  
         format.js { render template: "students/iep" }         
       else
         format.js { render template: "students/errors" }
@@ -63,6 +62,7 @@ class StudentsController < ApplicationController
     
     respond_to do |format|
       if @student.update_attributes(params[:student])
+      	session[:current_student_id] = @student.id  
       	if (@student.preference_ids & PreferenceCategory.where(name: 'Specialized Language Support').first.preferences.collect {|x| x.id}).present?
 	        format.js { render template: "students/ell" }
 	      else
@@ -79,6 +79,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.update_attributes(params[:student])
+        session[:current_student_id] = @student.id  
         format.js { render template: "students/preferences" }         
       else
         format.js { render template: "students/errors" }
