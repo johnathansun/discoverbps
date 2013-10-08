@@ -298,8 +298,13 @@ $(".timeline").hover(
 <!-- END script for timeline and registration -->
 
 <!-- End timeline -->
-
-<%= render partial: 'schools/map', locals: {schools: @eligible_schools} %>
+<!-- start google map -->
+<div class="wrap global_map">
+	<section class="content_wrap">
+			<%= render partial: 'schools/account_tab' %>		
+	</section>
+	<%= render partial: 'schools/map', locals: {schools: @eligible_schools, map_controls: true} %>
+</div>
 
 <!-- start bar list children -->
 <div class="wrap">
@@ -361,13 +366,13 @@ $(".timeline").hover(
 									<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-31"></span>
 								</div>
 								<div id="sortable_choice_order_button" class="choice menu_bloc sortable_column">
-									Choice order
+									School Name
 								</div>
 								
 								<!-- add class "open" to show "Walk time" and "Drive time"-->
 								<div id="getting_there" class=" menu_bloc ">
 									<div id="sortable_distance_button" class="first_block sortable_column">
-										Getting there 
+										Getting There 
 									</div>
 									<div class="second_block sortable_column">
 										Walk Time
@@ -379,7 +384,7 @@ $(".timeline").hover(
 									<span aria-hidden="true" class="glass_close icon-DBPS-Dev-Assets-SRG-23"></span>
 								</div>
 								<div id="sortable_hours_button" class=" menu_bloc sortable_column">
-									School hours
+									School Hours
 								</div>
 								<div class=" menu_bloc sortable_column">
 									Surround Care
@@ -499,7 +504,6 @@ $(".timeline").hover(
 			//$(".header_preferences #show_btn").css("display","none");
 			$(".preferences").removeClass("hide");
 		})
-	  
 
 		$("#sign_up_button").click(function(){
 	  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/account_signup_panel') %>");
@@ -508,6 +512,7 @@ $(".timeline").hover(
 	  	$('#dialog_box').show();
 	  	return false;
 		});
+
 		$("#login_button").click(function(){
 	  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/account_login_panel') %>");
 	  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});

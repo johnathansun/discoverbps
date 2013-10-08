@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+
 	def create
 		if current_user.present?
 			@student = Student.where(user_id: current_user.id, first_name: params[:student][:first_name], last_name: params[:student][:last_name]).first_or_create
@@ -6,11 +7,27 @@ class StudentsController < ApplicationController
 			@student = Student.where(session_id: session[:session_id], first_name: params[:student][:first_name], last_name: params[:student][:last_name]).first_or_create
 		end
 
- 
+    respond_to do |format|
+      if @student.update_attributes(params[:student])
+        session[:current_student_id] = @student.id  	
+      	street_number = URI.escape(params[:student][:street_number].try(:strip))
+        street_name   = URI.escape(params[:student][:street_name].try(:strip))
+        zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
+        
+        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
+        
+        format.js { render template: "students/address_verification" }
+      else
+        format.js { render template: "students/errors" }
+      end
+    end
+  end
+
+  def update
+  	@student = Student.find(params[:id])
 
     respond_to do |format|
       if @student.update_attributes(params[:student])
-      	logger.info "*********** setting current_student_id to #{@student.id}"
         session[:current_student_id] = @student.id  	
       	street_number = URI.escape(params[:student][:street_number].try(:strip))
         street_name   = URI.escape(params[:student][:street_name].try(:strip))

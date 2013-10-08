@@ -1,15 +1,8 @@
-<!-- start google map -->
-<div class="wrap global_map">
-	
-	<section class="content_wrap">
-			<%= render partial: 'schools/account_tab' %>		
-	</section>
-	
-	<!-- zone where google map in integrated -->
-	<div id='googleMap'></div>
-	<!-- END zone where google map in integrated -->
-	
-	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
+<!-- zone where google map in integrated -->
+<div id='googleMap'></div>
+<!-- END zone where google map in integrated -->
+
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
 
 
 <!-- script to integrat and personnalize google map for screen (difference with zoom)-->
@@ -235,8 +228,8 @@ function initialize(){
 		var mapProp = {
 		  center:myLatlng,
 		  zoom:13,
-			panControl: true,
-			zoomControl: false,
+			panControl: <%= map_controls %>,
+			zoomControl: <%= map_controls %>,
 			mapTypeControl: false,
 			scaleControl: false,
 			draggable: false,
@@ -251,23 +244,6 @@ function initialize(){
 
 
 		var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-
-    var coordinates = new google.maps.LatLng(<%= current_student.latitude %>, <%= current_student.longitude %>);
-    latlngbounds.extend(coordinates);
-    var marker = new google.maps.Marker({
-      position: coordinates,
-      icon: {
-        path: MAP_HOME,
-        fillColor: '#000000',
-        fillOpacity: 1,
-        strokeColor: '',
-        strokeWeight: 0,
-        rotation: 180,
-        scale: 1/22
-      },
-      label: '<i class="icon-map-home"></i>',
-      map: map
-    });
 		
     <% schools.each_with_index do |school, i| %>
       <% if school.latitude.present? && school.longitude.present? %>
@@ -292,11 +268,34 @@ function initialize(){
         var infowindow = new google.maps.InfoWindow({
         });
         google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent('<div><h3><%= school.name %></h3><br /><%= school.api_basic_info[0][:campus1address1] %><br /><%= school.api_basic_info[0][:campus1city] %>, <%= school.api_basic_info[0][:campus1state] %><br /><%= school.api_basic_info[0][:campus1zip] %>');
+          infowindow.setContent('<div><h3><%= school.name %></h3><%= school.api_basic_info[0][:campus1address1] %><br /><%= school.api_basic_info[0][:campus1city] %>, <%= school.api_basic_info[0][:campus1state] %>');
           infowindow.open(map,this);
         });
       <% end %>
     <% end %>
+
+    var coordinates = new google.maps.LatLng(<%= current_student.latitude %>, <%= current_student.longitude %>);
+    latlngbounds.extend(coordinates);
+    var marker = new google.maps.Marker({
+      position: coordinates,
+      icon: {
+        path: MAP_HOME,
+        fillColor: '#000000',
+        fillOpacity: 1,
+        strokeColor: '',
+        strokeWeight: 0,
+        rotation: 180,
+        scale: 1/22
+      },
+      label: '<i class="icon-map-home"></i>',
+      map: map
+    });
+    var infowindow = new google.maps.InfoWindow({
+    });
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.setContent('<div><h3>Home</h3><%= current_student.street_number %> <%= current_student.street_name %>, <%= current_student.zipcode %>');
+      infowindow.open(map,this);
+    });
 
 		//Associate the styled map with the MapTypeId and set it to display.
 		  map.fitBounds(latlngbounds);
@@ -308,6 +307,3 @@ function initialize(){
 
 	</script>
 	<!--END script to integrat and personnalize google map-->
-
-</div>
-<!-- end google map -->

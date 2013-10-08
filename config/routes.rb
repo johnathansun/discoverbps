@@ -11,7 +11,7 @@ DiscoverbpsV2::Application.routes.draw do
   end 
 
   resources :schools do 
-    get 'print', on: :member
+    get 'print', on: :collection
   end
 
 
