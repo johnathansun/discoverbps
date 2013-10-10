@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131010190943) do
+ActiveRecord::Schema.define(:version => 20131010203707) do
 
   create_table "preference_categories", :force => true do |t|
     t.string   "name"
@@ -131,11 +131,13 @@ ActiveRecord::Schema.define(:version => 20131010190943) do
     t.string   "primary_language"
     t.string   "sibling_school_name"
     t.integer  "sibling_school_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.float    "latitude"
     t.float    "longitude"
     t.string   "neighborhood"
+    t.boolean  "iep_needs",           :default => false
+    t.boolean  "ell_needs",           :default => false
   end
 
   add_index "students", ["session_id"], :name => "index_students_on_session_id"

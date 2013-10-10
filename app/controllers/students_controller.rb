@@ -71,11 +71,23 @@ class StudentsController < ApplicationController
 
   def iep
     @student = Student.find(params[:id])
-    
+    if params[:student].blank?
+    	params[:student] = {}
+	    params[:student][:iep_needs] = '0'
+	    params[:student][:ell_needs] = '0'
+		else
+	    if params[:student][:iep_needs].blank?
+		    params[:student][:iep_needs] = '0'
+	  	end
+	  	if params[:student][:ell_needs].blank?
+		    params[:student][:ell_needs] = '0'
+	  	end
+	  end
+
     respond_to do |format|
       if @student.update_attributes(params[:student])
       	session[:current_student_id] = @student.id  
-      	if (@student.preference_ids & PreferenceCategory.where(name: 'Specialized Language Support').first.preferences.collect {|x| x.id}).present?
+      	if @student.ell_needs?
 	        format.js { render template: "students/ell" }
 	      else
 	        format.js { render template: "students/preferences" }

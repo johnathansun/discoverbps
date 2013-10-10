@@ -11,6 +11,6 @@ class PreferenceCategory < ActiveRecord::Base
   scope :preference_panel, where(include_in_special_needs_dialog_box: false)
 
   def self.grade_level_categories(grade_level)
-  	self.where("grade_#{grade_level}".to_sym => true)
+  	self.where("grade_#{grade_level}".downcase.to_sym => true)
   end
 end
