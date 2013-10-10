@@ -1,36 +1,46 @@
 module SchoolsHelper
 	def facilities_list_helper(hash)
-		list = ''
-		list << 'Art Room, ' 						if hash[:hasartroom] == 'True'
-		list << 'Athletic Field, ' 			if hash[:hasathleticfield] == 'True'
-		list << 'Auditorium, ' 					if hash[:hasauditorium] == 'True'
-		list << 'Cafeteria, ' 					if hash[:hascafeteria] == 'True'
-		list << 'Computer Lab, ' 				if hash[:hascomputerlab] == 'True'
-		list << 'Gymnasium, ' 					if hash[:hasgymnasium] == 'True'
-		list << 'Library, ' 						if hash[:haslibrary] == 'True'
-		list << 'Music Room, ' 					if hash[:hasmusicroom] == 'True'
-		list << 'Outdoor Classrooms, ' 	if hash[:hasoutdoorclassroom] == 'True'
-		list << 'Playground, ' 					if hash[:hasplayground] == 'True'
-		list << 'Pool, ' 								if hash[:haspool] == 'True'
-		list << 'Science Lab, ' 				if hash[:hassciencelab] == 'True'
-		return list.gsub(/,$/, '')
+		if hash.present?
+			list = ''
+			list << 'Art Room, ' 						if hash[:hasartroom] == 'True'
+			list << 'Athletic Field, ' 			if hash[:hasathleticfield] == 'True'
+			list << 'Auditorium, ' 					if hash[:hasauditorium] == 'True'
+			list << 'Cafeteria, ' 					if hash[:hascafeteria] == 'True'
+			list << 'Computer Lab, ' 				if hash[:hascomputerlab] == 'True'
+			list << 'Gymnasium, ' 					if hash[:hasgymnasium] == 'True'
+			list << 'Library, ' 						if hash[:haslibrary] == 'True'
+			list << 'Music Room, ' 					if hash[:hasmusicroom] == 'True'
+			list << 'Outdoor Classrooms, ' 	if hash[:hasoutdoorclassroom] == 'True'
+			list << 'Playground, ' 					if hash[:hasplayground] == 'True'
+			list << 'Pool, ' 								if hash[:haspool] == 'True'
+			list << 'Science Lab, ' 				if hash[:hassciencelab] == 'True'
+			return list.gsub(/,\s$/, '')
+		else
+			return ''
+		end
 	end
 
 	def school_type_helper(hash)
-		list = ''
-		list += 'District, ' if hash[:isdistrict] == 'True'
-		list += 'Charter, ' if hash[:ischarter] == 'True'
-		list += 'Citywide,' if hash[:iscitywide] == 'True'
-		list += 'Pilot' if hash[:ispilot] == 'True'
-		return list.gsub(/,$/, '')
+		if hash.present?
+			list = ''
+			list += 'District, ' if hash[:isdistrict] == 'True'
+			list += 'Charter, ' if hash[:ischarter] == 'True'
+			list += 'Citywide,' if hash[:iscitywide] == 'True'
+			list += 'Pilot' if hash[:ispilot] == 'True'
+			return list.gsub(/,\s$/, '')
+		else
+			return ''
+		end
 	end
 
 	def partners_list_helper(array)
-		list = ''
-		array.each do |partner|
-			list << "#{partner[:description]}, "
+		if array.present?
+			list = ''
+			array.each do |partner|
+				list << "#{partner[:description]}, "
+			end
+			return list.gsub(/,\s?$/, '')
 		end
-		return list.gsub(/,$/, '')
 	end
 
 	def school_hours_start_time_helper(hours)
@@ -40,6 +50,8 @@ module SchoolsHelper
 			decimal 	= hour + (minutes / 60.0)
 			range_percent = (decimal - 7) / 17
 			(range_percent * 100).to_i
+		else
+			return ''
 		end
 	end
 
