@@ -6,7 +6,7 @@ class SchoolsController < ApplicationController
     @students = Student.where(session_id: session[:session_id]).order(:first_name)
   end
 
-  def index
+  def index    
     @students = Student.where(session_id: session[:session_id]).order(:first_name)
 
     if @students.blank?
@@ -23,7 +23,6 @@ class SchoolsController < ApplicationController
         zipcode       = current_student.zipcode.strip
         grade_level   = current_student.grade_level.to_s.length < 2 ? ('0' + current_student.grade_level.try(:strip)) : current_student.grade_level.try(:strip)
 
-        logger.info "***************** https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}"
         eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
       else
         eligible_schools = []
@@ -63,18 +62,18 @@ class SchoolsController < ApplicationController
         format.csv do
           require 'csv'
           csv_string = CSV.generate do |csv|
-            csv << ['Name', 'Distance from Home', 'Walk Time', 'Drive Time', 'Hours', 'Grades Offered', 'Before School Programs', 'After School Programs', 'Facilities', 'MCAS Tier', 'School Type', 'School Focus', 'Special Application', 'Uniform Policy', 'Walk Zone Eligible', 'Transportation Eligible', 'School Email']
+            csv << ['Name', 'Distance from Home', 'Walk Time', 'Drive Time', 'Transportation Eligibility', 'Hours', 'Grades Offered', 'Before School Programs', 'After School Programs', 'Facilities', 'Partners', 'MCAS Tier', 'School Type', 'School Focus', 'Special Application', 'Uniform Policy', 'School Email']
                       
             counter = 0
             @eligible_schools.each do |school|
               counter += 1
-              csv << [ school.name, school.distance, school.walk_time, school.drive_time, school.api_hours.try(:[],0).try(:[], :schhours1), school.api_grades.try(:[], 0).try(:[], :grade), school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms), school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms), facilities_list_helper(school.api_facilities[0]), "Tier #{school.tier}", school_type_helper(school.api_basic_info.try(:[], 0)), school.api_description.try(:[], 0).try(:[], :schfocus), school.api_description.try(:[], 0).try(:[], :specialapplicationnarrative), school.api_description.try(:[], 0).try(:[], :uniformpolicy), (school.walk_zone_eligibility == 'Y' ? 'Walk Zone Eligible' : ''), (school.transportation_eligibility == 'Y' ? 'Transportation' : ''), school.api_basic_info.try(:[], 0).try(:[], :schemail) ]
+              csv << [ school.name, school.distance, school.walk_time, school.drive_time, school.transportation_eligibility, school.api_hours.try(:[],0).try(:[], :schhours1), school.api_grades.try(:[], 0).try(:[], :grade), school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms), school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms), facilities_list_helper(school.api_facilities.try(:[], 0)), partners_list_helper(school.api_partners), "Tier #{school.tier}", school_type_helper(school.api_basic_info.try(:[], 0)), school.api_description.try(:[], 0).try(:[], :schfocus), school.api_description.try(:[], 0).try(:[], :specialapplicationnarrative), school.api_description.try(:[], 0).try(:[], :uniformpolicy), school.api_basic_info.try(:[], 0).try(:[], :schemail) ]
             end
           end
 
           send_data csv_string,
                     :type => 'text/csv; charset=iso-8859-1; header=present',
-                    :disposition => "attachment; filename=#{current_student.first_name}_Schools.csv"
+                    :disposition => "attachment; filename=#{current_student.first_name}s_eligible_schools.csv"
         end
       end
     end
@@ -93,41 +92,36 @@ class SchoolsController < ApplicationController
     end
   end
 
+  def sort
+    if session[:current_student_id].present?
+      current_student_id = session[:current_student_id]
+      session["student_#{current_student_id}_school_ids".to_sym] = params[:school]
+    end
+    render nothing: true
+    # schools = params
+    # @books.each do |book|
+    #   book.position = params['book'].index(book.id.to_s) + 1
+    # book.save
+  end
+
   private
 
-  def bps_api_connector(url)
-    response = Faraday.new(:url => url, :ssl => {:version => :SSLv3}).get
-    if response.body.present?
-      MultiJson.load(response.body, :symbolize_keys => true)
+    def bps_api_connector(url)
+      response = Faraday.new(:url => url, :ssl => {:version => :SSLv3}).get
+      if response.body.present?
+        MultiJson.load(response.body, :symbolize_keys => true)
+      end
     end
-  end
 
-  def layout_selector
-    case action_name
-    when "home"
-      "home"
-    when "print"
-      "print"
-    else
-      "application"
+    def layout_selector
+      case action_name
+      when "home"
+        "home"
+      when "print"
+        "print"
+      else
+        "application"
+      end
     end
-  end
-
-  def facilities_list_helper(hash)
-    list = ''
-    list << 'Art Room, '            if hash[:hasartroom] == 'True'
-    list << 'Athletic Field, '      if hash[:hasathleticfield] == 'True'
-    list << 'Auditorium, '          if hash[:hasauditorium] == 'True'
-    list << 'Cafeteria, '           if hash[:hascafeteria] == 'True'
-    list << 'Computer Lab, '        if hash[:hascomputerlab] == 'True'
-    list << 'Gymnasium, '           if hash[:hasgymnasium] == 'True'
-    list << 'Library, '             if hash[:haslibrary] == 'True'
-    list << 'Music Room, '          if hash[:hasmusicroom] == 'True'
-    list << 'Outdoor Classrooms, '  if hash[:hasoutdoorclassroom] == 'True'
-    list << 'Playground, '          if hash[:hasplayground] == 'True'
-    list << 'Pool, '                if hash[:haspool] == 'True'
-    list << 'Science Lab, '         if hash[:hassciencelab] == 'True'
-    return list.gsub(/,$/, '')
-  end
 
 end

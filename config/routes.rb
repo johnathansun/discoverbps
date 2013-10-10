@@ -12,6 +12,7 @@ DiscoverbpsV2::Application.routes.draw do
 
   resources :schools do 
     get 'print', on: :collection
+    post 'sort', on: :collection
   end
 
 
