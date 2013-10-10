@@ -34,11 +34,13 @@ class SchoolsController < ApplicationController
       # add virtual attributes to schools
       eligible_schools.each do |school|
         s = School.where(bps_id: school[:School]).first
-        s.tier = school[:Tier]
-        s.walk_zone_eligibility = school[:AssignmentWalkEligibilityStatus]
-        s.transportation_eligibility = school[:TransEligible]
-        @school_coordinates += "#{s.latitude},#{s.longitude}|"
-        @eligible_schools << s
+        if s.present?
+          s.tier = school[:Tier]
+          s.walk_zone_eligibility = school[:AssignmentWalkEligibilityStatus]
+          s.transportation_eligibility = school[:TransEligible]
+          @school_coordinates += "#{s.latitude},#{s.longitude}|"
+          @eligible_schools << s
+        end
       end
 
       @school_coordinates.gsub!(/\|$/,'')
@@ -52,7 +54,12 @@ class SchoolsController < ApplicationController
         school.distance = @walk_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :distance).try(:[], :text)
       end
 
-      @eligible_schools.sort_by! {|x| x.distance}
+      if current_student.preferences.blank?
+        logger.info "************************ Student preferences are blank"
+        @eligible_schools.sort_by! {|x| x.api_basic_info[0][:schname_23]}
+      else
+        logger.info "************************ Student preferences are not blank"
+      end
 
       current_student.school_ids.clear
       current_student.school_ids = @eligible_schools.collect {|x| x.id}
