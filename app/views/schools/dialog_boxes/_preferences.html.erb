@@ -2,7 +2,11 @@
 <!-- dialog preferences -->
 <div class='content'>
 	<%= form_tag preferences_student_path(student), :method => :put do %>
-		<h3>What matters most to <%= current_student.first_name %>?</h3>
+		<% if current_student.first_name.present? %>
+			<h3>What school features are important to <%= current_student.first_name %>?</h3>
+		<% else %>
+			<h3>What school features are important your child?</h3>
+		<% end %>
 		<div class='bloc'>
 			<% PreferenceCategory.qualitative.rank(:sort_order).all.each_with_index do |category, i| %>
 				<div class="preference">

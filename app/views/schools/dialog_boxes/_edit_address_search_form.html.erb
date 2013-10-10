@@ -12,12 +12,20 @@
 		<div class="clr"></div>
 	</div>
 	<!--END  Address and zip info -->
-	<div class="form_line">                    	
-		<input id="first_name" name="[student]first_name" class="bloc_3" type="text" value=<%= student.first_name %> />
+	<div class="form_line">
+		<% if student.first_name.present? %>
+			<input id="first_name" name="[student]first_name" class="bloc_3" type="text" value=<%= student.first_name %> />
+		<% else %>
+			<input id="first_name" name="[student]first_name" class="bloc_3" type="text" placeholder="Student's first name" />
+		<% end %>
 		<div class="separation_bloc">
 			<div class="separation"></div>
 		</div>
-		<input id="last_name" name="[student]last_name" class="bloc_4" type="text" value=<%= student.last_name %> />
+		<% if student.last_name.present? %>
+			<input id="last_name" name="[student]last_name" class="bloc_4" type="text" value=<%= student.last_name %> />
+		<% else %>
+			<input id="last_name" name="[student]last_name" class="bloc_4" type="text" placeholder="Last name" />
+		<% end %>
 		<div class="separation_bloc">
 			<div class="separation"></div>
 		</div>

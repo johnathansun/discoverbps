@@ -2,9 +2,21 @@ class StudentsController < ApplicationController
 
 	def create
 		if current_user.present?
-			@student = Student.where(user_id: current_user.id, first_name: params[:student][:first_name], last_name: params[:student][:last_name]).first_or_create
+			if params[:student][:first_name].present? && params[:student][:last_name].present?
+				@student = Student.where(user_id: current_user.id, first_name: params[:student][:first_name], last_name: params[:student][:last_name]).first_or_create
+			elsif params[:student][:first_name].present?
+				@student = Student.where(user_id: current_user.id, first_name: params[:student][:first_name]).first_or_create
+			else
+				@student = Student.where(user_id: current_user.id, grade_level: params[:student][:grade_level]).first_or_create
+			end
 		else
-			@student = Student.where(session_id: session[:session_id], first_name: params[:student][:first_name], last_name: params[:student][:last_name]).first_or_create
+			if params[:student][:first_name].present? && params[:student][:last_name].present?
+				@student = Student.where(session_id: session[:session_id], first_name: params[:student][:first_name], last_name: params[:student][:last_name]).first_or_create
+			elsif params[:student][:first_name].present?
+				@student = Student.where(session_id: session[:session_id], first_name: params[:student][:first_name]).first_or_create
+			else
+				@student = Student.where(session_id: session[:session_id], grade_level: params[:student][:grade_level]).first_or_create
+			end
 		end
 
     respond_to do |format|
@@ -13,7 +25,7 @@ class StudentsController < ApplicationController
         street_name   = URI.escape(params[:student][:street_name].try(:strip))
         zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
         
-        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
+        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}").try(:[], :List)
         
         format.js { render template: "students/address_verification" }
       else
@@ -31,7 +43,7 @@ class StudentsController < ApplicationController
         street_name   = URI.escape(params[:student][:street_name].try(:strip))
         zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
         
-        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
+        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}").try(:[], :List)
         
         format.js { render template: "students/address_verification" }
       else
@@ -42,7 +54,7 @@ class StudentsController < ApplicationController
 
   def address_verification
     @student = Student.find(params[:id])
-    home_coordinates = Geocoder.coordinates("#{params[:student][:street_number]} #{params[:student][:street_name]} #{params[:student][:zipcode]}")
+    home_coordinates = Geocoder.coordinates("#{params[:student][:street_number]} #{params[:student][:street_name]} #{params[:student][:neighborhood]} #{params[:student][:zipcode]}")
 
     params[:student][:latitude] = home_coordinates[0]
     params[:student][:longitude] = home_coordinates[1]
