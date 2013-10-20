@@ -528,7 +528,7 @@ $(".timeline").hover(
 	    	scroll: true,
 	    	update: function(){
 	    		$('#sortable li').each(function(){
-		        $(this).find('.row_number').html($(this).index() + 1);
+		        $(this).find('.sortable_row_number').html($(this).index() + 1);
 		      });
 		      $.ajax({
 		        url: '/schools/sort',
@@ -544,10 +544,10 @@ $(".timeline").hover(
 	  var choice_order_ascending = false;
 	  $("#sortable_choice_order_button").click(function(){
 	  	if (choice_order_ascending) {
-	  		$('ul#sortable>li').tsort('span.sortable_school_name',{order:'desc'});
+	  		$('ul#sortable>li').tsort('span.sortable_row_number',{order:'desc'});
 	  		choice_order_ascending = false;
 	  	} else {
-	  		$('ul#sortable>li').tsort('span.sortable_school_name',{order:'asc'});
+	  		$('ul#sortable>li').tsort('span.sortable_row_number',{order:'asc'});
 	  		choice_order_ascending = true;
 	  	}
 	  });

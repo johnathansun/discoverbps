@@ -2,7 +2,7 @@
 	<div class="li_frame">
 		<!-- brief school information -->
 		<div class="no_order line">
-			<span class="row_number middle"><%= index + 1 %></span>
+			<span class="sortable_row_number middle"><% unless session["student_#{current_student.id}_school_ids".to_sym].blank? %><%= index + 1 %><% end %></span>
 		</div>
 		<div class="school_name select line">
 			<span class="middle">
