@@ -527,6 +527,9 @@ $(".timeline").hover(
 	    	axis: "y", 
 	    	scroll: true,
 	    	update: function(){
+	    		$('#sortable li').each(function(){
+		        $(this).find('.row_number').html($(this).index() + 1);
+		      });
 		      $.ajax({
 		        url: '/schools/sort',
 		        type: 'post',
