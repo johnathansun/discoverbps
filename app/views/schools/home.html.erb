@@ -64,7 +64,7 @@
 								<p class="K">Please select from your previous searches:</p>
 								<ul class="horizontal_list">
 									<% for student in @students %>
-										<li><%= link_to student.first_name, schools_path(student: student.first_name), class: 'orange_button' %></li>
+										<li><%= link_to student.tab_name, schools_path(student: student.first_name), class: 'orange_button' %></li>
 									<% end %>
 								</ul>
 								<div class='clr'></div>

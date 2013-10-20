@@ -6,63 +6,86 @@ class SchoolsController < ApplicationController
     @students = Student.where(session_id: session[:session_id]).order(:first_name)
   end
 
-  def index    
+  def index
     @students = Student.where(session_id: session[:session_id]).order(:first_name)
 
     if @students.blank?
       render 'home', layout: 'home'
     else
+
+      # Find student by params if params[:student] exists
       if params[:student].present? && Student.where(first_name: params[:student], session_id: session[:session_id]).present?
         student = Student.where(first_name: params[:student], session_id: session[:session_id]).first
         session[:current_student_id] = student.id
       end
 
-      if current_student.street_number.present? && current_student.street_name.present? && current_student.zipcode.present?
-        street_number = URI.escape(current_student.street_number)
-        street_name   = URI.escape(current_student.street_name)
-        zipcode       = current_student.zipcode.strip
-        grade_level   = current_student.grade_level.to_s.length < 2 ? ('0' + current_student.grade_level.try(:strip)) : current_student.grade_level.try(:strip)
+      # Hit the BPS API if the student has no saved school_choices, or if the cache is stale (> 24 hours)
+      if current_student.api_school_choices.blank? || current_student.api_school_choices_created_at.blank? || current_student.api_school_choices_created_at < Time.now.yesterday
+        if current_student.street_number.present? && current_student.street_name.present? && current_student.zipcode.present?
+          street_number = URI.escape(current_student.street_number)
+          street_name   = URI.escape(current_student.street_name)
+          zipcode       = current_student.zipcode.strip
+          grade_level   = current_student.grade_level.to_s.length < 2 ? ('0' + current_student.grade_level.try(:strip)) : current_student.grade_level.try(:strip)
 
-        eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
+          eligible_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
+
+          @eligible_schools = []
+          
+          # Add eligibility attributes to schools
+          @school_coordinates = ''      
+          eligible_schools.each do |school|
+            s = School.where(bps_id: school[:School]).first
+            if s.present?
+              s.tier = school[:Tier]
+              s.walk_zone_eligibility = school[:AssignmentWalkEligibilityStatus]
+              s.transportation_eligibility = school[:TransEligible]
+              @school_coordinates += "#{s.latitude},#{s.longitude}|"
+              @eligible_schools << s
+            end
+          end
+
+          current_student.update_attributes(api_school_choices: @eligible_schools)
+        else
+          @eligible_schools = []
+        end
+      # Use the current_students saves list of schools if they're saved
+      elsif current_student.api_school_choices.present?
+        @eligible_schools = current_student.api_school_choices
       else
-        eligible_schools = []
+        @eligible_schools = []        
       end
 
-      @eligible_schools = []
-      @school_coordinates = ''
-      
-      # add virtual attributes to schools
-      eligible_schools.each do |school|
-        s = School.where(bps_id: school[:School]).first
-        if s.present?
-          s.tier = school[:Tier]
-          s.walk_zone_eligibility = school[:AssignmentWalkEligibilityStatus]
-          s.transportation_eligibility = school[:TransEligible]
-          @school_coordinates += "#{s.latitude},#{s.longitude}|"
-          @eligible_schools << s
+      # Add walk and drive times
+      if @eligible_schools.present?
+        @school_coordinates.gsub!(/\|$/,'')
+        @walk_info = MultiJson.load(Faraday.new(url: URI.escape("http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_student.latitude},#{current_student.longitude}&destinations=#{@school_coordinates}&mode=walking&units=imperial&sensor=false")).get.body, :symbolize_keys => true)
+        @drive_info = MultiJson.load(Faraday.new(url: URI.escape("http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_student.latitude},#{current_student.longitude}&destinations=#{@school_coordinates}&mode=driving&units=imperial&sensor=false")).get.body, :symbolize_keys => true)
+
+        @eligible_schools.each_with_index do |school, i|
+          school.walk_time = @walk_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text)
+          school.drive_time = @drive_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text)
+          school.distance = @walk_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :distance).try(:[], :text)
         end
       end
 
-      @school_coordinates.gsub!(/\|$/,'')
-      @walk_info = MultiJson.load(Faraday.new(url: URI.escape("http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_student.latitude},#{current_student.longitude}&destinations=#{@school_coordinates}&mode=walking&units=imperial&sensor=false")).get.body, :symbolize_keys => true)
-      @drive_info = MultiJson.load(Faraday.new(url: URI.escape("http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_student.latitude},#{current_student.longitude}&destinations=#{@school_coordinates}&mode=driving&units=imperial&sensor=false")).get.body, :symbolize_keys => true)
-
-      # add virtual attributes to schools
-      @eligible_schools.each_with_index do |school, i|
-        school.walk_time = @walk_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text)
-        school.drive_time = @drive_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text)
-        school.distance = @walk_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :distance).try(:[], :text)
-      end
-
-      if current_student.preferences.blank?
-        logger.info "************************ Student preferences are blank"
-        @eligible_schools.sort_by! {|x| x.api_basic_info[0][:schname_23]}
+      # Sort eligible schools by session sort order if it exists
+      if session["student_#{current_student.id}_school_ids".to_sym].present?
+        @sorted_eligible_schools = []
+        # Set union on the bps_ids in the session and the bps_ids on the eligible_schools to make sure no schools are missing in session list
+        school_ids = session["student_#{current_student.id}_school_ids".to_sym]
+        school_ids <<  (@eligible_schools.collect {|x| x.bps_id.to_s} - school_ids)
+        school_ids.each do |bps_id|
+          school = @eligible_schools.select {|x| x.bps_id.to_s == bps_id.to_s}
+          if school.present?
+            @sorted_eligible_schools << school.first
+          end
+        end
       else
-        logger.info "************************ Student preferences are not blank"
+        @sorted_eligible_schools = @eligible_schools
       end
 
-      current_student.school_ids.clear
-      current_student.school_ids = @eligible_schools.collect {|x| x.id}
+      # current_student.school_ids.clear
+      # current_student.school_ids = @sorted_eligible_schools.collect {|x| x.id}
 
       respond_to do |format|
         format.html # index.html.erb

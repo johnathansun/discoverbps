@@ -6,12 +6,18 @@
 		<!-- Start menu account -->
 		<div class='menu'>
 			<div class='box'>
-				<span>My lists</span>
-				<%= link_to 'View', schools_path %>
-				<a href='/schools/print'>Print</a>
-				<%= link_to 'Download', schools_path(format: :csv) %>
-				<a href='#'>Share via email</a>
-				<a id='save_btn' href='#'>Save <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
+				<% if params[:controller] == 'schools' && params[:action] == 'index' %>
+					<span>My lists</span>
+					<%= link_to 'Print', print_schools_path %>
+					<%= link_to 'Download', schools_path(format: :csv) %>
+					<a href='#'>Share via email</a>
+					<a id='save_btn' href='#'>Save <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
+				<% elsif @students.present? %>
+					<span>My lists</span>
+					<% for student in @students %>
+						<%= link_to student.tab_name, schools_path(student: student.tab_name) %>
+					<% end %>
+				<% end %>
 			</div>
 			<div class='mobile_only box list_child'>
 				<span>&nbsp;</span>

@@ -25,16 +25,54 @@ class School < ActiveRecord::Base
 		"#{api_basic_info[0][:campus1address1]} #{api_basic_info[0][:campus1city]} #{api_basic_info[0][:campus1zip]}"
 	end
 
+	# turn api_grades into an array
 	def grade_levels
 		if api_grades.present? && api_grades[0][:grade].present?
 			grades = ['K0', 'K1', 'K2', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-			start_grade = api_grades[0][:grade].match(/^../).to_s
-			end_grade = api_grades[0][:grade].match(/..$/).to_s
+			start_grade = api_grades[0][:grade].upcase.match(/^../).to_s
+			end_grade = api_grades[0][:grade].upcase.match(/..$/).to_s
 			if start_grade.present? && end_grade.present?
 				start_grade_index = grades.index(start_grade)
 				end_grade_index = grades.index(end_grade)
 				grades[start_grade_index..end_grade_index]
 			end
+		end
+	end
+
+	def facilities_present?
+		if api_facilities.present?
+			facilities = api_facilities[0]
+			if facilities[:hasartroom] == 'True' || facilities[:hasathleticfield] == 'True' || facilities[:hasauditorium] == 'True' || facilities[:hascafeteria] == 'True' || facilities[:hascomputerlab] == 'True' || facilities[:hasgymnasium] == 'True' || facilities[:haslibrary] == 'True' || facilities[:hasmusicroom] == 'True' || facilities[:hasoutdoorclassroom] == 'True' || facilities[:hasplayground] == 'True' || facilities[:haspool] == 'True' || facilities[:hassciencelab] == 'True'
+				return true
+			else
+				return false
+			end
+		else
+			return false
+		end
+	end
+
+	def fulltime_nurse?
+		if api_basic_info.present?
+			if api_basic_info[0][:ishasfulltimenurse] == 'True'
+				return true
+			else
+				return false
+			end
+		else
+			return false
+		end
+	end
+
+	def uniform_policy?
+		if api_description.present?
+			if api_description[0][:uniformpolicy].blank? || api_description[0][:uniformpolicy] == 'No Uniform' || api_description[0][:uniformpolicy] == 'Not Specified'
+				return false
+			else
+				return true
+			end
+		else
+			return false
 		end
 	end
 end

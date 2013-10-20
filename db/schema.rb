@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131010203707) do
+ActiveRecord::Schema.define(:version => 20131020065042) do
 
   create_table "preference_categories", :force => true do |t|
     t.string   "name"
@@ -44,9 +44,24 @@ ActiveRecord::Schema.define(:version => 20131010203707) do
   create_table "preferences", :force => true do |t|
     t.integer  "preference_category_id"
     t.string   "name"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.integer  "sort_order"
+    t.boolean  "grade_k0",               :default => false
+    t.boolean  "grade_k1",               :default => false
+    t.boolean  "grade_k2",               :default => false
+    t.boolean  "grade_1",                :default => false
+    t.boolean  "grade_2",                :default => false
+    t.boolean  "grade_3",                :default => false
+    t.boolean  "grade_4",                :default => false
+    t.boolean  "grade_5",                :default => false
+    t.boolean  "grade_6",                :default => false
+    t.boolean  "grade_7",                :default => false
+    t.boolean  "grade_8",                :default => false
+    t.boolean  "grade_9",                :default => false
+    t.boolean  "grade_10",               :default => false
+    t.boolean  "grade_11",               :default => false
+    t.boolean  "grade_12",               :default => false
   end
 
   add_index "preferences", ["preference_category_id"], :name => "index_preferences_on_preference_category_id"
@@ -131,13 +146,15 @@ ActiveRecord::Schema.define(:version => 20131010203707) do
     t.string   "primary_language"
     t.string   "sibling_school_name"
     t.integer  "sibling_school_id"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.float    "latitude"
     t.float    "longitude"
     t.string   "neighborhood"
-    t.boolean  "iep_needs",           :default => false
-    t.boolean  "ell_needs",           :default => false
+    t.boolean  "iep_needs",                     :default => false
+    t.boolean  "ell_needs",                     :default => false
+    t.text     "api_school_choices"
+    t.time     "api_school_choices_created_at"
   end
 
   add_index "students", ["session_id"], :name => "index_students_on_session_id"

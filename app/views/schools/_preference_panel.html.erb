@@ -11,7 +11,7 @@
 		<% if PreferenceCategory.grade_level_categories(current_student.grade_level).present? %>
 			<% @opening_tags = 0 %>
 			<% @closing_tags = 0 %>
-			<% PreferenceCategory.preference_panel.grade_level_categories(current_student.grade_level).rank(:sort_order).all.each_with_index do |category, i| %>
+			<% PreferenceCategory.preference_panel.grade_level_categories(current_student.grade_level).each_with_index do |category, i| %>
 				<% if i.remainder(3) == 0 %>
 					<% @opening_tags += 1 %>
 					<div class="colonn">
@@ -21,9 +21,9 @@
 						<% for preference in category.preferences.rank(:sort_order).all %>
 							<label class='font_13_14'>
 								<% if category.select_type == 'radio_button' %>
-									<input type='radio' name='[student][preference_ids][]' value='<%= preference.id %>', <%= current_student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
+									<input id="category_<%= category.id %>_preference_<%= preference.id %>" type='radio' name='[student][preference_ids][]' value='<%= preference.id %>', <%= current_student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
 								<% else %>
-									<input type='checkbox' name='[student][preference_ids][]' value='<%= preference.id %>', <%= current_student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
+									<input id="category_<%= category.id %>_preference_<%= preference.id %>" type='checkbox' name='[student][preference_ids][]' value='<%= preference.id %>', <%= current_student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
 								<% end %>
 								<span class="text"><%= preference.name %></span>
 							</label>
@@ -33,7 +33,7 @@
 					<% @closing_tags += 1 %>
 					</div>
 				<% end %>
-				<% if ((i + 1) == PreferenceCategory.preference_panel.grade_level_categories(current_student.grade_level).rank(:sort_order).count) && (@opening_tags > @closing_tags) %>
+				<% if ((i + 1) == PreferenceCategory.preference_panel.grade_level_categories(current_student.grade_level).count) && (@opening_tags > @closing_tags) %>
 					</div>
 				<% end %>
 			<% end %>
@@ -41,3 +41,21 @@
 		<div class="clr"></div>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function() {
+		$(function() {
+		  return $(':checkbox').click(function() {
+		  	var checked_preference_ids;
+		  	checked_preference_ids = new Array();
+		    $(':checkbox').each(function(i, value) {
+  	      if ($('#' + value.getAttribute('id')).is(':checked')) {
+		      	return checked_preference_ids.push(value.getAttribute('id'));	      	
+		      }
+		    });
+		    $.unique(checked_preference_ids);
+
+		  });
+		});
+	});
+</script>

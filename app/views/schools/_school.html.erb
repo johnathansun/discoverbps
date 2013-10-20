@@ -19,7 +19,7 @@
 				<span class="icon middle">
 					<% if school.walk_zone_eligibility == 'Y' %>
 						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-14"></span>
-					<% elsif school.transportation_eligibility == 'Y' %>
+					<% else %>
 						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-15"></span>
 					<% end %>
 				</span>
@@ -53,8 +53,20 @@
 		</div>
 		<div class="box line your_fit_icon">
 			<span class="middle">
-				<% PreferenceCategory.preference_panel.each do |category| %>
-					<span aria-hidden="true" class="icon <%= category.glyph_class %>"></span> 
+				<span aria-hidden="true" data-grades="<%= school.grade_levels %>" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"></span>
+				<% if school.facilities_present? %>
+					<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"></span> 
+				<% end %>
+				<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"></span> 
+				<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"></span> 
+				<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialprograms"></span> 
+				<% if school.fulltime_nurse? %>
+					<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"></span> 
+				<% end %>
+				<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"></span> 
+				<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"></span> 
+				<% if school.uniform_policy? %>
+					<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"></span> 
 				<% end %>
 			</span>
 		</div>

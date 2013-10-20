@@ -1,8 +1,9 @@
 <div class="name_info <%= student == current_student ? 'active' : '' %>" id="student_<%= student.id %>_tab">
-	<span class="name"><%= link_to student.first_name, schools_path(student: student.first_name), class: 'student_tab' %> <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span> </span>
+	<span class="name"><%= link_to truncate(student.first_name, length: 12), schools_path(student: student.first_name), class: 'student_tab' %> <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span> </span>
 	<span class="grade">Grade<br/><span class="number"><%= student.grade_level %></span></span>
 	<div class="clr"></div>
 </div>
+
 <script>
 	<% if student == current_student %>
 	$("#student_<%= student.id %>_tab").click(function(){

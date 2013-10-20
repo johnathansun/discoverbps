@@ -621,7 +621,7 @@ you can use the generic selector below, but it's slower:
   content: "\e03a";
 }
 .icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered:before {
-  content: "\e039";
+  content: "\e041";
 }
 .icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness:before {
   content: "\e038";
@@ -2478,7 +2478,7 @@ footer.footer .logo {
 }
 .wrap .menu_compare_name .name_list .name_info {
   float: left;
-  width: 295px;
+  width: 251px;
   height: 34px;
   padding: 8px 0 0;
 }

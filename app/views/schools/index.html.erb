@@ -303,7 +303,7 @@ $(".timeline").hover(
 	<section class="content_wrap">
 			<%= render partial: 'schools/account_tab' %>		
 	</section>
-	<%= render partial: 'schools/map', locals: {schools: @eligible_schools, map_controls: true} %>
+	<%= render partial: 'schools/map', locals: {schools: @sorted_eligible_schools, map_controls: true} %>
 </div>
 
 <!-- start bar list children -->
@@ -366,7 +366,7 @@ $(".timeline").hover(
 									<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-31"></span>
 								</div>
 								<div id="sortable_choice_order_button" class="choice menu_bloc sortable_column">
-									School Name
+									Your Sort Order
 								</div>
 								
 								<!-- add class "open" to show "Walk time" and "Drive time"-->
@@ -406,7 +406,7 @@ $(".timeline").hover(
 						
 						<!-- School listing -->
 						<ul id="sortable">
-							<% @eligible_schools.each_with_index do |school, i| %>
+							<% @sorted_eligible_schools.each_with_index do |school, i| %>
 								<%= render partial: 'schools/school', locals: {school: school, index: i} %>
 							<% end %>
 						</ul>
@@ -572,3 +572,4 @@ $(".timeline").hover(
 	  });
 	});
 </script>
+<%= debug session %>
