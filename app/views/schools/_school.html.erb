@@ -2,7 +2,11 @@
 	<div class="li_frame">
 		<!-- brief school information -->
 		<div class="no_order line">
-			<span class="sortable_row_number middle"><% if session["student_#{current_student.id}_school_ids".to_sym].present? || current_user.school_rankings.where(student_id: current_student.id).first.try(:sorted_school_ids).present? %><%= index + 1 %><% end %></span>
+			<span class="sortable_row_number middle">
+				<% if session["student_#{current_student.id}_school_ids".to_sym].present? || (current_user.present? && current_user.school_rankings.where(student_id: current_student.id).first.try(:sorted_school_ids).present?) %>
+					<%= index + 1 %>
+				<% end %>
+			</span>
 		</div>
 		<div class="school_name select line">
 			<span class="middle">
