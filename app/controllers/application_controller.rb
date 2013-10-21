@@ -31,8 +31,6 @@ class ApplicationController < ActionController::Base
 
 	def after_sign_in_path_for(resource)
 		current_student.update_attributes(user_id: current_user.id) if current_student.user_id.blank?
-		current_user.school_rankings.where(student_id: current_student.id).first_or_create.update_attributes(sorted_school_ids: session["student_#{session[:current_student_id]}_school_ids".to_sym]) if session["student_#{session[:current_student_id]}_school_ids".to_sym].present?
-	  session.delete("student_#{session[:current_student_id]}_school_ids".to_sym)
 	  schools_url
 	end
 end

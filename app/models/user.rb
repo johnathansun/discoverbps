@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-	has_many :school_rankings
 	has_many :students, order: :first_name
 
   # Include default devise modules. Others available are:
