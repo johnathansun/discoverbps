@@ -137,3 +137,6 @@ a.student_tab {
 .center {	
 	text-align: center;
 }
+a.no-decoration {
+	text-decoration: none !important;
+}
