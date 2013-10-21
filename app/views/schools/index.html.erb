@@ -362,42 +362,33 @@ $(".timeline").hover(
 						<!-- school list header -->
 						<div class="menu_list">
 							<div class="li_frame">
-								<div class="arrow menu_bloc">
-									<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-31"></span>
+								<div id="sortable_choice_order_column" class="arrow menu_bloc">
+									<div aria-hidden="true" id="choice_order_arrow" class="icon-DBPS-Dev-Assets-arrow-up"></div>
 								</div>
-								<div id="sortable_choice_order_button" class="choice menu_bloc sortable_column">
-									Your Sort Order
+								<div id="sortable_school_name_column" class="menu_bloc sortable_column">
+									<div class="column_title">School Name</div>
 								</div>
 								
 								<!-- add class "open" to show "Walk time" and "Drive time"-->
 								<div id="getting_there" class=" menu_bloc ">
-									<div id="sortable_distance_button" class="first_block sortable_column">
-										Getting There 
+									<div id="sortable_distance_column" class="first_block sortable_column">
+										<div class="column_title">Getting There</div>
 									</div>
 									<div class="second_block sortable_column">
-										Walk Time
+										<div class="column_title">Walk Time</div>
 									</div>
 									<div class="second_block sortable_column">
-										Drive Time
+										<div class="column_title">Drive Time</div>
 									</div>
-									<span aria-hidden="true" class="glass_open icon-DBPS-Dev-Assets-SRG-24"></span>
-									<span aria-hidden="true" class="glass_close icon-DBPS-Dev-Assets-SRG-23"></span>
 								</div>
-								<div id="sortable_hours_button" class=" menu_bloc sortable_column">
-									School Hours
+								<div id="sortable_hours_column" class="menu_bloc sortable_column">
+									<div class="column_title">School Hours</div>
 								</div>
-								<div class=" menu_bloc sortable_column">
-									Surround Care
+								<div id="sortable_surround_care_column" class=" menu_bloc sortable_column">
+									<div class="column_title">Surround Care</div>
 								</div>
-								<div class="your_fit menu_bloc sortable_column">
-									<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-31"></span> Your Fit 
-									<span aria-hidden="true" class="glass_open icon-DBPS-Dev-Assets-SRG-24"></span>
-								</div>
-								<div class="your_fit_show menu_bloc sortable_column">
-										Enrollement
-								</div>
-								<div class="your_fit_show menu_bloc active sortable_column">
-										Arts Focus
+								<div id="sortable_fit_column" class=" menu_bloc sortable_column">
+									<div class="column_title">Your Fit</div>
 								</div>
 								<div class="clr"></div>
 							</div>
@@ -542,35 +533,103 @@ $(".timeline").hover(
 	  });
 
 	  var choice_order_ascending = false;
-	  $("#sortable_choice_order_button").click(function(){
+	  $("#sortable_choice_order_column").click(function(){
+	  	$('.column_arrow').hide();
+	  	$('.sortable_column').css("color", "#565656")
+	  	$('#sortable_choice_order_column').css("color", "#0077cf")
 	  	if (choice_order_ascending) {
 	  		$('ul#sortable>li').tsort('span.sortable_row_number',{order:'desc'});
+	  		$('#sortable_choice_order_column').html('<div aria-hidden="true" id="choice_order_arrow" class="icon-DBPS-Dev-Assets-arrow-down"></div>');
 	  		choice_order_ascending = false;
 	  	} else {
 	  		$('ul#sortable>li').tsort('span.sortable_row_number',{order:'asc'});
+	  		$('#sortable_choice_order_column').html('<div aria-hidden="true" id="choice_order_arrow" class="icon-DBPS-Dev-Assets-arrow-up"></div>');
 	  		choice_order_ascending = true;
 	  	}
 	  });
 
+	  var school_name_ascending = false;
+	  $("#sortable_school_name_column").click(function(){
+	  	$('.column_arrow').hide();
+	  	$('.sortable_column').css("color", "#565656")
+	  	$('#sortable_choice_order_column').css("color", "#565656")
+		  $('#sortable_school_name_column').css("color", "#0077cf")
+	  	if (school_name_ascending) {
+	  		$('ul#sortable>li').tsort('span.sortable_school_name',{order:'desc'});
+	  		$('#sortable_school_name_column').html('<span aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></span> <div class="column_title">School Name</div>');
+	  		school_name_ascending = false;
+	  	} else {
+	  		$('ul#sortable>li').tsort('span.sortable_school_name',{order:'asc'});
+	  		$('#sortable_school_name_column').html('<span aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></span> <div class="column_title">School Name</div>');
+	  		school_name_ascending = true;
+	  	}
+	  });
+
 	  var getting_there_ascending = false;
-	  $("#sortable_distance_button").click(function(){
+	  $("#sortable_distance_column").click(function(){
+	  	$('.column_arrow').hide();
+	  	$('.sortable_column').css("color", "#565656")
+	  	$('#sortable_choice_order_column').css("color", "#565656")
+		  $('#sortable_distance_column').css("color", "#0077cf")
 	  	if (getting_there_ascending) {
 	  		$('ul#sortable>li').tsort('span.sortable_distance',{order:'desc'});
+	  		$('#sortable_distance_column').html('<span aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></span> <div class="column_title">Getting There</div>');
 	  		getting_there_ascending = false;
 	  	} else {
 	  		$('ul#sortable>li').tsort('span.sortable_distance',{order:'asc'});
+	  		$('#sortable_distance_column').html('<span aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></span> <div class="column_title">Getting There</div>');
 	  		getting_there_ascending = true;
 	  	}
 	  });
 
+	 	var surround_care_ascending = false;
+	  $("#sortable_surround_care_column").click(function(){
+	  	$('.column_arrow').hide();
+	  	$('.sortable_column').css("color", "#565656")
+	  	$('#sortable_choice_order_column').css("color", "#565656")
+		  $('#sortable_surround_care_column').css("color", "#0077cf")
+	  	if (surround_care_ascending) {
+	  		$('ul#sortable>li').tsort('span.sortable_surround_care',{order:'desc'});
+	  		$('#sortable_surround_care_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Surround Care</div>');
+	  		surround_care_ascending = false;
+	  	} else {
+	  		$('ul#sortable>li').tsort('span.sortable_distance',{order:'asc'});
+	  		$('#sortable_surround_care_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Surround Care</div>');
+	  		surround_care_ascending = true;
+	  	}
+	  });
+
 	  var hours_ascending = false;
-	  $("#sortable_hours_button").click(function(){
+	  $("#sortable_hours_column").click(function(){
+	  	$('.column_arrow').hide();
+	  	$('.sortable_column').css("color", "#565656")
+	  	$('#sortable_choice_order_column').css("color", "#565656")
+		  $('#sortable_hours_column').css("color", "#0077cf")
 	  	if (hours_ascending) {
 	  		$('ul#sortable>li').tsort('span.sortable_hours',{order:'desc'});
+	  		$('#sortable_hours_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">School Hours</div>');
 	  		hours_ascending = false;
 	  	} else {
 	  		$('ul#sortable>li').tsort('span.sortable_hours',{order:'asc'});
+	  		$('#sortable_hours_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">School Hours</div>');
 	  		hours_ascending = true;
+	  	}
+	  });
+
+	  var fit_ascending = false;
+	  $("#sortable_fit_column").click(function(){
+	  	$('.column_arrow').hide();
+	  	$('.sortable_column').css("color", "#565656")
+	  	$('#sortable_choice_order_column').css("color", "#565656")
+		  $('#sortable_fit_column').css("color", "#0077cf")
+	  	if (fit_ascending) {
+	  		$('ul#sortable>li').tsort('span.sortable_fit',{order:'desc'});
+	  		$('#sortable_fit_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Your Fit</div>');
+	  		fit_ascending = false;
+	  	} else {
+	  		$('ul#sortable>li').tsort('span.sortable_fit',{order:'asc'});
+	  		$('#sortable_fit_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Your Fit</div>');
+	  		fit_ascending = true;
 	  	}
 	  });
 	});

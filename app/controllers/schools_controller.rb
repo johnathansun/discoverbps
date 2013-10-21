@@ -3,20 +3,31 @@ class SchoolsController < ApplicationController
   layout :layout_selector
 
   def home
-    @students = Student.where(session_id: session[:session_id]).order(:first_name)
+    # session.clear
+    if current_user
+      @students = current_user.students
+    else
+      @students = Student.where(session_id: session[:session_id]).order(:first_name)
+    end
   end
 
   def index
-    @students = Student.where(session_id: session[:session_id]).order(:first_name)
+    if current_user
+      @students = current_user.students
+    else
+      @students = Student.where(session_id: session[:session_id]).order(:first_name)
+    end
 
     if @students.blank?
       render 'home', layout: 'home'
     else
-
-      # Find student by params if params[:student] exists
-      if params[:student].present? && Student.where(first_name: params[:student], session_id: session[:session_id]).present?
-        student = Student.where(first_name: params[:student], session_id: session[:session_id]).first
-        session[:current_student_id] = student.id
+      # Find the current_student if it's specified in the params
+      if params[:student].present? 
+        if current_user.present? && current_user.students.where(first_name: params[:student]).first.present?
+          session[:current_student_id] = current_user.students.where(first_name: params[:student]).first.id
+        elsif Student.where(first_name: params[:student], session_id: session[:session_id]).present?
+          session[:current_student_id] = Student.where(first_name: params[:student], session_id: session[:session_id]).first.id
+        end
       end
 
       # Hit the BPS API if the student has no saved school_choices, or if the cache is stale (> 24 hours)
@@ -48,7 +59,8 @@ class SchoolsController < ApplicationController
         else
           @eligible_schools = []
         end
-      # Use the current_students saves list of schools if they're saved
+      
+      # Use the current_student's saved list of schools if they're saved
       elsif current_student.api_school_choices.present?
         @eligible_schools = current_student.api_school_choices
       else
@@ -69,13 +81,23 @@ class SchoolsController < ApplicationController
       end
 
       # Sort eligible schools by session sort order if it exists
-      if session["student_#{current_student.id}_school_ids".to_sym].present?
         @sorted_eligible_schools = []
-        # Set union on the bps_ids in the session and the bps_ids on the eligible_schools to make sure no schools are missing in session list
-        school_ids = session["student_#{current_student.id}_school_ids".to_sym]
-        school_ids <<  (@eligible_schools.collect {|x| x.bps_id.to_s} - school_ids)
-        school_ids.each do |bps_id|
-          school = @eligible_schools.select {|x| x.bps_id.to_s == bps_id.to_s}
+      if current_user.present? && current_user.school_rankings.where(student_id: current_student.id).present?
+        search_ids = @eligible_schools.collect {|x| x.bps_id.to_s}
+        ranked_ids = current_user.school_rankings.where(student_id: current_student.id).first.sorted_school_ids
+        combined_ids = (ranked_ids + (search_ids - ranked_ids)).flatten
+        combined_ids.each do |bps_id|
+          school = @eligible_schools.select {|x| x.bps_id.to_s == bps_id}
+          if school.present?
+            @sorted_eligible_schools << school.first
+          end
+        end
+      elsif session["student_#{current_student.id}_school_ids".to_sym].present?
+        search_ids = @eligible_schools.collect {|x| x.bps_id.to_s}
+        ranked_ids = session["student_#{current_student.id}_school_ids".to_sym]
+        combined_ids = (ranked_ids + (search_ids - ranked_ids)).flatten
+        combined_ids.each do |bps_id|
+          school = @eligible_schools.select {|x| x.bps_id.to_s == bps_id}
           if school.present?
             @sorted_eligible_schools << school.first
           end
@@ -122,16 +144,18 @@ class SchoolsController < ApplicationController
     end
   end
 
+  # POST
   def sort
-    if session[:current_student_id].present?
-      current_student_id = session[:current_student_id]
-      session["student_#{current_student_id}_school_ids".to_sym] = params[:school]
+    if params[:school].present?
+      school_ids = params[:school].flatten
+      if current_user.present?
+        school_ranking = SchoolRanking.where(user_id: current_user.id, student_id: current_student_id).first_or_create
+        school_ranking.update_attributes(sorted_school_ids: school_ids)
+      else
+        session["student_#{session[:current_student_id]}_school_ids".to_sym] = school_ids
+      end
     end
     render nothing: true
-    # schools = params
-    # @books.each do |book|
-    #   book.position = params['book'].index(book.id.to_s) + 1
-    # book.save
   end
 
   private

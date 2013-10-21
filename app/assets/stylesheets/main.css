@@ -396,7 +396,6 @@ you can use the generic selector below, but it's slower:
 [class*="icon-"] {
 */
 .icon-DBPS-Dev-Assets-SRG-44,
-.icon-DBPS-Dev-Assets-SRG-31,
 .icon-DBPS-Dev-Assets-SRG-18,
 .icon-DBPS-Dev-Assets-SRG-05,
 .icon-DBPS-Dev-Assets-SRG-04,
@@ -439,6 +438,8 @@ you can use the generic selector below, but it's slower:
 .icon-DBPS-Dev-Assets-SRG-32,
 .icon-DBPS-Dev-Assets-SRG-19,
 .icon-DBPS-Dev-Assets-SRG-06,
+.icon-DBPS-Dev-Assets-arrow-up,
+.icon-DBPS-Dev-Assets-arrow-down,
 .icon-DBPS-Preferences-Icons-20130930-SRG_walktime,
 .icon-DBPS-Preferences-Icons-20130930-SRG_sports,
 .icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours,
@@ -470,9 +471,6 @@ you can use the generic selector below, but it's slower:
 }
 .icon-DBPS-Dev-Assets-SRG-44:before {
   content: "\e000";
-}
-.icon-DBPS-Dev-Assets-SRG-31:before {
-  content: "\e00d";
 }
 .icon-DBPS-Dev-Assets-SRG-18:before {
   content: "\e01a";
@@ -599,6 +597,12 @@ you can use the generic selector below, but it's slower:
 }
 .icon-DBPS-Dev-Assets-SRG-06:before {
   content: "\e026";
+}
+.icon-DBPS-Dev-Assets-arrow-up:before {
+  content: "\e040";
+}
+.icon-DBPS-Dev-Assets-arrow-down:before {
+  content: "\e00d";
 }
 
 
@@ -2158,7 +2162,6 @@ footer.footer .logo {
 .wrap #school_list .menu_list .menu_bloc.choice {
   width: 305px;
   border: none;
-  color: #0077cf;
   padding-left: 0;
 }
 .wrap #school_list .menu_list .menu_bloc.your_fit {
@@ -2200,7 +2203,7 @@ footer.footer .logo {
 .wrap #school_list .menu_list .menu_bloc .first_block {
   display: inline-block;
   float: left;
-  width: 100px;
+  width: 120px;
 }
 .wrap #school_list .menu_list .menu_bloc .second_block {
   display: none;
@@ -3455,11 +3458,8 @@ ie6 .print1 .wrap {
   padding: 7px 0 0 8px;
   height: 20px;
 }
-.print1 .wrap #school_list .menu_list .menu_bloc.choice {
-  width: 200px;
-  padding-left: 0;
-}
-.print1 .wrap #school_list .menu_list .menu_bloc.arrow {
+
+.print1 .wrap #school_list .menu_list .menu_bloc .arrow {
   width: 16px;
   border: none;
   text-align: left;

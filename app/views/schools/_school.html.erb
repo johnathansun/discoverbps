@@ -2,7 +2,7 @@
 	<div class="li_frame">
 		<!-- brief school information -->
 		<div class="no_order line">
-			<span class="sortable_row_number middle"><% unless session["student_#{current_student.id}_school_ids".to_sym].blank? %><%= index + 1 %><% end %></span>
+			<span class="sortable_row_number middle"><% if session["student_#{current_student.id}_school_ids".to_sym].present? || current_user.school_rankings.where(student_id: current_student.id).first.try(:sorted_school_ids).present? %><%= index + 1 %><% end %></span>
 		</div>
 		<div class="school_name select line">
 			<span class="middle">
@@ -52,7 +52,7 @@
 			</span>
 		</div>
 		<div class="box line your_fit_icon">
-			<span class="middle">
+			<span class="middle sortable_fit">
 				<span aria-hidden="true" data-grades="<%= school.grade_levels %>" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"></span>
 				<% if school.facilities_present? %>
 					<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"></span> 

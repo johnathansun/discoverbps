@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131020065042) do
+ActiveRecord::Schema.define(:version => 20131021000917) do
 
   create_table "preference_categories", :force => true do |t|
     t.string   "name"
@@ -73,6 +73,17 @@ ActiveRecord::Schema.define(:version => 20131020065042) do
 
   add_index "preferences_students", ["preference_id"], :name => "index_preferences_students_on_preference_id"
   add_index "preferences_students", ["student_id"], :name => "index_preferences_students_on_student_id"
+
+  create_table "school_rankings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "student_id"
+    t.text     "sorted_school_ids"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "school_rankings", ["student_id"], :name => "index_school_rankings_on_student_id"
+  add_index "school_rankings", ["user_id"], :name => "index_school_rankings_on_user_id"
 
   create_table "schools", :force => true do |t|
     t.datetime "created_at",           :null => false

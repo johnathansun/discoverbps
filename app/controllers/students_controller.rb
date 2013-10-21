@@ -39,6 +39,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.update_attributes(params[:student])
+        session[:current_student_id] = @student.id
       	street_number = URI.escape(params[:student][:street_number].try(:strip))
         street_name   = URI.escape(params[:student][:street_name].try(:strip))
         zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
@@ -119,6 +120,16 @@ class StudentsController < ApplicationController
         session[:current_student_id] = @student.id    
 	      format.html { redirect_to schools_url }
       end
+    end
+  end
+
+  def destroy
+    @student = Student.find(params[:id])
+    @student.destroy
+    session[:current_student_id] = nil
+
+    respond_to do |format|
+      format.html { redirect_to schools_url }
     end
   end
 

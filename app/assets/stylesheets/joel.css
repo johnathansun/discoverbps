@@ -107,3 +107,30 @@ a.student_tab {
 .sortable_column {
 	cursor: pointer;
 }
+#sortable_school_name_column {
+  width: 286px !important;
+}
+#choice_order_arrow {
+	margin-top: 1px;
+}
+.column_arrow {
+	float: left;
+	margin-top: 1px;
+	margin-right: 5px;
+}
+.column_title {
+	margin-top: 3px;
+}
+.delete_button {
+	color: red !important;
+	font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+	font-size: 12px;
+	background-color: white !important;
+	border: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	padding-left: 12px;
+	padding-top: 12px;
+	height: 38px;
+	text-decoration: none;
+}
