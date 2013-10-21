@@ -115,15 +115,15 @@ class SchoolsController < ApplicationController
 
         # loop through the schools returned from the API, find the matching schools in the db,
         # and save the eligibility variables on student_schools
-        api_schools.each do |school|
-          school = School.where(bps_id: school[:School]).first
+        api_schools.each do |api_school|
+          school = School.where(bps_id: api_school[:School]).first
           if school.present?
             school_coordinates += "#{school.latitude},#{school.longitude}|"
             student_school = current_student.student_schools.where(school_id: school.id).first_or_initialize
-            student_school.bps_id                     = school[:School]
-            student_school.tier                       = school[:Tier]
-            student_school.walk_zone_eligibility      = school[:AssignmentWalkEligibilityStatus]
-            student_school.transportation_eligibility = school[:TransEligible]
+            student_school.bps_id                     = api_school[:School]
+            student_school.tier                       = api_school[:Tier]
+            student_school.walk_zone_eligibility      = api_school[:AssignmentWalkEligibilityStatus]
+            student_school.transportation_eligibility = api_school[:TransEligible]
             student_school.save
           end
         end
@@ -135,8 +135,8 @@ class SchoolsController < ApplicationController
         drive_info  = MultiJson.load(Faraday.new(url: URI.escape("http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_student.latitude},#{current_student.longitude}&destinations=#{school_coordinates}&mode=driving&units=imperial&sensor=false")).get.body, :symbolize_keys => true)
 
         # save distance, walk time and drive time on the student_schools join table
-        api_schools.each_with_index do |school, i|
-          school = School.where(bps_id: school[:School]).first
+        api_schools.each_with_index do |api_school, i|
+          school = School.where(bps_id: api_school[:School]).first
           if school.present?
             student_school             = current_student.student_schools.where(school_id: school.id).first_or_initialize
             student_school.distance    = walk_info.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :distance).try(:[], :text)
