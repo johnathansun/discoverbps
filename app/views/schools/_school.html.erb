@@ -3,7 +3,7 @@
 		<!-- brief school information -->
 		<div class="no_order line">
 			<span class="sortable_row_number middle">
-				<% if session["student_#{current_student.id}_school_ids".to_sym].present? || (current_user.present? && current_user.school_rankings.where(student_id: current_student.id).first.try(:sorted_school_ids).present?) %>
+				<% if student_school.ranked? %>
 					<%= index + 1 %>
 				<% end %>
 			</span>
@@ -27,14 +27,14 @@
 						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-15"></span>
 					<% end %>
 				</span>
-				<span class="middle sortable_distance"><%= spacer_helper(school.distance) %></span>
+				<span class="middle sortable_distance"><%= spacer_helper(student_school.distance) %></span>
 			</div>
 			<div class="second_bloc middle">
-				<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> <%= spacer_helper(school.walk_time) %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+				<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> <%= spacer_helper(student_school.walk_time) %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
 					
 			</div>
 			<div class="second_bloc middle last">
-				<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> <%= spacer_helper(school.drive_time) %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+				<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> <%= spacer_helper(student_school.drive_time) %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
 			</div>	
 			
 		</div>
@@ -90,11 +90,11 @@
 		<div class="school_descrip">
 			<div class="right_side">
 
-					<%= render partial: 'schools/school_details_desktop', locals: {school: school} %>
+					<%= render partial: 'schools/school_details_desktop', locals: {school: school, student_school: student_school} %>
 						
-					<%= render partial: 'schools/school_details_mobile', locals: {school: school} %>				
+					<%= render partial: 'schools/school_details_mobile', locals: {school: school, student_school: student_school} %>
 						 
-					<%= render partial: 'schools/school_details_tablet', locals: {school: school} %>
+					<%= render partial: 'schools/school_details_tablet', locals: {school: school, student_school: student_school} %>
 
 					<div class="clr"></div>
 				</div>

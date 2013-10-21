@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131021000917) do
+ActiveRecord::Schema.define(:version => 20131021145504) do
 
   create_table "preference_categories", :force => true do |t|
     t.string   "name"
@@ -74,17 +74,6 @@ ActiveRecord::Schema.define(:version => 20131021000917) do
   add_index "preferences_students", ["preference_id"], :name => "index_preferences_students_on_preference_id"
   add_index "preferences_students", ["student_id"], :name => "index_preferences_students_on_student_id"
 
-  create_table "school_rankings", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "student_id"
-    t.text     "sorted_school_ids"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-  end
-
-  add_index "school_rankings", ["student_id"], :name => "index_school_rankings_on_student_id"
-  add_index "school_rankings", ["user_id"], :name => "index_school_rankings_on_user_id"
-
   create_table "schools", :force => true do |t|
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
@@ -107,14 +96,6 @@ ActiveRecord::Schema.define(:version => 20131021000917) do
   end
 
   add_index "schools", ["slug"], :name => "index_schools_on_slug", :unique => true
-
-  create_table "schools_students", :id => false, :force => true do |t|
-    t.integer "student_id", :null => false
-    t.integer "school_id",  :null => false
-  end
-
-  add_index "schools_students", ["school_id"], :name => "index_schools_students_on_school_id"
-  add_index "schools_students", ["student_id"], :name => "index_schools_students_on_student_id"
 
   create_table "searches", :force => true do |t|
     t.string   "street_number"
@@ -144,6 +125,26 @@ ActiveRecord::Schema.define(:version => 20131021000917) do
     t.string   "student_5_grade_level"
   end
 
+  create_table "student_schools", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "school_id"
+    t.string   "tier"
+    t.string   "walk_zone_eligibility"
+    t.string   "transportation_eligibility"
+    t.string   "distance"
+    t.string   "walk_time"
+    t.string   "drive_time"
+    t.integer  "sort_order"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.string   "bps_id"
+    t.boolean  "ranked",                     :default => false
+  end
+
+  add_index "student_schools", ["bps_id"], :name => "index_student_schools_on_bps_id"
+  add_index "student_schools", ["school_id"], :name => "index_student_schools_on_school_id"
+  add_index "student_schools", ["student_id"], :name => "index_student_schools_on_student_id"
+
   create_table "students", :force => true do |t|
     t.integer  "user_id"
     t.string   "session_id"
@@ -157,15 +158,14 @@ ActiveRecord::Schema.define(:version => 20131021000917) do
     t.string   "primary_language"
     t.string   "sibling_school_name"
     t.integer  "sibling_school_id"
-    t.datetime "created_at",                                       :null => false
-    t.datetime "updated_at",                                       :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.float    "latitude"
     t.float    "longitude"
     t.string   "neighborhood"
-    t.boolean  "iep_needs",                     :default => false
-    t.boolean  "ell_needs",                     :default => false
-    t.text     "api_school_choices"
-    t.time     "api_school_choices_created_at"
+    t.boolean  "iep_needs",               :default => false
+    t.boolean  "ell_needs",               :default => false
+    t.time     "schools_last_updated_at"
   end
 
   add_index "students", ["session_id"], :name => "index_students_on_session_id"

@@ -303,7 +303,7 @@ $(".timeline").hover(
 	<section class="content_wrap">
 			<%= render partial: 'schools/account_tab' %>		
 	</section>
-	<%= render partial: 'schools/map', locals: {schools: @sorted_eligible_schools, map_controls: true} %>
+	<%= render partial: 'schools/map', locals: {student_schools: @student_schools, map_controls: true} %>
 </div>
 
 <!-- start bar list children -->
@@ -311,7 +311,7 @@ $(".timeline").hover(
 	<!-- menu with compare button, student's name button and add_child button -->
 	<div class="menu_compare_name ">
 		<div class="flexible_content" style="width:100%;">
-			<div class="compare" style="visibility:hidden;">
+			<div class="compare">
 				Compare your lists:
 			</div>
 			<div class="name_list">
@@ -323,6 +323,10 @@ $(".timeline").hover(
 				+ Add a child
 			</div>
 			<script>
+				$(".compare").click(function(){
+					document.location.href='/schools/compare';
+			  	return false;
+				});
 				$(".add_child").click(function(){
 			  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/address_search') %>");
 			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
@@ -397,8 +401,8 @@ $(".timeline").hover(
 						
 						<!-- School listing -->
 						<ul id="sortable">
-							<% @sorted_eligible_schools.each_with_index do |school, i| %>
-								<%= render partial: 'schools/school', locals: {school: school, index: i} %>
+							<% @student_schools.each_with_index do |student_school, i| %>
+								<%= render partial: 'schools/school', locals: {student_school: student_school, school: student_school.school, index: i} %>
 							<% end %>
 						</ul>
 						<!-- END School listing -->

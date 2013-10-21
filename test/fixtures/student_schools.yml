@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  student_id: 1
+  school_id: 1
+  tier: MyString
+  walk_zone_eligibility: MyString
+  transportation_eligibility: MyString
+  distance: MyString
+  walk_time: MyString
+  drive_time: MyString
+
+two:
+  student_id: 1
+  school_id: 1
+  tier: MyString
+  walk_zone_eligibility: MyString
+  transportation_eligibility: MyString
+  distance: MyString
+  walk_time: MyString
+  drive_time: MyString
