@@ -1,7 +1,7 @@
 DiscoverbpsV2::Application.routes.draw do
   devise_for :users, :controllers => { :sessions => "users/sessions", :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  root :to => 'schools#home'
+  root :to => 'schools#coming_soon'
 
   resources :students do
     put 'address_verification', on: :member
@@ -11,6 +11,7 @@ DiscoverbpsV2::Application.routes.draw do
   end 
 
   resources :schools do 
+    get 'coming_soon', on: :collection
     get 'print', on: :collection
     post 'sort', on: :collection
     get 'compare', on: :collection
