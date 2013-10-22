@@ -145,3 +145,6 @@ a.no-decoration {
 	padding: 22px;
 	float: left;
 }
+input, select {
+	outline: none;
+}
