@@ -1,12 +1,14 @@
 <li id="school_<%= school.bps_id %>" class="list_row  ">
 	<div class="li_frame">
 		<!-- brief school information -->
-		<div class="no_order line">
-			<span class="sortable_row_number middle">
-				<% if student_school.ranked? %>
-					<%= index + 1 %>
-				<% end %>
-			</span>
+		<div class="desktop">
+			<div class="no_order line">
+				<span class="sortable_row_number middle">
+					<% if student_school.ranked? %>
+						<%= index + 1 %>
+					<% end %>
+				</span>
+			</div>
 		</div>
 		<div class="school_name select line">
 			<span class="middle">
