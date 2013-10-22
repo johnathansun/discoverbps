@@ -131,6 +131,16 @@ a.no-decoration {
 	width: 296px;
 	float: left;
 }
+.compare_list_numbers {
+	padding-top: 12px;
+	padding-right: 19px;
+}
+.compare_list_numbers li {
+	text-align: right;
+}
+.draggable {
+	cursor: row-resize;
+}
 input, select {
 	outline: none;
 }

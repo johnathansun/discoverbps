@@ -314,13 +314,18 @@ $(".timeline").hover(
 <div class="wrap compare_list" id="compare_list">
 	<div class="colomn_left">
 		<div class="menu_compare_name ">
-			<div class="compare">
+			<div style="width: 170px; height: 42px;">
+				<br />
 			</div>
 			<div class="clr"></div>
 		</div>
 		<div class="result">
-			<div class="compare_list_number">
-				&nbsp;
+			<div class="compare_list_numbers">
+				<ul>
+					<% (1..@students.collect {|x| x.student_schools }.max.count).each do |num| %>
+						<li><h2><%= num %></h2></li>
+					<% end %>
+				</ul>
 			</div>
 		</div>
 	</div>	
@@ -346,7 +351,7 @@ $(".timeline").hover(
 							<% student.student_schools.rank(:sort_order).each_with_index do |school, i| %>
 								<li id="<%= student.id %>_<%= school.bps_id %>">
 									<div class="li_frame">
-										<div class="school_name line">
+										<div class="school_name draggable line">
 											<span class="middle">
 						            <h3><%= school.try(:school).try(:api_basic_info).try(:[], 0).try(:[], :schname_23) %></h3>
 						          </span>
