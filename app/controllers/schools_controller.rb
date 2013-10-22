@@ -2,6 +2,9 @@ class SchoolsController < ApplicationController
   include SchoolsHelper
   layout :layout_selector
 
+  def coming_soon
+  end
+
   def home
     # session.clear
     if current_user
@@ -67,6 +70,13 @@ class SchoolsController < ApplicationController
     else
       @students = Student.where(session_id: session[:session_id]).order(:first_name)
     end
+    if @students.blank?
+      render 'home', layout: 'home'
+    else
+      respond_to do |format|
+        format.html
+      end
+    end
   end
 
   def print
@@ -103,13 +113,16 @@ class SchoolsController < ApplicationController
       if current_student.street_number.present? && current_student.street_name.present? && current_student.zipcode.present?
         logger.info "************ refreshing student_schools"
   
-        street_number = URI.escape(current_student.street_number)
-        street_name   = URI.escape(current_student.street_name)
-        zipcode       = current_student.zipcode.strip
-        grade_level   = current_student.grade_level.to_s.length < 2 ? ('0' + current_student.grade_level.try(:strip)) : current_student.grade_level.try(:strip)
+        street_number     = URI.escape(current_student.street_number)
+        street_name       = URI.escape(current_student.street_name)
+        zipcode           = current_student.zipcode.strip
+        grade_level       = current_student.grade_level.to_s.length < 2 ? ('0' + current_student.grade_level.try(:strip)) : current_student.grade_level.try(:strip)
+        x_coordinate      = current_student.x_coordinate
+        y_coordinate      = current_student.y_coordinate
+        sibling_school_id = current_student.sibling_school_id
 
         # hit the BPS API
-        api_schools = bps_api_connector("https://apps.mybps.org/schooldata/schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")[:List]
+        api_schools = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}&X=#{x_coordinate}&Y=#{y_coordinate}&SiblingSchList=#{sibling_school_id}")[:List]
         
         school_coordinates = ''
 

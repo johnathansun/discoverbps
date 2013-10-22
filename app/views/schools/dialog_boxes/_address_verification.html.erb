@@ -9,6 +9,8 @@
 		<%= hidden_field_tag '[student]street_name', addresses.first[:Street].try(:titleize) %>
 		<%= hidden_field_tag '[student]neighborhood', addresses.first[:SectionOfCity] %>
 		<%= hidden_field_tag '[student]zipcode', addresses.first[:ZipCode] %>
+		<%= hidden_field_tag '[student]x_coordinate', addresses.first[:X] %>
+		<%= hidden_field_tag '[student]y_coordinate', addresses.first[:Y] %>
 
 		<div id="address_matches" class='selection'>
 			<% addresses.each_with_index do |address, index| %>

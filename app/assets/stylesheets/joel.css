@@ -140,3 +140,8 @@ a.student_tab {
 a.no-decoration {
 	text-decoration: none !important;
 }
+.compare_column {
+	width: 277px;
+	padding: 22px;
+	float: left;
+}

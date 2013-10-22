@@ -19,13 +19,15 @@ class StudentsController < ApplicationController
 			end
 		end
 
+    params[:student][:sibling_school_id] = School.where(name: params[:student][:sibling_school_name]).first.try(:bps_id)
+
     respond_to do |format|
       if @student.update_attributes(params[:student])
       	street_number = URI.escape(params[:student][:street_number].try(:strip))
         street_name   = URI.escape(params[:student][:street_name].try(:strip))
         zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
         
-        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}").try(:[], :List)
+        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}").try(:[], :List)
         
         format.js { render template: "students/address_verification" }
       else
@@ -44,7 +46,7 @@ class StudentsController < ApplicationController
         street_name   = URI.escape(params[:student][:street_name].try(:strip))
         zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
         
-        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}").try(:[], :List)
+        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}").try(:[], :List)
         
         format.js { render template: "students/address_verification" }
       else

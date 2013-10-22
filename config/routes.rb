@@ -11,6 +11,7 @@ DiscoverbpsV2::Application.routes.draw do
   end 
 
   resources :schools do 
+    get 'home', on: :collection
     get 'coming_soon', on: :collection
     get 'print', on: :collection
     post 'sort', on: :collection
