@@ -21,10 +21,10 @@
 		<div class="box line getting_there ">
 			<div class="first_block middle">
 				<span class="icon middle">
-					<% if school.walk_zone_eligibility == 'Y' %>
-						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-14"></span>
-					<% else %>
+					<% if school.transportation_eligibility == 'Y' %>
 						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-15"></span>
+					<% else %>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-14"></span>
 					<% end %>
 				</span>
 				<span class="middle sortable_distance"><%= spacer_helper(student_school.distance) %></span>
@@ -48,11 +48,16 @@
 		</div>
 		<div class="box line surround_care">
 			<span class="middle">
+				<% surround_care_count = 0 %>
 				<% if school.api_basic_info[0][:BeforeSchPrograms].present? %>
+					<% surround_care_count += 1 %>
 					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<br/>
 				<% end %> 
 				<% if school.api_basic_info[0][:AfterSchPrograms].present? %>
-					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school<% end %>
+					<% surround_care_count += 1 %>
+					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school
+				<% end %>
+				<span class="sortable_surround_care" style="visibility: hidden;"><%= surround_care_count %></span>
 			</span>
 		</div>
 		<div class="box line your_fit_icon">
