@@ -20,6 +20,31 @@ module SchoolsHelper
 		end
 	end
 
+	def sports_list_helper(hash)
+		if hash.present?
+			list = ''
+			list << 'Baseball, ' 						if hash[:Baseball] == true
+			list << 'Basketball, ' 					if (hash[:boyBasketball] == true || hash[:girlBasketball] == true)
+			list << 'Cheerleading, ' 				if hash[:Cheer] == true
+			list << 'Cross Country, ' 			if (hash[:boyCrossCountry] == true || hash[:girlCrossCountry] == true)
+			list << 'Double Dutch, ' 				if (hash[:boyDoubleDutch] == true || hash[:girlDoubleDutch] == true)
+			list << 'Football, ' 						if hash[:Football] == true
+			list << 'Golf, ' 								if hash[:Golf] == true
+			list << 'Hockey, ' 							if hash[:Hockey] == true
+			list << 'Indoor Track, ' 				if (hash[:boyIndoorTrack] == true || hash[:girlIndoorTrack] == true)
+			list << 'Soccer, ' 							if (hash[:boySoccer] == true || hash[:girlSoccer] == true)
+			list << 'Softball, ' 						if hash[:Softball] == true
+			list << 'Swimming, ' 						if (hash[:boySwim] == true || hash[:girlSwim] == true)
+			list << 'Tennis, ' 							if (hash[:boyTennis] == true || hash[:girlTennis] == true)
+			list << 'Track, ' 							if (hash[:boyOutdoorTrack] == true || hash[:girlOutdoorTrack] == true)
+			list << 'Volleyball, ' 					if (hash[:boyVolleyball] == true || hash[:girlVolleyball] == true)
+			list << 'Wrestling, ' 					if hash[:Wrestling] == true
+			return list.gsub(/,\s$/, '')
+		else
+			return ''
+		end
+	end
+
 	def school_type_helper(hash)
 		if hash.present?
 			list = ''

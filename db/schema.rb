@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131021210918) do
+ActiveRecord::Schema.define(:version => 20131022142121) do
 
   create_table "preference_categories", :force => true do |t|
     t.string   "name"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20131021210918) do
     t.string   "slug"
     t.float    "latitude"
     t.float    "longitude"
+    t.text     "api_sports"
   end
 
   add_index "schools", ["slug"], :name => "index_schools_on_slug", :unique => true
