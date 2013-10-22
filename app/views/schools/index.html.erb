@@ -303,7 +303,7 @@ $(".timeline").hover(
 	<section class="content_wrap">
 			<%= render partial: 'schools/account_tab' %>		
 	</section>
-	<%= render partial: 'schools/map', locals: {student_schools: @student_schools, map_controls: true} %>
+	<%= render partial: 'schools/map', locals: {students_list: [current_student], map_controls: true} %>
 </div>
 
 <!-- start bar list children -->

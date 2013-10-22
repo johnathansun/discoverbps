@@ -245,22 +245,25 @@ function initialize(){
 
 		var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
 		
-    <% student_schools.each_with_index do |student_school, i| %>
-      <% if student_school.school.latitude.present? && student_school.school.longitude.present? %>
-        var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
-        latlngbounds.extend(coordinates);
-        var marker = new google.maps.Marker({
-          position: coordinates,
-          icon: '/assets/map_pins/DBPS_MapPins_Blue_<%= i + 1 %>.svg',
-          map: map,
-          title: '<%= escape_javascript(student_school.school.name) %>'
-        });
-        var infowindow = new google.maps.InfoWindow({
-        });
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info[0][:campus1address1] %><br /><%= student_school.school.api_basic_info[0][:campus1city] %>, <%= student_school.school.api_basic_info[0][:campus1state] %>');
-          infowindow.open(map,this);
-        });
+    <% colors = ['Blue', 'Green', 'Orange', 'Purple', 'Teal'] %>
+    <% students_list.each_with_index do |student, student_i| %>
+      <% student.student_schools.each_with_index do |student_school, i| %>
+        <% if student_school.school.latitude.present? && student_school.school.longitude.present? %>
+          var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
+          latlngbounds.extend(coordinates);
+          var marker = new google.maps.Marker({
+            position: coordinates,
+            icon: '/assets/map_pins/DBPS_MapPins_<%= colors[student_i] %>_<%= i + 1 %>.svg',
+            map: map,
+            title: '<%= escape_javascript(student_school.school.name) %>'
+          });
+          var infowindow = new google.maps.InfoWindow({
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info[0][:campus1address1] %><br /><%= student_school.school.api_basic_info[0][:campus1city] %>, <%= student_school.school.api_basic_info[0][:campus1state] %>');
+            infowindow.open(map,this);
+          });
+        <% end %>
       <% end %>
     <% end %>
 

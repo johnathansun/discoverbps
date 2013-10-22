@@ -121,28 +121,14 @@ a.student_tab {
 .column_title {
 	margin-top: 3px;
 }
-.delete_button {
-	color: red !important;
-	font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
-	font-size: 12px;
-	background-color: white !important;
-	border: 0;
-	-webkit-border-radius: 0;
-	border-radius: 0;
-	padding-left: 12px;
-	padding-top: 12px;
-	height: 38px;
-	text-decoration: none;
-}
 .center {	
 	text-align: center;
 }
 a.no-decoration {
 	text-decoration: none !important;
 }
-.compare_column {
-	width: 277px;
-	padding: 22px;
+.compare_students_column {
+	width: 296px;
 	float: left;
 }
 input, select {

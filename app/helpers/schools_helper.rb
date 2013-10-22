@@ -67,7 +67,7 @@ module SchoolsHelper
 	end
 
 	def spacer_helper(string)
-		raw "#{string.try(:strip)}&nbsp;"
+		raw string.try(:strip).try(:gsub, /\s/, '&nbsp;')
 	end
 
 	# def link_to_add_student(link_name, partial)

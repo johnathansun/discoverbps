@@ -1,14 +1,3 @@
-<header>
-	<div class="wrap">
-		<section class="content_wrap">
-			<p class='title'>Discover</p>
-			<div class='logo'><a href='javascript:void();'><img src='img/bps-logo.png'/></a></div>
-			<div class='clr'></div>
-		</section>
-	</div>
-</header>
-
-
 <div class="wrap timeline_menu">
 	<!-- start timeline -->
 	<div class="timeline">
@@ -150,7 +139,6 @@ $(".languages_mobile").click(function() {
 		// Open mobile
 		is_open_menu_languages_mobile= true;
 		$(".list_languages").css("display", "block");
-
 	 }
 });
 
@@ -320,141 +308,73 @@ $(".timeline").hover(
 	<section class="content_wrap">
 			<%= render partial: 'schools/account_tab' %>		
 	</section>
-	<%= render partial: 'schools/map', locals: {student_schools: @students.first.student_schools, map_controls: true} %>
+	<%= render partial: 'schools/map', locals: {students_list: @students, map_controls: true} %>
 </div>
 
 <div class="wrap compare_list" id="compare_list">
 	<div class="colomn_left">
 		<div class="menu_compare_name ">
-				<div class="compare">
-					Compare your lists:
-				</div>
-				<div class="clr"></div>
+			<div class="compare">
+			</div>
+			<div class="clr"></div>
 		</div>
 		<div class="result">
 			<div class="compare_list_number">
-				<ul>
-					<% @students.collect {|x| x.student_schools.rank(:sort_order)}.safe_transpose.each_with_index do |school_row, row_i| %>
-						<li id="number_1">
-							<div class="li_frame">
-								<div class="no_order line">
-									<span class="middle"><span class="number"><%= row_i + 1 %></span></span>
-								</div>
-							</div>
-						</li>
-					<% end %>
-				</ul>				
+				&nbsp;
 			</div>
 		</div>
-	</div>
-	<div  class="result colomn_right">	
+	</div>	
+	<div class="result colomn_right">	
 		<div class="compare_list_content">
 			<!-- ajust the div width when studens are add (to create left and right draggable effect of the school list)  -->	
-			<div class="flexible_content" style="width:2000px;">
+			<div class="flexible_content" style="width:1095px;">
 				<div class="menu_compare_name compare_action">
 					<div class="name_list">
-						<div class="name_info active" id="name_1">
-							<span class="name">Elizabeth <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span> </span>
-							<span class="grade">Grade<br/><span class="number">3</span></span>
-							<div class="clr"></div>
-						</div>
-				        <div class="name_info" id="name_2">
-							<span class="name">Tommy <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span></span>
-							<span class="grade">Grade<br/><span class="number">7</span></span>
-							<div class="clr"></div>
-						</div>
-					</div>	
-					<div class="add_child" >
-						+ Add a child
+						<% @students.each_with_index do |student, i| %>
+							<div class="name_info active" id="name_<%= i + 1 %>">
+								<span class="name"><%= student.first_name %> <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span> </span>
+								<span class="grade">Grade<br/><span class="number"><%= student.grade_level %></span></span>
+								<div class="clr"></div>
+							</div>
+						<% end %>
 					</div>
 					<div class="clr"></div>
 				</div>
-				<ul>
-					<li id="compare_1">
-						<div class="li_frame">
-							<div class="school_name line name_1">
-								<span class="middle">
-			                    	Eliot K-8 
-			                     </span>
-							</div>
-			                <div class="school_name line name_2">
-								<span class="middle">
-			                        McKay K-8
-			                     </span>
-							</div>
-						</div>
-					</li>
-			    <li id="compare_2">
-						<div class="li_frame">
-							<div class="school_name line name_1">
-								<span class="middle">
-			                    	Eliot K-8 
-			                     </span>
-							</div>
-			        <div class="school_name line name_2">
-								<span class="middle">
-			                        McKay K-8
-			      </span>
-							</div>
-						</div>
-					</li>
-			    <li id="compare_3">
-						<div class="li_frame">
-							<div class="school_name line name_1">
-								<span class="middle">
-			                    	Eliot K-8 
-			                     </span>
-							</div>
-			                <div class="school_name line name_2">
-								<span class="middle">
-			                        McKay K-8
-			                     </span>
-							</div>
-						</div>
-					</li>
-			        <li id="compare_4">
-						<div class="li_frame">
-							<div class="school_name line name_1">
-								<span class="middle">
-			                    	Eliot K-8 
-			                     </span>
-							</div>
-			                <div class="school_name line name_2">
-								<span class="middle">
-			                        McKay K-8
-			                     </span>
-							</div>
-						</div>
-					</li>
-			        <li id="compare_5">
-						<div class="li_frame">
-							<div class="school_name line name_1">
-								<span class="middle">
-			                    	Eliot K-8 
-			                     </span>
-							</div>
-			                <div class="school_name line name_2">
-								<span class="middle">
-			                        McKay K-8
-			                     </span>
-							</div>
-						</div>
-					</li>
-			        <li id="compare_6">
-						<div class="li_frame">
-							<div class="school_name line name_1">
-								<span class="middle">
-			                    	Eliot K-8 
-			                     </span>
-							</div>
-			                <div class="school_name line name_2">
-								<span class="middle">
-			                        McKay K-8
-			                     </span>
-							</div>
-						</div>
-					</li>
-				</ul>
+				<% @students.each_with_index do |student, student_i| %>
+					<div class="compare_students_column">
+						<ul id="sortable_<%= student_i %>">
+							<% student.student_schools.rank(:sort_order).each_with_index do |school, i| %>
+								<li id="<%= student.id %>_<%= school.bps_id %>">
+									<div class="li_frame">
+										<div class="school_name line">
+											<span class="middle">
+						            <%= school.try(:school).try(:api_basic_info).try(:[], 0).try(:[], :schname_23) %>
+						          </span>
+										</div>
+									</div>
+								</li>
+							<% end %>
+						</ul>
+					</div>
+					<script>
+						$(function() {
+					    $("#sortable_<%= student_i %>").sortable({ 
+					    	axis: "y", 
+					    	scroll: true,
+					    	update: function(){
+						      $.ajax({
+						        url: '/schools/sort',
+						        type: 'post',
+						        data: $('#sortable_<%= student_i %>').sortable('serialize'),
+						        dataType: 'script'
+						      });
+						  	}
+						  });
+					    $("#sortable_<%= student_i %>").disableSelection();
+					  });
+					</script>
+				<% end %>
+				<div class="clr"></div>
 			</div>
 		</div>
 	</div>

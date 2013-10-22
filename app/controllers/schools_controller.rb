@@ -94,9 +94,11 @@ class SchoolsController < ApplicationController
 
   # POST
   def sort
-    if params[:school].present?
-      params[:school].flatten.each_with_index do |bps_id, i|
-        student_school = current_student.student_schools.where(bps_id: bps_id).first
+    key = params.keys.first
+    student = Student.find(key)
+    if student.present?
+      params[key].flatten.each_with_index do |bps_id, i|
+        student_school = student.student_schools.where(bps_id: bps_id).first
         if student_school.present?
           student_school.update_attributes(sort_order_position: i, ranked: true)
         end
@@ -125,12 +127,13 @@ class SchoolsController < ApplicationController
         api_schools = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}&X=#{x_coordinate}&Y=#{y_coordinate}&SiblingSchList=#{sibling_school_id}")[:List]
         
         school_coordinates = ''
-
+        school_ids = []
         # loop through the schools returned from the API, find the matching schools in the db,
         # and save the eligibility variables on student_schools
         api_schools.each do |api_school|
           school = School.where(bps_id: api_school[:School]).first
-          if school.present?
+          if school.present? && !school_ids.include?(school.id)
+            school_ids << school.id
             school_coordinates += "#{school.latitude},#{school.longitude}|"
             student_school = current_student.student_schools.where(school_id: school.id).first_or_initialize
             student_school.bps_id                     = api_school[:School]
@@ -144,6 +147,7 @@ class SchoolsController < ApplicationController
         # hit the Google Distance Matrix API to gather distances, drive times and walk times 
         # between the student's home address to all of his/her eligible schools
         school_coordinates.gsub!(/\|$/,'')
+        logger.info "http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_student.latitude},#{current_student.longitude}&destinations=#{school_coordinates}&mode=walking&units=imperial&sensor=false"
         walk_info   = MultiJson.load(Faraday.new(url: URI.escape("http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_student.latitude},#{current_student.longitude}&destinations=#{school_coordinates}&mode=walking&units=imperial&sensor=false")).get.body, :symbolize_keys => true)
         drive_info  = MultiJson.load(Faraday.new(url: URI.escape("http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_student.latitude},#{current_student.longitude}&destinations=#{school_coordinates}&mode=driving&units=imperial&sensor=false")).get.body, :symbolize_keys => true)
 

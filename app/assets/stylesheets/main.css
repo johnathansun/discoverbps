@@ -2481,7 +2481,7 @@ footer.footer .logo {
 }
 .wrap .menu_compare_name .name_list .name_info {
   float: left;
-  width: 277px;
+  width: 295px;
   height: 34px;
   padding: 8px 0 0;
 }
@@ -3242,6 +3242,9 @@ a.ui-corner-all:hover {
   margin-right: 0;
   top: -42px;
   position: relative;
+}
+.wrap.compare_list .footer_list {
+  margin-left: 192px;
 }
 .glass_open,
 .glass_close {
