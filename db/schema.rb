@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131023012354) do
+ActiveRecord::Schema.define(:version => 20131023172730) do
 
   create_table "preference_categories", :force => true do |t|
     t.string   "name"
@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(:version => 20131023012354) do
     t.boolean  "grade_10",               :default => false
     t.boolean  "grade_11",               :default => false
     t.boolean  "grade_12",               :default => false
-    t.text     "match_values"
   end
 
   add_index "preferences", ["preference_category_id"], :name => "index_preferences_on_preference_category_id"
