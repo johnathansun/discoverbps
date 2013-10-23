@@ -54,14 +54,12 @@
 					// hide all the icons with the same preference_category_id and only show if the
 					// checkboxes in the category are blank or if the values match what's in the icon's data-tags
 					$('.' + category_div.getAttribute('id') + '_icon').hide();
-					// $('.fit_icons_count').text(parseInt($('.fit_icons_count')) - 1);
+					// console.log($('.' + category_div.getAttribute('id') + '_icon').parent().getAttribute('id'));
 					if (checked_preference_values.length === 0) {
-						// $('.fit_icons_count').text(parseInt($('.fit_icons_count')) + 1);
 						$('.' + category_div.getAttribute('id') + '_icon').show();
 					} else {
 						$('.' + category_div.getAttribute('id') + '_icon').each(function(iii, icon) {
 							if ($.except(checked_preference_values, $(icon).data('tags')).length == 0) {
-								// $('.fit_icons_count').text(parseInt($('.fit_icons_count')) + 1);
 								$(icon).show();
 							}
 							// console.log($(icon).data('tags'));
@@ -70,6 +68,9 @@
 							// console.log(($.intersect($(icon).data('tags'), checked_preference_values).length > 0));
 						});
 					}
+				});
+				$('.list_row').each(function(i, school_row) {
+					$('#' + school_row.getAttribute('id') + '_icon_count').text($('#' + school_row.getAttribute('id') + '_icons').children('.category_icon:visible').size());
 				});
 			});
 		});
