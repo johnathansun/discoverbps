@@ -63,31 +63,17 @@
 			</span>
 		</div>
 		<div class="box line your_fit_icon">
-			<span class="middle sortable_fit">
-				
-				<span aria-hidden="true" data-grades="<%= school.grade_levels %>" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"></span>
-				
-				<% if school.facilities_present? %>
-					<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"></span> 
-				<% end %>
-				
-				<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"></span> 
-				<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"></span> 
-				<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialprograms"></span> 
-				
-				<% if school.fulltime_nurse? %>
-					<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"></span> 
-				<% end %>
-				
-				<% if sports_list_helper(school.api_sports[0]).present? %>
-					<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"></span> 
-				<% end %>
+			<span class="middle">
 
-				<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"></span> 
-				
-				<% if school.uniform_policy? %>
-					<span aria-hidden="true" data-grades="" class="icon category_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"></span> 
+				<% tag_counter = 0 %>
+				<% PreferenceCategory.preference_panel.grade_level_categories(current_student.grade_level).each_with_index do |category, i| %>
+					<% if preference_category_tags_helper(category, school).present? %>
+						<span aria-hidden='true' data-tags='<%= preference_category_tags_helper(category, school) %>' class='icon category_icon preference_category_<%= category.id %>_icon <%= category.glyph_class %>'></span>
+						<% tag_counter += 1 %>
+					<% end %>
 				<% end %>
+				<span class="sortable_fit fit_icons_count" style="visibility: hidden"><%= tag_counter %></span>
+
 			</span>
 		</div>
 		<div class="box line your_fit_descrip">

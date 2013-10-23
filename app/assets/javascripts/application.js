@@ -11,8 +11,9 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery.ui.all
+//= require jquery.ui.sortable
 //= require jquery_ujs
-//= require jquery.tinysort.min.js
-//= require modernizr-2.0.6.min.js
+//= require jquery.arrayUtilities.min
+//= require jquery.tinysort.min
+//= require modernizr-2.0.6.min
 //= require_tree .

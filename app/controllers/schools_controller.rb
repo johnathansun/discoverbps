@@ -21,7 +21,7 @@ class SchoolsController < ApplicationController
       @students = Student.where(session_id: session[:session_id]).order(:first_name)
     end
 
-    if @students.blank?
+    if @students.blank? || current_student.blank?
       render 'home', layout: 'home'
     else
       # Set current_student if it's specified in the params
@@ -124,7 +124,7 @@ class SchoolsController < ApplicationController
         sibling_school_id = current_student.sibling_school_id
 
         # hit the BPS API
-        api_schools = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolChoices?SchoolYear=2013-2014&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}&X=#{x_coordinate}&Y=#{y_coordinate}&SiblingSchList=#{sibling_school_id}")[:List]
+        api_schools = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolChoices?SchoolYear=2014-2015&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}&X=#{x_coordinate}&Y=#{y_coordinate}&SiblingSchList=#{sibling_school_id}")[:List]
         
         school_coordinates = ''
         school_ids = []

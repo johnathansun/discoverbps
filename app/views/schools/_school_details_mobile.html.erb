@@ -3,7 +3,7 @@
  
 	<div class="box">
 		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"></span> Grades Offered</p>
-		<p class="descrip"><%= school.api_grades[0][:grade] %></p>
+		<p class="descrip"><%= grade_levels_helper(school.grade_levels) %></p>
 	</div>
 
 	<div class="box">

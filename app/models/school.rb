@@ -28,15 +28,10 @@ class School < ActiveRecord::Base
 
 	# turn api_grades into an array
 	def grade_levels
-		if api_grades.present? && api_grades[0][:grade].present?
-			grades = ['K0', 'K1', 'K2', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-			start_grade = api_grades[0][:grade].upcase.match(/^../).to_s
-			end_grade = api_grades[0][:grade].upcase.match(/..$/).to_s
-			if start_grade.present? && end_grade.present?
-				start_grade_index = grades.index(start_grade)
-				end_grade_index = grades.index(end_grade)
-				grades[start_grade_index..end_grade_index]
-			end
+		if api_grades.present?
+			api_grades.collect {|x| x[:grade].upcase.gsub(/^0/, '') if x[:exists] == true}.compact
+		else
+			[]
 		end
 	end
 
