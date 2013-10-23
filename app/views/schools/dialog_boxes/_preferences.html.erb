@@ -8,10 +8,10 @@
 			<h3>What school features are important your child?</h3>
 		<% end %>
 		<div class='bloc'>
-			<% PreferenceCategory.qualitative.grade_level_categories(current_student.grade_level).all.each_with_index do |category, i| %>
+			<% PreferenceCategory.qualitative.grade_level_categories(current_student.grade_level).rank(:sort_order).each_with_index do |category, i| %>
 				<div class="preference">
 					<p class='title font_15'><span aria-hidden="true" class="fit_icon <%= category.glyph_class %>"></span><span class="text"><%= category.name %></span></p>
-					<% for preference in category.grade_level_preferences(current_student.grade_level).rank(:sort_order).all %>
+					<% category.grade_level_preferences(current_student.grade_level).rank(:sort_order).each do |preference| %>
 						<label class='font_13_14'><input type='checkbox' name='[student][preference_ids][]' value='<%= preference.id %>' /><span class="text"><%= preference.name %></span></label>
 					<% end %>
 				</div>

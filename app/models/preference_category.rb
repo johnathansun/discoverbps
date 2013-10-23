@@ -12,7 +12,7 @@ class PreferenceCategory < ActiveRecord::Base
 
   def self.grade_level_categories(gl)
   	grade_level = gl.try(:downcase).try(:strip)
-  	self.includes(:preferences).where("preferences.grade_#{grade_level}".to_sym => true)
+  	self.where("grade_#{grade_level}".to_sym => true)
   end
 
   def grade_level_preferences(gl)
