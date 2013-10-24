@@ -315,7 +315,7 @@ $(".timeline").hover(
 				Compare your lists:
 			</div>
 			<div class="name_list">
-				<% for student in @students %>
+				<% @students.each_with_index do |student, i| %>
 					<%= render partial: 'schools/student_tab', locals: {student: student} %>
 				<% end %>
 			</div>	
@@ -410,33 +410,7 @@ $(".timeline").hover(
 				</div>
 				<!-- END  listing of schools  -->
 				
-				<!-- info box at the end of listing -->
-				<div class="footer_list">
-					<div class="footer_left">
-						<p style="color:#000;margin-bottom: 1.6em;">Next Steps</p>
-						<p>Once your student’s list of schools has been sorted in the order of your choosing, registration begins by submitting the list and visiting a Welcome Center.</p>
-						<p style="color:#000;">How to register:</p>
-						<p><a href="https://apps.mybps.org/ExternalWeb/home.aspx" title="Pre-Register Online" target="_blank">Pre-Register Online</a></p>
-						<p><a href="http://www.bostonpublicschools.org/requireddocs" title="Collect the required documents" target="_blank">Collect the required documents</a></p>
-						<p><a href="http://www.bostonpublicschools.org/howtoregister#2.3" title="Plan a visit to a Welcome Center" target="_blank">Plan a visit to a Welcome Center</a></p>
-						<p style="color:#000;">How the School Assignment Policy works:</p>
-						<p><a href="http://www.bostonpublicschools.org/assignment" title="Learn more about Home-Based Eligibility" target="_blank">Learn more about Home-Based Eligibility</a></p>
-					</div>
-					<div class="footer_right">
-						<p style="color:#000;margin-bottom: 1.6em;">Need to think it over?</p>
-						<p>My lists</p>
-						<p><%= link_to 'Download', schools_path(format: :csv) %></p>
-						<p><a href="/schools/print" title="Print">Print</a></p>
-						<p><a href="" title="Share via email">Share via email</a></p>
-						<p><a href="" title="Save">Save</a></p>
-						<br/>
-						<p>Account</p>
-						<p><a href="#" id="sign_up_button" title="Sign Up">Sign Up</a></p>
-						<p><a href="#" id="login_button" title="Login">Login</a></p>
-					</div>
-					<div class="clr"></div>
-				</div>
-				<!-- END info box at the end of listing -->
+				<%= render partial: 'schools/footer' %>
 
 			</div>
 					

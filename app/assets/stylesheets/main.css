@@ -720,7 +720,7 @@ a:visited {
 /* ----------------------------------------------
 	 GLOBAL STYLES
 ---------------------------------------------- */
-::-moz-selection {
+/*::-moz-selection {
   background: #000;
   color: #fff;
   text-shadow: none;
@@ -729,7 +729,7 @@ a:visited {
   background: #000;
   color: #fff;
   text-shadow: none;
-}
+}*/
 body {
   -moz-font-feature-settings: "liga=1, dlig=1";
   -ms-font-feature-settings: "liga", "dlig";
@@ -742,14 +742,14 @@ img {
   -webkit-user-select: none;
   user-select: none;
 }
-a,
+/*a,
 a:before,
 a:after {
   -webkit-transition: all ease-in-out 0.2s;
   -moz-transition: all ease-in-out 0.2s;
   -o-transition: all ease-in-out 0.2s;
   transition: all ease-in-out 0.2s;
-}
+}*/
 /* ----------------------------------------------
 	 TYPE SETTING
 ---------------------------------------------- */
@@ -2472,18 +2472,21 @@ footer.footer .logo {
   float: left;
 }
 .wrap .menu_compare_name .name_list .name_info {
-  color: #969696;
-  background: #fafafa;
-}
-.wrap .menu_compare_name .name_list .name_info.active {
-  color: #ffffff;
-  background: #fc5b00;
-}
-.wrap .menu_compare_name .name_list .name_info {
   float: left;
   width: 295px;
   height: 34px;
   padding: 8px 0 0;
+  color: #969696;
+  background: #fafafa;
+  cursor: pointer;
+}
+.wrap .menu_compare_name .name_list .name_info:hover {
+  color: #ffffff;
+  background: #fc5b00;
+}
+.wrap .menu_compare_name .name_list .name_info.active {
+  color: #ffffff;
+  background: #fc5b00;
 }
 .wrap .menu_compare_name .name_list .name_info .indicator {
   display: none;
@@ -2513,15 +2516,8 @@ footer.footer .logo {
   cursor: pointer;
 }
 .wrap .menu_compare_name .add_child:hover {
-  float: left;
-  padding: 14px 0 0 16px;
   background: #fc5b00;
   color: #ffffff;
-  font-size: 15px;
-  display: inline-block;
-  width: 111px;
-  height: 28px;
-  cursor: pointer;
 }
 .wrap .menu_compare_name.compare_action .compare {
   background: #fc5b00;

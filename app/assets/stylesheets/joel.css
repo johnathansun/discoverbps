@@ -31,9 +31,7 @@ ul.horizontal_list li {
 	height: 45px;
 	margin-right: 12px;
 }
-.name_info {
-	cursor: pointer;
-}
+
 a.student_tab {
 	text-decoration: none;
 }
