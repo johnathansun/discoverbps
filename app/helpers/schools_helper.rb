@@ -73,21 +73,7 @@ module SchoolsHelper
 		end
 	end
 
-	def surround_care_list_helper(hash)
-		if hash.present?
-			list = []
-			if hash[:BeforeSchPrograms].present?
-				list << 'Before School'
-			elsif hash[:AfterSchPrograms].present?
-				list << 'After School'
-			end
-			return list
-		else
-			return nil
-		end
-	end
-
-		def enrollment_list_helper(hash)
+	def enrollment_list_helper(hash)
 		if hash.present?
 			list = []
 			list << hash[:SchSize]
@@ -190,9 +176,6 @@ module SchoolsHelper
 
 		elsif category.name == 'Uniform Policy'
 			tags = uniform_policy_list_helper(school.api_description[0])
-		
-		elsif category.name == 'Surround Care'
-			tags = surround_care_list_helper(school.api_description[0])
 		end
 		
 		return tags
