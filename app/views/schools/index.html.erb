@@ -22,7 +22,7 @@
 			<div class="month last">Sep</div>
 		</div>	
 		
-		<div class="day_indicator"  style="left:0%;">
+		<div class="day_indicator" style="left:<%= timeline_percent(Date.today) %>;">
 			<span class="text">Today</span>
 		</div>
 		
@@ -111,26 +111,6 @@
 	<section class="content_wrap ">
 		<nav class="menu_nav">
 			<span id="menu_nav_mobile" aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-25"></span>
-			<ul id="menu_items" class='mobile_only'>
-				<li class='first'><a href="#" title="">Discover</a></li>
-				<li><a href="#" title="">Register</a></li>
-				<li><a href="#" title="">Succeed!</a></li>
-				<li class='languages_mobile'>
-					<a href="#" title="">languages <span data-icon="&#xe003;" aria-hidden="true"></span></a>
-					<ul class='list_languages'>
-						<li><a href='#' class='language current_language'>English</a></li>
-						<li><a href='#' class='language'>Español</a></li>
-						<li><a href='#' class='language'>Kreyòl Ayisyen</a></li>
-						<li><a href='#' class='language'>??</a></li>
-						<li><a href='#' class='language'>Português</a></li>
-						<li><a href='#' class='language'>Kriolu Kabuverdianu</a></li>
-						<li><a href='#' class='language'>Ti?ng Vi?t</a></li>
-						<li><a href='#' class='language'>Français</a></li>
-						<li><a href='#' class='language'><span data-icon="&#xe003;" aria-hidden="true"></span> Other</a></li>
-					</ul>
-				</li>
-				<li class='visit'><a href='http://www.BostonPublicSchools.org'>Visit BostonPublicSchools.org</a></li>
-			</ul>
 			<ul class='no_mobile'>
 				<li class="succeed"><a href="#" title=""><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-05"></span></a></li>
 				<li class="register"><a href="#" title=""><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-06"></span></a></li>
@@ -211,14 +191,10 @@ function initializeRegistrationTimeline() {
 	$("#regis_3").width(4*($(".months .month").outerWidth()/30));
 	$("#regis_4").width(4*($(".months .month").outerWidth()/30));
 	$("#regis_5").width(4*($(".months .month").outerWidth()/30));
-
-
 	$("#regis_6").width(37*($(".months .month").outerWidth()/30));
 	
 
 	var arr= jQuery.makeArray($(".months .month"));
-	console.log($($(".months .month")[3]).width());
-
 	
 	// Set position registration_contaner on 1 January
 	// 3 is position January

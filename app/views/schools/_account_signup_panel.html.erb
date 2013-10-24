@@ -1,5 +1,5 @@
 <div id='signup_panel' class='action_box save_box' style="display:none;">
-	<div id="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
+	<div class="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
 	<div class='actions'>
 		<span class='txt_join_list' style='display:none;'>Join to save your lists:</span>
 		<span class='txt_login'>Sign Up with:</span>
@@ -34,13 +34,3 @@
 	</div>
 	<div class='clr'></div>
 </div>
-<script>	
-	$( document ).ready(function() {
-		$("#close_icon").click(function() {
-			$(".dialog_box").fadeOut("fast").removeClass("active");
-		});
-		$(".dialog_box").click(function(e){
-	  	e.stopPropagation();
-		});
-	});
-</script>

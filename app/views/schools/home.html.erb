@@ -33,7 +33,7 @@
 			<div class="search_header">
 				<div class="title_bloc">
 					<h1>Welcome to Boston Public Schools Registration</h1>
-					<img class="logo_beta" src="assets/logo_beta.png" alt="beta"/>
+					<img class="logo_beta" src="/assets/logo_beta.png" alt="beta"/>
 				</div>
 				<p>This website provides resources for finding, exploring and comparing a student's eligible schools. </p>
 								<p class="small_text tablet">Looking for the 2013-2014 school year?</p>
@@ -43,7 +43,7 @@
 						 
 							<!-- ADD CLASS "RIGHT" TO MOVE THE TODAY INDICATOR TO RIGHT OF THE TIME LINE, OR "LEFT" TO MOVE TO THE LEFT  FOR LARGEUR OF TABLET SIZE -->
 							<!-- AND change the top % to ajust the today up or down -->
-							<div class="today right" style="top:10%;">
+							<div class="today right" style="top:<%= timeline_percent(Date.today) %>;">
 								<span aria-hidden="true" class="right icon-DBPS-Dev-Assets-SRG-30"></span>&nbsp; Today &nbsp;<span aria-hidden="true" class="left icon-DBPS-Dev-Assets-SRG-32"></span>
 								<span class="yello_line"></span>
 							</div> 
@@ -188,7 +188,7 @@
 								Discover schools
 												</span>
 												<span class="tablette">
-													<img class="point" src="assets/yellow_point.png" />
+													<img class="point" src="/assets/yellow_point.png" />
 												</span>
 											</span>
 											<span class="event Y">
@@ -196,7 +196,7 @@
 								Compare options
 							</span>
 												<span class="tablette">
-													<img class="point" src="assets/yellow_point.png" />
+													<img class="point" src="/assets/yellow_point.png" />
 												</span>
 											</span>
 											<span class="event">
@@ -208,7 +208,7 @@
 														</span>
 												</span>
 												<span class="tablette">
-													<img class="point_arrow" src="assets/blue_point_arrow.png" />
+													<img class="point_arrow" src="/assets/blue_point_arrow.png" />
 												</span>
 											</span>
 											<span class="event y">
@@ -216,7 +216,7 @@
 								Create your list
 							</span>
 												<span class="tablette">
-													<img class="point" src="assets/yellow_point.png" />
+													<img class="point" src="/assets/yellow_point.png" />
 												</span>
 											</span>
 											<span class="event last">
@@ -225,7 +225,7 @@
 								<span class="W">Pre-register</span>
 							</span>
 												<span class="tablette">
-													<img class="point" src="assets/blue_point_white.png" />
+													<img class="point" src="/assets/blue_point_white.png" />
 												</span>
 											</span>
 						
@@ -252,14 +252,14 @@
 					<div class="content_right">
 											<span class="event" style="margin-bottom:39px;">
 												<span class="desktop">
-													 Jan 6<!--<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-35"></span>--><img class="point" src="assets/red_point.png" /><br/>
+													 Jan 6<!--<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-35"></span>--><img class="point" src="/assets/red_point.png" /><br/>
 													 <span class="W"> Registration begins</span><br/>
 														for K, 6 9
 														<br />
 														(All other grades: Feb 5th)
 												</span>
 												<span class="tablette">
-													<img class="point_arrow" src="assets/blue_point_arrow.png" />
+													<img class="point_arrow" src="/assets/blue_point_arrow.png" />
 												</span>
 													
 											</span>
@@ -297,7 +297,7 @@
 						
 						<span class="event">
 							<span class="desktop">
-								Sept 4<!--<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-35"></span>--> <img class="point" src="assets/blue_point.png" /><br/>
+								Sept 4<!--<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-35"></span>--> <img class="point" src="/assets/blue_point.png" /><br/>
 								<span class="W" style="font-size:12px;line-height:15px;">
 															First day of school!
 														</span>
@@ -308,7 +308,7 @@
 					<!--END timeline info of Succeed -->
 					
 					<!-- last point with star -->
-									<img class="final_point" src="assets/star_point.png" />
+									<img class="final_point" src="/assets/star_point.png" />
 									
 				</section>
 				<!-- END Succeed section -->

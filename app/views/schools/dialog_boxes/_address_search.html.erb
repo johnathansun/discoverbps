@@ -1,4 +1,4 @@
-	<div id="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
+	<div class="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
 	<div class="wrap ">
 		<div class="search">
 			<div class="search_section_content "> 			
@@ -25,12 +25,10 @@
 		</div>
 	</div>
 	<script>	
-	$( document ).ready(function() {
-		$("#close_icon").click(function() {
+		$(".close_icon").click(function() {
 			$(".dialog_box").fadeOut("fast").removeClass("active");
 		});
 		$(".dialog_box").click(function(e){
 	  	e.stopPropagation();
 		});
-	});
-</script>
+	</script>

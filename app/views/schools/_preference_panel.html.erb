@@ -48,6 +48,8 @@
 					$('#' + category_div.getAttribute('id') + ' .preference_checkbox').each(function(ii, category_checkbox) {
 						if ($('#' + category_checkbox.getAttribute('id')).is(':checked')) {
 							return checked_preference_values.push(category_checkbox.getAttribute('value'));
+						} else {
+							
 						}
 					});
 

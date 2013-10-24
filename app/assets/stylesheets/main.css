@@ -2472,6 +2472,7 @@ footer.footer .logo {
   float: left;
 }
 .wrap .menu_compare_name .name_list .name_info {
+  position: relative;
   float: left;
   width: 295px;
   height: 34px;
