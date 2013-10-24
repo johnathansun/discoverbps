@@ -87,6 +87,16 @@ module SchoolsHelper
 		end
 	end
 
+		def enrollment_list_helper(hash)
+		if hash.present?
+			list = []
+			list << hash[:SchSize]
+			return list
+		else
+			return nil
+		end
+	end
+
 
 	def school_type_helper(hash)
 		if hash.present?
@@ -176,8 +186,8 @@ module SchoolsHelper
 			tags = health_list_helper(school.api_basic_info[0])
 		
 		elsif category.name == 'Enrollment'
-			tags = school.api_basic_info[0][:SchSize]
-		
+			tags = enrollment_list_helper(school.api_basic_info[0])
+
 		elsif category.name == 'Uniform Policy'
 			tags = uniform_policy_list_helper(school.api_description[0])
 		
