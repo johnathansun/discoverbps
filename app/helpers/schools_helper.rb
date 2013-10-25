@@ -175,8 +175,9 @@ module SchoolsHelper
 		preference_names = category.preferences.collect {|x| x.name}
 		
 		if category.name == 'Grades Offered'
-			tags = grade_levels_data_helper(school.grade_levels)
-		
+			if school.grade_levels.present?
+				tags = grade_levels_data_helper(school.grade_levels)
+			end
 		elsif category.name == 'Facility Features'
 			tags = facilities_list_helper(school.api_facilities[0])
 		
