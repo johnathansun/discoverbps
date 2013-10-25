@@ -12,7 +12,7 @@
 		</div>
 		<div class="school_name select line">
 			<span class="middle">
-				<span class="sortable_school_name"><%= school.api_basic_info[0][:schname_23] %></span>
+				<span class="sortable_school_name"><%= school.api_basic_info.try(:[], 0).try(:[], :schname_23) %></span>
 				<% if current_student.sibling_school_id == school.bps_id %>
 					<span aria-hidden="true" class="select_icon icon-DBPS-Dev-Assets-SRG-12"></span>
 				<% end %>
@@ -41,9 +41,9 @@
 			
 		</div>
 		<div class="box line school_hours">
-			<span class="middle sortable_hours"> <%= truncate(school.api_hours[0][:schhours1], length: 18) %><br/>
+			<span class="middle sortable_hours"> <%= truncate(school.api_hours.try(:[], 0).try(:[], :schhours1), length: 18) %><br/>
 				<div class="max_range">
-					<div class="ajust_range" style="margin-left:<%= school_hours_start_time_helper(school.api_hours[0][:schhours1]) %>%;margin-right:<%= school_hours_end_time_helper(school.api_hours[0][:schhours1]) %>%;">
+					<div class="ajust_range" style="margin-left:<%= school_hours_start_time_helper(school.api_hours.try(:[], 0).try(:[], :schhours1)) %>%;margin-right:<%= school_hours_end_time_helper(school.api_hours.try(:[], 0).try(:[], :schhours1)) %>%;">
 					</div>
 				</div>
 			</span>
@@ -51,11 +51,11 @@
 		<div class="box line surround_care">
 			<span class="middle">
 				<% surround_care_count = 0 %>
-				<% if school.api_basic_info[0][:BeforeSchPrograms].present? %>
+				<% if school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms).present? %>
 					<% surround_care_count += 1 %>
 					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<br/>
 				<% end %> 
-				<% if school.api_basic_info[0][:AfterSchPrograms].present? %>
+				<% if school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms).present? %>
 					<% surround_care_count += 1 %>
 					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school
 				<% end %>

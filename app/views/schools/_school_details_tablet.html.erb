@@ -14,11 +14,11 @@
 	<div class="detail_row">
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"></span> Enrollment</p>
-			<p class="descrip"><%= school.api_basic_info[0][:SchSize] %></p>
+			<p class="descrip"><%= school.api_basic_info.try(:[], 0).try(:[], :SchSize) %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"></span> School Focus</p>
-			<p class="descrip"><%= school.api_description[0][:schfocus] %></p>
+			<p class="descrip"><%= school.api_description.try(:[], 0).try(:[], :schfocus) %></p>
 		</div>
 		<div class="clr"></div>
 	</div>
@@ -26,7 +26,7 @@
 	<div class="detail_row">
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"></span> School Type</p>
-			<p class="descrip"><% if school.api_basic_info[0][:ischarter] == 'True' %>Charter<% end %></p>
+			<p class="descrip"><% if school.api_basic_info.try(:[], 0).try(:[], :ischarter) == 'True' %>Charter<% end %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialprograms"></span> Special Programs</p>
@@ -38,11 +38,11 @@
 	<div class="detail_row">
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"></span> Special Application</p>
-			<p class="descrip"><%= school.api_description[0][:specialapplicationnarrative].present? ? school.api_description[0][:specialapplicationnarrative] : 'None' %></p>
+			<p class="descrip"><%= school.api_description.try(:[], 0).try(:[], :specialapplicationnarrative).present? ? school.api_description.try(:[], 0).try(:[], :specialapplicationnarrative) : 'None' %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"></span> Facility Features</p>
-			<p class="descrip"><%= facilities_list_helper(school.api_facilities[0]) %></p>
+			<p class="descrip"><%= facilities_list_helper(school.api_facilities.try(:[], 0)) %></p>
 		</div>
 	<div class="clr"></div>
 	</div>
@@ -50,11 +50,11 @@
 	<div class="detail_row">
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"></span> Uniform Policy</p>
-			<p class="descrip"><%= school.api_description[0][:uniformpolicy].blank? ? 'None' : school.api_description[0][:uniformpolicy] %></p>
+			<p class="descrip"><%= school.api_description.try(:[], 0).try(:[], :uniformpolicy).blank? ? 'None' : school.api_description.try(:[], 0).try(:[], :uniformpolicy) %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"></span> Sports</p>
-			<p class="descrip"><%= sports_list_helper(school.api_sports[0]) %></p>
+			<p class="descrip"><%= sports_list_helper(school.api_sports.try(:[], 0)) %></p>
 		</div>
 		<div class="clr"></div>
 	</div>
@@ -66,7 +66,7 @@
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"></span> Health & Wellness</p>
-			<p class="descrip"><%= school.api_basic_info[0][:ishasfulltimenurse] == 'True' ? 'Full-Time Nurse' : '' %></p>
+			<p class="descrip"><%= school.api_basic_info.try(:[], 0).try(:[], :ishasfulltimenurse) == 'True' ? 'Full-Time Nurse' : '' %></p>
 		</div>
 		<div class="clr"></div>
 	</div>

@@ -1,6 +1,6 @@
 <!-- show in desktop and tablet -->
 	<div class="school_description">
-		<p><%= school.api_description[0][:schoolspecial] %></p>
+		<p><%= school.api_description.try(:[], 0).try(:[], :schoolspecial) %></p>
 	</div>
 	<div class="clr"></div>
 <!--END show in desktop and tablet -->
@@ -28,13 +28,13 @@
  
  
 <div class="separation_line"></div>
-<p id="about_title" class="font_17">About <%= school.api_basic_info[0][:schname_23] %></p>
+<p id="about_title" class="font_17">About <%= school.api_basic_info.try(:[], 0).try(:[], :schname_23) %></p>
 <div class="school_name ">
 	<p>
-		<%= school.api_basic_info[0][:campus1address1] %>, <%= school.api_basic_info[0][:campus1city] %> <%= school.api_basic_info[0][:campus1zip] %><br />
+		<%= school.api_basic_info.try(:[], 0).try(:[], :campus1address1) %>, <%= school.api_basic_info.try(:[], 0).try(:[], :campus1city) %> <%= school.api_basic_info.try(:[], 0).try(:[], :campus1zip) %><br />
 		<a class="text_B0" href="" title="School Website">School Website</a> <br/>			
 		<!-- email link -->
-		Email: <a class="text_B0" href="mailto:eliotboston.k12.ma.us" title="Email adress"><%= school.api_basic_info[0][:schemail] %></a>
+		Email: <a class="text_B0" href="mailto:eliotboston.k12.ma.us" title="Email adress"><%= school.api_basic_info.try(:[], 0).try(:[], :schemail) %></a>
 	</p>
 	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"></span> <%= raw student_school.distance %> from home</p>
 	<p class="descrip">
@@ -44,17 +44,17 @@
 
 	<p  class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"></span> School hours</p>
 
-	<p class="descrip"><%= school.api_hours[0][:schhours1] %></p>
+	<p class="descrip"><%= school.api_hours.try(:[], 0).try(:[], :schhours1) %></p>
 
-	<% if school.api_basic_info[0][:BeforeSchPrograms].present? || school.api_basic_info[0][:AfterSchPrograms].present? %>
+	<% if school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms).present? || school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms).present? %>
 		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"></span> Surround care </p>
 
 		<p class="descrip">
-			<% if school.api_basic_info[0][:BeforeSchPrograms].present? %>
-				<span class="text_G1">Before:</span> <%= school.api_basic_info[0][:BeforeSchPrograms] %><br /><br />
+			<% if school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms).present? %>
+				<span class="text_G1">Before:</span> <%= school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms) %><br /><br />
 			<% end %>
-			<% if school.api_basic_info[0][:AfterSchPrograms].present? %>
-				<span class="text_G1">After:</span> <%= school.api_basic_info[0][:AfterSchPrograms] %>
+			<% if school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms).present? %>
+				<span class="text_G1">After:</span> <%= school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms) %>
 			<% end %>
 		</p>
 	<% end %>
@@ -79,7 +79,7 @@
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"></span> Facility Features</p>
-			<p class="descrip"><%= facilities_list_helper(school.api_facilities[0]) %></p>
+			<p class="descrip"><%= facilities_list_helper(school.api_facilities.try(:[], 0)) %></p>
 		</div>
 		<div class="clr"></div>
 	</div>
@@ -87,15 +87,15 @@
 	<div class="detail_row">
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"></span> Enrollment</p>
-			<p class="descrip"><%= school.api_basic_info[0][:SchSize] %></p>
+			<p class="descrip"><%= school.api_basic_info.try(:[], 0).try(:[], :SchSize) %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"></span> School Focus</p>
-			<p class="descrip"><%= school.api_description[0][:schfocus] %></p>
+			<p class="descrip"><%= school.api_description.try(:[], 0).try(:[], :schfocus) %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"></span> Sports</p>
-			<p class="descrip"><%= sports_list_helper(school.api_sports[0]) %></p>
+			<p class="descrip"><%= sports_list_helper(school.api_sports.try(:[], 0)) %></p>
 		</div>
 		<div class="clr"></div>
 	</div>
@@ -103,15 +103,11 @@
 	<div class="detail_row">
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"></span> School Type</p>
-			<p class="descrip"><%= school_type_helper(school.api_basic_info[0]) %></p>
-		</div>
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialprograms"></span> Special Programs</p>
-			<p class="descrip">WAITING</p>
+			<p class="descrip"><%= school_type_helper(school.api_basic_info.try(:[], 0)) %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"></span> Health & Wellness</p>
-			<p class="descrip"><%= school.api_basic_info[0][:ishasfulltimenurse] == 'True' ? 'Full-Time Nurse' : '' %></p>
+			<p class="descrip"><%= school.api_basic_info.try(:[], 0).try(:[], :ishasfulltimenurse) == 'True' ? 'Full-Time Nurse' : '' %></p>
 		</div>
 		<div class="clr"></div>
 	</div>
@@ -119,7 +115,7 @@
 	<div class="detail_row">
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"></span> Special Application</p>
-			<p class="descrip"><%= school.api_description[0][:specialapplicationnarrative].present? ? school.api_description[0][:specialapplicationnarrative] : 'None' %></p>
+			<p class="descrip"><%= school.api_description.try(:[], 0).try(:[], :specialapplicationnarrative).present? ? school.api_description.try(:[], 0).try(:[], :specialapplicationnarrative) : 'None' %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"></span> Community Partners</p>
@@ -131,7 +127,7 @@
 	<div class="detail_row">
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"></span> Uniform Policy</p>
-			<p class="descrip"><%= school.api_description[0][:uniformpolicy].blank? ? 'None' : school.api_description[0][:uniformpolicy] %></p>
+			<p class="descrip"><%= school.api_description.try(:[], 0).try(:[], :uniformpolicy).blank? ? 'None' : school.api_description.try(:[], 0).try(:[], :uniformpolicy) %></p>
 		</div>
 		<div class="box">
 			<p class="title"></p>
