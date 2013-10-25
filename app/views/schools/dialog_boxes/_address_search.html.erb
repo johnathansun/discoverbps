@@ -3,7 +3,7 @@
 		<div class="search">
 			<div class="search_section_content "> 			
 				<section class="search_section">
-					<div class="content_left">
+					<div class="content_left" style="margin-right: 0px;">
 						<div class="content">
 							<% if defined?(student) && student.present? %>
 								<h3>To edit your student's information, please modify the form fields below and click next:</h3>
@@ -11,6 +11,7 @@
 								<%= form_tag student_path(student), :method => :put, :remote => true do %>
 									<%= render partial: 'schools/dialog_boxes/edit_address_search_form', locals: {student: student} %>
 								<% end %>
+								<%= button_to 'Delete Student', student_path(student), method: :delete, id: 'delete_student_button' %>
 							<% else %>
 								<h3>Please enter your student's home address, name and grade level:</h3>
 								<br />

@@ -14,24 +14,34 @@ class SchoolsController < ApplicationController
     end
   end
 
+
   def index
-    if current_user
+    if current_user.present?
+      logger.info "*********** current_user exists"
       @students = current_user.students
     else
+      logger.info "*********** current_user is blank"
       @students = Student.where(session_id: session[:session_id]).order(:first_name)
     end
 
-    if @students.blank? || current_student.blank?
+    if @students.blank?
+      logger.info "*********** @students is blank"
       render 'home', layout: 'home'
     else
       # Set current_student if it's specified in the params
-      if params[:student].present? 
+      if params[:student].present?
         if current_user.present? && current_user.students.where(first_name: params[:student]).first.present?
           session[:current_student_id] = current_user.students.where(first_name: params[:student]).first.id
         elsif Student.where(first_name: params[:student], session_id: session[:session_id]).present?
           session[:current_student_id] = Student.where(first_name: params[:student], session_id: session[:session_id]).first.id
         end
       end
+
+      if current_student.blank?
+        session[:current_student_id] = @students.first.id
+      end
+
+      logger.info "*********** current_student = #{current_student.id}"
 
       @student_schools = get_school_choices
       

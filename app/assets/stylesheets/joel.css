@@ -149,3 +149,9 @@ input, select {
 	left:0;
 	top:0;
 }
+#delete_student_button {
+	float: right;
+	background: white !important;
+	margin-top: 5px;
+	color: red !important;
+}

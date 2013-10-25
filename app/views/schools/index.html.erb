@@ -2,110 +2,7 @@
 <div id='dialog_box' class='dialog_box dialog_box_dicover' style='display:none;'>
 </div>
 
-
-<!-- start timeline -->
-<div class="wrap timeline_menu">
-	<!-- start timeline -->
-	<div class="timeline">
-		<div class="months">
-			<div class="month">Oct 2013</div>
-			<div class="month">Nov</div>
-			<div class="month">Dec</div>
-			<div class="month">Jan 2014</div>
-			<div class="month">Feb</div>
-			<div class="month">Mar</div>
-			<div class="month">Apr</div>
-			<div class="month">May</div>
-			<div class="month">Jun</div>
-			<div class="month">Jul</div>
-			<div class="month">Aug</div>
-			<div class="month last">Sep</div>
-		</div>	
-		
-		<div class="day_indicator" style="left:<%= timeline_percent(Date.today) %>;">
-			<span class="text">Today</span>
-		</div>
-		
-		<div class="event_indicator"  style="left:15%;"><span class='icon-DBPS-Dev-Assets-SRG-38'></span></div>
-		<div class="event_indicator"  style="left:18%;"><span class='icon_horizontal-event'></span></div>
-		<div class="event_indicator"  style="left:46%;"><span class='icon_horizontal-event'></span></div>
-		<div class="event_indicator"  style="left:52%;"><span class='icon-DBPS-Dev-Assets-SRG-38'></span></div>
-		<div class="event_indicator"  style="left:92%;"><span class='icon_horizontal-event'></span></div>
-		
-        <div id="registration_contaner">
-        	<div id="registration_btn">
-            	Registration
-            </div>
-			<div class="clr"></div>
-        	<div class='register_timeline_contaner' style='display:none; '>
-				<div class='event_zone' id='regis_1' style='left:0%;'>
-					<div class='event'  >
-						<div class='box_info' style='display:none;'>
-							<div class='triangle'></div>
-							<div class='date_event'>Jan 22–25</div>
-							<div class='txt_event'>Last names R–Z<br>K, 6, 9 New-Student Registration</div>
-							<span>Your registration period</span>
-						</div>
-					</div>
-				</div>
-				<div class='event_zone' id='regis_2' style='left:6%;'>
-					<div class='event'  >
-						<div class='box_info' style='display:none;'>
-							<div class='triangle'></div>
-							<div class='date_event'>Jan 22–25</div>
-							<div class='txt_event'>Last names R–Z<br>K, 6, 9 New-Student Registration</div>
-							<span>Your registration period</span>
-						</div>
-					</div>
-				</div>
-				<div class='event_zone' id='regis_3' style='left:14%;'>
-					<div class='event'  >
-						<div class='box_info' style='display:none;'>
-							<div class='triangle'></div>
-							<div class='date_event'>Jan 22–25</div>
-							<div class='txt_event'>Last names R–Z<br>K, 6, 9 New-Student Registration</div>
-							<span>Your registration period</span>
-						</div>
-					</div>
-				</div>
-				<div class='event_zone' id='regis_4' style='left:22%;'>
-					<div class='event your_registration_period'  >
-						<div class='box_info' style='display:none;'>
-							<div class='triangle'></div>
-							<div class='date_event'>Jan 22–25</div>
-							<div class='txt_event'>Last names R–Z<br>K, 6, 9 New-Student Registration</div>
-							<span>Your registration period</span>
-						</div>
-					</div>
-				</div>
-				<div class='event_zone' id='regis_5' style='left:30%;'>
-					<div class='event'  >
-						<div class='box_info' style='display:none;'>
-							<div class='triangle'></div>
-							<div class='date_event'>Jan 22–25</div>
-							<div class='txt_event'>Last names R–Z<br>K, 6, 9 New-Student Registration</div>
-							<span>Your registration period</span>
-						</div>
-					</div>
-				</div>
-				
-				<div class='event_zone' id='regis_6' style='left:45%;'>
-					<div class='event'  >
-						<div class='box_info' style='display:none;'>
-							<div class='triangle'></div>
-							<div class='date_event'>Jan 22–25</div>
-							<div class='txt_event'>Last names R–Z<br>K, 6, 9 New-Student Registration</div>
-							<span>Your registration period</span>
-						</div>
-					</div>
-				</div>
-
-				
-			</div>
-
-        </div>
-	</div>
-	<!-- end timeline -->
+<%= render partial: 'timeline' %>
 	
 	<!--  navigation menu desktop and mobile -->
 	<section class="content_wrap ">
@@ -588,4 +485,3 @@ $(".timeline").hover(
 
 	});
 </script>
-<%= debug session %>

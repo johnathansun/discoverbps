@@ -60,12 +60,21 @@ module SchoolsHelper
 	end
 
 	def uniform_policy_list_helper(hash)
+		# ["", "No Uniform", "Not Specified", "Voluntary", "Mandatory", "Varies"] 
 		if hash.present?
 			list = []
 			if hash[:uniformpolicy] == 'Mandatory'
-				list << 'Yes'
+				list << 'Mandatory'
+			elsif hash[:uniformpolicy] == 'No Uniform'
+				list << 'None'
+			elsif hash[:uniformpolicy] == 'Not Specified'
+				list << 'Varies'
+			elsif hash[:uniformpolicy] == 'Varies'
+				list << 'Varies'
+			elsif hash[:uniformpolicy] == 'Voluntary'
+				list << 'None'
 			else
-				list << 'No'
+				list << 'None'
 			end
 			return list
 		else
@@ -98,12 +107,16 @@ module SchoolsHelper
 	end
 
 	def grade_levels_helper(array)
-		if array.length == 0
-			"N/A"
-		elsif array.length == 1
-			array[0]
+		if array.present?
+			if array.length == 0
+				"N/A"
+			elsif array.length == 1
+				array[0]
+			else
+				"#{array[0]} - #{array[-1]}"
+			end
 		else
-			"#{array[0]} - #{array[-1]}"
+			return nil
 		end
 	end
 
@@ -114,6 +127,8 @@ module SchoolsHelper
 				list << "#{partner[:description]}, "
 			end
 			return list.gsub(/,\s?$/, '')
+		else
+			return nil
 		end
 	end
 
@@ -169,10 +184,10 @@ module SchoolsHelper
 			tags = sports_list_helper(school.api_sports[0])
 		
 		elsif category.name == 'Health & Wellness'
-			tags = health_list_helper(school.api_basic_info[0])
+			tags = health_list_helper(school.api_basic_info.try(:[], 0))
 		
 		elsif category.name == 'Enrollment'
-			tags = enrollment_list_helper(school.api_basic_info[0])
+			tags = enrollment_list_helper(school.api_basic_info.try(:[], 0))
 
 		elsif category.name == 'Uniform Policy'
 			tags = uniform_policy_list_helper(school.api_description[0])
