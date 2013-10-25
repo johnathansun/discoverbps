@@ -33,14 +33,16 @@ class SchoolsController < ApplicationController
         end
       end
 
-      # Hit the API if the student has no saved schools, or if the cache is stale (> 24 hours)
-      if current_student.schools.blank? || current_student.schools_last_updated_at.blank? || current_student.schools_last_updated_at < Time.now.yesterday
-        @student_schools = get_school_choices
-      elsif current_student.schools.present?
-        @student_schools = current_student.student_schools.rank(:sort_order)
-      else
-        @student_schools = []
-      end
+      @student_schools = get_school_choices
+      
+      # # Hit the API if the student has no saved schools, or if the cache is stale (> 24 hours)
+      # if current_student.schools.blank? || current_student.schools_last_updated_at.blank? || current_student.schools_last_updated_at < Time.now.yesterday
+      #   @student_schools = get_school_choices
+      # elsif current_student.schools.present?
+      #   @student_schools = current_student.student_schools.rank(:sort_order)
+      # else
+      #   @student_schools = []
+      # end
 
       respond_to do |format|
         format.html # index.html.erb
