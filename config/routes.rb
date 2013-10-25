@@ -8,6 +8,7 @@ DiscoverbpsV2::Application.routes.draw do
     put 'iep', on: :member
     put 'ell', on: :member
     put 'preferences', on: :member
+    delete 'delete_all', on: :collection
   end 
 
   resources :schools do 

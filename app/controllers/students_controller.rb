@@ -135,6 +135,19 @@ class StudentsController < ApplicationController
     end
   end
 
+  def delete_all
+    students = Student.where('id IN (?)', params[:student_ids])
+    if students.present?
+      students.each do |student|
+        student.destroy
+      end
+    end
+    session[:current_student_id] = nil
+    respond_to do |format|
+      format.html { redirect_to home_students_url }
+    end
+  end
+
   private
 
   def bps_api_connector(url)
