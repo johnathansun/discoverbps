@@ -28,8 +28,11 @@ class StudentsController < ApplicationController
         zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
         
         @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}").try(:[], :List)
-        
-        format.js { render template: "students/address_verification" }
+        if @addresses.present?
+          format.js { render template: "students/address_verification" }
+        else
+          format.js { render template: "students/errors" }
+        end
       else
         format.js { render template: "students/errors" }
       end
@@ -48,7 +51,11 @@ class StudentsController < ApplicationController
         
         @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}").try(:[], :List)
         
-        format.js { render template: "students/address_verification" }
+        if @addresses.present?
+          format.js { render template: "students/address_verification" }
+        else
+          format.js { render template: "students/errors" }
+        end
       else
         format.js { render template: "students/errors" }
       end
@@ -136,7 +143,7 @@ class StudentsController < ApplicationController
   end
 
   def delete_all
-    students = Student.where('id IN (?)', params[:student_ids])
+    students = Student.where(session_id: session[:session_id])
     if students.present?
       students.each do |student|
         student.destroy
@@ -144,7 +151,7 @@ class StudentsController < ApplicationController
     end
     session[:current_student_id] = nil
     respond_to do |format|
-      format.html { redirect_to home_students_url }
+      format.html { redirect_to home_schools_url }
     end
   end
 
