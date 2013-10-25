@@ -104,7 +104,6 @@ class SchoolsController < ApplicationController
         end
       end
     end
-    render nothing: true
   end
 
   private

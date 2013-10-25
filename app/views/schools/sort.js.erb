@@ -1,0 +1,289 @@
+
+		      function initialize(){
+				  $('.global_map').css('height', ($(window).height() / 2) + 'px' );
+				  $('#googleMap').css('height', ($(window).height() / 2) + 'px' );
+				    // Create an array of styles.
+				  var map_styles = [
+				    {
+				    "featureType": "poi.attraction",
+				    "stylers": [
+				      { "visibility": "off" }
+				    ]
+				    },{
+				      "featureType": "poi.business",
+				      "stylers": [
+				        { "visibility": "off" }
+				      ]
+				    },{
+				      "featureType": "poi.place_of_worship",
+				      "stylers": [
+				        { "visibility": "off" }
+				      ]
+				    },{
+				      "featureType": "transit.line",
+				      "stylers": [
+				        { "visibility": "off" }
+				      ]
+				    },{
+				      "featureType": "poi.attraction",
+				      "stylers": [
+				        { "visibility": "off" }
+				      ]
+				    },{
+				      "featureType": "poi.medical",
+				      "stylers": [
+				        { "visibility": "off" }
+				      ]
+				    },{
+				      "featureType": "poi.school",
+				      "stylers": [
+				        { "visibility": "off" }
+				      ]
+				    },{
+				      "featureType": "landscape.man_made",
+				      "stylers": [
+				        { "visibility": "off" }
+				      ]
+				    },{
+				      "featureType": "poi.park",
+				      "elementType": "geometry",
+				      "stylers": [
+				        { "lightness": 41 }
+				      ]
+				    },{
+				      "featureType": "transit.station.airport",
+				      "stylers": [
+				        { "lightness": 49 }
+				      ]
+				    },{
+				      "featureType": "administrative",
+				      "elementType": "labels.text.fill",
+				      "stylers": [
+				        { "saturation": -100 },
+				        { "lightness": 24 }
+				      ]
+				    },{
+				      "featureType": "road.highway",
+				      "stylers": [
+				        { "lightness": 26 }
+				      ]
+				    },{
+				      "featureType": "road.arterial",
+				      "elementType": "geometry",
+				      "stylers": [
+				        { "visibility": "simplified" },
+				        { "color": "#d6cfc6" },
+				        { "lightness": 43 }
+				      ]
+				    },{
+				      "featureType": "road.local",
+				      "elementType": "geometry.fill",
+				      "stylers": [
+				        { "color": "#d6cfc6" },
+				        { "lightness": 42 }
+				      ]
+				    },{
+				      "featureType": "road.local",
+				      "elementType": "geometry.stroke",
+				      "stylers": [
+				        { "visibility": "off" }
+				      ]
+				    },{
+				      "featureType": "road.arterial",
+				      "elementType": "geometry.stroke",
+				      "stylers": [
+				        { "visibility": "off" }
+				      ]
+				    },{
+				      "featureType": "road.arterial",
+				      "elementType": "geometry.fill",
+				      "stylers": [
+				        { "visibility": "on" }
+				      ]
+				    },{
+				      "featureType": "poi.park",
+				      "elementType": "labels",
+				      "stylers": [
+				        { "visibility": "off" }
+				      ]
+				    },{
+				      "featureType": "transit.station.rail",
+				      "elementType": "labels",
+				      "stylers": [
+				        { "saturation": -73 },
+				        { "lightness": 27 }
+				      ]
+				    },{
+				      "featureType": "road.highway",
+				      "elementType": "geometry.stroke",
+				      "stylers": [
+				        { "visibility": "off" }
+				      ]
+				    },{
+				      "featureType": "road.highway",
+				      "elementType": "geometry.fill",
+				      "stylers": [
+				        { "visibility": "on" },
+				        { "lightness": -5 }
+				      ]
+				    },{
+				      "featureType": "administrative.land_parcel",
+				      "stylers": [
+				        { "visibility": "off" }
+				      ]
+				    },{
+				    }
+				  ];
+
+				  var Marker = function(options) {
+				    google.maps.Marker.apply(this, arguments);
+				    if (options.label) {
+				      this.MarkerLabel = new MarkerLabel({
+				        map: this.map,
+				        marker: this,
+				        text: options.label
+				      });
+				      this.MarkerLabel.bindTo('position', this, 'position');
+				    }
+				  };
+
+				  // Define Marker Shapes
+				  var MAP_HOME = 'M 239.96,415.88L 23.72,199.6L 96.52,199.56L 96.52,0.080L 383.4,0.080L 383.4,199.52L 456.28,199.52 z';
+				  var MAP_PIN = 'M 314.692,279.496c0,80.988-65.892,146.88-146.88,146.88S 20.933,360.496, 20.933,279.496c0-74.868, 56.364-136.704, 128.88-145.62 l0-144.252 l 36,0 L 185.813,133.876 C 258.317,142.792, 314.692,204.64, 314.692,279.496z';
+
+				  // Create Custom Marker Object
+				  Marker.prototype = new google.maps.Marker();
+
+				  // Custom Marker SetMap
+				  Marker.prototype.setMap = function() {
+				    google.maps.Marker.prototype.setMap.apply(this, arguments);
+				    (this.MarkerLabel) && this.MarkerLabel.setMap.apply(this.MarkerLabel, arguments);
+				  };
+				   
+				  // Marker Label Overlay
+				  var MarkerLabel = function(options) {
+				    var self = this;
+				    this.setValues(options);
+				    
+				    // Create the label container
+				    this.div = document.createElement('div');
+				    this.div.className = 'marker-label';
+				    var span = document.createElement('span');
+				    span.className = "marker-icon";
+				    this.div.appendChild(span);
+				   
+				    // Trigger the marker click handler if clicking on the label
+				    google.maps.event.addDomListener(this.div, 'click', function(e){
+				      (e.stopPropagation) && e.stopPropagation();
+				      google.maps.event.trigger(self.marker, 'click');
+				    });
+				  };
+
+				  // Create MarkerLabel Object
+				  MarkerLabel.prototype = new google.maps.OverlayView;
+
+				  // Marker Label onAdd
+				  MarkerLabel.prototype.onAdd = function() {
+				       var pane = this.getPanes().overlayImage.appendChild(this.div);
+				       var self = this;
+				       this.listeners = [
+				            google.maps.event.addListener(this, 'position_changed', function() { self.draw(); }),
+				            google.maps.event.addListener(this, 'text_changed', function() { self.draw(); }),
+				            google.maps.event.addListener(this, 'zindex_changed', function() { self.draw(); })
+				       ];
+				  };
+				   
+				  // Marker Label onRemove
+				  MarkerLabel.prototype.onRemove = function() {
+				       this.div.parentNode.removeChild(this.div);
+				       for (var i = 0, I = this.listeners.length; i < I; ++i) {
+				            google.maps.event.removeListener(this.listeners[i]);
+				       }
+				  };
+				   
+				  // Implement draw
+				  MarkerLabel.prototype.draw = function() {
+				       var projection = this.getProjection();
+				       var position = projection.fromLatLngToDivPixel(this.get('position'));
+				       var div = this.div;
+				       div.style.left = position.x + 'px';
+				       div.style.top = position.y + 'px';
+				       div.style.display = 'block';
+				       div.style.zIndex = this.get('zIndex'); //ALLOW LABEL TO OVERLAY MARKER
+				       this.div.innerHTML = this.get('text').toString();
+				  };
+
+				   // Create a new StyledMapType object, passing it the array of styles,
+					  // as well as the name to be displayed on the map type control.
+					 	var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});	
+						var myLatlng = 	new google.maps.LatLng(<%= current_student.latitude %>,<%= current_student.longitude %>);
+				    var latlngbounds = new google.maps.LatLngBounds();
+						var mapProp = {
+						  center:myLatlng,
+						  zoom:13,
+							panControl: true,
+							zoomControl: true,
+							mapTypeControl: false,
+							scaleControl: false,
+							draggable: false,
+							scrollwheel: false,
+							streetViewControl: false,
+							overviewMapControl: false,
+							
+							mapTypeControlOptions: {
+							  mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+							}
+						};
+
+
+						var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+						console.log(<%= current_student.student_schools.collect {|x| x.school_id } %>);
+				    <% current_student.student_schools.rank(:sort_order).each_with_index do |student_school, i| %>
+				      <% if student_school.school.latitude.present? && student_school.school.longitude.present? %>
+				        var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
+				        latlngbounds.extend(coordinates);
+				        var marker = new google.maps.Marker({
+				          position: coordinates,
+				          icon: '/assets/map_pins/DBPS_MapPins_Blue_<%= i + 1 %>.svg',
+				          map: map,
+				          title: '<%= escape_javascript(student_school.school.name) %>'
+				        });
+				        var infowindow = new google.maps.InfoWindow({
+				        });
+				        google.maps.event.addListener(marker, 'click', function() {
+				          infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info[0][:campus1address1] %><br /><%= student_school.school.api_basic_info[0][:campus1city] %>, <%= student_school.school.api_basic_info[0][:campus1state] %>');
+				          infowindow.open(map,this);
+				        });
+				      <% end %>
+				    <% end %>
+
+				    var coordinates = new google.maps.LatLng(<%= current_student.latitude %>, <%= current_student.longitude %>);
+				    latlngbounds.extend(coordinates);
+				    var marker = new google.maps.Marker({
+				      position: coordinates,
+				      icon: {
+				        path: MAP_HOME,
+				        fillColor: '#000000',
+				        fillOpacity: 1,
+				        strokeColor: '',
+				        strokeWeight: 0,
+				        rotation: 180,
+				        scale: 1/22
+				      },
+				      label: '<i class="icon-map-home"></i>',
+				      map: map
+				    });
+				    var infowindow = new google.maps.InfoWindow({
+				    });
+				    google.maps.event.addListener(marker, 'click', function() {
+				      infowindow.setContent('<div><h3>Home</h3><%= current_student.street_number %> <%= current_student.street_name %>, <%= current_student.zipcode %>');
+				      infowindow.open(map,this);
+				    });
+
+						//Associate the styled map with the MapTypeId and set it to display.
+						  map.fitBounds(latlngbounds);
+				      map.mapTypes.set('map_style', styledMap);
+						  map.setMapTypeId('map_style');
+					}
+		
+				initialize();
