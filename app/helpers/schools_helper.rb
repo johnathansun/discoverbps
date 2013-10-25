@@ -173,16 +173,13 @@ module SchoolsHelper
 
 	def preference_category_tags_helper(category, school)
 		preference_names = category.preferences.collect {|x| x.name}
-		
 		if category.name == 'Grades Offered'
-			if school.grade_levels.present?
-				tags = grade_levels_data_helper(school.grade_levels)
-			end
+			tags = grade_levels_data_helper(school.grade_levels)
 		elsif category.name == 'Facility Features'
-			tags = facilities_list_helper(school.api_facilities[0])
+			tags = facilities_list_helper(school.api_facilities.try(:[], 0))
 		
 		elsif category.name == 'Sports'
-			tags = sports_list_helper(school.api_sports[0])
+			tags = sports_list_helper(school.api_sports.try(:[], 0))
 		
 		elsif category.name == 'Health & Wellness'
 			tags = health_list_helper(school.api_basic_info.try(:[], 0))
@@ -191,7 +188,7 @@ module SchoolsHelper
 			tags = enrollment_list_helper(school.api_basic_info.try(:[], 0))
 
 		elsif category.name == 'Uniform Policy'
-			tags = uniform_policy_list_helper(school.api_description[0])
+			tags = uniform_policy_list_helper(school.api_description.try(:[], 0))
 		end
 		
 		return tags
