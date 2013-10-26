@@ -225,7 +225,11 @@ function initialize(){
    // Create a new StyledMapType object, passing it the array of styles,
 	  // as well as the name to be displayed on the map type control.
 	 	var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});	
-		var myLatlng = 	new google.maps.LatLng(<%= current_student.latitude %>,<%= current_student.longitude %>);
+    <% if current_student.latitude.present? && current_student.longitude.present? && current_student.latitude != 0 && current_student.longitude != 0 %>
+      var myLatlng =  new google.maps.LatLng(<%= current_student.latitude %>,<%= current_student.longitude %>);
+    <% else %>
+      var myLatlng = new google.maps.LatLng(42.3581,71.0636);
+    <% end %>
     var latlngbounds = new google.maps.LatLngBounds();
 		var mapProp = {
 		  center:myLatlng,
