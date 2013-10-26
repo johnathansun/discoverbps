@@ -1,219 +1,219 @@
 
-	<!-- partials are injected into this dialog box - don't delete -->
-	<div id='dialog_box' class='dialog_box dialog_box_dicover' style='display:none;'>
-	</div>
-	
-	
-	<div class="wrap ">
-		<div class="content_wrap">
-			<!--languages selection and his list-->
-			<!-- <ul class='languages'>
-				<li>
-					<div class='current_language'><span data-icon="&#xe003;" aria-hidden="true"></span>English</div>
-					<div class='clr'></div>
-					<ul >
-						<li><a href='#' class='language'>Español</a></li>
-						<li><a href='#' class='language'>Kreyòl Ayisyen</a></li>
-						<li><a href='#' class='language'>中文</a></li>
-						<li><a href='#' class='language'>Português</a></li>
-						<li><a href='#' class='language'>Kriolu Kabuverdianu</a></li>
-						<li><a href='#' class='language'>Tiếng Việt</a></li>
-						<li><a href='#' class='language'>Français</a></li>
-						<li><a href='#' class='language'><span data-icon="&#xe003;" aria-hidden="true"></span>Other</a></li>
-					</ul>
-				</li>
-			</ul> -->
-			<!--END list-->
-		</div>
-	</div>
-	<div class="wrap ">
-		<div class="content_wrap search">
-			<%= render partial: 'schools/account_tab' %>
+<!-- partials are injected into this dialog box - don't delete -->
+<div id='dialog_box' class='dialog_box dialog_box_dicover' style='display:none;'>
+</div>
 
-			<div class="search_header">
-				<div class="title_bloc">
-					<h1>Welcome to Boston Public Schools Registration</h1>
-					<img class="logo_beta" src="/assets/logo_beta.png" alt="beta"/>
+
+<div class="wrap ">
+	<div class="content_wrap">
+		<!--languages selection and his list-->
+		<!-- <ul class='languages'>
+			<li>
+				<div class='current_language'><span data-icon="&#xe003;" aria-hidden="true"></span>English</div>
+				<div class='clr'></div>
+				<ul >
+					<li><a href='#' class='language'>Español</a></li>
+					<li><a href='#' class='language'>Kreyòl Ayisyen</a></li>
+					<li><a href='#' class='language'>中文</a></li>
+					<li><a href='#' class='language'>Português</a></li>
+					<li><a href='#' class='language'>Kriolu Kabuverdianu</a></li>
+					<li><a href='#' class='language'>Tiếng Việt</a></li>
+					<li><a href='#' class='language'>Français</a></li>
+					<li><a href='#' class='language'><span data-icon="&#xe003;" aria-hidden="true"></span>Other</a></li>
+				</ul>
+			</li>
+		</ul> -->
+		<!--END list-->
+	</div>
+</div>
+<div class="wrap ">
+	<div class="content_wrap search">
+		<%= render partial: 'schools/account_tab' %>
+
+		<div class="search_header">
+			<div class="title_bloc">
+				<h1>Welcome to Boston Public Schools Registration</h1>
+				<img class="logo_beta" src="/assets/logo_beta.png" alt="beta"/>
+			</div>
+			<p>This website provides resources for finding, exploring and comparing a student's eligible schools. </p>
+							<p class="small_text tablet">Looking for the 2013-2014 school year?</p>
+			
+					 </div>
+					<div class="search_section_content "> 
+					 
+						<!-- ADD CLASS "RIGHT" TO MOVE THE TODAY INDICATOR TO RIGHT OF THE TIME LINE, OR "LEFT" TO MOVE TO THE LEFT  FOR LARGEUR OF TABLET SIZE -->
+						<!-- AND change the top % to ajust the today up or down -->
+						<div class="today right" style="top:<%= timeline_percent(Date.today) %>;">
+							<span aria-hidden="true" class="right icon-DBPS-Dev-Assets-SRG-30"></span>&nbsp; Today &nbsp;<span aria-hidden="true" class="left icon-DBPS-Dev-Assets-SRG-32"></span>
+							<span class="yello_line"></span>
+						</div> 
+						<!-- END today indicator-->
+						
+						<!-- Discover section -->
+			<section class="search_section first">
+				<p class="small_text no_tablet">Looking for the 2013-2014 school year?</p>	
+				<div class="content_left">
+					
+					<div class="logo discover" >
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-01"></span>
+					</div>
+					<div class="text">
+						<p>The first step in the school registration process is to identify the student's eligible schools. By filling out the form below, and answering a few questions in the following dialog boxes, we will display your student's eligible schools, and help you to consider which schools will be the best fit for your student.</p>
+
+						<% if @students.present? %>
+							<p class="K">Please select from your previous searches:</p>
+							<ul class="horizontal_list">
+								<% for student in @students %>
+									<li><%= link_to student.tab_name, schools_path(student: student.id), class: 'orange_button' %></li>
+								<% end %>
+								<li><%= button_to 'Clear Searches', {controller: 'students', action: 'delete_all', student_ids: @students.collect {|x| x.id}}, method: :delete, id: 'delete_all_students_button', confirm: 'Are you sure you want to clear all of your previous searches?' %></li>
+							</ul>
+							<div class='clr'></div>
+							<p class="K"><br />Or search for a new student using the form below:</p>
+						<% else %>
+							<p class="K">To get started, enter your home address and your student's name and grade level in the form below:</p>
+						<% end %>							
+							<%= form_tag students_path, :method => :post, :remote => true do %>
+							<%= render partial: 'schools/search_form' %>
+						<% end %>
+					</div>
+									 
 				</div>
-				<p>This website provides resources for finding, exploring and comparing a student's eligible schools. </p>
-								<p class="small_text tablet">Looking for the 2013-2014 school year?</p>
-				
-						 </div>
-						<div class="search_section_content "> 
-						 
-							<!-- ADD CLASS "RIGHT" TO MOVE THE TODAY INDICATOR TO RIGHT OF THE TIME LINE, OR "LEFT" TO MOVE TO THE LEFT  FOR LARGEUR OF TABLET SIZE -->
-							<!-- AND change the top % to ajust the today up or down -->
-							<div class="today right" style="top:<%= timeline_percent(Date.today) %>;">
-								<span aria-hidden="true" class="right icon-DBPS-Dev-Assets-SRG-30"></span>&nbsp; Today &nbsp;<span aria-hidden="true" class="left icon-DBPS-Dev-Assets-SRG-32"></span>
-								<span class="yello_line"></span>
-							</div> 
-							<!-- END today indicator-->
-							
-							<!-- Discover section -->
-				<section class="search_section first">
-					<p class="small_text no_tablet">Looking for the 2013-2014 school year?</p>	
-					<div class="content_left">
-						
-						<div class="logo discover" >
-							<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-01"></span>
-						</div>
-						<div class="text">
-							<p>The first step in the school registration process is to identify the student's eligible schools. By filling out the form below, and answering a few questions in the following dialog boxes, we will display your student's eligible schools, and help you to consider which schools will be the best fit for your student.</p>
-
-							<% if @students.present? %>
-								<p class="K">Please select from your previous searches:</p>
-								<ul class="horizontal_list">
-									<% for student in @students %>
-										<li><%= link_to student.tab_name, schools_path(student: student.id), class: 'orange_button' %></li>
-									<% end %>
-									<li><%= button_to 'Clear Searches', {controller: 'students', action: 'delete_all', student_ids: @students.collect {|x| x.id}}, method: :delete, id: 'delete_all_students_button', confirm: 'Are you sure you want to clear all of your previous searches?' %></li>
-								</ul>
-								<div class='clr'></div>
-								<p class="K"><br />Or search for a new student using the form below:</p>
-							<% else %>
-								<p class="K">To get started, enter your home address and your student's name and grade level in the form below:</p>
-							<% end %>							
-								<%= form_tag students_path, :method => :post, :remote => true do %>
-								<%= render partial: 'schools/search_form' %>
-							<% end %>
-						</div>
-										 
-					</div>
-					<!-- timeline info of Discover -->
-					<div class="content_right">
-						
-						<span class="event first" style="margin-bottom:37px;">
-												REGISTRATION TIMELINE <span aria-hidden="true" class="start_point icon-DBPS-Dev-Assets-SRG-35"></span>
-											</span>
-											<span class="event Y">
-												<span class="desktop">
-								Discover schools
-												</span>
-												<span class="tablette">
-													<img class="point" src="/assets/yellow_point.png" />
-												</span>
-											</span>
-											<span class="event Y">
-												<span class="desktop">
-								Compare options
-							</span>
-												<span class="tablette">
-													<img class="point" src="/assets/yellow_point.png" />
-												</span>
-											</span>
-											<span class="event">
-												<span class="desktop">
-								Nov 1<br/>
-								<span class="W" style="font-size:12px;line-height:15px;">
-															School Previews and<br/>
-									School Showcases start
-														</span>
-												</span>
-												<span class="tablette">
-													<img class="point_arrow" src="/assets/blue_point_arrow.png" />
-												</span>
-											</span>
-											<span class="event y">
-												<span class="desktop">
-								Create your list
-							</span>
-												<span class="tablette">
-													<img class="point" src="/assets/yellow_point.png" />
-												</span>
-											</span>
-											<span class="event last">
-												<span class="desktop">
-								Dec 15<br/>
-								<span class="W">Pre-register</span>
-							</span>
-												<span class="tablette">
-													<img class="point" src="/assets/blue_point_white.png" />
-												</span>
-											</span>
-						
-					</div>
-					<!--END  timeline info of Discover -->
+				<!-- timeline info of Discover -->
+				<div class="content_right">
 					
-				</section>
-				<!-- END Discover section -->
-				
-				<!-- REgister section -->
-				<section class=" search_section second">
-									
-					<div class="content_left">
-						<div class="logo register" >
-							<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-02"></span>
-						</div>
-						<div class="text">
-							<p>Once a student's list of schools has been chosen, registration begins by submitting the list and visiting a Welcome Center.
-													</p>
-													<a class="K" href="#" title="Learn more"  style="margin-bottom:0;">Learn more</a>
-						</div>
-					</div>
-					<!-- timeline info of Register -->
-					<div class="content_right">
-											<span class="event" style="margin-bottom:39px;">
-												<span class="desktop">
-													 Jan 6<!--<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-35"></span>--><img class="point" src="/assets/red_point.png" /><br/>
-													 <span class="W"> Registration begins</span><br/>
-														for K, 6 9
-														<br />
-														(All other grades: Feb 5th)
-												</span>
-												<span class="tablette">
-													<img class="point_arrow" src="/assets/blue_point_arrow.png" />
-												</span>
-													
+					<span class="event first" style="margin-bottom:37px;">
+											REGISTRATION TIMELINE <span aria-hidden="true" class="start_point icon-DBPS-Dev-Assets-SRG-35"></span>
+										</span>
+										<span class="event Y">
+											<span class="desktop">
+							Discover schools
 											</span>
-											<span class="event Y">
-												<span class="desktop">
-								Mar - Jul<br/>
-														<span class="W">Assignments mailed</span>
-												</span>
+											<span class="tablette">
+												<img class="point" src="/assets/yellow_point.png" />
 											</span>
-					</div>
-					<!--END timeline info of Register -->
-				</section>
-				<!-- END REgister section -->
-				
-				
-				
-				<!-- Succeed section -->
-							<section class="search_section third">				
-					<div class="content_left">
-						
-						<div class="logo succeed" >
-							<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-03"></span>
-						</div>
-						<div class="text">
-							<p>Hear from current Boston student who've succeeded in schools across the city. Learn about services and programs offered by Boston Public Schools you never knew existed!
-													</p>
-													<a class="K" href="#" title="Explore" style="margin-bottom:0;">Explore</a>
-						</div>
-											
-					</div>
-					<!--END timeline info of Register -->
+										</span>
+										<span class="event Y">
+											<span class="desktop">
+							Compare options
+						</span>
+											<span class="tablette">
+												<img class="point" src="/assets/yellow_point.png" />
+											</span>
+										</span>
+										<span class="event">
+											<span class="desktop">
+							Nov 1<br/>
+							<span class="W" style="font-size:12px;line-height:15px;">
+														School Previews and<br/>
+								School Showcases start
+													</span>
+											</span>
+											<span class="tablette">
+												<img class="point_arrow" src="/assets/blue_point_arrow.png" />
+											</span>
+										</span>
+										<span class="event y">
+											<span class="desktop">
+							Create your list
+						</span>
+											<span class="tablette">
+												<img class="point" src="/assets/yellow_point.png" />
+											</span>
+										</span>
+										<span class="event last">
+											<span class="desktop">
+							Dec 15<br/>
+							<span class="W">Pre-register</span>
+						</span>
+											<span class="tablette">
+												<img class="point" src="/assets/blue_point_white.png" />
+											</span>
+										</span>
 					
-					<!-- timeline info of Succeed -->
-					<div class="content_right">
-						
-						<span class="event">
-							<span class="desktop">
-								Sept 4<!--<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-35"></span>--> <img class="point" src="/assets/blue_point.png" /><br/>
-								<span class="W" style="font-size:12px;line-height:15px;">
-															First day of school!
-														</span>
-							</span>
-											</span>
-						
+				</div>
+				<!--END  timeline info of Discover -->
+				
+			</section>
+			<!-- END Discover section -->
+			
+			<!-- REgister section -->
+			<section class=" search_section second">
+								
+				<div class="content_left">
+					<div class="logo register" >
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-02"></span>
 					</div>
-					<!--END timeline info of Succeed -->
+					<div class="text">
+						<p>Once a student's list of schools has been chosen, registration begins by submitting the list and visiting a Welcome Center.
+												</p>
+												<a class="K" href="#" title="Learn more"  style="margin-bottom:0;">Learn more</a>
+					</div>
+				</div>
+				<!-- timeline info of Register -->
+				<div class="content_right">
+										<span class="event" style="margin-bottom:39px;">
+											<span class="desktop">
+												 Jan 6<!--<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-35"></span>--><img class="point" src="/assets/red_point.png" /><br/>
+												 <span class="W"> Registration begins</span><br/>
+													for K, 6 9
+													<br />
+													(All other grades: Feb 5th)
+											</span>
+											<span class="tablette">
+												<img class="point_arrow" src="/assets/blue_point_arrow.png" />
+											</span>
+												
+										</span>
+										<span class="event Y">
+											<span class="desktop">
+							Mar - Jul<br/>
+													<span class="W">Assignments mailed</span>
+											</span>
+										</span>
+				</div>
+				<!--END timeline info of Register -->
+			</section>
+			<!-- END REgister section -->
+			
+			
+			
+			<!-- Succeed section -->
+						<section class="search_section third">				
+				<div class="content_left">
 					
-					<!-- last point with star -->
-									<img class="final_point" src="/assets/star_point.png" />
-									
-				</section>
-				<!-- END Succeed section -->
-						</div>
-		</div>
+					<div class="logo succeed" >
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-03"></span>
+					</div>
+					<div class="text">
+						<p>Hear from current Boston student who've succeeded in schools across the city. Learn about services and programs offered by Boston Public Schools you never knew existed!
+												</p>
+												<a class="K" href="#" title="Explore" style="margin-bottom:0;">Explore</a>
+					</div>
+										
+				</div>
+				<!--END timeline info of Register -->
+				
+				<!-- timeline info of Succeed -->
+				<div class="content_right">
+					
+					<span class="event">
+						<span class="desktop">
+							Sept 4<!--<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-35"></span>--> <img class="point" src="/assets/blue_point.png" /><br/>
+							<span class="W" style="font-size:12px;line-height:15px;">
+														First day of school!
+													</span>
+						</span>
+										</span>
+					
+				</div>
+				<!--END timeline info of Succeed -->
+				
+				<!-- last point with star -->
+								<img class="final_point" src="/assets/star_point.png" />
+								
+			</section>
+			<!-- END Succeed section -->
+					</div>
 	</div>
+</div>
