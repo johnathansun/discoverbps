@@ -2697,7 +2697,7 @@ footer.footer .logo {
 .search .search_section .content_left form .form_line .bloc_2.select_grade {
   cursor: pointer;
   position: relative;
-  height: 38px;
+  height: 29px !important;
   width: 71px;
   padding-top: 0;
   background: #ffffff;
@@ -2820,7 +2820,7 @@ a.ui-corner-all:hover {
   width: 220px;
   display: block;
   float: left;
-  background: #0059a3;
+  background: none;
   font-size: 16px;
   line-height: 14px;
   color: #80bce7;
@@ -3149,7 +3149,6 @@ a.ui-corner-all:hover {
   height: 38px;
   width: 77px;
   padding-left: 11px;
-  padding-top: 12px;
   background: #ffffff;
   color: #565656;
   font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
@@ -5092,7 +5091,7 @@ ie6 .print1 .wrap {
   .wrap .search .search_section .content_left .text form .form_line .bloc_2.select_grade {
     float: none;
     width: auto;
-    height: 28px;
+    height: 38px;
     margin-bottom: 12px;
   }
   .wrap .search .search_section .content_left .text form .form_line .bloc_5 {

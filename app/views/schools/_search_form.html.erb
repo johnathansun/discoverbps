@@ -1,14 +1,14 @@
 <!-- Address and zip info -->
 <div class="form_line">
-	<input id="street_number" name="[student]street_number" class="bloc_3" type="text" placeholder="Street number" />
+	<input id="street_number" name="[student]street_number" class="bloc_3" type="text" placeholder="<%= (defined?(student) && student.try(:street_number).present?) ? student.street_number : 'Street number' %>" />
 	<div class="separation_bloc">
 		<div class="separation"></div>
 	</div>
-	<input id="street_name" name="[student]street_name" class="bloc_4" type="text" placeholder="Street name" />
+	<input id="street_name" name="[student]street_name" class="bloc_4" type="text" placeholder="<%= (defined?(student) && student.try(:street_name).present?) ? student.street_name : 'Street name' %>" />
 	<div class="separation_bloc">
 		<div class="separation"></div>
 	</div>
-		<input id="zipcode" name="[student]zipcode" class="bloc_2" type="text" placeholder="ZIP" />
+		<input id="zipcode" name="[student]zipcode" class="bloc_2" type="text" placeholder="<%= (defined?(student) && student.try(:zipcode).present?) ? student.zipcode : 'ZIP' %>" />
 				
 			<!-- Use current location button -->
 			<!-- <div class="current_location btn">
@@ -23,17 +23,17 @@
 	</div>
 	<!--END  Address and zip info -->
 	<div class="form_line">                    	
-		<input id="first_name" name="[student]first_name" class="bloc_3" type="text" placeholder="Student's first name" />
+		<input id="first_name" name="[student]first_name" class="bloc_3" type="text" placeholder="<%= (defined?(student) && student.try(:first_name).present?) ? student.first_name : 'Student first name' %>" />
 		<div class="separation_bloc">
 			<div class="separation"></div>
 		</div>
-		<input id="last_name" name="[student]last_name" class="bloc_4" type="text" placeholder="Last name" />
+		<input id="last_name" name="[student]last_name" class="bloc_4" type="text" placeholder="<%= (defined?(student) && student.try(:last_name).present?) ? student.last_name : 'Last name' %>" />
 		<div class="separation_bloc">
 			<div class="separation"></div>
 		</div>
 		<div class="bloc_2 select_grade" >
 			<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
-			<input id="grade_level_placeholder" name="[student]grade_level" type="text" placeholder="Grade" />
+			<input id="grade_level_placeholder" name="[student]grade_level" type="text" placeholder="<%= (defined?(student) && student.try(:grade_level).present?) ? student.grade_level : 'Grade' %>" />
 			<div class='option_grade'>
 				<div class='btn_grade'>K0</div>
 				<div class='btn_grade'>K1</div>

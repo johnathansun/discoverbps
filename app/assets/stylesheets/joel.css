@@ -12,7 +12,12 @@
 }
 #grade_level_placeholder {
 	width: 50px;
-	padding-top: 9px;
+}
+body.standard .select_grade {
+	padding-top: 9px !important;
+}
+.no_right_margin {
+	margin-right: 0px;
 }
 a.orange_button {
 	padding: 9px 12px 7px 12px;
@@ -88,7 +93,7 @@ a.student_tab {
   position: relative;
   height: 26px;
   width: 71px;
-  padding-top: 12px;
+  padding-top: 9px;
   background: #ebebeb;
   color: #565656;
   font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
