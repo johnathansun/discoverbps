@@ -1,6 +1,54 @@
 module SchoolsHelper
 	def facilities_list_helper(hash)
 		if hash.present?
+			list = ''
+			list << 'Art Room, ' 						if hash[:hasartroom] == 'True'
+			list << 'Athletic Field, ' 			if hash[:hasathleticfield] == 'True'
+			list << 'Auditorium, ' 					if hash[:hasauditorium] == 'True'
+			list << 'Cafeteria, ' 					if hash[:hascafeteria] == 'True'
+			list << 'Computer Lab, ' 				if hash[:hascomputerlab] == 'True'
+			list << 'Gymnasium, ' 					if hash[:hasgymnasium] == 'True'
+			list << 'Library, ' 						if hash[:haslibrary] == 'True'
+			list << 'Music Room, ' 					if hash[:hasmusicroom] == 'True'
+			list << 'Outdoor Classrooms, ' 	if hash[:hasoutdoorclassroom] == 'True'
+			list << 'Playground, ' 					if hash[:hasplayground] == 'True'
+			list << 'Pool, ' 								if hash[:haspool] == 'True'
+			list << 'Science Lab'	 					if hash[:hassciencelab] == 'True'
+			return list.strip.gsub(/,$/, '')
+		else
+			return nil
+		end
+	end
+
+	def sports_list_helper(hash)
+		if hash.present?
+			list = ''
+			list << 'Baseball, ' 						if hash[:Baseball] == true
+			list << 'Basketball, ' 					if (hash[:boyBasketball] == true || hash[:girlBasketball] == true)
+			list << 'Cheerleading, ' 				if hash[:Cheer] == true
+			list << 'Cross Country, ' 			if (hash[:boyCrossCountry] == true || hash[:girlCrossCountry] == true)
+			list << 'Double Dutch, ' 				if (hash[:boyDoubleDutch] == true || hash[:girlDoubleDutch] == true)
+			list << 'Football, ' 						if hash[:Football] == true
+			list << 'Golf, '								if hash[:Golf] == true
+			list << 'Hockey, ' 							if hash[:Hockey] == true
+			list << 'Indoor Track, ' 				if (hash[:boyIndoorTrack] == true || hash[:girlIndoorTrack] == true)
+			list << 'Soccer, ' 							if (hash[:boySoccer] == true || hash[:girlSoccer] == true)
+			list << 'Softball, ' 						if hash[:Softball] == true
+			list << 'Swimming, ' 						if (hash[:boySwim] == true || hash[:girlSwim] == true)
+			list << 'Tennis, ' 							if (hash[:boyTennis] == true || hash[:girlTennis] == true)
+			list << 'Track, ' 							if (hash[:boyOutdoorTrack] == true || hash[:girlOutdoorTrack] == true)
+			list << 'Volleyball, ' 					if (hash[:boyVolleyball] == true || hash[:girlVolleyball] == true)
+			list << 'Wrestling' 						if hash[:Wrestling] == true
+			return list.strip.gsub(/,$/, '')
+		else
+			return nil
+		end
+	end
+
+
+
+	def facilities_tags_helper(hash)
+		if hash.present?
 			list = []
 			list << 'Art Room' 						if hash[:hasartroom] == 'True'
 			list << 'Athletic Field' 			if hash[:hasathleticfield] == 'True'
@@ -20,9 +68,10 @@ module SchoolsHelper
 		end
 	end
 
-	def sports_list_helper(hash)
+	def sports_tags_helper(hash)
 		if hash.present?
 			list = []
+
 			list << 'Baseball' 						if hash[:Baseball] == true
 			list << 'Basketball' 					if (hash[:boyBasketball] == true || hash[:girlBasketball] == true)
 			list << 'Cheerleading' 				if hash[:Cheer] == true
@@ -100,7 +149,7 @@ module SchoolsHelper
 			list += 'Charter, ' if hash[:ischarter] == 'True'
 			list += 'Citywide,' if hash[:iscitywide] == 'True'
 			list += 'Pilot' if hash[:ispilot] == 'True'
-			return list.gsub(/,\s$/, '')
+			return list.strip.gsub(/,$/, '')
 		else
 			return ''
 		end
@@ -176,10 +225,10 @@ module SchoolsHelper
 		if category.name == 'Grades Offered'
 			tags = grade_levels_data_helper(school.grade_levels)
 		elsif category.name == 'Facility Features'
-			tags = facilities_list_helper(school.api_facilities.try(:[], 0))
+			tags = facilities_tags_helper(school.api_facilities.try(:[], 0))
 		
 		elsif category.name == 'Sports'
-			tags = sports_list_helper(school.api_sports.try(:[], 0))
+			tags = sports_tags_helper(school.api_sports.try(:[], 0))
 		
 		elsif category.name == 'Health & Wellness'
 			tags = health_list_helper(school.api_basic_info.try(:[], 0))
