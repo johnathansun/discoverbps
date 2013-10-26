@@ -2677,16 +2677,16 @@ footer.footer .logo {
   border-radius: 0;
 }
 .search .search_section .content_left form .form_line input:-moz-placeholder {
-  color: #565656;
+  color: #a4a4a4;
 }
 .search .search_section .content_left form .form_line input::-moz-placeholder {
-  color: #565656;
+  color: #a4a4a4;
 }
 .search .search_section .content_left form .form_line input:-ms-input-placeholder {
-  color: #565656;
+  color: #a4a4a4;
 }
 .search .search_section .content_left form .form_line input::-webkit-input-placeholder {
-  color: #565656;
+  color: #a4a4a4;
 }
 .search .search_section .content_left form .form_line .bloc_1 {
   width: 315px;

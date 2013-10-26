@@ -6,22 +6,27 @@ class SchoolsController < ApplicationController
   end
 
   def home
-    # session.clear
+    logger.info "************************ session_id = #{session[:session_id]}"
     if current_user
       @students = current_user.students
-    else
+    elsif session[:session_id].present?
       @students = Student.where(session_id: session[:session_id]).order(:first_name)
+    else
+      @students = []
     end
   end
 
 
   def index
+    logger.info "************************ session_id = #{session[:session_id]}"
     if current_user.present?
       logger.info "*********** current_user exists"
       @students = current_user.students
-    else
+    elsif session[:session_id].present?
       logger.info "*********** current_user is blank"
       @students = Student.where(session_id: session[:session_id]).order(:first_name)
+    else
+      @students = []
     end
 
     if @students.blank?
