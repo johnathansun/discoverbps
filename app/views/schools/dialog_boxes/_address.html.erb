@@ -14,5 +14,9 @@
 		$('#_studentstreet_name').val('<%= address[:Street].try(:titleize) %>');
 		$('#_studentneighborhood').val('<%= address[:SectionOfCity] %>');
 		$('#_studentzipcode').val('<%= address[:ZipCode] %>');
+		$('#_studentx_coordinate').val('<%= address[:X] %>');
+		$('#_studenty_coordinate').val('<%= address[:Y] %>');
+		$('#_studentlatitude').val('<%= address[:Lat] %>');
+		$('#_studentlongitude').val('<%= address[:Lng] %>');
 	});
 </script>

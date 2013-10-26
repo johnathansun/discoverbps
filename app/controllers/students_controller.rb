@@ -27,7 +27,7 @@ class StudentsController < ApplicationController
         street_name   = URI.escape(params[:student][:street_name].try(:strip))
         zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
         
-        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}").try(:[], :List)
+        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}").try(:[], :List)
         if @addresses.present?
           format.js { render template: "students/address_verification" }
         else
@@ -49,7 +49,7 @@ class StudentsController < ApplicationController
         street_name   = URI.escape(params[:student][:street_name].try(:strip))
         zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
         
-        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSDEV/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}").try(:[], :List)
+        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}").try(:[], :List)
         
         if @addresses.present?
           format.js { render template: "students/address_verification" }
@@ -64,10 +64,6 @@ class StudentsController < ApplicationController
 
   def address_verification
     @student = Student.find(params[:id])
-    home_coordinates = Geocoder.coordinates("#{params[:student][:street_number]} #{params[:student][:street_name]} Boston, MA #{params[:student][:zipcode]}")
-
-    params[:student][:latitude] = home_coordinates[0]
-    params[:student][:longitude] = home_coordinates[1]
 
     respond_to do |format|
       if @student.update_attributes(params[:student])

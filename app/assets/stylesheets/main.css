@@ -2480,10 +2480,16 @@ footer.footer .logo {
   color: #969696;
   background: #fafafa;
   cursor: pointer;
+  #edit_button {
+    visibility: hidden;
+  }
 }
 .wrap .menu_compare_name .name_list .name_info:hover {
   color: #ffffff;
   background: #fc5b00;
+  #edit_button {
+    visibility: visible;
+  }
 }
 .wrap .menu_compare_name .name_list .name_info.active {
   color: #ffffff;
