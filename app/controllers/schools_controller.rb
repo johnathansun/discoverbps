@@ -33,10 +33,10 @@ class SchoolsController < ApplicationController
     else
       # Set current_student if it's specified in the params
       if params[:student].present?
-        if current_user.present? && current_user.students.where(first_name: params[:student]).first.present?
-          session[:current_student_id] = current_user.students.where(first_name: params[:student]).first.id
-        elsif Student.where(first_name: params[:student], session_id: session[:session_id]).present?
-          session[:current_student_id] = Student.where(first_name: params[:student], session_id: session[:session_id]).first.id
+        if current_user.present? && current_user.students.find(params[:student]).present?
+          session[:current_student_id] = current_user.students.find(params[:student]).id
+        elsif Student.where(id: params[:student], session_id: session[:session_id]).present?
+          session[:current_student_id] = Student.where(id: params[:student], session_id: session[:session_id]).first.id
         end
       end
 

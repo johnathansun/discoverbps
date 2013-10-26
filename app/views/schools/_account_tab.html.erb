@@ -23,9 +23,9 @@
 			</div>
 			<div class='mobile_only box list_child'>
 				<span>&nbsp;</span>
-				<a class='child' href='#'>Elizabeth</a>
-				<a class='child' href='#'>Tommy</a>
-				<a href='#'>+ Add a child</a>
+				<% for student in @students %>
+					<%= link_to student.tab_name, schools_url(student: student.id), class: 'child' %>
+				<% end %>
 			</div>
 			<div class='clr box last'>
 				<span>Account</span>
