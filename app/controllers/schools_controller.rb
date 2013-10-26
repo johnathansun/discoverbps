@@ -6,7 +6,6 @@ class SchoolsController < ApplicationController
   end
 
   def home
-    logger.info "************************ session_id = #{session[:session_id]}"
     if current_user
       @students = current_user.students
     elsif session[:session_id].present?
@@ -18,7 +17,6 @@ class SchoolsController < ApplicationController
 
 
   def index
-    logger.info "************************ session_id = #{session[:session_id]}"
     if current_user.present?
       logger.info "*********** current_user exists"
       @students = current_user.students
