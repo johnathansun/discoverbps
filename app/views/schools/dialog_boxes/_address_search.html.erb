@@ -9,14 +9,14 @@
 								<h3>To edit your student's information, please modify the form fields below and click next:</h3>
 								<br />
 								<%= form_tag student_path(student), :method => :put, :remote => true do %>
-									<%= render partial: 'schools/dialog_boxes/edit_address_search_form', locals: {student: student} %>
+									<%= render partial: 'schools/search_form', locals: {student: student} %>
 								<% end %>
 								<%= button_to 'Delete Student', student_path(student), method: :delete, id: 'delete_student_button' %>
 							<% else %>
 								<h3>Please enter your student's home address, name and grade level:</h3>
 								<br />
 								<%= form_tag students_path, :method => :post, :remote => true do %>
-									<%= render partial: 'schools/dialog_boxes/new_address_search_form' %>
+									<%= render partial: 'schools/search_form' %>
 								<% end %>
 							<% end %>
 						</div>

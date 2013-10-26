@@ -1,3 +1,4 @@
+<!-- Address and zip info -->
 <div class="form_line">
 	<input id="street_number" name="[student]street_number" class="bloc_3" type="text" placeholder="Street number" />
 	<div class="separation_bloc">
@@ -8,6 +9,15 @@
 		<div class="separation"></div>
 	</div>
 		<input id="zipcode" name="[student]zipcode" class="bloc_2" type="text" placeholder="ZIP" />
+				
+			<!-- Use current location button -->
+			<!-- <div class="current_location btn">
+				<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-37"></span>
+					<span class="text">
+						Use current location
+					</span>
+			</div> -->
+			<!-- END  Use current location button -->
 			
 		<div class="clr"></div>
 	</div>
@@ -23,7 +33,7 @@
 		</div>
 		<div class="bloc_2 select_grade" >
 			<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
-			<span id="grade_level_placeholder">Grade</span>
+			<input id="grade_level_placeholder" name="[student]grade_level" type="text" placeholder="Grade" />
 			<div class='option_grade'>
 				<div class='btn_grade'>K0</div>
 				<div class='btn_grade'>K1</div>
@@ -45,13 +55,12 @@
 				<div class='btn_grade'>12</div>
 				<div class="clr"></div>
 			</div>
-			<%= hidden_field_tag "[student]grade_level", '' %>
 		</div>      
 		<div class="clr"></div>
 	</div>
 	<script>
 		$('.btn_grade').click(function() {
-			$('#grade_level_placeholder').html(this.innerText);
+			$('#grade_level_placeholder').val(this.innerText);
 			$('#_studentgrade_level').val(this.innerText);
 		});
 	</script>
@@ -66,7 +75,7 @@
 	<div id="search_form_submit" class="bloc_5">
 		<%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit' %>
 	</div>
-<!-- 										<div class="bloc_6">
+	<div class="bloc_6">
 		<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
 		<input id="sibling_school_autocomplete" name="[student]sibling_school_name" type="text" placeholder="Set Sibling's school" />
 		<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
@@ -86,4 +95,4 @@
 		});
 	});
 </script>
--->
+<!--END    NEXT and Sibling school buttons -->

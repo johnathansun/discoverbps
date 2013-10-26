@@ -7,7 +7,7 @@
 <!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <html>
   <head>
-    <title>Discover BPS</title>
+    <title>DiscoverBPS - 404 Error</title>
     <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     <meta charset="utf-8">
     <meta name="description" content="" />
@@ -17,29 +17,63 @@
     <meta name="viewport" content=" initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
     <link href="/assets/application.css" media="all" rel="stylesheet" type="text/css" />
     <script src="/assets/application.js" type="text/javascript"></script>
-    <meta content="authenticity_token" name="csrf-param" />
-<meta content="+laAmdFXRTF2aSqiVxwRG3clLjn2Y2n00NdinRK48ks=" name="csrf-token" />
   </head>
-  <body class="standard one">
-    <div style="text-align: center;">
+  <body>
 
+
+  <div id="placeholder" class="wrap ">
+    <div id="placeholder_title" class="content_wrap center">
+      <h1 style="color: #FFFF00; font-size: 150px; line-height: 56px; margin-bottom: 50px;">Oops</h1>
+      <br />
+      <br />
+      <span style="color: white; font-size: 16px; line-height: 21px;">
+        Error 404: The page you are looking for does not exist. 
+        <br />You may have mistyped the address or the page may have moved. 
+        <br />Please return to the <a href= '/'>home page</a> and try again.
+      </span>
     </div>
+  </div>
+
+<script>
+  var resizeDiv;
+
+  resizeDiv = function() {
+    var percent, vph, vpw;
+    vpw = $(window).width();
+    vph = $(window).height();
+    percent = vph * 0.3;
+    $("#placeholder").css({
+      height: (vph - 135) + "px"
+    });
+    return $("#placeholder_title").css({
+      "padding-top": percent + "px"
+    });
+  };
+
+  $(document).ready(function() {
+    return resizeDiv();
+  });
+
+  window.onresize = function(event) {
+    return resizeDiv();
+  };
+</script>
+
 
     <div class="footer_top">
-    </div>
-    <footer class="footer">
-      <div class="wrap">
-        <section class="content_wrap">
-          <p class='title_footer'>Boston Public Schools<br/>
-          <span class="copyright">Copyright &copy; 2011-2013 Boston Public Schools. All Rights Reserved. | Legal | Credits</p>
-          <div class='logo'><a href='javascript:void();'><img src='/assets/bps-logo.png'/></a></div>
-          <div class='clr'></div>
-        </section>
-      </div>
-    </footer>
+</div>
+<footer class="footer">
+  <div class="wrap">
+    <section class="content_wrap">
+      <p class='title_footer'>Boston Public Schools<br/>
+      <span class="copyright">Copyright &copy; 2011-2013 Boston Public Schools. All Rights Reserved. | Legal | Credits</p>
+      <div class='logo'><a href='javascript:void();'><img src='/assets/bps-logo.png'/></a></div>
+      <div class='clr'></div>
+    </section>
+  </div>
+</footer>
 
 <script>  
   $("body").click(function(){
@@ -49,5 +83,6 @@
     e.stopPropagation();
   });
 </script>
+    <code class='debug_dump'>{&quot;_csrf_token&quot;=&gt;&quot;+laAmdFXRTF2aSqiVxwRG3clLjn2Y2n00NdinRK48ks=&quot;, &quot;session_id&quot;=&gt;&quot;8f6c8351948c1ef699275a418897f2d8&quot;, &quot;current_student_id&quot;=&gt;114}</code>
   </body>
 </html>

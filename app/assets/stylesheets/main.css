@@ -2697,9 +2697,9 @@ footer.footer .logo {
 .search .search_section .content_left form .form_line .bloc_2.select_grade {
   cursor: pointer;
   position: relative;
-  height: 26px;
+  height: 38px;
   width: 71px;
-  padding-top: 12px;
+  padding-top: 0;
   background: #ffffff;
   color: #565656;
   font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
@@ -3146,7 +3146,7 @@ a.ui-corner-all:hover {
 .wrap .account #childrens .children label.bloc_grade .select_grade {
   cursor: pointer;
   position: relative;
-  height: 26px;
+  height: 38px;
   width: 77px;
   padding-left: 11px;
   padding-top: 12px;
