@@ -1,4 +1,6 @@
 class Student < ActiveRecord::Base
+  acts_as_paranoid
+  
   belongs_to :user
 	has_and_belongs_to_many :preferences, uniq: true
 	has_many :student_schools, uniq: true
