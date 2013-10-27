@@ -11,7 +11,6 @@
 								<%= form_tag student_path(student), :method => :put, :remote => true do %>
 									<%= render partial: 'schools/search_form', locals: {student: student} %>
 								<% end %>
-								<%= button_to 'Delete Student', student_path(student), method: :delete, id: 'delete_student_button' %>
 							<% else %>
 								<h3>Please enter your student's home address, name and grade level:</h3>
 								<br />

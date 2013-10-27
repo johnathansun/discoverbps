@@ -1,7 +1,7 @@
 <!-- Address and zip info -->
 <div class="form_line">
 
-	<% if (defined?(student) && student.try(:street_number).present?) %>
+	<% if defined?(student) && student.try(:street_number).present? %>
 		<input id="street_number" class="bloc_3" name="[student]street_number" type="text" value="<%= student.street_number %>" />
 	<% else %>
 		<input id="street_number" class="bloc_3" name="[student]street_number" type="text" placeholder="Street Number" />
@@ -11,7 +11,7 @@
 		<div class="separation"></div>
 	</div>
 
-	<% if (defined?(student) && student.try(:street_name).present?) %>
+	<% if defined?(student) && student.try(:street_name).present? %>
 		<input id="street_name" class="bloc_4" name="[student]street_name" type="text" value="<%= student.street_name %>" />
 	<% else %>
 		<input id="street_name" class="bloc_4" name="[student]street_name" type="text" placeholder="Street Name" />
@@ -21,7 +21,7 @@
 		<div class="separation"></div>
 	</div>
 
-	<% if (defined?(student) && student.try(:zipcode).present?) %>
+	<% if defined?(student) && student.try(:zipcode).present? %>
 		<input id="zipcode" class="bloc_2" name="[student]zipcode" type="text" value="<%= student.zipcode %>" />
 	<% else %>
 		<input id="zipcode" class="bloc_2" name="[student]zipcode" type="text" placeholder="ZIP" />
@@ -41,7 +41,7 @@
 	<!--END  Address and zip info -->
 	<div class="form_line">
 
-		<% if (defined?(student) && student.try(:first_name).present?) %>
+		<% if defined?(student) && student.try(:first_name).present? %>
 			<input id="first_name" class="bloc_3" name="[student]first_name" type="text" value="<%= student.first_name %>" />
 		<% else %>
 			<input id="first_name" class="bloc_3" name="[student]first_name" type="text" placeholder="Student's First Name" />
@@ -52,7 +52,7 @@
 			<div class="separation"></div>
 		</div>
 
-		<% if (defined?(student) && student.try(:last_name).present?) %>
+		<% if defined?(student) && student.try(:last_name).present? %>
 			<input id="last_name" class="bloc_4" name="[student]last_name" type="text" value="<%= student.last_name %>" />
 		<% else %>
 			<input id="last_name" class="bloc_4" name="[student]last_name" type="text" placeholder="Last Name" />
@@ -64,7 +64,7 @@
 		<div class="bloc_2 select_grade" >
 			<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
 
-			<% if (defined?(student) && student.try(:grade_level).present?) %>
+			<% if defined?(student) && student.try(:grade_level).present? %>
 				<input id="grade_level_placeholder" name="[student]grade_level" type="text" value="<%= student.grade_level %>" />
 			<% else %>
 				<input id="grade_level_placeholder" name="[student]grade_level" type="text" placeholder="Grade" />
@@ -111,24 +111,4 @@
 	<div id="search_form_submit" class="bloc_5">
 		<%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit' %>
 	</div>
-	<div id="sibling_school" class="bloc_6">
-		<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
-		<input id="sibling_school_autocomplete" name="[student]sibling_school_name" type="text" placeholder="Set Sibling's school" />
-		<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
-	</div>
-	<div class="clr"></div>
 </div>
-<script>
-	$(function() {
-		var schoolNames = <%= raw School.all.collect {|x| x.name} %>;
-		$( "#sibling_school_autocomplete" ).autocomplete({
-			source: schoolNames,
-			minLength: 2,
-			messages: {
-				noResults: '',
-				results: function() {}
-			}
-		});
-	});
-</script>
-<!--END    NEXT and Sibling school buttons -->
