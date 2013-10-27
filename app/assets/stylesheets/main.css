@@ -2272,9 +2272,9 @@ footer.footer .logo {
   display: none;
 }
 .wrap #school_list .footer_list {
-  padding: 37px;
+  padding: 37px 60px 37px 37px;
   background: #dfdfdf;
-  width: 1021px;
+  width: 948px;
   font-size: 15px;
   line-height: 20px;
 }
