@@ -261,22 +261,24 @@
 				      <% end %>
 				    <% end %>
 
-				    var coordinates = new google.maps.LatLng(<%= current_student.latitude %>, <%= current_student.longitude %>);
-				    latlngbounds.extend(coordinates);
-				    var marker = new google.maps.Marker({
-				      position: coordinates,
-				      icon: {
-				        path: MAP_HOME,
-				        fillColor: '#000000',
-				        fillOpacity: 1,
-				        strokeColor: '',
-				        strokeWeight: 0,
-				        rotation: 180,
-				        scale: 1/22
-				      },
-				      label: '<i class="icon-map-home"></i>',
-				      map: map
-				    });
+				    <% if current_student.latitude.present? && current_student.longitude.present? && current_student.latitude != 0 && current_student.longitude != 0 %>
+				      var coordinates = new google.maps.LatLng(<%= current_student.latitude %>, <%= current_student.longitude %>);
+				      latlngbounds.extend(coordinates);
+				      var marker = new google.maps.Marker({
+				        position: coordinates,
+				        icon: {
+				          path: MAP_HOME,
+				          fillColor: '#000000',
+				          fillOpacity: 1,
+				          strokeColor: '',
+				          strokeWeight: 0,
+				          rotation: 180,
+				          scale: 1/22
+				        },
+				        label: '<i class="icon-map-home"></i>',
+				        map: map
+				      });
+				    <% end %>
 				    var infowindow = new google.maps.InfoWindow({
 				    });
 				    google.maps.event.addListener(marker, 'click', function() {
