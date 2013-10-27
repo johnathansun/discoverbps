@@ -167,9 +167,10 @@ input, select {
 	float: right;
 	background: white !important;
 	margin-top: 5px;
+	border: none;
 	color: red !important;
 }
-#delete_all_students_button {
+#delete_students_button {
 	color: white !important;
 	font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
 	font-size: 16px;
