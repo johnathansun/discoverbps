@@ -46,17 +46,19 @@
 
 	<p class="descrip"><%= school.api_hours.try(:[], 0).try(:[], :schhours1) %></p>
 
-	<% if school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms).present? || school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms).present? %>
-		<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"></span> Surround care </p>
+	<% if ['K0', 'K1', 'K2', '1', '2', '3'].include?(current_student.grade_level) %>
+		<% if school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms).present? || school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms).present? %>
+			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"></span> Surround care </p>
 
-		<p class="descrip">
-			<% if school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms).present? %>
-				<span class="text_G1">Before:</span> <%= school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms) %><br /><br />
-			<% end %>
-			<% if school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms).present? %>
-				<span class="text_G1">After:</span> <%= school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms) %>
-			<% end %>
-		</p>
+			<p class="descrip">
+				<% if school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms).present? %>
+					<span class="text_G1">Before:</span> <%= school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms) %><br /><br />
+				<% end %>
+				<% if school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms).present? %>
+					<span class="text_G1">After:</span> <%= school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms) %>
+				<% end %>
+			</p>
+		<% end %>
 	<% end %>
 
 	<!-- print logo link -->

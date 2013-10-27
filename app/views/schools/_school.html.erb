@@ -46,20 +46,22 @@
 				</div>
 			</span>
 		</div>
-		<div class="box line surround_care">
-			<span class="middle">
-				<% surround_care_count = 0 %>
-				<% if school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms).present? %>
-					<% surround_care_count += 1 %>
-					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<br/>
-				<% end %> 
-				<% if school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms).present? %>
-					<% surround_care_count += 1 %>
-					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school
-				<% end %>
-				<span class="sortable_surround_care" style="visibility: hidden;"><%= surround_care_count %></span>
-			</span>
-		</div>
+		<% if ['K0', 'K1', 'K2', '1', '2', '3'].include?(current_student.grade_level) %>
+			<div class="box line surround_care">
+				<span class="middle">
+					<% surround_care_count = 0 %>
+					<% if school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms).present? %>
+						<% surround_care_count += 1 %>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<br/>
+					<% end %> 
+					<% if school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms).present? %>
+						<% surround_care_count += 1 %>
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school
+					<% end %>
+					<span class="sortable_surround_care" style="visibility: hidden;"><%= surround_care_count %></span>
+				</span>
+			</div>
+		<% end %>
 		<div class="box line your_fit_icon">
 			<span id="<%= current_student.id %>_<%= school.bps_id %>_icons" class="middle">
 
