@@ -98,7 +98,11 @@
 		$('.btn_grade').click(function() {
 			$('#grade_level_placeholder').val(this.innerText);
 			$('#_studentgrade_level').val(this.innerText);
+			$('.option_grade').hide();
 		});
+		$('.select_grade').mouseover(function() {
+			$('.option_grade').show();											
+		})
 	</script>
 
 <!-- NEXT and Sibling school buttons -->
