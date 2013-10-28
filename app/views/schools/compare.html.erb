@@ -26,7 +26,7 @@
 	<section class="content_wrap">
 			<%= render partial: 'schools/account_tab' %>		
 	</section>
-	<%= render partial: 'schools/map', locals: {students_list: @students, map_controls: true} %>
+	<%= render partial: 'schools/map', locals: {students_list: current_user_students, map_controls: true} %>
 </div>
 
 <div class="wrap compare_list" id="compare_list">
@@ -40,7 +40,7 @@
 		<div class="result">
 			<div class="compare_list_numbers">
 				<ul>
-					<% (1..@students.collect {|x| x.student_schools }.max.count).each do |num| %>
+					<% (1..current_user_students.collect {|x| x.student_schools }.max.count).each do |num| %>
 						<li><h2><%= num %></h2></li>
 					<% end %>
 				</ul>
@@ -53,7 +53,7 @@
 			<div class="flexible_content" style="width:1095px;">
 				<div class="menu_compare_name compare_action">
 					<div class="name_list">
-						<% @students.each_with_index do |student, i| %>
+						<% current_user_students.each_with_index do |student, i| %>
 							<div class="name_info" id="name_<%= i + 2 %>">
 								<span class="name"><%= student.first_name %> <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span> </span>
 								<span class="grade">Grade<br/><span class="number"><%= student.grade_level %></span></span>
@@ -63,7 +63,7 @@
 					</div>
 					<div class="clr"></div>
 				</div>
-				<% @students.each_with_index do |student, student_i| %>
+				<% current_user_students.each_with_index do |student, student_i| %>
 					<div class="compare_students_column">
 						<ul id="sortable_<%= student_i %>">
 							<% student.student_schools.rank(:sort_order).each_with_index do |school, i| %>

@@ -18,7 +18,7 @@
 				Compare your lists:
 			</div>
 			<div class="name_list">
-				<% @students.each_with_index do |student, i| %>
+				<% current_user_students.each_with_index do |student, i| %>
 					<%= render partial: 'schools/student_tab', locals: {student: student} %>
 				<% end %>
 			</div>	

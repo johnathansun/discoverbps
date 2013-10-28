@@ -28,7 +28,9 @@ class StudentsController < ApplicationController
         zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
         
         @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}").try(:[], :List)
+
         if @addresses.present?
+          format.html { redirect_to verify_address_students_url}
           format.js { render template: "students/address_verification" }
         else
           format.js { render template: "students/errors" }
@@ -60,6 +62,10 @@ class StudentsController < ApplicationController
         format.js { render template: "students/errors" }
       end
     end
+  end
+
+  def verify_address
+    
   end
 
   def address_verification
@@ -140,6 +146,7 @@ class StudentsController < ApplicationController
 
   def delete_all
     students = Student.where('session_id = ? AND id IN (?)', session[:session_id], params[:student_ids])
+    logger.info "************************* #{students}"
     if students.present?
       students.each do |student|
         student.destroy
@@ -149,6 +156,16 @@ class StudentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to home_schools_url }
     end
+  end
+
+  def save_preference
+    current_student.preferences.clear
+    if params.try(:[], :student).try(:[], :preference_ids).present?
+      params[:student][:preference_ids].each do |name|
+        current_student.preferences << Preference.where(name: name)
+      end
+    end
+    render nothing: true
   end
 
   private

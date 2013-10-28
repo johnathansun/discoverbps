@@ -45,7 +45,7 @@ module SchoolsHelper
 		end
 	end
 
-	
+
 	def school_type_helper(hash)
 		if hash.present?
 			list = ''
@@ -115,7 +115,6 @@ module SchoolsHelper
 	################ helper methods fo generating category data tags
 
 	def preference_category_tags_helper(category, school)
-		preference_names = category.preferences.collect {|x| x.name}
 		if category.name == 'Grades Offered'
 			tags = grade_levels_tags_helper(school.grade_levels)
 		elsif category.name == 'Facility Features'

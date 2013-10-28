@@ -68,8 +68,15 @@
 				<% tag_counter = 0 %>
 				<% PreferenceCategory.preference_panel.grade_level_categories(current_student.grade_level).each_with_index do |category, i| %>
 					<% if preference_category_tags_helper(category, school).present? %>
-						<span aria-hidden='true' id='school_<%= school.id %>' data-tags='<%= preference_category_tags_helper(category, school) %>' class='icon category_icon preference_category_<%= category.id %>_icon <%= category.glyph_class %>'></span>
-						<% tag_counter += 1 %>
+						<% if current_student.preferences.collect {|x| x.preference_category_id}.include?(category.id) %>
+							<% if (preference_category_tags_helper(category, school) & current_student.preferences.where(preference_category_id: category.id).collect {|x| x.name}).present? %>
+								<span aria-hidden='true' id='school_<%= school.id %>' data-tags='<%= preference_category_tags_helper(category, school) %>' class='icon category_icon preference_category_<%= category.id %>_icon <%= category.glyph_class %>'></span>
+								<% tag_counter += 1 %>
+							<% end %>
+						<% else %>
+							<span aria-hidden='true' id='school_<%= school.id %>' data-tags='<%= preference_category_tags_helper(category, school) %>' class='icon category_icon preference_category_<%= category.id %>_icon <%= category.glyph_class %>'></span>
+							<% tag_counter += 1 %>
+						<% end %>
 					<% end %>
 				<% end %>
 				<span id='<%= current_student.id %>_<%= school.bps_id %>_icon_count' class="sortable_fit fit_icon_count" style="visibility: hidden;"><%= tag_counter %></span>

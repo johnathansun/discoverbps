@@ -42,6 +42,12 @@
 	$(document).ready(function() {
 		$(function() {
 			return $('.preference_checkbox').click(function() {
+				$.ajax({
+	        url: '/students/<%= current_student.id %>/save_preference',
+	        type: 'post',
+	        data: $('.preference_checkbox:checked').serialize(),
+	        dataType: 'script'
+	      });
 				// if a checkbox is clicked, get all the checkboxes and inspect their values
 				$('.preference_category').each(function(i, category_div) {
 					var checked_preference_values = new Array();
@@ -64,10 +70,6 @@
 							if ($.except(checked_preference_values, $(icon).data('tags')).length == 0) {
 								$(icon).show();
 							}
-							// console.log($(icon).data('tags'));
-							// console.log($.type(checked_preference_values));
-							// console.log($.except(checked_preference_values, $(icon).data('tags')).length == 0);
-							// console.log(($.intersect($(icon).data('tags'), checked_preference_values).length > 0));
 						});
 					}
 				});

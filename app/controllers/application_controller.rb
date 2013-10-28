@@ -14,11 +14,11 @@ class ApplicationController < ActionController::Base
 
   def current_user_students
   	if current_user
-      @students = current_user.students
+      return current_user.students
     elsif session[:session_id].present?
-      @students = Student.where(session_id: session[:session_id]).order(:first_name)
+      return Student.where(session_id: session[:session_id]).order(:first_name)
     else
-      @students = []
+      return []
     end
   end
 

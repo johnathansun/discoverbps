@@ -6,29 +6,12 @@ class SchoolsController < ApplicationController
   end
 
   def home
-    if current_user
-      @students = current_user.students
-    elsif session[:session_id].present?
-      @students = Student.where(session_id: session[:session_id]).order(:first_name)
-    else
-      @students = []
-    end
   end
 
 
   def index
-    if current_user.present?
-      logger.info "*********** current_user exists"
-      @students = current_user.students
-    elsif session[:session_id].present?
-      logger.info "*********** current_user is blank"
-      @students = Student.where(session_id: session[:session_id]).order(:first_name)
-    else
-      @students = []
-    end
-
-    if @students.blank?
-      logger.info "*********** @students is blank"
+    if current_user_students.blank?
+      logger.info "*********** current_user_students is blank"
       render 'home', layout: 'home'
     else
       # Set current_student if it's specified in the params
@@ -41,7 +24,7 @@ class SchoolsController < ApplicationController
       end
 
       if current_student.blank?
-        session[:current_student_id] = @students.first.id
+        session[:current_student_id] = current_user_students.first.id
       end
 
       logger.info "*********** current_student = #{current_student.id}"
@@ -67,7 +50,7 @@ class SchoolsController < ApplicationController
             counter = 0
             @eligible_schools.each do |school|
               counter += 1
-              csv << [ school.name, school.distance, school.walk_time, school.drive_time, school.transportation_eligibility, school.api_hours.try(:[],0).try(:[], :schhours1), school.api_grades.try(:[], 0).try(:[], :grade), school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms), school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms), facilities_list_helper(school.api_facilities.try(:[], 0)), partners_list_helper(school.api_partners), "Tier #{school.tier}", school_type_helper(school.api_basic_info.try(:[], 0)), school.api_description.try(:[], 0).try(:[], :schfocus), school.api_description.try(:[], 0).try(:[], :specialapplicationnarrative), school.api_description.try(:[], 0).try(:[], :uniformpolicy), school.api_basic_info.try(:[], 0).try(:[], :schemail) ]
+              csv << [ school.name, school.distance, school.walk_time, school.drive_time, school.transportation_eligibility, school.api_hours.try(:[],0).try(:[], :schhours1), school.api_grades.try(:[], 0).try(:[], :grade), school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms), school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms), facilities_list_helper(school.api_facilities.try(:[], 0), 'string'), partners_list_helper(school.api_partners), "Tier #{school.tier}", school_type_helper(school.api_basic_info.try(:[], 0)), school.api_description.try(:[], 0).try(:[], :schfocus), school.api_description.try(:[], 0).try(:[], :specialapplicationnarrative), school.api_description.try(:[], 0).try(:[], :uniformpolicy), school.api_basic_info.try(:[], 0).try(:[], :schemail) ]
             end
           end
 
@@ -80,12 +63,7 @@ class SchoolsController < ApplicationController
   end
 
   def compare
-    if current_user
-      @students = current_user.students
-    else
-      @students = Student.where(session_id: session[:session_id]).order(:first_name)
-    end
-    if @students.blank?
+    if current_user_students.blank?
       render 'home', layout: 'home'
     else
       respond_to do |format|

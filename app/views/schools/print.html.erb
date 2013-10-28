@@ -177,7 +177,7 @@
 								</div>
 								<div class="school_name select line">
 									<span class="middle">
-										<%= school.api_basic_info[0][:schname_23] %>
+										<%= school.api_basic_info.try(:[], 0)[:schname_23] %>
 										<% if current_student.sibling_school_id == school.bps_id %>
 											<span aria-hidden="true" class="select_icon icon-DBPS-Dev-Assets-SRG-12"></span>
 										<% end %>
@@ -186,7 +186,7 @@
 								<div class="box line getting_there ">
 									<div class="first_block middle">
 										
-										<span class="middle"><%= school.api_basic_info[0][:campus1address1] %><br /><%= school.api_basic_info[0][:campus1city] %> <%= school.api_basic_info[0][:campus1zip] %><br /></span>
+										<span class="middle"><%= school.api_basic_info.try(:[], 0)[:campus1address1] %><br /><%= school.api_basic_info.try(:[], 0)[:campus1city] %> <%= school.api_basic_info.try(:[], 0)[:campus1zip] %><br /></span>
 									</div>
 										
 									

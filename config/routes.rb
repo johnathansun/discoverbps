@@ -10,6 +10,8 @@ DiscoverbpsV2::Application.routes.draw do
     put 'ell', on: :member
     put 'preferences', on: :member
     delete 'delete_all', on: :collection
+    get 'verify_address', on: :collection
+    post 'save_preference', on: :member
   end 
 
   resources :schools do 
@@ -19,7 +21,6 @@ DiscoverbpsV2::Application.routes.draw do
     post 'sort', on: :collection
     get 'compare', on: :collection
   end
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
