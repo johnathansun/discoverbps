@@ -10,7 +10,6 @@
 					<span>My lists</span>
 					<%= link_to 'Print', print_schools_path %>
 					<%= link_to 'Download', schools_path(format: :csv) %>
-					<a href='#'>Share via email</a>
 					<% if current_user.blank? %>
 						<a id='save_btn' href='#'>Save <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
 					<% end %>
