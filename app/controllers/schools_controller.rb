@@ -120,6 +120,7 @@ class SchoolsController < ApplicationController
         api_schools = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolChoices?SchoolYear=2014-2015&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}&X=#{x_coordinate}&Y=#{y_coordinate}&SiblingSchList=#{sibling_school_id}")[:List]
         
         if api_schools.present?
+          logger.info "*************************** found #{api_schools.count} schools"
           school_coordinates = ''
           school_ids = []
           # loop through the schools returned from the API, find the matching schools in the db,
