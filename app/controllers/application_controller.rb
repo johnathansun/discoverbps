@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_student
+  helper_method :current_user_students
   # after_filter :store_location
 
   private
@@ -9,6 +10,16 @@ class ApplicationController < ActionController::Base
   	if session[:current_student_id].present?
 	  	Student.find(session[:current_student_id]) rescue nil
 	  end
+  end
+
+  def current_user_students
+  	if current_user
+      @students = current_user.students
+    elsif session[:session_id].present?
+      @students = Student.where(session_id: session[:session_id]).order(:first_name)
+    else
+      @students = []
+    end
   end
 
 	# def store_location
