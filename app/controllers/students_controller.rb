@@ -146,7 +146,7 @@ class StudentsController < ApplicationController
 
   def delete_all
     students = Student.where('session_id = ? AND id IN (?)', session[:session_id], params[:student_ids])
-    logger.info "************************* #{students}"
+    logger.info "************************* #{students.count} students found"
     if students.present?
       students.each do |student|
         student.destroy
