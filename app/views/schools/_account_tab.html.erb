@@ -14,16 +14,16 @@
 					<% if current_user.blank? %>
 						<a id='save_btn' href='#'>Save <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
 					<% end %>
-				<% elsif @students.present? %>
+				<% elsif current_user_students.present? %>
 					<span>My lists</span>
-					<% for student in @students %>
+					<% for student in current_user_students %>
 						<%= link_to student.tab_name, schools_path(student: student.tab_name) %>
 					<% end %>
 				<% end %>
 			</div>
 			<div class='mobile_only box list_child'>
 				<span>&nbsp;</span>
-				<% for student in @students %>
+				<% for student in current_user_students %>
 					<%= link_to student.tab_name, schools_url(student: student.id), class: 'child' %>
 				<% end %>
 			</div>
