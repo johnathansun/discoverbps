@@ -96,8 +96,8 @@
 	</div>
 	<script>
 		$('.btn_grade').click(function() {
-			$('#grade_level_placeholder').val(this.innerText);
-			$('#_studentgrade_level').val(this.innerText);
+			$('#grade_level_placeholder').val(this.innerHTML);
+			$('#_studentgrade_level').val(this.innerHTML);
 			$('.option_grade').hide();
 		});
 		$('.select_grade').mouseover(function() {
