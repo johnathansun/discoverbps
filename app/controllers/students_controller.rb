@@ -66,6 +66,7 @@ class StudentsController < ApplicationController
   end
 
   def address_verification
+    logger.info "**************************** request format = #{request.format}"
     @student = Student.find(params[:id])
 
     street_number = URI.escape(@student.street_number.try(:strip))
@@ -78,6 +79,7 @@ class StudentsController < ApplicationController
   end
 
   def verify_address
+    logger.info "**************************** request format = #{request.format}"
     @student = Student.find(params[:id])
 
     respond_to do |format|
