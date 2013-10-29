@@ -1,7 +1,7 @@
 <div class="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
 <!-- dialog individualized education plan -->
 <div class='content'>
-	<%= form_tag set_special_needs_student_path(@student), :method => :put, :remote => true do %>
+	<%= form_tag set_special_needs_student_path(@student), :method => :put, :remote => true, :html => {:'data-type' => 'json'} do %>
 		<h3>Does your child have specialized language or educational needs?</h3>
 		
 		<p><%= check_box_tag '[student]iep_needs', '1', @student.iep_needs %> My child has an Individualized Education Plan (IEP) for special needs</p>
