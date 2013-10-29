@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  layout 'home'
 
 	def create
 		if current_user.present?
@@ -21,21 +22,20 @@ class StudentsController < ApplicationController
 
     params[:student][:sibling_school_id] = School.where(name: params[:student][:sibling_school_name]).first.try(:bps_id)
 
+    street_number = URI.escape(params[:student][:street_number].try(:strip))
+    street_name   = URI.escape(params[:student][:street_name].try(:strip))
+    zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
+        
+    addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
+    @addresses = addresses.try(:[], :List)
+    @errors = addresses.try(:[], :Error).try(:[], 0)
+
     respond_to do |format|
       if @student.update_attributes(params[:student])
-      	street_number = URI.escape(params[:student][:street_number].try(:strip))
-        street_name   = URI.escape(params[:student][:street_name].try(:strip))
-        zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
-        
-        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}").try(:[], :List)
-
-        if @addresses.present?
-          format.html { redirect_to verify_address_students_url}
-          format.js { render template: "students/address_verification" }
-        else
-          format.js { render template: "students/errors" }
-        end
+        format.html { redirect_to address_verification_student_path(@student)}
+        format.js { render template: "students/address_verification" }
       else
+        format.html { render action: address_verification }
         format.js { render template: "students/errors" }
       end
     end
@@ -44,44 +44,60 @@ class StudentsController < ApplicationController
   def update
   	@student = Student.find(params[:id])
 
+    street_number = URI.escape(@student.street_number.try(:strip))
+    street_name   = URI.escape(@student.street_name.try(:strip))
+    zipcode       = URI.escape(@student.zipcode.try(:strip))
+        
+    addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
+    @addresses = addresses.try(:[], :List)
+    @errors = addresses.try(:[], :Error).try(:[], 0)
+
     respond_to do |format|
       if @student.update_attributes(params[:student])
         session[:current_student_id] = @student.id
-      	street_number = URI.escape(params[:student][:street_number].try(:strip))
-        street_name   = URI.escape(params[:student][:street_name].try(:strip))
-        zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
         
-        @addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}").try(:[], :List)
-        
-        if @addresses.present?
-          format.js { render template: "students/address_verification" }
-        else
-          format.js { render template: "students/errors" }
-        end
+        format.html { redirect_to address_verification_student_path(@student)}
+        format.js { render template: "students/address_verification" }
       else
+        format.html
         format.js { render template: "students/errors" }
       end
     end
-  end
-
-  def verify_address
-    
   end
 
   def address_verification
     @student = Student.find(params[:id])
 
+    street_number = URI.escape(@student.street_number.try(:strip))
+    street_name   = URI.escape(@student.street_name.try(:strip))
+    zipcode       = URI.escape(@student.zipcode.try(:strip))
+        
+    addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
+    @addresses = addresses.try(:[], :List)
+    @errors = addresses.try(:[], :Error).try(:[], 0)
+  end
+
+  def verify_address
+    @student = Student.find(params[:id])
+
     respond_to do |format|
       if @student.update_attributes(params[:student])
-        session[:current_student_id] = @student.id  
-        format.js { render template: "students/iep" }         
+        session[:current_student_id] = @student.id 
+        format.html { redirect_to special_needs_student_path(@student)}
+        format.js { render template: "students/special_needs" }         
       else
+        format.html
         format.js { render template: "students/errors" }
       end
     end
   end
 
-  def iep
+  def special_needs
+    @student = Student.find(params[:id])
+    
+  end
+
+  def set_special_needs
     @student = Student.find(params[:id])
     if params[:student].blank?
     	params[:student] = {}
@@ -100,8 +116,13 @@ class StudentsController < ApplicationController
       if @student.update_attributes(params[:student])
       	session[:current_student_id] = @student.id  
       	if @student.ell_needs?
-	        format.js { render template: "students/ell" }
-	      else
+          format.html { redirect_to ell_needs_student_path(@student)}
+	        format.js { render template: "students/ell_needs" }
+	      elsif @student.iep_needs?
+          format.html { redirect_to iep_needs_student_path(@student)}
+          format.js { render template: "students/preferences" }
+        else
+          format.html { redirect_to schools_path}
 	        format.js { render template: "students/preferences" }
 	      end
       else
@@ -110,28 +131,14 @@ class StudentsController < ApplicationController
     end
   end
 
-  def ell
-    @student = Student.find(params[:id])
-
-    respond_to do |format|
-      if @student.update_attributes(params[:student])
-        session[:current_student_id] = @student.id  
-        format.js { render template: "students/preferences" }         
-      else
-        format.js { render template: "students/errors" }
-      end
-    end
-  end
-
-  def preferences
+  def ell_needs
     @student = Student.find(params[:id])
     
-    respond_to do |format|
-      if @student.update_attributes(params[:student])
-        session[:current_student_id] = @student.id    
-	      format.html { redirect_to schools_url }
-      end
-    end
+  end
+
+  def iep_needs
+    @student = Student.find(params[:id])
+    
   end
 
   def destroy
@@ -146,7 +153,7 @@ class StudentsController < ApplicationController
 
   def delete_all
     students = Student.where('session_id = ? AND id IN (?)', session[:session_id], params[:student_ids])
-    logger.info "************************* student_ids #{params[:student_ids]}"
+    logger.info "************************* student_ids #{params[:student_ids].class}"
     logger.info "************************* #{students.count} students found"
     if students.present?
       students.each do |student|

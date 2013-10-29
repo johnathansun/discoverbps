@@ -5,12 +5,13 @@ DiscoverbpsV2::Application.routes.draw do
   match 'home' => 'schools#home'
 
   resources :students do
-    put 'address_verification', on: :member
-    put 'iep', on: :member
-    put 'ell', on: :member
-    put 'preferences', on: :member
+    get 'address_verification', on: :member
+    put 'verify_address', on: :member
+    get 'special_needs', on: :member
+    put 'set_special_needs', on: :member
+    get 'ell_needs', on: :member
+    get 'iep_needs', on: :member
     delete 'delete_all', on: :collection
-    get 'verify_address', on: :collection
     post 'save_preference', on: :member
   end 
 

@@ -1,0 +1,151 @@
+
+<!-- partials are injected into this dialog box - don't delete -->
+<div id='dialog_box' class='dialog_box dialog_box_dicover' style='display:none;'>
+</div>
+
+
+<div class="wrap ">
+	<div class="content_wrap">
+	</div>
+</div>
+<div class="wrap ">
+	<div class="content_wrap search">
+		<%= render partial: 'schools/account_tab' %>
+
+		<div class="search_header">
+			<div class="title_bloc">
+				<h1>Welcome to Boston Public Schools Registration</h1>
+				<img class="logo_beta" src="/assets/logo_beta.png" alt="beta"/>
+			</div>
+			<p>This website provides resources for finding, exploring and comparing a student's eligible schools. </p>
+							<p class="small_text tablet">Looking for the 2013-2014 school year?</p>
+			
+					 </div>
+					<div class="search_section_content "> 
+					 
+						<!-- ADD CLASS "RIGHT" TO MOVE THE TODAY INDICATOR TO RIGHT OF THE TIME LINE, OR "LEFT" TO MOVE TO THE LEFT  FOR LARGEUR OF TABLET SIZE -->
+						<!-- AND change the top % to ajust the today up or down -->
+						<div class="today right" style="top:<%= timeline_percent(Date.today) %>;">
+							<span aria-hidden="true" class="right icon-DBPS-Dev-Assets-SRG-30"></span>&nbsp; Today &nbsp;<span aria-hidden="true" class="left icon-DBPS-Dev-Assets-SRG-32"></span>
+							<span class="yello_line"></span>
+						</div> 
+						<!-- END today indicator-->
+						
+						<!-- Discover section -->
+			<section class="search_section first">
+				<p class="small_text no_tablet">Looking for the 2013-2014 school year?</p>	
+				<div class="content_left">
+					
+					<div class="logo discover" >
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-01"></span>
+					</div>
+					<div class="text">
+						<br />
+						<div class='bloc'>
+							<p class='first'>
+								As part of the registration process, every applicant is asked to complete a Home Language Survey. The results of this Survey determine whether a child needs additional language assessment at our Newcomers Assessment and Counseling Center. Results of the language assessment will indicate if a child should receive additional language learning support in school. If this is the case, a child's school choices may expand beyond his/her Home Based options to include program seats in a wider community cluster of schools. Click here to view a map of the ELL Clusters. Note, your cluster is based on your place of residence.  You may still use this tool to learn about your Home Based school options.
+							</p>
+							<p>
+								For more information on clusters, the Language Assessment, or the Newcomer's Assessment and Counseling Center, please call a Welcome Center near you or contact the Newcomers Center directly at:
+							</p>
+						</div>
+						<h2>617-635-1565</h2>
+
+						<br />
+						<br />
+						<% if @student.iep_needs? %>
+							<%= link_to 'Next', iep_needs_student_path(@student), id: 'next_button', class: 'orange_button' %>
+						<% else %>
+							<%= link_to 'Display All Schools', schools_path, id: 'next_button', class: 'orange_button' %>
+						<% end %>
+						<script>
+							$('#next_button').click(function() {
+								$('#next_button').text('Working...');
+							});
+						</script>
+					</div>
+				</div>
+				<%= render partial: 'schools/vertical_timeline' %>
+			</section>
+			<!-- END Discover section -->
+			
+			<!-- REgister section -->
+			<section class=" search_section second">
+								
+				<div class="content_left">
+					<div class="logo register" >
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-02"></span>
+					</div>
+					<div class="text">
+						<p>
+							Once a student's list of schools has been chosen, registration begins by submitting the list and visiting a Welcome Center.
+						</p>
+						<a class="K" href="#" title="Learn more"  style="margin-bottom:0;">Learn more</a>
+					</div>
+				</div>
+				<!-- timeline info of Register -->
+				<div class="content_right">
+					<span class="event" style="margin-bottom:39px;">
+						<span class="desktop">
+							 Jan 6<!--<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-35"></span>--><img class="point" src="/assets/red_point.png" /><br/>
+							 <span class="W"> Registration begins</span><br/>
+								for K, 6 9
+								<br />
+								(All other grades: Feb 5th)
+							</span>
+							<span class="tablette">
+								<img class="point_arrow" src="/assets/blue_point_arrow.png" />
+							</span>
+							
+						</span>
+						<span class="event Y">
+							<span class="desktop">
+								Mar - Jul<br/>
+							<span class="W">Assignments mailed</span>
+						</span>
+					</span>
+				</div>
+				<!--END timeline info of Register -->
+			</section>
+			<!-- END REgister section -->
+			
+			<!-- Succeed section -->
+			<section class="search_section third">				
+				<div class="content_left">
+					
+					<div class="logo succeed" >
+						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-03"></span>
+					</div>
+					<div class="text">
+						<p>
+							Hear from current Boston student who've succeeded in schools across the city. Learn about services and programs offered by Boston Public Schools you never knew existed!
+						</p>
+						<a class="K" href="#" title="Explore" style="margin-bottom:0;">Explore</a>
+					</div>
+										
+				</div>
+				<!--END timeline info of Register -->
+				
+				<!-- timeline info of Succeed -->
+				<div class="content_right">
+					
+					<span class="event">
+						<span class="desktop">
+							Sept 4<!--<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-35"></span>--> <img class="point" src="/assets/blue_point.png" /><br/>
+							<span class="W" style="font-size:12px;line-height:15px;">
+								First day of school!
+							</span>
+						</span>
+					</span>
+					
+				</div>
+				<!--END timeline info of Succeed -->
+				
+				<!-- last point with star -->
+				<img class="final_point" src="/assets/star_point.png" />
+								
+			</section>
+			<!-- END Succeed section -->
+		</div>
+	</div>
+</div>

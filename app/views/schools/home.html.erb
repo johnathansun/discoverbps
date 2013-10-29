@@ -72,7 +72,7 @@
 							<p class="K"><br />Or search for a new student using the form below:</p>
 						<% else %>
 							<p class="K">To get started, enter your home address and your student's name and grade level in the form below:</p>
-						<% end %>							
+						<% end %>
 							<%= form_tag students_path, method: :post, remote: true do %>
 							<!-- Address and zip info -->
 								<div class="form_line">
@@ -172,8 +172,8 @@
 									</div>
 									<script>
 										$('.btn_grade').click(function() {
-											$('#grade_level_placeholder').val(this.innerText);
-											$('#_studentgrade_level').val(this.innerText);
+											$('#grade_level_placeholder').val(this.innerHTML);
+											$('#_studentgrade_level').val(this.innerHTML);
 											$('.option_grade').hide();
 										});
 										$('.select_grade').mouseover(function() {
@@ -215,59 +215,8 @@
 					</div>
 									 
 				</div>
-				<!-- timeline info of Discover -->
-				<div class="content_right">
-						<span class="event first" style="margin-bottom:37px;">
-							REGISTRATION TIMELINE <span aria-hidden="true" class="start_point icon-DBPS-Dev-Assets-SRG-35"></span>
-						</span>
-						<span class="event Y">
-							<span class="desktop">
-								Discover schools
-							</span>
-							<span class="tablette">
-								<img class="point" src="/assets/yellow_point.png" />
-							</span>
-						</span>
-						<span class="event Y">
-							<span class="desktop">
-								Compare options
-							</span>
-							<span class="tablette">
-								<img class="point" src="/assets/yellow_point.png" />
-							</span>
-						</span>
-						<span class="event">
-							<span class="desktop">
-								Nov 1<br/>
-								<span class="W" style="font-size:12px;line-height:15px;">
-									School Previews and<br/>
-									School Showcases start
-								</span>
-							</span>
-							<span class="tablette">
-								<img class="point_arrow" src="/assets/blue_point_arrow.png" />
-							</span>
-						</span>
-						<span class="event y">
-							<span class="desktop">
-								Create your list
-							</span>
-							<span class="tablette">
-								<img class="point" src="/assets/yellow_point.png" />
-							</span>
-						</span>
-						<span class="event last">
-							<span class="desktop">
-								Dec 15<br/>
-							<span class="W">Pre-register</span>
-						</span>
-						<span class="tablette">
-							<img class="point" src="/assets/blue_point_white.png" />
-						</span>
-					</span>
-				</div>
-				<!--END  timeline info of Discover -->
-				
+				<%= render partial: 'schools/vertical_timeline' %>
+
 			</section>
 			<!-- END Discover section -->
 			

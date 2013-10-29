@@ -1,9 +1,9 @@
-<div id="address_verification_row_<%= index %>" class='row'>
+<div id="address_verification_row_<%= index %>" class='row button-pointer'>
 	<%= address[:StreetNum] %> <%= address[:Street].try(:titleize) %>, <%= address[:SectionOfCity] %> <%= address[:ZipCode] %>
 	<% if index == 0 %>
-		<span id="address_check_mark_<%= index %>" class='address_check_mark icon_selected icon-DBPS-Dev-Assets-SRG-42' style="display:visible;"></span>
+		<span id="address_check_mark_<%= index %>" class='address_check_mark icon_selected green icon-DBPS-Dev-Assets-SRG-42' style="display:visible;"></span>
 	<% else %>
-		<span id="address_check_mark_<%= index %>" class='address_check_mark icon_selected icon-DBPS-Dev-Assets-SRG-42' style="display:none;"></span>
+		<span id="address_check_mark_<%= index %>" class='address_check_mark icon_selected green icon-DBPS-Dev-Assets-SRG-42' style="display:none;"></span>
 	<% end %>
 </div>
 <script>

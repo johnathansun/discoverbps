@@ -1,3 +1,12 @@
+.red {
+	color: #fc0d1b;
+}
+.green {
+	color: #72c900;
+}
+.button-pointer {
+	cursor: pointer;
+}
 .ui-widget-content {
   background-color: #0059a3;
   width: 400px;
@@ -23,19 +32,19 @@ body.standard #sibling_school {
 	margin-right: 0px;
 }
 a.orange_button {
-	padding: 9px 12px 7px 12px;
+	padding: 12px 13px 11px 13px;
 	background-color: #fc5b00;
 	text-decoration: none;
-	display: block;
+	color: white;
 }
 a.orange_button:hover {
 	text-decoration: none;
+	color: white;
 }
 a.green_button {
-	padding: 9px 12px 7px 12px;
+	padding: 12px 14px 11px 14px;
 	background-color: #72c900;
 	text-decoration: none;
-	display: block;
 }
 a.green_button:hover {
 	text-decoration: none;
@@ -181,4 +190,6 @@ input, select {
 	width: auto !important;
 	padding: 1px 12px 0 12px;
 	height: 38px;
+	margin-top: -9px;
+
 }

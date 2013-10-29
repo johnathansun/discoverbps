@@ -1,0 +1,24 @@
+<div class="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
+<!-- dialog hello -->
+<div class='content'>
+	<span class='title'>Individualized Education Plans</span>
+	<div class='bloc'>
+		<p class='first'>For students with disabilities, placement in a school is determined by their Individualized Education Plan (IEP) and the availability of appropriate seats.  While families are able to indicate school choices through the regular assignment process, placement decisions are made by Boston Public’s IEP team. Students with low levels of need (i.e. Pull-Out or Push-In Resources) can have these needs met in any district school, and may therefore choose from the same set of schools as general education students. For questions about SWD placements, please call:</p>
+	</div>
+	<div class='tel'>617-635-8599</div>
+	<br />
+	<br />
+	<%= link_to 'Display All Schools', schools_path, id: 'next_button', class: 'orange_button' %>
+</div>
+<script>
+	$('#next_button').click(function() {
+		$('#next_button').text('Working...');
+	});
+
+	$(".close_icon").click(function() {
+		$(".dialog_box").fadeOut("fast").removeClass("active");
+	});
+	$(".dialog_box").click(function(e){
+  	e.stopPropagation();
+	});
+</script>
