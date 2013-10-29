@@ -122,10 +122,10 @@ class StudentsController < ApplicationController
 	        format.js { render template: "students/ell_needs" }
 	      elsif @student.iep_needs?
           format.html { redirect_to iep_needs_student_path(@student)}
-          format.js { render template: "students/preferences" }
+          format.js { render template: "students/iep_needs" }
         else
           format.html { redirect_to schools_path}
-	        format.js { render template: "students/preferences" }
+	        format.js { redirect_to schools_path }
 	      end
       else
         format.js { render template: "students/errors" }
