@@ -90,7 +90,7 @@
 								<div id="sortable_hours_column" class="menu_bloc sortable_column">
 									<div class="column_title">School Hours</div>
 								</div>
-								<% if ['K0', 'K1', 'K2', '1', '2', '3'].include?(current_student.grade_level) %>
+								<% if SURROUND_CARE_GRADES.include?(current_student.grade_level) %>
 									<div id="sortable_surround_care_column" class=" menu_bloc sortable_column">
 										<div class="column_title">Surround Care</div>
 									</div>
@@ -110,7 +110,7 @@
 							<% end %>
 						</ul>
 
-						<% if ['1', '2', '3', '4', '5', '7', '8'].include?(current_student.grade_level) %>
+						<% if NON_TRANSITION_GRADES.include?(current_student.grade_level) %>
 							<p>This grade level qualifies for additional zone-based schools. Please <%= link_to 'click here', zone_schools_schools_url %> to view the list.</p>
 						<% end %>
 						<!-- END School listing -->
