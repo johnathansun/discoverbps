@@ -1904,7 +1904,7 @@ footer.footer .logo {
   color: #565656;
   font-size: 16px;
   line-height: 18px;
-  width: 350px;
+  width: 330px;
   padding-left: 19px;
   cursor: pointer;
 }
@@ -2147,7 +2147,7 @@ footer.footer .logo {
   z-index: 5000;
 }
 .wrap #school_list .menu_list #sortable_school_name_column {
-  width: 350px;
+  width: 330px;
 }
 .wrap #school_list .menu_list .menu_bloc {
   font-size: 15px;
@@ -2478,7 +2478,7 @@ footer.footer .logo {
 .wrap .menu_compare_name .name_list .name_info {
   position: relative;
   float: left;
-  width: 295px;
+  width: 288px;
   height: 34px;
   padding: 8px 0 0;
   color: #969696;
@@ -2522,7 +2522,7 @@ footer.footer .logo {
   color: #c9c9c9;
   font-size: 15px;
   display: inline-block;
-  width: 111px;
+  width: 112px;
   height: 28px;
   cursor: pointer;
 }

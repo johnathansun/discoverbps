@@ -93,7 +93,7 @@ a.student_tab {
 	width: auto !important;
 }
 #about_title {
-	padding-left: 20px;
+	padding-left: 19px;
 }
 
 #dialog_box .search .search_section .content_left form .form_line input {
@@ -201,7 +201,7 @@ input, select {
 .school_info_column {
 	float: left;
 	padding-left: 19px;
-	width: 240px;
+	width: 250px;
 }
 .school_features_column {
 	float: left;
