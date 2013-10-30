@@ -247,13 +247,13 @@ module SchoolsHelper
 
 	def grade_levels_tags_helper(grade_levels)
 		tags = []
-		tags << 'Early Learning Center' if (grade_levels & ['K0', 'K1', 'K2']).present?
-		tags << 'K-5' if (grade_levels & ['K0', 'K1', 'K2', '1', '2', '3', '4', '5']).present?
-		tags << 'K-8' if (grade_levels & ['K0', 'K1', 'K2', '1', '2', '3', '4', '5', '6', '7', '8']).present?
-		tags << '6-8' if (grade_levels & ['6', '7', '8']).present?
-		tags << '6-12' if (grade_levels & ['6', '7', '8', '9', '10', '11', '12']).present?
-		tags << '7-12 (Exam School only)' if (grade_levels & ['7', '8', '9', '10', '11', '12']).present?
-		tags << '9-12' if (grade_levels & ['9', '10', '11', '12']).present?
+		tags << 'Early Learning Center' if (['K0', 'K1', 'K2'] - grade_levels).blank?
+		tags << 'K-5' if (['K0', 'K1', 'K2', '1', '2', '3', '4', '5'] - grade_levels).blank?
+		tags << 'K-8' if (['K0', 'K1', 'K2', '1', '2', '3', '4', '5', '6', '7', '8'] - grade_levels).blank?
+		tags << '6-8' if (['6', '7', '8'] - grade_levels).blank?
+		tags << '6-12' if (['6', '7', '8', '9', '10', '11', '12'] - grade_levels).blank?
+		tags << '7-12 (Exam School only)' if (['7', '8', '9', '10', '11', '12'] - grade_levels).blank?
+		tags << '9-12' if (['9', '10', '11', '12'] - grade_levels).blank?
 		return tags
 	end
 
