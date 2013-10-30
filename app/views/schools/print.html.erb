@@ -13,35 +13,21 @@
 <!-- script for timeline and registration -->
 
 <div class="wrap global_map">
-	<img class="bg_g5" src="/assets/bg_g5.png" />
-	<!-- students menu -->
-	<div class="menu_student_info ">
-		
+	<%= render partial: 'schools/map', locals: {students_list: [current_student], map_controls: false, width: '100%'} %>
+
+	<div class="menu_student_info " style="position: absolute; z-index: 10;">
 		<div class="name_list">
 			<div class="name_info active" id="name_1">
 				<span class="name"><%= current_student.first_name %> <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span> </span>
 				<span class="grade">Grade<br/><span class="number"><%= current_student.grade_level %></span></span>
 				<div class="clr"></div>
 			</div>
-			<div class="student_info">
-				<span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-33"></span> <span class="text_G2"><%= current_student.street_number %> <%= current_student.street_name %>, Boston <%= current_student.zipcode %></span><br/>
-				<% if current_student.sibling_school_id.present? %>
-					<span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-12"></span> Sibling School: <span class="text_G2"><%= School.find(current_student.sibling_school_id).try(:name) %></span><br/><br/>
-				<% end %>			
-				<!-- Preferences:<br/>
-				<span aria-hidden="true" class=" icon-DBPS-Dev-Assets-SRG-35"></span> School Start Time:<span class="text_G2"> 7:30</span><br/>
-				<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-35"></span> Enrollment: <span class="text_G2">Small</span><br/>
-				<span aria-hidden="true" class=" icon-DBPS-Dev-Assets-SRG-35"></span> Facility Features: <span class="text_G2">Swimming Pool, Gym</span><br/> -->
-			</div>
-			
 		</div>	
 			
-		<div class="clr"></div>
-		
+		<div class="clr"></div>		
 	</div>
 	<!-- END students menu -->
 
-<%= render partial: 'schools/map', locals: {students_list: [current_student], map_controls: true} %>
 
 	<div class="clr"></div>
 	
