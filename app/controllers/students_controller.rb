@@ -128,7 +128,7 @@ class StudentsController < ApplicationController
           format.js { render template: "students/iep_needs" }
         else
           format.html { redirect_to schools_path}
-	        format.js { redirect_to schools_path }
+	        format.js { render :js => "window.location = '/schools'" }
 	      end
       else
         format.js { render template: "students/errors" }
