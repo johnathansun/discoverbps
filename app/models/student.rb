@@ -13,6 +13,8 @@ class Student < ActiveRecord::Base
   validates :grade_level, inclusion: { in: %w(K0 K1 K2 1 2 3 4 5 6 7 8 9 10 11 12),
     message: "%{value} is not valid" }
 
+  before_validation :format_grade_level
+
   def tab_name
   	if first_name.present?
   		first_name
@@ -21,5 +23,11 @@ class Student < ActiveRecord::Base
   	else
   		'Anonymous'
   	end
+  end
+
+private
+
+  def format_grade_level
+    self.grade_level = self.grade_level.strip.upcase if self.grade_level.present?
   end
 end
