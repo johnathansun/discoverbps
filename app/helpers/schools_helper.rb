@@ -62,7 +62,7 @@ module SchoolsHelper
 	def school_tier_helper(tier)
 		if tier.present?
 			if tier == 'NR'
-				tier_name = 'Not Relevant'
+				tier_name = 'Not Ranked'
 			elsif tier == 'N/A'
 				tier_name = 'N/A'
 			else
