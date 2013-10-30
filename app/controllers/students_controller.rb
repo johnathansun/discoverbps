@@ -2,21 +2,25 @@ class StudentsController < ApplicationController
   layout 'home'
 
 	def create
-		if current_user.present?
-			if params[:student][:first_name].present? && params[:student][:last_name].present?
-				@student = Student.where(user_id: current_user.id, first_name: params[:student][:first_name], last_name: params[:student][:last_name]).first_or_create
+		first_name  = params.try(:[], :student).try(:[], :first_name)
+    last_name   = params.try(:[], :student).try(:[], :last_name)
+    zipcode     = params.try(:[], :student).try(:[], :zipcode)
+      
+    if current_user.present?
+      if first_name.present? && last_name.present?
+				@student = Student.where(user_id: current_user.id, first_name: first_name, last_name: last_name).first_or_create
 			elsif params[:student][:first_name].present?
-				@student = Student.where(user_id: current_user.id, first_name: params[:student][:first_name]).first_or_create
+				@student = Student.where(user_id: current_user.id, first_name: first_name).first_or_create
 			else
-				@student = Student.where(user_id: current_user.id, grade_level: params[:student][:grade_level]).first_or_create
+				@student = Student.where(user_id: current_user.id, grade_level: grade_level).first_or_create
 			end
 		else
-			if params[:student][:first_name].present? && params[:student][:last_name].present?
-				@student = Student.where(session_id: session[:session_id], first_name: params[:student][:first_name], last_name: params[:student][:last_name]).first_or_create
-			elsif params[:student][:first_name].present?
-				@student = Student.where(session_id: session[:session_id], first_name: params[:student][:first_name]).first_or_create
+			if first_name.present? && last_name.present?
+				@student = Student.where(session_id: session[:session_id], first_name: first_name, last_name: last_name).first_or_create
+			elsif first_name.present?
+				@student = Student.where(session_id: session[:session_id], first_name: first_name).first_or_create
 			else
-				@student = Student.where(session_id: session[:session_id], grade_level: params[:student][:grade_level]).first_or_create
+				@student = Student.where(session_id: session[:session_id], grade_level: grade_level).first_or_create
 			end
 		end
 
@@ -66,7 +70,6 @@ class StudentsController < ApplicationController
   end
 
   def address_verification
-    logger.info "**************************** request format = #{request.format}"
     @student = Student.find(params[:id])
 
     street_number = URI.escape(@student.street_number.try(:strip))
@@ -79,8 +82,8 @@ class StudentsController < ApplicationController
   end
 
   def verify_address
-    logger.info "**************************** request format = #{request.format}"
     @student = Student.find(params[:id])
+    params[:student][:address_verified] = true
 
     respond_to do |format|
       if @student.update_attributes(params[:student])

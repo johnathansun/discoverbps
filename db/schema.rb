@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131026221134) do
+ActiveRecord::Schema.define(:version => 20131030003804) do
 
   create_table "preference_categories", :force => true do |t|
     t.string   "name"
@@ -170,6 +170,7 @@ ActiveRecord::Schema.define(:version => 20131026221134) do
     t.float    "x_coordinate"
     t.float    "y_coordinate"
     t.datetime "deleted_at"
+    t.boolean  "address_verified",        :default => false
   end
 
   add_index "students", ["session_id"], :name => "index_students_on_session_id"

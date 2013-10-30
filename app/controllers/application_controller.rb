@@ -14,9 +14,9 @@ class ApplicationController < ActionController::Base
 
   def current_user_students
   	if current_user
-      return current_user.students
+      return current_user.students.verified
     elsif session[:session_id].present?
-      return Student.where(session_id: session[:session_id]).order(:first_name)
+      return Student.verified.where(session_id: session[:session_id]).order(:first_name)
     else
       return []
     end
