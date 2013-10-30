@@ -7,6 +7,9 @@
 .button-pointer {
 	cursor: pointer;
 }
+.event:hover {
+	background: #80bce7;
+}
 .ui-widget-content {
   background-color: #0059a3;
   width: 400px;
@@ -109,9 +112,6 @@ a.student_tab {
   color: #565656;
   font-size: 16px;
 }
-.list_row {
-	cursor: row-resize;
-}
 .icon-map-pin:before {
 	content: "\e024";
 }
@@ -190,6 +190,7 @@ input, select {
 .sortable_row_number {
 	color: #565656;
 	font-size: 20px;
+	cursor: row-resize;
 }
 .sortable_school_name {
 	color: #0077cf;
