@@ -92,9 +92,6 @@ a.student_tab {
 #about_title {
 	padding-left: 20px;
 }
-.school_name {
-	cursor: pointer;
-}
 
 #dialog_box .search .search_section .content_left form .form_line input {
   background: #ebebeb;
@@ -127,9 +124,6 @@ a.student_tab {
 }
 .sortable_column {
 	cursor: pointer;
-}
-#sortable_school_name_column {
-  width: 286px !important;
 }
 #choice_order_arrow {
 	margin-top: 1px;
@@ -192,4 +186,24 @@ input, select {
 	height: 38px;
 	margin-top: -9px;
 
+}
+.sortable_row_number {
+	color: #565656;
+	font-size: 20px;
+}
+.sortable_school_name {
+	color: #0077cf;
+}
+.transportation_icon {
+	color: #565656;
+}
+.school_info_column {
+	float: left;
+	padding-left: 19px;
+	width: 240px;
+}
+.school_features_column {
+	float: left;
+	margin-left: 10px;
+	width: 150px;
 }

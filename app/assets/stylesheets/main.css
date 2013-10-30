@@ -1696,7 +1696,7 @@ footer.footer .logo {
   display: block;
 }
 .wrap .single_school .name_school {
-  font-size: 27px;
+  font-size: 26px;
   color: #565656;
 }
 .wrap .single_school .school_descrip {
@@ -1904,8 +1904,9 @@ footer.footer .logo {
   color: #565656;
   font-size: 16px;
   line-height: 18px;
-  width: 286px;
+  width: 350px;
   padding-left: 19px;
+  cursor: pointer;
 }
 .wrap #school_list ul li .school_name .full_descrip_link {
   color: #0077cf;
@@ -2113,6 +2114,7 @@ footer.footer .logo {
   color: #565656;
   font-size: 27px;
   line-height: 28px;
+  cursor: pointer;
 }
 .wrap #school_list ul li .icon {
   font-size: 30px;
@@ -2140,9 +2142,12 @@ footer.footer .logo {
 }
 .wrap #school_list .menu_list {
   padding: 13px 0;
-  height: 27px;
+  height: 26px;
   background: #ebebeb;
   z-index: 5000;
+}
+.wrap #school_list .menu_list #sortable_school_name_column {
+  width: 350px;
 }
 .wrap #school_list .menu_list .menu_bloc {
   font-size: 15px;
@@ -2535,7 +2540,7 @@ footer.footer .logo {
 .wrap .menu_compare_name.compare_action .name_list .name_info .indicator {
   display: inline-block;
   line-height: .7em;
-  font-size: 26px;
+  font-size: 27px;
 }
 .wrap .menu_compare_name.compare_action .name_list .name_info#name_1 {
   color: #969696;
@@ -3602,7 +3607,6 @@ ie6 .print1 .wrap {
   }
   .wrap #school_list ul li .school_descrip .right_side .tablet {
     display: block;
-    width: 305px;
     float: left;
   }
   .wrap #school_list ul li .school_descrip .right_side .tablet .box {
@@ -3623,6 +3627,9 @@ ie6 .print1 .wrap {
   }
   .wrap #school_list .shadow {
     display: none;
+  }
+  .wrap #school_list .menu_list #sortable_school_name_column {
+    width: 273px;
   }
   .wrap #school_list .menu_list .menu_bloc {
     width: 151px;

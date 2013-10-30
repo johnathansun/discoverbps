@@ -29,20 +29,24 @@
  
 <div class="separation_line"></div>
 <p id="about_title" class="font_17">About <%= school.api_basic_info.try(:[], 0).try(:[], :schname_23) %></p>
-<div class="school_name ">
+
+<div class="school_info_column">
 	<p>
-		<%= school.api_basic_info.try(:[], 0).try(:[], :campus1address1) %>, <%= school.api_basic_info.try(:[], 0).try(:[], :campus1city) %> <%= school.api_basic_info.try(:[], 0).try(:[], :campus1zip) %><br />
-		<a class="text_B0" href="" title="School Website">School Website</a> <br/>			
-		<!-- email link -->
-		Email: <a class="text_B0" href="mailto:eliotboston.k12.ma.us" title="Email adress"><%= school.api_basic_info.try(:[], 0).try(:[], :schemail) %></a>
+		<%= school.api_basic_info.try(:[], 0).try(:[], :campus1address1) %>, <%= school.api_basic_info.try(:[], 0).try(:[], :campus1city) %> <%= school.api_basic_info.try(:[], 0).try(:[], :campus1zip) %>
+		<br />
+		<% if school.api_basic_info.try(:[], 0).try(:[], :SchLink).present? %>
+			<%= link_to 'School Website', school.api_basic_info.try(:[], 0).try(:[], :SchLink), class: "text_B0", title: "School Website", target: "_blank" %>
+			<br/>			
+		<% end %>
+		<%= mail_to school.api_basic_info.try(:[], 0).try(:[], :schemail), school.api_basic_info.try(:[], 0).try(:[], :schemail), class: "text_B0", title: "Email Address" %>
 	</p>
-	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"></span> <%= raw student_school.distance %> from home</p>
+	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"></span> <%= raw student_school.distance %> mi from home</p>
 	<p class="descrip">
 		<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> <%= raw student_school.walk_time %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span><br/>
 		<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> <%= raw student_school.drive_time %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
 	</p>
 
-	<p  class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"></span> School hours</p>
+	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"></span> School hours</p>
 
 	<p class="descrip"><%= school.api_hours.try(:[], 0).try(:[], :schhours1) %></p>
 
@@ -65,97 +69,64 @@
 	<p class="desktop_tablet">
 		<a href="/schools/<%= school.slug %>/print" title="Print Details"><span aria-hidden="true" class="font_20 icon-DBPS-Dev-Assets-SRG-28"></span> Print Details</a>
 	</p>
+	<div class="clr"></div>
 </div>
 
-<div class="full_details">
-	<div class="desktop">
-
-		<div class="detail_row">
+<div class="desktop">
+	<div class="school_features_column">
+		<div class="box">
+			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"></span> School Type</p>
+			<p class="descrip"><%= school_type_helper(school.api_basic_info.try(:[], 0)) %></p>
+		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"></span> Grades Offered</p>
 			<p class="descrip"><%= grade_levels_helper(school.grade_levels) %></p>
+		</div>
+		<div class="box">
+			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"></span> Enrollment</p>
+			<p class="descrip"><%= school.api_basic_info.try(:[], 0).try(:[], :SchSize) %></p>
+		</div>
+		<div class="box">
+			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"></span> Eligibility</p>
+			<p class="descrip"><%= school.transportation_eligibility == 'Y' ? 'Transportation' : 'Walk' %></p>
+		</div>
+		<div class="box">
+			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"></span> Special Application</p>
+			<p class="descrip"><%= school.api_description.try(:[], 0).try(:[], :specialapplicationnarrative).present? ? school.api_description.try(:[], 0).try(:[], :specialapplicationnarrative) : 'None' %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"></span> MCAS Tier</p>
 			<p class="descrip">Tier <%= school.tier %></p>
 		</div>
 		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"></span> Facility Features</p>
-			<p class="descrip"><%= facilities_list_helper(school.api_facilities.try(:[], 0)) %></p>
+			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"></span> Uniform Policy</p>
+			<p class="descrip"><%= school.api_description.try(:[], 0).try(:[], :uniformpolicy).blank? ? 'None' : school.api_description.try(:[], 0).try(:[], :uniformpolicy) %></p>
 		</div>
-		<div class="clr"></div>
 	</div>
 
-	<div class="detail_row">
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"></span> Enrollment</p>
-			<p class="descrip"><%= school.api_basic_info.try(:[], 0).try(:[], :SchSize) %></p>
-		</div>
+	<div class="school_features_column">
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"></span> School Focus</p>
 			<p class="descrip"><%= school.api_description.try(:[], 0).try(:[], :schfocus) %></p>
 		</div>
 		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"></span> Sports</p>
-			<p class="descrip"><%= sports_list_helper(school.api_sports.try(:[], 0)) %></p>
-		</div>
-		<div class="clr"></div>
-	</div>
-
-	<div class="detail_row">
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"></span> School Type</p>
-			<p class="descrip"><%= school_type_helper(school.api_basic_info.try(:[], 0)) %></p>
-		</div>
-		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"></span> Health & Wellness</p>
 			<p class="descrip"><%= school.api_basic_info.try(:[], 0).try(:[], :ishasfulltimenurse) == 'True' ? 'Full-Time Nurse' : '' %></p>
-		</div>
-		<div class="clr"></div>
-	</div>
-
-	<div class="detail_row">
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"></span> Special Application</p>
-			<p class="descrip"><%= school.api_description.try(:[], 0).try(:[], :specialapplicationnarrative).present? ? school.api_description.try(:[], 0).try(:[], :specialapplicationnarrative) : 'None' %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"></span> Community Partners</p>
 			<p class="descrip"><%= partners_list_helper(school.api_partners) %></p>
 		</div>
-		<div class="clr"></div>
 	</div>
 
-	<div class="detail_row">
+	<div class="school_features_column">
 		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"></span> Uniform Policy</p>
-			<p class="descrip"><%= school.api_description.try(:[], 0).try(:[], :uniformpolicy).blank? ? 'None' : school.api_description.try(:[], 0).try(:[], :uniformpolicy) %></p>
+			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"></span> Facility Features</p>
+			<p class="descrip"><%= facilities_list_helper(school.api_facilities.try(:[], 0)) %></p>
 		</div>
 		<div class="box">
-			<p class="title"></p>
-			<p class="descrip"></p>
+			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"></span> Sports</p>
+			<p class="descrip"><%= sports_list_helper(school.api_sports.try(:[], 0)) %></p>
 		</div>
-		<div class="box">
-			<p class="title"></p>
-			<p class="descrip"></p>
-		</div>
-		<div class="clr"></div>
-	</div>
-
-	<div class="detail_row">
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"></span> Eligibility</p>
-			<p class="descrip"><%= school.transportation_eligibility == 'Y' ? 'Transportation' : 'Walk' %></p>
-		</div>
-		<div class="box">
-			<p class="title"></p>
-			<p class="descrip"></p>
-		</div>
-		<div class="box">
-			<p class="title"></p>
-			<p class="descrip"></p>
-		</div>
-		<div class="clr"></div>
 	</div>
 </div>
-<!--END show in desktop only -->
