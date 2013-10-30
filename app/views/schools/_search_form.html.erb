@@ -1,4 +1,3 @@
-<!-- Address and zip info -->
 <div class="form_line">
 
 	<% if defined?(student) && student.try(:street_number).present? %>
@@ -107,12 +106,26 @@
 
 <!-- NEXT and Sibling school buttons -->
 <div class="form_line">
-	<div class="bloc_6 portrait">
-		<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
-		<input type="text" placeholder="Set Sibling's school" />
-		<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
-	</div>
 	<div id="search_form_submit" class="bloc_5">
 		<%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit' %>
 	</div>
+	<div  id="sibling_school" class="bloc_6">
+		<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
+		<input id="sibling_school_autocomplete" name="[student]sibling_school_name" type="text" placeholder="Set Sibling's school" />
+		<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
+	</div>
+	<div class="clr"></div>
 </div>
+<script>
+	$(function() {
+		var schoolNames = <%= raw School.all.collect {|x| x.name}.compact %>;
+		$( "#sibling_school_autocomplete" ).autocomplete({
+			source: schoolNames,
+			minLength: 2,
+			messages: {
+				noResults: '',
+				results: function() {}
+			}
+		});
+	});
+</script>

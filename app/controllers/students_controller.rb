@@ -5,6 +5,7 @@ class StudentsController < ApplicationController
 		first_name  = params.try(:[], :student).try(:[], :first_name)
     last_name   = params.try(:[], :student).try(:[], :last_name)
     zipcode     = params.try(:[], :student).try(:[], :zipcode)
+    grade_level = params.try(:[], :student).try(:[], :grade_level)
       
     if current_user.present?
       if first_name.present? && last_name.present?
