@@ -64,7 +64,7 @@ module SchoolsHelper
 			if tier == 'NR'
 				tier_name = 'Not Ranked'
 			elsif tier == 'N/A'
-				tier_name = 'N/A'
+				tier_name = 'Not Applicable'
 			else
 				tier_name = "Tier #{tier}"
 			end

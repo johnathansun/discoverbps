@@ -110,7 +110,7 @@
 							<% end %>
 						</ul>
 
-						<% if ['1', '2', '4', '5', '7', '8', '10', '11', '12'].include?(current_student.grade_level) %>
+						<% if ['1', '2', '3', '4', '5', '7', '8'].include?(current_student.grade_level) %>
 							<p>This grade level qualifies for additional zone-based schools. Please <%= link_to 'click here', zone_schools_schools_url %> to view the list.</p>
 						<% end %>
 						<!-- END School listing -->

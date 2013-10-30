@@ -69,7 +69,7 @@ class SchoolsController < ApplicationController
         session[:current_student_id] = current_user_students.first.id
       end
 
-      non_transition_grades = ['1', '2', '4', '5', '7', '8', '10', '11', '12']
+      non_transition_grades = ['1', '2', '3', '4', '5', '7', '8']
       if non_transition_grades.include?(current_student.grade_level)
         @zone_schools = get_zone_schools
       else
