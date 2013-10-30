@@ -13,6 +13,7 @@
 		<%= hidden_field_tag '[student]y_coordinate', @addresses.first.try(:[], :Y) %>
 		<%= hidden_field_tag '[student]latitude', @addresses.first.try(:[], :Lat) %>
 		<%= hidden_field_tag '[student]longitude', @addresses.first.try(:[], :Lng) %>
+		<%= hidden_field_tag '[student]geo_code', @addresses.first.try(:[], :GeoCode) %>
 
 		<div id="address_matches" class='selection'>
 			<% @addresses.each_with_index do |address, index| %>
