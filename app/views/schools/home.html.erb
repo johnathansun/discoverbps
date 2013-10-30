@@ -35,30 +35,27 @@
 				<h1>Welcome to Boston Public Schools Registration</h1>
 				<img class="logo_beta" src="/assets/logo_beta.png" alt="beta"/>
 			</div>
-			<p>This website provides resources for finding, exploring and comparing a student's eligible schools. </p>
-							<p class="small_text tablet">Looking for the 2013-2014 school year?</p>
+			<p>Discover BPS is a new tool for 2014. We are working hard to ensure its accuracy for all families, across all addresses and grades. If you find issues with your search, please <%= mail_to 'discoverbps@bostonpublicschools.org', 'send us feedback', class: 'yellow' %> so we can continue to improve the site.</p>
+			<p>&mdash; The BPS Welcome Center Team</p>			
+		</div>
+		<div class="search_section_content "> 
+		 
+			<!-- ADD CLASS "RIGHT" TO MOVE THE TODAY INDICATOR TO RIGHT OF THE TIME LINE, OR "LEFT" TO MOVE TO THE LEFT  FOR LARGEUR OF TABLET SIZE -->
+			<!-- AND change the top % to ajust the today up or down -->
+			<div class="today right" style="top:<%= timeline_percent(Date.today) %>;">
+				<span aria-hidden="true" class="right icon-DBPS-Dev-Assets-SRG-30"></span>&nbsp; Today &nbsp;<span aria-hidden="true" class="left icon-DBPS-Dev-Assets-SRG-32"></span>
+				<span class="yello_line"></span>
+			</div> 
+			<!-- END today indicator-->
 			
-					 </div>
-					<div class="search_section_content "> 
-					 
-						<!-- ADD CLASS "RIGHT" TO MOVE THE TODAY INDICATOR TO RIGHT OF THE TIME LINE, OR "LEFT" TO MOVE TO THE LEFT  FOR LARGEUR OF TABLET SIZE -->
-						<!-- AND change the top % to ajust the today up or down -->
-						<div class="today right" style="top:<%= timeline_percent(Date.today) %>;">
-							<span aria-hidden="true" class="right icon-DBPS-Dev-Assets-SRG-30"></span>&nbsp; Today &nbsp;<span aria-hidden="true" class="left icon-DBPS-Dev-Assets-SRG-32"></span>
-							<span class="yello_line"></span>
-						</div> 
-						<!-- END today indicator-->
-						
-						<!-- Discover section -->
+				<!-- Discover section -->
 			<section class="search_section first">
-				<p class="small_text no_tablet">Looking for the 2013-2014 school year?</p>	
-				<div class="content_left">
-					
+				<div class="content_left">					
 					<div class="logo discover" >
 						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-01"></span>
 					</div>
 					<div class="text">
-						<p>The first step in the school registration process is to identify the student's eligible schools. By filling out the form below, and answering a few questions in the following dialog boxes, we will display your student's eligible schools, and help you to consider which schools will be the best fit for your student.</p>
+						<p>The first step in the discovery process is to identify the student's eligible schools. By filling out the form below, and answering a few questions in the following dialog boxes, we will dispaly your student's eligible schools, including information about which schools may be a good fit.</p>
 
 						<% if current_user_students.present? %>
 							<p class="K">Please select from your previous searches:</p>

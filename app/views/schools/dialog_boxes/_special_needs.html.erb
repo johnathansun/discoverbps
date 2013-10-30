@@ -10,10 +10,14 @@
 		
 		<p><%= check_box_tag '[student]ell_needs', '1', @student.ell_needs %> My child may need specialized language support</p>
 
-		<div class='btn'><%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit' %></div>
+		<div class='btn'><%= submit_tag 'Next', class: 'orange_submit' %></div>
 	<% end %>
 </div>
-<script>	
+<script>
+	$('.orange_submit').click(function() {
+		$('.orange_submit').text('Working...');
+	});
+
 	$(".close_icon").click(function() {
 		$(".dialog_box").fadeOut("fast").removeClass("active");
 	});
