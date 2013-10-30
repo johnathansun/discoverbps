@@ -48,9 +48,9 @@ class StudentsController < ApplicationController
   def update
   	@student = Student.find(params[:id])
 
-    street_number = URI.escape(@student.street_number.try(:strip))
-    street_name   = URI.escape(@student.street_name.try(:strip))
-    zipcode       = URI.escape(@student.zipcode.try(:strip))
+    street_number = URI.escape(params[:student].try(:[], :street_number).try(:strip))
+    street_name   = URI.escape(params[:student].try(:[], :street_name).try(:strip))
+    zipcode       = URI.escape(params[:student].try(:[], :zipcode).try(:strip))
         
     addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
     @addresses = addresses.try(:[], :List)
