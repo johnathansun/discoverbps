@@ -142,7 +142,9 @@ class SchoolsController < ApplicationController
     def get_home_schools
       if current_student.street_number.present? && current_student.street_name.present? && current_student.zipcode.present?
         logger.info "************ refreshing student_schools"
-  
+        
+        current_student.student_schools.clear
+
         street_number     = URI.escape(current_student.street_number)
         street_name       = URI.escape(current_student.street_name)
         zipcode           = current_student.zipcode.strip
@@ -207,6 +209,8 @@ class SchoolsController < ApplicationController
       if current_student.street_number.present? && current_student.street_name.present? && current_student.zipcode.present?
         logger.info "************ refreshing student_schools"
   
+        current_student.student_schools.clear
+
         zipcode           = current_student.zipcode.strip
         grade_level       = current_student.grade_level.to_s.length < 2 ? ('0' + current_student.grade_level.try(:strip)) : current_student.grade_level.try(:strip)
         x_coordinate      = current_student.x_coordinate
