@@ -59,6 +59,21 @@ module SchoolsHelper
 		end
 	end
 
+	def school_tier_helper(tier)
+		if tier.present?
+			if tier == 'NR'
+				tier_name = 'Not Relevant'
+			elsif tier == 'N/A'
+				tier_name = 'N/A'
+			else
+				tier_name = "Tier #{tier}"
+			end
+			return tier_name
+		else
+			return ''
+		end
+	end
+
 	def grade_levels_helper(array)
 		if array.present?
 			if array.length == 0
