@@ -129,9 +129,10 @@ module SchoolsHelper
 
 	################ helper methods fo generating category data tags
 
-	def preference_category_tags_helper(category, school)
+	def preference_category_tags_helper(category, school, student_school)
 		if category.name == 'Grades Offered'
-			tags = grade_levels_tags_helper(school.grade_levels)
+			tags = grade_levels_tags_helper(school.grade_levels, student_school)
+
 		elsif category.name == 'Facility Features'
 			tags = facilities_tags_helper(school.api_facilities.try(:[], 0))
 		
@@ -245,25 +246,16 @@ module SchoolsHelper
 		end
 	end
 
-	def grade_levels_tags_helper(grade_levels)
+	def grade_levels_tags_helper(grade_levels, student_school)
 		tags = []
 		tags << 'Early Learning Center' if (['K0', 'K1', 'K2'] - grade_levels).blank?
 		tags << 'K-5' if (['K0', 'K1', 'K2', '1', '2', '3', '4', '5'] - grade_levels).blank?
 		tags << 'K-8' if (['K0', 'K1', 'K2', '1', '2', '3', '4', '5', '6', '7', '8'] - grade_levels).blank?
 		tags << '6-8' if (['6', '7', '8'] - grade_levels).blank?
 		tags << '6-12' if (['6', '7', '8', '9', '10', '11', '12'] - grade_levels).blank?
-		tags << '7-12 (Exam School only)' if (['7', '8', '9', '10', '11', '12'] - grade_levels).blank?
+		tags << '7-12 (Exam School only)' if (['7', '8', '9', '10', '11', '12'] - grade_levels).blank? && student_school.exam_school?
 		tags << '9-12' if (['9', '10', '11', '12'] - grade_levels).blank?
 		return tags
 	end
 
-
-	# def link_to_add_student(link_name, partial)
- #    new_object = .page_fields.new
- #    id = new_object.object_id
- #    fields = f.fields_for('page_fields_attributes[]', new_object, index: id) do |builder|
- #      render :partial => partial, locals: {f: builder, object: new_object}
- #    end
- #    return link_to(link_name, '#', class: 'add_fields btn btn-small btn-success', data: {id: id, fields: fields.gsub('\n', '')})
- #  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131030015242) do
+ActiveRecord::Schema.define(:version => 20131030212719) do
 
   create_table "preference_categories", :force => true do |t|
     t.string   "name"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(:version => 20131030015242) do
     t.datetime "updated_at",                                    :null => false
     t.string   "bps_id"
     t.boolean  "ranked",                     :default => false
+    t.boolean  "exam_school",                :default => false
   end
 
   add_index "student_schools", ["bps_id"], :name => "index_student_schools_on_bps_id"

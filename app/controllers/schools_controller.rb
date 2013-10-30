@@ -172,6 +172,7 @@ class SchoolsController < ApplicationController
               student_school.tier                       = api_school[:Tier]
               student_school.walk_zone_eligibility      = api_school[:AssignmentWalkEligibilityStatus]
               student_school.transportation_eligibility = api_school[:TransEligible]
+              student_school.exam_school                = (api_school[:IsExamSchool] == "0" ? false : true) 
               student_school.save
             end
           end
@@ -237,6 +238,7 @@ class SchoolsController < ApplicationController
               student_school.tier                       = api_school[:Tier]
               student_school.walk_zone_eligibility      = api_school[:AssignmentWalkEligibilityStatus]
               student_school.transportation_eligibility = api_school[:TransEligible]
+              student_school.exam_school                = (api_school[:IsExamSchool] == "0" ? false : true) 
               student_school.save
             end
           end

@@ -4,5 +4,5 @@ class StudentSchool < ActiveRecord::Base
 
 	belongs_to :school
 	belongs_to :student
-  attr_accessible :distance, :drive_time, :school_id, :student_id, :tier, :transportation_eligibility, :walk_time, :walk_zone_eligibility, :sort_order_position, :bps_id, :ranked
+  attr_accessible :distance, :drive_time, :school_id, :student_id, :tier, :transportation_eligibility, :walk_time, :walk_zone_eligibility, :sort_order_position, :bps_id, :ranked, :exam_school
 end
