@@ -62,7 +62,8 @@
 						<%= form_tag set_special_needs_student_path(@student), :method => :put, :remote => false do %>
 							<h3>Does your child have specialized language or educational needs?</h3>
 							<br />
-							
+							<p><%= check_box_tag 'special_needs', '1' %> Not applicable</p>
+
 							<p><%= check_box_tag '[student]iep_needs', '1', @student.iep_needs %> My child has an Individualized Education Plan (IEP) for special needs</p>
 							
 							<p><%= check_box_tag '[student]ell_needs', '1', @student.ell_needs %> My child may need specialized language support</p>
