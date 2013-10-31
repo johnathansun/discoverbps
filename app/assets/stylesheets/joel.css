@@ -41,7 +41,7 @@ body.standard #sibling_school #sibling_school_autocomplete {
 	background: #0059a3;
 }
 .no_right_margin {
-	margin-right: 0px;
+	margin-right: 0px !important;
 }
 a.orange_button {
 	padding: 12px 13px 11px 13px;
@@ -99,7 +99,7 @@ a.student_tab {
 }
 .school_description {
 	width: 410px;
-	padding: 19px;
+	padding: 17px 19px;
 	float: left;
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: 15px;
@@ -189,6 +189,9 @@ input, select {
 	color: red !important;
 }
 #delete_students_button {
+	float: left;
+	margin-top: -50px;
+	margin-left: 280px;
 	color: white !important;
 	font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
 	font-size: 16px;
@@ -199,8 +202,6 @@ input, select {
 	width: auto !important;
 	padding: 1px 12px 0 12px;
 	height: 38px;
-	margin-top: -9px;
-
 }
 .transportation_icon {
 	color: #565656;
