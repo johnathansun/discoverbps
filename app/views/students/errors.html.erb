@@ -1,0 +1,27 @@
+<div class="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
+<!-- dialog select address matches -->
+<div class='content'>
+	<% if student.errors.present? %>
+		<h3>
+			Please complete the following <%= pluralize(student.errors.count, "field") %>:
+		</h3>
+		<br />
+		<ul>
+	  	<% student.errors.full_messages.each do |msg| %>
+	  		<li style="color: red;"><%= msg %></li>
+	  	<% end %>
+		</ul>
+	<% else %>
+		<h3>
+			We're sorry but something went wrong. Please try your search again later.
+		</h3>
+	<% end %>
+</div>
+<script>	
+	$(".close_icon").click(function() {
+		$(".dialog_box").fadeOut("fast").removeClass("active");
+	});
+	$(".dialog_box").click(function(e){
+  	e.stopPropagation();
+	});
+</script>
