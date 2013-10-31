@@ -266,7 +266,7 @@ function initialize(){
           var infowindow = new google.maps.InfoWindow({
           });
           google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info.try(:[], 0)[:campus1address1] %><br /><%= student_school.school.api_basic_info.try(:[], 0)[:campus1city] %>, <%= student_school.school.api_basic_info.try(:[], 0)[:campus1state] %>');
+            infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info.try(:[], :campus1address1) %><br /><%= student_school.school.api_basic_info.try(:[], :campus1city) %>, <%= student_school.school.api_basic_info.try(:[], :campus1state) %>');
             infowindow.open(map,this);
           });
         <% end %>
