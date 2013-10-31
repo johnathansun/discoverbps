@@ -36,17 +36,17 @@
 <!--END show in desktop and tablet --> 
  
 <div class="separation_line"></div>
-<p id="about_title" class="font_17">About <%= school.api_basic_info.try(:[], 0).try(:[], :schname_23) %></p>
+<p id="about_title" class="font_17">About <%= school.api_basic_info.try(:[], :schname_23) %></p>
 
 <div class="school_info_column">
 	<p>
-		<%= school.api_basic_info.try(:[], 0).try(:[], :campus1address1) %>, <%= school.api_basic_info.try(:[], 0).try(:[], :campus1city) %> <%= school.api_basic_info.try(:[], 0).try(:[], :campus1zip) %>
+		<%= school.api_basic_info.try(:[], :campus1address1) %>, <%= school.api_basic_info.try(:[], :campus1city) %> <%= school.api_basic_info.try(:[], :campus1zip) %>
 		<br />
-		<% if school.api_basic_info.try(:[], 0).try(:[], :SchLink).present? %>
-			<%= link_to 'School Website', school.api_basic_info.try(:[], 0).try(:[], :SchLink), class: "text_B0", title: "School Website", target: "_blank" %>
+		<% if school.api_basic_info.try(:[], :SchLink).present? %>
+			<%= link_to 'School Website', school.api_basic_info.try(:[], :SchLink), class: "text_B0", title: "School Website", target: "_blank" %>
 			<br/>			
 		<% end %>
-		<%= mail_to school.api_basic_info.try(:[], 0).try(:[], :schemail), school.api_basic_info.try(:[], 0).try(:[], :schemail), class: "text_B0", title: "Email Address" %>
+		<%= mail_to school.api_basic_info.try(:[], :schemail), school.api_basic_info.try(:[], :schemail), class: "text_B0", title: "Email Address" %>
 	</p>
 	<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"></span> <%= raw student_school.distance %> mi from home</p>
 	<p class="descrip">
@@ -59,15 +59,15 @@
 	<p class="descrip"><%= school.api_hours.try(:[], 0).try(:[], :schhours1) %></p>
 
 	<% if NON_TRANSITION_GRADES.include?(current_student.grade_level) %>
-		<% if school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms).present? || school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms).present? %>
+		<% if school.api_basic_info.try(:[], :BeforeSchPrograms).present? || school.api_basic_info.try(:[], :AfterSchPrograms).present? %>
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"></span> Surround care </p>
 
 			<p class="descrip">
-				<% if school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms).present? %>
-					<span class="text_G1">Before:</span> <%= school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms) %><br /><br />
+				<% if school.api_basic_info.try(:[], :BeforeSchPrograms).present? %>
+					<span class="text_G1">Before:</span> <%= school.api_basic_info.try(:[], :BeforeSchPrograms) %><br /><br />
 				<% end %>
-				<% if school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms).present? %>
-					<span class="text_G1">After:</span> <%= school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms) %>
+				<% if school.api_basic_info.try(:[], :AfterSchPrograms).present? %>
+					<span class="text_G1">After:</span> <%= school.api_basic_info.try(:[], :AfterSchPrograms) %>
 				<% end %>
 			</p>
 		<% end %>
@@ -84,7 +84,7 @@
 	<div class="school_features_column">
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"></span> School Type</p>
-			<p class="descrip"><%= school_type_helper(school.api_basic_info.try(:[], 0)) %></p>
+			<p class="descrip"><%= school_type_helper(school.api_basic_info) %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"></span> Grades Offered</p>
@@ -92,7 +92,7 @@
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"></span> Enrollment</p>
-			<p class="descrip"><%= school.api_basic_info.try(:[], 0).try(:[], :SchSize) %></p>
+			<p class="descrip"><%= school.api_basic_info.try(:[], :SchSize) %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"></span> Eligibility</p>
@@ -119,7 +119,7 @@
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"></span> Health & Wellness</p>
-			<p class="descrip"><%= school.api_basic_info.try(:[], 0).try(:[], :ishasfulltimenurse) == 'True' ? 'Full-Time Nurse' : '' %></p>
+			<p class="descrip"><%= school.api_basic_info.try(:[], :ishasfulltimenurse) == 'True' ? 'Full-Time Nurse' : '' %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"></span> Community Partners</p>

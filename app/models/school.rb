@@ -23,7 +23,7 @@ class School < ActiveRecord::Base
 	# after_validation :geocode
 
 	def full_address
-		"#{api_basic_info.try(:[], 0)[:campus1address1]} #{api_basic_info.try(:[], 0)[:campus1city]} #{api_basic_info.try(:[], 0)[:campus1zip]}"
+		"#{api_basic_info[:campus1address1]} #{api_basic_info[:campus1city]} #{api_basic_info[:campus1zip]}"
 	end
 
 	# turn api_grades into an array
@@ -50,7 +50,7 @@ class School < ActiveRecord::Base
 
 	def fulltime_nurse?
 		if api_basic_info.present?
-			if api_basic_info.try(:[], 0)[:ishasfulltimenurse] == 'True'
+			if api_basic_info[:ishasfulltimenurse] == 'True'
 				return true
 			else
 				return false

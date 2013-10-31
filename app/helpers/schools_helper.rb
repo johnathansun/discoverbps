@@ -140,10 +140,10 @@ module SchoolsHelper
 			tags = sports_tags_helper(school.api_sports.try(:[], 0))
 		
 		elsif category.name == 'Health & Wellness'
-			tags = health_tags_helper(school.api_basic_info.try(:[], 0))
+			tags = health_tags_helper(school.api_basic_info)
 		
 		elsif category.name == 'Enrollment'
-			tags = enrollment_tags_helper(school.api_basic_info.try(:[], 0))
+			tags = enrollment_tags_helper(school.api_basic_info)
 
 		elsif category.name == 'Uniform Policy'
 			tags = uniform_policy_tags_helper(school.api_description.try(:[], 0))

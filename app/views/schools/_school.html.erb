@@ -10,7 +10,7 @@
 	</div>
 	<div class="school_name select line">
 		<span class="middle">
-			<span class="sortable_school_name"><%= school.api_basic_info.try(:[], 0).try(:[], :schname_23) %></span>
+			<span class="sortable_school_name"><%= school.api_basic_info.try(:[], :schname_23) %></span>
 			<% if current_student.sibling_school_id == school.bps_id %>
 				<span aria-hidden="true" class="select_icon icon-DBPS-Dev-Assets-SRG-12"></span>
 			<% end %>
@@ -50,11 +50,11 @@
 		<div class="box line surround_care">
 			<span class="middle">
 				<% surround_care_count = 0 %>
-				<% if school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms).present? %>
+				<% if school.api_basic_info.try(:[], :BeforeSchPrograms).present? %>
 					<% surround_care_count += 1 %>
 					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<br/>
 				<% end %> 
-				<% if school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms).present? %>
+				<% if school.api_basic_info.try(:[], :AfterSchPrograms).present? %>
 					<% surround_care_count += 1 %>
 					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school
 				<% end %>

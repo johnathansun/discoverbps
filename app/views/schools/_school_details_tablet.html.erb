@@ -2,7 +2,7 @@
 	<div class="school_features_column">
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"></span> School Type</p>
-			<p class="descrip"><%= school_type_helper(school.api_basic_info.try(:[], 0)) %></p>
+			<p class="descrip"><%= school_type_helper(school.api_basic_info) %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"></span> Grades Offered</p>
@@ -10,7 +10,7 @@
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"></span> Enrollment</p>
-			<p class="descrip"><%= school.api_basic_info.try(:[], 0).try(:[], :SchSize) %></p>
+			<p class="descrip"><%= school.api_basic_info.try(:[], :SchSize) %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"></span> Eligibility</p>
@@ -30,7 +30,7 @@
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"></span> Health & Wellness</p>
-			<p class="descrip"><%= school.api_basic_info.try(:[], 0).try(:[], :ishasfulltimenurse) == 'True' ? 'Full-Time Nurse' : '' %></p>
+			<p class="descrip"><%= school.api_basic_info.try(:[], :ishasfulltimenurse) == 'True' ? 'Full-Time Nurse' : '' %></p>
 		</div>
 		<div class="clr"></div>
 	</div>
