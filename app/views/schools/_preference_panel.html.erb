@@ -42,20 +42,21 @@
 	$(document).ready(function() {
 		$(function() {
 			return $('.preference_checkbox').click(function() {
+				
+				// save the preference to student.preferences
 				$.ajax({
 	        url: '/students/<%= current_student.id %>/save_preference',
 	        type: 'post',
 	        data: $('.preference_checkbox:checked').serialize(),
 	        dataType: 'script'
 	      });
-				// if a checkbox is clicked, get all the checkboxes and inspect their values
+
+				// get all the checkboxes and inspect their values
 				$('.preference_category').each(function(i, category_div) {
 					var checked_preference_values = new Array();
 					$('#' + category_div.getAttribute('id') + ' .preference_checkbox').each(function(ii, category_checkbox) {
 						if ($('#' + category_checkbox.getAttribute('id')).is(':checked')) {
 							return checked_preference_values.push(category_checkbox.getAttribute('value'));
-						} else {
-							
 						}
 					});
 
@@ -64,7 +65,6 @@
 					$('.' + category_div.getAttribute('id') + '_icon').hide();
 					// console.log($('.' + category_div.getAttribute('id') + '_icon').parent().getAttribute('id'));
 					if (checked_preference_values.length === 0) {
-						$('.' + category_div.getAttribute('id') + '_icon').show();
 					} else {
 						$('.' + category_div.getAttribute('id') + '_icon').each(function(iii, icon) {
 							if ($.except(checked_preference_values, $(icon).data('tags')).length == 0) {
