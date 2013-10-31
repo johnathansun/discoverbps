@@ -41,7 +41,7 @@ body.standard #sibling_school #sibling_school_autocomplete {
 	background: #0059a3;
 }
 .no_right_margin {
-	margin-right: 0px !important;
+	margin-right: 0px;
 }
 a.orange_button {
 	padding: 12px 13px 11px 13px;
@@ -182,13 +182,6 @@ input, select {
 	top:0;
 }
 #delete_student_button {
-	float: right;
-	background: white !important;
-	margin-top: 5px;
-	border: none;
-	color: red !important;
-}
-#delete_students_button {
 	float: left;
 	margin-top: -50px;
 	margin-left: 292px;
@@ -202,6 +195,20 @@ input, select {
 	width: auto !important;
 	padding: 1px 12px 0 12px;
 	height: 38px;
+}
+#delete_students_button {
+	color: white !important;
+	font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+	font-size: 16px;
+	background-color: #fc0d1b !important;
+	border: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	width: auto !important;
+	padding: 1px 12px 0 12px;
+	height: 38px;
+	margin-top: -9px;
+
 }
 .transportation_icon {
 	color: #565656;
