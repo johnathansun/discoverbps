@@ -1,11 +1,16 @@
 <!-- info box at the end of listing -->
 	<div class="footer_list">
 		<div class="footer_left">
+			
 			<p style="color:#000;margin-bottom: 1em;">Notice</p>
 			<p>Your customized list is current as of 11/1/2013. Boston School Committee (BSC) will vote on some facilities changes that may add new schools and move others. Please continue to check this site over the next several weeks as we update it to reflect any approved facilities changes by (BSC).</p>
 			<p>Discover BPS is a new tool for 2014. We are working hard to ensure its accuracy for all families, across all addresses and grades. If you find issues with your search, please send us feedback at <%= mail_to 'discoverbps@bostonpublicschools.org', 'discoverbps@bostonpublicschools.org', class: 'yellow' %> so we can continue to improve the site.</p>
-			<p style="color:#000;margin-bottom: 1em;">Next Steps</p>
-			<p>Once your student’s list of schools has been sorted in the order of your choosing, registration begins by submitting the list and visiting a Welcome Center.</p>
+			
+			<% if Date.today > Date.new(2013, 12, 15) %>
+				<p style="color:#000;margin-bottom: 1em;">Next Steps</p>
+				<p>Once your student’s list of schools has been sorted in the order of your choosing, registration begins by submitting the list and visiting a Welcome Center.</p>
+			<% end %>
+			
 			<p style="color:#000;">How to register:</p>
 			<p><a href="http://www.bostonpublicschools.org/requireddocs" title="Collect the required documents" target="_blank">Collect the required documents</a></p>
 			<p><a href="http://www.bostonpublicschools.org/howtoregister#2.3" title="Plan a visit to a Welcome Center" target="_blank">Plan a visit to a Welcome Center</a></p>
