@@ -1,31 +1,39 @@
 <!-- show in desktop and tablet -->
+<% if school.api_photos.present? %>
+	<div class="school_photos photos">
+		<div class="principal">
+			<div class="glass">
+				<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-29"></span>
+			</div>
+			<img src="<%= school.api_photos[0][:url] %>" alt=""  />
+		</div>
+		<% if school.api_photos[1].present? %>
+			<div class="second small">
+				<img src="<%= school.api_photos[1][:url] %>" alt="" />
+			</div>
+		<% end %>
+		<% if school.api_photos[2].present? %>
+			<div class="third small">
+				<img src="<%= school.api_photos[2][:url] %>" alt="" />
+			</div>
+		<% end %>
+		<% if school.api_photos[3].present? %>
+			<div class="fourth small last">
+				<img src="<%= school.api_photos[3][:url] %>" alt="" />
+			</div>
+		<% end %>
+		<div class="clr"></div>
+	</div>
 	<div class="school_description">
-		<p><%= school.api_description.try(:[], 0).try(:[], :schoolspecial) %></p>
+		<%= school.api_description.try(:[], 0).try(:[], :schoolspecial) %>
 	</div>
 	<div class="clr"></div>
-<!--END show in desktop and tablet -->
-
-<!-- PHOTOS -->
-<!-- 		<div class="photos school_name ">
-	<div class="principal">
-		<div class="glass">
-			<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-29"></span>
-		</div>
-		<img src="img/schools/eliotk8/school_large.jpg" alt=""  />
+<% else %>
+	<div class="school_description full">
+		<%= school.api_description.try(:[], 0).try(:[], :schoolspecial) %>
 	</div>
-	<div class="second small">
-		<img src="img/schools/eliotk8/school_1.jpg" alt="" />
-	</div>
-	<div class="third small">
-		<img src="img/schools/eliotk8/school_2.jpg" alt="" />
-	</div>
-	<div class="fourth small last">
-		<img src="img/schools/eliotk8/school_3.jpg" alt="" />
-	</div>
-	<div class="clr"></div>	
-</div> -->
-<!--END PHOTOS -->
- 
+<% end %>
+<!--END show in desktop and tablet --> 
  
 <div class="separation_line"></div>
 <p id="about_title" class="font_17">About <%= school.api_basic_info.try(:[], 0).try(:[], :schname_23) %></p>
@@ -50,7 +58,7 @@
 
 	<p class="descrip"><%= school.api_hours.try(:[], 0).try(:[], :schhours1) %></p>
 
-	<% if ['K0', 'K1', 'K2', '1', '2', '3'].include?(current_student.grade_level) %>
+	<% if NON_TRANSITION_GRADES.include?(current_student.grade_level) %>
 		<% if school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms).present? || school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms).present? %>
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"></span> Surround care </p>
 

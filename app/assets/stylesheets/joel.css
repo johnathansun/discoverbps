@@ -92,14 +92,20 @@ a.student_tab {
 .preference_category_title {
 	margin-bottom: 0.8em !important;
 }
-.school_description {
-	padding: 23px;
+.school_photos {
+	width: 310px;
+	padding: 19px;
 	float: left;
 }
-.school_description p {
+.school_description {
+	width: 410px;
+	padding: 19px;
+	float: left;
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: 15px;
-	width: auto !important;
+}
+.school_description .full {
+	width: 100%;
 }
 #about_title {
 	padding-left: 19px;

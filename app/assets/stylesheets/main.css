@@ -1649,13 +1649,13 @@ footer.footer .logo {
 .wrap .single_school p {
   font-size: 15px;
 }
-.wrap .single_school .photos {
+.wrap .photos {
   float: left;
 }
-.wrap .single_school .photos {
+.wrap .photos {
   max-width: 289px;
 }
-.wrap .single_school .photos .small {
+.wrap .photos .small {
   float: left;
   width: 30.45%;
   height: 66px;
@@ -1663,23 +1663,23 @@ footer.footer .logo {
   display: block;
   cursor: pointer;
 }
-.wrap .single_school .photos .small.last {
+.wrap .photos .small.last {
   margin-right: 0;
 }
-.wrap .single_school .photos .small img {
+.wrap .photos .small img {
   width: 100%;
 }
-.wrap .single_school .photos .principal {
+.wrap .photos .principal {
   height: 215px;
   margin-bottom: 12px;
   display: block;
   position: relative;
   cursor: pointer;
 }
-.wrap .single_school .photos .principal img {
+.wrap .photos .principal img {
   width: 100%;
 }
-.wrap .single_school .photos .principal .glass {
+.wrap .photos .principal .glass {
   background: #ebebeb;
   font-size: 22px;
   width: 40px;
@@ -1692,7 +1692,7 @@ footer.footer .logo {
   color: #c9c9c9;
   display: none;
 }
-.wrap .single_school .photos .principal:hover .glass {
+.wrap .photos .principal:hover .glass {
   display: block;
 }
 .wrap .single_school .name_school {
@@ -3941,7 +3941,7 @@ ie6 .print1 .wrap {
     padding-right: 2%;
     width: 96.1%;
   }
-  .wrap .single_school .photos {
+  .wrap .photos {
     float: none;
   }
   .wrap .single_school .school_descrip {
@@ -4408,7 +4408,7 @@ ie6 .print1 .wrap {
     padding-right: 2%;
     width: 96.1%;
   }
-  .wrap .single_school .photos {
+  .wrap .photos {
     float: left;
   }
   .wrap .single_school .school_descrip {
