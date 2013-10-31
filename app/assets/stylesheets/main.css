@@ -1869,13 +1869,18 @@ footer.footer .logo {
   /*li:nth-child(1),li:nth-child(2),li:nth-child(3),li:nth-child(4),li:nth-child(5){*/
 
 }
-.wrap #school_list ul li {
+.wrap #school_list ul li.small_list_row {
   list-style: none;
-  background: #fafafa;
+  background: #ffffff;
   height: 48px;
   margin: 24px 0;
   /*.icon-DBPS-Dev-Assets-SRG-35{color:@B0;}*/
 
+}
+.wrap #school_list ul li.small_list_row .sortable_row_number {
+  color: #565656;
+  font-size: 17px;
+  cursor: row-resize;
 }
 .wrap #school_list ul li.descrip_open {
   height: auto !important;
@@ -1901,8 +1906,8 @@ footer.footer .logo {
   line-height: 18px;
 }
 .wrap #school_list ul li .school_name {
-  color: #565656;
-  font-size: 16px;
+  color: #0077cf;
+  font-size: 17px;
   line-height: 18px;
   width: 330px;
   padding-left: 19px;
@@ -2097,47 +2102,52 @@ footer.footer .logo {
   float: left;
 }
 
-.wrap #school_list ul li {
+.wrap #school_list ul li.list_row {
   background: #ffffff;
   margin-bottom: 12px;
   margin-top: 0;
   height: 82px;
 }
-.wrap #school_list ul li .line {
+.wrap #school_list ul li.list_row .line {
   height: 82px;
 }
-.wrap #school_list ul li .no_order {
+.wrap #school_list ul li.list_row .sortable_row_number {
+  color: #565656;
+  font-size: 20px;
+  cursor: row-resize;
+}
+.wrap #school_list ul li.list_row .no_order {
   font-size: 27px;
   line-height: 28px;
 }
-.wrap #school_list ul li .school_name {
-  color: #565656;
+.wrap #school_list ul li.list_row .school_name {
+  color: #0077cf;
   font-size: 27px;
   line-height: 28px;
   cursor: pointer;
 }
-.wrap #school_list ul li .icon {
+.wrap #school_list ul li.list_row .icon {
   font-size: 30px;
 }
-.wrap #school_list ul li .getting_there {
+.wrap #school_list ul li.list_row .getting_there {
   font-size: 15px;
 }
-.wrap #school_list ul li .school_hours {
+.wrap #school_list ul li.list_row .school_hours {
   font-size: 15px;
 }
-.wrap #school_list ul li .school_hours .max_range {
+.wrap #school_list ul li.list_row .school_hours .max_range {
   background: #e7f1f7;
 }
-.wrap #school_list ul li .surround_care {
+.wrap #school_list ul li.list_row .surround_care {
   font-size: 13px;
   line-height: 15px;
 }
-.wrap #school_list ul li .your_fit_icon {
+.wrap #school_list ul li.list_row .your_fit_icon {
   display: table;
   font-size: 17px;
   color: #0077cf;
 }
-.wrap #school_list ul li .your_fit_icon .icon {
+.wrap #school_list ul li.list_row .your_fit_icon .icon {
   font-size: 17px;
 }
 .wrap #school_list .menu_list {

@@ -89,7 +89,7 @@
 								<div id="sortable_hours_column" class="menu_bloc sortable_column">
 									<div class="column_title">School Hours</div>
 								</div>
-								<% if ['K0', 'K1', 'K2', '1', '2', '3'].include?(current_student.grade_level) %>
+								<% if SURROUND_CARE_GRADES.include?(current_student.grade_level) %>
 									<div id="sortable_surround_care_column" class=" menu_bloc sortable_column">
 										<div class="column_title">Surround Care</div>
 									</div>
@@ -105,7 +105,9 @@
 						<!-- School listing -->
 						<ul id="sortable">
 							<% @zone_schools.each_with_index do |student_school, i| %>
-								<%= render partial: 'schools/school', locals: {student_school: student_school, school: student_school.school, index: i} %>
+								<li id="<%= current_student.id %>_<%= student_school.school.bps_id %>" class="small_list_row">
+									<%= render partial: 'schools/school', locals: {student_school: student_school, school: student_school.school, index: i} %>
+								</li>
 							<% end %>
 						</ul>
 						<!-- END School listing -->
@@ -194,25 +196,6 @@
 	  	$('#dialog_box').show();
 	  	return false;
 		});
-
-		$(function() {
-	    $("#sortable").sortable({ 
-	    	axis: "y", 
-	    	scroll: true,
-	    	update: function(){
-	    		$('#sortable li').each(function(){
-		        $(this).find('.sortable_row_number').html($(this).index() + 1);
-		      });
-		      $.ajax({
-		        url: '/schools/sort',
-		        type: 'post',
-		        data: $('#sortable').sortable('serialize'),
-		        dataType: 'script'
-		      });
-		  	}
-		  });
-	    $("#sortable").disableSelection();
-	  });
 
 	  var choice_order_ascending = false;
 	  $("#sortable_choice_order_column").click(function(){

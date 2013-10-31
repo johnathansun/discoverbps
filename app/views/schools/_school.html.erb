@@ -1,112 +1,111 @@
-<li id="<%= current_student.id %>_<%= school.bps_id %>" class="list_row  ">
-	<div id="<%= current_student.id %>_<%= school.bps_id %>_row" class="li_frame">
-		<!-- brief school information -->
-		<div class="desktop">
-			<div class="no_order line">
-				<span class="sortable_row_number middle">
-					<%= index + 1 %>
-				</span>
-			</div>
+
+<div id="<%= current_student.id %>_<%= school.bps_id %>_row" class="li_frame">
+	<!-- brief school information -->
+	<div class="desktop">
+		<div class="no_order line">
+			<span class="sortable_row_number middle">
+				<%= index + 1 %>
+			</span>
 		</div>
-		<div class="school_name select line">
-			<span class="middle">
-				<span class="sortable_school_name"><%= school.api_basic_info.try(:[], 0).try(:[], :schname_23) %></span>
-				<% if current_student.sibling_school_id == school.bps_id %>
-					<span aria-hidden="true" class="select_icon icon-DBPS-Dev-Assets-SRG-12"></span>
+	</div>
+	<div class="school_name select line">
+		<span class="middle">
+			<span class="sortable_school_name"><%= school.api_basic_info.try(:[], 0).try(:[], :schname_23) %></span>
+			<% if current_student.sibling_school_id == school.bps_id %>
+				<span aria-hidden="true" class="select_icon icon-DBPS-Dev-Assets-SRG-12"></span>
+			<% end %>
+		</span>
+	</div>
+	
+	<!-- add class "open" to show "Walk time info" and "Drive time info"-->
+	<div class="box line getting_there ">
+		<div class="first_block middle">
+			<span class="icon middle">
+				<% if school.transportation_eligibility == 'Y' %>
+					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-15 transportation_icon"></span>
+				<% else %>
+					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-14 transportation_icon"></span>
 				<% end %>
 			</span>
+			<span class="middle sortable_distance"><%= spacer_helper(student_school.distance) %>&nbsp;mi</span>
 		</div>
+		<div class="second_bloc middle">
+			<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> <%= spacer_helper(student_school.walk_time) %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+				
+		</div>
+		<div class="second_bloc middle last">
+			<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> <%= spacer_helper(student_school.drive_time) %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
+		</div>	
 		
-		<!-- add class "open" to show "Walk time info" and "Drive time info"-->
-		<div class="box line getting_there ">
-			<div class="first_block middle">
-				<span class="icon middle">
-					<% if school.transportation_eligibility == 'Y' %>
-						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-15 transportation_icon"></span>
-					<% else %>
-						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-14 transportation_icon"></span>
-					<% end %>
-				</span>
-				<span class="middle sortable_distance"><%= spacer_helper(student_school.distance) %>&nbsp;mi</span>
-			</div>
-			<div class="second_bloc middle">
-				<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> <%= spacer_helper(student_school.walk_time) %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
-					
-			</div>
-			<div class="second_bloc middle last">
-				<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> <%= spacer_helper(student_school.drive_time) %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
-			</div>	
-			
-		</div>
-		<div class="box line school_hours">
-			<span class="middle sortable_hours"> <%= truncate(school.api_hours.try(:[], 0).try(:[], :schhours1), length: 18) %><br/>
-				<div class="max_range">
-					<div class="ajust_range" style="margin-left:<%= school_hours_start_time_helper(school.api_hours.try(:[], 0).try(:[], :schhours1)) %>%;margin-right:<%= school_hours_end_time_helper(school.api_hours.try(:[], 0).try(:[], :schhours1)) %>%;">
-					</div>
+	</div>
+	<div class="box line school_hours">
+		<span class="middle sortable_hours"> <%= truncate(school.api_hours.try(:[], 0).try(:[], :schhours1), length: 18) %><br/>
+			<div class="max_range">
+				<div class="ajust_range" style="margin-left:<%= school_hours_start_time_helper(school.api_hours.try(:[], 0).try(:[], :schhours1)) %>%;margin-right:<%= school_hours_end_time_helper(school.api_hours.try(:[], 0).try(:[], :schhours1)) %>%;">
 				</div>
+			</div>
+		</span>
+	</div>
+	<% if SURROUND_CARE_GRADES.include?(current_student.grade_level) %>
+		<div class="box line surround_care">
+			<span class="middle">
+				<% surround_care_count = 0 %>
+				<% if school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms).present? %>
+					<% surround_care_count += 1 %>
+					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<br/>
+				<% end %> 
+				<% if school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms).present? %>
+					<% surround_care_count += 1 %>
+					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school
+				<% end %>
+				<span class="sortable_surround_care" style="visibility: hidden;"><%= surround_care_count %></span>
 			</span>
 		</div>
-		<% if SURROUND_CARE_GRADES.include?(current_student.grade_level) %>
-			<div class="box line surround_care">
-				<span class="middle">
-					<% surround_care_count = 0 %>
-					<% if school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms).present? %>
-						<% surround_care_count += 1 %>
-						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<br/>
-					<% end %> 
-					<% if school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms).present? %>
-						<% surround_care_count += 1 %>
-						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school
-					<% end %>
-					<span class="sortable_surround_care" style="visibility: hidden;"><%= surround_care_count %></span>
-				</span>
-			</div>
-		<% end %>
-		<div class="box line your_fit_icon">
-			<span id="<%= current_student.id %>_<%= school.bps_id %>_icons" class="middle">
+	<% end %>
+	<div class="box line your_fit_icon">
+		<span id="<%= current_student.id %>_<%= school.bps_id %>_icons" class="middle">
 
-				<% tag_counter = 0 %>
-				<% PreferenceCategory.preference_panel.grade_level_categories(current_student.grade_level).each_with_index do |category, i| %>
-					<% if preference_category_tags_helper(category, school, student_school).present? %>
-						<% if current_student.preferences.collect {|x| x.preference_category_id}.include?(category.id) %>
-							<% if (preference_category_tags_helper(category, school, student_school) & current_student.preferences.where(preference_category_id: category.id).collect {|x| x.name}).present? %>
-								<span aria-hidden='true' id='school_<%= school.id %>' data-tags='<%= preference_category_tags_helper(category, school, student_school) %>' class='icon category_icon preference_category_<%= category.id %>_icon <%= category.glyph_class %>'></span>
-								<% tag_counter += 1 %>
-							<% end %>
-						<% else %>
+			<% tag_counter = 0 %>
+			<% PreferenceCategory.preference_panel.grade_level_categories(current_student.grade_level).each_with_index do |category, i| %>
+				<% if preference_category_tags_helper(category, school, student_school).present? %>
+					<% if current_student.preferences.collect {|x| x.preference_category_id}.include?(category.id) %>
+						<% if (preference_category_tags_helper(category, school, student_school) & current_student.preferences.where(preference_category_id: category.id).collect {|x| x.name}).present? %>
 							<span aria-hidden='true' id='school_<%= school.id %>' data-tags='<%= preference_category_tags_helper(category, school, student_school) %>' class='icon category_icon preference_category_<%= category.id %>_icon <%= category.glyph_class %>'></span>
 							<% tag_counter += 1 %>
 						<% end %>
+					<% else %>
+						<span aria-hidden='true' id='school_<%= school.id %>' data-tags='<%= preference_category_tags_helper(category, school, student_school) %>' class='icon category_icon preference_category_<%= category.id %>_icon <%= category.glyph_class %>'></span>
+						<% tag_counter += 1 %>
 					<% end %>
 				<% end %>
-				<span id='<%= current_student.id %>_<%= school.bps_id %>_icon_count' class="sortable_fit fit_icon_count" style="visibility: hidden;"><%= tag_counter %></span>
+			<% end %>
+			<span id='<%= current_student.id %>_<%= school.bps_id %>_icon_count' class="sortable_fit fit_icon_count" style="visibility: hidden;"><%= tag_counter %></span>
 
-			</span>
-		</div>
-		<div class="box line your_fit_descrip">
-			<span class="middle">
-				<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Small
-			</span>
-		</div>
-		<div class="box line your_fit_descrip">
-			<span class="middle">
-				<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Yes
-			</span>
-		</div>
-		<div class="clr"></div>
-		<!--END brief school information -->
-		
-		<div class="school_descrip">
-			<div class="right_side">
-				<%= render partial: 'schools/school_details_desktop', locals: {school: school, student_school: student_school} %>
-						
-				<%= render partial: 'schools/school_details_mobile', locals: {school: school, student_school: student_school} %>
-						 
-				<%= render partial: 'schools/school_details_tablet', locals: {school: school, student_school: student_school} %>
+		</span>
+	</div>
+	<div class="box line your_fit_descrip">
+		<span class="middle">
+			<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Small
+		</span>
+	</div>
+	<div class="box line your_fit_descrip">
+		<span class="middle">
+			<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-35"></span> Yes
+		</span>
+	</div>
+	<div class="clr"></div>
+	<!--END brief school information -->
+	
+	<div class="school_descrip">
+		<div class="right_side">
+			<%= render partial: 'schools/school_details_desktop', locals: {school: school, student_school: student_school} %>
+					
+			<%= render partial: 'schools/school_details_mobile', locals: {school: school, student_school: student_school} %>
+					 
+			<%= render partial: 'schools/school_details_tablet', locals: {school: school, student_school: student_school} %>
 
-				<div class="clr"></div>
-			</div>
 			<div class="clr"></div>
 		</div>
-	</div>		
-</li>
+		<div class="clr"></div>
+	</div>
+</div>
