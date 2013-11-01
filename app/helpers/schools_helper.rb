@@ -251,12 +251,12 @@ module SchoolsHelper
 		# '7-12 (Exam)'
 		tags = []
 		tags << 'Early Learning Center' if (grades_offered == 'K-1 (EEC)')
-		tags << 'K-5' if (grades_offered == 'K-5 (Elementary)')
+		tags << 'K-5 (Elementary)' if (grades_offered == 'K-5 (Elementary)')
 		tags << 'K-8' if (grades_offered == 'K-8')
-		tags << '6-8' if (grades_offered == '6-8 (Middle)')
+		tags << '6-8 (Middle)' if (grades_offered == '6-8 (Middle)')
 		tags << '6-12' if (grades_offered == '6-12')
-		tags << '7-12 (Exam School only)' if (grades_offered == '7-12 (Exam)') && student_school.exam_school?
-		tags << '9-12' if (grades_offered == '9-12 (High)')
+		tags << '7-12 (Exam)' if (grades_offered == '7-12 (Exam)') && student_school.exam_school?
+		tags << '9-12 (High)' if (grades_offered == '9-12 (High)')
 		return tags
 	end
 
