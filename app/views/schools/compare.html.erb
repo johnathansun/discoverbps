@@ -44,12 +44,12 @@
 				<% current_user_students.each_with_index do |student, student_i| %>
 					<div class="compare_students_column">
 						<ul id="sortable_<%= student_i %>">
-							<% student.student_schools.rank(:sort_order).each_with_index do |school, i| %>
-								<li id="<%= student.id %>_<%= school.bps_id %>">
+							<% student.student_schools.rank(:sort_order).each_with_index do |student_school, i| %>
+								<li id="<%= student.id %>_<%= student_school.school.bps_id %>">
 									<div class="li_frame">
 										<div class="school_name draggable line">
 											<span class="middle">
-						            <h3><%= school.try(:school).try(:api_basic_info).try(:[], 0).try(:[], :schname_23) %></h3>
+						            <h3><%= student_school.school.name %></h3>
 						          </span>
 										</div>
 									</div>
