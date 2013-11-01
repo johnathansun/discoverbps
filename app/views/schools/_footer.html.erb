@@ -1,25 +1,23 @@
 <!-- info box at the end of listing -->
 	<div class="footer_list">
 		<div class="footer_left">
-			
-			<p style="color:#000;margin-bottom: 1em;">Notice</p>
-			<p>Your customized list is current as of 11/1/2013. Boston School Committee (BSC) will vote on some facilities changes that may add new schools and move others. Please continue to check this site over the next several weeks as we update it to reflect any approved facilities changes by (BSC).</p>
-			<p>Discover BPS is a new tool for 2014. We are working hard to ensure its accuracy for all families, across all addresses and grades. If you find issues with your search, please send us feedback at <%= mail_to 'discoverbps@bostonpublicschools.org', 'discoverbps@bostonpublicschools.org', class: 'yellow' %> so we can continue to improve the site.</p>
 
-			<p style="color:#000;margin-bottom: 1em;">Next Steps</p>			
-			<% if Date.today > Date.new(2013, 12, 15) %>
-				<p>
-					Once your student's list of schools has been sorted in the order of your choosing, you can use BPS Express to pre-register your child. Please visit <%= link_to 'www.bostonpublicschools.org/research', 'http://www.bostonpublicschools.org/research', class: 'blue' %> for more information on school preview activities. You can complete the registration process by visiting a Welcome Center.
-				</p>
-			<% else %>
-				<p>Once your student's list of schools has been sorted in the order of your choosing, please visit <%= link_to 'www.bostonpublicschools.org/research', 'http://www.bostonpublicschools.org/research', class: 'blue' %> for information on school preview activities. Pre-registration begins on December 15th.</p>
-			<% end %>
+			<p style="color:#000;margin-bottom: 1em;font-size:1.2em;">Notice</p>
+			<p>Your customized list is current as of 11/1/2013. Boston School Committee (BSC) will vote on some facilities changes that may add new schools and move others. Please continue to check this site over the next several weeks as we update it to reflect any approved facilities changes by (BSC).</p>
+
+			<p style="color:#000;margin-bottom: 1em;font-size:1.2em;">Next Steps</p>
+			<p style="color:#000;">Learn how the School Assignment Policy works:</p>
+			<p><a href="http://www.bostonpublicschools.org/assignment" title="Learn more about Home-Based Eligibility" target="_blank">www.bostonpublicschools.org/assignment</a></p>	
+
+			<p style="color:#000;">Visit Schools:</p>
+			<p>Once your student's list of schools has been sorted in the order of your choosing, please visit <%= link_to 'www.bostonpublicschools.org/research', 'http://www.bostonpublicschools.org/research',  target: "_blank", class: 'blue' %> for information on school preview activities.</p>
+
+			<p style="color:#000;">Pre-Register:</p>
+			<p>Starting December 15, you may begin the process from the comfort of your home.</p>
 			
-			<p style="color:#000;">How to register:</p>
+			<p style="color:#000;">Register:</p>
 			<p><a href="http://www.bostonpublicschools.org/requireddocs" title="Collect the required documents" target="_blank">Collect the required documents</a></p>
 			<p><a href="http://www.bostonpublicschools.org/howtoregister#2.3" title="Plan a visit to a Welcome Center" target="_blank">Plan a visit to a Welcome Center</a></p>
-			<p style="color:#000;">How the School Assignment Policy works:</p>
-			<p><a href="http://www.bostonpublicschools.org/assignment" title="Learn more about Home-Based Eligibility" target="_blank">Learn more about Home-Based Eligibility</a></p>
 		</div>
 		<div class="footer_right">
 			<p style="color:#000;margin-bottom: 1.6em;">Need to think it over?</p>
