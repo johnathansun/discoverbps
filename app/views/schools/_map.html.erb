@@ -9,7 +9,7 @@
 
 <script>
 function initialize(){
-  <% if defined?(height) && height == 'resize' %>
+  <% if defined?(resize) && resize == true %>
     $('.global_map').css('height', ($(window).height() / 2) + 'px' );
     $('#googleMap').css('height', ($(window).height() / 2) + 'px' );
   <% end %>
@@ -264,7 +264,8 @@ function initialize(){
             position: coordinates,
             icon: '/assets/map_pins/DBPS_MapPins_<%= colors[student_i] %>_<%= i + 1 %>.svg',
             map: map,
-            title: '<%= escape_javascript(student_school.school.name) %>'
+            title: '<%= escape_javascript(student_school.school.name) %>',
+            new google.maps.Size(64,64)
           });
           var infowindow = new google.maps.InfoWindow({
           });
