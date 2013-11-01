@@ -28,8 +28,11 @@
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"></span> Uniform Policy</p>
-			<p class="descrip"><%= school.api_description.try(:[], :uniformpolicy) %></p>
-			<p class="descrip"><%= school.api_description.try(:[], :uniformpolicydesc) %></p>
+			<% if school.api_description.try(:[], :uniformpolicydesc).present? %>
+				<p class="descrip"><%= school.api_description.try(:[], :uniformpolicydesc) %></p>
+			<% else %>
+				<p class="descrip"><%= school.api_description.try(:[], :uniformpolicy) %></p>
+			<% end %>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"></span> Health & Wellness</p>
