@@ -5,21 +5,21 @@
 			<div class="glass">
 				<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-29"></span>
 			</div>
-			<img src="<%= school.api_photos[0][:url] %>" alt=""  />
+			<img src="<%= school.api_photos.try(:[], 0).try(:[], :url) %>" alt=""  />
 		</div>
 		<% if school.api_photos[1].present? %>
 			<div class="second small">
-				<img src="<%= school.api_photos[1][:url] %>" alt="" />
+				<img src="<%= school.api_photos.try(:[], 1).try(:[], :url) %>" alt="" />
 			</div>
 		<% end %>
 		<% if school.api_photos[2].present? %>
 			<div class="third small">
-				<img src="<%= school.api_photos[2][:url] %>" alt="" />
+				<img src="<%= school.api_photos.try(:[], 2).try(:[], :url) %>" alt="" />
 			</div>
 		<% end %>
 		<% if school.api_photos[3].present? %>
 			<div class="fourth small last">
-				<img src="<%= school.api_photos[3][:url] %>" alt="" />
+				<img src="<%= school.api_photos.try(:[], 3).try(:[], :url) %>" alt="" />
 			</div>
 		<% end %>
 		<div class="clr"></div>
