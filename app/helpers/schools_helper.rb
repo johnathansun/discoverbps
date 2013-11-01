@@ -131,7 +131,7 @@ module SchoolsHelper
 
 	def preference_category_tags_helper(category, school, student_school)
 		if category.name == 'Grades Offered'
-			tags = grade_levels_tags_helper(school.grade_levels, student_school)
+			tags = grade_levels_tags_helper(school.api_basic_info.try(:[], :GradesOffered), student_school)
 
 		elsif category.name == 'Facility Features'
 			tags = facilities_tags_helper(school.api_facilities)
@@ -247,15 +247,16 @@ module SchoolsHelper
 		end
 	end
 
-	def grade_levels_tags_helper(grade_levels, student_school)
+	def grade_levels_tags_helper(grades_offered, student_school)
+		# '7-12 (Exam)'
 		tags = []
-		tags << 'Early Learning Center' if (['K0', 'K1', 'K2', '1'] == grade_levels)
-		tags << 'K-5' if (['K2', '1', '2', '3', '4', '5'] == grade_levels || ['K1', 'K2', '1', '2', '3', '4', '5'] == grade_levels || ['K0', 'K1', 'K2', '1', '2', '3', '4', '5'] == grade_levels)
-		tags << 'K-8' if (['K2', '1', '2', '3', '4', '5', '6', '7', '8'] == grade_levels || ['K1', 'K2', '1', '2', '3', '4', '5', '6', '7', '8'] == grade_levels || ['K0', 'K1', 'K2', '1', '2', '3', '4', '5', '6', '7', '8'] == grade_levels)
-		tags << '6-8' if (['6', '7', '8'] == grade_levels)
-		tags << '6-12' if (['6', '7', '8', '9', '10', '11', '12'] == grade_levels)
-		tags << '7-12 (Exam School only)' if (['7', '8', '9', '10', '11', '12'] == grade_levels) && student_school.exam_school?
-		tags << '9-12' if (['9', '10', '11', '12'] == grade_levels)
+		tags << 'Early Learning Center' if (grades_offered == 'K-1 (EEC)')
+		tags << 'K-5' if (grades_offered == 'K-5 (Elementary)')
+		tags << 'K-8' if (grades_offered == 'K-8')
+		tags << '6-8' if (grades_offered == '6-8 (Middle)')
+		tags << '6-12' if (grades_offered == '6-12')
+		tags << '7-12 (Exam School only)' if (grades_offered == '7-12 (Exam)') && student_school.exam_school?
+		tags << '9-12' if (grades_offered == '9-12 (High)')
 		return tags
 	end
 
