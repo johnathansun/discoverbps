@@ -1,5 +1,5 @@
 <!-- show in desktop and tablet -->
-<% if school.api_photos.present? %>
+<% if school.api_photos.present? && school.api_photos.try(:[], 0).present? %>
 	<div class="school_photos photos">
 		<div class="principal">
 			<div class="glass">
@@ -7,19 +7,19 @@
 			</div>
 			<img src="<%= school.api_photos.try(:[], 0).try(:[], :url) %>" alt=""  />
 		</div>
-		<% if school.api_photos[1].present? %>
+		<% if school.api_photos.try(:[], 1).present? %>
 			<div class="second small">
-				<img src="<%= school.api_photos.try(:[], 1).try(:[], :url) %>" alt="" />
+				<img src="<%= school.api_photos[1].try(:[], :url) %>" alt="" />
 			</div>
 		<% end %>
-		<% if school.api_photos[2].present? %>
+		<% if school.api_photos.try(:[], 2).present? %>
 			<div class="third small">
-				<img src="<%= school.api_photos.try(:[], 2).try(:[], :url) %>" alt="" />
+				<img src="<%= school.api_photos[2].try(:[], :url) %>" alt="" />
 			</div>
 		<% end %>
-		<% if school.api_photos[3].present? %>
+		<% if school.api_photos.try(:[], 3).present? %>
 			<div class="fourth small last">
-				<img src="<%= school.api_photos.try(:[], 3).try(:[], :url) %>" alt="" />
+				<img src="<%= school.api_photos[3].try(:[], :url) %>" alt="" />
 			</div>
 		<% end %>
 		<div class="clr"></div>
