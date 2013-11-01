@@ -262,9 +262,9 @@ function initialize(){
           latlngbounds.extend(coordinates);
           var image = {
             url: '/assets/map_pins/DBPS_MapPins_<%= colors[student_i] %>_<%= i + 1 %>.png',
-            size: new google.maps.Size(67, 104),
+            size: new google.maps.Size(17, 25),
             origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(0, 34),
+            anchor: new google.maps.Point(0, 0),
           };
           var marker = new google.maps.Marker({
             position: coordinates,
