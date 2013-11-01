@@ -261,7 +261,7 @@ function initialize(){
           var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
           latlngbounds.extend(coordinates);
           var image = {
-            url: 'http://discoverbps.org/assets/map_pins/DBPS_MapPins_<%= colors[student_i] %>_<%= i + 1 %>.svg',
+            url: '/assets/map_pins/DBPS_MapPins_<%= colors[student_i] %>_<%= i + 1 %>.svg',
             size: new google.maps.Size(67, 104),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(0, 34),
