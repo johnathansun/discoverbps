@@ -223,6 +223,6 @@ input, select {
 	margin-left: 10px;
 	width: 150px;
 }
-.antialiased_button {
-	-webkit-font-smoothing: antialiased;
+input {
+	-webkit-font-smoothing: antialiased;	
 }
