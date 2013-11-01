@@ -134,10 +134,10 @@ module SchoolsHelper
 			tags = grade_levels_tags_helper(school.grade_levels, student_school)
 
 		elsif category.name == 'Facility Features'
-			tags = facilities_tags_helper(school.api_facilities.try(:[], 0))
+			tags = facilities_tags_helper(school.api_facilities)
 		
 		elsif category.name == 'Sports'
-			tags = sports_tags_helper(school.api_sports.try(:[], 0))
+			tags = sports_tags_helper(school.api_sports)
 		
 		elsif category.name == 'Health & Wellness'
 			tags = health_tags_helper(school.api_basic_info)
@@ -146,7 +146,7 @@ module SchoolsHelper
 			tags = enrollment_tags_helper(school.api_basic_info)
 
 		elsif category.name == 'Uniform Policy'
-			tags = uniform_policy_tags_helper(school.api_description.try(:[], 0))
+			tags = uniform_policy_tags_helper(school.api_description)
 		end
 		
 		return tags

@@ -6,7 +6,7 @@ class PreferenceCategory < ActiveRecord::Base
 
   attr_accessible :name, :description, :sort_order, :qualitative_criteria, :include_in_special_needs_dialog_box, :select_type, :glyph_id, :glyph_class, :grade_k0, :grade_k1, :grade_k2, :grade_1, :grade_2, :grade_3, :grade_4, :grade_5, :grade_6, :grade_7, :grade_8, :grade_9, :grade_10, :grade_11, :grade_12
 
-  scope :qualitative, where(qualitative_criteria: true)
+   
   scope :special_needs, where(include_in_special_needs_dialog_box: true)
   scope :preference_panel, where(include_in_special_needs_dialog_box: false)
 

@@ -40,7 +40,7 @@ class SchoolsController < ApplicationController
             @home_schools.each do |student_school|
               school = student_school.school
               counter += 1
-              csv << [ school.name, student_school.distance, student_school.walk_time, student_school.drive_time, school.transportation_eligibility, school.api_hours.try(:[],0).try(:[], :schhours1), school.api_grades.try(:[], 0).try(:[], :grade), school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms), school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms), facilities_list_helper(school.api_facilities.try(:[], 0)), partners_list_helper(school.api_partners), "Tier #{school.tier}", school_type_helper(school.api_basic_info.try(:[], 0)), school.api_description.try(:[], 0).try(:[], :schfocus), school.api_description.try(:[], 0).try(:[], :specialapplicationnarrative), school.api_description.try(:[], 0).try(:[], :uniformpolicy), school.api_basic_info.try(:[], 0).try(:[], :schemail) ]
+              csv << [ school.name, student_school.distance, student_school.walk_time, student_school.drive_time, school.transportation_eligibility, school.api_hours.try(:[], :schhours1), school.api_grades.try(:[], :grade), school.api_basic_info.try(:[], :BeforeSchPrograms), school.api_basic_info.try(:[], :AfterSchPrograms), facilities_list_helper(school.api_facilities), partners_list_helper(school.api_partners), "Tier #{school.tier}", school_type_helper(school.api_basic_info), school.api_description.try(:[], :schfocus), school.api_description.try(:[], :specialapplicationnarrative), school.api_description.try(:[], :uniformpolicy), school.api_basic_info.try(:[], :schemail) ]
             end
           end
 
@@ -86,7 +86,7 @@ class SchoolsController < ApplicationController
             @zone_schools.each do |student_school|
               school = student_school.school
               counter += 1
-              csv << [ school.name, student_school.distance, student_school.walk_time, student_school.drive_time, school.transportation_eligibility, school.api_hours.try(:[],0).try(:[], :schhours1), school.api_grades.try(:[], 0).try(:[], :grade), school.api_basic_info.try(:[], 0).try(:[], :BeforeSchPrograms), school.api_basic_info.try(:[], 0).try(:[], :AfterSchPrograms), facilities_list_helper(school.api_facilities.try(:[], 0)), partners_list_helper(school.api_partners), "Tier #{school.tier}", school_type_helper(school.api_basic_info.try(:[], 0)), school.api_description.try(:[], 0).try(:[], :schfocus), school.api_description.try(:[], 0).try(:[], :specialapplicationnarrative), school.api_description.try(:[], 0).try(:[], :uniformpolicy), school.api_basic_info.try(:[], 0).try(:[], :schemail) ]
+              csv << [ school.name, student_school.distance, student_school.walk_time, student_school.drive_time, school.transportation_eligibility, school.api_hours.try(:[],0).try(:[], :schhours1), school.api_grades.try(:[], :grade), school.api_basic_info.try(:[], :BeforeSchPrograms), school.api_basic_info.try(:[], :AfterSchPrograms), facilities_list_helper(school.api_facilities), partners_list_helper(school.api_partners), "Tier #{school.tier}", school_type_helper(school.api_basic_info), school.api_description.try(:[], :schfocus), school.api_description.try(:[], :specialapplicationnarrative), school.api_description.try(:[], :uniformpolicy), school.api_basic_info.try(:[], :schemail) ]
             end
           end
 

@@ -96,9 +96,9 @@
 									
 								</div>
 								<div class="box line school_hours">
-									<span  class="middle"> <%= truncate(school.api_hours.try(:[], 0).try(:[], :schhours1), length: 18) %><br/>
+									<span  class="middle"> <%= truncate(school.api_hours.try(:[], :schhours1), length: 18) %><br/>
 										<div class="max_range">
-											<div class="ajust_range" style="margin-left:<%= school_hours_start_time_helper(school.api_hours.try(:[], 0).try(:[], :schhours1)) %>%;margin-right:<%= school_hours_end_time_helper(school.api_hours.try(:[], 0).try(:[], :schhours1)) %>%;">
+											<div class="ajust_range" style="margin-left:<%= school_hours_start_time_helper(school.api_hours.try(:[], :schhours1)) %>%;margin-right:<%= school_hours_end_time_helper(school.api_hours.try(:[], :schhours1)) %>%;">
 											</div>
 										</div>
 									</span>
