@@ -161,6 +161,7 @@ module SchoolsHelper
 			list << 'Cafeteria' 					if hash[:hascafeteria] == 'True'
 			list << 'Computer Lab' 				if hash[:hascomputerlab] == 'True'
 			list << 'Gymnasium' 					if hash[:hasgymnasium] == 'True'
+			# list << 'Handicap Accessible'
 			list << 'Library' 						if hash[:haslibrary] == 'True'
 			list << 'Music Room' 					if hash[:hasmusicroom] == 'True'
 			list << 'Outdoor Classrooms' 	if hash[:hasoutdoorclassroom] == 'True'

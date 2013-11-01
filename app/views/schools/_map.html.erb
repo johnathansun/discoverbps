@@ -264,8 +264,7 @@ function initialize(){
             position: coordinates,
             icon: '/assets/map_pins/DBPS_MapPins_<%= colors[student_i] %>_<%= i + 1 %>.svg',
             map: map,
-            title: '<%= escape_javascript(student_school.school.name) %>',
-            new google.maps.Size(64,64)
+            title: '<%= escape_javascript(student_school.school.name) %>'
           });
           var infowindow = new google.maps.InfoWindow({
           });
