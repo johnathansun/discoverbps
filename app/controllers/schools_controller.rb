@@ -140,7 +140,7 @@ class SchoolsController < ApplicationController
     # this method pulls a list of eligible schools from the GetSchoolChoices API, 
     # saves the schools to student_schools, and fetches distance and walk/drive times from the Google Matrix API
     def get_home_schools
-      if current_student.street_number.present? && current_student.street_name.present? && current_student.zipcode.present?
+      if current_student.present? && current_student.street_number.present? && current_student.street_name.present? && current_student.zipcode.present?
         logger.info "************ refreshing student_schools"
         
         current_student.student_schools.clear
@@ -207,7 +207,7 @@ class SchoolsController < ApplicationController
     # this method pulls a list of eligible schools from the GetSchoolChoices API, 
     # saves the schools to student_schools, and fetches distance and walk/drive times from the Google Matrix API
     def get_zone_schools
-      if current_student.street_number.present? && current_student.street_name.present? && current_student.zipcode.present?
+      if current_student.present? && current_student.street_number.present? && current_student.street_name.present? && current_student.zipcode.present?
         logger.info "************ refreshing student_schools"
   
         current_student.student_schools.clear
