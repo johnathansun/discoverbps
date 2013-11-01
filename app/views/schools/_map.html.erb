@@ -260,9 +260,15 @@ function initialize(){
         <% if student_school.school.latitude.present? && student_school.school.longitude.present? %>
           var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
           latlngbounds.extend(coordinates);
+          var image = {
+            url: '/assets/map_pins/DBPS_MapPins_<%= colors[student_i] %>_<%= i + 1 %>.svg',
+            size: new google.maps.Size(67, 104),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(0, 34),
+          };
           var marker = new google.maps.Marker({
             position: coordinates,
-            icon: '/assets/map_pins/DBPS_MapPins_<%= colors[student_i] %>_<%= i + 1 %>.svg',
+            icon: image,
             map: map,
             title: '<%= escape_javascript(student_school.school.name) %>'
           });
