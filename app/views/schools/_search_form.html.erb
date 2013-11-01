@@ -1,5 +1,73 @@
 <div class="form_line">
 
+	<% if defined?(student) && student.try(:first_name).present? %>
+		<input id="first_name" class="bloc_3" name="[student]first_name" type="text" value="<%= student.first_name %>" />
+	<% else %>
+		<input id="first_name" class="bloc_3" name="[student]first_name" type="text" placeholder="First Name (optional)" />
+	<% end %>
+
+
+	<div class="separation_bloc">
+		<div class="separation"></div>
+	</div>
+
+	<% if defined?(student) && student.try(:last_name).present? %>
+		<input id="last_name" class="bloc_4" name="[student]last_name" type="text" value="<%= student.last_name %>" />
+	<% else %>
+		<input id="last_name" class="bloc_4" name="[student]last_name" type="text" placeholder="Last Name (optional)" />
+	<% end %>
+
+	<div class="separation_bloc">
+		<div class="separation"></div>
+	</div>
+	<div class="bloc_2 select_grade" >
+		<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
+
+		<% if defined?(student) && student.try(:grade_level).present? %>
+			<input id="grade_level_placeholder" name="[student]grade_level" type="text" value="<%= student.grade_level %>" />
+		<% else %>
+			<input id="grade_level_placeholder" name="[student]grade_level" type="text" placeholder="Grade" />
+		<% end %>
+
+		<div class='option_grade'>
+			<div class='btn_grade'>K0</div>
+			<div class='btn_grade'>K1</div>
+			<div class='btn_grade'>K2</div>
+			<div class="clr"></div>
+			<div class='btn_grade'>1</div>
+			<div class='btn_grade'>2</div>
+			<div class='btn_grade'>3</div>
+			<div class='btn_grade'>4</div>
+			<div class='btn_grade'>5</div>
+			<div class="clr"></div>
+			<div class='btn_grade'>6</div>
+			<div class='btn_grade'>7</div>
+			<div class='btn_grade'>8</div>
+			<div class="clr"></div>
+			<div class='btn_grade'>9</div>
+			<div class='btn_grade'>10</div>
+			<div class='btn_grade'>11</div>
+			<div class='btn_grade'>12</div>
+			<div class="clr"></div>
+		</div>
+	</div>      
+	<div class="clr"></div>
+</div>
+<script>
+	$('.btn_grade').click(function() {
+		$('#grade_level_placeholder').val(this.innerHTML);
+		$('#_studentgrade_level').val(this.innerHTML);
+		$('.option_grade').hide();
+	});
+	$('.select_grade').mouseover(function() {
+		$('.option_grade').show();											
+	})
+</script>
+
+
+
+<div class="form_line">
+
 	<% if defined?(student) && student.try(:street_number).present? %>
 		<input id="street_number" class="bloc_3" name="[student]street_number" type="text" value="<%= student.street_number %>" />
 	<% else %>
@@ -25,84 +93,10 @@
 	<% else %>
 		<input id="zipcode" class="bloc_2" name="[student]zipcode" type="text" placeholder="ZIP" />
 	<% end %>
-				
-			<!-- Use current location button -->
-			<!-- <div class="current_location btn">
-				<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-37"></span>
-					<span class="text">
-						Use current location
-					</span>
-			</div> -->
-			<!-- END  Use current location button -->
 			
-		<div class="clr"></div>
-	</div>
+	<div class="clr"></div>
+</div>
 	<!--END  Address and zip info -->
-	<div class="form_line">
-
-		<% if defined?(student) && student.try(:first_name).present? %>
-			<input id="first_name" class="bloc_3" name="[student]first_name" type="text" value="<%= student.first_name %>" />
-		<% else %>
-			<input id="first_name" class="bloc_3" name="[student]first_name" type="text" placeholder="Student's First Name" />
-		<% end %>
-
-
-		<div class="separation_bloc">
-			<div class="separation"></div>
-		</div>
-
-		<% if defined?(student) && student.try(:last_name).present? %>
-			<input id="last_name" class="bloc_4" name="[student]last_name" type="text" value="<%= student.last_name %>" />
-		<% else %>
-			<input id="last_name" class="bloc_4" name="[student]last_name" type="text" placeholder="Last Name (optional)" />
-		<% end %>
-
-		<div class="separation_bloc">
-			<div class="separation"></div>
-		</div>
-		<div class="bloc_2 select_grade" >
-			<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
-
-			<% if defined?(student) && student.try(:grade_level).present? %>
-				<input id="grade_level_placeholder" name="[student]grade_level" type="text" value="<%= student.grade_level %>" />
-			<% else %>
-				<input id="grade_level_placeholder" name="[student]grade_level" type="text" placeholder="Grade" />
-			<% end %>
-
-			<div class='option_grade'>
-				<div class='btn_grade'>K0</div>
-				<div class='btn_grade'>K1</div>
-				<div class='btn_grade'>K2</div>
-				<div class="clr"></div>
-				<div class='btn_grade'>1</div>
-				<div class='btn_grade'>2</div>
-				<div class='btn_grade'>3</div>
-				<div class='btn_grade'>4</div>
-				<div class='btn_grade'>5</div>
-				<div class="clr"></div>
-				<div class='btn_grade'>6</div>
-				<div class='btn_grade'>7</div>
-				<div class='btn_grade'>8</div>
-				<div class="clr"></div>
-				<div class='btn_grade'>9</div>
-				<div class='btn_grade'>10</div>
-				<div class='btn_grade'>11</div>
-				<div class='btn_grade'>12</div>
-				<div class="clr"></div>
-			</div>
-		</div>      
-		<div class="clr"></div>
-	</div>
-	<script>
-		$('.btn_grade').click(function() {
-			$('#grade_level_placeholder').val(this.innerHTML);
-			$('#_studentgrade_level').val(this.innerHTML);
-			$('.option_grade').hide();
-		});
-		$('.select_grade').mouseover(function() {
-			$('.option_grade').show();											
-		})
-	</script>
 
 <!-- NEXT and Sibling school buttons -->
 <div class="form_line">
