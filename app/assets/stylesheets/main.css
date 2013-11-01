@@ -676,6 +676,7 @@ body {
   color: #565656;
   font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
   background: #0077cf;
+  -webkit-font-smoothing: antialiased;
 }
 sup {
   font-size: .475em;

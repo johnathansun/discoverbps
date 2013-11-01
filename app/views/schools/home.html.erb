@@ -62,7 +62,7 @@
 								<% for student in current_user_students %>
 									<li><%= link_to student.tab_name, schools_path(student: student.id), class: 'orange_button' %></li>
 								<% end %>
-								<li><%= button_to 'Clear Searches', {controller: 'students', action: 'delete_all', student_ids: current_user_students.collect {|x| x.id}}, method: :delete, id: 'delete_students_button', confirm: 'Are you sure you want to clear all of your previous searches?' %></li>
+								<li><%= button_to 'Clear Searches', {controller: 'students', action: 'delete_all', student_ids: current_user_students.collect {|x| x.id}}, method: :delete, id: 'delete_students_button', class: 'antialiased_button', confirm: 'Are you sure you want to clear all of your previous searches?' %></li>
 							</ul>
 							<div class='clr'></div>
 							<p class="K"><br />Or search for a new student using the form below:</p>
