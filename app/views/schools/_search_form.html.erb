@@ -54,7 +54,7 @@
 		<% if defined?(student) && student.try(:last_name).present? %>
 			<input id="last_name" class="bloc_4" name="[student]last_name" type="text" value="<%= student.last_name %>" />
 		<% else %>
-			<input id="last_name" class="bloc_4" name="[student]last_name" type="text" placeholder="Last Name" />
+			<input id="last_name" class="bloc_4" name="[student]last_name" type="text" placeholder="Last Name (optional)" />
 		<% end %>
 
 		<div class="separation_bloc">
@@ -112,7 +112,7 @@
 	<% unless sibling_search == false %>
 		<div  id="sibling_school" class="bloc_6">
 			<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
-			<input id="sibling_school_autocomplete" name="[student]sibling_school_name" type="text" placeholder="Set Sibling's school" />
+			<input id="sibling_school_autocomplete" name="[student]sibling_school_name" type="text" placeholder="Set Sibling's School" />
 			<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
 		</div>
 	<% end %>

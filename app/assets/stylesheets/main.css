@@ -2713,13 +2713,13 @@ footer.footer .logo {
   display: block;
   float: left;
   padding: 9px 0 0 8px;
-  width: 70px;
+  width: 80px;
 }
 .search .search_section .content_left form .form_line .bloc_2.select_grade {
   cursor: pointer;
   position: relative;
   height: 29px !important;
-  width: 71px;
+  width: 80px;
   padding-top: 0;
   background: #ffffff;
   color: #565656;
@@ -2765,13 +2765,13 @@ footer.footer .logo {
   color: #ffffff;
 }
 .search .search_section .content_left form .form_line .bloc_3 {
-  width: 165px;
+  width: 200px;
   display: block;
   float: left;
   padding: 9px 0 0 11px;
 }
 .search .search_section .content_left form .form_line .bloc_4 {
-  width: 136px;
+  width: 200px;
   display: block;
   float: left;
   padding: 9px 0 0 11px;

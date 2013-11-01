@@ -13,9 +13,6 @@ a.blue {
 .button-pointer {
 	cursor: pointer;
 }
-.event:hover {
-	background: #80bce7;
-}
 .ui-widget-content {
   background-color: #0059a3;
   width: 400px;
@@ -119,7 +116,7 @@ a.student_tab {
   cursor: pointer;
   position: relative;
   height: 26px;
-  width: 71px;
+  width: 80px;
   padding-top: 9px;
   background: #ebebeb;
   color: #565656;
