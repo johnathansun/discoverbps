@@ -3330,13 +3330,13 @@ ie6 .print1 .wrap {
 }
 .print1 .wrap.global_map {
   background: #ebebeb;
-  height: 156px;
+  height: 300px;
   position: relative;
 }
 .print1 .wrap #googleMap {
   width: 60%;
   float: left;
-  height: 156px;
+  height: 300px;
 }
 .print1 .wrap .bg_g5 {
   position: absolute;

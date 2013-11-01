@@ -11,7 +11,7 @@
 					<%= link_to 'Print', print_schools_path %>
 					<%= link_to 'Download', schools_path(format: :csv) %>
 					<% if current_user.blank? %>
-						<a id='save_btn' href='#'>Save <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
+						<a id='save_btn' href='#'>Save</a>
 					<% end %>
 				<% elsif current_user_students.present? %>
 					<span>My lists</span>
@@ -33,8 +33,8 @@
 					<%= link_to 'Settings', edit_user_registration_path %>
 					<%= link_to 'Logout', destroy_user_session_path, method: :delete %>
 				<% else %>
-					<a id='login_btn' href='#'>Login <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
-					<a class='signup_btn' href='#'>Sign Up <div class='icon' data-icon="&#xe001;" aria-hidden="true"></div></a>
+					<a id='login_btn' href='#'>Login</a>
+					<a class='signup_btn' href='#'>Sign Up</a>
 				<% end %>
 			</div>
 			<div class='clr'></div>
