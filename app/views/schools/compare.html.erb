@@ -25,6 +25,7 @@
 			</div>
 		</div>
 	</div>	
+	<% colors = ['#0077cf', '#61ab00', '#ff9500', '#7400b8', '#00c9bc'] %>
 	<div class="result colomn_right">	
 		<div class="compare_list_content">
 			<!-- ajust the div width when studens are add (to create left and right draggable effect of the school list)  -->	
@@ -33,7 +34,7 @@
 					<div class="name_list">
 						<% current_user_students.each_with_index do |student, i| %>
 							<div class="name_info" id="name_<%= i + 2 %>">
-								<span class="name"><%= student.first_name %> <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span> </span>
+								<span class="name"><%= student.first_name %> <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"style="color: <%= colors[i] %>;"></span> </span>
 								<span class="grade">Grade<br/><span class="number"><%= student.grade_level %></span></span>
 								<div class="clr"></div>
 							</div>
