@@ -27,7 +27,7 @@ class StudentsController < ApplicationController
 
     params[:student][:sibling_school_id] = School.where(name: params[:student][:sibling_school_name]).first.try(:bps_id)
 
-    street_number = URI.escape(params[:student][:street_number].try(:strip))
+    street_number = URI.escape(params[:student][:street_number].try(:gsub, /\D/, ''))
     street_name   = URI.escape(params[:student][:street_name].try(:strip))
     zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
         
