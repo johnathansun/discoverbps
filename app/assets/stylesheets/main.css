@@ -1191,7 +1191,7 @@ header .logo {
 }
 footer.footer {
   background: #ffffff;
-  height: 56px;
+  height: 60px;
   padding: 19px 0 25px;
   clear: both;
 }
@@ -1201,6 +1201,7 @@ footer.footer .title_footer {
   padding-top: 22px;
   margin-bottom: 0;
   font-size: 14px;
+  min-width: 500px;
 }
 footer.footer .title_footer .copyright {
   color: #969696;
