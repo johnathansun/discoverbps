@@ -30,6 +30,10 @@ GEM
       multi_json (~> 1.0)
     acts_as_paranoid (0.4.2)
       activerecord (~> 3.2)
+    airbrake (3.1.12)
+      activesupport
+      builder
+      json
     arel (3.0.2)
     atomic (1.1.14)
     aws-s3 (0.6.3)
@@ -192,6 +196,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_paranoid (~> 0.4.0)
+  airbrake
   aws-s3
   coffee-rails (~> 3.2.1)
   devise
