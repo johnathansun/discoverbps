@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   layout 'home'
 
 	def create
-    logger.info "*********************** #{request.headers["Content-Type"]}"
+    logger.info "*********************** #{request.headers.inspect}"
 		first_name  = params.try(:[], :student).try(:[], :first_name)
     last_name   = params.try(:[], :student).try(:[], :last_name)
     zipcode     = params.try(:[], :student).try(:[], :zipcode)
@@ -39,14 +39,14 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @addresses.present? && @student.update_attributes(params[:student])
-        format.html { redirect_to address_verification_student_path(@student)}
         format.js { render template: "students/address_verification" }
+        format.html { redirect_to address_verification_student_path(@student)}
       else
         if @addresses.blank?
           @student.errors[:base] << "We couldn't find any addresses in Boston that match your search. Please try again."
         end
-        format.html { render action: errors }
         format.js { render template: "students/errors" }
+        format.html { render action: errors }
       end
     end
   end
@@ -66,20 +66,20 @@ class StudentsController < ApplicationController
       if @addresses.present? && @student.update_attributes(params[:student])
         session[:current_student_id] = @student.id
         
-        format.html { redirect_to address_verification_student_path(@student)}
         format.js { render template: "students/address_verification" }
+        format.html { redirect_to address_verification_student_path(@student)}
       else
         if @addresses.blank?
           @student.errors[:base] << "We couldn't find any addresses in Boston that match your search. Please try again."
         end
-        format.html { render action: errors }
         format.js { render template: "students/errors" }
+        format.html { render action: errors }
       end
     end
   end
 
   def address_verification
-    logger.info "*********************** #{request.headers["Content-Type"]}"
+    logger.info "*********************** #{request.headers.inspect}"
     @student = Student.find(params[:id])
 
     street_number = URI.escape(@student.street_number.try(:strip))
@@ -92,18 +92,18 @@ class StudentsController < ApplicationController
   end
 
   def verify_address
-    logger.info "*********************** #{request.headers["Content-Type"]}"
+    logger.info "*********************** #{request.headers.inspect}"
     @student = Student.find(params[:id])
     params[:student][:address_verified] = true
 
     respond_to do |format|
       if @student.update_attributes(params[:student])
         session[:current_student_id] = @student.id 
-        format.html { redirect_to special_needs_student_path(@student)}
         format.js { render template: "students/special_needs" }         
+        format.html { redirect_to special_needs_student_path(@student)}
       else
-        format.html
         format.js { render template: "students/errors" }
+        format.html
       end
     end
   end
