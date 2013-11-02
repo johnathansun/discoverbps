@@ -54,10 +54,13 @@
 	<div class="clr"></div>
 </div>
 <script>
+	$("body").click(function(){
+  	$(".option_grade").fadeOut("fast");
+	});
 	$('.btn_grade').click(function() {
 		$('#grade_level_placeholder').val(this.innerHTML);
 		$('#_studentgrade_level').val(this.innerHTML);
-		$('.option_grade').hide();
+		$('.option_grade').fadeOut("fast");
 	});
 	$('.select_grade').mouseover(function() {
 		$('.option_grade').show();											
