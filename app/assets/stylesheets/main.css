@@ -1201,7 +1201,7 @@ footer.footer .title_footer {
   padding-top: 22px;
   margin-bottom: 0;
   font-size: 14px;
-  min-width: 500px;
+  width: 400px;
 }
 footer.footer .title_footer .copyright {
   color: #969696;
@@ -4345,11 +4345,12 @@ ie6 .print1 .wrap {
     height: auto;
   }
   footer.footer .title_footer {
-    float: none;
+    float: left;
     width: auto;
     padding-top: 0;
     margin-bottom: 15px;
     font-size: 12px;
+    width: 400px;
   }
   footer.footer .wrap {
     font-size: 12px;
@@ -4812,11 +4813,12 @@ ie6 .print1 .wrap {
     height: auto;
   }
   footer.footer .title_footer {
-    float: none;
+    float: left;
     width: auto;
     padding-top: 0;
     margin-bottom: 15px;
     font-size: 12px;
+    width: 50%;
   }
   footer.footer .wrap {
     font-size: 12px;
@@ -5180,11 +5182,12 @@ ie6 .print1 .wrap {
     height: auto;
   }
   footer.footer .title_footer {
-    float: none;
+    float: left;
     width: auto;
     padding-top: 0;
     margin-bottom: 15px;
     font-size: 12px;
+    width: 50%;
   }
   footer.footer .wrap {
     font-size: 12px;
