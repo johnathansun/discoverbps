@@ -2,7 +2,6 @@ class StudentsController < ApplicationController
   layout 'home'
 
 	def create
-    logger.info "*********************** #{request.headers.inspect}"
 		first_name  = params.try(:[], :student).try(:[], :first_name)
     last_name   = params.try(:[], :student).try(:[], :last_name)
     zipcode     = params.try(:[], :student).try(:[], :zipcode)
@@ -46,7 +45,8 @@ class StudentsController < ApplicationController
           @student.errors[:base] << "We couldn't find any addresses in Boston that match your search. Please try again."
         end
         format.js { render template: "students/errors" }
-        format.html { render controller: 'schools', action: 'home' }
+        flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
+        format.html { redirect_to root_url }
       end
     end
   end
@@ -73,13 +73,13 @@ class StudentsController < ApplicationController
           @student.errors[:base] << "We couldn't find any addresses in Boston that match your search. Please try again."
         end
         format.js { render template: "students/errors" }
-        format.html { render action: errors }
+        flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
+        format.html { redirect_to root_url }
       end
     end
   end
 
   def address_verification
-    logger.info "*********************** #{request.headers.inspect}"
     @student = Student.find(params[:id])
 
     street_number = URI.escape(@student.street_number.try(:strip))
@@ -92,7 +92,6 @@ class StudentsController < ApplicationController
   end
 
   def verify_address
-    logger.info "*********************** #{request.headers.inspect}"
     @student = Student.find(params[:id])
     params[:student][:address_verified] = true
 
@@ -103,7 +102,8 @@ class StudentsController < ApplicationController
         format.html { redirect_to special_needs_student_path(@student)}
       else
         format.js { render template: "students/errors" }
-        format.html
+        flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
+        format.html { redirect_to root_url }
       end
     end
   end
@@ -143,6 +143,8 @@ class StudentsController < ApplicationController
 	      end
       else
         format.js { render template: "students/errors" }
+        flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
+        format.html { redirect_to root_url }
       end
     end
   end
