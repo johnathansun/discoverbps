@@ -46,7 +46,7 @@ class StudentsController < ApplicationController
           @student.errors[:base] << "We couldn't find any addresses in Boston that match your search. Please try again."
         end
         format.js { render template: "students/errors" }
-        format.html { render action: errors }
+        format.html { render controller: 'schools', action: 'home' }
       end
     end
   end

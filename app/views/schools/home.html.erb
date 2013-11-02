@@ -42,9 +42,17 @@
 								<li><%= button_to 'Clear Searches', {controller: 'students', action: 'delete_all', student_ids: current_user_students.collect {|x| x.id}}, method: :delete, id: 'delete_students_button', class: 'antialiased_button', confirm: 'Are you sure you want to clear all of your previous searches?' %></li>
 							</ul>
 							<div class='clr'></div>
-							<p class="K"><br />Or search for a new student using the form below:</p>
+							<% if defined?(@student) && @student.errors.present? %>
+								<p style='color: red;'>There were errors with your search. Please enter all of the required fields and try again</p>
+							<% else %>
+								<p class="K"><br />Or search for a new student using the form below:</p>							
+							<% end %>
 						<% else %>
-							<p class="K">To get started, enter your home address and your student's name and grade level in the form below:</p>
+							<% if defined?(@student) && @student.errors.present? %>
+								<p style='color: red;'>There were errors with your search. Please enter all of the required fields and try again</p>
+							<% else %>
+								<p class="K">To get started, enter your home address and your student's name and grade level in the form below:</p>
+							<% end %>
 						<% end %>
 							<div class="desktop_tablet">
 								<%= form_tag students_path, method: :post, remote: true do %>
