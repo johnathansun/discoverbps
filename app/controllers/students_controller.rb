@@ -2,6 +2,7 @@ class StudentsController < ApplicationController
   layout 'home'
 
 	def create
+    logger.info "*********************** #{request.inspect}"
 		first_name  = params.try(:[], :student).try(:[], :first_name)
     last_name   = params.try(:[], :student).try(:[], :last_name)
     zipcode     = params.try(:[], :student).try(:[], :zipcode)
@@ -78,6 +79,7 @@ class StudentsController < ApplicationController
   end
 
   def address_verification
+    logger.info "*********************** #{request.inspect}"
     @student = Student.find(params[:id])
 
     street_number = URI.escape(@student.street_number.try(:strip))
