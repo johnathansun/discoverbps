@@ -247,7 +247,7 @@
 				        var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
 				        latlngbounds.extend(coordinates);
 			          var image = {
-			            url: '/assets/map_pins/DBPS_MapPins_Blue.png',
+			            url: '/assets/map_pins/DBPS_MapPins_Blue_<%= i + 1 %>.png',
 			            size: new google.maps.Size(17, 25),
 			            origin: new google.maps.Point(0, 0),
 			            anchor: new google.maps.Point(0, 0),
