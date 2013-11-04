@@ -6,7 +6,7 @@ DiscoverbpsV2::Application.routes.draw do
 
   resources :students do
     get 'address_verification', on: :member
-    post 'verify_address', on: :member
+    put 'verify_address', on: :member
     get 'special_needs', on: :member
     put 'set_special_needs', on: :member
     get 'ell_needs', on: :member
