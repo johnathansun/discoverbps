@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   layout 'home'
 
 	def create
-    logger.info request.headers
+    logger.info "******************** XHR request? #{request.xhr?}"
 		first_name  = params.try(:[], :student).try(:[], :first_name)
     last_name   = params.try(:[], :student).try(:[], :last_name)
     zipcode     = params.try(:[], :student).try(:[], :zipcode)
@@ -81,7 +81,7 @@ class StudentsController < ApplicationController
   end
 
   def address_verification
-    logger.info request.headers
+    logger.info "******************** XHR request? #{request.xhr?}"
     @student = Student.find(params[:id])
 
     street_number = URI.escape(@student.street_number.try(:strip))
@@ -94,7 +94,7 @@ class StudentsController < ApplicationController
   end
 
   def verify_address
-    logger.info request.headers
+    logger.info "******************** XHR request? #{request.xhr?}"
     @student = Student.find(params[:id])
     params[:student][:address_verified] = true
 
