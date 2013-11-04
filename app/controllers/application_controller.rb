@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def after_sign_in_path_for(resource)
-		current_student.update_attributes(user_id: current_user.id) if current_student.user_id.blank?
+		current_student.update_attributes(user_id: current_user.id) if current_student.present? && current_student.user_id.blank?
 	  schools_url
 	end
 end
