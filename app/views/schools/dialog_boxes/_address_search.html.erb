@@ -8,7 +8,7 @@
 							<% if defined?(student) && student.present? %>
 								<h3>To edit your student's information, please modify the form fields below and click next:</h3>
 								<br />
-								<%= form_tag student_path(student), :method => :put, :remote => true, :html => {:'data-type' => 'json'} do %>
+								<%= form_tag student_path(student), :method => :put, :remote => true, :'data-type' => 'script' do %>
 									<%= render partial: 'schools/search_form', locals: {student: student, sibling_search: false} %>
 								<% end %>
 								<%= button_to 'Clear Student', student_path(student), method: :delete, id: 'delete_student_button', class: 'antialiased_button', confirm: 'Are you sure you want to clear this student?' %>
