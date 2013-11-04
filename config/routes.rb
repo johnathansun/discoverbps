@@ -18,7 +18,6 @@ DiscoverbpsV2::Application.routes.draw do
   resources :schools do 
     get 'home', on: :collection
     get 'zone_schools', on: :collection
-    get 'coming_soon', on: :collection
     get 'print', on: :collection
     post 'sort', on: :collection
     get 'compare', on: :collection
