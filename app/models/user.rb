@@ -10,9 +10,12 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid, :name
   # attr_accessible :title, :body
 
-	def self.find_for_oauth(auth, signed_in_resource=nil)
+	def self.find_or_create_from_oauth(auth, signed_in_resource=nil)
 	  user = User.where(:provider => auth.provider, :uid => auth.uid).first
-	  unless user
+	  if user.present?
+	  	puts "*********************** user was found or created from oauth hash"
+	  else
+	  	puts "*********************** user was NOT found or created from oauth hash"
 	    user = User.create(name:auth.extra.raw_info.name,
 	                         provider:auth.provider,
 	                         uid:auth.uid,
@@ -20,6 +23,6 @@ class User < ActiveRecord::Base
 	                         password:Devise.friendly_token[0,20]
 	                         )
 	  end
-	  user
+	  return user
 	end
 end
