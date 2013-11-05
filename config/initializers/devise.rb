@@ -235,8 +235,8 @@ Devise.setup do |config|
   # OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE if Rails.env.development? 
   require "omniauth-facebook"
   require "omniauth-twitter"
-  config.omniauth :facebook, ENV['FACEBOOK_ID'], ENV['FACEBOOK_SECRET'], {:scope => 'email, offline_access', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}} 
-  config.omniauth :twitter, ENV['TWITTER_ID'], ENV['TWITTER_SECRET'], {:scope => 'email, offline_access', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}} 
+  config.omniauth :facebook, ENV['FACEBOOK_ID'], ENV['FACEBOOK_SECRET']
+  config.omniauth :twitter, ENV['TWITTER_ID'], ENV['TWITTER_SECRET'] 
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

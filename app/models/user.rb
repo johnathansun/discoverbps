@@ -12,10 +12,7 @@ class User < ActiveRecord::Base
 
 	def self.find_or_create_from_oauth(auth, signed_in_resource=nil)
 	  user = User.where(:provider => auth.provider, :uid => auth.uid).first
-	  if user.present?
-	  	puts "*********************** user was found or created from oauth hash"
-	  else
-	  	puts "*********************** user was NOT found or created from oauth hash"
+	  if user.blank?
 	    user = User.create(name:auth.extra.raw_info.name,
 	                         provider:auth.provider,
 	                         uid:auth.uid,
@@ -23,6 +20,7 @@ class User < ActiveRecord::Base
 	                         password:Devise.friendly_token[0,20]
 	                         )
 	  end
+	  puts "********************* user id = #{user.id}"
 	  return user
 	end
 end
