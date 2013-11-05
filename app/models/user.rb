@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 	  	puts "******************** name = #{auth.extra.raw_info.name}"
 	  	puts "******************** provider = #{auth.provider}"
 	  	puts "******************** email = #{auth.info.email}"
-	    user = User.create(name: auth.extra.raw_info.name,
+	    user = User.create!(name: auth.extra.raw_info.name,
 	                         provider: auth.provider,
 	                         uid: auth.uid,
 	                         email: auth.info.email,
