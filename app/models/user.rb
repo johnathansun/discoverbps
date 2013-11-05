@@ -13,11 +13,15 @@ class User < ActiveRecord::Base
 	def self.find_or_create_from_oauth(auth, signed_in_resource=nil)
 	  user = User.where(:provider => auth.provider, :uid => auth.uid).first
 	  if user.blank?
-	    user = User.create(name:auth.extra.raw_info.name,
-	                         provider:auth.provider,
-	                         uid:auth.uid,
-	                         email:auth.info.email,
-	                         password:Devise.friendly_token[0,20]
+	  	puts "******************** user not found with omniauth hash - creating new user with the following info"
+	  	puts "******************** name = #{auth.extra.raw_info.name}"
+	  	puts "******************** provider = #{auth.provider}"
+	  	puts "******************** email = #{auth.info.email}"
+	    user = User.create(name: auth.extra.raw_info.name,
+	                         provider: auth.provider,
+	                         uid: auth.uid,
+	                         email: auth.info.email,
+	                         password: Devise.friendly_token[0,20]
 	                         )
 	  end
 	  puts "********************* user id = #{user.id}"
