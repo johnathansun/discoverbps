@@ -27,8 +27,12 @@
 			<p><a href="" title="Save">Save</a></p>
 			<br/>
 			<p>Account</p>
-			<p><a href="#" id="sign_up_button" title="Sign Up">Sign Up</a></p>
-			<p><a href="#" id="login_button" title="Login">Login</a></p>
+			<% if current_user.present? %>
+				<%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+			<% else %>
+				<p><a href="#" id="sign_up_button" title="Sign Up">Sign Up</a></p>
+				<p><a href="#" id="login_button" title="Login">Login</a></p>
+			<% end %>
 		</div>
 		<div class="clr"></div>
 	</div>
