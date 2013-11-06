@@ -24,7 +24,9 @@
 			<p>My lists</p>
 			<p><%= link_to 'Download', schools_path(format: :csv) %></p>
 			<p><a href="/schools/print" title="Print">Print</a></p>
-			<p><a href="" title="Save">Save</a></p>
+			<% if current_user.blank? %>
+				<p><a href="" title="Save">Save</a></p>
+			<% end %>
 			<br/>
 			<p>Account</p>
 			<% if current_user.present? %>
