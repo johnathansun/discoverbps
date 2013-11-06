@@ -32,10 +32,27 @@
 			<% if current_user.present? %>
 				<%= link_to 'Logout', destroy_user_session_path, method: :delete %>
 			<% else %>
-				<p><a href="#" id="sign_up_button" title="Sign Up">Sign Up</a></p>
-				<p><a href="#" id="login_button" title="Login">Login</a></p>
+				<p><a href="#" id="footer_sign_up_button" title="Sign Up">Sign Up</a></p>
+				<p><a href="#" id="footer_login_button" title="Login">Login</a></p>
 			<% end %>
 		</div>
 		<div class="clr"></div>
 	</div>
 	<!-- END info box at the end of listing -->
+	<script>
+		$(document).ready(function(){
+
+			$('#footer_login_button').click(function() {
+				$('#dialog_box').show();
+				$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/login') %>");
+				$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
+				return false;
+			});
+			$('#footer_sign_up_button').click(function() {
+				$('#dialog_box').show();
+				$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/signup') %>");
+				$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
+				return false;
+			});
+		});
+	</script>

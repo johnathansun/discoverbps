@@ -1,0 +1,32 @@
+<div class="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
+<!-- dialog hello -->
+<div class='content'>
+	<span class='txt_join_list' style='display:none;'>Join to save your lists:</span>
+	<p class='txt_login'>Log in with:</p>
+	
+	<div><%= link_to image_tag('/assets/oauth-facebook.png'), user_omniauth_authorize_path(:facebook) %></div>
+	<div><%= link_to image_tag('/assets/oauth-twitter.png'), user_omniauth_authorize_path(:twitter) %></div>
+	
+	<%= form_for(:user, :as => 'user', :url => session_path(:user)) do |f| %>
+		<form method='' action='' name=''>
+			<div class='input_box'>
+				<%= f.email_field :email, placeholder: 'Email address' %>
+			</div>
+			<div class='input_box'>
+				<%= f.password_field :password, placeholder: 'Password' %>
+			</div>
+			<div class="signup"><%= image_submit_tag('/assets/oauth-login.png') %></div>
+			<br />
+			<a href='#' class='signup_btn btn_login txt_btn_sign_up'>Sign up <span class='note_login'>if you haven't yet</span></a>
+			<div class='clr'></div>
+		</form>
+	<% end %>
+</div>
+<script>
+	$(".close_icon").click(function() {
+		$(".dialog_box").fadeOut("fast").removeClass("active");
+	});
+	$(".dialog_box").click(function(e){
+  	e.stopPropagation();
+	});
+</script>
