@@ -3,7 +3,7 @@
 	<% if defined?(student) && student.try(:first_name).present? %>
 		<input id="first_name" class="bloc_3" name="[student]first_name" type="text" value="<%= student.first_name %>" />
 	<% else %>
-		<input id="first_name" class="bloc_3" name="[student]first_name" type="text" placeholder="First Name (optional)" />
+		<input id="first_name" class="bloc_3" name="[student]first_name" type="text" placeholder="Student's First Name" />
 	<% end %>
 
 
@@ -14,7 +14,7 @@
 	<% if defined?(student) && student.try(:last_name).present? %>
 		<input id="last_name" class="bloc_4" name="[student]last_name" type="text" value="<%= student.last_name %>" />
 	<% else %>
-		<input id="last_name" class="bloc_4" name="[student]last_name" type="text" placeholder="Last Name (optional)" />
+		<input id="last_name" class="bloc_4" name="[student]last_name" type="text" placeholder="Student's Last Name" />
 	<% end %>
 
 	<div class="separation_bloc">

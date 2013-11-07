@@ -31,7 +31,7 @@
 						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-01"></span>
 					</div>
 					<div class="text">
-						<p>The first step in the discovery process is to identify the student's eligible schools. By filling out the form below, and answering a few questions in the following dialog boxes, we will display your student's eligible schools, including information about which schools may be a good fit.</p>
+						<p>The first step in the discovery process is to identify the student's eligible schools. By filling out the form below, we can tell you which schools your child is eligible to attend, and which ones might be a good fit.</p>
 
 						<% if current_user_students.present? %>
 							<p class="K">Please select from your previous searches:</p>
@@ -45,13 +45,13 @@
 							<% if flash[:alert].present? %>
 								<p style='color: red;'><%= flash[:alert] %></p>
 							<% else %>
-								<p class="K"><br />Or search for a new student using the form below:</p>							
+								<p class="K"><br />Or search for a new student using the form below (name is optional):</p>							
 							<% end %>
 						<% else %>
 							<% if flash[:alert].present? %>
 								<p style='color: red;'><%= flash[:alert] %></p>
 							<% else %>
-								<p class="K">To get started, enter your home address and your student's name and grade level in the form below:</p>
+								<p class="K">To get started, enter your home address and your student's name and grade level in the form below (name is optional):</p>
 							<% end %>
 						<% end %>
 							<div class="desktop_tablet">
@@ -66,7 +66,11 @@
 									<%= render partial: 'schools/search_form', locals: {sibling_search: true} %>
 								<% end %>
 							</div>
+						<p>
+								<br />
+								After you get your list, be sure to visit! Showcase In Our Schools for grades K-8 Saturday, November 16, from 9:00 AM to 1:00 PM. High School Showcase at Madison Park High School Thursday, December 5, from 6:00 – 8:00 PM</p>
 					</div>
+
 									 
 				</div>
 				<%= render partial: 'schools/vertical_timeline' %>
