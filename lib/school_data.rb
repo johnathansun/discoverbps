@@ -1,6 +1,6 @@
 module SchoolData
 
-	def update_basic_info!
+	def self.update_basic_info!
 		School.all.each do |school|
 			api_response = Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchool?schyear=2014&sch=#{school.bps_id}", :ssl => {:version => :SSLv3}).get.body
 			if api_response.present?
@@ -10,7 +10,7 @@ module SchoolData
 		end
 	end
 
-	def update_awards!
+	def self.update_awards!
 		School.all.each do |school|
 			api_response = Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolAwards?schyear=2014&sch=#{school.bps_id}&TranslationLanguage=", :ssl => {:version => :SSLv3}).get.body
 			if api_response.present?
@@ -20,7 +20,7 @@ module SchoolData
 		end
 	end
 
-	def update_descriptions!
+	def self.update_descriptions!
 		School.all.each do |school|
 			api_response = Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolDescriptions?schyear=2014&sch=#{school.bps_id}&TranslationLanguage=", :ssl => {:version => :SSLv3}).get.body
 			if api_response.present?
@@ -30,7 +30,7 @@ module SchoolData
 		end
 	end
 
-	def update_facilities!
+	def self.update_facilities!
 		School.all.each do |school|
 			api_response = Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolFacilities?schyear=2014&sch=#{school.bps_id}", :ssl => {:version => :SSLv3}).get.body
 			if api_response.present?
@@ -40,7 +40,7 @@ module SchoolData
 		end
 	end
 
-	def update_grades!
+	def self.update_grades!
 		School.all.each do |school|
 			api_response = Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolGrades?schyear=2014&sch=#{school.bps_id}", :ssl => {:version => :SSLv3}).get.body
 			if api_response.present?
@@ -50,7 +50,7 @@ module SchoolData
 		end
 	end
 
-	def update_hours!
+	def self.update_hours!
 		School.all.each do |school|
 			api_response = Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolHours?schyear=2014&sch=#{school.bps_id}&TranslationLanguage=", :ssl => {:version => :SSLv3}).get.body
 			if api_response.present?
@@ -60,7 +60,7 @@ module SchoolData
 		end
 	end
 
-	def update_languages!
+	def self.update_languages!
 		School.all.each do |school|
 			api_response = Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolLanguages?schyear=2014&sch=#{school.bps_id}", :ssl => {:version => :SSLv3}).get.body
 			if api_response.present?
@@ -70,7 +70,7 @@ module SchoolData
 		end
 	end
 
-	def update_partners!
+	def self.update_partners!
 		School.all.each do |school|
 			api_response = Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolPartners?schyear=2014&sch=#{school.bps_id}&TranslationLanguage=", :ssl => {:version => :SSLv3}).get.body
 			if api_response.present?
@@ -80,7 +80,7 @@ module SchoolData
 		end
 	end
 
-	def update_photos!
+	def self.update_photos!
 		School.all.each do |school|
 			api_response = Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolPhotos?schyear=2014&sch=#{school.bps_id}", :ssl => {:version => :SSLv3}).get.body
 			if api_response.present?
@@ -90,7 +90,7 @@ module SchoolData
 		end
 	end
 
-	def update_sports!
+	def self.update_sports!
 		School.all.each do |school|
 			api_response = Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolSports?schyear=2014&sch=#{school.bps_id}", :ssl => {:version => :SSLv3}).get.body
 			if api_response.present?
