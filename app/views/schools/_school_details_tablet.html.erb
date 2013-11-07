@@ -52,10 +52,12 @@
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"></span> Community Partners</p>
 			<p class="descrip"><%= partners_list_helper(school.api_partners) %></p>
 		</div>
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"></span> Sports</p>
-			<p class="descrip"><%= sports_list_helper(school.api_sports) %></p>
-		</div>
+		<% if UPPER_GRADES.include?(current_student.grade_level) %>
+			<div class="box">
+				<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"></span> Sports</p>
+				<p class="descrip"><%= sports_list_helper(school.api_sports) %></p>
+			</div>
+		<% end %>
 		<div class="clr"></div>
 	</div>
 </div>
