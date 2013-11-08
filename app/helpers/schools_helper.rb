@@ -45,20 +45,6 @@ module SchoolsHelper
 		end
 	end
 
-
-	def school_type_helper(hash)
-		if hash.present?
-			list = ''
-			list += 'District, ' if hash[:isdistrict] == 'True'
-			list += 'Charter, ' if hash[:ischarter] == 'True'
-			list += 'Citywide,' if hash[:iscitywide] == 'True'
-			list += 'Pilot' if hash[:ispilot] == 'True'
-			return list.strip.gsub(/,$/, '')
-		else
-			return ''
-		end
-	end
-
 	def school_tier_helper(tier)
 		if tier.present?
 			if tier == 'NR'
