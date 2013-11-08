@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131106235830) do
+ActiveRecord::Schema.define(:version => 20131108165711) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -157,6 +157,7 @@ ActiveRecord::Schema.define(:version => 20131106235830) do
     t.string   "bps_id"
     t.boolean  "ranked",                     :default => false
     t.boolean  "exam_school",                :default => false
+    t.string   "eligibility"
   end
 
   add_index "student_schools", ["bps_id"], :name => "index_student_schools_on_bps_id"

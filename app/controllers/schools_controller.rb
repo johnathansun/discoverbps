@@ -170,6 +170,7 @@ class SchoolsController < ApplicationController
               student_school = current_student.student_schools.where(school_id: school.id).first_or_initialize
               student_school.bps_id                     = api_school[:School]
               student_school.tier                       = api_school[:Tier]
+              student_school.eligibility                = api_school[:Eligibility]
               student_school.walk_zone_eligibility      = api_school[:AssignmentWalkEligibilityStatus]
               student_school.transportation_eligibility = api_school[:TransEligible]
               student_school.exam_school                = (api_school[:IsExamSchool] == "0" ? false : true) 
