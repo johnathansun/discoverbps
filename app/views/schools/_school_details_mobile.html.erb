@@ -23,6 +23,10 @@
 			<p class="descrip"><%= school.api_description.try(:[], :isspecialappprocedures) %></p>
 		</div>
 		<div class="box">
+			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"></span> Advanced Work Class (AWC)</p>
+			<p class="descrip"><%= school.api_basic_info.try(:[], :isAWC) %></p>
+		</div>
+		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"></span> MCAS Tier</p>
 			<p class="descrip"><%= school_tier_helper(student_school.tier) %></p>
 		</div>
