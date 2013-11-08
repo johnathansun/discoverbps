@@ -1201,7 +1201,7 @@ footer.footer .title_footer {
   padding-top: 22px;
   margin-bottom: 0;
   font-size: 14px;
-  width: 400px;
+  width: 350px;
 }
 footer.footer .title_footer .copyright {
   color: #969696;
@@ -1615,6 +1615,44 @@ footer.footer .logo {
   top: 0px;
   font-size: 12px;
 }
+
+.dialog_box .input_box {
+  position: relative;
+  border-color: #ebebeb;
+  color: #000000;
+  background: #ebebeb;
+  padding: 0;
+  margin: 10px 0;
+  width: 242px;
+  /* Placeholder */
+
+}
+.dialog_box .input_box input {
+  padding: 0 0 0 10px;
+  border: none;
+  outline: none;
+  color: #000000;
+  font-family: AvenirLT-Black;
+  font-size: 15px;
+  width: 200px;
+  height: 31px;
+  line-height: 31px;
+  background: #ebebeb;
+  width: 224px;
+}
+.dialog_box .input_box input:focus {
+  background-color: #ffffff;
+}
+.dialog_box .input_box input:-moz-placeholder {
+  color: #000000;
+}
+.dialog_box .input_box input:-ms-input-placeholder {
+  color: #000000;
+}
+.dialog_box .input_box input::-webkit-input-placeholder {
+  color: #000000;
+}
+
 .wrap .account_box .account_menu_box .action_box.save_box .btn.create_box {
   border-color: #fc5b00;
   color: #ffffff;
@@ -1630,8 +1668,8 @@ footer.footer .logo {
   font-family: AvenirLT-Black;
   font-size: 15px;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .note_login {
-  margin: 11px 0 0 5px;
+.note_login {
+  margin: 11px 0;
   color: #969696;
   font-size: 13px;
   width: auto;
@@ -3519,6 +3557,7 @@ ie6 .print1 .wrap {
 ---------------------------------------------- */
 @media screen and (max-width: 1200px) {
   footer.footer .title_footer {
+    width: 300px;
     font-size: 12px;
   }
   .standard .wrap {
@@ -4347,10 +4386,10 @@ ie6 .print1 .wrap {
   footer.footer .title_footer {
     float: left;
     width: auto;
-    padding-top: 0;
+    padding-top: 22px;
     margin-bottom: 15px;
     font-size: 12px;
-    width: 400px;
+    width: 290px;
   }
   footer.footer .wrap {
     font-size: 12px;
@@ -4815,7 +4854,7 @@ ie6 .print1 .wrap {
   footer.footer .title_footer {
     float: left;
     width: auto;
-    padding-top: 0;
+    padding-top: 22px;
     margin-bottom: 15px;
     font-size: 12px;
     width: 50%;
