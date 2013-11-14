@@ -45,6 +45,10 @@ module SchoolsHelper
 		end
 	end
 
+	def eligibility_helper(tier)
+		tier.gsub(/:/, ', ')
+	end
+
 	def school_tier_helper(tier)
 		if tier.present?
 			if tier == 'NR'
