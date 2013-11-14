@@ -24,7 +24,7 @@
 			<p>My lists</p>
 			<p><%= link_to 'Download', schools_path(format: :csv) %></p>
 			<% if params[:action] == 'zone_schools' %>
-				<p><a href="/schools/print?zone_schools" title="Print">Print</a></p>
+				<p><a href="/schools/print_zone_schools" title="Print">Print</a></p>
 			<% else %>
 				<p><a href="/schools/print" title="Print">Print</a></p>
 			<% end %>
