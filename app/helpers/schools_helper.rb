@@ -46,7 +46,7 @@ module SchoolsHelper
 	end
 
 	def eligibility_helper(tier)
-		tier.gsub(/:/, ', ')
+		tier.try(:gsub, /:/, ', ')
 	end
 
 	def school_tier_helper(tier)

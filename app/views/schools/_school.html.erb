@@ -40,7 +40,11 @@
 	</div>
 	<div class="box line eligibility ">
 		<div class="first_block middle">
-			<span class="middle sortable_eligibility"><%= eligibility_helper(student_school.eligibility) %></span>
+			<% if params[:action] == 'zone_schools' %>
+				<span class="middle sortable_eligibility">Zone</span>
+			<% else %>
+				<span class="middle sortable_eligibility"><%= eligibility_helper(student_school.eligibility) %></span>
+			<% end %>
 		</div>
 		<div class="second_bloc middle">
 			<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> <%= spacer_helper(student_school.walk_time) %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
