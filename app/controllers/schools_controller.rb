@@ -109,7 +109,11 @@ class SchoolsController < ApplicationController
   end
 
   def print
-    index
+    if params['zone_schools'].present?
+      zone_schools
+    else
+      index
+    end
   end
 
   def show
