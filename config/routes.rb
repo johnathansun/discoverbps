@@ -19,6 +19,7 @@ DiscoverbpsV2::Application.routes.draw do
     get 'home', on: :collection
     get 'zone_schools', on: :collection
     get 'print', on: :collection
+    get 'print_zone_schools', on: :collection
     post 'sort', on: :collection
     get 'compare', on: :collection
   end

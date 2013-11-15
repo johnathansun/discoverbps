@@ -288,6 +288,8 @@ class SchoolsController < ApplicationController
         "home"
       when "print"
         "print"
+      when "print_zone_schools"
+        "print"
       else
         "application"
       end
