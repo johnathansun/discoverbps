@@ -100,7 +100,7 @@
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"></span> Special Application</p>
-			<p class="descrip"><%= school.api_description.try(:[], :isspecialappprocedures) %></p>
+			<p class="descrip"><%= special_application_helper(school.api_description.try(:[], :isspecialappprocedures)) %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"></span> Advanced Work Class (AWC)</p>

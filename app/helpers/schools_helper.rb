@@ -113,6 +113,14 @@ module SchoolsHelper
 		end
 	end
 
+	def special_application_helper(string)
+		if string.blank? || string == 'False'
+			'No'
+		elsif string == 'True'
+			'Yes'
+		end
+	end
+
 	def awc_helper(string)
 		if string.blank? || string == 'No'
 			'No'
