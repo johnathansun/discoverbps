@@ -113,6 +113,14 @@ module SchoolsHelper
 		end
 	end
 
+	def awc_helper(string)
+		if string.blank? || string == 'No'
+			'No'
+		elsif string == 'Yes'
+			'Yes'
+		end
+	end
+
 	def spacer_helper(string)
 		raw string.try(:strip).try(:gsub, /\s/, '&nbsp;')
 	end
@@ -137,6 +145,9 @@ module SchoolsHelper
 
 		elsif category.name == 'Uniform Policy'
 			tags = uniform_policy_tags_helper(school.api_description)
+
+		elsif category.name == 'AWC'
+			tags = awc_tags_helper(school.api_basic_info)
 		end
 		
 		return tags
@@ -231,6 +242,16 @@ module SchoolsHelper
 		if hash.present?
 			list = []
 			list << hash[:SchSize]
+			return list
+		else
+			return nil
+		end
+	end
+
+	def awc_tags_helper(hash)
+		if hash.present?
+			list = []
+			list << 'Advanced Work Class' if hash[:IsAWC] == 'Yes'
 			return list
 		else
 			return nil

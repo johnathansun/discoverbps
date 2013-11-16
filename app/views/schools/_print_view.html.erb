@@ -57,7 +57,7 @@
 						</div>
 						<div id="getting_there" class=" menu_bloc ">
 							<div class="first_block">
-								Address 
+								Eligibility 
 							</div>
 							
 						</div>
@@ -90,7 +90,7 @@
 								<div class="box line getting_there ">
 									<div class="first_block middle">
 										
-										<span class="middle"><%= school.api_basic_info.try(:[], :campus1address1) %><br /><%= school.api_basic_info.try(:[], :campus1city) %> <%= school.api_basic_info.try(:[], :campus1zip) %><br /></span>
+										<span class="middle"><%= eligibility_helper(student_school.eligibility) %></span>
 									</div>
 										
 									

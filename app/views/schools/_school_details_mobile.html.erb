@@ -24,7 +24,7 @@
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"></span> Advanced Work Class (AWC)</p>
-			<p class="descrip"><%= school.api_basic_info.try(:[], :IsAWC) %></p>
+			<p class="descrip"><%= awc_helper(school.api_basic_info.try(:[], :IsAWC)) %></p>
 		</div>
 		<div class="box">
 			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"></span> MCAS Tier</p>
