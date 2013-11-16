@@ -102,6 +102,8 @@ class SchoolsController < ApplicationController
     if current_user_students.blank?
       render 'home', layout: 'home'
     else
+      @matching_school_ids = current_user_students.collect {|x| x.student_schools.collect {|y| y.bps_id}}.inject(:&)
+
       respond_to do |format|
         format.html
       end

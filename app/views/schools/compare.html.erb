@@ -34,7 +34,7 @@
 					<div class="name_list">
 						<% current_user_students.each_with_index do |student, i| %>
 							<div class="name_info" id="name_<%= i + 2 %>">
-								<span class="name"><%= student.first_name %> <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"style="color: <%= colors[i] %>;"></span> </span>
+								<span class="name"><%= student.first_name %> <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08" style="color: <%= colors[i] %>;"></span> </span>
 								<span class="grade">Grade<br/><span class="number"><%= student.grade_level %></span></span>
 								<div class="clr"></div>
 							</div>
@@ -49,9 +49,15 @@
 								<li id="<%= student.id %>_<%= student_school.school.bps_id %>">
 									<div class="li_frame">
 										<div class="school_name draggable line">
-											<span class="middle">
-						            <h3><%= student_school.school.name %></h3>
-						          </span>
+											<% if @matching_school_ids.include?(student_school.bps_id) %>
+												<span class="middle" style="background-color: #ffff00;">
+						            	<h3 style="padding-left: 12px;"><%= student_school.school.name %></h3>
+						          	</span>
+						          <% else %>
+												<span class="middle">
+							        		<h3 style="padding-left: 12px;"><%= student_school.school.name %></h3>
+							          </span>
+						         	<% end %>
 										</div>
 									</div>
 								</li>
@@ -80,6 +86,6 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<%= render partial: 'schools/footer' %>
 	

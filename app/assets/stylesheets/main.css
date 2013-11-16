@@ -2412,8 +2412,7 @@ footer.footer .logo {
   border-left: 1px solid #ffffff;
   font-size: 16px;
   line-height: 18px;
-  width: 277px;
-  padding-left: 19px;
+  width: 100%;
 }
 .wrap#compare_list ul li .school_name.name_1 {
   border: 0;
