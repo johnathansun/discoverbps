@@ -251,7 +251,7 @@ module SchoolsHelper
 	def awc_tags_helper(hash)
 		if hash.present?
 			list = []
-			list << 'Advanced Work Class' if hash[:IsAWC] == 'Yes'
+			list << 'Advanced Work Class School' if hash[:IsAWC] == 'Yes'
 			return list
 		else
 			return nil
