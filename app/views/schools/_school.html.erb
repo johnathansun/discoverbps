@@ -43,7 +43,7 @@
 			<% if params[:action] == 'zone_schools' %>
 				<span class="middle sortable_eligibility">Zone</span>
 			<% else %>
-				<span class="middle sortable_eligibility"><%= eligibility_helper(student_school.eligibility) %></span>
+				<span class="middle sortable_eligibility"><%=raw eligibility_helper(spacer_helper(student_school.eligibility)) %></span>
 			<% end %>
 		</div>
 		<div class="second_bloc middle">
