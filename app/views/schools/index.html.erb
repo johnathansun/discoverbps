@@ -55,16 +55,9 @@
 
 		<!-- preferences list-->
 		<div id="school_list">
-		
-			<!-- shadow on the left show when list move on the left.  Display none in normal situation-->
-			<div class="shadow" style="display: none;"></div>
-			<!-- END shadow-->
-				
 				<!-- listing of schools  -->
 				<div class="list_content">
-				
-					<!-- ajust the div width when "getting there" and/or "Your fit" glass_icon is clic (to create left and right draggable effect of the school list)  -->	
-					<div class="flexible_content" style="width:1210px;">
+					<div class="flexible_content" style="width:1220px;">
 						<!-- school list header -->
 						<div class="menu_list">
 							<div class="li_frame">
@@ -143,24 +136,6 @@
 			}
 		);
 		
-		//Getting there button to show more(titles and descrip of each school lines)
-		$("#getting_there .glass_open").click(function(){
-			$("#getting_there").addClass("open");
-			$("#sortable .getting_there").addClass("open");
-		})
-		
-		//Getting there button to close the extra info about Getting there
-		$("#getting_there .glass_close").click(function(){
-			$("#getting_there").removeClass("open");
-			$("#sortable .getting_there").removeClass("open");
-		})
-		
-		//Your fit button to show the different fits added, add class open in the menu and each line of the list to display the titles and the description of each fit
-		$(".your_fit .glass_open").click(function(){
-			$(".your_fit_show").addClass("open");
-			$(".your_fit_descrip").addClass("open");
-		})
-		
 		//compare button => add class to compare_list, close school list and preferences, and show the comparaison list
 		/*$(".menu_compare_name .compare").click(function(){
 			
@@ -174,18 +149,10 @@
 		
 		//btn close preference choice in tablet size
 		$(".header_preferences #hide_btn").click(function(){
-			
-			//$("#preference_content").css("display","none");
-			//$(".header_preferences #hide_btn").css("display","none");
-			//$(".header_preferences #show_btn").css("display","inline-block");
 			$(".preferences").addClass("hide");
 		})
 		//btn show preference choice in tablet size
 		$(".header_preferences #show_btn").click(function(){
-			
-			//$("#preference_content").css("display","block");
-			//$(".header_preferences #hide_btn").css("display","inline-block");
-			//$(".header_preferences #show_btn").css("display","none");
 			$(".preferences").removeClass("hide");
 		})
 

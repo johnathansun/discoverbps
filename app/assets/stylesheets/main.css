@@ -719,7 +719,7 @@ a:visited {
 /* !STYLE BASE
 ---------------------------------------------- */
 /* ----------------------------------------------
-	 GLOBAL STYLES
+   GLOBAL STYLES
 ---------------------------------------------- */
 /*::-moz-selection {
   background: #000;
@@ -752,7 +752,7 @@ a:after {
   transition: all ease-in-out 0.2s;
 }*/
 /* ----------------------------------------------
-	 TYPE SETTING
+   TYPE SETTING
 ---------------------------------------------- */
 /* !BASE TEXT ELEMENTS
 ---------------------------------------------- */
@@ -1034,26 +1034,26 @@ body {
 }
 .dialog_box#dialog_welcome_tutoriel .triangle {
   /*width: 0;
-			height: 0;
-			left:117px;
-			top:147px;
-			left:120px\9;
-			position:absolute;
-			border-left: 20px solid transparent;
-			border-right: 20px solid transparent;
-			border-top: 90px solid @W;	
-			transform:rotate(-33deg);
-			-ms-transform:rotate(-33deg);
-			-webkit-transform:rotate(-33deg); */
+      height: 0;
+      left:117px;
+      top:147px;
+      left:120px\9;
+      position:absolute;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 90px solid @W;  
+      transform:rotate(-33deg);
+      -ms-transform:rotate(-33deg);
+      -webkit-transform:rotate(-33deg); */
 
   /*-webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.3));*/
 
   /*background:url(..//assets/bg_box_welcome_triangle.png);
-			width: 422px;
-			height: 295px;
-			left: -20px;
-			top: -25px;
-			position:absolute;*/
+      width: 422px;
+      height: 295px;
+      left: -20px;
+      top: -25px;
+      position:absolute;*/
 
 }
 .dialog_box#dialog_share_via_email textarea {
@@ -1237,7 +1237,7 @@ footer.footer .logo {
 }
 .wrap {
   /*width:1134px;
-	margin: 0 auto;*/
+  margin: 0 auto;*/
 
   margin: 0 33px;
   min-width: 1210px\9;
@@ -1246,7 +1246,7 @@ footer.footer .logo {
 }
 .wrap .content_wrap {
   /*width:960px;
-		margin: 0 auto;*/
+    margin: 0 auto;*/
 
   margin: 0 87px;
   position: relative;
@@ -1409,9 +1409,9 @@ footer.footer .logo {
 }
 .wrap.timeline_menu .timeline #registration_contaner .register_timeline_contaner .event_zone:hover .event {
   /*.box_info {
-									display: block;
-									
-								}*/
+                  display: block;
+                  
+                }*/
 
 }
 .wrap.timeline_menu .timeline .day_indicator {
@@ -1457,8 +1457,8 @@ footer.footer .logo {
 }
 .wrap .account_box .account_menu_box {
   /*position: absolute;
-			top: 30px; 
-			left: 0px;*/
+      top: 30px; 
+      left: 0px;*/
 
   color: #565656;
   background: #ffffff;
@@ -1494,10 +1494,10 @@ footer.footer .logo {
 }
 .wrap .account_box .account_menu_box .action_box.register_box {
   /*.text {float:left;}
-					.inputs {
-						float:left;
-						margin:0 5px 0 0;
-					}*/
+          .inputs {
+            float:left;
+            margin:0 5px 0 0;
+          }*/
 
 }
 .wrap .account_box .account_menu_box .action_box.register_box span {
@@ -1764,25 +1764,24 @@ footer.footer .logo {
   min-height: 75px;
   margin-bottom: 20px;
 }
-.wrap .box .title {
+.wrap .single_school .box .title {
   color: #565656;
   margin-bottom: 0;
-  font-size: 14px;
 }
-.wrap .box .title span {
+.wrap .single_school .box .title span {
   margin: 0 5px 0 0;
 }
-.wrap .box .descrip {
+.wrap .single_school .box .descrip {
   color: #969696;
   margin-left: 21px;
 }
-.wrap .box .descrip span {
+.wrap .single_school .box .descrip span {
   color: #565656;
 }
-.wrap .box.first {
+.wrap .single_school .box.first {
   padding: 0;
 }
-.wrap .box .absolute {
+.wrap .single_school .box .absolute {
   position: absolute;
   width: 168px;
 }
@@ -1816,21 +1815,6 @@ footer.footer .logo {
 }
 .wrap .preferences .up_arrow {
   display: none;
-}
-.wrap .preferences.hide #preference_content {
-  display: none;
-}
-.wrap .preferences.hide .header_preferences #hide_btn {
-  display: none;
-}
-.wrap .preferences.hide .header_preferences #show_btn {
-  display: inline-block;
-}
-.wrap .preferences.hide .header_preferences .down_arrow {
-  display: none;
-}
-.wrap .preferences.hide .header_preferences .up_arrow {
-  display: inline-block;
 }
 .wrap .preferences .header_preferences {
   margin-left: 20px;
@@ -1912,7 +1896,7 @@ footer.footer .logo {
 }
 .wrap #school_list ul li.small_list_row {
   list-style: none;
-  background: #ffffff;
+  background: #ffffff !important;
   height: 48px;
   margin: 24px 0;
   /*.icon-DBPS-Dev-Assets-SRG-35{color:@B0;}*/
@@ -2144,7 +2128,7 @@ footer.footer .logo {
 }
 
 .wrap #school_list ul li.list_row {
-  background: #ffffff;
+  background: #ffffff !important;
   margin-bottom: 12px;
   margin-top: 0;
   height: 82px;
@@ -2851,19 +2835,19 @@ footer.footer .logo {
 }
 .search .search_section .content_left form .form_line .bloc_5 {
   /*
-								width:39px;
-								display:block;
-								float:left;
-								background: @OR;
-								color: @W;
-								padding:3px 11px 0 6px;
-								height:30px;
-								font-size: 16px;
-								line-height: 16px;
-								padding-top: 4px;
-								border:0;
-								font-family: @current;
-								color: @W;*/
+                width:39px;
+                display:block;
+                float:left;
+                background: @OR;
+                color: @W;
+                padding:3px 11px 0 6px;
+                height:30px;
+                font-size: 16px;
+                line-height: 16px;
+                padding-top: 4px;
+                border:0;
+                font-family: @current;
+                color: @W;*/
 
   height: 38px;
   float: left;
@@ -3488,6 +3472,10 @@ ie6 .print1 .wrap {
   padding-left: 9px;
   width: 95px;
 }
+.print1 .wrap .box .title {
+  font-size: 13px;
+  margin-bottom: .5em;
+}
 .print1 .wrap #school_list ul li .school_name,
 .print1 .wrap #school_list ul li .no_order {
   font-size: 14px;
@@ -3553,7 +3541,7 @@ ie6 .print1 .wrap {
 }
 /* -Screen - tablet */
 /* ----------------------------------------------
-	 ELEMENT LAYOUT - TABLETTE
+   ELEMENT LAYOUT - TABLETTE
 ---------------------------------------------- */
 @media screen and (max-width: 1200px) {
   footer.footer .title_footer {
@@ -3584,7 +3572,7 @@ ie6 .print1 .wrap {
   }
   .wrap .menu_compare_name .name_list {
     /*width:390px;
-  			.name_info{width:50%;}*/
+        .name_info{width:50%;}*/
   
   }
   .wrap .preferences {
@@ -3613,10 +3601,25 @@ ie6 .print1 .wrap {
   .wrap .preferences .colonn.last {
     border: 0;
   }
+  .wrap .preferences.hide #preference_content {
+    display: none;
+  }
+  .wrap .preferences.hide .header_preferences #hide_btn {
+    display: none;
+  }
+  .wrap .preferences.hide .header_preferences #show_btn {
+    display: inline-block;
+  }
+  .wrap .preferences.hide .header_preferences .down_arrow {
+    display: none;
+  }
+  .wrap .preferences.hide .header_preferences .up_arrow {
+    display: inline-block;
+  }
   .wrap #school_list,
   .wrap #compare_list {
     margin-left: 0;
-    margin: 11px 0 11px 11px;
+    margin: 0 0 11px 11px;
     overflow: hidden;
   }
   .wrap #school_list .footer_list,
@@ -3683,7 +3686,7 @@ ie6 .print1 .wrap {
     width: 273px;
   }
   .wrap #school_list .menu_list .menu_bloc {
-    width: 131px;
+    width: 151px;
   }
   .wrap #school_list .menu_list .menu_bloc.choice {
     width: 293px;
@@ -3787,7 +3790,7 @@ ie6 .print1 .wrap {
 }
 /* -Screen - tablet 2 */
 /* ----------------------------------------------
-	 ELEMENT LAYOUT - TABLETTE 2
+   ELEMENT LAYOUT - TABLETTE 2
 ---------------------------------------------- */
 @media screen and (max-width: 1090px) {
   .standard .wrap {
@@ -3946,7 +3949,7 @@ ie6 .print1 .wrap {
 }
 /* Mobile Layout */
 /* ----------------------------------------------
-	 ELEMENT LAYOUT - MOBILE (600px max)
+   ELEMENT LAYOUT - MOBILE (600px max)
 ---------------------------------------------- */
 @media screen and (max-width: 768px) and (min-device-width: 900px) {
   .no_mobile {
@@ -4053,7 +4056,7 @@ ie6 .print1 .wrap {
     color: #fc5b00;
   }
   .wrap.global_map {
-    width: 100%;
+    width: 96%;
     height: 290px;
   }
   .wrap.global_map #googleMap {
@@ -4201,10 +4204,10 @@ ie6 .print1 .wrap {
   .wrap.timeline_menu nav.menu_nav ul li.languages_mobile {
     color: #80bce7;
     /*&:hover {
-  								.list_languages {
-  									display:block;
-  								}
-  							}*/
+                  .list_languages {
+                    display:block;
+                  }
+                }*/
   
   }
   .wrap.timeline_menu nav.menu_nav ul li.languages_mobile a span {
@@ -4266,31 +4269,31 @@ ie6 .print1 .wrap {
   }
   .wrap .search .search_section .content_left .text form .form_line {
     /*.inputs{
-  								height: auto;
-  								background: none;
-  								width:auto;
-  								float: none;
-  								input{background: @W; }
-  								.separation{display: none;}
-  								.bloc_3{
-  									float: none;
-  									width: 96%;
-  									padding-left: 4%;
-  								}
-  								.bloc_4{
-  									float: none;
-  									width: 96%;
-  									padding-left: 4%;
-  								}
-  								.bloc_2{
-  									&.select_grade{
-  										float: none;
-  										width: auto;
-  										height: 28px;
-  									}
-  								}
-  							}
-  							.btn{}*/
+                  height: auto;
+                  background: none;
+                  width:auto;
+                  float: none;
+                  input{background: @W; }
+                  .separation{display: none;}
+                  .bloc_3{
+                    float: none;
+                    width: 96%;
+                    padding-left: 4%;
+                  }
+                  .bloc_4{
+                    float: none;
+                    width: 96%;
+                    padding-left: 4%;
+                  }
+                  .bloc_2{
+                    &.select_grade{
+                      float: none;
+                      width: auto;
+                      height: 28px;
+                    }
+                  }
+                }
+                .btn{}*/
   
   }
   .wrap .search .search_section .content_left .text form .form_line .bloc_2.select_grade .arrow {
@@ -4521,7 +4524,7 @@ ie6 .print1 .wrap {
     color: #fc5b00;
   }
   .wrap.global_map {
-    width: 100%;
+    width: 96%;
     height: 290px;
   }
   .wrap.global_map #googleMap {
@@ -4669,10 +4672,10 @@ ie6 .print1 .wrap {
   .wrap.timeline_menu nav.menu_nav ul li.languages_mobile {
     color: #80bce7;
     /*&:hover {
-  								.list_languages {
-  									display:block;
-  								}
-  							}*/
+                  .list_languages {
+                    display:block;
+                  }
+                }*/
   
   }
   .wrap.timeline_menu nav.menu_nav ul li.languages_mobile a span {
@@ -4734,31 +4737,31 @@ ie6 .print1 .wrap {
   }
   .wrap .search .search_section .content_left .text form .form_line {
     /*.inputs{
-  								height: auto;
-  								background: none;
-  								width:auto;
-  								float: none;
-  								input{background: @W; }
-  								.separation{display: none;}
-  								.bloc_3{
-  									float: none;
-  									width: 96%;
-  									padding-left: 4%;
-  								}
-  								.bloc_4{
-  									float: none;
-  									width: 96%;
-  									padding-left: 4%;
-  								}
-  								.bloc_2{
-  									&.select_grade{
-  										float: none;
-  										width: auto;
-  										height: 28px;
-  									}
-  								}
-  							}
-  							.btn{}*/
+                  height: auto;
+                  background: none;
+                  width:auto;
+                  float: none;
+                  input{background: @W; }
+                  .separation{display: none;}
+                  .bloc_3{
+                    float: none;
+                    width: 96%;
+                    padding-left: 4%;
+                  }
+                  .bloc_4{
+                    float: none;
+                    width: 96%;
+                    padding-left: 4%;
+                  }
+                  .bloc_2{
+                    &.select_grade{
+                      float: none;
+                      width: auto;
+                      height: 28px;
+                    }
+                  }
+                }
+                .btn{}*/
   
   }
   .wrap .search .search_section .content_left .text form .form_line .bloc_2.select_grade .arrow {
@@ -4886,7 +4889,7 @@ ie6 .print1 .wrap {
 }
 /* Mobile portrait Layout */
 /* ----------------------------------------------
-	 ELEMENT LAYOUT - MOBILE PORTRAIT (607px max)
+   ELEMENT LAYOUT - MOBILE PORTRAIT (607px max)
 ---------------------------------------------- */
 @media screen and (max-width: 607px) {
   .no_mobile {
@@ -4941,7 +4944,7 @@ ie6 .print1 .wrap {
     color: #fc5b00;
   }
   .wrap.global_map {
-    width: 100%;
+    width: 96%;
     height: 290px;
   }
   .wrap.global_map #googleMap {
@@ -5209,7 +5212,6 @@ ie6 .print1 .wrap {
   }
   .wrap .search .logo.discover {
     font-size: 65px;
-    margin-left: 14px;
   }
   .wrap .search .logo.register {
     font-size: 68px;
