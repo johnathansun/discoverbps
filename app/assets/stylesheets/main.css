@@ -3682,7 +3682,7 @@ ie6 .print1 .wrap {
     width: 273px;
   }
   .wrap #school_list .menu_list .menu_bloc {
-    width: 151px;
+    width: 131px;
   }
   .wrap #school_list .menu_list .menu_bloc.choice {
     width: 293px;
@@ -5208,6 +5208,7 @@ ie6 .print1 .wrap {
   }
   .wrap .search .logo.discover {
     font-size: 65px;
+    margin-left: 14px;
   }
   .wrap .search .logo.register {
     font-size: 68px;
