@@ -224,7 +224,5 @@ input {
 	-webkit-font-smoothing: antialiased;	
 }
 #google_translate_element {
-	padding-top: 22px;
-	width: 200px;
-	float: left;
+	width: 165px;
 }
