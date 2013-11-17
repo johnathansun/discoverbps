@@ -1764,24 +1764,25 @@ footer.footer .logo {
   min-height: 75px;
   margin-bottom: 20px;
 }
-.wrap .single_school .box .title {
+.wrap .box .title {
   color: #565656;
   margin-bottom: 0;
+  font-size: 14px;
 }
-.wrap .single_school .box .title span {
+.wrap .box .title span {
   margin: 0 5px 0 0;
 }
-.wrap .single_school .box .descrip {
+.wrap .box .descrip {
   color: #969696;
   margin-left: 21px;
 }
-.wrap .single_school .box .descrip span {
+.wrap .box .descrip span {
   color: #565656;
 }
-.wrap .single_school .box.first {
+.wrap .box.first {
   padding: 0;
 }
-.wrap .single_school .box .absolute {
+.wrap .box .absolute {
   position: absolute;
   width: 168px;
 }

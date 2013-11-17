@@ -8,7 +8,7 @@
 			<div class='box'>
 				<% if params[:controller] == 'schools' && params[:action] == 'index' %>
 					<span>My lists</span>
-					<%= link_to 'Print', print_schools_path %>
+					<%= link_to 'Print', print_home_schools_schools_path %>
 					<%= link_to 'Download', schools_path(format: :csv) %>
 					<% if current_user.blank? %>
 						<a id='save_btn' href='#'>Save</a>

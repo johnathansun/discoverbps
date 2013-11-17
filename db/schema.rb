@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131108165711) do
+ActiveRecord::Schema.define(:version => 20131117061319) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(:version => 20131108165711) do
     t.text     "api_partners"
     t.text     "api_photos"
     t.string   "name"
-    t.integer  "bps_id"
+    t.string   "bps_id"
     t.string   "slug"
     t.float    "latitude"
     t.float    "longitude"

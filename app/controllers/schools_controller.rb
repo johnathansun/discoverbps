@@ -2,9 +2,6 @@ class SchoolsController < ApplicationController
   include SchoolsHelper
   layout :layout_selector
 
-  def coming_soon
-  end
-
   def home
   end
 
@@ -110,7 +107,7 @@ class SchoolsController < ApplicationController
     end
   end
 
-  def print
+  def print_home_schools
     index
   end
 
@@ -118,12 +115,12 @@ class SchoolsController < ApplicationController
     zone_schools
   end
 
-  def show
+  def print
     @school = School.find(params[:id])
+    @student_school = current_student.student_schools.where(bps_id: @school.bps_id).try(:first)
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @school }
     end
   end
 
@@ -286,14 +283,16 @@ class SchoolsController < ApplicationController
 
     def layout_selector
       case action_name
-      when "home"
-        "home"
-      when "print"
-        "print"
-      when "print_zone_schools"
-        "print"
+      when 'home'
+        'home'
+      when 'print_home_schools'
+        'print'
+      when 'print_zone_schools'
+        'print'
+      when 'print'
+        'print'
       else
-        "application"
+        'application'
       end
     end
 
