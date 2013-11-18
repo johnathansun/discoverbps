@@ -225,4 +225,5 @@ input {
 }
 #google_translate_element {
 	width: 165px;
+	text-align: right;
 }

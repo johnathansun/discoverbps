@@ -62,7 +62,7 @@
 						<div class="menu_list">
 							<div class="li_frame">
 								<div id="sortable_choice_order_column" class="arrow menu_bloc desktop no_mobile">
-									<div aria-hidden="true" id="choice_order_arrow" class="icon-DBPS-Dev-Assets-arrow-up"></div>
+									
 								</div>
 								<div id="sortable_school_name_column" class="menu_bloc sortable_column">
 									<div class="column_title">School Name</div>
@@ -70,8 +70,8 @@
 								
 								<!-- add class "open" to show "Walk time" and "Drive time"-->
 								<div id="getting_there" class=" menu_bloc ">
-									<div id="sortable_distance_column" class="first_block sortable_column">
-										<div class="column_title">Getting There</div>
+									<div id="sortable_distance_column" class="first_block sortable_column" style="color: #0077cf;">
+										<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Getting There</div>
 									</div>
 									<div class="second_block sortable_column">
 										<div class="column_title">Walk Time</div>
@@ -215,11 +215,11 @@
 		  $('#sortable_school_name_column').css("color", "#0077cf")
 	  	if (school_name_ascending) {
 	  		$('ul#sortable>li').tsort('span.sortable_school_name',{order:'desc'});
-	  		$('#sortable_school_name_column').html('<span aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></span> <div class="column_title">School Name</div>');
+	  		$('#sortable_school_name_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">School Name</div>');
 	  		school_name_ascending = false;
 	  	} else {
 	  		$('ul#sortable>li').tsort('span.sortable_school_name',{order:'asc'});
-	  		$('#sortable_school_name_column').html('<span aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></span> <div class="column_title">School Name</div>');
+	  		$('#sortable_school_name_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">School Name</div>');
 	  		school_name_ascending = true;
 	  	}
 	  });
@@ -232,11 +232,11 @@
 		  $('#sortable_distance_column').css("color", "#0077cf")
 	  	if (getting_there_ascending) {
 	  		$('ul#sortable>li').tsort('span.sortable_distance',{order:'desc'});
-	  		$('#sortable_distance_column').html('<span aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></span> <div class="column_title">Getting There</div>');
+	  		$('#sortable_distance_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Getting There</div>');
 	  		getting_there_ascending = false;
 	  	} else {
 	  		$('ul#sortable>li').tsort('span.sortable_distance',{order:'asc'});
-	  		$('#sortable_distance_column').html('<span aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></span> <div class="column_title">Getting There</div>');
+	  		$('#sortable_distance_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Getting There</div>');
 	  		getting_there_ascending = true;
 	  	}
 	  });
