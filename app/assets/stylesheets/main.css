@@ -2314,7 +2314,7 @@ footer.footer .logo {
 .wrap #school_list .footer_list {
   padding: 37px 60px 37px 37px;
   background: #dfdfdf;
-  width: 948px;
+  width: 1123px;
   font-size: 15px;
   line-height: 20px;
 }
@@ -2336,8 +2336,9 @@ footer.footer .logo {
 .wrap #school_list .footer_list .footer_right {
   width: 159px;
   border-left: 1px solid #ffffff;
-  float: right;
+  float: left;
   padding-left: 20px;
+  margin-left: 60px;
 }
 .wrap #school_list .footer_list .footer_right p {
   margin-bottom: .6em;
@@ -3635,6 +3636,7 @@ ie6 .print1 .wrap {
   .wrap #school_list .footer_list .footer_right,
   .wrap #compare_list .footer_list .footer_right {
     width: 182px;
+    margin-left: 20px;
   }
   .wrap #school_list .footer_list .footer_right p,
   .wrap #compare_list .footer_list .footer_right p {
@@ -4164,6 +4166,7 @@ ie6 .print1 .wrap {
     border: 0;
     border-top: 1px solid #ffffff;
     padding: 14px 0 0 0;
+    margin-left: 0;
   }
   .wrap #school_list .list_content {
     overflow: hidden;
@@ -4632,6 +4635,7 @@ ie6 .print1 .wrap {
     border: 0;
     border-top: 1px solid #ffffff;
     padding: 14px 0 0 0;
+    margin-left: 0;
   }
   .wrap #school_list .list_content {
     overflow: hidden;
@@ -5052,6 +5056,7 @@ ie6 .print1 .wrap {
     border: 0;
     border-top: 1px solid #ffffff;
     padding: 14px 0 0 0;
+    margin-left: 0;
   }
   .wrap #school_list .list_content {
     overflow: hidden;
