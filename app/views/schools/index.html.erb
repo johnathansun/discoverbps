@@ -50,6 +50,16 @@
 
 
 <div class="wrap">
+	<div data-icon="&#xe001;" aria-hidden="true" class='arrow_slide no_mobile'></div>
+	<script>
+		$( window ).resize(function() {
+			if ($(window).width() > 1480) {
+				$('.arrow_slide').hide();
+			} else {
+				$('.arrow_slide').show();
+			}		
+		});
+	</script>
 	<div class="result">
 		<%= render partial: 'schools/preference_panel' %>
 
