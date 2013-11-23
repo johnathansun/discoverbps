@@ -259,8 +259,8 @@ function initialize(){
         var coordinates = new google.maps.LatLng(<%= school.latitude %>, <%= school.longitude %>);
         latlngbounds.extend(coordinates);
         var image = {
-          url: '/assets/map_pins/DBPS_MapPins_Blue_1.png',
-          size: new google.maps.Size(17, 25),
+          url: '/assets/map_pins/DBPS_MapPins_Medium_Blue_1.png',
+          size: new google.maps.Size(19, 29),
           origin: new google.maps.Point(0, 0),
           anchor: new google.maps.Point(0, 0),
         };
@@ -285,8 +285,8 @@ function initialize(){
             var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
             latlngbounds.extend(coordinates);
             var image = {
-              url: '/assets/map_pins/DBPS_MapPins_<%= colors[student_i] %>_<%= i + 1 %>.png',
-              size: new google.maps.Size(17, 25),
+              url: '/assets/map_pins/DBPS_MapPins_Medium_<%= colors[student_i] %>_<%= i + 1 %>.png',
+              size: new google.maps.Size(19, 29),
               origin: new google.maps.Point(0, 0),
               anchor: new google.maps.Point(0, 0),
             };

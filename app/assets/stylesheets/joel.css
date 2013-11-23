@@ -33,6 +33,7 @@ body.standard .select_grade {
 }
 body.standard #sibling_school {
 	background: #0059a3;
+	margin-left: 0;
 }
 body.standard #sibling_school #sibling_school_autocomplete {
 	background: #0059a3;
@@ -226,4 +227,8 @@ input {
 #google_translate_element {
 	width: 165px;
 	text-align: right;
+}
+#add_sibling {
+  margin-left: 12px;
+  cursor: pointer;
 }
