@@ -4,7 +4,8 @@ module SchoolData
 		School.all.each do |school|
 			api_response = Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchool?schyear=2014&sch=#{school.bps_id}", :ssl => {:version => :SSLv3}).get.body
 			if api_response.present?
-				school.update_attributes(api_basic_info: MultiJson.load(api_response, :symbolize_keys => true).try(:[], 0)) # remove hash from array
+				hash = MultiJson.load(api_response, :symbolize_keys => true).try(:[], 0)
+				school.update_attributes(name: hash[:schname_23], api_basic_info: hash) # remove hash from array
 				puts "********** updating basic info for school #{school.bps_id}"
 			end
 		end
