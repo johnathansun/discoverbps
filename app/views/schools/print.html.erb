@@ -35,7 +35,7 @@
 		<div class="flexible_content" >
 
 			<div style="margin-top: 20px; ">
-				<h1><%= @school.api_basic_info.try(:[], :schname_23) %></h1>
+				<h1><%= @school.name %></h1>
 				<br />
 				<p style="font-family: georgia; font-size: 14px;"><%= @school.api_description.try(:[], :schoolspecial) %></p>
 			</div>
