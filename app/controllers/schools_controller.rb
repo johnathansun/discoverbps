@@ -201,7 +201,7 @@ class SchoolsController < ApplicationController
           end
 
           current_student.update_attributes(schools_last_updated_at: Time.now)
-          return current_student.student_schools.order(:distance)
+          return current_student.student_schools.rank(:sort_order)
         end
       else
         return []
