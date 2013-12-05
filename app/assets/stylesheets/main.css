@@ -361,6 +361,9 @@ td {
   h3 {
     page-break-after: avoid;
   }
+  .timeline_menu {
+    display: none;
+  }
 }
 /* Mixins */
 /* !SITE SETTINGS
