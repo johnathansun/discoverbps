@@ -8,8 +8,11 @@ class Student < ActiveRecord::Base
 
   scope :verified, where(address_verified: true)
   
-  attr_accessible :first_name, :last_name, :grade_level, :iep, :primary_language, :session_id, :sibling_school_id, :sibling_school_name, :street_name, :street_number, :neighborhood, :zipcode, :latitude, :longitude, :user_id, :preference_ids, :school_ids, :iep_needs, :ell_needs, :schools_last_updated_at, :x_coordinate, :y_coordinate, :address_verified, :geo_code
+  attr_accessible :first_name, :last_name, :grade_level, :iep, :primary_language, :session_id, :sibling_school_ids, :sibling_school_names, :street_name, :street_number, :neighborhood, :zipcode, :latitude, :longitude, :user_id, :preference_ids, :school_ids, :iep_needs, :ell_needs, :schools_last_updated_at, :x_coordinate, :y_coordinate, :address_verified, :geo_code
   
+  serialize :sibling_school_names
+  serialize :sibling_school_ids
+
   validates :street_number, :street_name, :zipcode, :grade_level, presence: true
   validates :street_number, length: { maximum: 5 }
   validates :grade_level, inclusion: { in: %w(K0 K1 K2 1 2 3 4 5 6 7 8 9 10 11 12),

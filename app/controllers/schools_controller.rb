@@ -148,16 +148,20 @@ class SchoolsController < ApplicationController
         
         current_student.student_schools.clear
 
-        street_number     = URI.escape(current_student.street_number)
-        street_name       = URI.escape(current_student.street_name)
-        zipcode           = current_student.zipcode.strip
-        grade_level       = current_student.grade_level.to_s.length < 2 ? ('0' + current_student.grade_level.try(:strip)) : current_student.grade_level.try(:strip)
-        x_coordinate      = current_student.x_coordinate
-        y_coordinate      = current_student.y_coordinate
-        sibling_school_id = current_student.sibling_school_id
+        street_number       = URI.escape(current_student.street_number)
+        street_name         = URI.escape(current_student.street_name)
+        zipcode             = current_student.zipcode.strip
+        grade_level         = current_student.grade_level.to_s.length < 2 ? ('0' + current_student.grade_level.try(:strip)) : current_student.grade_level.try(:strip)
+        x_coordinate        = current_student.x_coordinate
+        y_coordinate        = current_student.y_coordinate
+        sibling_school_id_one   = current_student.sibling_school_ids.try(:[], 0)
+        sibling_school_id_two   = current_student.sibling_school_ids.try(:[], 1)
+        sibling_school_id_three = current_student.sibling_school_ids.try(:[], 2)
+        sibling_school_id_four  = current_student.sibling_school_ids.try(:[], 3)
+        sibling_school_id_five  = current_student.sibling_school_ids.try(:[], 4)
 
         # hit the BPS API
-        api_schools = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolChoices?SchoolYear=2014-2015&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}&X=#{x_coordinate}&Y=#{y_coordinate}&SiblingSchList=#{sibling_school_id}")[:List]
+        api_schools = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolChoices?SchoolYear=2014-2015&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}&X=#{x_coordinate}&Y=#{y_coordinate}&SiblingSchList=#{sibling_school_id_one},#{sibling_school_id_two},#{sibling_school_id_three},#{sibling_school_id_four},#{sibling_school_id_five}")[:List]
         
         if api_schools.present?
           logger.info "*************************** found #{api_schools.count} schools"
@@ -216,15 +220,19 @@ class SchoolsController < ApplicationController
   
         current_student.student_schools.clear
 
-        zipcode           = current_student.zipcode.strip
-        grade_level       = current_student.grade_level.to_s.length < 2 ? ('0' + current_student.grade_level.try(:strip)) : current_student.grade_level.try(:strip)
-        x_coordinate      = current_student.x_coordinate
-        y_coordinate      = current_student.y_coordinate
-        geo_code          = current_student.geo_code
-        sibling_school_id = current_student.sibling_school_id
+        zipcode             = current_student.zipcode.strip
+        grade_level         = current_student.grade_level.to_s.length < 2 ? ('0' + current_student.grade_level.try(:strip)) : current_student.grade_level.try(:strip)
+        x_coordinate        = current_student.x_coordinate
+        y_coordinate        = current_student.y_coordinate
+        geo_code            = current_student.geo_code
+        sibling_school_id_one   = current_student.sibling_school_ids.try(:[], 0)
+        sibling_school_id_two   = current_student.sibling_school_ids.try(:[], 1)
+        sibling_school_id_three = current_student.sibling_school_ids.try(:[], 2)
+        sibling_school_id_four  = current_student.sibling_school_ids.try(:[], 3)
+        sibling_school_id_five  = current_student.sibling_school_ids.try(:[], 4)
 
         # hit the BPS API
-        api_schools = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc/GetSchoolInterestList?SchoolYear=2014-2015&Grade=#{grade_level}&ZipCode=#{zipcode}&Geo=#{geo_code}&X=#{x_coordinate}&Y=#{y_coordinate}&SiblingSchList=#{sibling_school_id}")[:List]
+        api_schools = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc/GetSchoolInterestList?SchoolYear=2014-2015&Grade=#{grade_level}&ZipCode=#{zipcode}&Geo=#{geo_code}&X=#{x_coordinate}&Y=#{y_coordinate}&SiblingSchList=#{sibling_school_id_one},#{sibling_school_id_two},#{sibling_school_id_three},#{sibling_school_id_four},#{sibling_school_id_five}")[:List]
         
         if api_schools.present?
           logger.info "*************************** found #{api_schools.count} schools"

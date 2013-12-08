@@ -24,8 +24,7 @@ class StudentsController < ApplicationController
 				@student = Student.where(session_id: session[:session_id], grade_level: grade_level).first_or_initialize
 			end
 		end
-
-    params[:student][:sibling_school_id] = School.where(name: params[:student][:sibling_school_name]).first.try(:bps_id)
+    params[:student][:sibling_school_ids] = School.where("name IN (?)", params[:student][:sibling_school_names].compact.reject(&:empty?)).collect {|x| x.bps_id}.uniq
 
     street_number = URI.escape(params[:student][:street_number].try(:gsub, /\D/, ''))
     street_name   = URI.escape(params[:student][:street_name].try(:strip))

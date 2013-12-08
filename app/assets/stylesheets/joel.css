@@ -34,6 +34,7 @@ body.standard .select_grade {
 body.standard #sibling_school {
 	background: #0059a3;
 	margin-left: 0;
+	margin-right: 12px;
 }
 body.standard #sibling_school #sibling_school_autocomplete {
 	background: #0059a3;

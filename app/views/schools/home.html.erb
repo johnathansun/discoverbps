@@ -62,13 +62,13 @@
 							<div class="desktop_tablet">
 								<%= form_tag students_path, method: :post, remote: true do %>
 								<!-- Address and zip info -->
-									<%= render partial: 'schools/search_form', locals: {sibling_search: true} %>
+									<%= render partial: 'schools/home_search_form', locals: {sibling_search: true} %>
 								<% end %>
 							</div>
 							<div class="mobile_only">
 								<%= form_tag students_path, method: :post, remote: false do %>
 								<!-- Address and zip info -->
-									<%= render partial: 'schools/search_form', locals: {sibling_search: true} %>
+									<%= render partial: 'schools/home_search_form', locals: {sibling_search: true} %>
 								<% end %>
 							</div>
 					</div>
