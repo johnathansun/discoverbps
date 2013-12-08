@@ -169,7 +169,7 @@ class StudentsController < ApplicationController
   end
 
   def delete_all
-    students = Student.where('session_id = ? AND id IN (?)', session[:session_id], params[:student_ids])
+    students = Student.where('id IN (?)', params[:student_ids])
     if students.present?
       students.each do |student|
         student.destroy
