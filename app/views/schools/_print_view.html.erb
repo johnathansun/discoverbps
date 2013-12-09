@@ -81,8 +81,8 @@
 							<div class="li_frame">
 								<div class="school_name select line">
 									<span class="middle">
-										<%= school.api_basic_info.try(:[], :schname_23) %>
-										<% if current_student.sibling_school_id == school.bps_id %>
+										<%= school.name %>
+										<% if current_student.sibling_school_ids.present? && current_student.sibling_school_ids.include?(school.bps_id) %>
 											<span aria-hidden="true" class="select_icon icon-DBPS-Dev-Assets-SRG-12"></span>
 										<% end %>
 									</span>
