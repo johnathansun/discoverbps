@@ -1695,22 +1695,25 @@ footer.footer .logo {
 .wrap .single_school p {
   font-size: 15px;
 }
+#main_gallery_image{
+  margin: 30px 0 20px 0;
+  img{ width: 682px;}
+}
+.wrap .photos {
+  float: left;
+}
 .wrap .photos {
   max-width: 289px;
 }
-.photos {
+.wrap .photos .small {
   float: left;
-}
-.photos .small {
-  float: left;
-  width: 90px;
+  width: 30.45%;
   height: 66px;
-  margin-right: 9px;
-  margin-bottom: 10px;
+  margin-right: 4.15%;
   display: block;
   cursor: pointer;
 }
-.photos .small.last {
+.wrap .photos .small.last {
   margin-right: 0;
 }
 .wrap .photos .small img {
@@ -2064,10 +2067,9 @@ footer.footer .logo {
 }
 .wrap #school_list ul li .school_descrip .right_side .photos .small {
   float: left;
-  width: 90px;
+  width: 30.45%;
   height: 66px;
-  margin-right: 9px;
-  margin-bottom: 10px;
+  margin-right: 4.15%;
   display: block;
   cursor: pointer;
 }
@@ -3814,6 +3816,10 @@ ie6 .print1 .wrap {
     max-width: 769px;
     padding: 0 33px;
   }
+  #main_gallery_image{
+    margin: 30px 0 20px 0;
+    img{ width: 475px;}
+  }
   .dialog_box.dialog_box_dicover {
     width: 536px;
     margin: 0 0 0 -268px;
@@ -3994,6 +4000,10 @@ ie6 .print1 .wrap {
     padding-left: 2%;
     padding-right: 2%;
     width: 96.1%;
+  }
+  #main_gallery_image{
+    margin: 30px 0 20px 0;
+    img{ width: 475px;}
   }
   .wrap .photos {
     float: none;

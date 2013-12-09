@@ -1,8 +1,8 @@
 	<div class="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
 	<div class="photos">
-		<div id="main_image"><%= image_tag(school.api_photos[photo_index].try(:[], :url), width: '685px') %></div>
+		<div id="main_gallery_image"><%= image_tag(school.api_photos[photo_index].try(:[], :url)) %></div>
 		<% school.api_photos.each_with_index do |url, index| %>
-			<div id="<%= school.bps_id %>_thumbnail_<%= index %>" class="small"><%= image_tag(school.api_photos[index].try(:[], :url), width: '90px') %></div>
+			<div id="<%= school.bps_id %>_thumbnail_<%= index %>" style="display: inline; cursor: pointer; width: 60px; height: 45px; margin: 0 5px 13px 0;"><%= image_tag(school.api_photos[index].try(:[], :url), width: '60px', height: '45px') %></div>
 		<% end %>
 	</div>
 	<script>	
@@ -14,7 +14,7 @@
 		});
 		<% school.api_photos.each_with_index do |url, index| %>
 			$("#<%= school.bps_id %>_thumbnail_<%= index %>").click(function(){
-		  	$('#main_image').html("<%= escape_javascript(image_tag(school.api_photos[index].try(:[], :url), width: '685px')) %>");
+		  	$('#main_gallery_image').html("<%= escape_javascript(image_tag(school.api_photos[index].try(:[], :url))) %>");
 		  	return false;
 			});
 		<% end %>
