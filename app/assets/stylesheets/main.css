@@ -1696,20 +1696,21 @@ footer.footer .logo {
   font-size: 15px;
 }
 .wrap .photos {
-  float: left;
-}
-.wrap .photos {
   max-width: 289px;
 }
-.wrap .photos .small {
+.photos {
   float: left;
-  width: 30.45%;
+}
+.photos .small {
+  float: left;
+  width: 90px;
   height: 66px;
-  margin-right: 4.15%;
+  margin-right: 9px;
+  margin-bottom: 10px;
   display: block;
   cursor: pointer;
 }
-.wrap .photos .small.last {
+.photos .small.last {
   margin-right: 0;
 }
 .wrap .photos .small img {
@@ -2063,9 +2064,10 @@ footer.footer .logo {
 }
 .wrap #school_list ul li .school_descrip .right_side .photos .small {
   float: left;
-  width: 30.45%;
+  width: 90px;
   height: 66px;
-  margin-right: 4.15%;
+  margin-right: 9px;
+  margin-bottom: 10px;
   display: block;
   cursor: pointer;
 }

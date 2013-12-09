@@ -1,0 +1,21 @@
+	<div class="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
+	<div class="photos">
+		<div id="main_image"><%= image_tag(school.api_photos[photo_index].try(:[], :url), width: '685px') %></div>
+		<% school.api_photos.each_with_index do |url, index| %>
+			<div id="<%= school.bps_id %>_thumbnail_<%= index %>" class="small"><%= image_tag(school.api_photos[index].try(:[], :url), width: '90px') %></div>
+		<% end %>
+	</div>
+	<script>	
+		$(".close_icon").click(function() {
+			$(".dialog_box").fadeOut("fast").removeClass("active");
+		});
+		$(".dialog_box").click(function(e){
+	  	e.stopPropagation();
+		});
+		<% school.api_photos.each_with_index do |url, index| %>
+			$("#<%= school.bps_id %>_thumbnail_<%= index %>").click(function(){
+		  	$('#main_image').html("<%= escape_javascript(image_tag(school.api_photos[index].try(:[], :url), width: '685px')) %>");
+		  	return false;
+			});
+		<% end %>
+	</script>

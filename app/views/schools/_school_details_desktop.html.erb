@@ -5,22 +5,54 @@
 			<div class="glass">
 				<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-29"></span>
 			</div>
-			<img src="<%= school.api_photos.try(:[], 0).try(:[], :url) %>" alt=""  />
+			<img id="<%= school.bps_id %>_photo_1" src="<%= school.api_photos.try(:[], 0).try(:[], :url) %>" alt=""  />
+			<script>
+				$("#<%= school.bps_id %>_photo_1").click(function(){
+			  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 0}) %>");
+			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
+			  	$('#dialog_box').show();
+			  	return false;
+				});
+			</script>
 		</div>
 		<% if school.api_photos.try(:[], 1).present? %>
-			<div class="second small">
+			<div id="<%= school.bps_id %>_photo_2" class="second small">
 				<img src="<%= school.api_photos[1].try(:[], :url) %>" alt="" />
 			</div>
+			<script>
+				$("#<%= school.bps_id %>_photo_2").click(function(){
+			  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 1}) %>");
+			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
+			  	$('#dialog_box').show();
+			  	return false;
+				});
+			</script>
 		<% end %>
 		<% if school.api_photos.try(:[], 2).present? %>
-			<div class="third small">
+			<div id="<%= school.bps_id %>_photo_3" class="third small">
 				<img src="<%= school.api_photos[2].try(:[], :url) %>" alt="" />
 			</div>
+			<script>
+				$("#<%= school.bps_id %>_photo_3").click(function(){
+			  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 2}) %>");
+			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
+			  	$('#dialog_box').show();
+			  	return false;
+				});
+			</script>
 		<% end %>
 		<% if school.api_photos.try(:[], 3).present? %>
-			<div class="fourth small last">
+			<div id="<%= school.bps_id %>_photo_4" class="fourth small last">
 				<img src="<%= school.api_photos[3].try(:[], :url) %>" alt="" />
 			</div>
+			<script>
+				$("#<%= school.bps_id %>_photo_4").click(function(){
+			  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 3}) %>");
+			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
+			  	$('#dialog_box').show();
+			  	return false;
+				});
+			</script>
 		<% end %>
 		<div class="clr"></div>
 	</div>
