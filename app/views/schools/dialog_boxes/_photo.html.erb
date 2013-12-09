@@ -2,7 +2,11 @@
 	<div class="photos">
 		<div id="main_gallery_image"><%= image_tag(school.api_photos[photo_index].try(:[], :url)) %></div>
 		<% school.api_photos.each_with_index do |url, index| %>
-			<div id="<%= school.bps_id %>_thumbnail_<%= index %>" style="display: inline; cursor: pointer; width: 60px; height: 45px; margin: 0 5px 13px 0;"><%= image_tag(school.api_photos[index].try(:[], :url), width: '60px', height: '45px') %></div>
+			<% if photo_index == index %>
+				<div id="<%= school.bps_id %>_thumbnail_<%= index %>" style="display: inline; cursor: pointer; width: 60px; height: 45px; margin: 0 5px 13px 0;"><%= image_tag(school.api_photos[index].try(:[], :url), width: '60px', height: '45px', class: 'thumbnail', style: 'border: 3px solid #fc5b00; margin: -3px;') %></div>
+			<% else %>
+				<div id="<%= school.bps_id %>_thumbnail_<%= index %>" style="display: inline; cursor: pointer; width: 60px; height: 45px; margin: 0 5px 13px 0;"><%= image_tag(school.api_photos[index].try(:[], :url), width: '60px', height: '45px', class: 'thumbnail') %></div>
+			<% end %>
 		<% end %>
 	</div>
 	<script>	
@@ -15,6 +19,9 @@
 		<% school.api_photos.each_with_index do |url, index| %>
 			$("#<%= school.bps_id %>_thumbnail_<%= index %>").click(function(){
 		  	$('#main_gallery_image').html("<%= escape_javascript(image_tag(school.api_photos[index].try(:[], :url))) %>");
+		  	$('.thumbnail').css('border','none').css('margin', '0px');
+		  	$('#<%= school.bps_id %>_thumbnail_<%= index %> img').css('margin','-3px');
+		  	$('#<%= school.bps_id %>_thumbnail_<%= index %> img').css('border','solid #fc5b00 3px');
 		  	return false;
 			});
 		<% end %>
