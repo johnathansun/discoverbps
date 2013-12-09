@@ -11,7 +11,7 @@
 	<div class="school_name select line">
 		<span class="middle">
 			<span class="sortable_school_name"><%= school.name %></span>
-			<% if current_student.sibling_school_ids.include?(school.bps_id) %>
+			<% if current_student.sibling_school_ids.present? && current_student.sibling_school_ids.include?(school.bps_id) %>
 				<span aria-hidden="true" class="select_icon icon-DBPS-Dev-Assets-SRG-12"></span>
 			<% end %>
 		</span>
