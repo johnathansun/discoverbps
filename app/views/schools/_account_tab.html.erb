@@ -115,6 +115,19 @@
 		var login_panel_open = false;
 		var signup_panel_open = false;
 
+		$('.account_box').hover(
+			function() {
+				$('.account_menu_box').show();
+			}, function() {
+				$('.account_menu_box').hide();
+				$("#login_panel").hide();
+				$('#signup_panel').hide();
+				$('#signup_error').hide();
+				$('#login_error').hide();
+				login_panel_open = false;
+				signup_panel_open = false;
+		});
+
 		$('#login_btn').click(function() {
 			if (login_panel_open) {
 				login_panel_open = false;
