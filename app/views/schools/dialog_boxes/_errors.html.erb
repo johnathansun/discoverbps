@@ -1,7 +1,9 @@
 <div class="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
 <!-- dialog select address matches -->
 <div class='content'>
-	<% if student.errors.present? %>
+	<% if @error_message.present? %>
+		<h3 style="color: red;"><%= @error_message %></h3>
+	<% elsif student.errors.present? %>
 		<h3>
 			Please complete the following <%= pluralize(student.errors.count, "field") %>:
 		</h3>

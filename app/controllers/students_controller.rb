@@ -41,7 +41,11 @@ class StudentsController < ApplicationController
         format.html { redirect_to address_verification_student_path(@student)}
       else
         if @addresses.blank?
-          @student.errors[:base] << "We couldn't find any addresses in Boston that match your search. Please try again."
+          if @errors.present?
+            @error_message = @errors
+          else
+            @error_message = "We couldn't find any addresses in Boston that match your search. Please try again."
+          end
         end
         format.js { render template: "students/errors" }
         flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
@@ -69,7 +73,11 @@ class StudentsController < ApplicationController
         format.html { redirect_to address_verification_student_path(@student)}
       else
         if @addresses.blank?
-          @student.errors[:base] << "We couldn't find any addresses in Boston that match your search. Please try again."
+          if @errors.present?
+            @error_message = @errors
+          else
+            @error_message = "We couldn't find any addresses in Boston that match your search. Please try again."
+          end
         end
         format.js { render template: "students/errors" }
         flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
@@ -196,7 +204,9 @@ class StudentsController < ApplicationController
   def bps_api_connector(url)
     response = Faraday.new(:url => url, :ssl => {:version => :SSLv3}).get
     if response.body.present?
-      MultiJson.load(response.body, :symbolize_keys => true)
+      MultiJson.load(response.body, :symbolize_keys => true) rescue {Error: ['The server responded with an error. Please try your search again later.']}
+    else
+      {Error: ['The server responded with an error. Please try your search again later.']}
     end
   end
 end
