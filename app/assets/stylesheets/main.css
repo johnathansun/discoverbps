@@ -1442,9 +1442,6 @@ footer.footer .logo {
   left: 0;
   z-index: 1;
 }
-.wrap .account_box:hover .account_menu_box {
-  display: block;
-}
 .wrap .account_box .btn_account {
   font-size: 17px;
   color: #ffffff;
@@ -1530,7 +1527,6 @@ footer.footer .logo {
   font-size: 13px;
   color: #ff0000;
 }
-.wrap .account_box .account_menu_box .action_box .actions span,
 .wrap .account_box .account_menu_box .action_box .actions label {
   display: inline-block;
   width: 100%;

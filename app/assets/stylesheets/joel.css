@@ -225,10 +225,6 @@ input, select {
 input {
 	-webkit-font-smoothing: antialiased;	
 }
-#google_translate_element {
-	width: 165px;
-	text-align: right;
-}
 #add_sibling {
   margin-left: 12px;
   cursor: pointer;
