@@ -24,26 +24,30 @@ class SchoolsController < ApplicationController
       end
 
       @home_schools = get_home_schools
+      if @home_schools.blank?
+        flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
+        render 'home', layout: 'home'
+      else
 
-
-      respond_to do |format|
-        format.html # index.html.erb
-        format.csv do
-          require 'csv'
-          csv_string = CSV.generate do |csv|
-            csv << ['Name', 'Distance from Home', 'Walk Time', 'Drive Time', 'Transportation Eligibility', 'Hours', 'Grades Offered', 'Before School Programs', 'After School Programs', 'Facilities', 'Partners', 'MCAS Tier', 'School Type', 'School Focus', 'Special Application', 'Uniform Policy', 'School Email']
-                      
-            counter = 0
-            @home_schools.each do |student_school|
-              school = student_school.school
-              counter += 1
-              csv << [ school.name, student_school.distance, student_school.walk_time, student_school.drive_time, school.transportation_eligibility, school.api_hours.try(:[], :schhours1), grade_levels_helper(school.grade_levels), school.api_basic_info.try(:[], :BeforeSchPrograms), school.api_basic_info.try(:[], :AfterSchPrograms), facilities_list_helper(school.api_facilities), partners_list_helper(school.api_partners), "Tier #{school.tier}", school.api_basic_info.try(:[], :SchoolType), school.api_description.try(:[], :schfocus), school.api_description.try(:[], :specialapplicationnarrative), school.api_description.try(:[], :uniformpolicy), school.api_basic_info.try(:[], :schemail) ]
+        respond_to do |format|
+          format.html # index.html.erb
+          format.csv do
+            require 'csv'
+            csv_string = CSV.generate do |csv|
+              csv << ['Name', 'Distance from Home', 'Walk Time', 'Drive Time', 'Transportation Eligibility', 'Hours', 'Grades Offered', 'Before School Programs', 'After School Programs', 'Facilities', 'Partners', 'MCAS Tier', 'School Type', 'School Focus', 'Special Application', 'Uniform Policy', 'School Email']
+                        
+              counter = 0
+              @home_schools.each do |student_school|
+                school = student_school.school
+                counter += 1
+                csv << [ school.name, student_school.distance, student_school.walk_time, student_school.drive_time, school.transportation_eligibility, school.api_hours.try(:[], :schhours1), grade_levels_helper(school.grade_levels), school.api_basic_info.try(:[], :BeforeSchPrograms), school.api_basic_info.try(:[], :AfterSchPrograms), facilities_list_helper(school.api_facilities), partners_list_helper(school.api_partners), "Tier #{school.tier}", school.api_basic_info.try(:[], :SchoolType), school.api_description.try(:[], :schfocus), school.api_description.try(:[], :specialapplicationnarrative), school.api_description.try(:[], :uniformpolicy), school.api_basic_info.try(:[], :schemail) ]
+              end
             end
-          end
 
-          send_data csv_string,
-                    :type => 'text/csv; charset=iso-8859-1; header=present',
-                    :disposition => "attachment; filename=#{current_student.first_name}s_eligible_schools.csv"
+            send_data csv_string,
+                      :type => 'text/csv; charset=iso-8859-1; header=present',
+                      :disposition => "attachment; filename=#{current_student.first_name}s_eligible_schools.csv"
+          end
         end
       end
     end
@@ -144,7 +148,7 @@ class SchoolsController < ApplicationController
     # saves the schools to student_schools, and fetches distance and walk/drive times from the Google Matrix API
     def get_home_schools
       if current_student.present? && current_student.street_number.present? && current_student.street_name.present? && current_student.zipcode.present?
-        logger.info "************ refreshing student_schools"
+        logger.info "************ fetching home schools"
         
         current_student.student_schools.clear
 
@@ -216,7 +220,7 @@ class SchoolsController < ApplicationController
     # saves the schools to student_schools, and fetches distance and walk/drive times from the Google Matrix API
     def get_zone_schools
       if current_student.present? && current_student.street_number.present? && current_student.street_name.present? && current_student.zipcode.present?
-        logger.info "************ refreshing student_schools"
+        logger.info "************ fetching zone schools"
   
         current_student.student_schools.clear
 
