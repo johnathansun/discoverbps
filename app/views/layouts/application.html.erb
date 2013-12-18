@@ -49,6 +49,12 @@
 
 		<%= yield %>
 
+		<script>
+			$('.goog-te-menu-value').click(function() {
+				ga('send', 'event', 'button', 'click', 'Translate Page');
+			});
+		</script>
+
 		<%= render partial: 'layouts/footer' %>
 		<%= render partial: 'layouts/analytics' %>
 

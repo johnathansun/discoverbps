@@ -52,7 +52,7 @@
 
 								<div id="address_matches" class='selection'>
 									<% @addresses.each_with_index do |address, index| %>
-										<%= render partial: 'schools/dialog_boxes/address', locals: {address: address, index: index} %>
+										<%= render partial: 'students/address', locals: {address: address, index: index} %>
 									<% end %>
 								</div>
 								<br/>

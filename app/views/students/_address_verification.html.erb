@@ -17,18 +17,21 @@
 
 		<div id="address_matches" class='selection'>
 			<% @addresses.each_with_index do |address, index| %>
-				<%= render partial: 'schools/dialog_boxes/address', locals: {address: address, index: index} %>
+				<%= render partial: 'students/address', locals: {address: address, index: index} %>
 			<% end %>
 		</div>
 		<br/>
-		<div class='btn'><%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit' %></div>
+		<div class='btn'><%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit', id: "address_verification_button" %></div>
 	<% end %>
 </div>
-<script>	
+<script>
 	$(".close_icon").click(function() {
 		$(".dialog_box").fadeOut("fast").removeClass("active");
 	});
 	$(".dialog_box").click(function(e){
   	e.stopPropagation();
+	});
+	$('#address_verification_button').on('click', function() {
+		ga('send', 'event', 'button', 'click', 'Address Verification Next Button (XHR)');
 	});
 </script>

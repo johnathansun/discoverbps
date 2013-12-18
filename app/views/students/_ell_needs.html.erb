@@ -12,16 +12,16 @@
 	<br />
 
 	<% if @student.iep_needs? %>
-		<%= link_to 'Next', iep_needs_student_path(@student), id: 'iep_button', class: 'orange_button next_button' %>
+		<%= link_to 'Next', iep_needs_student_path(@student), id: 'iep_button', class: 'orange_button next_button', id: 'ell_next_button' %>
 	<% else %>
-		<%= link_to 'Next', schools_path, id: 'schools_button', class: 'orange_button next_button' %>
+		<%= link_to 'Next', schools_path, id: 'schools_button', class: 'orange_button next_button', id: 'ell_next_button' %>
 	<% end %>
 
 </div>
 <script>
 	$('#iep_button').click(function(e){
 		e.preventDefault();
-		$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/iep_needs', locals: {student: @student}) %>");
+		$('#dialog_box').html("<%= escape_javascript(render partial: 'students/iep_needs', locals: {student: @student}) %>");
 	});
 
 	$('.next_button').click(function() {
@@ -34,5 +34,8 @@
 	});
 	$(".dialog_box").click(function(e){
   	e.stopPropagation();
+	});
+	$('#ell_next_button').on('click', function() {
+		ga('send', 'event', 'button', 'click', 'ELL Next Button (XHR)');
 	});
 </script>

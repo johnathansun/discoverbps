@@ -37,8 +37,13 @@
 							<p class="K">Please select from your previous searches:</p>
 							<ul class="horizontal_list">
 								<% for student in current_user_students %>
-									<li><%= link_to student.tab_name, schools_path(student: student.id), class: 'orange_button' %></li>
+									<li><%= link_to student.tab_name, schools_path(student: student.id), class: 'orange_button previous_student_search_button' %></li>
 								<% end %>
+								<script>
+									$('.previous_student_search_button').click(function() {
+										ga('send', 'event', 'button', 'click', 'Previous Student Search Button');
+									});
+								</script>
 								<li><%= button_to 'Clear Searches', {controller: 'students', action: 'delete_all', student_ids: current_user_students.collect {|x| x.id}}, method: :delete, id: 'delete_students_button', class: 'antialiased_button', confirm: 'Are you sure you want to clear all of your previous searches?' %></li>
 							</ul>
 							<div class='clr'></div>

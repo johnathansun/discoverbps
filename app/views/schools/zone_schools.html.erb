@@ -31,7 +31,7 @@
 			  	return false;
 				});
 				$(".add_child").click(function(){
-			  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/address_search') %>");
+			  	$('#dialog_box').html("<%= escape_javascript(render partial: 'students/address_search') %>");
 			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
 			  	$('#dialog_box').show();
 			  	return false;
@@ -138,8 +138,8 @@
 <script>
 	$( document ).ready(function() {
 		//Click on school name to open the full school description in the school line
-		$("#school_list li .li_frame > .school_name").click(
-			function() {
+		$("#school_list li .li_frame > .school_name").click(function() {
+			ga('send', 'event', 'button', 'click', 'Open Zone School Details');
 			$(this).parent().parent().addClass("descrip_open");
 			$(this).parent().parent().find(".school_descrip").toggle();
 			}

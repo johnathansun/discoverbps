@@ -102,161 +102,49 @@
 	<!--END  Address and zip info -->
 
 <!-- NEXT and Sibling school buttons -->
-<div id="sibling_search_one" class="form_line">
-	<% unless sibling_search == false %>
-		<div  id="sibling_school" class="bloc_6">
-			<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
-			<input id="sibling_school_one_autocomplete" name="[student]sibling_school_names[]" type="text" placeholder="Set Sibling's School" />
-			<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
-		</div>
-	<% end %>
-  <div id="add_child_two" class="add_child btn">
-  	<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-10"></span>
-    <span class="text">
-    	Add another child
-    </span>
-  </div>
-	<div class="clr"></div>
-</div>
-<script>
-	$("#add_child_two").click(function() {
-		$('#sibling_search_two').show();
-	});
-	$(function() {
-		var schoolNames = <%= raw School.all.collect {|x| x.name}.compact %>;
-		$( "#sibling_school_one_autocomplete" ).autocomplete({
-			source: schoolNames,
-			minLength: 2,
-			messages: {
-				noResults: '',
-				results: function() {}
-			}
-		});
-	});
-</script>
 
-<div id="sibling_search_two" class="form_line" style="display: none;">
-	<% unless sibling_search == false %>
-		<div  id="sibling_school" class="bloc_6">
-			<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
-			<input id="sibling_school_two_autocomplete" name="[student]sibling_school_names[]" type="text" placeholder="Set Sibling's School" />
-			<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
-		</div>
-	<% end %>
-  <div id="add_child_three" class="add_child btn">
-  	<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-10"></span>
-    <span class="text">
-    	Add another child
-    </span>
-  </div>
-	<div class="clr"></div>
-</div>
-<script>
-	$("#add_child_three").click(function() {
-		$('#sibling_search_three').show();
-	});
-	$(function() {
-		var schoolNames = <%= raw School.all.collect {|x| x.name}.compact %>;
-		$( "#sibling_school_two_autocomplete" ).autocomplete({
-			source: schoolNames,
-			minLength: 2,
-			messages: {
-				noResults: '',
-				results: function() {}
-			}
+<% (1..5).each do |row_number| %>
+	<div id="sibling_search_<%= row_number %>" class="form_line" style="display: <%= row_number == 1 ? 'block' : 'none' %>">
+		<% unless sibling_search == false %>
+			<div  id="sibling_school" class="bloc_6">
+				<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
+				<input id="sibling_school_<%= row_number %>_autocomplete" name="[student]sibling_school_names[]" type="text" placeholder="Set Sibling's School" />
+				<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
+			</div>
+		<% end %>
+		<% unless row_number == 5 %>
+		  <div id="add_child_<%= row_number + 1 %>" class="add_child btn">
+		  	<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-10"></span>
+		    <span class="text">
+		    	Add another child
+		    </span>
+		  </div>
+		<% end %>
+		<div class="clr"></div>
+	</div>
+	<script>
+		$("#add_child_<%= row_number + 1 %>").click(function() {
+			$('#sibling_search_<%= row_number + 1 %>').show();
 		});
-	});
-</script>
+		$(function() {
+			var schoolNames = <%= raw School.all.collect {|x| x.name}.compact %>;
+			$( "#sibling_school_<%= row_number %>_autocomplete" ).autocomplete({
+				source: schoolNames,
+				minLength: 2,
+				messages: {
+					noResults: '',
+					results: function() {}
+				}
+			});
+		});
+	</script>
+<% end %>
 
-<div id="sibling_search_three" class="form_line" style="display: none;">
-	<% unless sibling_search == false %>
-		<div  id="sibling_school" class="bloc_6">
-			<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
-			<input id="sibling_school_three_autocomplete" name="[student]sibling_school_names[]" type="text" placeholder="Set Sibling's School" />
-			<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
-		</div>
-	<% end %>
-  <div id="add_child_four" class="add_child btn">
-  	<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-10"></span>
-    <span class="text">
-    	Add another child
-    </span>
-  </div>
-	<div class="clr"></div>
-</div>
-<script>
-	$("#add_child_four").click(function() {
-		$('#sibling_search_four').show();
-	});
-	$(function() {
-		var schoolNames = <%= raw School.all.collect {|x| x.name}.compact %>;
-		$( "#sibling_school_three_autocomplete" ).autocomplete({
-			source: schoolNames,
-			minLength: 2,
-			messages: {
-				noResults: '',
-				results: function() {}
-			}
-		});
-	});
-</script>
-
-<div id="sibling_search_four" class="form_line" style="display: none;">
-	<% unless sibling_search == false %>
-		<div id="sibling_school" class="bloc_6">
-			<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
-			<input id="sibling_school_four_autocomplete" name="[student]sibling_school_names[]" type="text" placeholder="Set Sibling's School" />
-			<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
-		</div>
-	<% end %>
-  <div id="add_child_five" class="add_child btn">
-  	<span aria-hidden="true" class="icon icon-DBPS-Dev-Assets-SRG-10"></span>
-    <span class="text">
-    	Add another child
-    </span>
-  </div>
-	<div class="clr"></div>
-</div>
-<script>
-	$("#add_child_five").click(function() {
-		$('#sibling_search_five').show();
-	});
-	$(function() {
-		var schoolNames = <%= raw School.all.collect {|x| x.name}.compact %>;
-		$( "#sibling_school_four_autocomplete" ).autocomplete({
-			source: schoolNames,
-			minLength: 2,
-			messages: {
-				noResults: '',
-				results: function() {}
-			}
-		});
-	});
-</script>
-
-<div id="sibling_search_five" class="form_line" style="display: none;">
-	<% unless sibling_search == false %>
-		<div id="sibling_school" class="bloc_6">
-			<span aria-hidden="true" class="select_school_icon icon-DBPS-Dev-Assets-SRG-12"></span>
-			<input id="sibling_school_five_autocomplete" name="[student]sibling_school_names[]" type="text" placeholder="Set Sibling's School" />
-			<span aria-hidden="true" class="arrow icon-DBPS-Dev-Assets-SRG-41"></span>
-		</div>
-	<% end %>
-	<div class="clr"></div>
-</div>
-<script>
-	$(function() {
-		var schoolNames = <%= raw School.all.collect {|x| x.name}.compact %>;
-		$( "#sibling_school_five_autocomplete" ).autocomplete({
-			source: schoolNames,
-			minLength: 2,
-			messages: {
-				noResults: '',
-				results: function() {}
-			}
-		});
-	});
-</script>
 <div id="search_form_submit" class="bloc_5">
-	<%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit' %>
+	<%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit', id: 'home_search_button' %>
 </div>
+<script>
+	$('#home_search_button').on('click', function() {
+		ga('send', 'event', 'button', 'click', 'Home Search Button');
+	});
+</script>

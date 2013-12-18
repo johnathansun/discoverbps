@@ -8,7 +8,7 @@
 	<div class='tel'>617-635-8599</div>
 	<br />
 	<br />
-	<%= link_to 'Next', schools_path, id: 'next_button', class: 'orange_button' %>
+	<%= link_to 'Next', schools_path, id: 'next_button', class: 'orange_button', id: 'iep_next_button' %>
 </div>
 <script>
 	$('#next_button').click(function() {
@@ -20,5 +20,8 @@
 	});
 	$(".dialog_box").click(function(e){
   	e.stopPropagation();
+	});
+	$('#iep_next_button').on('click', function() {
+		ga('send', 'event', 'button', 'click', 'IEP Next Button (XHR)');
 	});
 </script>
