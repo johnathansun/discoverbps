@@ -46,11 +46,6 @@
 							<p><%= check_box_tag '[student]iep_needs', '1', @student.iep_needs %> My child has an Individualized Education Plan (IEP) for special needs</p>
 
 							<div class='btn'><%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit', id: 'special_needs_next_button' %></div>
-							<script>
-								$('#special_needs_next_button').on('click', function() {
-									ga('send', 'event', 'button', 'click', 'Special Needs Next Button (HTML)');
-								});
-							</script>
 						<% end %>
 					</div>
 									 
