@@ -56,8 +56,13 @@
 									<% end %>
 								</div>
 								<br/>
-								<div class='btn'><%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit' %></div>
+								<div class='btn'><%= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit', id: 'address_verification_button' %></div>
 							<% end %>
+							<script>
+								$('#address_verification_button').on('click', function() {
+									ga('send', 'event', 'button', 'click', 'Address Verification Next Button (HTML)');
+								});
+							</script>
 						<% else %>
 							<p class="red">We couldn't find an address that matched your entry. Please try again.</p>
 

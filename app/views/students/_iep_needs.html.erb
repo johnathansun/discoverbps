@@ -8,11 +8,11 @@
 	<div class='tel'>617-635-8599</div>
 	<br />
 	<br />
-	<%= link_to 'Next', schools_path, id: 'next_button', class: 'orange_button', id: 'iep_next_button' %>
+	<%= link_to 'Next', schools_path, id: 'iep_next_button', class: 'orange_button' %>
 </div>
 <script>
-	$('#next_button').click(function() {
-		$('#next_button').text('Working...');
+	$('#iep_next_button').click(function() {
+		$('#iep_next_button').text('Working...');
 	});
 
 	$(".close_icon").click(function() {
