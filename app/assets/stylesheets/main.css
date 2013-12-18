@@ -684,6 +684,21 @@ body {
   background: #0077cf;
   -webkit-font-smoothing: antialiased;
 }
+input {
+  -webkit-font-smoothing: antialiased;  
+}
+h1 {
+  -webkit-font-smoothing: antialiased;  
+}
+h2 {
+  -webkit-font-smoothing: antialiased;  
+}
+h3 {
+  -webkit-font-smoothing: antialiased;  
+}
+h4 {
+  -webkit-font-smoothing: antialiased;  
+}
 sup {
   font-size: .475em;
   line-height: 0;
@@ -2690,7 +2705,7 @@ footer.footer .logo {
 .wrap .search .search_section .content_left {
   /*width: 815px;*/
 
-  margin-right: 150px;
+  margin-right: 160px;
   border-top: 1px solid #fff;
 }
 .wrap .search .search_section .content_left a.K {

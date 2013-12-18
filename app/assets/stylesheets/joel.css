@@ -222,9 +222,6 @@ input, select {
 	margin-left: 10px;
 	width: 150px;
 }
-input {
-	-webkit-font-smoothing: antialiased;	
-}
 #add_sibling {
   margin-left: 12px;
   cursor: pointer;
