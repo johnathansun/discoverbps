@@ -12,9 +12,9 @@
 	<br />
 
 	<% if @student.iep_needs? %>
-		<%= link_to 'Next', iep_needs_student_path(@student), id: 'iep_button ell_next_button', class: 'orange_button next_button' %>
+		<%= link_to 'Next', iep_needs_student_path(@student), id: 'iep_button', class: 'orange_button next_button' %>
 	<% else %>
-		<%= link_to 'Next', schools_path, id: 'schools_button ell_next_button', class: 'orange_button next_button' %>
+		<%= link_to 'Next', schools_path, id: 'schools_button', class: 'orange_button next_button' %>
 	<% end %>
 
 </div>
@@ -27,7 +27,6 @@
 	$('.next_button').click(function() {
 		$('.next_button').text('Working...');
 	});
-	
 
 	$(".close_icon").click(function() {
 		$(".dialog_box").fadeOut("fast").removeClass("active");
@@ -35,7 +34,7 @@
 	$(".dialog_box").click(function(e){
   	e.stopPropagation();
 	});
-	$('#ell_next_button').on('click', function() {
+	$('.next_button').on('click', function() {
 		ga('send', 'event', 'button', 'click', 'ELL Next Button (XHR)');
 	});
 </script>
