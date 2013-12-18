@@ -16,6 +16,11 @@
 			<% end %>
 		</span>
 	</div>
+	<script>
+		$("#school_list li .li_frame > .school_name").click(function() {
+			ga('send', 'event', 'button', 'click', 'Open School Details');
+		});
+	</script>
 	
 	<!-- add class "open" to show "Walk time info" and "Drive time info"-->
 	<div class="box line getting_there ">
