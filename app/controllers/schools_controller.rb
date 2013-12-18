@@ -25,7 +25,7 @@ class SchoolsController < ApplicationController
 
       @home_schools = get_home_schools
       if @home_schools.blank?
-        flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
+        flash[:alert] = 'The server responded with an error. Please try your search again later.'
         render 'home', layout: 'home'
       else
 
