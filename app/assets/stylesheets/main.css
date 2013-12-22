@@ -446,6 +446,7 @@ you can use the generic selector below, but it's slower:
 .icon-DBPS-Dev-Assets-SRG-06,
 .icon-DBPS-Dev-Assets-arrow-up,
 .icon-DBPS-Dev-Assets-arrow-down,
+.icon-DBPS-Preferences-Icons-20130930-SRG_exam_school,
 .icon-DBPS-Preferences-Icons-20130930-SRG_walktime,
 .icon-DBPS-Preferences-Icons-20130930-SRG_sports,
 .icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours,
@@ -611,7 +612,9 @@ you can use the generic selector below, but it's slower:
   content: "\e00d";
 }
 
-
+.icon-DBPS-Preferences-Icons-20130930-SRG_exam_school:before {
+  content: "\e600";
+}
 .icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners:before {
   content: "\e03f";
 }
