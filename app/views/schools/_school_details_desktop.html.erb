@@ -75,7 +75,7 @@
 		<%= school.api_basic_info.try(:[], :campus1address1) %>, <%= school.api_basic_info.try(:[], :campus1city) %> <%= school.api_basic_info.try(:[], :campus1zip) %>
 		<br />
 		<% if school.api_basic_info.try(:[], :SchLink).present? %>
-			<%= link_to 'School Website', school.api_basic_info.try(:[], :SchLink), class: "text_B0", title: "School Website", target: "_blank" %>
+			<%= link_to 'School Website', 'http://bostonpublicschools.org/Page/628', class: "text_B0", title: "School Website", target: "_blank" %>
 			<br/>			
 		<% end %>
 		<%= mail_to school.api_basic_info.try(:[], :schemail), school.api_basic_info.try(:[], :schemail), class: "text_B0", title: "Email Address" %>
