@@ -1,8 +1,5 @@
 require 'json'
 
-root_url        = "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/"
-school_year     = "2014"
-
 task :update_schools => [
   :update_basic_info,
   :update_awards,
