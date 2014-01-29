@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+echo "===> Setting up the DB."
+rake db:create:all
+rake db:schema:load
+
+rake import_schools
+rake update_schools
+
+echo "===> Setting up the test DB."
+rake db:test:prepare
+rake db:test:load
