@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery.ui.all
 //= require jquery_ujs
-//= require jquery.arrayUtilities.min
 //= require jquery.tinysort.min
 //= require modernizr-2.0.6.min
 //= require_tree .

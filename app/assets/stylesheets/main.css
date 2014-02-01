@@ -1904,6 +1904,12 @@ footer.footer .logo {
   position: relative;
   padding-bottom: 40px;
 }
+.wrap #school_list #sortable_eligibility_column {
+  width: 100px;
+}
+.wrap #school_list #sortable_hours_column {
+  width: 140px;
+}
 .wrap #school_list .shadow {
   width: 24px;
   position: absolute;
@@ -1992,6 +1998,9 @@ footer.footer .logo {
 .wrap #school_list ul li .getting_there {
   font-size: 13px;
 }
+.wrap #school_list ul li .eligibility {
+  width: 100px;
+}
 .wrap #school_list ul li .your_fit_icon {
   display: table;
 }
@@ -2031,7 +2040,7 @@ footer.footer .logo {
 }
 .wrap #school_list ul li .your_fit_icon,
 .wrap #school_list ul li .your_fit_descrip {
-  width: 120px;
+  width: 200px;
 }
 .wrap #school_list ul li .your_fit_icon .icon,
 .wrap #school_list ul li .your_fit_descrip .icon {
@@ -3704,6 +3713,9 @@ ie6 .print1 .wrap {
   }
   .wrap #school_list ul li .box {
     width: 148px;
+  }
+  .wrap #school_list ul li .eligibility {
+    width: 100px;
   }
   .wrap #school_list .shadow {
     display: none;
