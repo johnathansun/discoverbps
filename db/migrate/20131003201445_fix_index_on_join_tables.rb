@@ -1,6 +1,5 @@
 class FixIndexOnJoinTables < ActiveRecord::Migration
   def up
-  	drop_table :schools_students
   	drop_table :preferences_students
 
   	create_table :schools_students, :id => false do |t|
