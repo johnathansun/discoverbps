@@ -12,7 +12,7 @@ api_schools.each {|x| School.create(bps_id: x[:sch], api_basic_info: x, name: x[
 
 ###### :api_basic_info (convert to hash)
 
-School.all.each {|x| x.update_attributes(api_basic_info: MultiJson.load(Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchool?schyear=2014&sch=#{x.bps_id}", :ssl => {:version => :SSLv3}).get.body, :symbolize_keys => true)) if Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchool?schyear=2014&sch=#{x.bps_id}", :ssl => {:version => :SSLv3}).get.body.present?}    
+School.all.each {|x| x.update_attributes(api_basic_info: MultiJson.load(Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchool?schyear=2014&sch=#{x.bps_id}", :ssl => {:version => :SSLv3}).get.body, :symbolize_keys => true).try(:[], 0)) if Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchool?schyear=2014&sch=#{x.bps_id}", :ssl => {:version => :SSLv3}).get.body.present?}
 
 ###### :api_awards
 
@@ -20,11 +20,11 @@ School.all.each {|x| x.update_attributes(api_awards: MultiJson.load(Faraday.new(
 
 ###### :api_description (convert to hash)
 
-School.all.each {|x| x.update_attributes(api_description: MultiJson.load(Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolDescriptions?schyear=2014&sch=#{x.bps_id}&TranslationLanguage=", :ssl => {:version => :SSLv3}).get.body, :symbolize_keys => true)) if Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolDescriptions?schyear=2014&sch=#{x.bps_id}&TranslationLanguage=", :ssl => {:version => :SSLv3}).get.body.present?}
+School.all.each {|x| x.update_attributes(api_description: MultiJson.load(Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolDescriptions?schyear=2014&sch=#{x.bps_id}&TranslationLanguage=", :ssl => {:version => :SSLv3}).get.body, :symbolize_keys => true).try(:[], 0)) if Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolDescriptions?schyear=2014&sch=#{x.bps_id}&TranslationLanguage=", :ssl => {:version => :SSLv3}).get.body.present?}
 
 ###### :api_facilities (convert to hash)
 
-School.all.each {|x| x.update_attributes(api_facilities: MultiJson.load(Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolFacilities?schyear=2014&sch=#{x.bps_id}", :ssl => {:version => :SSLv3}).get.body, :symbolize_keys => true)) if Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolFacilities?schyear=2014&sch=#{x.bps_id}", :ssl => {:version => :SSLv3}).get.body.present?}
+School.all.each {|x| x.update_attributes(api_facilities: MultiJson.load(Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolFacilities?schyear=2014&sch=#{x.bps_id}", :ssl => {:version => :SSLv3}).get.body, :symbolize_keys => true).try(:[], 0)) if Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolFacilities?schyear=2014&sch=#{x.bps_id}", :ssl => {:version => :SSLv3}).get.body.present?}
 
 ###### :api_grades
 
@@ -32,7 +32,7 @@ School.all.each {|x| x.update_attributes(api_grades: MultiJson.load(Faraday.new(
 
 ###### :api_hours (convert to hash)
 
-School.all.each {|x| x.update_attributes(api_hours: MultiJson.load(Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolHours?schyear=2014&sch=#{x.bps_id}&TranslationLanguage=", :ssl => {:version => :SSLv3}).get.body, :symbolize_keys => true)) if Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolHours?schyear=2014&sch=#{x.bps_id}&TranslationLanguage=", :ssl => {:version => :SSLv3}).get.body.present?}
+School.all.each {|x| x.update_attributes(api_hours: MultiJson.load(Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolHours?schyear=2014&sch=#{x.bps_id}&TranslationLanguage=", :ssl => {:version => :SSLv3}).get.body, :symbolize_keys => true).try(:[], 0)) if Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolHours?schyear=2014&sch=#{x.bps_id}&TranslationLanguage=", :ssl => {:version => :SSLv3}).get.body.present?}
 
 ###### :api_languages
 
@@ -48,7 +48,7 @@ School.all.each {|x| x.update_attributes(api_photos: MultiJson.load(Faraday.new(
 
 ###### :api_sports (convert to hash
 
-School.all.each {|x| x.update_attributes(api_sports: MultiJson.load(Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolSports?schyear=2014&sch=#{x.bps_id}", :ssl => {:version => :SSLv3}).get.body, :symbolize_keys => true)) if Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolSports?schyear=2014&sch=#{x.bps_id}", :ssl => {:version => :SSLv3}).get.body.present?}
+School.all.each {|x| x.update_attributes(api_sports: MultiJson.load(Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolSports?schyear=2014&sch=#{x.bps_id}", :ssl => {:version => :SSLv3}).get.body, :symbolize_keys => true).try(:[], 0)) if Faraday.new(:url => "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetSchoolSports?schyear=2014&sch=#{x.bps_id}", :ssl => {:version => :SSLv3}).get.body.present?}
 
 
 
