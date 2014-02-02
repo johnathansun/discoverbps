@@ -795,7 +795,8 @@ strong {
   /*font-weight: inherit;*/
 }
 /* !TITLE ELEMENTS
----------------------------------------------- */h1 {
+---------------------------------------------- */
+h1 {
   font-weight: 400;
   font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
 }
@@ -805,9 +806,11 @@ h2 {
 }
 h3 {
   font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+  font-weight: 400;
 }
 h4 {
   font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+  font-weight: 400;
 }
 .titre,
 .titre1,
@@ -826,6 +829,7 @@ h4 {
 /* Base shared Layout */
 body {
   font-size: 14px;
+  font-weight: 200;
 }
 * {
   margin: 0;

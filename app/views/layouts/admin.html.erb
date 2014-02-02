@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="ie6 deprecated" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 deprecated" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 deprecated" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9 " lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<html>
+	<head>
+	  <title>Discover BPS</title>
+		<meta charset="utf-8">
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+		<meta name="google-translate-customization" content="aa683e7af7847f35-9a501f4011b13f8c-g70067f7b977b09c6-13"></meta>
+		<meta name="viewport" content=" initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--[if lte IE 7]><script src="stylesheets/lte-ie7.js"></script><![endif]-->
+
+		<!-- Selectivizr (DOES NOT WORK WITH CSS FILE + LESS | DEACTIVATE CSS FILE) = -->
+			<!--[if lte IE 8]>
+				<link rel="stylesheet" href="stylesheets/css/ie.css" />
+				<script src="js/libs/selectivizr-1.0.2.min.js"></script>
+			<![endif]--> 
+			
+		<!-- Deprecated IEs scripts & stylesheets =================== -->	
+		 <!-- Chrome Frame for IE6 and under -->
+			<!--[if lte IE 6 ]>
+			  <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+			  <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+			<![endif]-->
+
+		<!-- script pour Typekit  =================== -->
+			<!--<script type="text/javascript" src="//use.typekit.net/_______.js"></script>
+			<script type="text/javascript">try{Typekit.load();}catch(e){}</script>-->
+			
+		<!-- font-icons-->
+		<!--[if lte IE 7]><script src="lte-ie7.js"></script><![endif]-->
+	  <%= stylesheet_link_tag    "application", :media => "all" %>
+	  <%= javascript_include_tag "application" %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body class="standard one admin">
+		<div class="wrap" style="margin-top: 10px; margin-bottom: 15px; ">
+			<div style="font-size: 3em; color: #0077cf; display: inline; margin-left: -23px;" >
+				<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-01"></span>
+			</div>
+			<div style="float: right;">
+				<%= link_to 'Students', admin_students_path %> | <%= link_to 'Schools', admin_schools_path %> | <%= link_to 'Preferences', admin_preferences_path %> | <%= link_to 'Users', admin_users_path %>
+			</div>
+		</div>
+		<%= yield %>
+
+		<%= render partial: 'layouts/analytics' %>
+
+	</body>
+</html>

@@ -226,3 +226,33 @@ input, select {
   margin-left: 12px;
   cursor: pointer;
 }
+
+body.admin {
+	background-color: white;
+	font-family: helvetica, arial, sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+
+	a {
+		color: #0077cf;
+		text-decoration: none;
+	}
+	a:hover {
+		color: #0077cf;
+		text-decoration: underline;
+	}
+
+	h1 { font-size: 2.5em; margin-bottom: .1em; }
+	h2 { font-size: 2.2em; margin-bottom: .5em; }
+	h3 { font-size: 1.7em; margin-bottom: .5em; }
+	h4 { font-size: 1.2em; }
+
+	table {
+		td { padding-top: 5px;}
+	}
+
+	ul.with_bullets {
+		list-style: disc inside none; 
+		margin-left: 20px;
+	}	
+}

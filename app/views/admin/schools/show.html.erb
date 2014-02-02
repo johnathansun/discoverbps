@@ -1,0 +1,401 @@
+<div class="wrap global_map" style="margin-bottom: 30px;">
+	<!-- zone where google map in integrated -->
+	<div id='googleMap' style="width: 100%;"></div>
+	<!-- END zone where google map in integrated -->
+
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
+
+	<script>
+		function initialize(){
+			$('.global_map').css('height', ($(window).height() / 2.5) + 'px' );
+			$('#googleMap').css('height', ($(window).height() / 2.5) + 'px' );
+
+		  // Create an array of styles.
+		  var map_styles = [
+		    {
+		    "featureType": "poi.attraction",
+		    "stylers": [
+		      { "visibility": "off" }
+		    ]
+		    },{
+		      "featureType": "poi.business",
+		      "stylers": [
+		        { "visibility": "off" }
+		      ]
+		    },{
+		      "featureType": "poi.place_of_worship",
+		      "stylers": [
+		        { "visibility": "off" }
+		      ]
+		    },{
+		      "featureType": "transit.line",
+		      "stylers": [
+		        { "visibility": "off" }
+		      ]
+		    },{
+		      "featureType": "poi.attraction",
+		      "stylers": [
+		        { "visibility": "off" }
+		      ]
+		    },{
+		      "featureType": "poi.medical",
+		      "stylers": [
+		        { "visibility": "off" }
+		      ]
+		    },{
+		      "featureType": "poi.school",
+		      "stylers": [
+		        { "visibility": "off" }
+		      ]
+		    },{
+		      "featureType": "landscape.man_made",
+		      "stylers": [
+		        { "visibility": "off" }
+		      ]
+		    },{
+		      "featureType": "poi.park",
+		      "elementType": "geometry",
+		      "stylers": [
+		        { "lightness": 41 }
+		      ]
+		    },{
+		      "featureType": "transit.station.airport",
+		      "stylers": [
+		        { "lightness": 49 }
+		      ]
+		    },{
+		      "featureType": "administrative",
+		      "elementType": "labels.text.fill",
+		      "stylers": [
+		        { "saturation": -100 },
+		        { "lightness": 24 }
+		      ]
+		    },{
+		      "featureType": "road.highway",
+		      "stylers": [
+		        { "lightness": 26 }
+		      ]
+		    },{
+		      "featureType": "road.arterial",
+		      "elementType": "geometry",
+		      "stylers": [
+		        { "visibility": "simplified" },
+		        { "color": "#d6cfc6" },
+		        { "lightness": 43 }
+		      ]
+		    },{
+		      "featureType": "road.local",
+		      "elementType": "geometry.fill",
+		      "stylers": [
+		        { "color": "#d6cfc6" },
+		        { "lightness": 42 }
+		      ]
+		    },{
+		      "featureType": "road.local",
+		      "elementType": "geometry.stroke",
+		      "stylers": [
+		        { "visibility": "off" }
+		      ]
+		    },{
+		      "featureType": "road.arterial",
+		      "elementType": "geometry.stroke",
+		      "stylers": [
+		        { "visibility": "off" }
+		      ]
+		    },{
+		      "featureType": "road.arterial",
+		      "elementType": "geometry.fill",
+		      "stylers": [
+		        { "visibility": "on" }
+		      ]
+		    },{
+		      "featureType": "poi.park",
+		      "elementType": "labels",
+		      "stylers": [
+		        { "visibility": "off" }
+		      ]
+		    },{
+		      "featureType": "transit.station.rail",
+		      "elementType": "labels",
+		      "stylers": [
+		        { "saturation": -73 },
+		        { "lightness": 27 }
+		      ]
+		    },{
+		      "featureType": "road.highway",
+		      "elementType": "geometry.stroke",
+		      "stylers": [
+		        { "visibility": "off" }
+		      ]
+		    },{
+		      "featureType": "road.highway",
+		      "elementType": "geometry.fill",
+		      "stylers": [
+		        { "visibility": "on" },
+		        { "lightness": -5 }
+		      ]
+		    },{
+		      "featureType": "administrative.land_parcel",
+		      "stylers": [
+		        { "visibility": "off" }
+		      ]
+		    },{
+		    }
+		  ];
+
+		  var Marker = function(options) {
+		    google.maps.Marker.apply(this, arguments);
+		    if (options.label) {
+		      this.MarkerLabel = new MarkerLabel({
+		        map: this.map,
+		        marker: this,
+		        text: options.label
+		      });
+		      this.MarkerLabel.bindTo('position', this, 'position');
+		    }
+		  };
+
+		  // Define Marker Shapes
+		  var MAP_PIN = 'M 314.692,279.496c0,80.988-65.892,146.88-146.88,146.88S 20.933,360.496, 20.933,279.496c0-74.868, 56.364-136.704, 128.88-145.62 l0-144.252 l 36,0 L 185.813,133.876 C 258.317,142.792, 314.692,204.64, 314.692,279.496z';
+
+		  // Create Custom Marker Object
+		  Marker.prototype = new google.maps.Marker();
+
+		  // Custom Marker SetMap
+		  Marker.prototype.setMap = function() {
+		    google.maps.Marker.prototype.setMap.apply(this, arguments);
+		    (this.MarkerLabel) && this.MarkerLabel.setMap.apply(this.MarkerLabel, arguments);
+		  };
+		   
+		  // Marker Label Overlay
+		  var MarkerLabel = function(options) {
+		    var self = this;
+		    this.setValues(options);
+		    
+		    // Create the label container
+		    this.div = document.createElement('div');
+		    this.div.className = 'marker-label';
+		    var span = document.createElement('span');
+		    span.className = "marker-icon";
+		    this.div.appendChild(span);
+		   
+		    // Trigger the marker click handler if clicking on the label
+		    google.maps.event.addDomListener(this.div, 'click', function(e){
+		      (e.stopPropagation) && e.stopPropagation();
+		      google.maps.event.trigger(self.marker, 'click');
+		    });
+		  };
+
+		  // Create MarkerLabel Object
+		  MarkerLabel.prototype = new google.maps.OverlayView;
+
+		  // Marker Label onAdd
+		  MarkerLabel.prototype.onAdd = function() {
+				var pane = this.getPanes().overlayImage.appendChild(this.div);
+				var self = this;
+				this.listeners = [
+					google.maps.event.addListener(this, 'position_changed', function() { self.draw(); }),
+					google.maps.event.addListener(this, 'text_changed', function() { self.draw(); }),
+					google.maps.event.addListener(this, 'zindex_changed', function() { self.draw(); })
+				];
+			};
+		   
+		  // Marker Label onRemove
+		  MarkerLabel.prototype.onRemove = function() {
+		  	this.div.parentNode.removeChild(this.div);
+		  	for (var i = 0, I = this.listeners.length; i < I; ++i) {
+		  		google.maps.event.removeListener(this.listeners[i]);
+		  	}
+		  };
+		   
+		  // Implement draw
+		  MarkerLabel.prototype.draw = function() {
+		  	var projection = this.getProjection();
+		  	var position = projection.fromLatLngToDivPixel(this.get('position'));
+		  	var div = this.div;
+		  	div.style.left = position.x + 'px';
+		  	div.style.top = position.y + 'px';
+		  	div.style.display = 'block';
+		  	div.style.zIndex = this.get('zIndex'); //ALLOW LABEL TO OVERLAY MARKER
+		  	this.div.innerHTML = this.get('text').toString();
+		  };
+
+		  // Create a new StyledMapType object, passing it the array of styles,
+			// as well as the name to be displayed on the map type control.
+			var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});	
+			var latlngbounds = new google.maps.LatLngBounds();
+			<% if @school.latitude.present? && @school.longitude.present? && @school.latitude != 0 && @school.longitude != 0 %>
+	      var myLatLng =  new google.maps.LatLng(<%= @school.latitude %>,<%= @school.longitude %>);
+	    <% else %>
+	      var myLatLng = new google.maps.LatLng(42.3581,-71.0636);
+	    <% end %>
+			var mapProp = {
+				center: myLatLng,
+				zoom: 14,
+				panControl: true,
+				zoomControl: true,
+				mapTypeControl: false,
+				scaleControl: false,
+				draggable: true,
+				scrollwheel: false,
+				streetViewControl: false,
+				overviewMapControl: false,
+
+				mapTypeControlOptions: {
+				  mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+				}
+			};
+
+			var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+
+			<% if @school.latitude.present? && @school.longitude.present? %>
+				var coordinates = new google.maps.LatLng(<%= @school.latitude %>, <%= @school.longitude %>);
+				latlngbounds.extend(coordinates);
+				var image = {
+					url: '/assets/map_pins/DBPS_MapPins_Medium_Blue_1.png',
+					size: new google.maps.Size(19, 29),
+					origin: new google.maps.Point(0, 0),
+					anchor: new google.maps.Point(0, 0)
+				};
+				var marker = new google.maps.Marker({
+					position: coordinates,
+					icon: image,
+					map: map,
+					title: '<%= escape_javascript(@school.name) %>'
+				});
+				var infowindow = new google.maps.InfoWindow({});
+				infowindow.setContent('<div><h4><%= @school.name %></h4><%= @school.api_basic_info.try(:[], :campus1address1) %><br /><%= @school.api_basic_info.try(:[], :campus1city) %>, <%= @school.api_basic_info.try(:[], :campus1state) %>');
+				infowindow.open(map,marker);
+			<% end %>
+
+			//Associate the styled map with the MapTypeId and set it to display.
+
+			map.mapTypes.set('map_style', styledMap);
+			map.setMapTypeId('map_style');
+		}
+				
+		google.maps.event.addDomListener(window, 'load', initialize);
+
+	</script>
+	<!--END script to integrat and personnalize google map-->
+</div>
+
+<div class="wrap">
+
+	<h1><%= @school.bps_id %> &mdash; <%= @school.name %></h1>
+	<p><strong>Last Updated:</strong> <%= @school.updated_at %> EST</p>
+
+	<% if @school.api_basic_info.present? %>
+		<h3>Basic Info</h3>
+		<ul class="with_bullets">
+			<% @school.api_basic_info.each_pair do |key, value| %>
+				<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
+			<% end %>
+		</ul>
+	<% else %>
+		<p style="margin-left: 20px;">[ No data ]</p>
+	<% end %>
+
+	<h3>Description</h3>
+	<% if @school.api_description.present? %>
+		<ul class="with_bullets">
+			<% @school.api_description.each_pair do |key, value| %>
+				<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
+			<% end %>
+		</ul>
+	<% else %>
+		<p style="margin-left: 20px;">[ No data ]</p>
+	<% end %>
+
+	<% if @school.api_awards.present? %>
+		<h3>Awards</h3>
+		<ul class="with_bullets">
+			<% @school.api_awards[0].each_pair do |key, value| %>
+				<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
+			<% end %>
+		</ul>
+	<% else %>
+		<p style="margin-left: 20px;">[ No data ]</p>
+	<% end %>
+
+	<h3>Extra Curricular</h3>
+	<% if @school.api_extra_curricular.present? %>
+		<ul class="with_bullets">
+			<% @school.api_extra_curricular[0].each_pair do |key, value| %>
+				<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
+			<% end %>
+		</ul>
+	<% else %>
+		<p style="margin-left: 20px;">[ No data ]</p>
+	<% end %>
+
+	<h3>Facilities</h3>
+	<% if @school.api_facilities.present? %>
+		<ul class="with_bullets">
+			<% @school.api_facilities.each_pair do |key, value| %>
+				<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
+			<% end %>
+		</ul>
+	<% else %>
+		<p style="margin-left: 20px;">[ No data ]</p>
+	<% end %>
+
+	<h3>Grades</h3>
+	<% if @school.api_grades.present? %>
+		<ul class="with_bullets">
+			<% @school.api_grades[0].each_pair do |key, value| %>
+				<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
+			<% end %>
+		</ul>
+	<% else %>
+		<p style="margin-left: 20px;">[ No data ]</p>
+	<% end %>
+
+	<h3>Languages</h3>
+	<% if @school.api_languages.present? %>
+		<ul class="with_bullets">
+			<% @school.api_languages[0].each_pair do |key, value| %>
+				<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
+			<% end %>
+		</ul>
+	<% else %>
+		<p style="margin-left: 20px;">[ No data ]</p>
+	<% end %>
+
+	<h3>Partners</h3>
+	<% if @school.api_partners.present? %>
+		<ul class="with_bullets">
+			<% @school.api_partners[0].each_pair do |key, value| %>
+				<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
+			<% end %>
+		</ul>
+	<% else %>
+		<p style="margin-left: 20px;">[ No data ]</p>
+	<% end %>
+
+	<h3>Sports</h3>
+	<% if @school.api_sports.present? %>
+		<ul class="with_bullets">
+			<% @school.api_sports.each_pair do |key, value| %>
+				<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
+			<% end %>
+		</ul>
+	<% else %>
+		<p style="margin-left: 20px;">[ No data ]</p>
+	<% end %>
+
+	<h3>Photos</h3>
+	<% if @school.api_photos.present? %>
+		<ul class="with_bullets">
+			<% @school.api_photos.each do |photo| %>
+				<li>
+					<%= link_to photo[:url], photo[:url] %>
+				</li>
+			<% end %>
+		</ul>
+	<% end %>
+
+
+
+</div>

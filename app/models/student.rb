@@ -30,6 +30,14 @@ class Student < ActiveRecord::Base
   	end
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def full_address
+    "#{street_number} #{street_name} #{zipcode}"
+  end
+
 private
 
   def format_grade_level

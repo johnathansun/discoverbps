@@ -25,6 +25,19 @@ DiscoverbpsV2::Application.routes.draw do
     get 'compare', on: :collection
   end
 
+  namespace :admin do
+    root :to => "students#index"
+    resources :preferences do
+      post :sort, on: :collection
+    end
+    resources :preference_categories do
+      post :sort, on: :collection
+    end
+    resources :schools
+    resources :students
+    resources :users
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

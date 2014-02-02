@@ -1,0 +1,7 @@
+<div class="wrap">
+	<h1 style="font-size: 4em; font-family: helvetica, arial, sans-serif; font-weight: 200;"><%= number_with_delimiter(@students.count) %><span style="font-size: 24px;"> searches</span></h1>
+	<% for student in @students %>
+		<h4><%= link_to student.full_name, admin_student_path(student) %></h4>
+	<% end %>
+	<%= will_paginate @students, :param_name => 'student' %>
+</div>

@@ -1,0 +1,2 @@
+module Admin::PreferenceCategoriesHelper
+end
