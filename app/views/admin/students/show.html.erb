@@ -1,14 +1,14 @@
 <div class="wrap global_map" style="margin-bottom: 30px;">
 	<!-- zone where google map in integrated -->
-	<div id='googleMap' style="width: 100%;"></div>
+	<div id='map-canvas' style="width: 100%;"></div>
 	<!-- END zone where google map in integrated -->
 
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
 
 	<script>
 		function initialize(){
-			$('.global_map').css('height', ($(window).height() / 3) + 'px' );
-			$('#googleMap').css('height', ($(window).height() / 3) + 'px' );
+			$('.global_map').css('height', ($(window).height() / 2.5) + 'px' );
+			$('#map-canvas').css('height', ($(window).height() / 2.5) + 'px' );
 
 			// Create an array of styles.
 			var map_styles = [
@@ -247,7 +247,7 @@
 				}
 			};
 
-			var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+			var map = new google.maps.Map(document.getElementById("map-canvas"),mapProp);
 
 			<% if @student.latitude.present? && @student.longitude.present? && @student.latitude != 0 && @student.longitude != 0 %>
 				var coordinates = new google.maps.LatLng(<%= @student.latitude %>, <%= @student.longitude %>);

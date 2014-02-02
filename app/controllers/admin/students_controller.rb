@@ -2,7 +2,12 @@ class Admin::StudentsController < ApplicationController
 	layout 'admin'
 
 	def index
-		@students = Student.order('created_at DESC').paginate(:page => params[:submitted_page], :per_page => 100)
+		if params[:letter].blank?
+			@students = Student.order(:last_name)
+		else
+			@students = Student.where('lower(last_name) SIMILAR TO ?', "#{params[:letter]}%").order(:last_name)
+		end
+		
 	end
 
 	def show

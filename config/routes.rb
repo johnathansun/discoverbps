@@ -34,7 +34,7 @@ DiscoverbpsV2::Application.routes.draw do
       post :sort, on: :collection
     end
     resources :schools
-    resources :students
+    resources :students, path: 'searches'
     resources :users
   end
 

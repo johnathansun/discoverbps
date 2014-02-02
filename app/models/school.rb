@@ -5,7 +5,8 @@ class School < ActiveRecord::Base
 
 	attr_protected
 	attr_accessor :tier, :transportation_eligibility, :walk_zone_eligibility, :walk_time, :drive_time, :distance
-	# attr_accessible :name, :bps_id, :api_basic_info, :api_awards, :api_calendar, :api_description, :api_extra_curricular, :api_facilities, :api_grades, :api_hours, :api_languages, :api_partners, :api_photos, :api_sports
+	attr_accessible :api_basic_info, :api_awards, :api_calendar, :api_description, :api_extra_curricular, :api_facilities, :api_grades, :api_hours, :api_languages, :api_partners, :api_photos, :name, :bps_id, :slug, :latitude, :longitude, :api_sports
+
 
 	serialize :api_basic_info # convert to hash  
 	serialize :api_awards
@@ -21,6 +22,7 @@ class School < ActiveRecord::Base
 	serialize :api_sports # convert to hash
 
 	# after_validation :geocode
+	before_save :strip_bps_id
 
 	def full_address
 		"#{api_basic_info[:campus1address1]} #{api_basic_info[:campus1city]} #{api_basic_info[:campus1zip]}"
@@ -69,5 +71,11 @@ class School < ActiveRecord::Base
 		else
 			return false
 		end
+	end
+
+	private
+
+	def strip_bps_id
+		self.bps_id.try(:strip!)
 	end
 end

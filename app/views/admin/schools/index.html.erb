@@ -5,16 +5,21 @@
 		<thead>
 			<th style="text-align: left;">ID</th>
 			<th style="text-align: left;">Name</th>
+			<th style="text-align: left;">Last Updated</th>
 			<th></th>
 		</thead>
 		<tbody>
 			<% for school in @schools %>
-				<tr>
-					<td width='80px'><h4><%= school.bps_id %></h4></td>
-					<td><h4><%= link_to school.name, admin_school_path(school) %></h4></td>
-					<td><%= button_to "Delete", admin_school_path(school), method: 'delete', confirm_with: "Are you sure you want to delete this school and all of its associated data?" %></td>
+				<tr class="hover">
+					<td width='80px'><%= school.bps_id %></td>
+					<td><strong><%= link_to school.name, admin_school_path(school) %></strong></td>
+					<td><%= school.updated_at %> EST</td>
+					<td width="40px"><%= button_to 'Delete', admin_school_path(school), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this school and remove it from all existing student lists?" %></td>
 				</tr>
 			<% end %>
 		</tbody>
 	</table>
+</div>
+<div class="wrap">
+	<%= link_to 'Add a New School', new_admin_school_path, class: 'add_button', style: 'color: white; font-weight: bold;' %>
 </div>

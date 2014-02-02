@@ -31,7 +31,7 @@ class Student < ActiveRecord::Base
   end
 
   def full_name
-    "#{first_name} #{last_name}"
+    "#{first_name.try(:humanize)} #{last_name.try(:humanize)}"
   end
 
   def full_address

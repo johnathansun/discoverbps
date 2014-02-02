@@ -1,7 +1,48 @@
-<div class="wrap">
-	<h1 style="font-size: 4em; font-family: helvetica, arial, sans-serif; font-weight: 200;"><%= number_with_delimiter(@students.count) %><span style="font-size: 24px;"> searches</span></h1>
-	<% for student in @students %>
-		<h4><%= link_to student.full_name, admin_student_path(student) %></h4>
-	<% end %>
-	<%= will_paginate @students, :param_name => 'student' %>
+<div class="wrap global_map" style="margin-bottom: 30px;">
+	<!-- zone where google map in integrated -->
+	<div id='map-canvas' style="width: 100%; height: 400px;"></div>
+	<!-- END zone where google map in integrated -->
+	<script src="http://maps.googleapis.com/maps/api/js?libraries=geometry,visualization&sensor=false"></script>
+
+	<script>
+		$('.global_map').css('height', ($(window).height() / 2.5) + 'px' );
+		$('#map-canvas').css('height', ($(window).height() / 2.5) + 'px' );
+		
+		// Create an array of styles.
+		var map_styles = [
+			{
+			"stylers": [
+				{ "visibility": "on" },
+				{ "saturation": -65 },
+				{ "lightness": -25 }
+	    ]
+			}
+		];
+
+		var heatmapData = new Array();
+
+		<% @students.each_with_index do |student, i| %>
+			<% if student.latitude.present? && student.longitude.present? && student.latitude != 0 && student.longitude != 0 %>
+				heatmapData.push(new google.maps.LatLng(<%= student.latitude %>, <%= student.longitude %>));
+			<% end %>
+		<% end %>
+		
+		var Boston = new google.maps.LatLng(42.32,-71.0636);
+		map = new google.maps.Map(document.getElementById('map-canvas'), {
+		  center: Boston,
+		  zoom: 11,
+		  mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
+		var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});
+		var heatmap = new google.maps.visualization.HeatmapLayer({
+		  data: heatmapData, radius: 10, opacity: 1
+		});
+
+		heatmap.setMap(map);
+
+		map.mapTypes.set('map_style', styledMap);
+		map.setMapTypeId('map_style');
+
+	</script>
+	<!--END script to integrat and personnalize google map-->
 </div>

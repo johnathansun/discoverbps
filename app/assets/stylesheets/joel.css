@@ -207,7 +207,6 @@ input, select {
 	padding: 1px 12px 0 12px;
 	height: 38px;
 	margin-top: -9px;
-
 }
 .transportation_icon {
 	color: #565656;
@@ -232,6 +231,7 @@ body.admin {
 	font-family: helvetica, arial, sans-serif;
 	font-weight: 400;
 	font-size: 16px;
+	padding-bottom: 40px;
 
 	a {
 		color: #0077cf;
@@ -243,16 +243,45 @@ body.admin {
 	}
 
 	h1 { font-size: 2.5em; margin-bottom: .1em; }
-	h2 { font-size: 2.2em; margin-bottom: .5em; }
-	h3 { font-size: 1.7em; margin-bottom: .5em; }
+	h2 { font-size: 2.2em; margin-bottom: .1em; }
+	h3 { font-size: 1.6em; margin-bottom: .5em; }
 	h4 { font-size: 1.2em; }
 
 	table {
+		tr.hover:hover { background-color: #eeeeee;}
 		td { padding-top: 5px;}
+	
 	}
 
 	ul.with_bullets {
 		list-style: disc inside none; 
 		margin-left: 20px;
-	}	
+	}
+
+	.add_button {
+		font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+		font-size: 14px;
+		color: white;
+		text-decoration: none;
+		padding: 12px 13px 11px 13px;
+		background-color: #72c900;
+		border: 0;
+		-webkit-border-radius: 0;
+		border-radius: 0;
+	}
+	.add_button:hover {
+		text-decoration: none;
+	}
+	.delete_button {
+		color: white !important;
+		font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+		font-size: 13px;
+		background-color: #fc0d1b !important;
+		border: 0;
+		-webkit-border-radius: 0;
+		border-radius: 0;
+		width: auto !important;
+		padding: 1px 10px 0 10px;
+		height: 34px;
+	}
 }
