@@ -1,25 +1,308 @@
-<div class="wrap">
-	<h1>Schools</h1>
-	<br />
-	<table width="100%">
+<div class="map-container">
+	<!-- zone where google map in integrated -->
+	<div id='map-canvas' style="width: 100%;"></div>
+	<!-- END zone where google map in integrated -->
+
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
+
+	<script>
+		function initialize(){
+			$('.map-container').css('height', ($(window).height() / 2.5) + 'px' );
+			$('#map-canvas').css('height', ($(window).height() / 2.5) + 'px' );
+
+			// Create an array of styles.
+			var map_styles = [
+				{
+				"featureType": "poi.attraction",
+				"stylers": [
+					{ "visibility": "off" }
+				]
+				},{
+					"featureType": "poi.business",
+					"stylers": [
+						{ "visibility": "off" }
+					]
+				},{
+					"featureType": "poi.place_of_worship",
+					"stylers": [
+						{ "visibility": "off" }
+					]
+				},{
+					"featureType": "transit.line",
+					"stylers": [
+						{ "visibility": "off" }
+					]
+				},{
+					"featureType": "poi.attraction",
+					"stylers": [
+						{ "visibility": "off" }
+					]
+				},{
+					"featureType": "poi.medical",
+					"stylers": [
+						{ "visibility": "off" }
+					]
+				},{
+					"featureType": "poi.school",
+					"stylers": [
+						{ "visibility": "off" }
+					]
+				},{
+					"featureType": "landscape.man_made",
+					"stylers": [
+						{ "visibility": "off" }
+					]
+				},{
+					"featureType": "poi.park",
+					"elementType": "geometry",
+					"stylers": [
+						{ "lightness": 41 }
+					]
+				},{
+					"featureType": "transit.station.airport",
+					"stylers": [
+						{ "lightness": 49 }
+					]
+				},{
+					"featureType": "administrative",
+					"elementType": "labels.text.fill",
+					"stylers": [
+						{ "saturation": -100 },
+						{ "lightness": 24 }
+					]
+				},{
+					"featureType": "road.highway",
+					"stylers": [
+						{ "lightness": 26 }
+					]
+				},{
+					"featureType": "road.arterial",
+					"elementType": "geometry",
+					"stylers": [
+						{ "visibility": "simplified" },
+						{ "color": "#d6cfc6" },
+						{ "lightness": 43 }
+					]
+				},{
+					"featureType": "road.local",
+					"elementType": "geometry.fill",
+					"stylers": [
+						{ "color": "#d6cfc6" },
+						{ "lightness": 42 }
+					]
+				},{
+					"featureType": "road.local",
+					"elementType": "geometry.stroke",
+					"stylers": [
+						{ "visibility": "off" }
+					]
+				},{
+					"featureType": "road.arterial",
+					"elementType": "geometry.stroke",
+					"stylers": [
+						{ "visibility": "off" }
+					]
+				},{
+					"featureType": "road.arterial",
+					"elementType": "geometry.fill",
+					"stylers": [
+						{ "visibility": "on" }
+					]
+				},{
+					"featureType": "poi.park",
+					"elementType": "labels",
+					"stylers": [
+						{ "visibility": "off" }
+					]
+				},{
+					"featureType": "transit.station.rail",
+					"elementType": "labels",
+					"stylers": [
+						{ "saturation": -73 },
+						{ "lightness": 27 }
+					]
+				},{
+					"featureType": "road.highway",
+					"elementType": "geometry.stroke",
+					"stylers": [
+						{ "visibility": "off" }
+					]
+				},{
+					"featureType": "road.highway",
+					"elementType": "geometry.fill",
+					"stylers": [
+						{ "visibility": "on" },
+						{ "lightness": -5 }
+					]
+				},{
+					"featureType": "administrative.land_parcel",
+					"stylers": [
+						{ "visibility": "off" }
+					]
+				},{
+				}
+			];
+
+			var Marker = function(options) {
+				google.maps.Marker.apply(this, arguments);
+				if (options.label) {
+					this.MarkerLabel = new MarkerLabel({
+						map: this.map,
+						marker: this,
+						text: options.label
+					});
+					this.MarkerLabel.bindTo('position', this, 'position');
+				}
+			};
+
+			// Define Marker Shapes
+			var MAP_PIN = 'M 314.692,279.496c0,80.988-65.892,146.88-146.88,146.88S 20.933,360.496, 20.933,279.496c0-74.868, 56.364-136.704, 128.88-145.62 l0-144.252 l 36,0 L 185.813,133.876 C 258.317,142.792, 314.692,204.64, 314.692,279.496z';
+
+			// Create Custom Marker Object
+			Marker.prototype = new google.maps.Marker();
+
+			// Custom Marker SetMap
+			Marker.prototype.setMap = function() {
+				google.maps.Marker.prototype.setMap.apply(this, arguments);
+				(this.MarkerLabel) && this.MarkerLabel.setMap.apply(this.MarkerLabel, arguments);
+			};
+			 
+			// Marker Label Overlay
+			var MarkerLabel = function(options) {
+				var self = this;
+				this.setValues(options);
+				
+				// Create the label container
+				this.div = document.createElement('div');
+				this.div.className = 'marker-label';
+				var span = document.createElement('span');
+				span.className = "marker-icon";
+				this.div.appendChild(span);
+			 
+				// Trigger the marker click handler if clicking on the label
+				google.maps.event.addDomListener(this.div, 'click', function(e){
+					(e.stopPropagation) && e.stopPropagation();
+					google.maps.event.trigger(self.marker, 'click');
+				});
+			};
+
+			// Create MarkerLabel Object
+			MarkerLabel.prototype = new google.maps.OverlayView;
+
+			// Marker Label onAdd
+			MarkerLabel.prototype.onAdd = function() {
+				var pane = this.getPanes().overlayImage.appendChild(this.div);
+				var self = this;
+				this.listeners = [
+					google.maps.event.addListener(this, 'position_changed', function() { self.draw(); }),
+					google.maps.event.addListener(this, 'text_changed', function() { self.draw(); }),
+					google.maps.event.addListener(this, 'zindex_changed', function() { self.draw(); })
+				];
+			};
+			 
+			// Marker Label onRemove
+			MarkerLabel.prototype.onRemove = function() {
+				this.div.parentNode.removeChild(this.div);
+				for (var i = 0, I = this.listeners.length; i < I; ++i) {
+					google.maps.event.removeListener(this.listeners[i]);
+				}
+			};
+			 
+			// Implement draw
+			MarkerLabel.prototype.draw = function() {
+				var projection = this.getProjection();
+				var position = projection.fromLatLngToDivPixel(this.get('position'));
+				var div = this.div;
+				div.style.left = position.x + 'px';
+				div.style.top = position.y + 'px';
+				div.style.display = 'block';
+				div.style.zIndex = this.get('zIndex'); //ALLOW LABEL TO OVERLAY MARKER
+				this.div.innerHTML = this.get('text').toString();
+			};
+
+			// Create a new StyledMapType object, passing it the array of styles,
+			// as well as the name to be displayed on the map type control.
+			var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});	
+			var latlngbounds = new google.maps.LatLngBounds();
+			var myLatLng = new google.maps.LatLng(42.32,-71.0636);
+			var mapProp = {
+				center: myLatLng,
+				zoom: 11,
+				panControl: true,
+				zoomControl: true,
+				mapTypeControl: false,
+				scaleControl: false,
+				draggable: true,
+				scrollwheel: false,
+				streetViewControl: false,
+				overviewMapControl: false,
+
+				mapTypeControlOptions: {
+					mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+				}
+			};
+
+			var map = new google.maps.Map(document.getElementById("map-canvas"),mapProp);
+
+			<% if @schools.present? %>
+				<% @schools.each_with_index do |school, i| %>
+					<% if school.latitude.present? && school.longitude.present? && school.latitude != 0 && school.longitude != 0 %>
+						var coordinates = new google.maps.LatLng(<%= school.latitude %>, <%= school.longitude %>);
+						latlngbounds.extend(coordinates);
+						var marker = new google.maps.Marker({
+							position: coordinates,
+							icon: {
+								path: MAP_PIN,
+								fillColor: '#0077cf',
+								fillOpacity: 1,
+								strokeColor: '',
+								strokeWeight: 0,
+								rotation: 180,
+								scale: 1/22
+							},
+							label: '<i class="icon-map-home"></i>',
+							map: map
+						});
+						var infowindow = new google.maps.InfoWindow({
+						});
+						google.maps.event.addListener(marker, 'click', function() {
+							infowindow.setContent('<div><h4><%= school.name %></h4><%= school.api_basic_info.try(:[], :campus1address1) %><br /><%= school.api_basic_info.try(:[], :campus1city) %>');
+							infowindow.open(map,this);
+						});
+					<% end %>
+				<% end %>
+			<% end %>	
+			//Associate the styled map with the MapTypeId and set it to display.
+
+			map.mapTypes.set('map_style', styledMap);
+			map.setMapTypeId('map_style');
+		}
+				
+		google.maps.event.addDomListener(window, 'load', initialize);
+
+	</script>
+	<!--END script to integrat and personnalize google map-->
+</div>
+<div class="content">
+	<h1>Schools</h1><br />
+	<table width="100%;">
 		<thead>
-			<th style="text-align: left;">ID</th>
+			<th style="text-align: left;">BPS ID</th>
 			<th style="text-align: left;">Name</th>
 			<th style="text-align: left;">Last Updated</th>
-			<th></th>
+			<th style="text-align: left;"></th>
 		</thead>
 		<tbody>
 			<% for school in @schools %>
 				<tr class="hover">
 					<td width='80px'><%= school.bps_id %></td>
 					<td><strong><%= link_to school.name, admin_school_path(school) %></strong></td>
-					<td><%= school.updated_at %> EST</td>
+					<td><%= distance_of_time_in_words_to_now(school.updated_at) %> ago</td>
 					<td width="40px"><%= button_to 'Delete', admin_school_path(school), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this school and remove it from all existing student lists?" %></td>
 				</tr>
 			<% end %>
 		</tbody>
 	</table>
-</div>
-<div class="wrap">
+	<br />
 	<%= link_to 'Add a New School', new_admin_school_path, class: 'add_button', style: 'color: white; font-weight: bold;' %>
 </div>

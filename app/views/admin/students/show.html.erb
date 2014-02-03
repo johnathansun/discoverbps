@@ -282,7 +282,7 @@
 							url: '/assets/map_pins/DBPS_MapPins_Medium_Blue_<%= i + 1 %>.png',
 							size: new google.maps.Size(19, 29),
 							origin: new google.maps.Point(0, 0),
-							anchor: new google.maps.Point(0, 0),
+							anchor: new google.maps.Point(19, 29),
 						};
 						var marker = new google.maps.Marker({
 							position: coordinates,
@@ -313,7 +313,7 @@
 
 <div class="wrap">
 
-	<h1 style="margin-bottom: 1em;"><%= @student.full_name %> <span style="font-size: 20px;">Grade <%= @student.grade_level %></span></h1>
+	<h2 style="margin-bottom: 1em;"><%= @student.full_name %> <span style="font-size: 20px;">Grade <%= @student.grade_level %></span></h2>
 
 	<h3>Eligible Schools</h3>
 	<div>

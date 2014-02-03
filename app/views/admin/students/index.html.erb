@@ -1,20 +1,20 @@
-<div class="wrap global_map" style="margin-bottom: 30px;">
+<div class="map-container" style="margin-bottom: 30px;">
 	<!-- zone where google map in integrated -->
 	<div id='map-canvas' style="width: 100%; height: 400px;"></div>
 	<!-- END zone where google map in integrated -->
 	<script src="http://maps.googleapis.com/maps/api/js?libraries=geometry,visualization&sensor=false"></script>
 
 	<script>
-		$('.global_map').css('height', ($(window).height() / 2.5) + 'px' );
-		$('#map-canvas').css('height', ($(window).height() / 2.5) + 'px' );
+		$('.map-container').css('height', '375px' );
+		$('#map-canvas').css('height', '375px' );
 		
 		// Create an array of styles.
 		var map_styles = [
 			{
 			"stylers": [
 				{ "visibility": "on" },
-				{ "saturation": -65 },
-				{ "lightness": -25 }
+				{ "saturation": -60 },
+				{ "lightness": -18 }
 	    ]
 			}
 		];
@@ -26,8 +26,8 @@
 				heatmapData.push(new google.maps.LatLng(<%= student.latitude %>, <%= student.longitude %>));
 			<% end %>
 		<% end %>
-		
-		var Boston = new google.maps.LatLng(42.32,-71.0636);
+
+		var Boston = new google.maps.LatLng(42.313,-71.09);
 		map = new google.maps.Map(document.getElementById('map-canvas'), {
 		  center: Boston,
 		  zoom: 11,
@@ -35,8 +35,31 @@
 		});
 		var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});
 		var heatmap = new google.maps.visualization.HeatmapLayer({
-		  data: heatmapData, radius: 10, opacity: 1
+		  data: heatmapData, radius: 8, opacity: 1
 		});
+
+
+		// var MAP_PIN = 'M 314.692,279.496c0,80.988-65.892,146.88-146.88,146.88S 20.933,360.496, 20.933,279.496c0-74.868, 56.364-136.704, 128.88-145.62 l0-144.252 l 36,0 L 185.813,133.876 C 258.317,142.792, 314.692,204.64, 314.692,279.496z';
+
+		// <% [[42.2855667,-71.0911333],[42.317967,-71.064183],[42.2580833,-71.1235833],[42.3195333,-71.1116667],[42.2786,-71.1368333],[42.2902167,-71.0720167],[42.27725,-71.0935667],[42.3884833,-71.0006333],[42.3408,-71.0538667],[42.3302333,-71.0818333],[42.3125,-71.1015833],[42.3748667,-71.0388167]].each_with_index do |coords, i| %>
+		// 	var coordinates = new google.maps.LatLng(<%= coords[0] %>, <%= coords[1] %>);
+		// 	var marker = new google.maps.Marker({
+		// 		position: coordinates,
+		// 		icon: {
+		// 			path: MAP_PIN,
+		// 			fillColor: '#000000',
+		// 			fillOpacity: 1,
+		// 			strokeColor: '',
+		// 			strokeWeight: 0,
+		// 			rotation: 180,
+		// 			scale: 1/22
+		// 		},
+		// 		label: '<i class="icon-map-home"></i>',
+		// 		map: map
+		// 	});
+		// 	var infowindow = new google.maps.InfoWindow({
+		// 	});
+		// <% end %>
 
 		heatmap.setMap(map);
 

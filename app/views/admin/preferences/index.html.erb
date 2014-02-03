@@ -1,0 +1,19 @@
+<div class="content">
+	<h2>Preferences</h2>
+	<br />
+	<% for preference_category in @preference_categories %>
+		<h3><%= preference_category.name %></h3>
+		<table width="100%;">
+			<tbody>
+				<% for preference in preference_category.preferences.rank(:sort_order) %>
+					<tr class="hover">
+						<td><Strong><%= link_to preference.name, edit_admin_preference_path(preference) %></strong></td>
+						<td width="40px"><%= button_to 'Delete', admin_preference_path(preference), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this preference?" %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	<% end %>
+	<br />
+	<%= link_to 'Add a New Preference', new_admin_preference_path, class: 'add_button', style: 'color: white; font-weight: bold;' %>
+</div>

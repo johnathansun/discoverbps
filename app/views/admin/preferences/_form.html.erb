@@ -1,0 +1,97 @@
+<% if @preference.errors.any? %>
+  <div class="alert alert-error">
+    <h3><%= pluralize(@preference.errors.count, "error") %> prohibited this preference from being saved:</h3>
+    <ul>
+      <% @preference.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+  
+<div class="field">
+  <%= f.label :name, "Name" %>
+  <br />
+  <%= f.text_field :name %>
+</div>
+
+<div style="margin: 30px 0 30px 0;">
+  <h3>Grade Levels</h3>
+  <div style="margin-left: 20px;">
+
+    <div class="field">
+      <%= f.check_box :grade_k0 %>
+      <%= f.label :grade_k0, "K0" %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :grade_k1 %>
+      <%= f.label :grade_k1, "K1" %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :grade_k2 %>
+      <%= f.label :grade_k2, "K2" %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :grade_1 %>
+      <%= f.label :grade_1, "1" %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :grade_2 %>
+      <%= f.label :grade_2, "2" %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :grade_3 %>
+      <%= f.label :grade_3, "3" %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :grade_4 %>
+      <%= f.label :grade_4, "4" %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :grade_5 %>
+      <%= f.label :grade_5, "5" %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :grade_6 %>
+      <%= f.label :grade_6, "6" %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :grade_7 %>
+      <%= f.label :grade_7, "7" %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :grade_8 %>
+      <%= f.label :grade_8, "8" %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :grade_9 %>
+      <%= f.label :grade_9, "9" %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :grade_10 %>
+      <%= f.label :grade_10, "10" %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :grade_11 %>
+      <%= f.label :grade_11, "11" %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :grade_12 %>
+      <%= f.label :grade_12, "12" %>
+    </div>
+  </div>
+</div>

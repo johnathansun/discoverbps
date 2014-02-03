@@ -227,30 +227,37 @@ input, select {
 }
 
 body.admin {
-	background-color: white;
+	background-color: #0077cf;
 	font-family: helvetica, arial, sans-serif;
-	font-weight: 400;
+	font-weight: bold;
 	font-size: 16px;
 	padding-bottom: 40px;
 
-	a {
-		color: #0077cf;
-		text-decoration: none;
+	.page {
+		background-color: #ffffff;
 	}
-	a:hover {
-		color: #0077cf;
-		text-decoration: underline;
+	.content {
+		padding: 30px 30px 50px 30px;
 	}
+
+	a { color: #0077cf; text-decoration: none; }
+	a:hover { color: #0077cf; text-decoration: underline; }
+
+	a.white { color: #ffffff; text-decoration: none; }
+	a.white:hover { color: #ffff00; text-decoration: none; }
 
 	h1 { font-size: 2.5em; margin-bottom: .1em; }
 	h2 { font-size: 2.2em; margin-bottom: .1em; }
-	h3 { font-size: 1.6em; margin-bottom: .5em; }
+	h3 { font-size: 1.4em; margin-bottom: .5em; }
 	h4 { font-size: 1.2em; }
 
 	table {
-		tr.hover:hover { background-color: #eeeeee;}
-		td { padding-top: 5px;}
-	
+		tr.hover:hover { background-color: #eeeeee;}	
+		td { padding-top: 5px; padding-bottom: 5px; vertical-align: middle; }
+	}
+
+	.field {
+		margin-bottom: 10px;
 	}
 
 	ul.with_bullets {
@@ -275,13 +282,13 @@ body.admin {
 	.delete_button {
 		color: white !important;
 		font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
-		font-size: 13px;
+		font-size: 12px;
 		background-color: #fc0d1b !important;
 		border: 0;
 		-webkit-border-radius: 0;
 		border-radius: 0;
 		width: auto !important;
-		padding: 1px 10px 0 10px;
-		height: 34px;
+		padding: 1px 8px 0 8px;
+		height: 30px;
 	}
 }

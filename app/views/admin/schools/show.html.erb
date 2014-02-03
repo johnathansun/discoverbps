@@ -1,14 +1,14 @@
-<div class="wrap global_map" style="margin-bottom: 30px;">
+<div class="map-container">
 	<!-- zone where google map in integrated -->
-	<div id='googleMap' style="width: 100%;"></div>
+	<div id='map-canvas' style="width: 100%;"></div>
 	<!-- END zone where google map in integrated -->
 
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
 
 	<script>
 		function initialize(){
-			$('.global_map').css('height', ($(window).height() / 2.5) + 'px' );
-			$('#googleMap').css('height', ($(window).height() / 2.5) + 'px' );
+			$('.map-container').css('height', ($(window).height() / 2.5) + 'px' );
+			$('#map-canvas').css('height', ($(window).height() / 2.5) + 'px' );
 
 		  // Create an array of styles.
 		  var map_styles = [
@@ -246,26 +246,28 @@
 				}
 			};
 
-			var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+			var map = new google.maps.Map(document.getElementById("map-canvas"),mapProp);
 
 
 			<% if @school.latitude.present? && @school.longitude.present? %>
 				var coordinates = new google.maps.LatLng(<%= @school.latitude %>, <%= @school.longitude %>);
 				latlngbounds.extend(coordinates);
-				var image = {
-					url: '/assets/map_pins/DBPS_MapPins_Medium_Blue_1.png',
-					size: new google.maps.Size(19, 29),
-					origin: new google.maps.Point(0, 0),
-					anchor: new google.maps.Point(0, 0)
-				};
 				var marker = new google.maps.Marker({
 					position: coordinates,
-					icon: image,
-					map: map,
-					title: '<%= escape_javascript(@school.name) %>'
+					icon: {
+						path: MAP_PIN,
+						fillColor: '#0077cf',
+						fillOpacity: 1,
+						strokeColor: '',
+						strokeWeight: 0,
+						rotation: 180,
+						scale: 1/22
+					},
+					label: '<i class="icon-map-home"></i>',
+					map: map
 				});
 				var infowindow = new google.maps.InfoWindow({});
-				infowindow.setContent('<div><h4><%= @school.name %></h4><%= @school.api_basic_info.try(:[], :campus1address1) %><br /><%= @school.api_basic_info.try(:[], :campus1city) %>, <%= @school.api_basic_info.try(:[], :campus1state) %>');
+				infowindow.setContent('<div><h4><%= @school.name %></h4><%= @school.api_basic_info.try(:[], :campus1address1) %><br /><%= @school.api_basic_info.try(:[], :campus1city) %>');
 				infowindow.open(map,marker);
 			<% end %>
 
@@ -281,7 +283,7 @@
 	<!--END script to integrat and personnalize google map-->
 </div>
 
-<div class="wrap">
+<div style="padding: 30px 30px 50px 30px;">
 
 	<h2><%= @school.bps_id %> &mdash; <%= @school.name %></h2>
 	<p><strong>Last Updated:</strong> <%= @school.updated_at %> EST</p>
