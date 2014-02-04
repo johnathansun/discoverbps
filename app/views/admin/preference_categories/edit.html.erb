@@ -10,4 +10,7 @@
 	  	<%= link_to 'Cancel', admin_preference_categories_path %>
 	  </div>
 	<% end %>
+	<div style="margin-top: 20px;">
+		<%= button_to 'Delete', admin_preference_category_path(@preference_category), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this preference category (and all nested preferences)?", style: "font-size: 14px; height: 40px; padding-left: 10px; padding-right: 10px;" %>
+	</div>
 </div>
