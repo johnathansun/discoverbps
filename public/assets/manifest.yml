@@ -1353,6 +1353,8 @@ oauth-login.png: oauth-login-f9f35a9f42e4ec0eb4b0b25cb61bd710.png
 oauth-login/index.png: oauth-login-f9f35a9f42e4ec0eb4b0b25cb61bd710.png
 oauth-twitter.png: oauth-twitter-59ecfdef252deb76a6c9e28c31b13299.png
 oauth-twitter/index.png: oauth-twitter-59ecfdef252deb76a6c9e28c31b13299.png
+pencil.png: pencil-5a3c9a234680dc40a182e0c4ec9fb0e3.png
+pencil/index.png: pencil-5a3c9a234680dc40a182e0c4ec9fb0e3.png
 red_point.png: red_point-81f3046eae32be4a7a4264b3195d4c9e.png
 red_point/index.png: red_point-81f3046eae32be4a7a4264b3195d4c9e.png
 schools/eliotk8/school_1.jpg: schools/eliotk8/school_1-817887baf71021d2e1ef2e427cc31197.jpg
@@ -1373,8 +1375,8 @@ yellow_point.png: yellow_point-f7c0668496d1fe02295f14341112d440.png
 yellow_point/index.png: yellow_point-f7c0668496d1fe02295f14341112d440.png
 application.js: application-28e225f51c9d6989ebef108d953adc1f.js
 application/index.js: application-28e225f51c9d6989ebef108d953adc1f.js
-application.css: application-2ef2e43404d9301f4a8978557c87730c.css
-application/index.css: application-2ef2e43404d9301f4a8978557c87730c.css
+application.css: application-ce41bd459eceb4339e793fdd6c6cfad3.css
+application/index.css: application-ce41bd459eceb4339e793fdd6c6cfad3.css
 jquery-ui/animated-overlay.gif: jquery-ui/animated-overlay-602eee4c79a4796b02bb6442948c9e28.gif
 jquery-ui/animated-overlay/index.gif: jquery-ui/animated-overlay-602eee4c79a4796b02bb6442948c9e28.gif
 jquery-ui/ui-bg_flat_0_aaaaaa_40x100.png: jquery-ui/ui-bg_flat_0_aaaaaa_40x100-7d1197a52442bc56fcad60d0390f4b32.png

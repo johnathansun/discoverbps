@@ -2,7 +2,7 @@
 	<h1>Preferences</h1>
 	<br />
 	<% for preference_category in @preference_categories %>
-		<h3><%= preference_category.name %></h3>
+		<h3><%= preference_category.name %> <%= link_to 'Edit', edit_admin_preference_category_path(preference_category), style: 'font-size: 14px;' %></h3>
 		<table width="100%;">
 			<tbody>
 				<% for preference in preference_category.preferences.rank(:sort_order) %>
