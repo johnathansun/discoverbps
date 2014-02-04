@@ -11,7 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131208214817) do
+ActiveRecord::Schema.define(:version => 20140204005421) do
+
+  create_table "admins", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0,  :null => false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
+  add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -40,21 +60,7 @@ ActiveRecord::Schema.define(:version => 20131208214817) do
     t.string   "select_type",                         :default => "check_mark"
     t.string   "glyph_id"
     t.string   "glyph_class"
-    t.boolean  "grade_k0",                            :default => false
-    t.boolean  "grade_k1",                            :default => false
-    t.boolean  "grade_k2",                            :default => false
-    t.boolean  "grade_1",                             :default => false
-    t.boolean  "grade_2",                             :default => false
-    t.boolean  "grade_3",                             :default => false
-    t.boolean  "grade_4",                             :default => false
-    t.boolean  "grade_5",                             :default => false
-    t.boolean  "grade_6",                             :default => false
-    t.boolean  "grade_7",                             :default => false
-    t.boolean  "grade_8",                             :default => false
-    t.boolean  "grade_9",                             :default => false
-    t.boolean  "grade_10",                            :default => false
-    t.boolean  "grade_11",                            :default => false
-    t.boolean  "grade_12",                            :default => false
+    t.boolean  "include_in_preferences_panel",        :default => true
   end
 
   create_table "preferences", :force => true do |t|
@@ -78,6 +84,9 @@ ActiveRecord::Schema.define(:version => 20131208214817) do
     t.boolean  "grade_10",               :default => false
     t.boolean  "grade_11",               :default => false
     t.boolean  "grade_12",               :default => false
+    t.string   "api_table_name"
+    t.string   "api_table_key"
+    t.string   "api_table_value"
   end
 
   add_index "preferences", ["preference_category_id"], :name => "index_preferences_on_preference_category_id"
@@ -113,6 +122,34 @@ ActiveRecord::Schema.define(:version => 20131208214817) do
   end
 
   add_index "schools", ["slug"], :name => "index_schools_on_slug", :unique => true
+
+  create_table "searches", :force => true do |t|
+    t.string   "street_number"
+    t.string   "street_name"
+    t.string   "zipcode"
+    t.string   "iep"
+    t.string   "primary_language"
+    t.text     "session_key"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "sibling_school_name"
+    t.integer  "sibling_school_id"
+    t.string   "student_1_first_name"
+    t.string   "student_1_last_name"
+    t.string   "student_1_grade_level"
+    t.string   "student_2_first_name"
+    t.string   "student_2_last_name"
+    t.string   "student_2_grade_level"
+    t.string   "student_3_first_name"
+    t.string   "student_3_last_name"
+    t.string   "student_3_grade_level"
+    t.string   "student_4_first_name"
+    t.string   "student_4_last_name"
+    t.string   "student_4_grade_level"
+    t.string   "student_5_first_name"
+    t.string   "student_5_last_name"
+    t.string   "student_5_grade_level"
+  end
 
   create_table "student_schools", :force => true do |t|
     t.integer  "student_id"

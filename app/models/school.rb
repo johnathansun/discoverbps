@@ -37,6 +37,22 @@ class School < ActiveRecord::Base
 		end
 	end
 
+	def has_preference?(preference)
+		table = preference.api_table_name
+		key = preference.api_table_key
+		value = preference.api_table_value
+
+		if table.blank? || key.blank? || value.blank?
+			return false
+		else
+			if self.send(table).present? && self.send(table).try(:[], key.to_sym).present? && self.send(table).try(:[], key.to_sym) == value
+				return true
+			else
+				return false
+			end
+		end
+	end
+
 	def facilities_present?
 		if api_facilities.present?
 			if api_facilities[:hasartroom] == 'True' || api_facilities[:hasathleticfield] == 'True' || api_facilities[:hasauditorium] == 'True' || api_facilities[:hascafeteria] == 'True' || api_facilities[:hascomputerlab] == 'True' || api_facilities[:hasgymnasium] == 'True' || api_facilities[:haslibrary] == 'True' || api_facilities[:hasmusicroom] == 'True' || api_facilities[:hasoutdoorclassroom] == 'True' || api_facilities[:hasplayground] == 'True' || api_facilities[:haspool] == 'True' || api_facilities[:hassciencelab] == 'True'

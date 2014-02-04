@@ -1,0 +1,13 @@
+<div class="content">
+	<h1>Editing Category</h1>
+
+	<%= form_for(:preference_category, :url => admin_preference_category_path(@preference_category), :html => {:method => :put}) do |f| %>
+		<%= render :partial => 'form', :locals => {:f => f} %>
+	  
+	  <div class="actions">
+	  	<%= f.submit 'Save', :class => 'add_button', :disable_with => "Please wait..." %>
+	  	&nbsp;&nbsp;
+	  	<%= link_to 'Cancel', admin_preference_categories_path %>
+	  </div>
+	<% end %>
+</div>

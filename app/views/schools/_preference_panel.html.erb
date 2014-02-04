@@ -8,17 +8,17 @@
 	
 	<!-- preferences list for desktop and tablet situation -->
 	<div id="preference_content">
-		<% if PreferenceCategory.preference_panel.grade_level_categories(current_student.grade_level).present? %>
+		<% if student_preference_categories.present? %>
 			<% @opening_tags = 0 %>
 			<% @closing_tags = 0 %>
-			<% PreferenceCategory.preference_panel.grade_level_categories(current_student.grade_level).rank(:sort_order).each_with_index do |category, i| %>
+			<% student_preference_categories.each_with_index do |category, i| %>
 				<% if i.remainder(2) == 0 %>
 					<% @opening_tags += 1 %>
 					<div class="colonn">
 				<% end %>
 					<div id="preference_category_<%= category.id %>" class="preference preference_category">
 						<p class='preference_category_title font_16'><span aria-hidden="true" class="<%= category.glyph_class %>"></span> <span class="text"><%= category.name %></span></p>
-						<% category.grade_level_preferences(current_student.grade_level).rank(:sort_order).each do |preference| %>
+						<% category.grade_level_preferences(current_student.grade_level).each do |preference| %>
 							<label class='font_13_14'>
 								<input data-category="preference_category_<%= category.id %>" id="preference_<%= preference.id %>" class="preference_checkbox" type='checkbox' name='[student][preference_ids][]' value='<%= preference.name %>', <%= current_student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
 								<span class="text"><%= preference.name %></span>
@@ -29,7 +29,7 @@
 					<% @closing_tags += 1 %>
 					</div>
 				<% end %>
-				<% if ((i + 1) == PreferenceCategory.preference_panel.grade_level_categories(current_student.grade_level).count) && (@opening_tags > @closing_tags) %>
+				<% if ((i + 1) == student_preference_categories.count) && (@opening_tags > @closing_tags) %>
 					</div>
 				<% end %>
 			<% end %>

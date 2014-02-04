@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_student
   helper_method :current_user_students
+  helper_method :student_preference_categories
   # after_filter :store_location
 
   private
@@ -20,6 +21,10 @@ class ApplicationController < ActionController::Base
     else
       return []
     end
+  end
+
+  def student_preference_categories
+  	PreferenceCategory.preference_panel.grade_level_categories(current_student.try(:grade_level))
   end
 
 	# def store_location

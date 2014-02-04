@@ -1,0 +1,60 @@
+<% if @preference_category.errors.any? %>
+  <div class="alert alert-error">
+    <h3><%= pluralize(@preference_category.errors.count, "error") %> prohibited this preference categoryfrom being saved:</h3>
+    <ul>
+      <% @preference_category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<br />
+<div class="field">
+  <%= f.label :name, "Name" %>
+  <br />
+  <%= f.text_field :name %>
+</div>
+
+<div class="field">
+  <%= f.label :description, "Description" %>
+  <br />
+  <%= f.text_area :description, rows: 5 %>
+</div>
+
+<div style="margin-top: 20px;" class="field">
+  <%= f.check_box :include_in_preferences_panel %>
+  <%= f.label :include_in_preferences_panel, "Include in preferences sidebar?" %>
+</div>
+
+<div style="margin: 20px 0 30px 0;">
+  <h3>Icon</h3>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Dev-Assets-SRG-17' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Dev-Assets-SRG-17'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Dev-Assets-SRG-29' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Dev-Assets-SRG-29'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Dev-Assets-SRG-16' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Dev-Assets-SRG-16'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Dev-Assets-SRG-15' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Dev-Assets-SRG-15'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Dev-Assets-SRG-14' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Dev-Assets-SRG-14'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Dev-Assets-SRG-13' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Dev-Assets-SRG-13'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Dev-Assets-SRG-34' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Dev-Assets-SRG-34'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Dev-Assets-SRG-08' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Dev-Assets-SRG-08'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_exam_school' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_exam_school'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_walktime' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_walktime'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_sports' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_sports'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_eligibility' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_specialprograms' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_specialprograms'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_drivetime' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_drivetime'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_distance' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_distance'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_statedesignation' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_statedesignation'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_schooltype' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_mcastier' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_enrollment' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment'></span></div>
+  <div style="margin-bottom: 5px;"><%= f.radio_button :glyph_class, 'icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners' %> <span style="margin: 2px 0 0 3px;" aria-hidden='true' class='icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners'></span></div>
+</div>

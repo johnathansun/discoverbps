@@ -8,15 +8,44 @@
     </ul>
   </div>
 <% end %>
-  
+<br />
 <div class="field">
   <%= f.label :name, "Name" %>
   <br />
-  <%= f.text_field :name %>
+  <%= f.text_field :name, style: "width: 200px;" %>
+</div>
+
+<div class="field">
+  <%= f.label :preference_category_id, "Preference Category" %>
+  <br />
+  <%= f.select :preference_category_id, options_from_collection_for_select(PreferenceCategory.rank(:sort_order), 'id', 'name', @preference.preference_category_id) %>
+</div>
+
+<br />
+<h3>API Info</h3>
+<p style="margin-bottom: 10px;">In order to determine whether a school has a given attribute, we need to know whether this attribute exists in the data returned by the API. To do so, the system needs to know what key and value to look for in which table. For instance, to determine whether a school has a swimming pool, the system would need to look in GetSchoolFacilities and find that 'haspool' = 'True'. For more information on the tables, keys and values provided by the API, please see <%= link_to "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help", 'https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help', target: "_blank" %>.</p>
+
+<div class="field">
+  <%= f.label :api_table_name, "Table Name" %>
+  <br />
+  <%= f.select :api_table_name, options_for_select([ ['GetSchool', 'api_basic_info'], ['GetSchoolAwards', 'api_awards'], ['GetSchoolDescriptions', 'api_description'], ['GetSchoolExtraCurricular', 'api_extra_curricular'], ['GetSchoolFacilities', 'api_facilities'], ['GetSchoolGrades', 'api_grades'], ['GetSchoolLanguages', 'api_languages'], ['GetSchoolPartners', 'api_partners'], ['GetSchoolPhotos', 'api_photos'], ['GetSchoolSports', 'api_sports']], @preference.api_table_name) %>
+</div>
+
+<div class="field">
+  <%= f.label :api_table_key, "Match Key" %>
+  <br />
+  <%= f.text_field :api_table_key, style: "width: 200px;" %>
+</div>
+
+<div class="field">
+  <%= f.label :api_table_value, "Match Value" %>
+  <br />
+  <%= f.text_field :api_table_value, style: "width: 200px;" %>
 </div>
 
 <div style="margin: 30px 0 30px 0;">
   <h3>Grade Levels</h3>
+  <p style="margin-bottom: 10px;">Please indicate which grade levels should display this preference.</p>
   <div style="margin-left: 20px;">
 
     <div class="field">
