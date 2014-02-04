@@ -1,4 +1,4 @@
-<div class="map-container">
+<div class="map-container" style="margin: -30px -30px 30px -30px;">
 	<!-- zone where google map in integrated -->
 	<div id='map-canvas' style="width: 100%;"></div>
 	<!-- END zone where google map in integrated -->
@@ -283,26 +283,31 @@
 	</script>
 	<!--END script to integrat and personnalize google map-->
 </div>
-<div class="content">
-	<h1>Schools</h1><br />
-	<table width="100%;">
-		<thead>
-			<th style="text-align: left;">BPS ID</th>
-			<th style="text-align: left;">Name</th>
-			<th style="text-align: left;">Last Updated</th>
-			<th style="text-align: left;"></th>
-		</thead>
-		<tbody>
-			<% for school in @schools %>
-				<tr class="hover">
-					<td width='80px'><%= school.bps_id %></td>
-					<td><strong><%= link_to school.name, admin_school_path(school) %></strong></td>
-					<td><%= distance_of_time_in_words_to_now(school.updated_at) %> ago</td>
-					<td width="40px"><%= button_to 'Delete', admin_school_path(school), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this school and remove it from all existing student lists?" %></td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
-	<br />
-	<%= link_to 'Add a New School', new_admin_school_path, class: 'add_button', style: 'color: white; font-weight: bold;' %>
-</div>
+
+<% if flash[:alert].present? %>
+	<div class="errors" style="color: white; background-color: #fc0d1b; padding: 20px; margin-bottom: 30px;"><%= flash[:alert] %></div>
+<% elsif flash[:notice].present? %>
+	<div class="notice" style="color: white; background-color: #72c900; padding: 20px; margin-bottom: 30px;"><%= flash[:notice] %></div>
+<% end %>
+
+<h1>Schools</h1><br />
+<table width="100%;">
+	<thead>
+		<th style="text-align: left;">BPS ID</th>
+		<th style="text-align: left;">Name</th>
+		<th style="text-align: left;">Last Updated</th>
+		<th style="text-align: left;"></th>
+	</thead>
+	<tbody>
+		<% for school in @schools %>
+			<tr class="hover">
+				<td width='80px'><%= school.bps_id %></td>
+				<td><strong><%= link_to school.name, admin_school_path(school) %></strong></td>
+				<td><%= distance_of_time_in_words_to_now(school.updated_at) %> ago</td>
+				<td width="40px"><%= button_to 'Delete', admin_school_path(school), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this school and remove it from all existing student lists?" %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<br />
+<%= link_to 'Add a New School', new_admin_school_path, class: 'add_button', style: 'color: white; font-weight: bold;' %>

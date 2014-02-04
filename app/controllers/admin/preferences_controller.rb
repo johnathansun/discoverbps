@@ -1,4 +1,5 @@
 class Admin::PreferencesController < ApplicationController
+	before_filter :authenticate_admin!
 	layout 'admin'
 
 	def index

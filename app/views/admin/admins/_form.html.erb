@@ -1,0 +1,29 @@
+<% if @admin.errors.any? %>
+  <div class="alert alert-error">
+    <h3><%= pluralize(@admin.errors.count, "error") %> prohibited this admin user from being saved:</h3>
+    <ul>
+      <% @admin.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<br />
+
+<div class="field">
+  <%= f.label :email, "Email" %>
+  <br />
+  <%= f.email_field :email %>
+</div>
+
+<div class="field">
+  <%= f.label :password, "Password" %>
+  <br />
+  <%= f.password_field :password %>
+</div>
+
+<div class="field">
+  <%= f.label :password_confirmation, "Password Confirmation" %>
+  <br />
+  <%= f.password_field :password_confirmation %>
+</div>

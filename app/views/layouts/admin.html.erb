@@ -52,12 +52,17 @@
 				<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-01"></span>
 			</div>
 			<div style="float: right; padding-bottom: 5px; font-weight: bold; font-size: 17px; margin-top: 49px;">
-				<%= link_to 'Dashboard', admin_students_path, class: 'white' %> &nbsp; <%= link_to 'Schools', admin_schools_path, class: 'white' %> &nbsp; <%= link_to 'Preferences', admin_preferences_path, class: 'white' %> &nbsp; <%= link_to 'Users', admin_users_path, class: 'white' %>
+				<% if current_admin.present? %>
+					<%= link_to 'Dashboard', admin_students_path, class: 'white' %> &nbsp; <%= link_to 'Schools', admin_schools_path, class: 'white' %> &nbsp; <%= link_to 'Preferences', admin_preferences_path, class: 'white' %> &nbsp; <%= link_to 'Users', admin_admins_path, class: 'white' %> <span style="color: #ffffff;">&nbsp;|&nbsp;</span> <%= link_to 'Logout', admin_sign_out_path, class: 'white' %>
+				<% end %>
+
 			</div>
 		</div>
 		<div class="wrap">
 			<div class="page">
-				<%= yield %>
+				<div class="content">
+					<%= yield %>
+				</div>
 			</div>
 		</div>
 		<%= render partial: 'layouts/analytics' %>

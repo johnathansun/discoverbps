@@ -1,5 +1,12 @@
 DiscoverbpsV2::Application.routes.draw do
-  devise_for :admins
+  devise_for :admins, :controllers => { :sessions => "admin/sessions", :registrations => "admin/registrations", :passwords => "admin/passwords" }
+  devise_scope :admin do
+    get "admin_sign_in", :to => "admin/sessions#new"
+    get "admin_sign_out", :to => "admin/sessions#destroy"
+    get "admin_sign_up", :to => "admin/registrations#new"
+    get "admin_edit_registration", :to => "admin/registrations#edit"
+  end
+
   devise_for :users, :controllers => { :sessions => "users/sessions", :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
 
   root :to => 'schools#home'
@@ -28,6 +35,7 @@ DiscoverbpsV2::Application.routes.draw do
 
   namespace :admin do
     root :to => "students#index"
+    resources :admins
     resources :preferences do
       post :sort, on: :collection
     end
@@ -36,7 +44,6 @@ DiscoverbpsV2::Application.routes.draw do
     end
     resources :schools
     resources :students, path: 'searches'
-    resources :users
   end
 
   # The priority is based upon order of creation:

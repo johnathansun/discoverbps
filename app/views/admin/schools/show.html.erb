@@ -1,4 +1,4 @@
-<div class="map-container">
+<div class="map-container" style="margin: -30px -30px 30px -30px;">
 	<!-- zone where google map in integrated -->
 	<div id='map-canvas' style="width: 100%;"></div>
 	<!-- END zone where google map in integrated -->
@@ -283,123 +283,125 @@
 	<!--END script to integrat and personnalize google map-->
 </div>
 
-<div style="padding: 30px 30px 50px 30px;">
+<% if flash[:alert].present? %>
+	<div class="errors" style="color: white; background-color: #fc0d1b; padding: 20px; margin-bottom: 30px;"><%= flash[:alert] %></div>
+<% elsif flash[:notice].present? %>
+	<div class="notice" style="color: white; background-color: #72c900; padding: 20px; margin-bottom: 30px;"><%= flash[:notice] %></div>
+<% end %>
 
-	<h2><%= @school.bps_id %> &mdash; <%= @school.name %></h2>
-	<p><strong>Last Updated:</strong> <%= @school.updated_at %> EST</p>
+<h2><%= @school.bps_id %> &mdash; <%= @school.name %></h2>
+<p><strong>Last Updated:</strong> <%= @school.updated_at %> EST</p>
 
-	<h3>Basic Info</h3>
-		<% if @school.api_basic_info.present? %>
-		<ul class="with_bullets">
-			<% @school.api_basic_info.each_pair do |key, value| %>
-				<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
+<h3>Basic Info</h3>
+	<% if @school.api_basic_info.present? %>
+	<ul class="with_bullets">
+		<% @school.api_basic_info.each_pair do |key, value| %>
+			<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<p style="margin-left: 20px;">[ No data ]</p>
+<% end %>
+
+<h3>Description</h3>
+<% if @school.api_description.present? %>
+	<ul class="with_bullets">
+		<% @school.api_description.each_pair do |key, value| %>
+			<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<p style="margin-left: 20px;">[ No data ]</p>
+<% end %>
+
+<h3>Awards</h3>
+	<% if @school.api_awards.present? %>
+	<ul class="with_bullets">
+		<% @school.api_awards[0].each_pair do |key, value| %>
+			<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<p style="margin-left: 20px;">[ No data ]</p>
+<% end %>
+
+<h3>Extra Curricular</h3>
+<% if @school.api_extra_curricular.present? %>
+	<ul class="with_bullets">
+		<% @school.api_extra_curricular[0].each_pair do |key, value| %>
+			<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<p style="margin-left: 20px;">[ No data ]</p>
+<% end %>
+
+<h3>Facilities</h3>
+<% if @school.api_facilities.present? %>
+	<ul class="with_bullets">
+		<% @school.api_facilities.each_pair do |key, value| %>
+			<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<p style="margin-left: 20px;">[ No data ]</p>
+<% end %>
+
+<h3>Grades</h3>
+<% if @school.api_grades.present? %>
+	<ul class="with_bullets">
+		<% @school.api_grades.each do |grade| %>
+			<% if grade[:exists] == true %>
+				<li><%= grade[:grade] %></li>
 			<% end %>
-		</ul>
-	<% else %>
-		<p style="margin-left: 20px;">[ No data ]</p>
-	<% end %>
+		<% end %>
+	</ul>
+<% else %>
+	<p style="margin-left: 20px;">[ No data ]</p>
+<% end %>
 
-	<h3>Description</h3>
-	<% if @school.api_description.present? %>
-		<ul class="with_bullets">
-			<% @school.api_description.each_pair do |key, value| %>
-				<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
+<h3>Languages</h3>
+<% if @school.api_languages.present? %>
+	<ul class="with_bullets">
+		<% @school.api_languages.each do |language| %>
+			<li><%= language[:Language] %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<p style="margin-left: 20px;">[ No data ]</p>
+<% end %>
+
+<h3>Partners</h3>
+<% if @school.api_partners.present? %>
+	<ul class="with_bullets">
+		<% @school.api_partners.each do |partner| %>
+			<% if partner[:description].present? %>
+				<li><%= partner[:description] %></li>
 			<% end %>
-		</ul>
-	<% else %>
-		<p style="margin-left: 20px;">[ No data ]</p>
-	<% end %>
+		<% end %>
+	</ul>
+<% else %>
+	<p style="margin-left: 20px;">[ No data ]</p>
+<% end %>
 
-	<h3>Awards</h3>
-		<% if @school.api_awards.present? %>
-		<ul class="with_bullets">
-			<% @school.api_awards[0].each_pair do |key, value| %>
-				<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
-			<% end %>
-		</ul>
-	<% else %>
-		<p style="margin-left: 20px;">[ No data ]</p>
-	<% end %>
+<h3>Sports</h3>
+<% if @school.api_sports.present? %>
+	<ul class="with_bullets">
+		<% @school.api_sports.each_pair do |key, value| %>
+			<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<p style="margin-left: 20px;">[ No data ]</p>
+<% end %>
 
-	<h3>Extra Curricular</h3>
-	<% if @school.api_extra_curricular.present? %>
-		<ul class="with_bullets">
-			<% @school.api_extra_curricular[0].each_pair do |key, value| %>
-				<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
-			<% end %>
-		</ul>
-	<% else %>
-		<p style="margin-left: 20px;">[ No data ]</p>
-	<% end %>
-
-	<h3>Facilities</h3>
-	<% if @school.api_facilities.present? %>
-		<ul class="with_bullets">
-			<% @school.api_facilities.each_pair do |key, value| %>
-				<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
-			<% end %>
-		</ul>
-	<% else %>
-		<p style="margin-left: 20px;">[ No data ]</p>
-	<% end %>
-
-	<h3>Grades</h3>
-	<% if @school.api_grades.present? %>
-		<ul class="with_bullets">
-			<% @school.api_grades.each do |grade| %>
-				<% if grade[:exists] == true %>
-					<li><%= grade[:grade] %></li>
-				<% end %>
-			<% end %>
-		</ul>
-	<% else %>
-		<p style="margin-left: 20px;">[ No data ]</p>
-	<% end %>
-
-	<h3>Languages</h3>
-	<% if @school.api_languages.present? %>
-		<ul class="with_bullets">
-			<% @school.api_languages.each do |language| %>
-				<li><%= language[:Language] %></li>
-			<% end %>
-		</ul>
-	<% else %>
-		<p style="margin-left: 20px;">[ No data ]</p>
-	<% end %>
-
-	<h3>Partners</h3>
-	<% if @school.api_partners.present? %>
-		<ul class="with_bullets">
-			<% @school.api_partners.each do |partner| %>
-				<% if partner[:description].present? %>
-					<li><%= partner[:description] %></li>
-				<% end %>
-			<% end %>
-		</ul>
-	<% else %>
-		<p style="margin-left: 20px;">[ No data ]</p>
-	<% end %>
-
-	<h3>Sports</h3>
-	<% if @school.api_sports.present? %>
-		<ul class="with_bullets">
-			<% @school.api_sports.each_pair do |key, value| %>
-				<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
-			<% end %>
-		</ul>
-	<% else %>
-		<p style="margin-left: 20px;">[ No data ]</p>
-	<% end %>
-
-	<h3>Photos</h3>
-	<% if @school.api_photos.present? %>
-		<ul class="with_bullets">
-			<% @school.api_photos.each do |photo| %>
-				<li>
-					<%= link_to photo[:url], photo[:url] %>
-				</li>
-			<% end %>
-		</ul>
-	<% end %>
-
-</div>
+<h3>Photos</h3>
+<% if @school.api_photos.present? %>
+	<ul class="with_bullets">
+		<% @school.api_photos.each do |photo| %>
+			<li>
+				<%= link_to photo[:url], photo[:url] %>
+			</li>
+		<% end %>
+	</ul>
+<% end %>

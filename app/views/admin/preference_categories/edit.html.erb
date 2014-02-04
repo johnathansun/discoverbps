@@ -1,16 +1,20 @@
-<div class="content">
-	<h1>Editing Category</h1>
+<% if flash[:alert].present? %>
+	<div class="errors" style="color: white; background-color: #fc0d1b; padding: 20px; margin-bottom: 30px;"><%= flash[:alert] %></div>
+<% elsif flash[:notice].present? %>
+	<div class="notice" style="color: white; background-color: #72c900; padding: 20px; margin-bottom: 30px;"><%= flash[:notice] %></div>
+<% end %>
 
-	<%= form_for(:preference_category, :url => admin_preference_category_path(@preference_category), :html => {:method => :put}) do |f| %>
-		<%= render :partial => 'form', :locals => {:f => f} %>
-	  
-	  <div class="actions">
-	  	<%= f.submit 'Save', :class => 'add_button', :disable_with => "Please wait..." %>
-	  	&nbsp;&nbsp;
-	  	<%= link_to 'Cancel', admin_preference_categories_path %>
-	  </div>
-	<% end %>
-	<div style="margin-top: 20px;">
-		<%= button_to 'Delete', admin_preference_category_path(@preference_category), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this preference category (and all nested preferences)?", style: "font-size: 14px; height: 40px; padding-left: 10px; padding-right: 10px;" %>
-	</div>
+<h1>Editing Category</h1>
+
+<%= form_for(:preference_category, :url => admin_preference_category_path(@preference_category), :html => {:method => :put}) do |f| %>
+	<%= render :partial => 'form', :locals => {:f => f} %>
+  
+  <div class="actions">
+  	<%= f.submit 'Save', :class => 'add_button', :disable_with => "Please wait..." %>
+  	&nbsp;&nbsp;
+  	<%= link_to 'Cancel', admin_preference_categories_path %>
+  </div>
+<% end %>
+<div style="margin-top: 20px;">
+	<%= button_to 'Delete', admin_preference_category_path(@preference_category), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this preference category (and all nested preferences)?", style: "font-size: 14px; height: 40px; padding-left: 10px; padding-right: 10px;" %>
 </div>

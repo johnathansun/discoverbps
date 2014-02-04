@@ -1,0 +1,32 @@
+<% if flash[:alert].present? %>
+	<div class="errors" style="color: white; background-color: #fc0d1b; padding: 20px; margin-bottom: 30px;"><%= flash[:alert] %></div>
+<% elsif flash[:notice].present? %>
+	<div class="notice" style="color: white; background-color: #72c900; padding: 20px; margin-bottom: 30px;"><%= flash[:notice] %></div>
+<% end %>
+
+<h1>Sign In</h1>
+<br />
+
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <div class="field">
+  	<%= f.label :email %>
+  	<br />
+  	<%= f.email_field :email, :autofocus => true %>
+ 	</div>
+
+  <div class="field">
+  	<%= f.label :password %>
+  	<br />
+  	<%= f.password_field :password %>
+ 	</div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div>
+    	<%= f.check_box :remember_me %> <%= f.label :remember_me %>
+    </div>
+  <% end -%>
+
+  <div style="margin-top: 30px;"><%= f.submit "Sign in", class: 'add_button' %></div>
+<% end %>
+<br />
+<%= render "admins/shared/links" %>

@@ -1,4 +1,4 @@
-<div class="wrap global_map" style="margin-bottom: 30px;">
+<div class="map-container" style="margin: -30px -30px 30px -30px;">
 	<!-- zone where google map in integrated -->
 	<div id='map-canvas' style="width: 100%;"></div>
 	<!-- END zone where google map in integrated -->
@@ -7,7 +7,7 @@
 
 	<script>
 		function initialize(){
-			$('.global_map').css('height', ($(window).height() / 2.5) + 'px' );
+			$('.map-container').css('height', ($(window).height() / 2.5) + 'px' );
 			$('#map-canvas').css('height', ($(window).height() / 2.5) + 'px' );
 
 			// Create an array of styles.
@@ -311,56 +311,58 @@
 	<!--END script to integrat and personnalize google map-->
 </div>
 
-<div class="wrap">
+<% if flash[:alert].present? %>
+	<div class="errors" style="color: white; background-color: #fc0d1b; padding: 20px; margin-bottom: 30px;"><%= flash[:alert] %></div>
+<% elsif flash[:notice].present? %>
+	<div class="notice" style="color: white; background-color: #72c900; padding: 20px; margin-bottom: 30px;"><%= flash[:notice] %></div>
+<% end %>
 
-	<h2 style="margin-bottom: 1em;"><%= @student.full_name %> <span style="font-size: 20px;">Grade <%= @student.grade_level %></span></h2>
+<h2 style="margin-bottom: 1em;"><%= @student.full_name %> <span style="font-size: 20px;">Grade <%= @student.grade_level %></span></h2>
 
-	<h3>Eligible Schools</h3>
-	<div>
-		<% if @student.student_schools.present? %>
-			<table width="100%">
-				<thead>
-					<th style="text-align: left;"></th>
-					<th style="text-align: left;">Name</th>
-					<th style="text-align: left;">Distance</th>
-					<th style="text-align: left;">Walk Time</th>
-					<th style="text-align: left;">Drive Time</th>
-					<th style="text-align: left;">Tier</th>
-					<th style="text-align: left;">Eligibility</th>
-					<th style="text-align: left;">Walk Zone Eligible</th>
-				</thead>
-				<% @student.student_schools.rank(:sort_order).each_with_index do |school, i| %>
-					<tr>
-						<td><%= i + 1 %></td>
-						<td><%= school.school.name %></td>
-						<td><%= school.distance.present? ? "#{school.distance} mi" : '' %></td>
-						<td><%= school.walk_time %></td>
-						<td><%= school.drive_time %></td>
-						<td><%= school.tier %></td>
-						<td><%= school.eligibility %></td>
-						<td><%= school.walk_zone_eligibility %></td>
-					</tr>
-				<% end %>
-			</table>
-		<% else %>
-			[ No preferences selected ]
-		<% end %>
-	</div>
-
-	<h3>Checked Preferences</h3>
-	<div style="margin-left: 0px;">
-		<% if @student.preferences.present? %>
-			<% @student.preferences.group_by(&:preference_category).each do |category, preferences| %>
-				<h4><%= category.name %></h4>
-				<ul style="list-style: disc inside none; margin-left: 20px;">
-					<% for preference in preferences %>
-						<li><%= preference.name %></li>
-					<% end %>
-				</ul>
+<h3>Eligible Schools</h3>
+<div>
+	<% if @student.student_schools.present? %>
+		<table width="100%">
+			<thead>
+				<th style="text-align: left;"></th>
+				<th style="text-align: left;">Name</th>
+				<th style="text-align: left;">Distance</th>
+				<th style="text-align: left;">Walk Time</th>
+				<th style="text-align: left;">Drive Time</th>
+				<th style="text-align: left;">Tier</th>
+				<th style="text-align: left;">Eligibility</th>
+				<th style="text-align: left;">Walk Zone Eligible</th>
+			</thead>
+			<% @student.student_schools.rank(:sort_order).each_with_index do |school, i| %>
+				<tr>
+					<td><%= i + 1 %></td>
+					<td><%= school.school.name %></td>
+					<td><%= school.distance.present? ? "#{school.distance} mi" : '' %></td>
+					<td><%= school.walk_time %></td>
+					<td><%= school.drive_time %></td>
+					<td><%= school.tier %></td>
+					<td><%= school.eligibility %></td>
+					<td><%= school.walk_zone_eligibility %></td>
+				</tr>
 			<% end %>
-		<% else %>
-			[ No preferences selected ]
-		<% end %>
-	</div>
+		</table>
+	<% else %>
+		[ No preferences selected ]
+	<% end %>
+</div>
 
+<h3>Checked Preferences</h3>
+<div style="margin-left: 0px;">
+	<% if @student.preferences.present? %>
+		<% @student.preferences.group_by(&:preference_category).each do |category, preferences| %>
+			<h4><%= category.name %></h4>
+			<ul style="list-style: disc inside none; margin-left: 20px;">
+				<% for preference in preferences %>
+					<li><%= preference.name %></li>
+				<% end %>
+			</ul>
+		<% end %>
+	<% else %>
+		[ No preferences selected ]
+	<% end %>
 </div>

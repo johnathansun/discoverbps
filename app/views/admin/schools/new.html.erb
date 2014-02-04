@@ -1,26 +1,30 @@
-<div class="wrap">
-	<h1>New School</h1>
-	<p>The school information in DiscoverBPS is pulled from the&nbsp; <%= link_to 'WebService v1.10 API', 'https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help' %>. In order to add a new school to DiscoverBPS, you must add the BPS School ID, which allows DiscoverBPS to connect to the API and pull in the appropriate data. The BPS School ID is typically a 4-digit number.</p>
+<% if flash[:alert].present? %>
+	<div class="errors" style="color: white; background-color: #fc0d1b; padding: 20px; margin-bottom: 30px;"><%= flash[:alert] %></div>
+<% elsif flash[:notice].present? %>
+	<div class="notice" style="color: white; background-color: #72c900; padding: 20px; margin-bottom: 30px;"><%= flash[:notice] %></div>
+<% end %>
 
-	<%= form_for(:school, :url => admin_schools_path, :html => {:method => :post}) do |f| %> 
-		<% if @school.errors.any? %>
-		  <h3><%= pluralize(@school.errors.count, "error") %> prohibited this school from being saved:</h3>
-		  <ul>
-		    <% @school.errors.full_messages.each do |msg| %>
-		      <li><%= msg %></li>
-		    <% end %>
-		  </ul>
-		<% end %>
-		  
-		<div class="field">
-		  <%= f.label :bps_id, "BPS School ID" %>
-		  <br />
-		  <%= f.text_field :bps_id, style: "width: 100px;" %>
-		</div>
-		<div style="margin-top: 20px;">
-			<%= f.submit 'Save', class: 'add_button', style: 'font-size: 18px;', disable_with: "Please wait..." %>
-			&nbsp;&nbsp;
-			<%= link_to 'Cancel', admin_schools_path %>
-		</div>
+<h1>New School</h1>
+<p>The school information in DiscoverBPS is pulled from the&nbsp; <%= link_to 'WebService v1.10 API', 'https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help' %>. In order to add a new school to DiscoverBPS, you must add the BPS School ID, which allows DiscoverBPS to connect to the API and pull in the appropriate data. The BPS School ID is typically a 4-digit number.</p>
+
+<%= form_for(:school, :url => admin_schools_path, :html => {:method => :post}) do |f| %> 
+	<% if @school.errors.any? %>
+	  <h3><%= pluralize(@school.errors.count, "error") %> prohibited this school from being saved:</h3>
+	  <ul>
+	    <% @school.errors.full_messages.each do |msg| %>
+	      <li><%= msg %></li>
+	    <% end %>
+	  </ul>
 	<% end %>
-</div>
+	  
+	<div class="field">
+	  <%= f.label :bps_id, "BPS School ID" %>
+	  <br />
+	  <%= f.text_field :bps_id, style: "width: 100px;" %>
+	</div>
+	<div style="margin-top: 20px;">
+		<%= f.submit 'Save', class: 'add_button', style: 'font-size: 18px;', disable_with: "Please wait..." %>
+		&nbsp;&nbsp;
+		<%= link_to 'Cancel', admin_schools_path %>
+	</div>
+<% end %>

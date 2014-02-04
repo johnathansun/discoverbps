@@ -45,8 +45,13 @@ class ApplicationController < ActionController::Base
 	  root_path
 	end
 
-	def after_sign_in_path_for(resource)
-		current_student.update_attributes(user_id: current_user.id) if current_student.present? && current_student.user_id.blank?
-	  schools_url
+  def after_sign_in_path_for(resource)
+		if resource.present? && resource.class.to_s == 'User'
+			root_url
+		elsif resource.present? && resource.class.to_s == 'Admin'
+			admin_root_url
+		else
+			root_url
+		end
 	end
 end
