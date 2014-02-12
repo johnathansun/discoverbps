@@ -1,0 +1,31 @@
+<% for notification in Notification.order('start_time DESC').active(session[:removed_notifications]) %>
+	<div id="notification_<%= notification.id %>" class="notification" style="background-color: #cfcfcf;">
+		<div class="wrap">
+			
+			<% if params[:action] == 'home' || params[:action] == 'address_verification' || params[:action] == 'ell_needs' || params[:action] == 'errors' || params[:action] == 'iep_needs' || params[:action] == 'special_needs' %>
+				<div class="content_wrap">
+					<div id="notification_close_icon_<%= notification.id %>" style="margin-left: 15px; color: #333333; float: right; cursor: pointer;"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
+					<span style="color: #333333;"><%= notification.message %></span>
+				</div>
+			<% else %>
+				<div id="notification_close_icon_<%= notification.id %>" style="margin-left: 15px; color: #333333; float: right; cursor: pointer;"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
+				<span style="color: #333333;"><%= notification.message %></span>
+			<% end %>
+		
+		</div>
+	</div>
+	<script>
+		$("#notification_close_icon_<%= notification.id %>").click(function() {
+			$("#notification_<%= notification.id %>").slideUp("fast");
+	    $.ajax({
+	      url: '/students/remove_notification',
+	      type: 'post',
+	      data: {
+	      	notification_id: '<%= notification.id %>', 
+	      	user_id: '<%= current_user.try(:id) %>'
+	      },
+	      dataType: 'script'
+	    });
+		});
+	</script>
+<% end %>
