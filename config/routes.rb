@@ -21,6 +21,7 @@ DiscoverbpsV2::Application.routes.draw do
     get 'iep_needs', on: :member
     delete 'delete_all', on: :collection
     post 'save_preference', on: :member
+    post 'remove_notification', on: :collection
   end 
 
   resources :schools do 
@@ -42,6 +43,7 @@ DiscoverbpsV2::Application.routes.draw do
     resources :preference_categories do
       post :sort, on: :collection
     end
+    resources :notifications
     resources :schools
     resources :students, path: 'searches'
   end

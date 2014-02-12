@@ -199,6 +199,19 @@ class StudentsController < ApplicationController
     render nothing: true
   end
 
+  def remove_notification
+    logger.info params
+    if session[:removed_notifications].present?
+      session[:removed_notifications] << params[:notification_id]
+      session[:removed_notifications].uniq!
+    else
+      session[:removed_notifications] = []
+      session[:removed_notifications] << params[:notification_id]
+      session[:removed_notifications].uniq!
+    end
+    render nothing: true
+  end
+
   private
 
   def bps_api_connector(url)

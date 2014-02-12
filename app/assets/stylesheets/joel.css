@@ -10,6 +10,10 @@ a.blue {
 .green {
 	color: #72c900;
 }
+.notification {
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
 .button-pointer {
 	cursor: pointer;
 }
@@ -224,74 +228,4 @@ input, select {
 #add_sibling {
   margin-left: 12px;
   cursor: pointer;
-}
-
-body.admin {
-	background-color: #0077cf;
-	font-family: helvetica, arial, sans-serif;
-	font-weight: bold;
-	font-size: 15px;
-	padding-bottom: 40px;
-
-	.page {
-		background-color: #ffffff;
-	}
-	.content {
-		padding: 30px 30px 50px 30px;
-	}
-
-	a { color: #0077cf; text-decoration: none; }
-	a:hover { color: #0077cf; text-decoration: underline; }
-
-	a.white { color: #ffffff; text-decoration: none; }
-	a.white:hover { color: #ffff00; text-decoration: none; }
-
-	h1 { font-size: 2.5em; margin-bottom: .1em; }
-	h2 { font-size: 2.2em; margin-bottom: .1em; }
-	h3 { font-size: 1.4em; margin-bottom: .5em; }
-	h4 { font-size: 1.2em; }
-
-	table {
-		tr.hover:hover { background-color: #eeeeee;}	
-		td { padding-top: 5px; padding-bottom: 5px; vertical-align: middle; }
-	}
-
-	.field {
-		margin-bottom: 10px;
-		font-size: 14px;
-
-		label { margin-bottom: 5px; }
-	}
-
-	ul.with_bullets {
-		list-style: disc inside none; 
-		margin-left: 20px;
-	}
-
-	.add_button {
-		font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
-		font-size: 14px;
-		color: white;
-		text-decoration: none;
-		padding: 12px 13px 11px 13px;
-		background-color: #72c900;
-		border: 0;
-		-webkit-border-radius: 0;
-		border-radius: 0;
-	}
-	.add_button:hover {
-		text-decoration: none;
-	}
-	.delete_button {
-		color: white !important;
-		font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
-		font-size: 12px;
-		background-color: #fc0d1b !important;
-		border: 0;
-		-webkit-border-radius: 0;
-		border-radius: 0;
-		width: auto !important;
-		padding: 1px 8px 0 8px;
-		height: 30px;
-	}
 }

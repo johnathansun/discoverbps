@@ -1,0 +1,29 @@
+<% if @notification.errors.any? %>
+  <div class="alert alert-error">
+    <h3><%= pluralize(@notification.errors.count, "error") %> prohibited this admin user from being saved:</h3>
+    <ul>
+      <% @notification.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="field">
+  <%= f.label :message, "Message" %>
+  <br />
+  <%= f.text_area :message, rows: 5 %>
+</div>
+
+<div class="field">
+  <%= f.label :start_time, "Start Time" %>
+  <br />
+  <%= f.datetime_select :start_time %>
+</div>
+
+<div class="field">
+  <%= f.label :end_time, "End Time" %>
+  <br />
+  <%= f.datetime_select :end_time %>
+</div>
+<p><em>All times are EST</em></p>

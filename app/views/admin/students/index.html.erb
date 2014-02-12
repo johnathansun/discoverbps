@@ -1,12 +1,12 @@
-<div class="map-container" style="margin: -30px -30px 30px -30px;">
+<div class="map-container" style="margin: -30px -30px -30px -30px;">
 	<!-- zone where google map in integrated -->
-	<div id='map-canvas' style="width: 100%; height: 400px;"></div>
+	<div id='map-canvas' style="width: 100%; height: 350px;"></div>
 	<!-- END zone where google map in integrated -->
 	<script src="http://maps.googleapis.com/maps/api/js?libraries=geometry,visualization&sensor=false"></script>
 
 	<script>
-		$('.map-container').css('height', ($(window).height() / 2.5) + 'px' );
-		$('#map-canvas').css('height', ($(window).height() / 2.5) + 'px' );
+		$('.map-container').css('height', ($(window).height() / 2) + 'px' );
+		$('#map-canvas').css('height', ($(window).height() / 2) + 'px' );
 		
 		// Create an array of styles.
 		var map_styles = [

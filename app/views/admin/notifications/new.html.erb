@@ -1,0 +1,17 @@
+<% if flash[:alert].present? %>
+	<div class="errors" style="color: white; background-color: #fc0d1b; padding: 20px; margin-bottom: 30px;"><%= flash[:alert] %></div>
+<% elsif flash[:notice].present? %>
+	<div class="notice" style="color: white; background-color: #72c900; padding: 20px; margin-bottom: 30px;"><%= flash[:notice] %></div>
+<% end %>
+
+<h2>New Notification</h2>
+
+<%= form_for(:notification, :url => admin_notifications_path, :html => {:method => :post}) do |f| %>
+	<%= render :partial => 'form', :locals => {:f => f} %>
+  
+  <div class="actions">
+  	<%= f.submit 'Save', :class => 'add_button', :disable_with => "Please wait..." %>
+  	&nbsp;&nbsp;
+  	<%= link_to 'Cancel', admin_notifications_path %>
+  </div>
+<% end %>
