@@ -13,6 +13,9 @@ a.blue {
 .notification {
 	padding-top: 12px;
 	padding-bottom: 12px;
+	background-color: #064581;
+	font-size: 18px;
+	color: #5fbee7;
 }
 .button-pointer {
 	cursor: pointer;
