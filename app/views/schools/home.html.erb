@@ -12,7 +12,7 @@
 				<h1>Welcome to Boston Public Schools Registration</h1>
 				<img class="logo_beta" src="/assets/logo_beta.png" alt="beta"/>
 			</div>
-			<p>Discover BPS is a new tool for 2014. We are working hard to ensure its accuracy for all families, across all addresses and grades. If you find issues with your search, please send us feedback at <%= mail_to 'discoverbps@bostonpublicschools.org', 'discoverbps@bostonpublicschools.org', class: 'yellow' %> so we can continue to improve the site.</p>
+			<p class="yellow-buttons"><%= auto_link(TextSnippet.find('home-intro').text) %></p>
 		</div>
 		<div class="search_section_content "> 
 		 
@@ -31,7 +31,7 @@
 						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-01"></span>
 					</div>
 					<div class="text">
-						<p>The first step in the discovery process is to identify the student's eligible schools. By filling out the form below, we can tell you which schools your child is eligible to attend, and which ones might be a good fit.</p>
+						<p class="yellow-buttons"><%= auto_link(TextSnippet.find('home-discover-intro').text) %></p>
 
 						<% if current_user_students.present? %>
 							<p class="K">Please select from your previous searches:</p>
@@ -83,9 +83,7 @@
 						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-02"></span>
 					</div>
 					<div class="text">
-						<p>
-							Once a student's list of schools has been chosen, registration begins by submitting the list and visiting a Welcome Center.
-						</p>
+						<p class="yellow-buttons"><%= auto_link(TextSnippet.find('home-register-intro').text) %></p>
 						<a class="K" href="http://www.bostonpublicschools.org/register" title="Learn more"  style="margin-bottom:0;" target="_blank">Learn more</a>
 					</div>
 				</div>
@@ -123,9 +121,7 @@
 						<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-03"></span>
 					</div>
 					<div class="text">
-						<p>
-							Check out some resources that can help you and your child prepare for this exciting milestone!
-						</p>
+						<p class="yellow-buttons"><%= auto_link(TextSnippet.find('home-succeed-intro').text) %></p>
 						<a class="K" href="http://www.bostonpublicschools.org/transitionsupport" title="Explore" style="margin-bottom:0;" target="_blank">Explore</a>
 					</div>
 										
