@@ -1,0 +1,17 @@
+<% if flash[:alert].present? %>
+	<div class="errors" style="color: white; background-color: #fc0d1b; padding: 20px; margin-bottom: 30px;"><%= flash[:alert] %></div>
+<% elsif flash[:notice].present? %>
+	<div class="notice" style="color: white; background-color: #72c900; padding: 20px; margin-bottom: 30px;"><%= flash[:notice] %></div>
+<% end %>
+
+<h1>Editing Text Snippet</h1>
+
+<%= form_for(:text_snippet, :url => admin_text_snippet_path(@text_snippet), :html => {:method => :put}) do |f| %>
+	<%= render :partial => 'form', :locals => {:f => f} %>
+  
+  <div class="actions">
+  	<%= f.submit 'Save', :class => 'add_button', :disable_with => "Please wait..." %>
+  	&nbsp;&nbsp;
+  	<%= link_to 'Cancel', admin_text_snippets_path %>
+  </div>
+<% end %>

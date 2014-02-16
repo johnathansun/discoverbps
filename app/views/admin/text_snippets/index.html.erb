@@ -1,0 +1,28 @@
+<% if flash[:alert].present? %>
+	<div class="errors" style="color: white; background-color: #fc0d1b; padding: 20px; margin-bottom: 30px;"><%= flash[:alert] %></div>
+<% elsif flash[:notice].present? %>
+	<div class="notice" style="color: white; background-color: #72c900; padding: 20px; margin-bottom: 30px;"><%= flash[:notice] %></div>
+<% end %>
+
+<h1>Text Snippets</h1>
+<br />
+
+<table width="100%;">
+	<thead>
+		<th style="text-align: left;">Name</th>
+		<th style="text-align: left;">Text</th>
+		<th style="text-align: left;"></th>
+	</thead>
+	<tbody>
+		<% for text_snippet in @text_snippets %>
+			<tr class="hover">
+				<td width="150px" style="padding-right: 20px;"><%= text_snippet.slug %></td>
+				<td><%= text_snippet.text %></td>
+				<td width="70px" align="right"><%= link_to 'Edit', edit_admin_text_snippet_path(text_snippet), class: 'edit_button' %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<br />
+<p><%= link_to 'Add a New Snippet', new_admin_text_snippet_path, class: 'add_button', style: 'color: white; font-weight: bold;' %></p>

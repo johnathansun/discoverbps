@@ -232,3 +232,7 @@ input, select {
   margin-left: 12px;
   cursor: pointer;
 }
+.yellow-buttons {
+	a { color: #ffff00; text-decoration: none;}
+	a:hover { color: #ffff00; text-decoration: underline; }
+}

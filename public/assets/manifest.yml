@@ -1375,8 +1375,8 @@ yellow_point.png: yellow_point-f7c0668496d1fe02295f14341112d440.png
 yellow_point/index.png: yellow_point-f7c0668496d1fe02295f14341112d440.png
 application.js: application-af7cbab1b98a8c8a042625b3764bcf9e.js
 application/index.js: application-af7cbab1b98a8c8a042625b3764bcf9e.js
-application.css: application-5fb035aa97bf0866a75ffece89b310a7.css
-application/index.css: application-5fb035aa97bf0866a75ffece89b310a7.css
+application.css: application-a187f610cba9271d0c8191aa1a36313e.css
+application/index.css: application-a187f610cba9271d0c8191aa1a36313e.css
 jquery-ui/animated-overlay.gif: jquery-ui/animated-overlay-602eee4c79a4796b02bb6442948c9e28.gif
 jquery-ui/animated-overlay/index.gif: jquery-ui/animated-overlay-602eee4c79a4796b02bb6442948c9e28.gif
 jquery-ui/ui-bg_flat_0_aaaaaa_40x100.png: jquery-ui/ui-bg_flat_0_aaaaaa_40x100-7d1197a52442bc56fcad60d0390f4b32.png

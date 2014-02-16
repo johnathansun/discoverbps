@@ -1451,6 +1451,7 @@ footer.footer .logo {
   height: 49px;
   text-align: center;
   width: 2px;
+  z-index: 2;
 }
 .wrap.timeline_menu .timeline .day_indicator .text {
   position: relative;

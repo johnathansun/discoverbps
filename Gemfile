@@ -8,6 +8,7 @@ gem 'rails', '3.2.16'
 
 gem 'airbrake'
 gem 'acts_as_paranoid', '~>0.4.0'
+gem 'rails_autolink'
 gem 'aws-s3'
 gem 'clockwork'
 gem 'delayed_job_active_record'

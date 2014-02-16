@@ -46,6 +46,7 @@ DiscoverbpsV2::Application.routes.draw do
     resources :notifications
     resources :schools
     resources :students, path: 'searches'
+    resources :text_snippets
   end
 
   # The priority is based upon order of creation:

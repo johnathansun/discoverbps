@@ -20,8 +20,8 @@
 				<td style="padding-right: 20px;"><%= notification.message %></td>
 				<td width='200px'><%= notification.start_time %></td>
 				<td width='200px'><%= notification.end_time %></td>
-				<td width="50px"><%= link_to 'Edit', edit_admin_notification_path(notification), class: 'edit_button' %></td>
-				<td width="50px"><%= button_to 'Delete', admin_notification_path(notification), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this notification?" %></td>
+				<td width="60px" align="right"><%= link_to 'Edit', edit_admin_notification_path(notification), class: 'edit_button' %></td>
+				<td width="60px" align="right"><%= button_to 'Delete', admin_notification_path(notification), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this notification?" %></td>
 			</tr>
 		<% end %>
 	</tbody>
