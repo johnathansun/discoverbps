@@ -10,6 +10,8 @@
 <table width="100%;">
 	<thead>
 		<th style="text-align: left;">Message</th>
+		<th style="text-align: left;"><%= raw "Home&nbsp;Page?" %></th>
+		<th style="text-align: left;"><%= raw "List&nbsp;Page?" %></th>
 		<th style="text-align: left;">Start Time</th>
 		<th style="text-align: left;">End Time</th>
 		<th style="text-align: left;"></th>
@@ -18,6 +20,8 @@
 		<% for notification in @notifications %>
 			<tr class="hover">
 				<td style="padding-right: 20px;"><%= notification.message %></td>
+				<td width='100px'><%= notification.home_page %></td>
+				<td width='100px'><%= notification.schools_page %></td>
 				<td width='200px'><%= notification.start_time %></td>
 				<td width='200px'><%= notification.end_time %></td>
 				<td width="60px" align="right"><%= link_to 'Edit', edit_admin_notification_path(notification), class: 'edit_button' %></td>
