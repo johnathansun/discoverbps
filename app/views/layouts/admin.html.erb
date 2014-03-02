@@ -6,7 +6,7 @@
 <!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <html>
 	<head>
-	  <title>Discover BPS</title>
+		<title>Discover BPS</title>
 		<meta charset="utf-8">
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -28,8 +28,8 @@
 		<!-- Deprecated IEs scripts & stylesheets =================== -->	
 		 <!-- Chrome Frame for IE6 and under -->
 			<!--[if lte IE 6 ]>
-			  <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-			  <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+				<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+				<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
 			<![endif]-->
 
 		<!-- script pour Typekit  =================== -->
@@ -38,9 +38,174 @@
 			
 		<!-- font-icons-->
 		<!--[if lte IE 7]><script src="lte-ie7.js"></script><![endif]-->
-	  <%= stylesheet_link_tag    "application", :media => "all" %>
-	  <%= javascript_include_tag "application" %>
-	  <%= csrf_meta_tags %>
+		<%= stylesheet_link_tag    "application", :media => "all" %>
+		<%= javascript_include_tag "admin" %>
+		<script src="http://maps.googleapis.com/maps/api/js?libraries=geometry,visualization&sensor=false"></script>
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+		<script>
+			google.load("visualization", "1", {packages:["corechart"]});
+			d3.json("/admin/searches.json", function(error, searches) {
+
+				// Draw the map
+				var map_styles = [
+					{
+					"stylers": [
+						{ "visibility": "on" },
+						{ "saturation": -60 },
+						{ "lightness": -12 }
+					]
+					}
+				];
+
+				var markers = new Array();
+				var Boston = new google.maps.LatLng(42.313,-71.09);
+				map = new google.maps.Map(document.getElementById('map-canvas'), {
+					center: Boston,
+					zoom: 11,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				});
+				if (searches.length > 0) {
+					searches.forEach(function(a, i) {
+						if (a.longitude && a.latitude) {
+							markers.push(new google.maps.LatLng(a.latitude, a.longitude));
+						}
+					});
+				}
+				var heatmap = new google.maps.visualization.HeatmapLayer({
+					data: markers, radius: 8, opacity: 0.9
+				});
+				heatmap.setMap(map);
+				var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});
+				map.mapTypes.set('map_style', styledMap);
+				map.setMapTypeId('map_style');
+
+				// Various formatters.
+				var formatNumber = d3.format(",f"),
+				formatChange = d3.format("+,d"),
+				formatCurrency = d3.format("$0,.2f"),
+				formatDate = d3.time.format("%x"),
+				formatTime = d3.time.format("%I:%M %p");
+
+				// A nest operator, for grouping the search list.
+				var nestByDate = d3.nest()
+				.key(function(d) { return d3.time.day(d.date); });
+
+				searches.forEach(function(d, i) {
+					d.index = i;
+					d.date = parseDate(d.created_at_date);
+				});
+
+				var search = crossfilter(searches),
+				all = search.groupAll(),
+				searchesByDate = search.dimension(function(d) { return d.date; }),
+				dates = searchesByDate.group(d3.time.day),
+				searchesByGrade = search.dimension(function(d) { return d.grade_level; }),
+				grades = searchesByGrade.group(),
+				searchesByPreference = search.dimension(function(d) { return d.preferences_count; }),
+				preferences = searchesByPreference.group();
+
+				function drawSearchesChart() {
+					var data = new google.visualization.DataTable();
+	        data.addColumn('date', 'Date');
+	        data.addColumn('number', 'Volume');
+					dates.top(Infinity).forEach(function(d, i) {
+						data.addRow([d.key, d.value]);
+					});
+					var options = {title: "Search Volume by Date", legend: {position: 'none'}};
+	        var chart = new google.visualization.ColumnChart(document.getElementById('searches_chart'));
+	        chart.draw(data, options);
+
+				}
+
+				function drawGradesChart() {
+					var data = new google.visualization.DataTable();
+	        data.addColumn('string', 'Grade');
+	        data.addColumn('number', 'Volume');
+	        data.addRows([
+						["K0", grades.top(Infinity)[0]['value']],
+						["K1", grades.top(Infinity)[1]['value']],
+						["K2", grades.top(Infinity)[2]['value']],
+						["1", grades.top(Infinity)[3]['value']],
+						["2", grades.top(Infinity)[4]['value']],
+						["3", grades.top(Infinity)[5]['value']],
+						["4", grades.top(Infinity)[6]['value']],
+						["5", grades.top(Infinity)[7]['value']],
+						["6", grades.top(Infinity)[8]['value']],
+						["7", grades.top(Infinity)[9]['value']],
+						["9", grades.top(Infinity)[10]['value']],
+						["10", grades.top(Infinity)[11]['value']],
+						["11", grades.top(Infinity)[12]['value']],
+						["12", grades.top(Infinity)[13]['value']],
+						["12", grades.top(Infinity)[14]['value']]
+	        ]);
+
+					var options = {title: "Search Volume by Grade Level", legend: {position: 'none'}};
+	        var chart = new google.visualization.ColumnChart(document.getElementById('grades_chart'));
+	        chart.draw(data, options);
+
+				}
+
+				function drawPreferencesChart() {
+					var data = new google.visualization.DataTable();
+	        data.addColumn('number', 'Preferences');
+	        data.addColumn('number', 'Volume');
+					preferences.top(10).forEach(function(d, i) {
+						data.addRow([d.key, d.value]);
+					});
+					var options = {title: "Search Volume by Preferences Count", legend: {position: 'none'}};
+	        var chart = new google.visualization.ColumnChart(document.getElementById('preferences_chart'));
+	        chart.draw(data, options);
+
+				}
+				renderAll();
+
+				// Renders the specified chart or list.
+				function render(method) {
+					d3.select(this).call(method);
+				}
+
+				// Whenever the brush moves, re-rendering everything.
+				function renderAll() {
+					drawSearchesChart();
+					drawGradesChart();
+					drawPreferencesChart();
+					d3.select("#total").text(formatNumber(all.value()));
+					// d3.selectAll("#grade_k0").text(formatNumber(grades.top(Infinity)[0]['value']));
+					// d3.selectAll("#grade_k1").text(formatNumber(grades.top(Infinity)[1]['value']));
+					// d3.selectAll("#grade_k2").text(formatNumber(grades.top(Infinity)[2]['value']));
+					// d3.selectAll("#grade_1").text(formatNumber(grades.top(Infinity)[3]['value']));
+					// d3.selectAll("#grade_2").text(formatNumber(grades.top(Infinity)[4]['value']));
+					// d3.selectAll("#grade_3").text(formatNumber(grades.top(Infinity)[5]['value']));
+					// d3.selectAll("#grade_4").text(formatNumber(grades.top(Infinity)[6]['value']));
+					// d3.selectAll("#grade_5").text(formatNumber(grades.top(Infinity)[7]['value']));
+					// d3.selectAll("#grade_6").text(formatNumber(grades.top(Infinity)[8]['value']));
+					// d3.selectAll("#grade_7").text(formatNumber(grades.top(Infinity)[9]['value']));
+					// d3.selectAll("#grade_8").text(formatNumber(grades.top(Infinity)[0]['value']));
+					// d3.selectAll("#grade_9").text(formatNumber(grades.top(Infinity)[10]['value']));
+					// d3.selectAll("#grade_10").text(formatNumber(grades.top(Infinity)[11]['value']));
+					// d3.selectAll("#grade_11").text(formatNumber(grades.top(Infinity)[12]['value']));
+					// d3.selectAll("#grade_12").text(formatNumber(grades.top(Infinity)[13]['value']));
+				}
+
+				// Like d3.time.format, but faster.
+				function parseDate(d) {
+					var format = d3.time.format("%Y-%m-%d");
+					return format.parse(d);
+				}
+
+				window.filter = function(filters) {
+					filters.forEach(function(d, i) { charts[i].filter(d); });
+					renderAll();
+				};
+
+				window.reset = function(i) {
+					charts[i].filter(null);
+					renderAll();
+				};
+			});
+		</script>
+		<%= csrf_meta_tags %>
 	</head>
 
 	<body class="standard one admin">

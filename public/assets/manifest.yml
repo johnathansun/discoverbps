@@ -139,6 +139,8 @@ bps-logo.png: bps-logo-5346bcf200148898ce67d0be8d477f00.png
 bps-logo/index.png: bps-logo-5346bcf200148898ce67d0be8d477f00.png
 btn_next.jpg: btn_next-958d7081c107eebe3cbed33395495cc7.jpg
 btn_next/index.jpg: btn_next-958d7081c107eebe3cbed33395495cc7.jpg
+dashboard-loader.gif: dashboard-loader-6907a47b199b6055149faf05aa361fab.gif
+dashboard-loader/index.gif: dashboard-loader-6907a47b199b6055149faf05aa361fab.gif
 favicon.ico: favicon-2511dc829852958a5e945131ab979e6e.ico
 favicon/index.ico: favicon-2511dc829852958a5e945131ab979e6e.ico
 icon_exclamation.png: icon_exclamation-240c36018a03c446fb76d8eca59ecff0.png
@@ -1375,8 +1377,8 @@ yellow_point.png: yellow_point-f7c0668496d1fe02295f14341112d440.png
 yellow_point/index.png: yellow_point-f7c0668496d1fe02295f14341112d440.png
 application.js: application-af7cbab1b98a8c8a042625b3764bcf9e.js
 application/index.js: application-af7cbab1b98a8c8a042625b3764bcf9e.js
-application.css: application-a187f610cba9271d0c8191aa1a36313e.css
-application/index.css: application-a187f610cba9271d0c8191aa1a36313e.css
+application.css: application-8df37ffe02d8d5e45a12884ba000565a.css
+application/index.css: application-8df37ffe02d8d5e45a12884ba000565a.css
 jquery-ui/animated-overlay.gif: jquery-ui/animated-overlay-602eee4c79a4796b02bb6442948c9e28.gif
 jquery-ui/animated-overlay/index.gif: jquery-ui/animated-overlay-602eee4c79a4796b02bb6442948c9e28.gif
 jquery-ui/ui-bg_flat_0_aaaaaa_40x100.png: jquery-ui/ui-bg_flat_0_aaaaaa_40x100-7d1197a52442bc56fcad60d0390f4b32.png
