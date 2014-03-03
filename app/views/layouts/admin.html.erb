@@ -156,12 +156,12 @@
 
 				function drawPreferencesChart() {
 					var data = new google.visualization.DataTable();
-	        data.addColumn('number', 'Preferences');
+	        data.addColumn('string', 'Preferences');
 	        data.addColumn('number', 'Volume');
-					preferences.top(25).forEach(function(d, i) {
-						data.addRow([d.key, d.value]);
+					preferences.top(Infinity).forEach(function(d, i) {
+						data.addRow([d.key.toString(), d.value]);
 					});
-					var options = {title: "Search Volume by Preferences Count", legend: {position: 'none'}, hAxis: { ticks: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25] }, "vAxis":{logScale: true}};
+					var options = {title: "Search Volume by Preferences Count", legend: {position: 'none'}, hAxis: { slantedText: false, maxAlternation: 1 }, vAxis: {logScale: true}};
 	        var chart = new google.visualization.ColumnChart(document.getElementById('preferences_chart'));
 	        chart.draw(data, options);
 
