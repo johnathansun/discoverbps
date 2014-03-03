@@ -48,7 +48,7 @@ private
     self.grade_level = self.grade_level.strip.upcase if self.grade_level.present?
   end
 
-  def count_preferences
+  def count_preferences(preference)
     self.update_column(:preferences_count, self.preferences.count)
   end
 end
