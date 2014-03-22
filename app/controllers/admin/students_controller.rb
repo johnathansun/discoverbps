@@ -9,7 +9,7 @@ class Admin::StudentsController < ApplicationController
       format.html
       format.json do
 				render json: @students.to_json(
-					only: [ :grade_level, :latitude, :longitude, :preferences_count ],
+					only: [ :grade_level, :latitude, :longitude, :preferences_count, :zipcode ],
 					methods: :created_at_date
 				)
       end
