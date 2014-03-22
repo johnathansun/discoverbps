@@ -1,5 +1,5 @@
 .map-container{style: "margin: -30px -30px 20px -30px;"}
-	#map-canvas{style: "width: 100%; height: 600px;"}
+	#map-canvas{style: "width: 100%; height: 650px;"}
 		%div{style: "text-align: center; margin-top: 200px;"}
 			Loading map data
 			%br/
@@ -8,19 +8,31 @@
 
 #searches_chart{style: "width: 100%; height: 300px;"}
 	%center
-		Loading chart data
+		Loading search data
 		%br/
 		= image_tag('dashboard-loader.gif')
 
 #grades_chart{style: "width: 100%; height: 300px;"}
 	%center
-		Loading chart data
+		Loading grade level data
 		%br/
 		= image_tag('dashboard-loader.gif')
 
-#preferences_chart{style: "width: 100%; height: 300px;"}
+#ell_preferences_chart{style: "display: inline-block; width: 33%; height: 450px;"}
 	%center
-		Loading chart data
+		Loading ELL data
+		%br/
+		= image_tag('dashboard-loader.gif')
+
+#iep_preferences_chart{style: "display: inline-block; width: 33%; height: 450px;"}
+	%center
+		Loading IEP data
+		%br/
+		= image_tag('dashboard-loader.gif')
+
+#preferences_chart{style: "display: inline-block; width: 33%; height: 450px;"}
+	%center
+		Loading preferences data
 		%br/
 		= image_tag('dashboard-loader.gif')
 
@@ -212,8 +224,13 @@
 			dates = searchesByDate.group(d3.time.day),
 			searchesByGrade = search.dimension(function(d) { return d.grade_level; }),
 			grades = searchesByGrade.group(),
+			searchesByEllPreference = search.dimension(function(d) { return d.ell_needs; }),
+			ellPreferences = searchesByEllPreference.group();
+			searchesByIepPreference = search.dimension(function(d) { return d.iep_needs; }),
+			iepPreferences = searchesByIepPreference.group();
 			searchesByPreference = search.dimension(function(d) { return d.preferences_count; }),
 			preferences = searchesByPreference.group();
+
 			searchesByZipcode = search.dimension(function(d) { return d.zipcode; }),
 			zipcodes = searchesByZipcode.group();
 
@@ -306,6 +323,32 @@
 
 			}
 
+			function drawEllChart() {
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', 'Preferences');
+				data.addColumn('number', 'Volume');
+				ellPreferences.top(Infinity).forEach(function(d, i) {
+					data.addRow([d.key.toString(), d.value]);
+				});
+				var options = {title: "ELL Needs", pieHole: 0.4};
+				var chart = new google.visualization.PieChart(document.getElementById('ell_preferences_chart'));
+				chart.draw(data, options);
+
+			}
+
+			function drawIepChart() {
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', 'Preferences');
+				data.addColumn('number', 'Volume');
+				iepPreferences.top(Infinity).forEach(function(d, i) {
+					data.addRow([d.key.toString(), d.value]);
+				});
+				var options = {title: "IEP Needs", pieHole: 0.4};
+				var chart = new google.visualization.PieChart(document.getElementById('iep_preferences_chart'));
+				chart.draw(data, options);
+
+			}
+
 			function drawPreferencesChart() {
 				var data = new google.visualization.DataTable();
 				data.addColumn('string', 'Preferences');
@@ -313,11 +356,12 @@
 				preferences.top(Infinity).forEach(function(d, i) {
 					data.addRow([d.key.toString(), d.value]);
 				});
-				var options = {title: "Search Volume by Preferences Count", legend: {position: 'none'}, hAxis: { slantedText: false, maxAlternation: 1 }, vAxis: {logScale: true}};
-				var chart = new google.visualization.ColumnChart(document.getElementById('preferences_chart'));
+				var options = {title: "Preferences Count", pieHole: 0.4};
+				var chart = new google.visualization.PieChart(document.getElementById('preferences_chart'));
 				chart.draw(data, options);
 
 			}
+
 			renderAll();
 
 			// Renders the specified chart or list.
@@ -325,27 +369,12 @@
 				d3.select(this).call(method);
 			}
 
-			// Whenever the brush moves, re-rendering everything.
 			function renderAll() {
 				drawSearchesChart();
 				drawGradesChart();
+				drawEllChart();
+				drawIepChart();
 				drawPreferencesChart();
-				d3.select("#total").text(formatNumber(all.value()));
-				// d3.selectAll("#grade_k0").text(formatNumber(grades.top(Infinity)[0]['value']));
-				// d3.selectAll("#grade_k1").text(formatNumber(grades.top(Infinity)[1]['value']));
-				// d3.selectAll("#grade_k2").text(formatNumber(grades.top(Infinity)[2]['value']));
-				// d3.selectAll("#grade_1").text(formatNumber(grades.top(Infinity)[3]['value']));
-				// d3.selectAll("#grade_2").text(formatNumber(grades.top(Infinity)[4]['value']));
-				// d3.selectAll("#grade_3").text(formatNumber(grades.top(Infinity)[5]['value']));
-				// d3.selectAll("#grade_4").text(formatNumber(grades.top(Infinity)[6]['value']));
-				// d3.selectAll("#grade_5").text(formatNumber(grades.top(Infinity)[7]['value']));
-				// d3.selectAll("#grade_6").text(formatNumber(grades.top(Infinity)[8]['value']));
-				// d3.selectAll("#grade_7").text(formatNumber(grades.top(Infinity)[9]['value']));
-				// d3.selectAll("#grade_8").text(formatNumber(grades.top(Infinity)[0]['value']));
-				// d3.selectAll("#grade_9").text(formatNumber(grades.top(Infinity)[10]['value']));
-				// d3.selectAll("#grade_10").text(formatNumber(grades.top(Infinity)[11]['value']));
-				// d3.selectAll("#grade_11").text(formatNumber(grades.top(Infinity)[12]['value']));
-				// d3.selectAll("#grade_12").text(formatNumber(grades.top(Infinity)[13]['value']));
 			}
 
 			// Like d3.time.format, but faster.
