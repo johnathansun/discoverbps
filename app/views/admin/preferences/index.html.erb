@@ -6,22 +6,54 @@
 
 <h1>Preferences</h1>
 <br />
+<p><strong>Instructions:</strong> To edit a preference category, click the 'edit' button next to the name. To edit a preference, click the preference name. To reorder the preferences list on the parent-facing site, grab the handle icon and drag-and-drop the row into a new location in its parent category.</p>
 <% for preference_category in @preference_categories %>
 	<h3><%= preference_category.name %> <%= link_to 'Edit', edit_admin_preference_category_path(preference_category), style: 'font-weight: normal; font-size: 14px;' %></h3>
 	<table width="100%;">
 		<tbody>
-			<% for preference in preference_category.preferences.rank(:sort_order) %>
-				<tr class="hover">
-					<td><Strong><%= link_to preference.name, edit_admin_preference_path(preference) %></strong></td>
-					<td width="150px"><%= preference.api_table_name %></td>
-					<td width="150px"><%= preference.api_table_key %></td>
-					<td width="200px"><%= preference.api_table_value %></td>
-					<td width="40px"><%= button_to 'Delete', admin_preference_path(preference), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this preference?" %></td>
-				</tr>
-			<% end %>
+			<td>
+				<ul id="preferences-list-<%= preference_category.id %>", style="margin-left: 10px;">
+					<% for preference in preference_category.preferences.rank(:sort_order) %>
+						<%= content_tag_for :li, preference do %>
+							<table width="100%" style="margin-bottom: 0;" >
+								<tr class="hover">
+									<td width="50px" class="handle"><%= image_tag('handle.png') %></td>
+									<td><strong><%= link_to preference.name, edit_admin_preference_path(preference) %></strong></td>
+									<td width="150px"><%= preference.api_table_name %></td>
+									<td width="150px"><%= preference.api_table_key %></td>
+									<td width="200px"><%= preference.api_table_value %></td>
+									<td width="40px"><%= button_to 'Delete', admin_preference_path(preference), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this preference?" %></td>
+								</tr>
+							</table>
+						<% end %>
+					<% end %>
+				</ul>
+			</td>
 		</tbody>
 	</table>
+	<script>
+	  $('#preferences-list-<%= preference_category.id %>').sortable({
+		  axis: 'y', 
+		  dropOnEmpty: false, 
+		  handle: '.handle', 
+		  cursor: 'ns-resize',
+		  items: 'li',
+		  opacity: 0.4,
+		  scroll: true,
+		  update: function(event, ui){      
+		  	$.ajax({
+		  		type: 'post', 
+		  		data: { preference: { id: ui.item.attr('id'), sort_order: ui.item.index() } }, 
+		  		dataType: 'script', 
+		  		beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+		  		url: '/admin/preferences/sort'
+		  	})
+		  }
+	  })
+	</script>
 <% end %>
+
 <br />
 <p><%= link_to 'Add a New Preference', new_admin_preference_path, class: 'add_button', style: 'color: white; font-weight: bold;' %></p>
 <p><%= link_to 'Add a New Preference Category', new_admin_preference_category_path, class: 'add_button', style: 'color: white; font-weight: bold;' %></p>
+<p><%= link_to 'Sort Preference Categories', admin_preference_categories_path, class: 'edit_button', style: 'color: white; font-weight: bold;' %></p>

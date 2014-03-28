@@ -1,0 +1,50 @@
+<% if flash[:alert].present? %>
+	<div class="errors" style="color: white; background-color: #fc0d1b; padding: 20px; margin-bottom: 30px;"><%= flash[:alert] %></div>
+<% elsif flash[:notice].present? %>
+	<div class="notice" style="color: white; background-color: #72c900; padding: 20px; margin-bottom: 30px;"><%= flash[:notice] %></div>
+<% end %>
+
+<h1>Preference Categories</h1>
+<br />
+<p><Strong>Instructions:</strong> to change the order of the preference categories on the parent-facing site, grab the handle icon and drag-and-drop the row into a new location in the list.</p>
+<table width="100%;">
+	<tbody>
+		<td>
+			<ul id="preferences-categories-list", style="margin-left: 10px;">
+				<% for preference_category in @preference_categories %>
+					<%= content_tag_for :li, preference_category do %>
+						<table width="100%" style="margin-bottom: 0;" >
+							<tr class="hover">
+								<td width="50px" class="handle"><%= image_tag('handle.png') %></td>
+								<td><strong><%= preference_category.name %></strong></td>
+								<td width="40px"><%= button_to 'Delete', admin_preference_category_path(preference_category), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this preference category and all associated preferences?" %></td>
+							</tr>
+						</table>
+					<% end %>
+				<% end %>
+			</ul>
+		</td>
+	</tbody>
+</table>
+
+<script>
+  $('#preferences-categories-list').sortable({
+	  axis: 'y', 
+	  dropOnEmpty: false, 
+	  handle: '.handle', 
+	  cursor: 'ns-resize',
+	  items: 'li',
+	  opacity: 0.4,
+	  scroll: true,
+	  update: function(event, ui){      
+	  	$.ajax({
+	  		type: 'post', 
+	  		data: { preference_category: { id: ui.item.attr('id'), sort_order: ui.item.index() } }, 
+	  		dataType: 'script', 
+	  		beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+	  		url: '/admin/preference_categories/sort'
+	  	})
+	  }
+  })
+</script>
+<p><%= link_to 'Return to Preferences', admin_preferences_path, class: 'edit_button', style: 'color: white; font-weight: bold;' %></p>

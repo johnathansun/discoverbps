@@ -17,6 +17,6 @@ class PreferenceCategory < ActiveRecord::Base
 
   def grade_level_preferences(gl)
   	grade_level = gl.try(:downcase).try(:strip)
-  	self.preferences.rank(:sort_order).where("grade_#{grade_level} = ?", true)
+  	self.preferences.where("grade_#{grade_level} = ?", true).rank(:sort_order)
   end
 end

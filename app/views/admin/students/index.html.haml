@@ -289,7 +289,7 @@
 				dates.top(Infinity).forEach(function(d, i) {
 					data.addRow([d.key, d.value]);
 				});
-				var options = {title: "Search Volume by Date", legend: {position: 'none'}};
+				var options = {title: "Searches by Date", legend: {position: 'none'}};
 				var chart = new google.visualization.ColumnChart(document.getElementById('searches_chart'));
 				chart.draw(data, options);
 
@@ -317,7 +317,7 @@
 					["12", grades.top(Infinity)[14]['value']]
 				]);
 
-				var options = {title: "Search Volume by Grade Level", legend: {position: 'none'}};
+				var options = {title: "Searches by Grade Level", legend: {position: 'none'}};
 				var chart = new google.visualization.ColumnChart(document.getElementById('grades_chart'));
 				chart.draw(data, options);
 

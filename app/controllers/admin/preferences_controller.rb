@@ -46,4 +46,10 @@ class Admin::PreferencesController < ApplicationController
       format.html { redirect_to admin_preferences_url }
     end
   end
+
+  def sort
+    id = params['preference']['id'].gsub(/preference_/, '')
+    Preference.find(id).update_attribute(:sort_order_position, params['preference']['sort_order'])
+    render :nothing => true
+  end
 end

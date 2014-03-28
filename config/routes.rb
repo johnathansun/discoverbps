@@ -38,10 +38,10 @@ DiscoverbpsV2::Application.routes.draw do
     root :to => "students#index"
     resources :admins
     resources :preferences do
-      post :sort, on: :collection
+      post 'sort', on: :collection
     end
     resources :preference_categories do
-      post :sort, on: :collection
+      post 'sort', on: :collection
     end
     resources :notifications
     resources :schools
