@@ -40,15 +40,12 @@
 		</div>
 		<!-- End menu account -->
 
-		
-		<!-- Login panel -->
 		<%= render partial: 'schools/account_login_panel' %>
-		<!-- End login panel -->
 
-		<!-- Sinup panel -->
 		<%= render partial: 'schools/account_signup_panel' %>
-		<!-- End signup panel -->
 		
+		<%= render partial: 'schools/account_forgot_password_panel' %>
+
 		<!-- Start register box -->
 		<div class='action_box register_box' style='display:none;'>
 			<div class='actions'>
@@ -114,33 +111,39 @@
 	$(document).ready(function(){
 		var login_panel_open = false;
 		var signup_panel_open = false;
+		var forgot_panel_open = false;
 
 		$('.account_box').hover(
 			function() {
 				$('.account_menu_box').show();
 			}, function() {
 				$('.account_menu_box').hide();
+				$("#forgot_panel").hide();
 				$("#login_panel").hide();
 				$('#signup_panel').hide();
 				$('#signup_error').hide();
 				$('#login_error').hide();
 				login_panel_open = false;
 				signup_panel_open = false;
+				forgot_panel_open = false;
 		});
 
 		$('#login_btn').click(function() {
 			if (login_panel_open) {
 				login_panel_open = false;
 				signup_panel_open = false;
+				forgot_panel_open = false;
 				$('#signup_panel').hide();
 				$("#login_panel").hide();
+				$("#forgot_panel").hide();
 				$(".account_menu_box").width("auto");
 			} else {
 				login_panel_open = true;
 				signup_panel_open = false;
-				//console.log("open box");
+				forgot_panel_open = false;
 				$('#signup_panel').css("display", "none");
 				$('#login_panel').css("display", "block");	
+				$('#forgot_panel').css("display", "none");
 			}
 			return false;
 		});
@@ -149,15 +152,42 @@
 				// Close box
 				login_panel_open = false;
 				signup_panel_open = false;
+				forgot_panel_open = false;
 				$('#signup_panel').hide();
 				$("#login_panel").hide();
+				$("#forgot_panel").hide();
 				$(".account_menu_box").width("auto");
 			} else {
+				// Open box
 				login_panel_open = false;
 				signup_panel_open = true;
-				//console.log("open box");
+				forgot_panel_open = false;
 				$('#login_panel').css("display", "none");
 				$('#signup_panel').css("display", "block");	
+				$('#forgot_panel').css("display", "none");
+			}
+			return false;
+		});
+		$('.forgot_btn').click(function() {
+			if (forgot_panel_open) {
+				// Close box
+				login_panel_open = false;
+				signup_panel_open = false;
+				forgot_panel_open = false;
+				$('#signup_panel').hide();
+				$("#login_panel").hide();
+				$("#forgot_panel").hide();
+				$(".account_menu_box").width("auto");
+			} else {
+				// Open box
+				login_panel_open = false;
+				signup_panel_open = false;
+				forgot_panel_open = true;
+				$("#signup_panel").css("display", "none");
+				$("#login_panel").css("display", "none");
+				$('#forgot_panel').css("display", "block");	
+				$('#reset_password_form').show();
+	    	$('#login_success').html('').show();
 			}
 			return false;
 		});
@@ -166,16 +196,19 @@
 				// Close box
 				login_panel_open = false;
 				signup_panel_open = false;
+				forgot_panel_open = false;
 				$('#signup_panel').hide();
 				$("#login_panel").hide();
+				$("#forgot_panel").hide();
 				$(".account_menu_box").width("auto");
 			} else {
 				// Open box
 				signup_panel_open = false;
 				login_panel_open = true;
-				//console.log("open box");
+				forgot_panel_open = false;
 				$("#signup_panel").css("display", "none");
 				$("#login_panel").css("display", "block");
+				$('#forgot_panel').css("display", "none");
 				//$(".account_menu_box").width("410");
 			}
 			 return false;

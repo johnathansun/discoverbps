@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.0.0'
-gem 'rails', '3.2.16'
+gem 'rails', '3.2.17'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -28,6 +28,7 @@ gem 'ranked-model'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'rake', '~> 10.3.1'
 gem 'unicorn'
 gem 'will_paginate', '~> 3.0'
 
@@ -43,6 +44,10 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+end
+
+group :development do
+  # gem "letter_opener"
 end
 
 

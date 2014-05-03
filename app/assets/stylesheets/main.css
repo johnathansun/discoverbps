@@ -1594,8 +1594,7 @@ footer.footer .logo {
 .wrap .account_box .account_menu_box .action_box.save_box .btn.input_box {
   position: relative;
   border-color: #ebebeb;
-  color: #000000;
-  background: #ebebeb;
+  color: #565656;
   padding: 0;
   width: 234px;
   /* Placeholder */
@@ -1605,26 +1604,26 @@ footer.footer .logo {
   padding: 0 0 0 10px;
   border: none;
   outline: none;
-  color: #000000;
+  color: #565656;
   font-family: AvenirLT-Black;
   font-size: 15px;
   width: 200px;
   height: 31px;
   line-height: 31px;
-  background: #ebebeb;
+  background: #ffffff;
   width: 224px;
 }
 .wrap .account_box .account_menu_box .action_box.save_box .btn.input_box input:focus {
   background-color: #ffffff;
 }
 .wrap .account_box .account_menu_box .action_box.save_box .btn.input_box input:-moz-placeholder {
-  color: #000000;
+  color: #565656;
 }
 .wrap .account_box .account_menu_box .action_box.save_box .btn.input_box input:-ms-input-placeholder {
-  color: #000000;
+  color: #565656;
 }
 .wrap .account_box .account_menu_box .action_box.save_box .btn.input_box input::-webkit-input-placeholder {
-  color: #000000;
+  color: #565656;
 }
 .wrap .account_box .account_menu_box .action_box.save_box .btn.input_box .icon_success {
   color: #72c900;

@@ -7,7 +7,7 @@ DiscoverbpsV2::Application.routes.draw do
     get "admin_edit_registration", :to => "admin/registrations#edit"
   end
 
-  devise_for :users, :controllers => { :sessions => "users/sessions", :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :sessions => "users/sessions", :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks", :passwords => 'users/passwords' }
 
   root :to => 'schools#home'
   match 'home' => 'schools#home'

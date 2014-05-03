@@ -19,10 +19,10 @@
 				<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
 				<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
 			</div>
-			<div class="signup"><%= image_submit_tag('/assets/oauth-login.png') %></div>
+			<div class="signup"><%= image_submit_tag('/assets/oauth-login.jpg') %></div>
 			<div id="login_error" style="display:none;color:red;"></div>
 		<% end %>
-		<a href='#' class='signup_btn btn_login txt_btn_sign_up'>Sign up <span class='note_login'>if you haven't yet</span></a>
+		<a href='#' class='forgot_btn btn_login txt_btn_sign_up'>Forgot password?</a>
 	</div>
 	<div class='clr'></div>
 </div>
@@ -32,7 +32,7 @@
 	  if (data.success) {
 	    window.location.replace("<%= request.original_url %>");
 	  } else {
-	    $('#login_error').html("We had trouble logging you in. <br />Please try again.").show();;
+	    $('#login_error').html("We had trouble logging you in. <br />Please try again.").show();
 	  }
 	});
 </script>
