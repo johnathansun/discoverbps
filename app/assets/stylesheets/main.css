@@ -1238,7 +1238,7 @@ footer.footer .title_footer {
   padding-top: 22px;
   margin-bottom: 0;
   font-size: 14px;
-  width: 350px;
+  width: 450px;
 }
 footer.footer a {
   text-decoration: none;
@@ -3601,8 +3601,8 @@ ie6 .print1 .wrap {
 ---------------------------------------------- */
 @media screen and (max-width: 1200px) {
   footer.footer .title_footer {
-    width: 300px;
-    font-size: 12px;
+    width: 450px;
+    font-size: 13px;
   }
   .standard .wrap {
     width: auto;
@@ -4464,10 +4464,10 @@ ie6 .print1 .wrap {
   footer.footer .title_footer {
     float: left;
     width: auto;
-    padding-top: 22px;
+    padding-top: 10px;
     margin-bottom: 15px;
     font-size: 12px;
-    width: 290px;
+    width: 300px;
   }
   footer.footer .wrap {
     font-size: 12px;
