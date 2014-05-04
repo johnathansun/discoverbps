@@ -42,7 +42,7 @@ class Users::PasswordsController < Devise::PasswordsController
 				respond_with resource
 			end
 		else
-			redirect_to new_user_password_path, notice: "We couldn't validate your email token. Please try again."
+			redirect_to new_user_password_path, alert: "We couldn't validate your email token. Please try again."
 		end
 	end
 end
