@@ -11,7 +11,7 @@ class Users::PasswordsController < Devise::PasswordsController
 			yield resource if block_given?
 
 			if successfully_sent?(self.resource)
-				format.html { render action: "new" }
+				format.html { render action: "new", :notice => "We sent a confirmation email to #{resource.email}. Please check your email for instructions on resetting your password." }
 				format.json {render :json => {:success => true}}
 			else
 				format.html { render action: "new", :alert => "Sorry, we couldn't find a user with that email address. Please try again or create a new account if you haven't done so already." }

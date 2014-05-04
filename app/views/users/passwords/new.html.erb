@@ -3,26 +3,29 @@
     <h1>Forgot your password?</h1>
   </div>
   <% if flash[:alert].present? %>
-  	<p style="color: red;"><%= flash[:alert] %></p>
+  	<p style="color: white;"><%= flash[:alert] %></p>
+  <% elsif flash[:notice].present? %>
+  	<p style="color: white;"><%= flash[:alert] %></p>  
   <% else %>
 	  <p>Please enter your email address in the form below. We will send you instructions on resetting your password.</p>
 	 <% end %>
 </div>
 
+<% unless flash[:notice].present? %>
+	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+		<% if resource.try(:errors).present? %>
+			<div style="color: white;">
+				<%= devise_error_messages! %>
+			</div>
+		<% end %>
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-	<% if resource.try(:errors).present? %>
-		<div style="color: white;">
-			<%= devise_error_messages! %>
-		</div>
+	  <div class='btn input_box'>
+	    <%= f.email_field :email, :autofocus => true, placeholder: 'Email' %>
+	  </div>
+
+	  <div class="form_button">
+	    <%= image_submit_tag('/assets/buttons/submit.jpg') %>
+	  </div>
+
 	<% end %>
-
-  <div class='btn input_box'>
-    <%= f.email_field :email, :autofocus => true, placeholder: 'Email' %>
-  </div>
-
-  <div class="form_button">
-    <%= image_submit_tag('/assets/buttons/submit.jpg') %>
-  </div>
-
 <% end %>
