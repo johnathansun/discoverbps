@@ -3,16 +3,16 @@
     <h1>Forgot your password?</h1>
   </div>
   <% if flash[:alert].present? %>
-  	<p><%= flash[:alert] %></p>
+  	<p style="color: red;"><%= flash[:alert] %></p>
   <% else %>
-	  <p style="color: red;">Please enter your email address in the form below. We will send you instructions on resetting your password.</p>
+	  <p>Please enter your email address in the form below. We will send you instructions on resetting your password.</p>
 	 <% end %>
 </div>
 
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
 	<% if resource.try(:errors).present? %>
-		<div class="alert alert-error">
+		<div style="color: white;">
 			<%= devise_error_messages! %>
 		</div>
 	<% end %>

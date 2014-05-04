@@ -6,13 +6,17 @@ class Users::PasswordsController < Devise::PasswordsController
   append_before_filter :assert_reset_token_passed, :only => :edit
 
 	def create
-		self.resource = User.send_reset_password_instructions(resource_params)
-		yield resource if block_given?
+		respond_to do |format|
+			self.resource = User.send_reset_password_instructions(resource_params)
+			yield resource if block_given?
 
-		if successfully_sent?(self.resource)
-			return render :json => {:success => true}
-		else
-			return render :json => {:success => false, :errors => ["Sorry, we couldn't find that email address."]}
+			if successfully_sent?(self.resource)
+				format.html { render action: "new" }
+				format.json {render :json => {:success => true}}
+			else
+				format.html { render action: "new", :alert => "Sorry, we couldn't find a user with that email address. Please try again or create a new account if you haven't done so already." }
+				format.json { render :json => {:success => false, :errors => ["Sorry, we couldn't find a user with that email address. Please try again or create a new account if you haven't done so already."] }}
+			end
 		end
 	end
 
@@ -42,7 +46,7 @@ class Users::PasswordsController < Devise::PasswordsController
 				respond_with resource
 			end
 		else
-			redirect_to new_user_password_path, alert: "We couldn't validate your email token. Please try again."
+			redirect_to new_user_password_path, alert: "We couldn't validate the authentication token from the email we sent. You may have waited too long to respond. Please try again."
 		end
 	end
 end
