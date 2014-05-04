@@ -188,7 +188,7 @@ Devise.setup do |config|
   # change their passwords.
   config.reset_password_within = 6.hours
 
-  config.allow_insecure_token_lookup = true
+  # config.allow_insecure_token_lookup = true
 
   # ==> Configuration for :encryptable
   # Allow you to use another encryption algorithm besides bcrypt (default). You can use
