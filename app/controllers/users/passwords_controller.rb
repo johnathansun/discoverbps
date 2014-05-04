@@ -1,6 +1,6 @@
 class Users::PasswordsController < Devise::PasswordsController
 	layout 'application'
-	
+
 	prepend_before_filter :require_no_authentication
   # Render the #edit only if coming from a reset password email link
   append_before_filter :assert_reset_token_passed, :only => :edit
@@ -19,7 +19,7 @@ class Users::PasswordsController < Devise::PasswordsController
 	# PUT /resource/password
 	def update
 		# self.resource = resource_class.reset_password_by_token(resource_params)
-		resource = AdminUser.where(reset_password_token: resource_params[:reset_password_token]).first
+		resource = User.where(reset_password_token: resource_params[:reset_password_token]).first
 
 		if resource.present?
 			if resource.persisted?
