@@ -1,7 +1,7 @@
 <% if flash[:alert].present? %>
-	<div class="errors" style="color: white; background-color: #fc0d1b; padding: 20px; margin-bottom: 30px;"><%= flash[:alert] %></div>
+	<div class="flash_alert"><%= flash[:alert] %></div>
 <% elsif flash[:notice].present? %>
-	<div class="notice" style="color: white; background-color: #72c900; padding: 20px; margin-bottom: 30px;"><%= flash[:notice] %></div>
+	<div class="flash_notice"><%= flash[:notice] %></div>
 <% end %>
 
 <h1>Admins Users</h1>

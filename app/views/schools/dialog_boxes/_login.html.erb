@@ -2,33 +2,54 @@
 <!-- dialog hello -->
 <div class='content'>
 	<span class='txt_join_list' style='display:none;'>Join to save your lists:</span>
-	<p class='txt_login'>Log in with:</p>
+	<p class='txt_login'>To log in, please enter your email address and password below:</p>
 		
-	<%= form_for(:user, :as => 'user', :url => session_path(:user)) do |f| %>
-		<form method='' action='' name=''>
-			<div class='input_box'>
-				<%= f.email_field :email, placeholder: 'Email address' %>
-			</div>
-			<div class='input_box'>
-				<%= f.password_field :password, placeholder: 'Password' %>
-			</div>
-			<div class="signup"><%= image_submit_tag('/assets/buttons/login.jpg') %></div>
-			<br />
-			<a href='#' class='forgot_btn btn_login txt_btn_sign_up'>Forgot password?</a>
+	<%= form_for(:user, :as => 'user', :url => session_path(:user), :html => {:id => "sign_in_user"}, :format => :json, :remote => true ) do |f| %>
 
-			<div class='clr'></div>
-		</form>
+		<div class='input_box'>
+			<%= f.email_field :email, placeholder: 'Email address' %>
+		</div>
+		
+		<div class='input_box'>
+			<%= f.password_field :password, placeholder: 'Password' %>
+		</div>
+
+		<div class="signup"><%= image_submit_tag('/assets/buttons/login.jpg') %></div>
+
+		<div id="login_error" style="display: none; color: red;"></div>
+
 	<% end %>
 
-	<div><%= link_to image_tag('/assets/buttons/facebook.png'), user_omniauth_authorize_path(:facebook) %></div>
-	<div><%= link_to image_tag('/assets/buttons/twitter.png'), user_omniauth_authorize_path(:twitter) %></div>
+	<a href='#' id="forgot_password_button" class='forgot_btn' style="font-size: 13px;">Forgot password?</a>
+
+
+	<p>You may also log in using your Facebook or Twitter account:</p>
+	<div class="btn_facebook"><%= link_to image_tag('/assets/buttons/facebook.png'), user_omniauth_authorize_path(:facebook) %></div>
+	<div class="btn_twitter"><%= link_to image_tag('/assets/buttons/twitter.png'), user_omniauth_authorize_path(:twitter) %></div>
 
 </div>
+
 <script>
+	$("form#sign_in_user").bind("ajax:success", function(e, data, status, xhr) {
+	  if (data.success) {
+	  	alert('data success');
+	    $('#login_error').html("You are now logged in.").show();
+	  } else {
+	  	alert('data failure');
+	    $('#login_error').html("We had trouble logging you in. <br />Please try again.").show();
+	  }
+	});
+
+	$('#forgot_password_button').click(function() {
+		$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/forgot_password') %>");
+		return false;
+	});
+
 	$(".close_icon").click(function() {
 		$(".dialog_box").fadeOut("fast").removeClass("active");
 	});
 	$(".dialog_box").click(function(e){
   	e.stopPropagation();
 	});
+
 </script>

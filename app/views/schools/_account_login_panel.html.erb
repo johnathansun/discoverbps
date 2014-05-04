@@ -8,13 +8,13 @@
 		
 		<%= form_for(:user, :as => 'user', :url => session_path(:user), :html => {:id => "sign_in_user"}, :format => :json, :remote => true ) do |f| %>
 			
-			<div class='btn input_box'>
+			<div class='input_box'>
 				<%= f.email_field :email, placeholder: 'Email address' %>
 				<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
 				<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
 			</div>
 
-			<div class='btn input_box'>
+			<div class='input_box'>
 				<%= f.password_field :password, placeholder: 'Password' %>
 				<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
 				<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>

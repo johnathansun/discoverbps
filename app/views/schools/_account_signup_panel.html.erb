@@ -1,26 +1,22 @@
 <div id='signup_panel' class='action_box save_box' style="display:none;">
 	<div class='actions'>
-		<span class='txt_join_list' style='display:none;'>Join to save your lists:</span>
-		<span class='txt_login'>Sign Up with:</span>
-		
-		<div><%= link_to image_tag('/assets/buttons/facebook.png'), user_omniauth_authorize_path(:facebook) %></div>
-		<div><%= link_to image_tag('/assets/buttons/twitter.png'), user_omniauth_authorize_path(:twitter) %></div>
+		<span class='txt_login'>Create your account:</span>
 		
 		<%= form_for(:user, :as => 'user', :url => registration_path(:user), :html => {:id => "sign_up_user"}, :format => :json, :remote => true ) do |f| %>
 
-			<div class='btn input_box'>
+			<div class='input_box'>
 				<%= f.email_field :email, placeholder: 'Email address' %>
 				<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
 				<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
 			</div>
 
-			<div class='btn input_box'>
+			<div class='input_box'>
 				<%= f.password_field :password, placeholder: 'Password' %>
 				<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
 				<span class='icon_failed' data-icon="&#xe025;" aria-hidden="true" style='display:none;'></span>
 			</div>
 			
-			<div class='btn input_box'>
+			<div class='input_box'>
 				<%= f.password_field :password_confirmation, placeholder: 'Password confirmation' %>
 
 				<span class='icon_success' data-icon="&#xe002;" aria-hidden="true" style='display:none;'></span>
@@ -34,6 +30,13 @@
 			<div class='clr'></div>
 		
 		<% end %>
+
+		<span class='txt_login'>You may also register using:</span>
+
+		<div style="margin-top: 5px;"><%= link_to image_tag('/assets/buttons/facebook.png'), user_omniauth_authorize_path(:facebook) %></div>
+		<div><%= link_to image_tag('/assets/buttons/twitter.png'), user_omniauth_authorize_path(:twitter) %></div>
+		
+
 	</div>
 	<div class='clr'></div>
 </div>

@@ -33,18 +33,12 @@
 					<%= link_to 'Logout', destroy_user_session_path, method: :delete %>
 				<% else %>
 					<a id='login_btn' href='#'>Login</a>
-					<a class='signup_btn' href='#'>Sign Up</a>
+					<a id='signup_btn' href='#'>Sign Up</a>
 				<% end %>
 			</div>
 			<div class='clr'></div>
 		</div>
 		<!-- End menu account -->
-
-		<%= render partial: 'schools/account_login_panel' %>
-
-		<%= render partial: 'schools/account_signup_panel' %>
-		
-		<%= render partial: 'schools/account_forgot_password_panel' %>
 
 		<!-- Start register box -->
 		<div class='action_box register_box' style='display:none;'>
@@ -129,89 +123,26 @@
 		});
 
 		$('#login_btn').click(function() {
-			if (login_panel_open) {
-				login_panel_open = false;
-				signup_panel_open = false;
-				forgot_panel_open = false;
-				$('#signup_panel').hide();
-				$("#login_panel").hide();
-				$("#forgot_panel").hide();
-				$(".account_menu_box").width("auto");
-			} else {
-				login_panel_open = true;
-				signup_panel_open = false;
-				forgot_panel_open = false;
-				$('#signup_panel').css("display", "none");
-				$('#login_panel').css("display", "block");	
-				$('#forgot_panel').css("display", "none");
-			}
+			$('#dialog_box').show();
+			$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/login') %>");
+			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 5)});
 			return false;
 		});
-		$('.signup_btn').click(function() {
-			if (signup_panel_open) {
-				// Close box
-				login_panel_open = false;
-				signup_panel_open = false;
-				forgot_panel_open = false;
-				$('#signup_panel').hide();
-				$("#login_panel").hide();
-				$("#forgot_panel").hide();
-				$(".account_menu_box").width("auto");
-			} else {
-				// Open box
-				login_panel_open = false;
-				signup_panel_open = true;
-				forgot_panel_open = false;
-				$('#login_panel').css("display", "none");
-				$('#signup_panel').css("display", "block");	
-				$('#forgot_panel').css("display", "none");
-			}
+
+		$('#signup_btn').click(function() {
+			$('#dialog_box').show();
+			$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/signup') %>");
+			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 5)});
 			return false;
 		});
-		$('.forgot_btn').click(function() {
-			if (forgot_panel_open) {
-				// Close box
-				login_panel_open = false;
-				signup_panel_open = false;
-				forgot_panel_open = false;
-				$('#signup_panel').hide();
-				$("#login_panel").hide();
-				$("#forgot_panel").hide();
-				$(".account_menu_box").width("auto");
-			} else {
-				// Open box
-				login_panel_open = false;
-				signup_panel_open = false;
-				forgot_panel_open = true;
-				$("#signup_panel").css("display", "none");
-				$("#login_panel").css("display", "none");
-				$('#forgot_panel').css("display", "block");	
-				$('#reset_password_form').show();
-	    	$('#login_success').html('').show();
-			}
+
+		$('#save_btn').click(function() {
+			$('#dialog_box').show();
+			$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/login') %>");
+			$('.txt_join_list').show();
+			$('p.txt_login').hide();
+			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 5)});
 			return false;
-		});
-		$("#save_btn").click(function() {
-			if (login_panel_open) {
-				// Close box
-				login_panel_open = false;
-				signup_panel_open = false;
-				forgot_panel_open = false;
-				$('#signup_panel').hide();
-				$("#login_panel").hide();
-				$("#forgot_panel").hide();
-				$(".account_menu_box").width("auto");
-			} else {
-				// Open box
-				signup_panel_open = false;
-				login_panel_open = true;
-				forgot_panel_open = false;
-				$("#signup_panel").css("display", "none");
-				$("#login_panel").css("display", "block");
-				$('#forgot_panel').css("display", "none");
-				//$(".account_menu_box").width("410");
-			}
-			 return false;
 		});
 	});
 

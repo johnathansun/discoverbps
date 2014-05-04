@@ -284,3 +284,17 @@ input, select {
 	border: 0 !important;
 	margin: 0 !important;
 }
+.flash_alert {
+	font-size: 16px; 
+	color: white; 
+	background-color: #fc0d1b; 
+	padding: 20px; 
+	margin-bottom: 30px;
+}
+.flash_notice {
+	font-size: 16px; 
+	color: white; 
+	background-color: #72c900; 
+	padding: 20px; 
+	margin-bottom: 30px;
+}

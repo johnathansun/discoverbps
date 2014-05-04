@@ -9,19 +9,19 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 	<%= devise_error_messages! %>
   
-  <div class='btn input_box'>
+  <div class='input_box'>
   	<%= f.text_field :name, :autofocus => true, :placeholder => 'Name' %>
   </div>  
 
-  <div class='btn input_box'>
+  <div class='input_box'>
   	<%= f.email_field :email, :autofocus => true, :placeholder => 'Email' %>
   </div>
 
-  <div class='btn input_box'>
+  <div class='input_box'>
   	<%= f.password_field :password, :placeholder => 'Password' %>
   </div>
 
-  <div class='btn input_box'>
+  <div class='input_box'>
   	<%= f.password_field :password_confirmation, :placeholder => 'Password confirmation' %>
   </div>
 
@@ -34,7 +34,7 @@
 
 <div class="page_instructions">
 
-	<p>You may also log in using your Facebook or Twitter account.</p>
+	<p>You may also register with your Facebook or Twitter account.</p>
 
 	<div><%= link_to image_tag('/assets/buttons/facebook.png'), user_omniauth_authorize_path(:facebook) %></div>
 	<div><%= link_to image_tag('/assets/buttons/twitter.png'), user_omniauth_authorize_path(:twitter) %></div>

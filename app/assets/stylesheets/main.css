@@ -1533,14 +1533,7 @@ footer.footer .logo {
   background: #ffffff;
   margin: 0 0 0 35px;
 }
-.wrap .account_box .account_menu_box .action_box.register_box {
-  /*.text {float:left;}
-          .inputs {
-            float:left;
-            margin:0 5px 0 0;
-          }*/
 
-}
 .wrap .account_box .account_menu_box .action_box.register_box span {
   display: inline-block;
 }
@@ -1569,7 +1562,7 @@ footer.footer .logo {
   display: inline-block;
   width: 100%;
 }
-.wrap .btn {
+.btn {
   position: relative;
   height: 31px;
   line-height: 31px;
@@ -1579,43 +1572,19 @@ footer.footer .logo {
   color: #ffffff;
   border: 4px solid transparent;
 }
-.wrap .btn.first {
+.btn.first {
   margin: 0;
 }
-.wrap .btn.facebook {
-  background: #3b5998;
-  border-color: #3b5998;
-  cursor: pointer;
-}
-.wrap .btn.facebook .icon {
-  position: absolute;
-  right: 14px;
-  top: 5px;
-  font-size: 30px;
-  width: auto;
-}
-.wrap .btn.twitter {
-  background: #2ba9e1;
-  border-color: #2ba9e1;
-  cursor: pointer;
-}
-.wrap .btn.twitter .icon {
-  position: absolute;
-  right: 9px;
-  top: 1px;
-  font-size: 22px;
-  width: auto;
-}
-.wrap .btn.input_box {
+.input_box {
   position: relative;
+  height: 31px;
+  width: 234px;
+  margin: 10px 0 0 0;
+  border: 4px solid transparent;
   border-color: #ebebeb;
   color: #444444;
-  padding: 0;
-  width: 234px;
-  /* Placeholder */
-
 }
-.wrap .btn.input_box input {
+.input_box input {
   padding: 0 0 0 10px;
   border: none;
   outline: none;
@@ -1628,26 +1597,26 @@ footer.footer .logo {
   background: #ffffff;
   width: 224px;
 }
-.wrap .btn.input_box input:focus {
+.input_box input:focus {
   background-color: #ffffff;
 }
-.wrap .btn.input_box input:-moz-placeholder {
+.input_box input:-moz-placeholder {
   color: #aaaaaa;
 }
-.wrap .btn.input_box input:-ms-input-placeholder {
+.input_box input:-ms-input-placeholder {
   color: #aaaaaa;
 }
-.wrap .btn.input_box input::-webkit-input-placeholder {
+.input_box input:-webkit-input-placeholder {
   color: #aaaaaa;
 }
-.wrap .btn.input_box .icon_success {
+.input_box .icon_success {
   color: #72c900;
   position: absolute;
   right: 5px;
   top: 0px;
   font-size: 12px;
 }
-.wrap .btn.input_box .icon_failed {
+.input_box .icon_failed {
   color: #ff0000;
   position: absolute;
   right: 5px;
@@ -1655,50 +1624,19 @@ footer.footer .logo {
   font-size: 12px;
 }
 
-.dialog_box .input_box {
-  position: relative;
-  border-color: #ebebeb;
-  color: #000000;
-  background: #ebebeb;
-  padding: 0;
-  margin: 10px 0;
-  width: 242px;
-  /* Placeholder */
-
+.btn_facebook {
+  margin-top: 4px;
 }
-.dialog_box .input_box input {
-  padding: 0 0 0 10px;
-  border: none;
-  outline: none;
-  color: #000000;
-  font-family: AvenirLT-Black;
-  font-size: 15px;
-  width: 200px;
-  height: 31px;
-  line-height: 31px;
-  background: #ebebeb;
-  width: 224px;
+.btn_twitter {
+  margin-top: 4px;
 }
-.dialog_box .input_box input:focus {
-  background-color: #ffffff;
-}
-.dialog_box .input_box input:-moz-placeholder {
-  color: #000000;
-}
-.dialog_box .input_box input:-ms-input-placeholder {
-  color: #000000;
-}
-.dialog_box .input_box input::-webkit-input-placeholder {
-  color: #000000;
-}
-
-.wrap .btn.create_box {
+.create_box {
   border-color: #fc5b00;
   color: #ffffff;
   background: #fc5b00;
   cursor: pointer;
 }
-.wrap .btn_login {
+.btn_login {
   display: inline-block;
   margin: 11px 0 0 0;
   background: none;

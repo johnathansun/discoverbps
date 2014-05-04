@@ -28,7 +28,7 @@
 				<p><a href="/schools/print_home_schools" title="Print">Print</a></p>
 			<% end %>
 			<% if current_user.blank? %>
-				<p><a href="" title="Save">Save</a></p>
+				<p><a href="#" id="footer_save_button" title="Save">Save Your List</a></p>
 			<% end %>
 			<br/>
 			<p>Account</p>
@@ -57,5 +57,14 @@
 				$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
 				return false;
 			});
+			$('#footer_save_button').click(function() {
+				$('#dialog_box').show();
+				$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/signup') %>");
+				$('.txt_join_list').show();
+				$('p.txt_login').hide();
+				$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
+				return false;
+			});
+
 		});
 	</script>

@@ -1,30 +1,43 @@
 <div class="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
 <!-- dialog hello -->
 <div class='content'>
-	<span class='txt_join_list' style='display:none;'>Join to save your lists:</span>
-	<p class='txt_login'>Sign Up with:</p>
-	
-	<div><%= link_to image_tag('/assets/buttons/facebook.png'), user_omniauth_authorize_path(:facebook) %></div>
-	<div><%= link_to image_tag('/assets/buttons/twitter.png'), user_omniauth_authorize_path(:twitter) %></div>
-	
-	<p class='txt_login'>Or create an account:</p>
+	<p class='txt_join_list' style='display:none;'>To save your lists in DiscoverBPS, please create an account:</p>
+	<p class='txt_login'>To create an account in DiscoverBPS, please enter your name, <br />email address and password in the form below:</p>
+		
 	<%= form_for(:user, :as => 'user', :url => session_path(:user)) do |f| %>
 		<form method='' action='' name=''>
 			<div class='input_box'>
-				<%= f.email_field :email, placeholder: 'Email address' %>
+				<%= f.text_field :name, placeholder: 'Name' %>
+			</div>
+			<div class='input_box'>
+				<%= f.email_field :email, placeholder: 'Email' %>
 			</div>
 			<div class='input_box'>
 				<%= f.password_field :password, placeholder: 'Password' %>
 			</div>
 			<div class='input_box'>
-				<%= f.password_field :password_confirmation, placeholder: 'Password Confirmation' %>
+				<%= f.password_field :password_confirmation, placeholder: 'Password confirmation' %>
 			</div>
 			<div class="signup"><%= image_submit_tag('/assets/buttons/signup.jpg') %></div>													
 			<div class='clr'></div>
 		</form>
 	<% end %>
+
+	<p>You may also register with your Facebook or Twitter account:</p>
+
+	<div class="btn_facebook"><%= link_to image_tag('/assets/buttons/facebook.png'), user_omniauth_authorize_path(:facebook) %></div>
+	<div class="btn_twitter"><%= link_to image_tag('/assets/buttons/twitter.png'), user_omniauth_authorize_path(:twitter) %></div>
+
 </div>
 <script>
+	$("form#sign_up_user").bind("ajax:success", function(e, data, status, xhr) {
+	  if (data.success) {
+	    window.location.replace("<%= request.original_url %>");
+	  } else {
+	    $('#signup_error').html("We had trouble creating your <br />account. Please complete the <br />required fields and try again.").show();;
+	  }
+	});
+
 	$(".close_icon").click(function() {
 		$(".dialog_box").fadeOut("fast").removeClass("active");
 	});
