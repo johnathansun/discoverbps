@@ -4,8 +4,8 @@
 	<span class='txt_join_list' style='display:none;'>Join to save your lists:</span>
 	<p class='txt_login'>Sign Up with:</p>
 	
-	<div><%= link_to image_tag('/assets/oauth-facebook.png'), user_omniauth_authorize_path(:facebook) %></div>
-	<div><%= link_to image_tag('/assets/oauth-twitter.png'), user_omniauth_authorize_path(:twitter) %></div>
+	<div><%= link_to image_tag('/assets/buttons/facebook.png'), user_omniauth_authorize_path(:facebook) %></div>
+	<div><%= link_to image_tag('/assets/buttons/twitter.png'), user_omniauth_authorize_path(:twitter) %></div>
 	
 	<p class='txt_login'>Or create an account:</p>
 	<%= form_for(:user, :as => 'user', :url => session_path(:user)) do |f| %>
@@ -19,7 +19,7 @@
 			<div class='input_box'>
 				<%= f.password_field :password_confirmation, placeholder: 'Password Confirmation' %>
 			</div>
-			<div class="signup"><%= image_submit_tag('/assets/oauth-create.jpg') %></div>													
+			<div class="signup"><%= image_submit_tag('/assets/buttons/signup.jpg') %></div>													
 			<div class='clr'></div>
 		</form>
 	<% end %>

@@ -1,0 +1,24 @@
+<div class="page_instructions">
+  <div class="title_bloc">
+    <h1>Forgot your password?</h1>
+  </div>
+  <p>Please enter your email address in the form below. We will send you instructions on resetting your password.</p>
+</div>
+
+
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+	<% if resource.try(:errors).present? %>
+		<div class="alert alert-error">
+			<%= devise_error_messages! %>
+		</div>
+	<% end %>
+
+  <div class='btn input_box'>
+    <%= f.password_field :email, :autofocus => true, placeholder: 'Email' %>
+  </div>
+
+  <div class="form_button">
+    <%= image_submit_tag('/assets/buttons/submit.jpg') %>
+  </div>
+
+<% end %>

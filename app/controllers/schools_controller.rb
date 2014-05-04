@@ -8,7 +8,7 @@ class SchoolsController < ApplicationController
 
   def index
     if current_user_students.blank?
-      render 'home', layout: 'home'
+      render 'home', layout: 'application'
     else
       # Set current_student if it's specified in the params
       if params[:student].present?
@@ -26,7 +26,7 @@ class SchoolsController < ApplicationController
       @home_schools = get_home_schools
       if @home_schools.blank?
         flash[:alert] = 'The server responded with an error. Please try your search again later.'
-        render 'home', layout: 'home'
+        render 'home', layout: 'application'
       else
 
         respond_to do |format|
@@ -55,7 +55,7 @@ class SchoolsController < ApplicationController
 
   def zone_schools
     if current_user_students.blank?
-      render 'home', layout: 'home'
+      render 'home', layout: 'application'
     else
       # Set current_student if it's specified in the params
       if params[:student].present?
@@ -101,7 +101,7 @@ class SchoolsController < ApplicationController
 
   def compare
     if current_user_students.blank?
-      render 'home', layout: 'home'
+      render 'home', layout: 'application'
     else
       @matching_school_ids = current_user_students.collect {|x| x.student_schools.collect {|y| y.bps_id}}.inject(:&)
 
@@ -304,7 +304,7 @@ class SchoolsController < ApplicationController
       when 'print'
         'print'
       else
-        'application'
+        'schools'
       end
     end
 

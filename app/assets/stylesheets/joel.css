@@ -1,3 +1,16 @@
+.sticky-footer-wrap {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -104px;
+}
+.footer, .sticky-footer-push {
+	clear: both;
+	height: 104px;
+}
+
+
+
 a.yellow {
 	color: #ffff00;
 }
@@ -235,4 +248,39 @@ input, select {
 .yellow-buttons {
 	a { color: #ffff00; text-decoration: none;}
 	a:hover { color: #ffff00; text-decoration: underline; }
+}
+
+.wrap .page_content {
+	padding: 88px 0 60px 0;
+}
+.wrap .page_content a {
+	color: #ffffff;
+	text-decoration :none;
+}
+.wrap .page_content a:hover {
+	color: #ffffff;
+	text-decoration :underline;
+}
+.wrap .page_instructions {
+  color: #80bce7;
+  font-size: 18px;
+  line-height: 24px;
+}
+.wrap .page_instructions .title_bloc h1 {
+  font-size: 33px;
+  color: #ffffff;
+  margin-bottom: 23px;
+  line-height: 1em;
+  display: inline-block;
+}
+.wrap .page_instructions p {
+  max-width: 675px;
+}
+
+.wrap .form_button {
+	margin: 20px 0 20px 0;
+}
+.add_child_button {
+	border: 0 !important;
+	margin: 0 !important;
 }

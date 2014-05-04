@@ -43,9 +43,20 @@
 	  <%= csrf_meta_tags %>
 	</head>
 	<body class="standard one">
-		
-		<%= render partial: 'schools/notifications' %>
-		<%= yield %>
+		<div class="sticky-footer-wrap">
+			
+			<%= render partial: 'layouts/notifications' %>
+			<!-- partials are injected into this dialog box - don't delete -->
+			
+			<div id='dialog_box' class='dialog_box dialog_box_dicover' style='display:none;'>
+			</div>
+
+			<div class="wrap ">
+				<%= yield %>
+			</div>
+
+			<div class="sticky-footer-push"></div>
+		</div>
 
 		<%= render partial: 'layouts/footer' %>
 		<%= render partial: 'layouts/analytics' %>

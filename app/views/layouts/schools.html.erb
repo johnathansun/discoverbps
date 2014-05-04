@@ -42,28 +42,15 @@
 	  <%= javascript_include_tag "application" %>
 	  <%= csrf_meta_tags %>
 	</head>
-	<body class="standard one">
-		
-		<div class="sticky-footer-wrap">
-			<%= render partial: 'layouts/notifications' %>
+	<body>
+		<div class="sticky-footer-wrap" style="padding-bottom: 40px;">
 			<!-- partials are injected into this dialog box - don't delete -->
+			<div id='dialog_box' class='dialog_box dialog_box_dicover' style='display:none;'></div>
 			
-			<div id='dialog_box' class='dialog_box dialog_box_dicover' style='display:none;'>
-			</div>
+			<%= render partial: 'layouts/notifications' %>
 
-			<div class="wrap ">
-				<div class="content_wrap">
+			<%= yield %>
 
-					<div class="content_left">					
-						<%= render partial: 'schools/account_tab' %>
-					</div>
-					
-					<div class="page_content">
-						<%= yield %>
-					</div>
-
-				</div>
-			</div>
 			<div class="sticky-footer-push"></div>
 		</div>
 

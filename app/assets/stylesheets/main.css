@@ -36,7 +36,14 @@ audio:not([controls]) {
  * 2. Force vertical scrollbar in non-IE
  * 3. Prevent iOS text size adjust on device orientation change, without disabling user zoom: h5bp.com/g
  */
+
+* {
+  margin: 0;
+}
 html {
+  position: relative;
+  min-height: 100%;
+  height: 100%;
   font-size: 100%;
   overflow-y: scroll;
   -webkit-text-size-adjust: 100%;
@@ -44,6 +51,8 @@ html {
 }
 body {
   margin: 0;
+  min-height: 100%;
+  height: 100%;
 }
 body,
 button,
@@ -1231,6 +1240,12 @@ footer.footer .title_footer {
   font-size: 14px;
   width: 350px;
 }
+footer.footer a {
+  text-decoration: none;
+}
+footer.footer a:hover {
+  text-decoration: underline;
+}
 footer.footer .title_footer .copyright {
   color: #969696;
 }
@@ -1554,7 +1569,7 @@ footer.footer .logo {
   display: inline-block;
   width: 100%;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn {
+.wrap .btn {
   position: relative;
   height: 31px;
   line-height: 31px;
@@ -1564,47 +1579,47 @@ footer.footer .logo {
   color: #ffffff;
   border: 4px solid transparent;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn.first {
+.wrap .btn.first {
   margin: 0;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn.facebook {
+.wrap .btn.facebook {
   background: #3b5998;
   border-color: #3b5998;
   cursor: pointer;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn.facebook .icon {
+.wrap .btn.facebook .icon {
   position: absolute;
   right: 14px;
   top: 5px;
   font-size: 30px;
   width: auto;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn.twitter {
+.wrap .btn.twitter {
   background: #2ba9e1;
   border-color: #2ba9e1;
   cursor: pointer;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn.twitter .icon {
+.wrap .btn.twitter .icon {
   position: absolute;
   right: 9px;
   top: 1px;
   font-size: 22px;
   width: auto;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn.input_box {
+.wrap .btn.input_box {
   position: relative;
   border-color: #ebebeb;
-  color: #565656;
+  color: #444444;
   padding: 0;
   width: 234px;
   /* Placeholder */
 
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn.input_box input {
+.wrap .btn.input_box input {
   padding: 0 0 0 10px;
   border: none;
   outline: none;
-  color: #565656;
+  color: #444444;
   font-family: AvenirLT-Black;
   font-size: 15px;
   width: 200px;
@@ -1613,26 +1628,26 @@ footer.footer .logo {
   background: #ffffff;
   width: 224px;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn.input_box input:focus {
+.wrap .btn.input_box input:focus {
   background-color: #ffffff;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn.input_box input:-moz-placeholder {
-  color: #565656;
+.wrap .btn.input_box input:-moz-placeholder {
+  color: #aaaaaa;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn.input_box input:-ms-input-placeholder {
-  color: #565656;
+.wrap .btn.input_box input:-ms-input-placeholder {
+  color: #aaaaaa;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn.input_box input::-webkit-input-placeholder {
-  color: #565656;
+.wrap .btn.input_box input::-webkit-input-placeholder {
+  color: #aaaaaa;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn.input_box .icon_success {
+.wrap .btn.input_box .icon_success {
   color: #72c900;
   position: absolute;
   right: 5px;
   top: 0px;
   font-size: 12px;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn.input_box .icon_failed {
+.wrap .btn.input_box .icon_failed {
   color: #ff0000;
   position: absolute;
   right: 5px;
@@ -1677,13 +1692,13 @@ footer.footer .logo {
   color: #000000;
 }
 
-.wrap .account_box .account_menu_box .action_box.save_box .btn.create_box {
+.wrap .btn.create_box {
   border-color: #fc5b00;
   color: #ffffff;
   background: #fc5b00;
   cursor: pointer;
 }
-.wrap .account_box .account_menu_box .action_box.save_box .btn_login {
+.wrap .btn_login {
   display: inline-block;
   margin: 11px 0 0 0;
   background: none;
@@ -3577,6 +3592,9 @@ ie6 .print1 .wrap {
 .mobile_only {
   display: none;
 }
+.logo_header {
+  margin-left: 72px;
+}
 /* -Screen - tablet */
 /* ----------------------------------------------
    ELEMENT LAYOUT - TABLETTE
@@ -3829,6 +3847,9 @@ ie6 .print1 .wrap {
   .wrap .single_school .tablet {
     display: block;
   }
+  .logo_header {
+    margin-left: 20px;
+  }
 }
 /* -Screen - tablet 2 */
 /* ----------------------------------------------
@@ -3991,6 +4012,9 @@ ie6 .print1 .wrap {
   }
   .wrap .single_school .tablet {
     display: block;
+  }
+  .logo_header {
+    margin-left: 20px;
   }
 }
 /* Mobile Layout */
@@ -4469,6 +4493,9 @@ ie6 .print1 .wrap {
   .mobile_only {
     display: block;
   }
+  .logo_header {
+    margin-left: 20px;
+  }
 }
 @media screen and (max-device-width: 640px) {
   .no_mobile {
@@ -4938,6 +4965,9 @@ ie6 .print1 .wrap {
   .mobile_only {
     display: block;
   }
+  .logo_header {
+    margin-left: 20px;
+  }
 }
 /* Mobile portrait Layout */
 /* ----------------------------------------------
@@ -5307,5 +5337,8 @@ ie6 .print1 .wrap {
   }
   .mobile_only {
     display: block;
+  }
+  .logo_header {
+    margin-left: 20px;
   }
 }
