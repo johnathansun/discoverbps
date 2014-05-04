@@ -49,4 +49,4 @@ class Users::PasswordsController < Devise::PasswordsController
 # 			redirect_to new_user_password_path, alert: "We couldn't validate the authentication token from the email we sent. You may have waited too long to respond. Please try again."
 # 		end
 # 	end
-# end
+end
