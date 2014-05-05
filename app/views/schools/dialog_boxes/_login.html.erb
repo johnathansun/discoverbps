@@ -4,11 +4,11 @@
 
 	<h1>Log In</h1>
 	<span class='txt_join_list' style='display:none;'>Join to save your lists:</span>
+
 	<p class='txt_login'>Please enter your email address and password below:</p>
+	<p id="login_error" style="display: none; color: red;"></p>
 		
 	<%= form_for(:user, :as => 'user', :url => session_path(:user), :html => {:id => "sign_in_user"}, :format => :json, :remote => true ) do |f| %>
-
-		<div id="login_error" style="display: none; color: red;"></div>
 
 		<div class='input_box'>
 			<%= f.email_field :email, placeholder: 'Email address' %>
@@ -34,12 +34,13 @@
 <script>
 	$("form#sign_in_user").bind("ajax:success", function(e, data, status, xhr) {
 	  if (data.success) {
-	  	alert('data success');
-	    $('#login_error').html("You are now logged in.").show();
+	    window.location.replace("<%= request.original_url %>");
 	  } else {
-	  	alert('data failure');
-	    $('#login_error').html("We had trouble logging you in. <br />Please try again.").show();
+	    $('#login_error').html("We had trouble logging you in. Please try again.").show();
 	  }
+	});
+	$("form#sign_in_user").bind("ajax:error", function(e, data, status, xhr) {
+    $('#login_error').html("We had trouble logging you in. Please try again or sign up for a new account.").show();
 	});
 
 	$('#forgot_password_button').click(function() {

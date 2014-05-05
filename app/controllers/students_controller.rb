@@ -1,5 +1,4 @@
 class StudentsController < ApplicationController
-  layout 'home'
 
 	def create
 		first_name  = params.try(:[], :student).try(:[], :first_name)

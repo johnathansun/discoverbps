@@ -296,7 +296,7 @@ class SchoolsController < ApplicationController
     def layout_selector
       case action_name
       when 'home'
-        'home'
+        'application'
       when 'print_home_schools'
         'print'
       when 'print_zone_schools'
