@@ -1623,12 +1623,14 @@ footer.footer .logo {
   top: 0px;
   font-size: 12px;
 }
-
+.btn_submit {
+  margin: 20px 0 20px 0;
+}
 .btn_facebook {
-  margin-top: 4px;
+  margin: 4px 0 0 0;
 }
 .btn_twitter {
-  margin-top: 4px;
+  margin: 4px 0 0 0;
 }
 .create_box {
   border-color: #fc5b00;

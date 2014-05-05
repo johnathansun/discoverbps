@@ -1,10 +1,14 @@
 <div class="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
 <!-- dialog hello -->
 <div class='content'>
+
+	<h1>Log In</h1>
 	<span class='txt_join_list' style='display:none;'>Join to save your lists:</span>
-	<p class='txt_login'>To log in, please enter your email address and password below:</p>
+	<p class='txt_login'>Please enter your email address and password below:</p>
 		
 	<%= form_for(:user, :as => 'user', :url => session_path(:user), :html => {:id => "sign_in_user"}, :format => :json, :remote => true ) do |f| %>
+
+		<div id="login_error" style="display: none; color: red;"></div>
 
 		<div class='input_box'>
 			<%= f.email_field :email, placeholder: 'Email address' %>
@@ -14,9 +18,7 @@
 			<%= f.password_field :password, placeholder: 'Password' %>
 		</div>
 
-		<div class="signup"><%= image_submit_tag('/assets/buttons/login.jpg') %></div>
-
-		<div id="login_error" style="display: none; color: red;"></div>
+		<div class="btn_submit"><%= image_submit_tag('/assets/buttons/login.jpg') %></div>
 
 	<% end %>
 

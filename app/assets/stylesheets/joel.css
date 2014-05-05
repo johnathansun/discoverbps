@@ -277,9 +277,6 @@ input, select {
   max-width: 675px;
 }
 
-.wrap .form_button {
-	margin: 20px 0 20px 0;
-}
 .add_child_button {
 	border: 0 !important;
 	margin: 0 !important;
