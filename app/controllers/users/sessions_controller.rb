@@ -13,7 +13,6 @@ class Users::SessionsController < Devise::SessionsController
 
 	# POST /resource/sign_in
 	def create
-		begin
 			self.resource = warden.authenticate!(auth_options)
 			set_flash_message(:notice, :signed_in) if is_flashing_format?
 			sign_in(resource_name, resource)
@@ -24,9 +23,6 @@ class Users::SessionsController < Devise::SessionsController
 			else
 				respond_with resource, location: after_sign_in_path_for(resource)
 			end
-		rescue
-			logger.info "*********************** rescue from 401"
-		end
 	end
 
 	# DELETE /resource/sign_out
