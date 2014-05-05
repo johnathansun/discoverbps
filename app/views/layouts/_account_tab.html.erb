@@ -80,29 +80,6 @@
 	});
 
 	$(document).ready(function(){
-		/*var is_open_menu_account= false;
-		$(".btn_account").click(function() {
-			 if (is_open_menu_account) {
-				// Close box
-				is_open_menu_account= false;
-			
-				$(".account_menu_box").css("display", "none");
-				$(".register_box").css("display", "none");
-		
-			 } else {
-				// Open box
-				is_open_menu_account= true;
-				$(".account_menu_box").css("display", "block");
-				$(".register_box").css("display", "block");
-				$(".save_box").css("display", "none");
-				//$(".account_menu_box").width("410");
-			 }
-			 
-			 return false;
-		});*/
-
-	});
-	$(document).ready(function(){
 		var login_panel_open = false;
 		var signup_panel_open = false;
 		var forgot_panel_open = false;
@@ -112,14 +89,6 @@
 				$('.account_menu_box').show();
 			}, function() {
 				$('.account_menu_box').hide();
-				$("#forgot_panel").hide();
-				$("#login_panel").hide();
-				$('#signup_panel').hide();
-				$('#signup_error').hide();
-				$('#login_error').hide();
-				login_panel_open = false;
-				signup_panel_open = false;
-				forgot_panel_open = false;
 		});
 
 		$('#login_btn').click(function() {
