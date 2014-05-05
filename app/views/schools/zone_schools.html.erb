@@ -1,10 +1,10 @@
 
-<%= render partial: 'schools/horizontal_timeline' %>
+<%= render partial: 'schools/timeline_horizontal' %>
 
 <!-- start google map -->
 <div class="wrap global_map">
 	<section class="content_wrap">
-			<%= render partial: 'schools/account_tab' %>		
+			<%= render partial: 'layouts/account_tab' %>		
 	</section>
 	<%= render partial: 'schools/map', locals: {students_list: [current_student], school: nil, map_controls: true, resize: true, width: '100%'} %>
 </div>
