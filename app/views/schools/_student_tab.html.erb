@@ -15,7 +15,7 @@
 		$( document ).ready(function() {
 			$("#student_<%= student.id %>_tab").click(function(){
 				$('#dialog_box').html("<%= escape_javascript(render partial: 'students/address_search', locals: {student: student}) %>");
-				$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
+				$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
 				$('#dialog_box').show();
 				return false;
 			});

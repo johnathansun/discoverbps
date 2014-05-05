@@ -36,7 +36,7 @@
 				<%= link_to 'Logout', destroy_user_session_path, method: :delete %>
 			<% else %>
 				<p><a href="#" id="footer_sign_up_button" title="Sign Up">Sign Up</a></p>
-				<p><a href="#" id="footer_login_button" title="Login">Login</a></p>
+				<p><a href="#" id="footer_login_button" title="Log In">Log In</a></p>
 			<% end %>
 		</div>
 		<div class="clr"></div>
@@ -48,13 +48,13 @@
 			$('#footer_login_button').click(function() {
 				$('#dialog_box').show();
 				$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/login') %>");
-				$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
+				$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
 				return false;
 			});
 			$('#footer_sign_up_button').click(function() {
 				$('#dialog_box').show();
 				$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/signup') %>");
-				$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
+				$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
 				return false;
 			});
 			$('#footer_save_button').click(function() {
@@ -62,7 +62,7 @@
 				$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/signup') %>");
 				$('.txt_join_list').show();
 				$('p.txt_login').hide();
-				$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
+				$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
 				return false;
 			});
 

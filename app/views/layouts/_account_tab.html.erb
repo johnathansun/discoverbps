@@ -94,14 +94,14 @@
 		$('#login_btn').click(function() {
 			$('#dialog_box').show();
 			$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/login') %>");
-			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 5)});
+			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
 			return false;
 		});
 
 		$('#signup_btn').click(function() {
 			$('#dialog_box').show();
 			$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/signup') %>");
-			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 5)});
+			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
 			return false;
 		});
 
@@ -110,7 +110,7 @@
 			$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/login') %>");
 			$('.txt_join_list').show();
 			$('p.txt_login').hide();
-			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 5)});
+			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
 			return false;
 		});
 	});

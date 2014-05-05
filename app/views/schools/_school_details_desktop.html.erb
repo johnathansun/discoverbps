@@ -9,7 +9,7 @@
 			<script>
 				$("#<%= school.bps_id %>_photo_1").click(function(){
 			  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 0}) %>");
-			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
+			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
 			  	$('#dialog_box').show();
 			  	return false;
 				});
@@ -22,7 +22,7 @@
 			<script>
 				$("#<%= school.bps_id %>_photo_2").click(function(){
 			  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 1}) %>");
-			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
+			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
 			  	$('#dialog_box').show();
 			  	return false;
 				});
@@ -35,7 +35,7 @@
 			<script>
 				$("#<%= school.bps_id %>_photo_3").click(function(){
 			  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 2}) %>");
-			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
+			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
 			  	$('#dialog_box').show();
 			  	return false;
 				});
@@ -48,7 +48,7 @@
 			<script>
 				$("#<%= school.bps_id %>_photo_4").click(function(){
 			  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 3}) %>");
-			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 4)});
+			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
 			  	$('#dialog_box').show();
 			  	return false;
 				});
