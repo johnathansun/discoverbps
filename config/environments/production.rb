@@ -1,14 +1,11 @@
 DiscoverbpsV2::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
-  client = Dalli::Client.new(ENV["MEMCACHIER_SERVERS"],
+  config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"],
                              :username => ENV["MEMCACHIER_USERNAME"],
                              :password => ENV["MEMCACHIER_PASSWORD"],
-                             :value_max_bytes => 5242880)
-  config.action_dispatch.rack_cache = {
-    :metastore    => client,
-    :entitystore  => client
-  }
+                             :value_max_bytes => 5242880
+
   config.static_cache_control = "public, max-age=2592000"
 
 
