@@ -4,7 +4,6 @@ class Admin::StudentsController < ApplicationController
 
 	def index
 		@students = Student.order(:last_name)
-		Rails.cache.delay.write("delayed", "Hello")
 
 		respond_to do |format|
       format.html
