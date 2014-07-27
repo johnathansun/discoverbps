@@ -14,7 +14,7 @@
 	<tbody>
 		<% for admin in @admins %>
 			<tr class="hover">
-				<td width='80px'><%= admin.email %></td>
+				<td><%= admin.email %></td>
 				<td width="40px"><%= button_to 'Delete', admin_admin_path(admin), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this admin user?" %></td>
 			</tr>
 		<% end %>
