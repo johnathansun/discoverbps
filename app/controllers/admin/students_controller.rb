@@ -8,7 +8,7 @@ class Admin::StudentsController < ApplicationController
 		respond_to do |format|
       format.html
       format.json do
-				render json: puts Rails.cache.read("searches")
+				render json: Rails.cache.read("searches")
       end
     end		
 	end
