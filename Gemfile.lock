@@ -51,6 +51,7 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     commonjs (0.2.7)
+    dalli (2.7.2)
     delayed_job (4.0.1)
       activesupport (>= 3.0, < 4.2)
     delayed_job_active_record (4.0.1)
@@ -101,6 +102,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcachier (0.0.2)
     mime-types (1.25.1)
     multi_json (1.9.3)
     multi_xml (0.5.5)
@@ -209,6 +211,7 @@ DEPENDENCIES
   aws-s3
   clockwork
   coffee-rails (~> 3.2.1)
+  dalli
   delayed_job_active_record
   devise
   faraday
@@ -219,6 +222,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   less-rails
+  memcachier
   multi_json
   newrelic_rpm
   omniauth

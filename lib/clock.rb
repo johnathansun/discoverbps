@@ -19,3 +19,5 @@ every(1.day, 'Update school languages', at: '09:00')	 		{ SchoolData.delay.updat
 every(1.day, 'Update school partners', at: '09:00') 			{ SchoolData.delay.update_partners! }
 every(1.day, 'Update school photos', at: '09:00') 				{ SchoolData.delay.update_photos! }
 every(1.day, 'Update school sports', at: '09:00') 				{ SchoolData.delay.update_sports! }	
+
+every(1.hour, 'Store searches json in memcache', at: '09:00') { Rails.cache.write("searches", Student.order(:last_name).to_json(only: [ :grade_level, :latitude, :longitude, :zipcode, :ell_needs, :iep_needs, :preferences_count  ], methods: :created_at_date)) }
