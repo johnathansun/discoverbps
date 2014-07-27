@@ -31,7 +31,6 @@ gem 'omniauth-twitter'
 gem 'rake', '~> 10.3.1'
 gem 'unicorn'
 gem 'will_paginate', '~> 3.0'
-gem 'memcachier'
 gem 'dalli'
 
 # Gems used only for assets and not required
