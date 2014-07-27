@@ -70,5 +70,7 @@ module DiscoverbpsV2
         'application.css',
         'application.js'
     ]
+
+    config.middleware.use Rack::Deflater
   end
 end
