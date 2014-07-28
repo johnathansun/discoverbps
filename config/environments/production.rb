@@ -16,22 +16,12 @@ DiscoverbpsV2::Application.configure do
                              :failover => true,
                              :socket_timeout => 1.5,
                              :socket_failure_delay => 0.2,
-                             :value_max_bytes => 10485760)
+                             :value_max_bytes => 5242880)
   config.action_dispatch.rack_cache = {
     :metastore    => client,
     :entitystore  => client
   }
   config.static_cache_control = "public, max-age=2592000"
-
-  # client = Dalli::Client.new(ENV["MEMCACHIER_SERVERS"],
-  #                            :username => ENV["MEMCACHIER_USERNAME"],
-  #                            :password => ENV["MEMCACHIER_PASSWORD"],
-  #                            :value_max_bytes => 5242880)
-  # config.action_dispatch.rack_cache = {
-  #   :metastore    => client,
-  #   :entitystore  => client
-  # }
-  # config.static_cache_control = "public, max-age=2592000"
 
   # Code is not reloaded between requests
   config.cache_classes = true
