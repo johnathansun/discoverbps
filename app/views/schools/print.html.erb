@@ -61,7 +61,7 @@
 						<p class="descrip"><%= @school.api_hours.try(:[], :schhours1) %></p>
 					</div>
 
-					<% if NON_TRANSITION_GRADES.include?(current_student.grade_level) %>
+					<% if SURROUND_CARE_GRADES.include?(current_student.grade_level) %>
 						<% if @school.api_basic_info.try(:[], :BeforeSchPrograms).present? || @school.api_basic_info.try(:[], :AfterSchPrograms).present? %>
 							<div class="box">
 								<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"></span> Surround care </p>
