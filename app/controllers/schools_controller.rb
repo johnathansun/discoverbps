@@ -70,7 +70,7 @@ class SchoolsController < ApplicationController
         session[:current_student_id] = current_user_students.first.id
       end
 
-      if ZONE_GRADES.include?(current_student.grade_level)
+      if @zone_grades.include?(current_student.grade_level)
         @zone_schools = get_zone_schools
       else
         @zone_schools = []

@@ -1,11 +1,26 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :set_zone_grades
   helper_method :current_student
   helper_method :current_user_students
   helper_method :student_preference_categories
   # after_filter :store_location
 
   private
+
+  def set_zone_grades
+  	if Date.today > Date.parse('01-11-2017')
+  		@zone_grades = []
+  	elsif Date.today > Date.parse('01-11-2016')
+  		@zone_grades = ['5']
+		elsif Date.today > Date.parse('01-11-2015')
+  		@zone_grades = ['4', '5']
+  	elsif Date.today > Date.parse('01-11-2014')
+  		@zone_grades = ['3', '4', '5']
+  	elsif Date.today > Date.parse('01-11-2013')
+  		@zone_grades = ['2', '3', '4', '5', '8']
+  	end
+  end
   
   def current_student
   	if session[:current_student_id].present?
@@ -14,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_students
-  	if current_user
+  	if current_user && current_user.students.present?
       return current_user.students.verified
     elsif session[:session_id].present?
       return Student.verified.where(session_id: session[:session_id]).order(:first_name)
