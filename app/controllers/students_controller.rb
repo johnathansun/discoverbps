@@ -1,53 +1,69 @@
 class StudentsController < ApplicationController
 
 	def create
-		first_name  = params.try(:[], :student).try(:[], :first_name)
-    last_name   = params.try(:[], :student).try(:[], :last_name)
-    zipcode     = params.try(:[], :student).try(:[], :zipcode)
-    grade_level = params.try(:[], :student).try(:[], :grade_level)
-      
-    if current_user.present?
-      if first_name.present? && last_name.present?
-				@student = Student.where(user_id: current_user.id, first_name: first_name, last_name: last_name).first_or_initialize
-			elsif first_name.present?
-				@student = Student.where(user_id: current_user.id, first_name: first_name).first_or_initialize
-			else
-				@student = Student.where(user_id: current_user.id, grade_level: grade_level).first_or_initialize
-			end
-		else
-			if first_name.present? && last_name.present?
-				@student = Student.where(session_id: session[:session_id], first_name: first_name, last_name: last_name).first_or_initialize
-			elsif first_name.present?
-				@student = Student.where(session_id: session[:session_id], first_name: first_name).first_or_initialize
-			else
-				@student = Student.where(session_id: session[:session_id], grade_level: grade_level).first_or_initialize
-			end
-		end
-    params[:student][:sibling_school_ids] = School.where("name IN (?)", params[:student][:sibling_school_names].try(:compact).try(:reject, &:empty?)).collect {|x| x.bps_id}.uniq
 
-    street_number = URI.escape(params[:student][:street_number].try(:gsub, /\D/, ''))
-    street_name   = URI.escape(params[:student][:street_name].try(:strip))
-    zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
-        
-    addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
+    if params[:student].present? && 
+      params[:student][:grade_level].present? && 
+      params[:student][:street_number].present? && 
+      params[:student][:street_name].present? && 
+      params[:student][:zipcode].present?
 
-    @addresses = addresses.try(:[], :List)
-    @errors = addresses.try(:[], :Error).try(:[], 0)
+  		first_name    = params[:student][:first_name].try(:strip)
+      last_name     = params[:student][:last_name].try(:strip)
+      grade_level   = params[:student][:grade_level].try(:strip)
+      street_number = URI.escape(params[:student][:street_number].try(:gsub, /\D/, ''))
+      street_name   = URI.escape(params[:student][:street_name].try(:strip))
+      zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
+
+      if current_user.present?
+        if first_name.present? && last_name.present?
+  				@student = Student.where(user_id: current_user.id, first_name: first_name, last_name: last_name).first_or_initialize
+  			elsif first_name.present?
+  				@student = Student.where(user_id: current_user.id, first_name: first_name).first_or_initialize
+  			else
+  				@student = Student.where(user_id: current_user.id, grade_level: grade_level).first_or_initialize
+  			end
+  		else
+  			if first_name.present? && last_name.present?
+  				@student = Student.where(session_id: session[:session_id], first_name: first_name, last_name: last_name).first_or_initialize
+  			elsif first_name.present?
+  				@student = Student.where(session_id: session[:session_id], first_name: first_name).first_or_initialize
+  			else
+  				@student = Student.where(session_id: session[:session_id], grade_level: grade_level).first_or_initialize
+  			end
+  		end
+
+      params[:student][:sibling_school_ids] = School.where("name IN (?)", params[:student][:sibling_school_names].try(:compact).try(:reject, &:empty?)).collect {|x| x.bps_id}.uniq
+          
+      api_response = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
+
+      @addresses = api_response.try(:[], :List)
+      @api_errors = api_response.try(:[], :Error).try(:[], 0)
+    
+    end
 
     respond_to do |format|
       if @addresses.present? && @student.update_attributes(params[:student])
         format.js { render template: "students/address_verification" }
         format.html { redirect_to address_verification_student_path(@student)}
       else
-        if @addresses.blank?
-          if @errors.present?
-            @error_message = @errors
-          else
-            @error_message = "We couldn't find any addresses in Boston that match your search. Please try again."
+        if api_response.present?
+          if @addresses.blank?
+            if @api_errors.present?
+              @error_message = @api_errors
+              flash[:alert] = "There were problems with your search. Please enter the required fields and try again."
+            else
+              @error_message = "We couldn't find any addresses in Boston that match your search. Please try again."
+              flash[:alert] = "We couldn't find any addresses in Boston that match your search. Please try again."
+            end
           end
+
+        else
+          @error_message = "Please enter the required search fields and try again."
+          flash[:alert] = "Please enter the required search fields and try again."
         end
+        
         format.js { render template: "students/errors" }
-        flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
         format.html { redirect_to root_url }
       end
     end
