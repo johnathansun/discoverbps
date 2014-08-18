@@ -8,7 +8,7 @@ A website where you can easily find schools your children are eligible to attend
 ## Stack Overview
 
 * Ruby version 2.0.0
-* Rails version 3.2.14
+* Rails version 3.2.19
 * PostgreSQL
 
 ## Installation
@@ -16,7 +16,7 @@ Please note that the instructions below have only been tested on OS X. If you ar
 
 ###Prerequisites
 
-#### Git, Ruby 2.0.0+, Rails 3.2.14+ (+ Homebrew on OS X)
+#### Git, Ruby 2.0.0+, Rails 3.2.19+ (+ Homebrew on OS X)
 **OS X**: [Set up a dev environment on OS X with Homebrew, Git, RVM, Ruby, and Rails](http://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/)
 
 **Windows**: Try [RailsInstaller](http://railsinstaller.org), along with some of these [tutorials](https://www.google.com/search?q=install+rails+on+windows) if you get stuck.
