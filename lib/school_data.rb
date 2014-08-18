@@ -23,7 +23,7 @@ module SchoolData
 				school.update_attributes(name: hash[:schname_23], latitude: hash[:Latitude], longitude: hash[:Longitude], api_basic_info: hash)
 				puts "********** done updating basic info for school #{school.bps_id}"
 			else
-				puts "********** API response not present for #{school.bps_id} on GetSchool"
+				puts "********** API response not present for GetSchool  with id #{school.bps_id}"
 			end
 		end
 	end
@@ -48,7 +48,7 @@ module SchoolData
 				school.update_attributes(api_awards: array)
 				puts "********** done updating awards for school #{school.bps_id}"
 			else
-				puts "********** API response not present for #{school.bps_id} on GetSchoolAwards"
+				puts "********** API response not present for GetSchoolAwards with id #{school.bps_id}"
 			end
 		end
 	end
@@ -76,7 +76,7 @@ module SchoolData
 				school.update_attributes(api_description: hash)
 				puts "********** done updating descriptions for school #{school.bps_id}"
 			else
-				puts "********** API response not present for #{school.bps_id} on GetSchoolDescriptions"
+				puts "********** API response not present for GetSchoolDescriptions with id #{school.bps_id}"
 			end
 		end
 	end
@@ -104,7 +104,7 @@ module SchoolData
 				school.update_attributes(api_facilities: hash)
 				puts "********** done updating facilities for school #{school.bps_id}"
 			else
-				puts "********** API response not present for #{school.bps_id} on GetSchoolFacilities"
+				puts "********** API response not present for GetSchoolFacilities with id #{school.bps_id}"
 			end
 		end
 	end
@@ -134,7 +134,7 @@ module SchoolData
 					school.update_attributes(api_grades: array)
 					puts "********** done updating grades for school #{school.bps_id}"
 				else
-					puts "********** API response not present for #{school.bps_id} on GetSchoolGrades"
+					puts "********** API response not present for GetSchoolGrades with id #{school.bps_id}"
 				end
 			end
 		end
@@ -162,7 +162,7 @@ module SchoolData
 				school.update_attributes(api_hours: hash)
 				puts "********** done updating hours for school #{school.bps_id}"
 			else
-				puts "********** API response not present for #{school.bps_id} on GetSchoolHours"
+				puts "********** API response not present for GetSchoolHours with id #{school.bps_id}"
 			end
 		end
 	end
@@ -187,7 +187,7 @@ module SchoolData
 				school.update_attributes(api_languages: array)
 				puts "********** done updating languages for school #{school.bps_id}"
 			else
-				puts "********** API response not present for #{school.bps_id} on GetSchoolLanguages"
+				puts "********** API response not present for GetSchoolLanguages with id #{school.bps_id}"
 			end
 		end
 	end
@@ -212,7 +212,7 @@ module SchoolData
 				school.update_attributes(api_partners: array)
 				puts "********** done updating partners for school #{school.bps_id}"
 			else
-				puts "********** API response not present for #{school.bps_id} on GetSchoolPartners"
+				puts "********** API response not present for GetSchoolPartners with id #{school.bps_id}"
 			end
 		end
 	end
@@ -237,7 +237,7 @@ module SchoolData
 				school.update_attributes(api_photos: array)
 				puts "********** done updating photos for school #{school.bps_id}"
 			else
-				puts "********** API response not present for #{school.bps_id} on GetSchoolPhotos"
+				puts "********** API response not present for GetSchoolPhotos with id #{school.bps_id}"
 			end
 		end
 	end
@@ -265,7 +265,7 @@ module SchoolData
 				school.update_attributes(api_sports: hash)
 				puts "********** done updating sports for school #{school.bps_id}"
 			else
-				puts "********** API response not present for #{school.bps_id} on GetSchoolSports"
+				puts "********** API response not present for GetSchoolSports with id #{school.bps_id}"
 			end
 		end
 	end
