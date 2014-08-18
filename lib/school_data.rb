@@ -1,8 +1,5 @@
 module SchoolData
 
-	ROOT_URL     = "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/".freeze
-	SCHOOL_YEAR  = "2014".freeze
-
 	def self.update_basic_info!(school_id=nil)
 		school_endpoint = "GetSchool?schyear=#{SCHOOL_YEAR}"
 
@@ -14,7 +11,7 @@ module SchoolData
 
 		schools.each do |school|
 			api_response = Faraday.new(
-				:url => "#{ROOT_URL}#{school_endpoint}&sch=#{school.bps_id}",
+				:url => "#{BPS_API_URL}#{school_endpoint}&sch=#{school.bps_id}",
 				:ssl => {:version => :SSLv3}).get.body
 
 			if api_response.present?
@@ -25,6 +22,8 @@ module SchoolData
 
 				school.update_attributes(name: hash[:schname_23], latitude: hash[:Latitude], longitude: hash[:Longitude], api_basic_info: hash)
 				puts "********** done updating basic info for school #{school.bps_id}"
+			else
+				puts "********** API response not present for #{school.bps_id} on GetSchool"
 			end
 		end
 	end
@@ -40,7 +39,7 @@ module SchoolData
 
 		schools.each do |school|
 			api_response = Faraday.new(
-				:url => "#{ROOT_URL}#{awards_endpoint}&sch=#{school.bps_id}&TranslationLanguage=",
+				:url => "#{BPS_API_URL}#{awards_endpoint}&sch=#{school.bps_id}&TranslationLanguage=",
 				:ssl => {:version => :SSLv3}).get.body
 
 			if api_response.present?
@@ -48,6 +47,8 @@ module SchoolData
 
 				school.update_attributes(api_awards: array)
 				puts "********** done updating awards for school #{school.bps_id}"
+			else
+				puts "********** API response not present for #{school.bps_id} on GetSchoolAwards"
 			end
 		end
 	end
@@ -63,7 +64,7 @@ module SchoolData
 
 		schools.each do |school|
 			api_response = Faraday.new(
-				:url => "#{ROOT_URL}#{desc_endpoint}&sch=#{school.bps_id}&TranslationLanguage=",
+				:url => "#{BPS_API_URL}#{desc_endpoint}&sch=#{school.bps_id}&TranslationLanguage=",
 				:ssl => {:version => :SSLv3}).get.body
 
 			if api_response.present?
@@ -74,6 +75,8 @@ module SchoolData
 
 				school.update_attributes(api_description: hash)
 				puts "********** done updating descriptions for school #{school.bps_id}"
+			else
+				puts "********** API response not present for #{school.bps_id} on GetSchoolDescriptions"
 			end
 		end
 	end
@@ -89,7 +92,7 @@ module SchoolData
 
 		schools.each do |school|
 			api_response = Faraday.new(
-				:url => "#{ROOT_URL}#{facilities_endpoint}&sch=#{school.bps_id}",
+				:url => "#{BPS_API_URL}#{facilities_endpoint}&sch=#{school.bps_id}",
 				:ssl => {:version => :SSLv3}).get.body
 
 			if api_response.present?
@@ -100,6 +103,8 @@ module SchoolData
 
 				school.update_attributes(api_facilities: hash)
 				puts "********** done updating facilities for school #{school.bps_id}"
+			else
+				puts "********** API response not present for #{school.bps_id} on GetSchoolFacilities"
 			end
 		end
 	end
@@ -120,7 +125,7 @@ module SchoolData
 				# is that it does not have an entry for <rc></rc>. This should
 				# be reported to the API developers.
 				api_response = Faraday.new(
-					:url => "#{ROOT_URL}#{grades_endpoint}&sch=#{school.bps_id}",
+					:url => "#{BPS_API_URL}#{grades_endpoint}&sch=#{school.bps_id}",
 					:ssl => {:version => :SSLv3}).get.body
 
 				if api_response.present?
@@ -128,6 +133,8 @@ module SchoolData
 
 					school.update_attributes(api_grades: array)
 					puts "********** done updating grades for school #{school.bps_id}"
+				else
+					puts "********** API response not present for #{school.bps_id} on GetSchoolGrades"
 				end
 			end
 		end
@@ -144,7 +151,7 @@ module SchoolData
 
 		schools.each do |school|
 			api_response = Faraday.new(
-				:url => "#{ROOT_URL}#{hours_endpoint}&sch=#{school.bps_id}&TranslationLanguage=",
+				:url => "#{BPS_API_URL}#{hours_endpoint}&sch=#{school.bps_id}&TranslationLanguage=",
 				:ssl => {:version => :SSLv3}).get.body
 			if api_response.present?
 				# Use .first to store as a hash instead of a hash inside an array
@@ -154,6 +161,8 @@ module SchoolData
 
 				school.update_attributes(api_hours: hash)
 				puts "********** done updating hours for school #{school.bps_id}"
+			else
+				puts "********** API response not present for #{school.bps_id} on GetSchoolHours"
 			end
 		end
 	end
@@ -169,7 +178,7 @@ module SchoolData
 
 		schools.each do |school|
 			api_response = Faraday.new(
-				:url => "#{ROOT_URL}#{languages_endpoint}&sch=#{school.bps_id}",
+				:url => "#{BPS_API_URL}#{languages_endpoint}&sch=#{school.bps_id}",
 				:ssl => {:version => :SSLv3}).get.body
 
 			if api_response.present?
@@ -177,6 +186,8 @@ module SchoolData
 
 				school.update_attributes(api_languages: array)
 				puts "********** done updating languages for school #{school.bps_id}"
+			else
+				puts "********** API response not present for #{school.bps_id} on GetSchoolLanguages"
 			end
 		end
 	end
@@ -192,7 +203,7 @@ module SchoolData
 
 		schools.each do |school|
 			api_response = Faraday.new(
-				:url => "#{ROOT_URL}#{partners_endpoint}&sch=#{school.bps_id}&TranslationLanguage=",
+				:url => "#{BPS_API_URL}#{partners_endpoint}&sch=#{school.bps_id}&TranslationLanguage=",
 				:ssl => {:version => :SSLv3}).get.body
 
 			if api_response.present?
@@ -200,6 +211,8 @@ module SchoolData
 
 				school.update_attributes(api_partners: array)
 				puts "********** done updating partners for school #{school.bps_id}"
+			else
+				puts "********** API response not present for #{school.bps_id} on GetSchoolPartners"
 			end
 		end
 	end
@@ -215,7 +228,7 @@ module SchoolData
 
 		schools.each do |school|
 			api_response = Faraday.new(
-				:url => "#{ROOT_URL}#{photos_endpoint}&sch=#{school.bps_id}",
+				:url => "#{BPS_API_URL}#{photos_endpoint}&sch=#{school.bps_id}",
 				:ssl => {:version => :SSLv3}).get.body
 
 			if api_response.present?
@@ -223,6 +236,8 @@ module SchoolData
 
 				school.update_attributes(api_photos: array)
 				puts "********** done updating photos for school #{school.bps_id}"
+			else
+				puts "********** API response not present for #{school.bps_id} on GetSchoolPhotos"
 			end
 		end
 	end
@@ -238,7 +253,7 @@ module SchoolData
 
 		schools.each do |school|
 			api_response = Faraday.new(
-				:url => "#{ROOT_URL}#{sports_endpoint}&sch=#{school.bps_id}",
+				:url => "#{BPS_API_URL}#{sports_endpoint}&sch=#{school.bps_id}",
 				:ssl => {:version => :SSLv3}).get.body
 
 			if api_response.present?
@@ -249,6 +264,8 @@ module SchoolData
 
 				school.update_attributes(api_sports: hash)
 				puts "********** done updating sports for school #{school.bps_id}"
+			else
+				puts "********** API response not present for #{school.bps_id} on GetSchoolSports"
 			end
 		end
 	end

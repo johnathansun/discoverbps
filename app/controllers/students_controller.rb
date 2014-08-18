@@ -35,7 +35,7 @@ class StudentsController < ApplicationController
 
       params[:student][:sibling_school_ids] = School.where("name IN (?)", params[:student][:sibling_school_names].try(:compact).try(:reject, &:empty?)).collect {|x| x.bps_id}.uniq
           
-      api_response = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
+      api_response = bps_api_connector("#{BPS_API_URL}/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
 
       @addresses = api_response.try(:[], :List)
       @api_errors = api_response.try(:[], :Error).try(:[], 0)
@@ -62,7 +62,7 @@ class StudentsController < ApplicationController
           @error_message = "Please enter the required search fields and try again."
           flash[:alert] = "Please enter the required search fields and try again."
         end
-        
+
         format.js { render template: "students/errors" }
         format.html { redirect_to root_url }
       end
@@ -76,7 +76,7 @@ class StudentsController < ApplicationController
     street_name   = URI.escape(params[:student].try(:[], :street_name).try(:strip))
     zipcode       = URI.escape(params[:student].try(:[], :zipcode).try(:strip))
         
-    addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
+    addresses = bps_api_connector("#{BPS_API_URL}/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
     @addresses = addresses.try(:[], :List)
     @errors = addresses.try(:[], :Error).try(:[], 0)
 
@@ -108,7 +108,7 @@ class StudentsController < ApplicationController
     street_name   = URI.escape(@student.street_name.try(:strip))
     zipcode       = URI.escape(@student.zipcode.try(:strip))
         
-    addresses = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
+    addresses = bps_api_connector("#{BPS_API_URL}/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
     @addresses = addresses.try(:[], :List)
     @errors = addresses.try(:[], :Error).try(:[], 0)
   end
