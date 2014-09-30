@@ -4,7 +4,7 @@
 <!-- start google map -->
 <div class="wrap global_map">
 	<section class="content_wrap">
-			<%= render partial: 'layouts/account_tab' %>		
+			<%= render partial: 'layouts/account_tab' %>
 	</section>
 	<%= render partial: 'schools/map', locals: {students_list: [current_student], school: nil, map_controls: true, resize: true, width: '100%'} %>
 </div>
@@ -21,7 +21,7 @@
 				<% current_user_students.each_with_index do |student, i| %>
 					<%= render partial: 'schools/student_tab', locals: {student: student} %>
 				<% end %>
-			</div>	
+			</div>
 			<div class="add_child" >
 				+ Add a child
 			</div>
@@ -37,10 +37,10 @@
 			  	return false;
 				});
 			</script>
-			
+
 			<div class="clr"></div>
 		</div>
-		
+
 	</div>
 	<!-- END menu with compare button, student's name button and add_child button -->
 
@@ -56,7 +56,7 @@
 				$('.arrow_slide').hide();
 			} else {
 				$('.arrow_slide').show();
-			}		
+			}
 		});
 	</script>
 	<div class="result">
@@ -66,8 +66,8 @@
 		<div id="school_list">
 				<!-- listing of schools  -->
 				<div class="list_content">
-				
-					<!-- ajust the div width when "getting there" and/or "Your fit" glass_icon is clic (to create left and right draggable effect of the school list)  -->	
+
+					<!-- ajust the div width when "getting there" and/or "Your fit" glass_icon is clic (to create left and right draggable effect of the school list)  -->
 					<div class="flexible_content" style="width:1220px;">
 						<!-- school list header -->
 						<div class="menu_list">
@@ -78,7 +78,7 @@
 								<div id="sortable_school_name_column" class="menu_bloc sortable_column">
 									<div class="column_title">School Name</div>
 								</div>
-								
+
 								<!-- add class "open" to show "Walk time" and "Drive time"-->
 								<div id="getting_there" class=" menu_bloc ">
 									<div id="sortable_distance_column" class="first_block sortable_column" style="color: #0077cf;">
@@ -109,7 +109,7 @@
 							</div>
 						</div>
 						<!-- END school list header -->
-						
+
 						<!-- School listing -->
 						<ul id="sortable">
 							<% @zone_schools.each_with_index do |student_school, i| %>
@@ -118,17 +118,19 @@
 								</li>
 							<% end %>
 						</ul>
+						<p><%= link_to 'Click here', schools_url, class: 'blue' %> to return to your home-based schools.</p>
+
 						<!-- END School listing -->
 					</div>
-					
-					
+
+
 				</div>
 				<!-- END  listing of schools  -->
-				
+
 				<%= render partial: 'schools/footer' %>
 
 			</div>
-					
+
 		</div>
 	</div>
 </div>
@@ -141,39 +143,39 @@
 			$(this).parent().parent().find(".school_descrip").toggle();
 			}
 		);
-		
+
 		//Getting there button to show more(titles and descrip of each school lines)
 		$("#getting_there .glass_open").click(function(){
 			$("#getting_there").addClass("open");
 			$("#sortable .getting_there").addClass("open");
 		})
-		
+
 		//Getting there button to close the extra info about Getting there
 		$("#getting_there .glass_close").click(function(){
 			$("#getting_there").removeClass("open");
 			$("#sortable .getting_there").removeClass("open");
 		})
-		
+
 		//Your fit button to show the different fits added, add class open in the menu and each line of the list to display the titles and the description of each fit
 		$(".your_fit .glass_open").click(function(){
 			$(".your_fit_show").addClass("open");
 			$(".your_fit_descrip").addClass("open");
 		})
-		
+
 		//compare button => add class to compare_list, close school list and preferences, and show the comparaison list
 		/*$(".menu_compare_name .compare").click(function(){
-			
+
 			$(this).parent().addClass("compare_action");
 			$("#school_list").css("display","none");
 			$(".preferences").css("display","none");
 			$("#compare_list").css("display","block");
-			
-			
+
+
 		})*/
-		
+
 		//btn close preference choice in tablet size
 		$(".header_preferences #hide_btn").click(function(){
-			
+
 			//$("#preference_content").css("display","none");
 			//$(".header_preferences #hide_btn").css("display","none");
 			//$(".header_preferences #show_btn").css("display","inline-block");
@@ -181,7 +183,7 @@
 		})
 		//btn show preference choice in tablet size
 		$(".header_preferences #show_btn").click(function(){
-			
+
 			//$("#preference_content").css("display","block");
 			//$(".header_preferences #hide_btn").css("display","inline-block");
 			//$(".header_preferences #show_btn").css("display","none");
