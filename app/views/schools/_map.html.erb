@@ -170,19 +170,19 @@ function initialize(){
     google.maps.Marker.prototype.setMap.apply(this, arguments);
     (this.MarkerLabel) && this.MarkerLabel.setMap.apply(this.MarkerLabel, arguments);
   };
-   
+
   // Marker Label Overlay
   var MarkerLabel = function(options) {
     var self = this;
     this.setValues(options);
-    
+
     // Create the label container
     this.div = document.createElement('div');
     this.div.className = 'marker-label';
     var span = document.createElement('span');
     span.className = "marker-icon";
     this.div.appendChild(span);
-   
+
     // Trigger the marker click handler if clicking on the label
     google.maps.event.addDomListener(this.div, 'click', function(e){
       (e.stopPropagation) && e.stopPropagation();
@@ -203,7 +203,7 @@ function initialize(){
             google.maps.event.addListener(this, 'zindex_changed', function() { self.draw(); })
        ];
   };
-   
+
   // Marker Label onRemove
   MarkerLabel.prototype.onRemove = function() {
        this.div.parentNode.removeChild(this.div);
@@ -211,7 +211,7 @@ function initialize(){
             google.maps.event.removeListener(this.listeners[i]);
        }
   };
-   
+
   // Implement draw
   MarkerLabel.prototype.draw = function() {
        var projection = this.getProjection();
@@ -226,7 +226,7 @@ function initialize(){
 
    // Create a new StyledMapType object, passing it the array of styles,
 	  // as well as the name to be displayed on the map type control.
-	 	var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});	
+	 	var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});
     <% if current_student.latitude.present? && current_student.longitude.present? && current_student.latitude != 0 && current_student.longitude != 0 %>
       var myLatlng =  new google.maps.LatLng(<%= current_student.latitude %>,<%= current_student.longitude %>);
     <% else %>
@@ -244,14 +244,18 @@ function initialize(){
 			scrollwheel: false,
 			streetViewControl: false,
 			overviewMapControl: false,
-			
+
 			mapTypeControlOptions: {
 			  mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
 			}
 		};
 
-
 		var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+    var boundaryLayer = new google.maps.KmlLayer({
+      url: 'http://discoverbps.org/boundary.kml'
+    });
+
+    boundaryLayer.setMap(map);
 
     <% if school.present? %>
       <% if school.latitude.present? && school.longitude.present? %>
@@ -336,7 +340,7 @@ function initialize(){
       map.mapTypes.set('map_style', styledMap);
 		  map.setMapTypeId('map_style');
 	}
-		
+
 		google.maps.event.addDomListener(window, 'load', initialize);
 
 

@@ -1,2 +1,4 @@
-export GEM_HOME="$rvm_path/gems/ruby-2.0.0-p247@discoverbps"
-export MY_RUBY_HOME="$rvm_path/rubies/ruby-2.0.0-p247"
+if [ -f "$rvm_path/scripts/rvm" ]; then
+  source "$rvm_path/scripts/rvm"
+  rvm use .
+fi
