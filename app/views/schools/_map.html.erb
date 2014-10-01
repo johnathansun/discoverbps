@@ -251,11 +251,23 @@ function initialize(){
 		};
 
 		var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    var boundaryLayer = new google.maps.KmlLayer({
-      url: 'http://discoverbps.org/boundary.kml'
-    });
 
-    boundaryLayer.setMap(map);
+    // Load GeoJSON.
+    map.data.loadGeoJson('http://discoverbps.org/boston_boundary.geojson');
+
+    // Set the stroke width, and fill color for each polygon
+    var featureStyle = {
+      strokeColor: 'red',
+      strokeWeight: 3
+    }
+    map.data.setStyle(featureStyle);
+
+    // var boundaryLayer = new google.maps.KmlLayer({
+    //   url: 'http://discoverbps.org/boundary.kml',
+    //   suppressInfoWindows: true
+    // });
+    //
+    // boundaryLayer.setMap(map);
 
     <% if school.present? %>
       <% if school.latitude.present? && school.longitude.present? %>
