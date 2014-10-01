@@ -22,7 +22,7 @@
 </Schema>
 <Folder><name>towns_polym</name>
   <Placemark>
-	<Style><LineStyle><color>ff0000ff</color><width>15</width></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<Style><LineStyle><color>33333333</color><width>2</width></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#towns_polym">
 		<SimpleData name="town_id">35</SimpleData>
 		<SimpleData name="town">BOSTON</SimpleData>
