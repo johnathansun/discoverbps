@@ -6,21 +6,21 @@
 		</div>
 		<p class="yellow-buttons"><%= auto_link(TextSnippet.find('home-intro').text) %></p>
 	</div>
-	<div class="search_section_content "> 
-	 
+	<div class="search_section_content ">
+
 		<!-- ADD CLASS "RIGHT" TO MOVE THE TODAY INDICATOR TO RIGHT OF THE TIME LINE, OR "LEFT" TO MOVE TO THE LEFT  FOR LARGEUR OF TABLET SIZE -->
 		<!-- AND change the top % to ajust the today up or down -->
 		<!--
 			<div class="today right" style="top:58%;">
 				<span aria-hidden="true" class="right icon-DBPS-Dev-Assets-SRG-30"></span>&nbsp; Today &nbsp;<span aria-hidden="true" class="left icon-DBPS-Dev-Assets-SRG-32"></span>
 				<span class="yello_line"></span>
-			</div>	 
-			-->			
+			</div>
+			-->
 			<!-- END today indicator-->
-		
+
 			<!-- Discover section -->
 		<section class="search_section first">
-			<div class="content_left">					
+			<div class="content_left">
 				<div class="logo discover" >
 					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-01"></span>
 				</div>
@@ -39,7 +39,7 @@
 						<% if flash[:alert].present? %>
 							<p style='color: red;'><%= flash[:alert] %></p>
 						<% else %>
-							<p class="K"><br />Or search for a new student using the form below (grade level is for the entering grade; name is optional):</p>							
+							<p class="K"><br />Or search for a new student using the form below (grade level is for the entering grade; name is optional):</p>
 						<% end %>
 					<% else %>
 						<% if flash[:alert].present? %>
@@ -55,16 +55,16 @@
 						</div>
 				</div>
 
-								 
+
 			</div>
 			<%= render partial: 'schools/timeline_vertical' %>
 
 		</section>
 		<!-- END Discover section -->
-		
+
 		<!-- REgister section -->
 		<section class=" search_section second">
-							
+
 			<div class="content_left">
 				<div class="logo register" >
 					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-02"></span>
@@ -78,7 +78,7 @@
 			<div class="content_right">
 				<span class="event" style="margin-bottom:39px;">
 					<span class="desktop">
-						 Jan 6<!--<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-35"></span>--><img class="point" src="/assets/red_point.png" /><br/>
+						 Jan 5<!--<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-35"></span>--><img class="point" src="/assets/red_point.png" /><br/>
 						 <span class="W"> Registration begins</span><br/>
 							for K, 6 9
 							<br />
@@ -87,7 +87,7 @@
 						<span class="tablette">
 							<img class="point_arrow" src="/assets/blue_point_arrow.png" />
 						</span>
-						
+
 					</span>
 					<span class="event Y">
 						<span class="desktop">
@@ -99,11 +99,11 @@
 			<!--END timeline info of Register -->
 		</section>
 		<!-- END REgister section -->
-		
+
 		<!-- Succeed section -->
-		<section class="search_section third">				
+		<section class="search_section third">
 			<div class="content_left">
-				
+
 				<div class="logo succeed" >
 					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-03"></span>
 				</div>
@@ -111,13 +111,13 @@
 					<p class="yellow-buttons"><%= auto_link(TextSnippet.find('home-succeed-intro').text) %></p>
 					<a class="K" href="http://www.bostonpublicschools.org/transitionsupport" title="Explore" style="margin-bottom:0;" target="_blank">Explore</a>
 				</div>
-									
+
 			</div>
 			<!--END timeline info of Register -->
-			
+
 			<!-- timeline info of Succeed -->
 			<div class="content_right">
-				
+
 				<span class="event">
 					<span class="desktop">
 						Sept 4<!--<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-35"></span>--> <img class="point" src="/assets/blue_point.png" /><br/>
@@ -126,13 +126,13 @@
 						</span>
 					</span>
 				</span>
-				
+
 			</div>
 			<!--END timeline info of Succeed -->
-			
+
 			<!-- last point with star -->
 			<img class="final_point" src="/assets/star_point.png" />
-							
+
 		</section>
 		<!-- END Succeed section -->
 	</div>
