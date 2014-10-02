@@ -1,10 +1,10 @@
 <div class="wrap timeline_menu">
 	<div class="timeline">
 		<div class="months">
-			<div class="month">Oct <%= Date.today.month > 9 ? Date.today.year : Date.today.years_ago(1).year %></div>
+			<div class="month">Oct <%= last_year_helper %></div>
 			<div class="month">Nov</div>
 			<div class="month">Dec</div>
-			<div class="month">Jan <%= Date.today.month > 9 ? Date.today.years_since(1).year : Date.today.year %></div>
+			<div class="month">Jan <%= next_year_helper %></div>
 			<div class="month">Feb</div>
 			<div class="month">Mar</div>
 			<div class="month">Apr</div>
