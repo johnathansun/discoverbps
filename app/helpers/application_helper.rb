@@ -16,7 +16,7 @@ module ApplicationHelper
 
 	#####
 
-	def last_year_helper
+	def timeline_last_year
 		if Date.today.month > 9
 			Date.today.year
 		else
@@ -24,7 +24,7 @@ module ApplicationHelper
 		end
 	end
 
-	def next_year_helper
+	def timeline_next_year
 		if Date.today.month > 9
 			Date.today.years_since(1).year
 		else
