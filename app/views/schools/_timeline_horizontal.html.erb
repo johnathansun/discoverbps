@@ -1,10 +1,10 @@
 <div class="wrap timeline_menu">
 	<div class="timeline">
 		<div class="months">
-			<div class="month">Oct 2013</div>
+			<div class="month">Oct <%= Date.today.month > 9 ? Date.today.year : Date.today.years_ago(1).year %></div>
 			<div class="month">Nov</div>
 			<div class="month">Dec</div>
-			<div class="month">Jan 2014</div>
+			<div class="month">Jan <%= Date.today.month > 9 ? Date.today.years_since(1).year : Date.today.year %></div>
 			<div class="month">Feb</div>
 			<div class="month">Mar</div>
 			<div class="month">Apr</div>
@@ -13,12 +13,12 @@
 			<div class="month">Jul</div>
 			<div class="month">Aug</div>
 			<div class="month last">Sep</div>
-		</div>	
-		
+		</div>
+
 		<div class="day_indicator" style="left:<%= timeline_percent(Date.today) %>;">
 			<span class="text">Today</span>
 		</div>
-		
+
 		<div class="event_indicator"  style="left:15%;"><span class='icon-DBPS-Dev-Assets-SRG-38'></span></div>
 		<div class="event_indicator"  style="left:18%;"><span class='icon_horizontal-event'></span></div>
 		<div class="event_indicator"  style="left:46%;"><span class='icon_horizontal-event'></span></div>
@@ -100,7 +100,7 @@ $("#menu_nav_mobile").click(function() {
 	if (is_open_menu_mobile) {
 		// Close mobile
 		is_open_menu_mobile= false;
-		
+
 		$("#menu_items").animate({
 			height: "0"
 		  }, 200, function() {
@@ -108,17 +108,17 @@ $("#menu_nav_mobile").click(function() {
 			$(this).css("display", "none");
 			$(".menu_nav").width("31px");
 			$("#menu_nav_mobile").removeClass( "icon-DBPS-Dev-Assets-SRG-07" ).addClass( " icon-DBPS-Dev-Assets-SRG-25" );
-		
+
 		});
 	 } else {
 		// Open mobile
-		$(".menu_nav").width("100%");	
+		$(".menu_nav").width("100%");
 		is_open_menu_mobile= true;
 		$("#menu_items").css("display", "block");
 		$('#menu_items').css('height', 'auto');
 		var autoHeight = $('#menu_items').height();
 		$("#menu_items").css("height", "0");
-		
+
 		$("#menu_items").animate({
 			height: autoHeight
 		  }, 200, function() {
@@ -133,7 +133,7 @@ function initializeRegistrationTimeline() {
 
 	// Ex. (2 1/3) months approximate
 	$("#registration_contaner").width(Math.floor((2.333*$(".months .month").outerWidth())));
-	
+
 	// Ex. 2 days approximate
 	$("#regis_1").width(5*($(".months .month").outerWidth()/30));
 	$("#regis_2").width(5*($(".months .month").outerWidth()/30));
@@ -141,10 +141,10 @@ function initializeRegistrationTimeline() {
 	$("#regis_4").width(5*($(".months .month").outerWidth()/30));
 	$("#regis_5").width(4*($(".months .month").outerWidth()/30));
 	$("#regis_6").width(37*($(".months .month").outerWidth()/30));
-	
+
 
 	var arr= jQuery.makeArray($(".months .month"));
-	
+
 	// Set position registration_contaner on 1 January
 	// 3 is position January
 	var position = $($(".months .month")[3]).position();
@@ -170,7 +170,7 @@ $(".event_zone").hover(
 	},
 	function () {
 		$(this).find(".box_info").css("display", "none");
-		
+
 	}
  );
 
@@ -196,7 +196,7 @@ $("#registration_btn").click(function() {
 		is_open_register_contaner= true;
 		$(".register_timeline_contaner").css("display", "block");
 	 }
-	 
+
 	 return false;
 });*/
 
@@ -209,7 +209,7 @@ $(".timeline").hover(
 			// Animation complete.
 		  });
 		$(".register_timeline_contaner").css("display", "block");
-	}, 
+	},
 	function() {
 		$(".register_timeline_contaner").css("display", "none");
 		$(".wrap.timeline_menu .timeline").stop(true, true).animate({
