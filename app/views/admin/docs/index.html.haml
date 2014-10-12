@@ -1,0 +1,318 @@
+%h1 DiscoverBPS Documentation
+
+%p
+  %i updated 10/12/2014
+
+%h3 Contents
+
+%ul
+  %li
+    = link_to '1. Front-End', admin_docs_path(anchor: '1')
+  %li{style: 'margin-left: 25px;'}
+    = link_to '1.1 Search', admin_docs_path(anchor: '1.1')
+  %li{style: 'margin-left: 25px;'}
+    = link_to '1.2  Eligible Schools', admin_docs_path(anchor: '1.2')
+  %li{style: 'margin-left: 25px;'}
+    = link_to '1.3  Zone Schools', admin_docs_path(anchor: '1.3')
+  %li{style: 'margin-left: 25px;'}
+    = link_to '1.4  Multiple Students', admin_docs_path(anchor: '1.4')
+  %li{style: 'margin-left: 25px;'}
+    = link_to '1.5  Accounts', admin_docs_path(anchor: '1.5')
+  %li
+    = link_to '2. Admin', admin_docs_path(anchor: '2')
+  %li{style: 'margin-left: 25px;'}
+    = link_to '2.1  Dashboard', admin_docs_path(anchor: '2.1')
+  %li{style: 'margin-left: 25px;'}
+    = link_to '2.2  Schools', admin_docs_path(anchor: '2.2')
+  %li{style: 'margin-left: 25px;'}
+    = link_to '2.3  Preferences', admin_docs_path(anchor: '2.3')
+  %li{style: 'margin-left: 25px;'}
+    = link_to '2.4  Notifications', admin_docs_path(anchor: '2.4')
+  %li{style: 'margin-left: 25px;'}
+    = link_to '2.5  Text Snippets', admin_docs_path(anchor: '2.5')
+  %li{style: 'margin-left: 25px;'}
+    = link_to '2.6  Admin Users', admin_docs_path(anchor: '2.6')
+  %li
+    = link_to '3. Technical', admin_docs_path(anchor: '3')
+  %li{style: 'margin-left: 25px;'}
+    = link_to '3.1  API Calls', admin_docs_path(anchor: '3.1')
+  %li{style: 'margin-left: 25px;'}
+    = link_to '3.2  Troubleshooting', admin_docs_path(anchor: '3.2')
+
+
+%hr/
+%h1
+  Introduction
+
+%p
+  DiscoverBPS (www.discoverbps.org) is a school search engine offered by Boston Public Schools.  It allows parents to enter a home address and grade level and see a personalized list of schools for their child. School information is served from the Boston Public Schools API, so that BPS administrators can manage the information in a centralized location. The goal of DiscoverBPS is to simplify the user interface to the school registration process and help parents to make more informed choices for their kids.
+
+%p
+  Version 1 of DiscoverBPS launched on November 1, 2011. Version 2 launched on November 1, 2013. This guide documents version 2, and provides detailed information on the front-end, admin, and technical functionality of the software. It also includes “How-To” and troubleshooting guides for OOIT and site administrators.
+
+
+%hr/
+%a{id: "1"}
+%h1
+  1. Front-End
+%br/
+
+%a{id: "1.1"}
+%h3 1.1  Search
+
+%p
+  As a search engine, the core functionality of DiscoverBPS is captured by the search form on the home page. The form contains fields for student name, address, and grade level, as well as one or more sibling schools. By filling out the form and clicking “Next” (and by then verifying the address and indicating whether the student has ELL or IEP needs), parents can quickly view a list of schools that is customized to their student. If previous searches are saved in the browser session (or in the parent account, if one has been created), buttons will appear above the form with the name of each student.
+
+%p
+  = image_tag('documentation/image10.png', class: 'responsive-image')
+
+
+%a{id: "1.2"}
+%h3 1.2  Eligible Schools
+
+%p The school list displays all of the schools that a student is eligible to apply to. Schools are displayed on a map at the top of the page, and in a list below the map. Schools are initially displayed in random order. Each school listing displays a name, distance (from the student’s home address), transportation eligibility, tier, and school hours.
+
+%p
+  = image_tag('documentation/image07.png', class: 'responsive-image')
+
+%p Clicking the school name reveals detailed school information, including photos, a description, and other school features.
+
+%p
+  = image_tag('documentation/image14.png', class: 'responsive-image')
+
+%p On the left side of the list page are checkboxes for various school offerings:
+
+%ul.with_bullets
+  %li Grades Offered
+  %li Enrollment
+  %li Advanced Work Course (AWC)
+  %li Uniform Policy
+  %li Health & Wellness
+  %li Facility Features
+  %li Sports
+
+%p
+  (The contents of the list vary according to the grade level of the search.) Checking an option adds the category’s icon to the “Your Fit” column, which can then be sorted in descending order. This device is meant to help parents find the schools that are the best fit for their student.
+
+%p
+  = image_tag('documentation/image08.png', class: 'responsive-image')
+
+%p
+  School details and school lists can be printed or downloaded in .csv format. Eligible school lists can also be saved for future access.
+
+%a{id: "1.3"}
+%h3 1.3  Zone Schools
+
+%p
+  Due to the recent change in the student assignment policy, certain grades are still eligible under the previous “zone school” eligibility system. Parents are alerted to such eligibility in a footnote below the list of schools. Clicking the link reveals a separate list of schools based on the old eligibility system.
+
+%p
+  = image_tag('documentation/image02.png', class: 'responsive-image')
+
+%p
+  The grade levels included in the zone school eligibility list will be reduced each year as students cycle through the grades. The grades that are eligible for zone school status will be as follows:
+
+%ul.with_bullets
+  %li 2014: 2, 3, 4, 5, 8
+  %li 2015: 3, 4, 5
+  %li 2016: 4, 5
+  %li 2017: 5
+
+%p
+  DiscoverBPS is programmed to automatically adjust the zone school grade levels on November 1 of each year through 2017.
+
+%a{id: "1.4"}
+%h3 1.4  Multiple Students
+
+%p
+  Parents can search for multiple students. They can do so from the home page by performing a new search, or by clicking the “Add a child” button on the list page. Student names appear in tabs on the list page, and can be selected to display the lists of schools for each child. Clicking the “Compare your lists” button reveals a side-by-side format that allows parents to sort the lists to optimize the odds of placing multiple students in the same school.
+
+
+%p
+  = image_tag('documentation/image11.png', class: 'responsive-image')
+
+%a{id: "1.5"}
+%h3 1.5  Accounts
+
+%p
+  Searches are automatically saved in the browser session (which means that when a user returns to the site on the same computer, the previous search results will still appear), but parents can also save their work by creating an account. Accounts can be created in DiscoverBPS with a username and password, or via Facebook or Twitter authentication. When returning to the site, parents can click “Account > Log In” to return to their previous session.
+
+%p
+  = image_tag('documentation/image05.png', class: 'responsive-image')
+
+
+%hr/
+%a{id: "2"}
+%h1
+  2. Admin
+%br/
+
+%p
+  The content in DiscoverBPS is administered through an admin interface at www.discoverbps.org/admin.  Admin users can log in with their email address and password.  New admin accounts can be added by any existing admin user.
+
+%a{id: "2.1"}
+%h3
+  2.1  Dashboard
+
+%p
+  = image_tag('documentation/image09.png', class: 'responsive-image')
+
+%p
+  After logging into the system, admin users will see a dashboard with statistics on site usage. The dashboard includes the following statistics:
+
+%ul.with_bullets
+  %li Search volume by zipcode (map)
+  %li Search volume by date (bar chart)
+  %li Searches by grade level
+  %li ELL needs (percentage by true/false)
+  %li IEP needs (percentage by true/false)
+  %li Preferences count
+
+%p
+  = link_to 'Click here to visit the admin dashboard', admin_root_url
+
+%a{id: "2.2"}
+%h3
+  2.2  Schools
+
+%p
+  = image_tag('documentation/image13.png', class: 'responsive-image')
+
+%p
+  The schools page displays a list of all of the schools stored in DiscoverBPS. The page also displays a map of the geocoded school locations. Each school displays a list of API tables and the status of the connection. Each school also shows the date of the last API update (which happens automatically at 3am EST each night). Clicking on a school reveals all of the data pulled from the API and currently stored in the DiscoverBPS database.
+
+%p
+  = link_to 'Click here to visit the schools page', admin_schools_url
+
+%h3
+  2.2.1 Adding a New School
+
+%p
+  New schools must be added to DiscoverBPS in order to appear in the search results. New schools are added by clicking the “Add New School” button at the bottom of the admin schools page, and entering the relevant BPS Id. After the ID has been saved in the DiscoverBPS database, it will automatically sync school data from the BPS API.
+
+%p
+  = image_tag('documentation/image00.png', class: 'responsive-image')
+
+%a{id: "2.3"}
+%h3
+  2.3  Preferences
+
+%p
+  = image_tag('documentation/image03.png', class: 'responsive-image')
+
+%p
+  The Preferences tab allows admin to create preference checkboxes that will appear in the left-hand sidebar on the user-facing school lists. These checkboxes filter the results according to whether a given school contains the selected value, and allows parents to sort the schools using the “Your Fit” column.
+
+%p
+  = link_to 'Click here to visit the preferences page', admin_preferences_url
+
+%h3
+  2.3.1 Adding a New Preference
+
+%p
+  In order to create a connection between the preference checkbox and the value on each school, admin must identify the appropraite API table, key and value (e.g. isHasFulltimeNurse = true). Admin must also select the grade levels that a given preference applies to (e.g. football will only be relevant for high school grade levels).
+
+%p
+  = image_tag('documentation/image15.png', class: 'responsive-image')
+
+%a{id: "2.4"}
+%h3
+  2.4  Notifications
+
+%p
+  = image_tag('documentation/image06.png', class: 'responsive-image')
+
+%p
+  Notifications are a lightweight tool to allows admin users to post important messages on the DiscoverBPS site. When active, notifications can be set to appear on the top of the home page and/or list pages on the user-facing site. Multiple notifications can be active at the same time, in which case they will stack one on top of another. Each notification has a start time and end time so that admin can program the notification to appear during a set window of time. Notification start and end times are accurate to the minute.
+
+%p
+  = link_to 'Click here to visit the notifications page', admin_notifications_url
+
+%p
+  = image_tag('documentation/image04.png', class: 'responsive-image')
+
+%a{id: "2.5"}
+%h3
+  2.5  Text Snippets
+
+%p
+  = image_tag('documentation/image01.png', class: 'responsive-image')
+
+%p
+  The Text Snippets section is a lightweight content management tool for the static content components on the DiscoverBPS site. These include the following:
+
+%ul.with_bullets
+  %li home page introduction text
+  %li home page search intro
+  %li home page register intro
+  %li home page succeed intro
+  %li footer info
+
+%p
+  = link_to 'Click here to visit the text snippets page', admin_text_snippets_url
+
+%a{id: "2.6"}
+%h3
+  2.6  Admin Users
+
+%p
+  The users section allows admin users to add, edit and delete other BPS admin users on the DiscoverBPS site. An invitation email will automatically be sent to users with instructions on logging in.
+
+%p
+  = image_tag('documentation/image12.png', class: 'responsive-image')
+
+
+%hr/
+%a{id: "3"}
+%h1
+  3. Technical
+%br/
+
+%p
+  DiscoverBPS.org is a Ruby on Rails application hosted on Heroku.com. The application uses Rails 3.2.19, Ruby 2.0.0, Postgres 9.2.6, and a number of open source Ruby Gems. The codebase can be found at https://github.com/joelmahoney/discoverbps [MOVE TO BPS ACCOUNT WHEN FINISHED]
+
+%p
+  The application connects to the BPS schools API at multiple endpoints (see https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help) to populate school information and eligible school lists. Eligible school lists, as well as address verification lists, are retrieved in real-time when applicants perform a search. School information is updated on a nightly basis (at 3am EST) by looping through each BPS school id, and retrieving data from the relevant API endpoints. When a user performs a search, the list of eligible schools is used to retrieve the records stored in the DiscoverBPS database, which are then displayed on the site. (The clock process is used because storing the school information in the DiscoverBPS database proved to be faster than retrieving basic school data in real-time from the API.)
+
+%a{id: "3.1"}
+%h3
+  3.1  API Calls
+
+%p
+  The following describes the API calls used in DiscoverBPS. Interpolated Rails variables are enclosed in [].
+
+%p
+  School information is updated on a nightly basis using the following endpoints:
+
+%ul.with_bullets
+  %li Basic School Info: /GetSchool?schyear=[school_year]&sch=[school.bps_id]
+  %li Awards: /GetSchoolAwards?schyear=[school_year]&sch=[school.bps_id]&TranslationLanguage=
+  %li Description: /GetSchoolDescriptions?schyear=[school_year]&sch=[school.bps_id]&TranslationLanguage=
+  %li Facilities: /GetSchoolFacilities?schyear=[school_year]&sch=[school.bps_id]
+  %li Grades: /GetSchoolGrades?schyear=[school_year]&sch=[school.bps_id]
+  %li Hours: /GetSchoolHours?schyear=[school_year]&sch=[school.bps_id]&TranslationLanguage=
+  %li Languages: /GetSchoolLanguages?schyear=[school_year]&sch=[school.bps_id]
+  %li Partners: /GetSchoolPartners?schyear=[school_year]&sch=[school.bps_id]&TranslationLanguage=
+  %li Photos: /GetSchoolPhotos?schyear=[school_year]&sch=[school.bps_id]
+  %li Sports: /GetSchoolSports?schyear=[school_year]&sch=[school.bps_id]
+
+%p
+  Note that some endpoints require a TranslationLanguage variable (left blank in all cases), while others do not. Note also that Basic Info, Descriptions, Facilities, Hours, and Sports return a single hash inside of an array.
+
+%p
+  Eligible school lists are populated by extracting the “List” value from the following endpoints:
+
+%ul.with_bullets
+  %li Addresses: /GetAddressMatches?StreetNumber=[street_number]&Street=[street_name]&ZipCode=[zipcode]
+  %li Eligible Schools: /GetSchoolChoices?SchoolYear=2014-2015&Grade=[grade_level]&StreetNumber=[street_number]&Street=[street_name]&ZipCode=[zipcode]&X=[x_coordinate]&Y=[y_coordinate]&SiblingSchList=[sibling_school_id_one],[sibling_school_id_two],[sibling_school_id_three],[sibling_school_id_four],[sibling_school_id_five]
+  %li Zone Schools: /GetSchoolInterestList?SchoolYear=2014-2015&Grade=[grade_level]&ZipCode=[zipcode]&Geo=[geo_code]&X=[x_coordinate]&Y=[y_coordinate]&SiblingSchList=[sibling_school_id_one],[sibling_school_id_two],[sibling_school_id_three],[sibling_school_id_four],[sibling_school_id_five]
+
+%a{id: "3.2"}
+%h3
+  3.2  Troubleshooting
+
+%p
+  If www.discoverbps.org is unresponsive, the first concern is to identify whether the problem originates from the site itself, or from the API. If the home page loads, but does not respond to the search form or load lists of eligible schools, it is likely that the API is causing the problem. See if the service is available at e.g. https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc/GetSchool?schyear=2014&&sch=4321
+
+%p
+  If the entire site is down, the problem is likely an issue with DiscoverBPS, or with the DNS, hosting account, etc. These assets are being transitioned to BPS and will be managed by OOIT.

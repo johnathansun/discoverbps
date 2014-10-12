@@ -23,9 +23,9 @@
 			<!--[if lte IE 8]>
 				<link rel="stylesheet" href="stylesheets/css/ie.css" />
 				<script src="js/libs/selectivizr-1.0.2.min.js"></script>
-			<![endif]--> 
-			
-		<!-- Deprecated IEs scripts & stylesheets =================== -->	
+			<![endif]-->
+
+		<!-- Deprecated IEs scripts & stylesheets =================== -->
 		 <!-- Chrome Frame for IE6 and under -->
 			<!--[if lte IE 6 ]>
 				<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
@@ -35,13 +35,13 @@
 		<!-- script pour Typekit  =================== -->
 			<!--<script type="text/javascript" src="//use.typekit.net/_______.js"></script>
 			<script type="text/javascript">try{Typekit.load();}catch(e){}</script>-->
-			
+
 		<!-- font-icons-->
 		<!--[if lte IE 7]><script src="lte-ie7.js"></script><![endif]-->
 		<%= stylesheet_link_tag    "application", :media => "all" %>
 		<%= javascript_include_tag "admin" %>
 		<%= yield :scripts %>
-		
+
 		<%= csrf_meta_tags %>
 	</head>
 
@@ -53,17 +53,19 @@
 			<div style="float: right; padding-bottom: 5px; font-weight: bold; font-size: 17px; margin-top: 49px;">
 				<% if current_admin.present? %>
 					<%= link_to 'Dashboard', admin_students_path, class: 'white' %>
-					<span style="color: #ffffff;">&nbsp;|&nbsp;</span> 
+					<span style="color: #ffffff;">&nbsp;|&nbsp;</span>
 					<%= link_to 'Schools', admin_schools_path, class: 'white' %>
-					<span style="color: #ffffff;">&nbsp;|&nbsp;</span> 
+					<span style="color: #ffffff;">&nbsp;|&nbsp;</span>
 					<%= link_to 'Preferences', admin_preferences_path, class: 'white' %>
-					<span style="color: #ffffff;">&nbsp;|&nbsp;</span> 
+					<span style="color: #ffffff;">&nbsp;|&nbsp;</span>
 					<%= link_to 'Notifications', admin_notifications_path, class: 'white' %>
-					<span style="color: #ffffff;">&nbsp;|&nbsp;</span> 
+					<span style="color: #ffffff;">&nbsp;|&nbsp;</span>
 					<%= link_to 'Text Snippets', admin_text_snippets_path, class: 'white' %>
-					<span style="color: #ffffff;">&nbsp;|&nbsp;</span> 
+					<span style="color: #ffffff;">&nbsp;|&nbsp;</span>
 					<%= link_to 'Users', admin_admins_path, class: 'white' %>
-					<span style="color: #ffffff;">&nbsp;|&nbsp;</span> 
+					<span style="color: #ffffff;">&nbsp;|&nbsp;</span>
+					<%= link_to 'Docs', admin_docs_path, class: 'white' %>
+					<span style="color: #ffffff;">&nbsp;|&nbsp;</span>
 					<%= link_to 'Logout', admin_sign_out_path, class: 'white' %>
 				<% end %>
 

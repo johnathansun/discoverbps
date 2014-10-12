@@ -22,9 +22,9 @@ DiscoverbpsV2::Application.routes.draw do
     delete 'delete_all', on: :collection
     post 'save_preference', on: :member
     post 'remove_notification', on: :collection
-  end 
+  end
 
-  resources :schools do 
+  resources :schools do
     get 'home', on: :collection
     get 'zone_schools', on: :collection
     get 'print_home_schools', on: :collection
@@ -37,6 +37,7 @@ DiscoverbpsV2::Application.routes.draw do
   namespace :admin do
     root :to => "students#index"
     resources :admins
+    resources :docs, only: [:index]
     resources :preferences do
       post 'sort', on: :collection
     end

@@ -32,7 +32,7 @@ body.admin {
 	h4 { font-size: 1.2em; }
 
 	table {
-		tr.hover:hover { background-color: #eeeeee;}	
+		tr.hover:hover { background-color: #eeeeee;}
 		td { padding-top: 5px; padding-bottom: 5px; vertical-align: middle; }
 	}
 
@@ -44,7 +44,7 @@ body.admin {
 	}
 
 	ul.with_bullets {
-		list-style: disc inside none; 
+		list-style: disc inside none;
 		margin-left: 20px;
 	}
 
@@ -137,8 +137,12 @@ body.admin {
 
 	.stat {
 	  margin-top: 10px;
-	  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	  font-weight: 200;
 	  font-size: 20px;
+	}
+
+	.responsive-image {
+		max-width: 100% !important;
 	}
 }
