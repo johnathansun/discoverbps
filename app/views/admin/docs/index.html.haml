@@ -295,16 +295,36 @@
   School information is updated on a nightly basis using the following endpoints:
 
 %ul.with_bullets
-  %li Basic School Info: /GetSchool?schyear=[school_year]&sch=[school.bps_id]
-  %li Awards: /GetSchoolAwards?schyear=[school_year]&sch=[school.bps_id]&TranslationLanguage=
-  %li Description: /GetSchoolDescriptions?schyear=[school_year]&sch=[school.bps_id]&TranslationLanguage=
-  %li Facilities: /GetSchoolFacilities?schyear=[school_year]&sch=[school.bps_id]
-  %li Grades: /GetSchoolGrades?schyear=[school_year]&sch=[school.bps_id]
-  %li Hours: /GetSchoolHours?schyear=[school_year]&sch=[school.bps_id]&TranslationLanguage=
-  %li Languages: /GetSchoolLanguages?schyear=[school_year]&sch=[school.bps_id]
-  %li Partners: /GetSchoolPartners?schyear=[school_year]&sch=[school.bps_id]&TranslationLanguage=
-  %li Photos: /GetSchoolPhotos?schyear=[school_year]&sch=[school.bps_id]
-  %li Sports: /GetSchoolSports?schyear=[school_year]&sch=[school.bps_id]
+  %li
+    %strong Basic School Info:
+    == /GetSchool?schyear=[school_year]&sch=[school.bps_id]
+  %li
+    %strong Awards:
+    == /GetSchoolAwards?schyear=[school_year]&sch=[school.bps_id]&TranslationLanguage=
+  %li
+    %strong Description:
+    == /GetSchoolDescriptions?schyear=[school_year]&sch=[school.bps_id]&TranslationLanguage=
+  %li
+    %strong Facilities:
+    == /GetSchoolFacilities?schyear=[school_year]&sch=[school.bps_id]
+  %li
+    %strong Grades:
+    == /GetSchoolGrades?schyear=[school_year]&sch=[school.bps_id]
+  %li
+    %strong Hours:
+    == /GetSchoolHours?schyear=[school_year]&sch=[school.bps_id]&TranslationLanguage=
+  %li
+    %strong Languages:
+    == /GetSchoolLanguages?schyear=[school_year]&sch=[school.bps_id]
+  %li
+    %strong Partners:
+    == /GetSchoolPartners?schyear=[school_year]&sch=[school.bps_id]&TranslationLanguage=
+  %li
+    %strong Photos:
+    == /GetSchoolPhotos?schyear=[school_year]&sch=[school.bps_id]
+  %li
+    %strong Sports:
+    == /GetSchoolSports?schyear=[school_year]&sch=[school.bps_id]
 
 %p
   Note that some endpoints require a TranslationLanguage variable (left blank in all cases), while others do not. Note also that Basic Info, Descriptions, Facilities, Hours, and Sports return a single hash inside of an array.
@@ -313,9 +333,15 @@
   Eligible school lists are populated by extracting the “List” value from the following endpoints:
 
 %ul.with_bullets
-  %li Addresses: /GetAddressMatches?StreetNumber=[street_number]&Street=[street_name]&ZipCode=[zipcode]
-  %li Eligible Schools: /GetSchoolChoices?SchoolYear=2014-2015&Grade=[grade_level]&StreetNumber=[street_number]&Street=[street_name]&ZipCode=[zipcode]&X=[x_coordinate]&Y=[y_coordinate]&SiblingSchList=[sibling_school_id_one],[sibling_school_id_two],[sibling_school_id_three],[sibling_school_id_four],[sibling_school_id_five]
-  %li Zone Schools: /GetSchoolInterestList?SchoolYear=2014-2015&Grade=[grade_level]&ZipCode=[zipcode]&Geo=[geo_code]&X=[x_coordinate]&Y=[y_coordinate]&SiblingSchList=[sibling_school_id_one],[sibling_school_id_two],[sibling_school_id_three],[sibling_school_id_four],[sibling_school_id_five]
+  %li
+    %strong Addresses:
+    == /GetAddressMatches?StreetNumber=[street_number]&Street=[street_name]&ZipCode=[zipcode]
+  %li
+    %strong Eligible Schools:
+    == /GetSchoolChoices?SchoolYear=2014-2015&Grade=[grade_level]&StreetNumber=[street_number]&Street=[street_name]&ZipCode=[zipcode]&X=[x_coordinate]&Y=[y_coordinate]&SiblingSchList=[sibling_school_id_one],[sibling_school_id_two],[sibling_school_id_three],[sibling_school_id_four],[sibling_school_id_five]
+  %li
+    %strong Zone Schools:
+    == /GetSchoolInterestList?SchoolYear=2014-2015&Grade=[grade_level]&ZipCode=[zipcode]&Geo=[geo_code]&X=[x_coordinate]&Y=[y_coordinate]&SiblingSchList=[sibling_school_id_one],[sibling_school_id_two],[sibling_school_id_three],[sibling_school_id_four],[sibling_school_id_five]
 
 %a{id: "3.2"}
 %h3
