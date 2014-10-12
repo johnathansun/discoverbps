@@ -1,4 +1,4 @@
-%h1 DiscoverBPS Documentation
+%h1 Documentation
 
 %p
   %i updated 10/12/2014
@@ -168,8 +168,9 @@
   %li IEP needs (percentage by true/false)
   %li Preferences count
 
-%p
-  = link_to 'Click here to visit the admin dashboard', admin_root_url
+- if current_admin.present?
+  %p
+    = link_to 'Click here to visit the admin dashboard', admin_root_url
 
 %a{id: "2.2"}
 %h3
@@ -181,8 +182,9 @@
 %p
   The schools page displays a list of all of the schools stored in DiscoverBPS. The page also displays a map of the geocoded school locations. Each school displays a list of API tables and the status of the connection. Each school also shows the date of the last API update (which happens automatically at 3am EST each night). Clicking on a school reveals all of the data pulled from the API and currently stored in the DiscoverBPS database.
 
-%p
-  = link_to 'Click here to visit the schools page', admin_schools_url
+- if current_admin.present?
+  %p
+    = link_to 'Click here to visit the schools page', admin_schools_url
 
 %h3
   2.2.1 Adding a New School
@@ -203,8 +205,9 @@
 %p
   The Preferences tab allows admin to create preference checkboxes that will appear in the left-hand sidebar on the user-facing school lists. These checkboxes filter the results according to whether a given school contains the selected value, and allows parents to sort the schools using the “Your Fit” column.
 
-%p
-  = link_to 'Click here to visit the preferences page', admin_preferences_url
+- if current_admin.present?
+  %p
+    = link_to 'Click here to visit the preferences page', admin_preferences_url
 
 %h3
   2.3.1 Adding a New Preference
@@ -225,8 +228,9 @@
 %p
   Notifications are a lightweight tool to allows admin users to post important messages on the DiscoverBPS site. When active, notifications can be set to appear on the top of the home page and/or list pages on the user-facing site. Multiple notifications can be active at the same time, in which case they will stack one on top of another. Each notification has a start time and end time so that admin can program the notification to appear during a set window of time. Notification start and end times are accurate to the minute.
 
-%p
-  = link_to 'Click here to visit the notifications page', admin_notifications_url
+- if current_admin.present?
+  %p
+    = link_to 'Click here to visit the notifications page', admin_notifications_url
 
 %p
   = image_tag('documentation/image04.png', class: 'responsive-image')
@@ -248,8 +252,9 @@
   %li home page succeed intro
   %li footer info
 
-%p
-  = link_to 'Click here to visit the text snippets page', admin_text_snippets_url
+- if current_admin.present?
+  %p
+    = link_to 'Click here to visit the text snippets page', admin_text_snippets_url
 
 %a{id: "2.6"}
 %h3

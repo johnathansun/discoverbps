@@ -66,7 +66,9 @@
 					<span style="color: #ffffff;">&nbsp;|&nbsp;</span>
 					<%= link_to 'Docs', admin_docs_path, class: 'white' %>
 					<span style="color: #ffffff;">&nbsp;|&nbsp;</span>
-					<%= link_to 'Logout', admin_sign_out_path, class: 'white' %>
+					<%= link_to 'Sign Out', admin_sign_out_path, class: 'white' %>
+				<% else %>
+					<%= link_to 'Sign In', admin_sign_in_path, class: 'white' %>
 				<% end %>
 
 			</div>
