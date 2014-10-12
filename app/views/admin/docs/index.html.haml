@@ -45,7 +45,8 @@
   Introduction
 
 %p
-  DiscoverBPS (www.discoverbps.org) is a school search engine offered by Boston Public Schools.  It allows parents to enter a home address and grade level and see a personalized list of schools for their child. School information is served from the Boston Public Schools API, so that BPS administrators can manage the information in a centralized location. The goal of DiscoverBPS is to simplify the user interface to the school registration process and help parents to make more informed choices for their kids.
+  = link_to 'DiscoverBPS', root_url
+  is a school search engine offered by Boston Public Schools.  It allows parents to enter a home address and grade level and see a personalized list of schools for their child. School information is served from the Boston Public Schools API, so that BPS administrators can manage the information in a centralized location. The goal of DiscoverBPS is to simplify the user interface to the school registration process and help parents to make more informed choices for their kids.
 
 %p
   Version 1 of DiscoverBPS launched on November 1, 2011. Version 2 launched on November 1, 2013. This guide documents version 2, and provides detailed information on the front-end, admin, and technical functionality of the software. It also includes “How-To” and troubleshooting guides for OOIT and site administrators.
@@ -274,10 +275,14 @@
 %br/
 
 %p
-  DiscoverBPS.org is a Ruby on Rails application hosted on Heroku.com. The application uses Rails 3.2.19, Ruby 2.0.0, Postgres 9.2.6, and a number of open source Ruby Gems. The codebase can be found at https://github.com/joelmahoney/discoverbps [MOVE TO BPS ACCOUNT WHEN FINISHED]
+  DiscoverBPS.org is a Ruby on Rails application hosted on Heroku.com. The application uses Rails 3.2.19, Ruby 2.0.0, Postgres 9.2.6, and a number of open source Ruby Gems. The codebase can be found at
+  = link_to 'https://github.com/joelmahoney/discoverbps', 'https://github.com/joelmahoney/discoverbps'
+  [NOTE: MOVE TO BPS ACCOUNT WHEN FINISHED]
 
 %p
-  The application connects to the BPS schools API at multiple endpoints (see https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help) to populate school information and eligible school lists. Eligible school lists, as well as address verification lists, are retrieved in real-time when applicants perform a search. School information is updated on a nightly basis (at 3am EST) by looping through each BPS school id, and retrieving data from the relevant API endpoints. When a user performs a search, the list of eligible schools is used to retrieve the records stored in the DiscoverBPS database, which are then displayed on the site. (The clock process is used because storing the school information in the DiscoverBPS database proved to be faster than retrieving basic school data in real-time from the API.)
+  The application connects to the BPS schools API at multiple endpoints (see
+  = link_to 'https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help', 'https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help'
+  ) to populate school information and eligible school lists. Eligible school lists, as well as address verification lists, are retrieved in real-time when applicants perform a search. School information is updated on a nightly basis (at 3am EST) by looping through each BPS school id, and retrieving data from the relevant API endpoints. When a user performs a search, the list of eligible schools is used to retrieve the records stored in the DiscoverBPS database, which are then displayed on the site. (The clock process is used because storing the school information in the DiscoverBPS database proved to be faster than retrieving basic school data in real-time from the API.)
 
 %a{id: "3.1"}
 %h3
@@ -317,7 +322,8 @@
   3.2  Troubleshooting
 
 %p
-  If www.discoverbps.org is unresponsive, the first concern is to identify whether the problem originates from the site itself, or from the API. If the home page loads, but does not respond to the search form or load lists of eligible schools, it is likely that the API is causing the problem. See if the service is available at e.g. https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc/GetSchool?schyear=2014&&sch=4321
+  If www.discoverbps.org is unresponsive, the first concern is to identify whether the problem originates from the site itself, or from the API. If the home page loads, but does not respond to the search form or load lists of eligible schools, it is likely that the API is causing the problem. See if the service is available at e.g.
+  = link_to 'https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc/GetSchool?schyear=2014&&sch=4321', 'https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc/GetSchool?schyear=2014&&sch=4321'
 
 %p
   If the entire site is down, the problem is likely an issue with DiscoverBPS, or with the DNS, hosting account, etc. These assets are being transitioned to BPS and will be managed by OOIT.
