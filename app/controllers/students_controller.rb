@@ -234,6 +234,7 @@ class StudentsController < ApplicationController
     if response.body.present?
       MultiJson.load(response.body, :symbolize_keys => true) rescue {Error: ['The server responded with an error. Please try your search again later.']}
     else
+			logger.info "************************ Error: no response body #{response}"
       {Error: ['The server responded with an error. Please try your search again later.']}
     end
   end
