@@ -232,7 +232,8 @@ class StudentsController < ApplicationController
   def bps_api_connector(url)
     response = Faraday.new(:url => url, :ssl => {:version => :SSLv3}).get
     if response.body.present?
-      MultiJson.load(response.body, :symbolize_keys => true) rescue {Error: ['The server responded with an error. Please try your search again later.']}
+      logger.info "************************ Error: bad response body #{response.body}"
+			MultiJson.load(response.body, :symbolize_keys => true) rescue {Error: ['The server responded with an error. Please try your search again later.']}
     else
 			logger.info "************************ Error: no response body #{response}"
       {Error: ['The server responded with an error. Please try your search again later.']}
