@@ -8,7 +8,7 @@ module SchoolData
 		schools = SchoolData.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_API_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
+			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
 
 			if api_response.present?
 				# Use .first to store as a hash instead of a hash inside an array
@@ -20,7 +20,7 @@ module SchoolData
 				rescue
 					puts "********** Something went wrong with #{endpoint} id #{school.bps_id}"
 				else
-					puts "********** Updated Basic Info for id #{school.bps_id}"					
+					puts "********** Updated Basic Info for id #{school.bps_id}"
 				end
 			else
 				puts "********** API response not present for #{endpoint} with id #{school.bps_id}"
@@ -37,7 +37,7 @@ module SchoolData
 		schools = SchoolData.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_API_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}&TranslationLanguage=")
+			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}&TranslationLanguage=")
 			SchoolData.extract_response(school, api_response, key, endpoint, 'array')
 		end
 	end
@@ -51,7 +51,7 @@ module SchoolData
 		schools = SchoolData.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_API_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}&TranslationLanguage=")
+			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}&TranslationLanguage=")
 			SchoolData.extract_response(school, api_response, key, endpoint, 'hash')
 		end
 	end
@@ -65,7 +65,7 @@ module SchoolData
 		schools = SchoolData.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_API_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
+			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
 			SchoolData.extract_response(school, api_response, key, endpoint, 'hash')
 		end
 	end
@@ -79,7 +79,7 @@ module SchoolData
 		schools = SchoolData.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_API_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
+			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
 			SchoolData.extract_response(school, api_response, key, endpoint, 'array')
 		end
 
@@ -94,7 +94,7 @@ module SchoolData
 		schools = SchoolData.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_API_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}&TranslationLanguage=")
+			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}&TranslationLanguage=")
 			SchoolData.extract_response(school, api_response, key, endpoint, 'hash')
 		end
 	end
@@ -108,7 +108,7 @@ module SchoolData
 		schools = SchoolData.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_API_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
+			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
 			SchoolData.extract_response(school, api_response, key, endpoint, 'array')
 		end
 	end
@@ -122,7 +122,7 @@ module SchoolData
 		schools = SchoolData.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_API_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}&TranslationLanguage=")
+			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}&TranslationLanguage=")
 			SchoolData.extract_response(school, api_response, key, endpoint, 'array')
 		end
 	end
@@ -136,7 +136,7 @@ module SchoolData
 		schools = SchoolData.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_API_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
+			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
 			SchoolData.extract_response(school, api_response, key, endpoint, 'array')
 		end
 	end
@@ -150,7 +150,7 @@ module SchoolData
 		schools = SchoolData.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_API_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
+			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
 			SchoolData.extract_response(school, api_response, key, endpoint, 'hash')
 		end
 	end
@@ -171,7 +171,7 @@ module SchoolData
 	end
 
 	def self.extract_response(school, api_response, key, endpoint, response_type)
-		if api_response.blank? 
+		if api_response.blank?
 			puts "********** API response not present for #{endpoint} with id #{school.bps_id}"
 		else
 			begin
@@ -186,7 +186,7 @@ module SchoolData
 			rescue
 				puts "********** Something went wrong with #{endpoint} id #{school.bps_id}"
 			else
-				puts "********** Updated from #{endpoint} for id #{school.bps_id}"		
+				puts "********** Updated from #{endpoint} for id #{school.bps_id}"
 			end
 		end
 	end

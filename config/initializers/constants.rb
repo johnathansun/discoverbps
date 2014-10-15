@@ -1,4 +1,4 @@
-BPS_API_URL = "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc".freeze
+BPS_WEBSERVICE_URL = ENV['BPS_WEBSERVICE_URL'].freeze
 SCHOOL_YEAR  = "2014".freeze
 SCHOOL_YEARS = "2014-2015".freeze
 NON_TRANSITION_GRADES = ['1', '2', '3', '4', '5', '7', '8'].freeze

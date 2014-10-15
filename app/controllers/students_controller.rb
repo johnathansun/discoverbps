@@ -2,10 +2,10 @@ class StudentsController < ApplicationController
 
 	def create
 
-    if params[:student].present? && 
-      params[:student][:grade_level].present? && 
-      params[:student][:street_number].present? && 
-      params[:student][:street_name].present? && 
+    if params[:student].present? &&
+      params[:student][:grade_level].present? &&
+      params[:student][:street_number].present? &&
+      params[:student][:street_name].present? &&
       params[:student][:zipcode].present?
 
   		first_name    = params[:student][:first_name].try(:strip)
@@ -34,12 +34,12 @@ class StudentsController < ApplicationController
   		end
 
       params[:student][:sibling_school_ids] = School.where("name IN (?)", params[:student][:sibling_school_names].try(:compact).try(:reject, &:empty?)).collect {|x| x.bps_id}.uniq
-          
-      api_response = bps_api_connector("#{BPS_API_URL}/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
+
+      api_response = bps_api_connector("#{BPS_WEBSERVICE_URL}/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
 
       @addresses = api_response.try(:[], :List)
       @api_errors = api_response.try(:[], :Error).try(:[], 0)
-    
+
     end
 
     respond_to do |format|
@@ -75,15 +75,15 @@ class StudentsController < ApplicationController
     street_number = URI.escape(params[:student].try(:[], :street_number).try(:strip))
     street_name   = URI.escape(params[:student].try(:[], :street_name).try(:strip))
     zipcode       = URI.escape(params[:student].try(:[], :zipcode).try(:strip))
-        
-    addresses = bps_api_connector("#{BPS_API_URL}/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
+
+    addresses = bps_api_connector("#{BPS_WEBSERVICE_URL}/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
     @addresses = addresses.try(:[], :List)
     @errors = addresses.try(:[], :Error).try(:[], 0)
 
     respond_to do |format|
       if @addresses.present? && @student.update_attributes(params[:student])
         session[:current_student_id] = @student.id
-        
+
         format.js { render template: "students/address_verification" }
         format.html { redirect_to address_verification_student_path(@student)}
       else
@@ -107,8 +107,8 @@ class StudentsController < ApplicationController
     street_number = URI.escape(@student.street_number.try(:strip))
     street_name   = URI.escape(@student.street_name.try(:strip))
     zipcode       = URI.escape(@student.zipcode.try(:strip))
-        
-    addresses = bps_api_connector("#{BPS_API_URL}/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
+
+    addresses = bps_api_connector("#{BPS_WEBSERVICE_URL}/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
     @addresses = addresses.try(:[], :List)
     @errors = addresses.try(:[], :Error).try(:[], 0)
   end
@@ -119,8 +119,8 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.update_attributes(params[:student])
-        session[:current_student_id] = @student.id 
-        format.js { render template: "students/special_needs" }         
+        session[:current_student_id] = @student.id
+        format.js { render template: "students/special_needs" }
         format.html { redirect_to special_needs_student_path(@student)}
       else
         format.js { render template: "students/errors" }
@@ -132,7 +132,7 @@ class StudentsController < ApplicationController
 
   def special_needs
     @student = Student.find(params[:id])
-    
+
   end
 
   def set_special_needs
@@ -152,7 +152,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.update_attributes(params[:student])
-      	session[:current_student_id] = @student.id  
+      	session[:current_student_id] = @student.id
       	if @student.ell_needs?
           format.html { redirect_to ell_needs_student_path(@student)}
 	        format.js { render template: "students/ell_needs" }
@@ -173,12 +173,12 @@ class StudentsController < ApplicationController
 
   def ell_needs
     @student = Student.find(params[:id])
-    
+
   end
 
   def iep_needs
     @student = Student.find(params[:id])
-    
+
   end
 
   def destroy

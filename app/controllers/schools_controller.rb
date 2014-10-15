@@ -35,7 +35,7 @@ class SchoolsController < ApplicationController
             require 'csv'
             csv_string = CSV.generate do |csv|
               csv << ['Name', 'Distance from Home', 'Walk Time', 'Drive Time', 'Transportation Eligibility', 'Hours', 'Grades Offered', 'Before School Programs', 'After School Programs', 'Facilities', 'Partners', 'MCAS Tier', 'School Type', 'School Focus', 'Special Application', 'Uniform Policy', 'School Email']
-                        
+
               counter = 0
               @home_schools.each do |student_school|
                 school = student_school.school
@@ -82,7 +82,7 @@ class SchoolsController < ApplicationController
           require 'csv'
           csv_string = CSV.generate do |csv|
             csv << ['Name', 'Distance from Home', 'Walk Time', 'Drive Time', 'Transportation Eligibility', 'Hours', 'Grades Offered', 'Before School Programs', 'After School Programs', 'Facilities', 'Partners', 'MCAS Tier', 'School Type', 'School Focus', 'Special Application', 'Uniform Policy', 'School Email']
-                      
+
             counter = 0
             @zone_schools.each do |student_school|
               school = student_school.school
@@ -144,12 +144,12 @@ class SchoolsController < ApplicationController
 
   private
 
-    # this method pulls a list of eligible schools from the GetSchoolChoices API, 
+    # this method pulls a list of eligible schools from the GetSchoolChoices API,
     # saves the schools to student_schools, and fetches distance and walk/drive times from the Google Matrix API
     def get_home_schools
       if current_student.present? && current_student.street_number.present? && current_student.street_name.present? && current_student.zipcode.present?
         logger.info "************ fetching home schools"
-        
+
         current_student.student_schools.clear
 
         street_number       = URI.escape(current_student.street_number)
@@ -165,8 +165,8 @@ class SchoolsController < ApplicationController
         sibling_school_id_five  = current_student.sibling_school_ids.try(:[], 4)
 
         # hit the BPS API
-        api_schools = bps_api_connector("#{BPS_API_URL}/GetSchoolChoices?SchoolYear=#{SCHOOL_YEARS}&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}&X=#{x_coordinate}&Y=#{y_coordinate}&SiblingSchList=#{sibling_school_id_one},#{sibling_school_id_two},#{sibling_school_id_three},#{sibling_school_id_four},#{sibling_school_id_five}")[:List]
-        
+        api_schools = bps_api_connector("#{BPS_WEBSERVICE_URL}/GetSchoolChoices?SchoolYear=#{SCHOOL_YEARS}&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}&X=#{x_coordinate}&Y=#{y_coordinate}&SiblingSchList=#{sibling_school_id_one},#{sibling_school_id_two},#{sibling_school_id_three},#{sibling_school_id_four},#{sibling_school_id_five}")[:List]
+
         if api_schools.present?
           logger.info "*************************** found #{api_schools.count} schools"
           school_coordinates = ''
@@ -184,12 +184,12 @@ class SchoolsController < ApplicationController
               student_school.eligibility                = api_school[:Eligibility]
               student_school.walk_zone_eligibility      = api_school[:AssignmentWalkEligibilityStatus]
               student_school.transportation_eligibility = api_school[:TransEligible]
-              student_school.exam_school                = (api_school[:IsExamSchool] == "0" ? false : true) 
+              student_school.exam_school                = (api_school[:IsExamSchool] == "0" ? false : true)
               student_school.save
             end
           end
-          
-          # hit the Google Distance Matrix API to gather distances, drive times and walk times 
+
+          # hit the Google Distance Matrix API to gather distances, drive times and walk times
           # between the student's home address to all of his/her eligible schools
           school_coordinates.gsub!(/\|$/,'')
           logger.info "http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_student.latitude},#{current_student.longitude}&destinations=#{school_coordinates}&mode=walking&units=imperial&sensor=false"
@@ -216,12 +216,12 @@ class SchoolsController < ApplicationController
       end
     end
 
-    # this method pulls a list of eligible schools from the GetSchoolChoices API, 
+    # this method pulls a list of eligible schools from the GetSchoolChoices API,
     # saves the schools to student_schools, and fetches distance and walk/drive times from the Google Matrix API
     def get_zone_schools
       if current_student.present? && current_student.street_number.present? && current_student.street_name.present? && current_student.zipcode.present?
         logger.info "************ fetching zone schools"
-  
+
         current_student.student_schools.clear
 
         zipcode             = current_student.zipcode.strip
@@ -236,8 +236,8 @@ class SchoolsController < ApplicationController
         sibling_school_id_five  = current_student.sibling_school_ids.try(:[], 4)
 
         # hit the BPS API
-        api_schools = bps_api_connector("#{BPS_API_URL}/GetSchoolInterestList?SchoolYear=#{SCHOOL_YEARS}&Grade=#{grade_level}&ZipCode=#{zipcode}&Geo=#{geo_code}&X=#{x_coordinate}&Y=#{y_coordinate}&SiblingSchList=#{sibling_school_id_one},#{sibling_school_id_two},#{sibling_school_id_three},#{sibling_school_id_four},#{sibling_school_id_five}")[:List]
-        
+        api_schools = bps_api_connector("#{BPS_WEBSERVICE_URL}/GetSchoolInterestList?SchoolYear=#{SCHOOL_YEARS}&Grade=#{grade_level}&ZipCode=#{zipcode}&Geo=#{geo_code}&X=#{x_coordinate}&Y=#{y_coordinate}&SiblingSchList=#{sibling_school_id_one},#{sibling_school_id_two},#{sibling_school_id_three},#{sibling_school_id_four},#{sibling_school_id_five}")[:List]
+
         if api_schools.present?
           logger.info "*************************** found #{api_schools.count} schools"
           school_coordinates = ''
@@ -254,12 +254,12 @@ class SchoolsController < ApplicationController
               student_school.tier                       = api_school[:Tier]
               student_school.walk_zone_eligibility      = api_school[:AssignmentWalkEligibilityStatus]
               student_school.transportation_eligibility = api_school[:TransEligible]
-              student_school.exam_school                = (api_school[:IsExamSchool] == "0" ? false : true) 
+              student_school.exam_school                = (api_school[:IsExamSchool] == "0" ? false : true)
               student_school.save
             end
           end
-          
-          # hit the Google Distance Matrix API to gather distances, drive times and walk times 
+
+          # hit the Google Distance Matrix API to gather distances, drive times and walk times
           # between the student's home address to all of his/her eligible schools
           school_coordinates.gsub!(/\|$/,'')
           logger.info "http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_student.latitude},#{current_student.longitude}&destinations=#{school_coordinates}&mode=walking&units=imperial&sensor=false"
