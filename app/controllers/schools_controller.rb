@@ -165,7 +165,7 @@ class SchoolsController < ApplicationController
         sibling_school_id_five  = current_student.sibling_school_ids.try(:[], 4)
 
         # hit the BPS API
-        api_schools = bps_api_connector("#{BPS_WEBSERVICE_URL}/GetSchoolChoices?SchoolYear=#{SCHOOL_YEARS}&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}&X=#{x_coordinate}&Y=#{y_coordinate}&SiblingSchList=#{sibling_school_id_one},#{sibling_school_id_two},#{sibling_school_id_three},#{sibling_school_id_four},#{sibling_school_id_five}")[:List]
+        api_schools = bps_api_connector("https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc/GetSchoolChoices?SchoolYear=#{SCHOOL_YEARS}&Grade=#{grade_level}&StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}&X=#{x_coordinate}&Y=#{y_coordinate}&SiblingSchList=#{sibling_school_id_one},#{sibling_school_id_two},#{sibling_school_id_three},#{sibling_school_id_four},#{sibling_school_id_five}")[:List]
 
         if api_schools.present?
           logger.info "*************************** found #{api_schools.count} schools"
