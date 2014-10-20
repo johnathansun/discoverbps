@@ -30,7 +30,7 @@ GEM
       multi_json (~> 1.0)
     acts_as_paranoid (0.4.2)
       activerecord (~> 3.2)
-    airbrake (3.1.16)
+    airbrake (4.1.0)
       builder
       multi_json
     arel (3.0.3)
