@@ -1,19 +1,21 @@
-module SchoolData
+module Webservice
+
 
 	##### UPDATE SCHOOL BASIC INFO #####
 
 	def self.update_basic_info!(school_id=nil)
 		endpoint = "GetSchool"
 
-		schools = SchoolData.find_schools(school_id)
+		schools = self.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
+			params = {schyear: SCHOOL_YEAR, sch: school.bps_id}.to_param
+			api_response = self.get_from_service(endpoint, params)
 
 			if api_response.present?
 				# Use .first to store as a hash instead of a hash inside an array
-      	# Alternatively, you can store as an array, but then you have to call
-      	# api_basic_info.first in all partials that need to access hash values
+      	# We could store it as an array, but then we'd have to call
+      	# api_basic_info.first in all partials that access these values
 				begin
 					hash = MultiJson.load(api_response, :symbolize_keys => true).first
 					school.update_attributes(name: hash[:schname_23], latitude: hash[:Latitude], longitude: hash[:Longitude], api_basic_info: hash)
@@ -34,11 +36,12 @@ module SchoolData
 		endpoint = "GetSchoolAwards"
 		key = :api_awards
 
-		schools = SchoolData.find_schools(school_id)
+		schools = self.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}&TranslationLanguage=")
-			SchoolData.extract_response(school, api_response, key, endpoint, 'array')
+			params = {schyear: SCHOOL_YEAR, sch: school.bps_id, translationlanguage: nil}.to_param
+			api_response = self.get_from_service(endpoint, params)
+			self.extract_response(school, api_response, key, endpoint, 'array')
 		end
 	end
 
@@ -48,11 +51,12 @@ module SchoolData
   	endpoint = "GetSchoolDescriptions"
   	key = :api_description
 
-		schools = SchoolData.find_schools(school_id)
+		schools = self.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}&TranslationLanguage=")
-			SchoolData.extract_response(school, api_response, key, endpoint, 'hash')
+			params = {schyear: SCHOOL_YEAR, sch: school.bps_id, translationlanguage: nil}.to_param
+			api_response = self.get_from_service(endpoint, params)
+			self.extract_response(school, api_response, key, endpoint, 'hash')
 		end
 	end
 
@@ -62,11 +66,12 @@ module SchoolData
 		endpoint = "GetSchoolFacilities"
 		key = :api_facilities
 
-		schools = SchoolData.find_schools(school_id)
+		schools = self.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
-			SchoolData.extract_response(school, api_response, key, endpoint, 'hash')
+			params = {schyear: SCHOOL_YEAR, sch: school.bps_id}.to_param
+			api_response = self.get_from_service(endpoint, params)
+			self.extract_response(school, api_response, key, endpoint, 'hash')
 		end
 	end
 
@@ -76,11 +81,12 @@ module SchoolData
 		endpoint = "GetSchoolGrades"
 		key = :api_grades
 
-		schools = SchoolData.find_schools(school_id)
+		schools = self.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
-			SchoolData.extract_response(school, api_response, key, endpoint, 'array')
+			params = {schyear: SCHOOL_YEAR, sch: school.bps_id}.to_param
+			api_response = self.get_from_service(endpoint, params)
+			self.extract_response(school, api_response, key, endpoint, 'array')
 		end
 
 	end
@@ -91,11 +97,12 @@ module SchoolData
 		endpoint  = "GetSchoolHours"
 		key = :api_hours
 
-		schools = SchoolData.find_schools(school_id)
+		schools = self.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}&TranslationLanguage=")
-			SchoolData.extract_response(school, api_response, key, endpoint, 'hash')
+			params = {schyear: SCHOOL_YEAR, sch: school.bps_id, translationlanguage: nil}.to_param
+			api_response = self.get_from_service(endpoint, params)
+			self.extract_response(school, api_response, key, endpoint, 'hash')
 		end
 	end
 
@@ -105,11 +112,12 @@ module SchoolData
 		endpoint = "GetSchoolLanguages"
 		key = :api_languages
 
-		schools = SchoolData.find_schools(school_id)
+		schools = self.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
-			SchoolData.extract_response(school, api_response, key, endpoint, 'array')
+			params = {schyear: SCHOOL_YEAR, sch: school.bps_id}.to_param
+			api_response = self.get_from_service(endpoint, params)
+			self.extract_response(school, api_response, key, endpoint, 'array')
 		end
 	end
 
@@ -119,11 +127,12 @@ module SchoolData
 		endpoint = "GetSchoolPartners"
 		key = :api_partners
 
-		schools = SchoolData.find_schools(school_id)
+		schools = self.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}&TranslationLanguage=")
-			SchoolData.extract_response(school, api_response, key, endpoint, 'array')
+			params = {schyear: SCHOOL_YEAR, sch: school.bps_id, translationlanguage: nil}.to_param
+			api_response = self.get_from_service(endpoint, params)
+			self.extract_response(school, api_response, key, endpoint, 'array')
 		end
 	end
 
@@ -133,11 +142,12 @@ module SchoolData
 		endpoint = "GetSchoolPhotos"
 		key = :api_photos
 
-		schools = SchoolData.find_schools(school_id)
+		schools = self.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
-			SchoolData.extract_response(school, api_response, key, endpoint, 'array')
+			params = {schyear: SCHOOL_YEAR, sch: school.bps_id}.to_param
+			api_response = self.get_from_service(endpoint, params)
+			self.extract_response(school, api_response, key, endpoint, 'array')
 		end
 	end
 
@@ -147,11 +157,12 @@ module SchoolData
 		endpoint = "GetSchoolSports"
 		key = :api_sports
 
-		schools = SchoolData.find_schools(school_id)
+		schools = self.find_schools(school_id)
 
 		schools.each do |school|
-			api_response = SchoolData.connect_to_service("#{BPS_WEBSERVICE_URL}/#{endpoint}?schyear=#{SCHOOL_YEAR}&sch=#{school.bps_id}")
-			SchoolData.extract_response(school, api_response, key, endpoint, 'hash')
+			params = {schyear: SCHOOL_YEAR, sch: school.bps_id}.to_param
+			api_response = self.get_from_service(endpoint, params)
+			self.extract_response(school, api_response, key, endpoint, 'hash')
 		end
 	end
 
@@ -166,8 +177,8 @@ module SchoolData
 		end
 	end
 
-	def self.connect_to_service(url)
-		Faraday.new(:url => "#{url}", :ssl => {:version => :SSLv3}).get.body
+	def self.get_from_service(endpoint, params)
+		Faraday.new(:url => "#{BPS_WEBSERVICE_URL}/#{endpoint}?#{params}", :ssl => {:version => :SSLv3}).get.body
 	end
 
 	def self.extract_response(school, api_response, key, endpoint, response_type)
