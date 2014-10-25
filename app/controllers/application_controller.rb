@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :set_zone_grades
+  helper_method :zone_school_grades
   helper_method :current_student
   helper_method :current_user_students
   helper_method :student_preference_categories
@@ -8,33 +8,38 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_zone_grades
+  def zone_school_grades
   	if Date.today > Date.parse('01-11-2017')
-  		@zone_grades = []
+  		[]
   	elsif Date.today > Date.parse('01-11-2016')
-  		@zone_grades = ['5']
+  		['5']
 		elsif Date.today > Date.parse('01-11-2015')
-  		@zone_grades = ['4', '5']
+  		['4', '5']
   	elsif Date.today > Date.parse('01-11-2014')
-  		@zone_grades = ['3', '4', '5']
+  		['3', '4', '5']
   	elsif Date.today > Date.parse('01-11-2013')
-  		@zone_grades = ['2', '3', '4', '5', '8']
+  		['2', '3', '4', '5', '8']
   	end
   end
-  
+
   def current_student
   	if session[:current_student_id].present?
 	  	Student.find(session[:current_student_id]) rescue nil
+    elsif current_user_students.try(:first).present?
+      session[:current_student_id] = current_user_students.first.id
+      Student.find(session[:current_student_id]) rescue nil
+    else
+      nil
 	  end
   end
 
   def current_user_students
   	if current_user && current_user.students.present?
-      return current_user.students.verified
+      current_user.students.verified
     elsif session[:session_id].present?
-      return Student.verified.where(session_id: session[:session_id]).order(:first_name)
+      Student.verified.where(session_id: session[:session_id]).order(:first_name)
     else
-      return []
+      []
     end
   end
 
@@ -48,7 +53,7 @@ class ApplicationController < ActionController::Base
 	#         request.fullpath != "/users/sign_up" && \
 	#         request.fullpath != "/users/password" && \
 	#         !request.xhr?) # don't store ajax calls
-	#       session[:previous_url] = request.fullpath 
+	#       session[:previous_url] = request.fullpath
 	#     end
 	# end
 

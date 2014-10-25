@@ -1,0 +1,40 @@
+<div class="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
+<!-- dialog hello -->
+<div class='content'>
+	<h2>Does your child have specialized language needs?</h2>
+
+	<%= form_tag set_ell_student_path(@student), method: :put, remote: true, 'data-type' => 'script' do %>
+
+		<p><%= radio_button_tag '[student]ell_language', 'Cape Verdean', @student.ell_language %>Cape Verdean</p>
+		<p><%= radio_button_tag '[student]ell_language', 'Vietnamese', @student.ell_language %>Vietnamese</p>
+		<p><%= radio_button_tag '[student]ell_language', 'Chinese', @student.ell_language %>Chinese</p>
+		<p><%= radio_button_tag '[student]ell_language', 'Haitian Creole', @student.ell_language %>Haitian Creole</p>
+		<p><%= radio_button_tag '[student]ell_language', 'Other', @student.ell_language %>Other (including multi-lingual)</p>
+		<p><%= radio_button_tag '[student]ell_language', false, @student.ell_language %>Not Applicable</p>
+
+		<div class='btn'><%= submit_tag 'Next', disable_with: 'Working...', id: 'ell_next_button', class: 'orange_submit' %></div>
+
+	<% end %>
+
+	<div class="footnote">
+		<p>
+			As part of the registration process, every applicant is asked to complete a Home Language Survey. The results of this Survey determine whether a child needs additional language assessment at our Newcomers Assessment and Counseling ￼￼Center. If this is the case, a child's school choices may expand beyond his/her Home Based options to include program ￼￼seats in a wider community cluster of schools. The ELL tab on your results page will show you which schools may be available to child, pending his/her test results.
+		</p>
+		<p>
+			For more information on clusters, the Language Assessment, or the Newcomer's Assessment and Counseling Center, please call a Welcome Center near you or contact the Newcomers Center directly at: 617-635-1565
+		</p>
+	</div>
+
+</div>
+<script>
+	$('#ell_next_button').click(function() {
+		$('#ell_next_button').text('Working...');
+	});
+
+	$(".close_icon").click(function() {
+		$(".dialog_box").fadeOut("fast").removeClass("active");
+	});
+	$(".dialog_box").click(function(e){
+  	e.stopPropagation();
+	});
+</script>

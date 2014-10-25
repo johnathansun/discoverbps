@@ -1,203 +1,228 @@
 module Webservice
 
+	# The following methods connect to endpoints on the BPS webservice. See:
+	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help
 
-	##### UPDATE SCHOOL BASIC INFO #####
 
-	def self.update_basic_info!(school_id=nil)
-		endpoint = "GetSchool"
+	##### ADDRESS MATCHES #####
 
-		schools = self.find_schools(school_id)
+	def self.address_matches(street_number, street_name, zipcode)
+		endpoint = "AddressMatches"
+		params = {streetnumber: street_number, street: street_name, zipcode: zipcode}.to_param
+		extract_from_array = false
+		api_response = self.get(endpoint, params)
+		self.extract(api_response, endpoint, extract_from_array, nil)
+	end
 
-		schools.each do |school|
-			params = {schyear: SCHOOL_YEAR, sch: school.bps_id}.to_param
-			api_response = self.get_from_service(endpoint, params)
 
-			if api_response.present?
-				# Use .first to store as a hash instead of a hash inside an array
-      	# We could store it as an array, but then we'd have to call
-      	# api_basic_info.first in all partials that access these values
-				begin
-					hash = MultiJson.load(api_response, :symbolize_keys => true).first
-					school.update_attributes(name: hash[:schname_23], latitude: hash[:Latitude], longitude: hash[:Longitude], api_basic_info: hash)
-				rescue
-					puts "********** Something went wrong with #{endpoint} id #{school.bps_id}"
-				else
-					puts "********** Updated Basic Info for id #{school.bps_id}"
-				end
-			else
-				puts "********** API response not present for #{endpoint} with id #{school.bps_id}"
-			end
+	##### HOME SCHOOLS #####
+
+	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc/GetSchoolChoices?SchoolYear=2014-2015&Grade=03&StreetNumber=44&Street=Court+St&ZipCode=02108&X=774444.562683105&Y=2961259.5579834&SiblingSchList=
+
+	def self.home_schools(grade_level, street_number, street_name, zipcode, x, y, awc, sibling_ids=[])
+		endpoint = "HomeSchool"
+		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
+		params = {schoolyear: SCHOOL_YEARS, grade: grade_level, streetnumber: street_number, street: street_name, zipcode: zipcode, x: x, y: y, siblingschlist: sibling_school_ids, awc: awc}.to_param
+		extract_from_array = false
+		api_response = self.get(endpoint, params)
+		self.extract(api_response, endpoint, extract_from_array, nil)
+	end
+
+
+	##### ZONE SCHOOLS #####
+
+	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc/GetSchoolInterestList?SchoolYear=2014-2015&Grade=03&ZipCode=02124&Geo=060&X=774444.562683105&Y=2961259.5579834&SiblingSchList=
+
+	def self.zone_schools(grade_level, street_number, street_name, zipcode, x, y, geo_code, zone_school_grades, sibling_ids=[])
+		if zone_school_grades.include?(grade_level)
+			endpoint = "ZoneSchools"
+			sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
+			params = {schoolyear: SCHOOL_YEARS, grade: grade_level, streetnumber: street_number, street: street_name, zipcode: zipcode, geo: geo_code, x: x, y: y, siblingschlist: sibling_school_ids}.to_param
+			extract_from_array = false
+			api_response = self.get(endpoint, params)
+			self.extract(api_response, endpoint, extract_from_array, nil)
+		else
+			nil
 		end
 	end
 
-	##### UPDATE SCHOOL AWARDS #####
+	##### ELL SCHOOLS #####
 
-	def self.update_awards!(school_id=nil)
-		endpoint = "GetSchoolAwards"
-		key = :api_awards
+	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/ELLList?schyear=2014&addressID=68051&gradeLevel=07
 
-		schools = self.find_schools(school_id)
-
-		schools.each do |school|
-			params = {schyear: SCHOOL_YEAR, sch: school.bps_id, translationlanguage: nil}.to_param
-			api_response = self.get_from_service(endpoint, params)
-			self.extract_response(school, api_response, key, endpoint, 'array')
+	def self.ell_schools(grade_level, address_id, language)
+		if zone_school_grades.include?(grade_level)
+			endpoint = "ELLSchools"
+			sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
+			params = {schyear: SCHOOL_YEAR, gradelevel: grade_level, addressid: address_id, language: language}.to_param
+			extract_from_array = false
+			api_response = self.get(endpoint, params)
+			self.extract(api_response, endpoint, extract_from_array, nil)
+		else
+			nil
 		end
 	end
 
-	##### UPDATE SCHOOL DESCRIPTIONS #####
 
-	def self.update_descriptions!(school_id=nil)
-  	endpoint = "GetSchoolDescriptions"
-  	key = :api_description
+	##### SPED SCHOOLS #####
 
-		schools = self.find_schools(school_id)
+	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/SPEDList?schyear=2014&addressID=68051&gradeLevel=07
 
-		schools.each do |school|
-			params = {schyear: SCHOOL_YEAR, sch: school.bps_id, translationlanguage: nil}.to_param
-			api_response = self.get_from_service(endpoint, params)
-			self.extract_response(school, api_response, key, endpoint, 'hash')
+	def self.sped_schools(grade_level, address_id)
+		if zone_school_grades.include?(grade_level)
+			endpoint = "SPEDSchools"
+			sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
+			params = {schyear: SCHOOL_YEAR, gradelevel: grade_level, addressid: address_id}.to_param
+			extract_from_array = false
+			api_response = self.get(endpoint, params)
+			self.extract(api_response, endpoint, extract_from_array, nil)
+		else
+			nil
 		end
 	end
 
-	##### UPDATE SCHOOL FACILITIES #####
 
-	def self.update_facilities!(school_id=nil)
-		endpoint = "GetSchoolFacilities"
-		key = :api_facilities
+	##### BASIC INFO #####
 
-		schools = self.find_schools(school_id)
+	def self.basic_info(bps_id)
+		endpoint = "Info"
+		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
+		extract_from_array = true
 
-		schools.each do |school|
-			params = {schyear: SCHOOL_YEAR, sch: school.bps_id}.to_param
-			api_response = self.get_from_service(endpoint, params)
-			self.extract_response(school, api_response, key, endpoint, 'hash')
-		end
+		api_response = self.get(endpoint, params)
+		self.extract(api_response, endpoint, extract_from_array, bps_id)
 	end
 
-	##### UPDATE SCHOOL GRADES #####
+	##### AWARDS #####
 
-	def self.update_grades!(school_id=nil)
-		endpoint = "GetSchoolGrades"
-		key = :api_grades
+	def self.awards(bps_id)
+		endpoint = "Awards"
+		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
+		extract_from_array = false
 
-		schools = self.find_schools(school_id)
-
-		schools.each do |school|
-			params = {schyear: SCHOOL_YEAR, sch: school.bps_id}.to_param
-			api_response = self.get_from_service(endpoint, params)
-			self.extract_response(school, api_response, key, endpoint, 'array')
-		end
-
+		api_response = self.get(endpoint, params)
+		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
 	end
 
-	##### UPDATE SCHOOL HOURS #####
+	##### DESCRIPTIONS #####
 
-	def self.update_hours!(school_id=nil)
-		endpoint  = "GetSchoolHours"
-		key = :api_hours
+	def self.description(bps_id)
+  	endpoint = "Description"
+		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
+		extract_from_array = true
 
-		schools = self.find_schools(school_id)
-
-		schools.each do |school|
-			params = {schyear: SCHOOL_YEAR, sch: school.bps_id, translationlanguage: nil}.to_param
-			api_response = self.get_from_service(endpoint, params)
-			self.extract_response(school, api_response, key, endpoint, 'hash')
-		end
+		api_response = self.get(endpoint, params)
+		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
 	end
 
-	##### UPDATE SCHOOL LANGUAGES #####
+	##### FACILITIES #####
 
-	def self.update_languages!(school_id=nil)
-		endpoint = "GetSchoolLanguages"
-		key = :api_languages
+	def self.facilities(bps_id)
+		endpoint = "Facilities"
+		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
+		extract_from_array = true
 
-		schools = self.find_schools(school_id)
-
-		schools.each do |school|
-			params = {schyear: SCHOOL_YEAR, sch: school.bps_id}.to_param
-			api_response = self.get_from_service(endpoint, params)
-			self.extract_response(school, api_response, key, endpoint, 'array')
-		end
+		api_response = self.get(endpoint, params)
+		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
 	end
 
-	##### UPDATE SCHOOL PARTNERS #####
+	##### GRADE LEVELS #####
 
-	def self.update_partners!(school_id=nil)
-		endpoint = "GetSchoolPartners"
-		key = :api_partners
+	def self.grades(bps_id)
+		endpoint = "Grades"
+		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
+		extract_from_array = false
 
-		schools = self.find_schools(school_id)
-
-		schools.each do |school|
-			params = {schyear: SCHOOL_YEAR, sch: school.bps_id, translationlanguage: nil}.to_param
-			api_response = self.get_from_service(endpoint, params)
-			self.extract_response(school, api_response, key, endpoint, 'array')
-		end
+		api_response = self.get(endpoint, params)
+		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
 	end
 
-	##### UPDATE SCHOOL PHOTOS #####
+	##### HOURS #####
 
-	def self.update_photos!(school_id=nil)
-		endpoint = "GetSchoolPhotos"
-		key = :api_photos
+	def self.hours(bps_id)
+		endpoint  = "Hours"
+		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
+		extract_from_array = true
 
-		schools = self.find_schools(school_id)
-
-		schools.each do |school|
-			params = {schyear: SCHOOL_YEAR, sch: school.bps_id}.to_param
-			api_response = self.get_from_service(endpoint, params)
-			self.extract_response(school, api_response, key, endpoint, 'array')
-		end
+		api_response = self.get(endpoint, params)
+		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
 	end
 
-	##### UPDATE SCHOOL SPORTS #####
+	##### LANGUAGES #####
 
-	def self.update_sports!(school_id=nil)
-		endpoint = "GetSchoolSports"
-		key = :api_sports
+	def self.languages(bps_id)
+		endpoint = "Languages"
+		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
+		extract_from_array = true
 
-		schools = self.find_schools(school_id)
+		api_response = self.get(endpoint, params)
+		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
+	end
 
-		schools.each do |school|
-			params = {schyear: SCHOOL_YEAR, sch: school.bps_id}.to_param
-			api_response = self.get_from_service(endpoint, params)
-			self.extract_response(school, api_response, key, endpoint, 'hash')
-		end
+	##### PARTNERS #####
+
+	def self.partners(bps_id)
+		endpoint = "Partners"
+		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
+		extract_from_array = false
+
+		api_response = self.get(endpoint, params)
+		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
+	end
+
+	##### PHOTOS #####
+
+	def self.photos(bps_id)
+		endpoint = "Photos"
+		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
+		extract_from_array = false
+
+		api_response = self.get(endpoint, params)
+		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
+	end
+
+	##### SPORTS #####
+
+	def self.sports(bps_id)
+		endpoint = "Sports"
+		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
+		extract_from_array = true
+
+		api_response = self.get(endpoint, params)
+		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
 	end
 
 
 	private
 
-	def self.find_schools(school_id)
-		if school_id.present?
-			School.where(id: school_id)
-		else
-			School.all
-		end
-	end
-
-	def self.get_from_service(endpoint, params)
+	def self.get(endpoint, params)
 		Faraday.new(:url => "#{BPS_WEBSERVICE_URL}/#{endpoint}?#{params}", :ssl => {:version => :SSLv3}).get.body
 	end
 
-	def self.extract_response(school, api_response, key, endpoint, response_type)
+	def self.extract(api_response, endpoint, extract_from_array, bps_id)
 		if api_response.blank?
-			puts "********** API response not present for #{endpoint} with id #{school.bps_id}"
+			if bps_id.present?
+				puts "********** No API response from #{endpoint} for school #{bps_id}"
+			else
+				puts "********** No API response from #{endpoint}"
+			end
+			return nil
 		else
 			begin
-				if response_type == 'hash'
-					# Use .first to store as a hash instead of an array with a hash as the single object.
-					# The object could be stored as an array, but .first would then need to be called in all of the view partials that access this data.
+				if extract_from_array == true
+					# Some responses are stored as a single hash inside an array. It's easier to extract the hash from the array here
+					# instead of calling .first in the views
 					response = MultiJson.load(api_response, :symbolize_keys => true).first
 				else
 					response = MultiJson.load(api_response, :symbolize_keys => true)
 				end
-				school.update_attributes(key => response)
 			rescue
-				puts "********** Something went wrong with #{endpoint} id #{school.bps_id}"
-			else
-				puts "********** Updated from #{endpoint} for id #{school.bps_id}"
+				if bps_id.present?
+					puts "********** Something went wrong when parsing #{endpoint} for school #{bps_id}"
+				else
+					puts "********** Something went wrong when parsing #{endpoint} endpoint"
+				end
+				return nil
 			end
 		end
 	end

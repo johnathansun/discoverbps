@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140728230253) do
+ActiveRecord::Schema.define(:version => 20141025011614) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -110,13 +110,11 @@ ActiveRecord::Schema.define(:version => 20140728230253) do
   add_index "preferences_students", ["student_id"], :name => "index_preferences_students_on_student_id"
 
   create_table "schools", :force => true do |t|
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.text     "api_basic_info"
     t.text     "api_awards"
-    t.text     "api_calendar"
     t.text     "api_description"
-    t.text     "api_extra_curricular"
     t.text     "api_facilities"
     t.text     "api_grades"
     t.text     "api_hours"
@@ -183,10 +181,12 @@ ActiveRecord::Schema.define(:version => 20140728230253) do
     t.boolean  "ranked",                     :default => false
     t.boolean  "exam_school",                :default => false
     t.string   "eligibility"
+    t.string   "school_type"
   end
 
   add_index "student_schools", ["bps_id"], :name => "index_student_schools_on_bps_id"
   add_index "student_schools", ["school_id"], :name => "index_student_schools_on_school_id"
+  add_index "student_schools", ["school_type"], :name => "index_student_schools_on_school_type"
   add_index "student_schools", ["student_id"], :name => "index_student_schools_on_student_id"
 
   create_table "students", :force => true do |t|
@@ -198,7 +198,6 @@ ActiveRecord::Schema.define(:version => 20140728230253) do
     t.string   "street_number"
     t.string   "street_name"
     t.string   "zipcode"
-    t.string   "iep"
     t.string   "primary_language"
     t.text     "sibling_school_names"
     t.text     "sibling_school_ids"
@@ -207,8 +206,8 @@ ActiveRecord::Schema.define(:version => 20140728230253) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "neighborhood"
-    t.boolean  "iep_needs",               :default => false
-    t.boolean  "ell_needs",               :default => false
+    t.boolean  "sped_needs",              :default => false
+    t.string   "ell_language",            :default => false
     t.time     "schools_last_updated_at"
     t.float    "x_coordinate"
     t.float    "y_coordinate"
@@ -216,6 +215,7 @@ ActiveRecord::Schema.define(:version => 20140728230253) do
     t.boolean  "address_verified",        :default => false
     t.string   "geo_code"
     t.integer  "preferences_count",       :default => 0
+    t.boolean  "awc_invitation"
   end
 
   add_index "students", ["session_id"], :name => "index_students_on_session_id"

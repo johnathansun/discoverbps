@@ -5,21 +5,19 @@ class School < ActiveRecord::Base
 
 	attr_protected
 	attr_accessor :tier, :transportation_eligibility, :walk_zone_eligibility, :walk_time, :drive_time, :distance
-	attr_accessible :api_basic_info, :api_awards, :api_calendar, :api_description, :api_extra_curricular, :api_facilities, :api_grades, :api_hours, :api_languages, :api_partners, :api_photos, :name, :bps_id, :slug, :latitude, :longitude, :api_sports
+	attr_accessible :api_basic_info, :api_awards, :api_description, :api_facilities, :api_grades, :api_hours, :api_languages, :api_partners, :api_photos, :name, :bps_id, :slug, :latitude, :longitude, :api_sports
 
 
-	serialize :api_basic_info # convert to hash  
-	serialize :api_awards
-	serialize :api_calendar
-	serialize :api_description # convert to hash
-	serialize :api_extra_curricular
-	serialize :api_facilities # convert to hash
-	serialize :api_grades
-	serialize :api_hours # convert to hash
-	serialize :api_languages
-	serialize :api_partners
-	serialize :api_photos
-	serialize :api_sports # convert to hash
+	serialize :api_basic_info # Hash
+	serialize :api_awards # Array
+	serialize :api_description # Hash
+	serialize :api_facilities # Hash
+	serialize :api_grades # Array
+	serialize :api_hours # Hash
+	serialize :api_languages # Hash
+	serialize :api_partners # Array
+	serialize :api_photos # Array
+	serialize :api_sports # Hash
 
 	# after_validation :geocode
 	before_save :strip_bps_id
@@ -87,6 +85,10 @@ class School < ActiveRecord::Base
 		else
 			return false
 		end
+	end
+
+	def update_from_webservice!(endpoint, params)
+
 	end
 
 	private

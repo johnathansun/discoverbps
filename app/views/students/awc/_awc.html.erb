@@ -1,0 +1,32 @@
+<div class="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
+<!-- dialog hello -->
+<div class='content'>
+  <h3>Has your child been invited to the Advanced Work Class (AWC) Program?</h3>
+
+  <%= form_tag set_awc_student_path(@student), method: :put, remote: true, 'data-type' => 'script' do %>
+
+    <p><%= radio_button_tag '[student]awc_invitation', true, @student.awc_invitation %>Yes</p>
+    <p><%= radio_button_tag '[student]awc_invitation', false, @student.awc_invitation %>No</p>
+
+    <div class='btn'><%= submit_tag 'Next', disable_with: 'Working...', id: 'awc_next_button', class: 'orange_submit' %></div>
+  <% end %>
+
+  <div class="footnote">
+    <p>
+      Advanced Work Class (AWC) is a full-time program in the Boston Public Schools that provides an accelerated academic curriculum for students in grades 4, 5 and 6. By responding “Yes” above, this tool will include AWC schools in your student’s list. However, only students that have been formally invited to AWC will have these schools appear on their actual registration form.
+    </p>
+  </div>
+
+</div>
+<script>
+  $('#awc_next_button').click(function() {
+    $('#awc_next_button').text('Working...');
+  });
+
+  $(".close_icon").click(function() {
+    $(".dialog_box").fadeOut("fast").removeClass("active");
+  });
+  $(".dialog_box").click(function(e){
+    e.stopPropagation();
+  });
+</script>

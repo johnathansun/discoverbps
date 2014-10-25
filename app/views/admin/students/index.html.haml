@@ -179,7 +179,7 @@
 
 			// Create a new StyledMapType object, passing it the array of styles,
 			// as well as the name to be displayed on the map type control.
-			var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});	
+			var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});
 			var myLatLng = new google.maps.LatLng(42.313,-71.0636);
 			var mapProp = {
 				center: myLatLng,
@@ -224,9 +224,9 @@
 			dates = searchesByDate.group(d3.time.day),
 			searchesByGrade = search.dimension(function(d) { return d.grade_level; }),
 			grades = searchesByGrade.group(),
-			searchesByEllPreference = search.dimension(function(d) { return d.ell_needs; }),
+			searchesByEllPreference = search.dimension(function(d) { return d.ell_language; }),
 			ellPreferences = searchesByEllPreference.group();
-			searchesByIepPreference = search.dimension(function(d) { return d.iep_needs; }),
+			searchesByIepPreference = search.dimension(function(d) { return d.sped_needs; }),
 			iepPreferences = searchesByIepPreference.group();
 			searchesByPreference = search.dimension(function(d) { return d.preferences_count; }),
 			preferences = searchesByPreference.group();
@@ -274,9 +274,9 @@
 					strokeWeight: 1
 				};
 			});
-			
+
 			var infowindow = new google.maps.InfoWindow({});
-			map.data.addListener('click', function(event) {	
+			map.data.addListener('click', function(event) {
 				infowindow.setContent('<div><h4>' + event.feature.getProperty('zip5') + '</h4>' + zipcodesHash[event.feature.getProperty('zip5')] + ' searches</div>');
 				infowindow.setPosition(event.latLng);
 				infowindow.open(map);

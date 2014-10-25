@@ -2,55 +2,34 @@ class StudentsController < ApplicationController
 
 	def create
 
-    if params[:student].present? &&
-      params[:student][:grade_level].present? &&
-      params[:student][:street_number].present? &&
-      params[:student][:street_name].present? &&
-      params[:student][:zipcode].present?
+    if params[:student].present? && params[:student][:grade_level].present? && params[:student][:street_number].present? && params[:student][:street_name].present? && params[:student][:zipcode].present?
 
-  		first_name    = params[:student][:first_name].try(:strip)
-      last_name     = params[:student][:last_name].try(:strip)
-      grade_level   = params[:student][:grade_level].try(:strip)
-      street_number = URI.escape(params[:student][:street_number].try(:gsub, /\D/, ''))
-      street_name   = URI.escape(params[:student][:street_name].try(:strip))
-      zipcode       = URI.escape(params[:student][:zipcode].try(:strip))
+  		first_name    = params[:student][:first_name]
+      last_name     = params[:student][:last_name]
+      grade_level   = params[:student][:grade_level]
+      street_number = params[:student][:street_number]
+      street_name   = params[:student][:street_name]
+      zipcode       = params[:student][:zipcode]
 
-      if current_user.present?
-        if first_name.present? && last_name.present?
-  				@student = Student.where(user_id: current_user.id, first_name: first_name, last_name: last_name).first_or_initialize
-  			elsif first_name.present?
-  				@student = Student.where(user_id: current_user.id, first_name: first_name).first_or_initialize
-  			else
-  				@student = Student.where(user_id: current_user.id, grade_level: grade_level).first_or_initialize
-  			end
-  		else
-  			if first_name.present? && last_name.present?
-  				@student = Student.where(session_id: session[:session_id], first_name: first_name, last_name: last_name).first_or_initialize
-  			elsif first_name.present?
-  				@student = Student.where(session_id: session[:session_id], first_name: first_name).first_or_initialize
-  			else
-  				@student = Student.where(session_id: session[:session_id], grade_level: grade_level).first_or_initialize
-  			end
-  		end
+			@student = get_or_set_student(current_user, first_name, last_name)
 
       params[:student][:sibling_school_ids] = School.where("name IN (?)", params[:student][:sibling_school_names].try(:compact).try(:reject, &:empty?)).collect {|x| x.bps_id}.uniq
 
-      api_response = bps_api_connector("#{BPS_WEBSERVICE_URL}/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
-
+			api_response = Webservice.address_matches(street_number, street_name, zipcode)
       @addresses = api_response.try(:[], :List)
-      @api_errors = api_response.try(:[], :Error).try(:[], 0)
+			@errors = api_response.try(:[], :Error).try(:[], 0)
 
     end
 
     respond_to do |format|
       if @addresses.present? && @student.update_attributes(params[:student])
-        format.js { render template: "students/address_verification" }
-        format.html { redirect_to address_verification_student_path(@student)}
+        format.js { render template: "students/address/addresses" }
+        format.html { redirect_to addresses_student_path(@student)}
       else
         if api_response.present?
           if @addresses.blank?
-            if @api_errors.present?
-              @error_message = @api_errors
+            if @errors.present?
+              @error_message = @errors
               flash[:alert] = "There were problems with your search. Please enter the required fields and try again."
             else
               @error_message = "We couldn't find any addresses in Boston that match your search. Please try again."
@@ -63,7 +42,7 @@ class StudentsController < ApplicationController
           flash[:alert] = "Please enter the required search fields and try again."
         end
 
-        format.js { render template: "students/errors" }
+        format.js { render template: "students/errors/errors" }
         format.html { redirect_to root_url }
       end
     end
@@ -72,20 +51,20 @@ class StudentsController < ApplicationController
   def update
   	@student = Student.find(params[:id])
 
-    street_number = URI.escape(params[:student].try(:[], :street_number).try(:strip))
-    street_name   = URI.escape(params[:student].try(:[], :street_name).try(:strip))
-    zipcode       = URI.escape(params[:student].try(:[], :zipcode).try(:strip))
+    street_number = params[:student].try(:[], :street_number)
+    street_name   = params[:student].try(:[], :street_name)
+    zipcode       = params[:student].try(:[], :zipcode)
 
-    addresses = bps_api_connector("#{BPS_WEBSERVICE_URL}/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
-    @addresses = addresses.try(:[], :List)
-    @errors = addresses.try(:[], :Error).try(:[], 0)
+    api_response = Webservice.address_matches(street_number, street_name, zipcode)
+    @addresses = api_response.try(:[], :List)
+    @errors = api_response.try(:[], :Error).try(:[], 0)
 
     respond_to do |format|
       if @addresses.present? && @student.update_attributes(params[:student])
         session[:current_student_id] = @student.id
 
-        format.js { render template: "students/address_verification" }
-        format.html { redirect_to address_verification_student_path(@student)}
+        format.js { render template: "students/address/addresses" }
+        format.html { redirect_to addresses_student_path(@student)}
       else
         if @addresses.blank?
           if @errors.present?
@@ -94,23 +73,23 @@ class StudentsController < ApplicationController
             @error_message = "We couldn't find any addresses in Boston that match your search. Please try again."
           end
         end
-        format.js { render template: "students/errors" }
+        format.js { render template: "students/errors/errors" }
         flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
         format.html { redirect_to root_url }
       end
     end
   end
 
-  def address_verification
+  def addresses
     @student = Student.find(params[:id])
 
-    street_number = URI.escape(@student.street_number.try(:strip))
-    street_name   = URI.escape(@student.street_name.try(:strip))
-    zipcode       = URI.escape(@student.zipcode.try(:strip))
+    street_number = @student.street_number
+    street_name   = @student.street_name
+    zipcode       = @student.zipcode
 
-    addresses = bps_api_connector("#{BPS_WEBSERVICE_URL}/GetAddressMatches?StreetNumber=#{street_number}&Street=#{street_name}&ZipCode=#{zipcode}")
-    @addresses = addresses.try(:[], :List)
-    @errors = addresses.try(:[], :Error).try(:[], 0)
+		api_response = Webservice.address_matches(street_number, street_name, zipcode)
+		@addresses = api_response.try(:[], :List)
+    @errors = api_response.try(:[], :Error).try(:[], 0)
   end
 
   def verify_address
@@ -120,66 +99,89 @@ class StudentsController < ApplicationController
     respond_to do |format|
       if @student.update_attributes(params[:student])
         session[:current_student_id] = @student.id
-        format.js { render template: "students/special_needs" }
-        format.html { redirect_to special_needs_student_path(@student)}
+        format.js { render template: "students/ell/ell" }
+        format.html { redirect_to ell_student_path(@student)}
       else
-        format.js { render template: "students/errors" }
+        format.js { render template: "students/errors/errors" }
         flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
         format.html { redirect_to root_url }
       end
     end
   end
 
-  def special_needs
-    @student = Student.find(params[:id])
+	# ELL DIALOG BOX
 
-  end
+	def ell
+		@student = Student.find(params[:id])
+	end
 
-  def set_special_needs
-    @student = Student.find(params[:id])
-    if params[:student].blank?
-    	params[:student] = {}
-	    params[:student][:iep_needs] = '0'
-	    params[:student][:ell_needs] = '0'
-		else
-	    if params[:student][:iep_needs].blank?
-		    params[:student][:iep_needs] = '0'
-	  	end
-	  	if params[:student][:ell_needs].blank?
-		    params[:student][:ell_needs] = '0'
-	  	end
-	  end
+	def set_ell
+		@student = Student.find(params[:id])
 
-    respond_to do |format|
-      if @student.update_attributes(params[:student])
-      	session[:current_student_id] = @student.id
-      	if @student.ell_needs?
-          format.html { redirect_to ell_needs_student_path(@student)}
-	        format.js { render template: "students/ell_needs" }
-	      elsif @student.iep_needs?
-          format.html { redirect_to iep_needs_student_path(@student)}
-          format.js { render template: "students/iep_needs" }
-        else
-          format.html { redirect_to schools_path}
-	        format.js { render :js => "window.location = '/schools'" }
-	      end
-      else
-        format.js { render template: "students/errors" }
-        flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
-        format.html { redirect_to root_url }
-      end
-    end
-  end
+		respond_to do |format|
+			if @student.update_attributes(params[:student])
+				session[:current_student_id] = @student.id
+				format.html { redirect_to sped_student_path(@student)}
+				format.js { render template: "students/sped/sped" }
+			else
+				format.js { render template: "students/ell/ell" }
+				flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
+				format.html { redirect_to root_url }
+			end
+		end
+	end
 
-  def ell_needs
-    @student = Student.find(params[:id])
 
-  end
+	# SPED DIALOG BOX
 
-  def iep_needs
-    @student = Student.find(params[:id])
+	def sped
+		@student = Student.find(params[:id])
+	end
 
-  end
+	def set_sped
+		@student = Student.find(params[:id])
+
+		respond_to do |format|
+			if @student.update_attributes(params[:student])
+				session[:current_student_id] = @student.id
+				if AWC_GRADES.include?(@student.grade_level)
+					format.html { redirect_to awc_student_path(@student)}
+					format.js { render template: "students/awc/awc" }
+				else
+					format.html { redirect_to schools_path}
+					format.js { render :js => "window.location = '/schools'" }
+				end
+			else
+				format.js { render template: "students/sped/sped" }
+				flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
+				format.html { redirect_to root_url }
+			end
+		end
+	end
+
+	# AWC DIALOG BOX
+
+	def awc
+		@student = Student.find(params[:id])
+	end
+
+	def set_awc
+		@student = Student.find(params[:id])
+
+		respond_to do |format|
+			if @student.update_attributes(params[:student])
+				session[:current_student_id] = @student.id
+				format.html { redirect_to schools_path}
+				format.js { render :js => "window.location = '/schools'" }
+			else
+				format.js { render template: "students/awc/awc" }
+				flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
+				format.html { redirect_to root_url }
+			end
+		end
+	end
+
+
 
   def destroy
     @student = Student.find(params[:id])
@@ -227,16 +229,28 @@ class StudentsController < ApplicationController
     render nothing: true
   end
 
-  private
+	private
 
-  def bps_api_connector(url)
-    response = Faraday.new(:url => url, :ssl => {:version => :SSLv3}).get
-    if response.body.present?
-      logger.info "************************ Error: bad response body #{response.body}"
-			MultiJson.load(response.body, :symbolize_keys => true) rescue {Error: ['The server responded with an error. Please try your search again later.']}
-    else
-			logger.info "************************ Error: no response body #{response}"
-      {Error: ['The server responded with an error. Please try your search again later.']}
-    end
-  end
+	def get_or_set_student(current_student, first_name, last_name)
+		if current_user.present?
+			if first_name.present? && last_name.present?
+				Student.where(user_id: current_user.id, first_name: first_name, last_name: last_name).first_or_initialize
+			elsif first_name.present?
+				Student.where(user_id: current_user.id, first_name: first_name).first_or_initialize
+			else
+				Student.where(user_id: current_user.id, grade_level: grade_level).first_or_initialize
+			end
+		elsif session[:session_id].present?
+			if first_name.present? && last_name.present?
+				Student.where(session_id: session[:session_id], first_name: first_name, last_name: last_name).first_or_initialize
+			elsif first_name.present?
+				Student.where(session_id: session[:session_id], first_name: first_name).first_or_initialize
+			else
+				Student.where(session_id: session[:session_id], grade_level: grade_level).first_or_initialize
+			end
+		else
+			nil
+		end
+	end
+
 end

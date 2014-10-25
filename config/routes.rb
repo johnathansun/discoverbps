@@ -13,12 +13,14 @@ DiscoverbpsV2::Application.routes.draw do
   match 'home' => 'schools#home'
 
   resources :students do
-    get 'address_verification', on: :member
+    get 'addresses', on: :member
     put 'verify_address', on: :member
-    get 'special_needs', on: :member
-    put 'set_special_needs', on: :member
-    get 'ell_needs', on: :member
-    get 'iep_needs', on: :member
+    get 'ell', on: :member
+    put 'set_ell', on: :member
+    get 'sped', on: :member
+    put 'set_sped', on: :member
+    get 'awc', on: :member
+    put 'set_awc', on: :member
     delete 'delete_all', on: :collection
     post 'save_preference', on: :member
     post 'remove_notification', on: :collection

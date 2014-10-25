@@ -1,4 +1,4 @@
-<div id="address_verification_row_<%= index %>" class='row button-pointer'>
+<div id="addresses_row_<%= index %>" class='row button-pointer'>
 	<%= address[:StreetNum] %> <%= address[:Street].try(:titleize) %>, <%= address[:SectionOfCity] %> <%= address[:ZipCode] %>
 	<% if index == 0 %>
 		<span id="address_check_mark_<%= index %>" class='address_check_mark icon_selected green icon-DBPS-Dev-Assets-SRG-42' style="display:visible;"></span>
@@ -7,7 +7,7 @@
 	<% end %>
 </div>
 <script>
-	$("#address_verification_row_<%= index %>").click(function() {
+	$("#addresses_row_<%= index %>").click(function() {
 		$('.address_check_mark').hide();
 		$('#address_check_mark_<%= index %>').show();
 		$('#_studentstreet_number').val('<%= address[:StreetNum] %>');
