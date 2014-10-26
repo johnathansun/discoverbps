@@ -1,2 +1,2 @@
-BPS_WEBSERVICE_URL: "https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/schools.svc"
-# BPS_WEBSERVICE_URL: "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc"
+BPS_WEBSERVICE_URL: "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc"
+BPS_DEV_WEBSERVICE_URL: "https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/schools.svc"

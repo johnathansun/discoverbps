@@ -19,23 +19,17 @@ class SchoolsController < ApplicationController
         end
       end
 
-      @home_schools = Webservice.home_schools(current_student.grade_level, current_student.street_number, current_student.street_name, current_student.zipcode, current_student.x_coordinate, current_student.y_coordinate, current_student.awc_invitation, current_student.sibling_school_ids)
+      @home_schools = current_student.home_schools
+      @zone_schools = current_student.zone_schools
+      @ell_schools = current_student.ell_schools
+      @sped_schools = current_student.sped_schools
 
-      if @home_schools.blank?
+      if current_student.home_schools.blank?
         flash[:alert] = 'The server responded with an error. Please try your search again later.'
         render 'home', layout: 'application'
       else
-        @zone_schools = Webservice.zone_schools(current_student.grade_level, current_student.street_number, current_student.street_name, current_student.zipcode, current_student.x_coordinate, current_student.y_coordinate, current_student.geo_code, current_student.awc_invitation, current_student.sibling_school_ids)
-        @ell_schools = Webservice.ell_schools(current_student.grade_level, current_student.address_id, current_student.ell_language)
-        @sped_schools = Webservice.sped_schools(current_student, params[:sped])
-
-        get_home_schools(current_student, @home_schools)
-        get_zone_schools(current_student, @zone_schools)
-        get_ell_schools(current_student, @ell_schools)
-        get_sped_schools(current_student, @sped_schools)
-
         respond_to do |format|
-          format.html # index.html.erb
+          format.html
         end
       end
     end

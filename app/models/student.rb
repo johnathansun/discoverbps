@@ -5,17 +5,25 @@ class Student < ActiveRecord::Base
 	has_and_belongs_to_many :preferences, uniq: true, after_add: :count_preferences, after_remove: :count_preferences
 	has_many :student_schools, uniq: true
   has_many :schools, through: :student_schools
-  has_many :home_schools, through: :student_schools, conditions: 'school_type = home_schools'
-  has_many :zone_schools, through: :student_schools, conditions: 'school_type = zone_schools'
-  has_many :ell_schools, through: :student_schools, conditions: 'school_type = ell_schools'
-  has_many :sped_schools, through: :student_schools, conditions: 'school_type = sped_schools'
+  has_many :home_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'home']
+  has_many :zone_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'zone']
+  has_many :ell_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'ell']
+  has_many :sped_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'sped']
 
   scope :verified, where(address_verified: true)
 
-  attr_accessible :first_name, :last_name, :grade_level, :primary_language, :session_id, :sibling_school_ids, :sibling_school_names, :street_name, :street_number, :neighborhood, :zipcode, :latitude, :longitude, :user_id, :preference_ids, :school_ids, :sped_needs, :ell_language, :awc_invitation, :schools_last_updated_at, :x_coordinate, :y_coordinate, :address_verified, :geo_code, :preferences_count
+  attr_accessible   :first_name, :last_name, :grade_level, :primary_language, :session_id, :sibling_school_ids,
+                    :sibling_school_names, :street_name, :street_number, :neighborhood, :zipcode, :latitude, :longitude,
+                    :addressid, :user_id, :preference_ids, :school_ids, :sped_needs, :ell_language, :awc_invitation,
+                    :schools_last_updated_at, :x_coordinate, :y_coordinate, :address_verified, :geo_code, :preferences_count,
+                    :home_schools_json, :zone_schools_json, :ell_schools_json, :sped_schools_json
 
   serialize :sibling_school_names
   serialize :sibling_school_ids
+  serialize :home_schools_json
+  serialize :zone_schools_json
+  serialize :ell_schools_json
+  serialize :sped_schools_json
 
   validates :street_number, :street_name, :zipcode, :grade_level, presence: true
   validates :street_number, length: { maximum: 5 }
@@ -51,8 +59,77 @@ class Student < ActiveRecord::Base
     grade_level.to_s.length < 2 ? ('0' + self.grade_level.try(:strip)) : self.grade_level.try(:strip)
   end
 
+  # SAVE SCHOOLS ON CURRENT_STUDENT
 
-private
+  def set_home_schools!
+    api_schools = Webservice.home_schools(self.formatted_grade_level, self.addressid, self.awc_invitation, self.sibling_school_ids).try(:[], :List)
+    save_student_schools!(api_schools, 'home')
+  end
+
+  def set_zone_schools!
+    api_schools = Webservice.zone_schools(self.formatted_grade_level, self.street_number, self.street_name, self.zipcode, self.x_coordinate, self.y_coordinate, self.geo_code, self.sibling_school_ids).try(:[], :List)
+    save_student_schools!(api_schools, 'zone')
+  end
+
+  def set_ell_schools!
+    api_schools = Webservice.ell_schools(self.formatted_grade_level, self.addressid, self.ell_language)
+    save_student_schools!(api_schools, 'ell')
+  end
+
+  def set_sped_schools!
+    api_schools = Webservice.sped_schools(self.formatted_grade_level, self.addressid)
+    save_student_schools!(api_schools, 'sped')
+  end
+
+  private
+
+  # this method pulls a list of eligible schools from the GetSchoolChoices API,
+  # saves the schools to student_schools, and fetches distance and walk/drive times from the Google Matrix API
+  def save_student_schools!(api_schools, school_list_type)
+    if self.longitude.present? && self.latitude.present?
+
+      self.send("#{school_list_type}_schools".to_sym).clear
+      self.update_column("#{school_list_type}_schools_json".to_sym, api_schools.to_json) rescue nil
+
+      # loop through the schools returned from the API, find the matching schools in the db,
+      # save the eligibility variables on student_schools, and collect the coordinates for the matrix search, below
+
+      if api_schools.present?
+        school_coordinates = ''
+        school_ids = []
+
+        api_schools.each do |api_school|
+          school = School.where(bps_id: api_school[:School]).first
+          if school.present? && !school_ids.include?(school.id)
+            school_ids << school.id
+            school_coordinates += "#{school.latitude},#{school.longitude}|"
+            exam_school = (api_school[:IsExamSchool] == "0" ? false : true)
+            self.student_schools.create(school_id: school.id, school_type: school_list_type, bps_id: api_school[:School], tier: api_school[:Tier], eligibility: api_school[:Eligibility], walk_zone_eligibility: api_school[:AssignmentWalkEligibilityStatus], transportation_eligibility: api_school[:TransEligible], exam_school: exam_school)
+          end
+        end
+
+        school_coordinates.gsub!(/\|$/,'')
+        walk_matrix = Google.walk_times(self.latitude, self.longitude, school_coordinates)
+        drive_matrix = Google.drive_times(self.latitude, self.longitude, school_coordinates)
+
+        # save distance, walk time and drive time on the student_schools join table
+
+        api_schools.each_with_index do |api_school, i|
+          school = School.where(bps_id: api_school[:School]).first
+          if school.present?
+            walk_time = walk_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
+            drive_time = drive_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
+
+            student_school = self.student_schools.where(school_id: school.id).first_or_initialize
+            student_school.update_attributes(distance: api_school[:StraightLineDistance], walk_time: walk_time, drive_time: drive_time)
+          end
+        end
+
+        self.update_column(:schools_last_updated_at, Time.now)
+      end
+    end
+  end
+
 
   def strip_first_name
     self.first_name = self.first_name.try(:strip)

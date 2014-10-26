@@ -23,6 +23,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @addresses.present? && @student.update_attributes(params[:student])
+				session[:current_student_id] = @student.id
         format.js { render template: "students/address/addresses" }
         format.html { redirect_to addresses_student_path(@student)}
       else
@@ -80,6 +81,8 @@ class StudentsController < ApplicationController
     end
   end
 
+	# ADDRESS DIALOG BOX
+
   def addresses
     @student = Student.find(params[:id])
 
@@ -98,7 +101,11 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.update_attributes(params[:student])
-        session[:current_student_id] = @student.id
+
+				if zone_school_grades.include?(@student.grade_level)
+					@student.set_zone_schools!
+				end
+
         format.js { render template: "students/ell/ell" }
         format.html { redirect_to ell_student_path(@student)}
       else
@@ -120,7 +127,11 @@ class StudentsController < ApplicationController
 
 		respond_to do |format|
 			if @student.update_attributes(params[:student])
-				session[:current_student_id] = @student.id
+
+				if @student.ell_language != false
+					@student.set_ell_schools!
+				end
+
 				format.html { redirect_to sped_student_path(@student)}
 				format.js { render template: "students/sped/sped" }
 			else
@@ -143,11 +154,18 @@ class StudentsController < ApplicationController
 
 		respond_to do |format|
 			if @student.update_attributes(params[:student])
-				session[:current_student_id] = @student.id
+
+				if @student.sped_needs == true
+					@student.set_sped_schools!
+				end
+
 				if AWC_GRADES.include?(@student.grade_level)
 					format.html { redirect_to awc_student_path(@student)}
 					format.js { render template: "students/awc/awc" }
 				else
+					# set the home schools
+					@student.set_home_schools!
+
 					format.html { redirect_to schools_path}
 					format.js { render :js => "window.location = '/schools'" }
 				end
@@ -170,7 +188,9 @@ class StudentsController < ApplicationController
 
 		respond_to do |format|
 			if @student.update_attributes(params[:student])
-				session[:current_student_id] = @student.id
+
+				@student.set_home_schools!
+
 				format.html { redirect_to schools_path}
 				format.js { render :js => "window.location = '/schools'" }
 			else

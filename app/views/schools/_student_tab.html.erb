@@ -1,8 +1,8 @@
 <% if student == current_student %>
 	<div class="name_info active" id="student_<%= student.id %>_tab">
 		<span class="name">
-			<%= truncate(student.first_name, length: 12) %> 
-			<span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span> 
+			<%= truncate(student.first_name, length: 12) %>
+			<span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span>
 		</span>
 		<span id="edit_button">edit</span>
 		<span class="grade">
@@ -14,7 +14,7 @@
 	<script>
 		$( document ).ready(function() {
 			$("#student_<%= student.id %>_tab").click(function(){
-				$('#dialog_box').html("<%= escape_javascript(render partial: 'students/address_search', locals: {student: student}) %>");
+				$('#dialog_box').html("<%= escape_javascript(render partial: 'students/address/address_search', locals: {student: student}) %>");
 				$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
 				$('#dialog_box').show();
 				return false;
@@ -25,8 +25,8 @@
 <% else %>
 	<div class="name_info" id="student_<%= student.id %>_tab">
 		<span class="name">
-			<%= truncate(student.first_name, length: 12) %> 
-			<span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span> 
+			<%= truncate(student.first_name, length: 12) %>
+			<span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span>
 		</span>
 		<span class="grade">
 			Grade<br/><span class="number"><%= student.grade_level %></span>
