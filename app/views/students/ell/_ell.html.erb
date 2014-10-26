@@ -6,9 +6,10 @@
 	<%= form_tag set_ell_student_path(@student), method: :put, remote: true, 'data-type' => 'script' do %>
 
 		<p><%= radio_button_tag '[student]ell_language', 'Cape Verdean', @student.ell_language %>Cape Verdean</p>
-		<p><%= radio_button_tag '[student]ell_language', 'Vietnamese', @student.ell_language %>Vietnamese</p>
 		<p><%= radio_button_tag '[student]ell_language', 'Chinese', @student.ell_language %>Chinese</p>
 		<p><%= radio_button_tag '[student]ell_language', 'Haitian Creole', @student.ell_language %>Haitian Creole</p>
+		<p><%= radio_button_tag '[student]ell_language', 'Spanish', @student.ell_language %>Spanish</p>
+		<p><%= radio_button_tag '[student]ell_language', 'Vietnamese', @student.ell_language %>Vietnamese</p>
 		<p><%= radio_button_tag '[student]ell_language', 'Other', @student.ell_language %>Other (including multi-lingual)</p>
 		<p><%= radio_button_tag '[student]ell_language', false, @student.ell_language %>Not Applicable</p>
 
