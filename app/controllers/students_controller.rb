@@ -1,5 +1,8 @@
 class StudentsController < ApplicationController
 
+	def index
+	end
+
 	def create
 
     if params[:student].present? && params[:student][:grade_level].present? && params[:student][:street_number].present? && params[:student][:street_name].present? && params[:student][:zipcode].present?
@@ -209,20 +212,18 @@ class StudentsController < ApplicationController
     session[:current_student_id] = nil
 
     respond_to do |format|
-      format.html { redirect_to schools_url }
+      format.html { redirect_to root_url }
     end
   end
 
   def delete_all
     students = Student.where('id IN (?)', params[:student_ids])
     if students.present?
-      students.each do |student|
-        student.destroy
-      end
+      students.destroy_all
     end
     session[:current_student_id] = nil
     respond_to do |format|
-      format.html { redirect_to home_schools_url }
+      format.html { redirect_to root_url }
     end
   end
 

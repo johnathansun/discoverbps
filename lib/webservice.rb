@@ -33,10 +33,10 @@ module Webservice
 
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc/GetSchoolInterestList?SchoolYear=2014-2015&Grade=03&ZipCode=02124&Geo=060&X=774444.562683105&Y=2961259.5579834&SiblingSchList=
 
-	def self.zone_schools(grade_level, street_number, street_name, zipcode, x, y, geo_code, sibling_ids=[])
-		endpoint = "SchoolInterestList"
+	def self.zone_schools(grade_level, addressid, sibling_ids=[])
+		endpoint = "ZoneSchools"
 		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
-		params = {schoolyear: SCHOOL_YEARS, grade: grade_level, streetnumber: street_number, street: street_name, zipcode: zipcode, geo: geo_code, x: x, y: y, siblingschlist: sibling_school_ids}.to_param
+		params = {schoolyear: SCHOOL_YEAR, grade: grade_level, addressid: addressid, siblingschlist: sibling_school_ids}.to_param
 		extract_from_array = false
 		api_response = self.get(BPS_WEBSERVICE_URL, endpoint, params)
 		self.extract(api_response, endpoint, extract_from_array, nil)

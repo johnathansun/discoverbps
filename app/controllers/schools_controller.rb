@@ -2,13 +2,9 @@ class SchoolsController < ApplicationController
   include SchoolsHelper
   layout :layout_selector
 
-  def home
-  end
-
-
   def index
     if current_user_students.blank?
-      render 'home', layout: 'application'
+      redirect_to root_url
     else
       # Set current_student if it's specified in the params
       if params[:student].present?
@@ -24,9 +20,9 @@ class SchoolsController < ApplicationController
       @ell_schools = current_student.ell_schools
       @sped_schools = current_student.sped_schools
 
-      if current_student.home_schools.blank?
-        flash[:alert] = 'The server responded with an error. Please try your search again later.'
-        render 'home', layout: 'application'
+      if @home_schools.blank?
+        flash[:alert] = 'There were no schools that matched your search. Please try again.'
+        redirect_to root_url
       else
         respond_to do |format|
           format.html
@@ -36,7 +32,16 @@ class SchoolsController < ApplicationController
   end
 
   def compare
+    if current_user_students.blank?
+      flash[:alert] = 'There were no schools that matched your search. Please try again.'
+      redirect_to root_url
+    else
+      @matching_school_ids = current_user_students.collect {|x| x.student_schools.collect {|y| y.bps_id}}.inject(:&)
 
+      respond_to do |format|
+        format.html
+      end
+    end
   end
 
   def get_ready
@@ -61,8 +66,6 @@ class SchoolsController < ApplicationController
 
     def layout_selector
       case action_name
-      when 'home'
-        'application'
       when 'print_home_schools'
         'print'
       when 'print_zone_schools'
@@ -72,81 +75,6 @@ class SchoolsController < ApplicationController
       else
         'schools'
       end
-    end
-
-    def get_home_schools(current_student, api_schools)
-      get_student_schools(current_student, api_schools, 'home_schools')
-    end
-
-    def get_zone_schools(current_student, api_schools)
-      get_student_schools(current_student, api_schools, 'zone_schools')
-    end
-
-    def get_ell_schools(current_student, api_schools)
-      get_student_schools(current_student, api_schools, 'ell_schools')
-    end
-
-    def get_sped_schools(current_student, api_schools)
-      get_student_schools(current_student, api_schools, 'sped_schools')
-    end
-
-    # this method pulls a list of eligible schools from the GetSchoolChoices API,
-    # saves the schools to student_schools, and fetches distance and walk/drive times from the Google Matrix API
-    def get_student_schools(current_student, api_schools, school_list_type)
-      if current_student.present? && current_student.street_number.present? && current_student.street_name.present? && current_student.zipcode.present?
-
-        current_student.student_schools.clear
-
-        # loop through the schools returned from the API, find the matching schools in the db,
-        # save the eligibility variables on student_schools, and collect the coordinates for the matrix search, below
-
-        if api_schools.present?
-          school_coordinates = ''
-          school_ids = []
-
-          api_schools.each do |api_school|
-            school = School.where(bps_id: api_school[:School]).first
-            if school.present? && !school_ids.include?(school.id)
-              school_ids << school.id
-              school_coordinates += "#{school.latitude},#{school.longitude}|"
-              exam_school = (api_school[:IsExamSchool] == "0" ? false : true)
-
-              student_school = current_student.student_schools.where(school_id: school.id).first_or_initialize
-              student_school.update_attributes(school_type: school_list_type, bps_id: api_school[:School], tier: api_school[:Tier], eligibility: api_school[:Eligibility], walk_zone_eligibility: api_school[:AssignmentWalkEligibilityStatus], transportation_eligibility: api_school[:TransEligible], exam_school: exam_school)
-            end
-          end
-
-          school_coordinates.gsub!(/\|$/,'')
-          walk_matrix = get_walk_matrix(current_student, school_coordinates)
-          drive_matrix = get_drive_matrix(current_student, school_coordinates)
-
-          # save distance, walk time and drive time on the student_schools join table
-
-          api_schools.each_with_index do |api_school, i|
-            school = School.where(bps_id: api_school[:School]).first
-            if school.present?
-              walk_time = walk_matrix.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text)
-              drive_time = drive_matrix.try(:[], :rows).try(:[], 0).try(:[], :elements).try(:[], i).try(:[], :duration).try(:[], :text)
-
-              student_school = current_student.student_schools.where(school_id: school.id).first_or_initialize
-              student_school.update_attributes(distance: api_school[:StraightLineDistance], walk_time: walk_time, drive_time: drive_time)
-            end
-          end
-
-          current_student.update_column(:schools_last_updated_at, Time.now)
-          current_student.student_schools.rank(:sort_order)
-        end
-      else
-        return []
-      end
-    end
-
-    def get_walk_times(current_student, school_coordinates)
-      MultiJson.load(Faraday.new(url: URI.escape("http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_student.latitude},#{current_student.longitude}&destinations=#{school_coordinates}&mode=walking&units=imperial&sensor=false")).get.body, :symbolize_keys => true)
-    end
-
-    def get_drive_times(current_student, school_coordinates)
-      MultiJson.load(Faraday.new(url: URI.escape("http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_student.latitude},#{current_student.longitude}&destinations=#{school_coordinates}&mode=driving&units=imperial&sensor=false")).get.body, :symbolize_keys => true)
     end
 
 end
