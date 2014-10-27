@@ -17,12 +17,12 @@ module Webservice
 
 	##### HOME SCHOOLS #####
 
-	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/schools.svc/HomeSchools?SchoolYear=2014&Grade=06&AddressID=68051&IsAwc=true&SiblingSchList=
+	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/schools.svc/HomeSchools?SchYear=2014&Grade=06&AddressID=68051&IsAwc=true&SiblingSchList=
 
 	def self.home_schools(grade_level, addressid, awc, sibling_ids=[])
 		endpoint = "HomeSchools"
 		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
-		params = {schoolyear: SCHOOL_YEAR, grade: grade_level, addressid: addressid, isawc: awc, siblingschlist: sibling_school_ids}.to_param
+		params = {schyear: SCHOOL_YEAR, grade: grade_level, addressid: addressid, isawc: awc, siblingschlist: sibling_school_ids}.to_param
 		extract_from_array = false
 		puts "****************** Getting Home schools from webservice with (#{grade_level}, #{addressid}, #{awc}, #{sibling_ids})"
 		api_response = self.get(endpoint, params)
@@ -33,12 +33,12 @@ module Webservice
 	##### ZONE SCHOOLS #####
 
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc/GetSchoolInterestList?SchoolYear=2014-2015&Grade=03&ZipCode=02124&Geo=060&X=774444.562683105&Y=2961259.5579834&SiblingSchList=
-	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/ZoneSchools?SchoolYear=2014&Grade=07&SiblingSchList=&AddressID=68051
+	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/ZoneSchools?SchYear=2014&Grade=07&SiblingSchList=&AddressID=68051
 
 	def self.zone_schools(grade_level, addressid, sibling_ids=[])
 		endpoint = "ZoneSchools"
 		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
-		params = {schoolyear: SCHOOL_YEAR, grade: grade_level, addressid: addressid, siblingschlist: sibling_school_ids}.to_param
+		params = {schyear: SCHOOL_YEAR, grade: grade_level, addressid: addressid, siblingschlist: sibling_school_ids}.to_param
 		extract_from_array = false
 		puts "****************** Getting Zone schools from webservice with (#{grade_level}, #{addressid}, #{sibling_ids})"
 		api_response = self.get(endpoint, params)
