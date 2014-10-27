@@ -36,10 +36,20 @@ class SchoolsController < ApplicationController
       flash[:alert] = 'There were no schools that matched your search. Please try again.'
       redirect_to root_url
     else
+      @home_schools = current_student.home_schools
+      @zone_schools = current_student.zone_schools
+      @ell_schools = current_student.ell_schools
+      @sped_schools = current_student.sped_schools
+
       @matching_school_ids = current_user_students.collect {|x| x.student_schools.collect {|y| y.bps_id}}.inject(:&)
 
-      respond_to do |format|
-        format.html
+      if @home_schools.blank?
+        flash[:alert] = 'There were no schools that matched your search. Please try again.'
+        redirect_to root_url
+      else
+        respond_to do |format|
+          format.html
+        end
       end
     end
   end

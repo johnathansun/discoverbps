@@ -1,51 +1,42 @@
-<%= render partial: 'schools/timeline_horizontal' %>
+<%= render partial: 'schools/header' %>
+
+<div class="wrap">
+	<%= render partial: 'schools/student_tabs' %>
+</div>
 
 <div class="wrap global_map">
-	<section class="content_wrap">
-			<%= render partial: 'layouts/account_tab' %>		
-	</section>
 	<%= render partial: 'schools/map', locals: {students_list: current_user_students, school: nil, map_controls: true, height: 'resize', width: '100%'} %>
 </div>
 
+<div class="wrap">
+	<%= render partial: 'schools/school_list_tabs' %>
+</div>
+
 <div class="wrap compare_list" id="compare_list">
+	<%= link_to get_ready_schools_path do %>
+		<span data-icon="&#xe001;" class='arrow_slide no_mobile'></span>
+	<% end %>
 	<div class="colomn_left">
-		<div class="menu_compare_name ">
-			<div style="width: 170px; height: 42px;">
-				<br />
-			</div>
-			<div class="clr"></div>
-		</div>
 		<div class="result">
 			<div class="compare_list_numbers">
 				<ul>
-					<% (1..current_user_students.collect {|x| x.student_schools }.max.count).each do |num| %>
+					<% (1..current_user_students.collect {|x| x.home_schools }.max.count).each do |num| %>
 						<li><h2><%= num %></h2></li>
 					<% end %>
 				</ul>
 			</div>
 		</div>
-	</div>	
+	</div>
 	<% colors = ['#0077cf', '#61ab00', '#ff9500', '#7400b8', '#00c9bc'] %>
-	<div class="result colomn_right">	
+	<div class="result colomn_right">
 		<div class="compare_list_content">
-			<!-- ajust the div width when studens are add (to create left and right draggable effect of the school list)  -->	
+			<!-- ajust the div width when studens are add (to create left and right draggable effect of the school list)  -->
 			<div class="flexible_content" style="width:1095px;">
-				<div class="menu_compare_name compare_action">
-					<div class="name_list">
-						<% current_user_students.each_with_index do |student, i| %>
-							<div class="name_info" id="name_<%= i + 2 %>">
-								<span class="name"><%= student.first_name %> <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08" style="color: <%= colors[i] %>;"></span> </span>
-								<span class="grade">Grade<br/><span class="number"><%= student.grade_level %></span></span>
-								<div class="clr"></div>
-							</div>
-						<% end %>
-					</div>
-					<div class="clr"></div>
-				</div>
+
 				<% current_user_students.each_with_index do |student, student_i| %>
 					<div class="compare_students_column">
 						<ul id="sortable_<%= student_i %>">
-							<% student.student_schools.rank(:sort_order).each_with_index do |student_school, i| %>
+							<% student.home_schools.rank(:sort_order).each_with_index do |student_school, i| %>
 								<li id="<%= student.id %>_<%= student_school.school.bps_id %>">
 									<div class="li_frame">
 										<div class="school_name draggable line">
@@ -66,8 +57,8 @@
 					</div>
 					<script>
 						$(function() {
-					    $("#sortable_<%= student_i %>").sortable({ 
-					    	axis: "y", 
+					    $("#sortable_<%= student_i %>").sortable({
+					    	axis: "y",
 					    	scroll: true,
 					    	update: function(){
 						      $.ajax({
@@ -88,4 +79,5 @@
 	</div>
 
 	<%= render partial: 'schools/footer' %>
-	
+
+</div>

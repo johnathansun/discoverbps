@@ -1,0 +1,76 @@
+<div class="account_tab">
+	<section class="content_wrap">
+		<%= render partial: 'layouts/account_tab' %>
+	</section>
+
+	<!-- <div id="google_translate_element" class="desktop_tablet">
+	</div> -->
+
+	<script type="text/javascript">
+		function googleTranslateElementInit() {
+			new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+		}
+	</script>
+	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</div>
+
+<div class="wrap timeline_menu">
+	<!--  navigation menu desktop and mobile -->
+	<section class="logo_header">
+		<nav class="menu_nav">
+			<span id="menu_nav_mobile" aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-25"></span>
+		</nav>
+		<div class="logo_discover" >
+			<a href="/" class="no-decoration"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-01"></span></a>
+		</div>
+	</section>
+</div>
+
+<div class="clr"></div>
+
+<!-- script for timeline and registration -->
+<script>
+
+	var is_open_menu_mobile= false;
+
+	$("#menu_nav_mobile").click(function() {
+
+		if (is_open_menu_mobile) {
+			// Close mobile
+			is_open_menu_mobile= false;
+
+			$("#menu_items").animate({
+				height: "0"
+			  }, 200, function() {
+				// Animation complete.
+				$(this).css("display", "none");
+				$(".menu_nav").width("31px");
+				$("#menu_nav_mobile").removeClass( "icon-DBPS-Dev-Assets-SRG-07" ).addClass( " icon-DBPS-Dev-Assets-SRG-25" );
+
+			});
+		 } else {
+			// Open mobile
+			$(".menu_nav").width("100%");
+			is_open_menu_mobile= true;
+			$("#menu_items").css("display", "block");
+			$('#menu_items').css('height', 'auto');
+			var autoHeight = $('#menu_items').height();
+			$("#menu_items").css("height", "0");
+
+			$("#menu_items").animate({
+				height: autoHeight
+			  }, 200, function() {
+				$('#menu_items').css('height', 'auto');
+				$("#menu_nav_mobile").removeClass( "icon-DBPS-Dev-Assets-SRG-25" ).addClass( " icon-DBPS-Dev-Assets-SRG-07" );
+			});
+		 }
+	});
+
+	window.onresize = function(event) {
+		$("#menu_items").css("display", "none");
+		$(".menu_nav").width("auto");
+		$("#menu_nav_mobile").removeClass( "icon-DBPS-Dev-Assets-SRG-07" ).addClass( " icon-DBPS-Dev-Assets-SRG-25" );
+		is_open_menu_mobile= false;
+	}
+
+</script>

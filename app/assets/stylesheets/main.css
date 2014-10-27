@@ -359,6 +359,10 @@ td {
   .timeline_menu {
     display: none;
   }
+  .account_tab {
+    float: right;
+    margin-left: 50px;
+  }
   .account_box {
     display: none !important;
   }
@@ -370,7 +374,6 @@ td {
   }
   .name_list .name_info.active {
     color: #ffffff !important;
-    background: #fc5b00 !important;
     display: block !important;
   }
   .wrap .menu_compare_name .add_child {
@@ -1282,7 +1285,7 @@ footer.footer .logo {
   /*width:1134px;
   margin: 0 auto;*/
 
-  margin: 0 33px;
+  margin: 0 50px;
   min-width: 1210px\9;
   min-width: 320px;
   position: relative;
@@ -1474,21 +1477,20 @@ footer.footer .logo {
   color: #ffff00;
   left: -23px;
 }
-.wrap .account_box {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
+.account_tab {
+  float: right;
+  margin-left: 50px;
 }
-.wrap .account_box .btn_account {
+.account_box {
+}
+.account_box .btn_account {
   font-size: 17px;
   color: #ffffff;
   padding: 5px 18px;
-  background: #fc5b00;
   width: 132px;
   cursor: pointer;
 }
-.wrap .account_box .btn_account .icon_excla {
+.account_box .btn_account .icon_excla {
   width: 20px;
   height: 20px;
   background: url(/assets/icon_exclamation.png);
@@ -1496,7 +1498,7 @@ footer.footer .logo {
   left: 142px;
   display: inline-block;
 }
-.wrap .account_box .account_menu_box {
+.account_box .account_menu_box {
   /*position: absolute;
       top: 30px;
       left: 0px;*/
@@ -1507,24 +1509,24 @@ footer.footer .logo {
   padding: 12px 36px 12px 24px;
   display: none;
 }
-.wrap .account_box .account_menu_box .menu {
+.account_box .account_menu_box .menu {
   float: left;
 }
-.wrap .account_box .account_menu_box .menu .box {
+.account_box .account_menu_box .menu .box {
   margin: 0 0 20px 0;
 }
-.wrap .account_box .account_menu_box .menu .box span {
+.account_box .account_menu_box .menu .box span {
   color: #565656;
 }
-.wrap .account_box .account_menu_box .menu .box a {
+.account_box .account_menu_box .menu .box a {
   color: #0077cf;
   text-decoration: none;
 }
-.wrap .account_box .account_menu_box .menu .box a .icon {
+.account_box .account_menu_box .menu .box a .icon {
   display: inline-block;
   font-size: 12px;
 }
-.wrap .account_box .account_menu_box .action_box {
+.account_box .account_menu_box .action_box {
   float: left;
   top: 0px;
   left: 168px;
@@ -1534,31 +1536,31 @@ footer.footer .logo {
   margin: 0 0 0 35px;
 }
 
-.wrap .account_box .account_menu_box .action_box.register_box span {
+.account_box .account_menu_box .action_box.register_box span {
   display: inline-block;
 }
-.wrap .account_box .account_menu_box .action_box.register_box label {
+.account_box .account_menu_box .action_box.register_box label {
   display: inline-block;
 }
-.wrap .account_box .account_menu_box .action_box.register_box input {
+.account_box .account_menu_box .action_box.register_box input {
   display: inline-block;
   margin: 0 5px 0 0;
 }
-.wrap .account_box .account_menu_box .action_box .actions {
+.account_box .account_menu_box .action_box .actions {
   float: left;
   padding: 0 0 0 20px;
   border-left: 1px solid #ebebeb;
   min-height: 221px;
 }
-.wrap .account_box .account_menu_box .action_box .actions a {
+.account_box .account_menu_box .action_box .actions a {
   color: #0077cf;
   text-decoration: none;
 }
-.wrap .account_box .account_menu_box .action_box .actions .warning {
+.account_box .account_menu_box .action_box .actions .warning {
   font-size: 13px;
   color: #ff0000;
 }
-.wrap .account_box .account_menu_box .action_box .actions label {
+.account_box .account_menu_box .action_box .actions label {
   display: inline-block;
   width: 100%;
 }
@@ -2539,7 +2541,7 @@ footer.footer .logo {
 
 
 .wrap .menu_school_lists {
-  margin: -42px 0 0 192px;
+  margin: -42px 0 0 142px;
   width: 100%;
   position: relative;
   overflow: auto;
@@ -3286,7 +3288,6 @@ a.ui-corner-all:hover {
 }
 .wrap.compare_list .colomn_right .compare_list_content {
   margin-right: 0;
-  top: -42px;
   position: relative;
 }
 .wrap.compare_list .footer_list {
@@ -3546,7 +3547,7 @@ ie6 .print1 .wrap {
   display: none;
 }
 .logo_header {
-  margin-left: 72px;
+  margin: 20px 0 0px -14px;
 }
 /* -Screen - tablet */
 /* ----------------------------------------------
@@ -3801,7 +3802,7 @@ ie6 .print1 .wrap {
     display: block;
   }
   .logo_header {
-    margin-left: 20px;
+    margin: 10px 0 20px -17px;
   }
 }
 /* -Screen - tablet 2 */
@@ -4041,45 +4042,45 @@ ie6 .print1 .wrap {
   .wrap .single_school .box.empty {
     display: none;
   }
-  .wrap .account_box {
+  .account_box {
     width: 100%;
   }
-  .wrap .account_box .btn_account {
+  .account_box .btn_account {
     padding: 5px 25px;
     width: 139px;
   }
-  .wrap .account_box .account_menu_box {
+  .account_box .account_menu_box {
     width: auto  !important;
   }
-  .wrap .account_box .account_menu_box .action_box {
+  .account_box .account_menu_box .action_box {
     float: none;
     margin-left: 0;
   }
-  .wrap .account_box .account_menu_box .action_box .actions {
+  .account_box .account_menu_box .action_box .actions {
     padding: 20px 0 0 0;
     border: 0;
     border-top: 1px solid #ebebeb;
     width: auto;
     float: none;
   }
-  .wrap .account_box .account_menu_box .action_box.register_box span {
+  .account_box .account_menu_box .action_box.register_box span {
     width: 100%;
   }
-  .wrap .account_box .account_menu_box .action_box.register_box label {
+  .account_box .account_menu_box .action_box.register_box label {
     display: inline-block;
     width: 100%;
   }
-  .wrap .account_box .account_menu_box .menu {
+  .account_box .account_menu_box .menu {
     float: none;
   }
-  .wrap .account_box .account_menu_box .menu .box {
+  .account_box .account_menu_box .menu .box {
     float: left;
     margin: 0 0 20px 0;
   }
-  .wrap .account_box .account_menu_box .menu .box.list_child {
+  .account_box .account_menu_box .menu .box.list_child {
     margin: 0  0 0 58px;
   }
-  .wrap .account_box .account_menu_box .menu .box.list_child .child {
+  .account_box .account_menu_box .menu .box.list_child .child {
     color: #fc5b00;
   }
   .wrap.global_map {
@@ -4513,45 +4514,45 @@ ie6 .print1 .wrap {
   .wrap .single_school .box.empty {
     display: none;
   }
-  .wrap .account_box {
+  .account_box {
     width: 100%;
   }
-  .wrap .account_box .btn_account {
+  .account_box .btn_account {
     padding: 5px 25px;
     width: 139px;
   }
-  .wrap .account_box .account_menu_box {
+  .account_box .account_menu_box {
     width: auto  !important;
   }
-  .wrap .account_box .account_menu_box .action_box {
+  .account_box .account_menu_box .action_box {
     float: none;
     margin-left: 0;
   }
-  .wrap .account_box .account_menu_box .action_box .actions {
+  .account_box .account_menu_box .action_box .actions {
     padding: 20px 0 0 0;
     border: 0;
     border-top: 1px solid #ebebeb;
     width: auto;
     float: none;
   }
-  .wrap .account_box .account_menu_box .action_box.register_box span {
+  .account_box .account_menu_box .action_box.register_box span {
     width: 100%;
   }
-  .wrap .account_box .account_menu_box .action_box.register_box label {
+  .account_box .account_menu_box .action_box.register_box label {
     display: inline-block;
     width: 100%;
   }
-  .wrap .account_box .account_menu_box .menu {
+  .account_box .account_menu_box .menu {
     float: none;
   }
-  .wrap .account_box .account_menu_box .menu .box {
+  .account_box .account_menu_box .menu .box {
     float: left;
     margin: 0 0 20px 0;
   }
-  .wrap .account_box .account_menu_box .menu .box.list_child {
+  .account_box .account_menu_box .menu .box.list_child {
     margin: 0  0 0 58px;
   }
-  .wrap .account_box .account_menu_box .menu .box.list_child .child {
+  .account_box .account_menu_box .menu .box.list_child .child {
     color: #fc5b00;
   }
   .wrap.global_map {
@@ -4937,45 +4938,45 @@ ie6 .print1 .wrap {
     width: 96%;
     margin: 0 auto;
   }
-  .wrap .account_box {
+  .account_box {
     width: 100%;
   }
-  .wrap .account_box .btn_account {
+  .account_box .btn_account {
     padding: 5px 25px;
     width: 139px;
   }
-  .wrap .account_box .account_menu_box {
+  .account_box .account_menu_box {
     width: auto  !important;
   }
-  .wrap .account_box .account_menu_box .action_box {
+  .account_box .account_menu_box .action_box {
     float: none;
     margin-left: 0;
   }
-  .wrap .account_box .account_menu_box .action_box .actions {
+  .account_box .account_menu_box .action_box .actions {
     padding: 20px 0 0 0;
     border: 0;
     border-top: 1px solid #ebebeb;
     width: auto;
     float: none;
   }
-  .wrap .account_box .account_menu_box .action_box.register_box span {
+  .account_box .account_menu_box .action_box.register_box span {
     width: 100%;
   }
-  .wrap .account_box .account_menu_box .action_box.register_box label {
+  .account_box .account_menu_box .action_box.register_box label {
     display: inline-block;
     width: 100%;
   }
-  .wrap .account_box .account_menu_box .menu {
+  .account_box .account_menu_box .menu {
     float: none;
   }
-  .wrap .account_box .account_menu_box .menu .box {
+  .account_box .account_menu_box .menu .box {
     float: left;
     margin: 0 0 20px 0;
   }
-  .wrap .account_box .account_menu_box .menu .box.list_child {
+  .account_box .account_menu_box .menu .box.list_child {
     margin: 0  0 0 58px;
   }
-  .wrap .account_box .account_menu_box .menu .box.list_child .child {
+  .account_box .account_menu_box .menu .box.list_child .child {
     color: #fc5b00;
   }
   .wrap.global_map {
