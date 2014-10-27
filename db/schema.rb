@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141026174616) do
+ActiveRecord::Schema.define(:version => 20141027003515) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -215,7 +215,7 @@ ActiveRecord::Schema.define(:version => 20141026174616) do
     t.boolean  "address_verified",        :default => false
     t.string   "geo_code"
     t.integer  "preferences_count",       :default => 0
-    t.boolean  "awc_invitation"
+    t.boolean  "awc_invitation",          :default => false
     t.string   "addressid"
     t.text     "home_schools_json"
     t.text     "zone_schools_json"

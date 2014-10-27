@@ -63,71 +63,98 @@
 
 		<!-- preferences list-->
 		<div id="school_list">
-				<!-- listing of schools  -->
-				<div class="list_content">
-					<div class="flexible_content" style="width:1220px;">
-						<!-- school list header -->
-						<div class="menu_list">
-							<div class="li_frame">
-								<div id="sortable_choice_order_column" class="arrow menu_bloc desktop no_mobile">
-
-								</div>
-								<div id="sortable_school_name_column" class="menu_bloc sortable_column">
-									<div class="column_title">School Name</div>
-								</div>
-
-								<!-- add class "open" to show "Walk time" and "Drive time"-->
-								<div id="getting_there" class=" menu_bloc ">
-									<div id="sortable_distance_column" class="first_block sortable_column" style="color: #0077cf;">
-										<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Getting There</div>
-									</div>
-									<div class="second_block sortable_column">
-										<div class="column_title">Walk Time</div>
-									</div>
-									<div class="second_block sortable_column">
-										<div class="column_title">Drive Time</div>
-									</div>
-								</div>
-								<div id="sortable_eligibility_column" class="menu_bloc sortable_column">
-									<div class="column_title">Eligibility</div>
-								</div>
-								<div id="sortable_hours_column" class="menu_bloc sortable_column">
-									<div class="column_title">School Hours</div>
-								</div>
-								<% if SURROUND_CARE_GRADES.include?(current_student.grade_level) %>
-									<div id="sortable_surround_care_column" class=" menu_bloc sortable_column">
-										<div class="column_title">Surround Care</div>
-									</div>
-								<% end %>
-								<div id="sortable_fit_column" class=" menu_bloc sortable_column">
-									<div class="column_title">Your Fit</div>
-								</div>
-								<div class="clr"></div>
+			<div style="clear: bottom;">
+				<ul>
+					<li><%= link_to 'Home Schools', '#', id: 'home_schools_button' %></li>
+					<li><%= link_to 'Zone Schools', '#', id: 'zone_schools_button' %></li>
+					<li><%= link_to 'ELL Schools', '#', id: 'ell_schools_button' %></li>
+					<li><%= link_to 'SPED Schools', '#', id: 'sped_schools_button' %></li>
+				</ul>
+			</div>
+			<!-- listing of schools  -->
+			<div class="list_content">
+				<div class="flexible_content" style="width:1220px;">
+					<!-- school list header -->
+					<div class="menu_list">
+						<div class="li_frame">
+							<div id="sortable_choice_order_column" class="arrow menu_bloc desktop no_mobile">
 							</div>
-						</div>
-						<!-- END school list header -->
+							<div id="sortable_school_name_column" class="menu_bloc sortable_column">
+								<div class="column_title">School Name</div>
+							</div>
 
-						<!-- School listing -->
-						<ul id="sortable">
-							<% @home_schools.each_with_index do |student_school, i| %>
-								<li id="<%= current_student.id %>_<%= student_school.bps_id %>" class="list_row">
-									<%= render partial: 'schools/school', locals: {student_school: student_school, school: student_school.school, index: i} %>
-								</li>
+							<!-- add class "open" to show "Walk time" and "Drive time"-->
+							<div id="getting_there" class=" menu_bloc ">
+								<div id="sortable_distance_column" class="first_block sortable_column" style="color: #0077cf;">
+									<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Getting There</div>
+								</div>
+								<div class="second_block sortable_column">
+									<div class="column_title">Walk Time</div>
+								</div>
+								<div class="second_block sortable_column">
+									<div class="column_title">Drive Time</div>
+								</div>
+							</div>
+							<div id="sortable_eligibility_column" class="menu_bloc sortable_column">
+								<div class="column_title">Eligibility</div>
+							</div>
+							<div id="sortable_hours_column" class="menu_bloc sortable_column">
+								<div class="column_title">School Hours</div>
+							</div>
+							<% if SURROUND_CARE_GRADES.include?(current_student.grade_level) %>
+								<div id="sortable_surround_care_column" class=" menu_bloc sortable_column">
+									<div class="column_title">Surround Care</div>
+								</div>
 							<% end %>
-						</ul>
-						
-						<!-- END School listing -->
+							<div id="sortable_fit_column" class=" menu_bloc sortable_column">
+								<div class="column_title">Your Fit</div>
+							</div>
+							<div class="clr"></div>
+						</div>
 					</div>
+					<!-- END school list header -->
 
+					<ul id="sortable">
+						<%= render partial: 'schools/schools', locals: {schools: @home_schools, list_id: 'home_school', display_style: ''} %>
+						<%= render partial: 'schools/schools', locals: {schools: @zone_schools, list_id: 'zone_school', display_style: 'none'} %>
+						<%= render partial: 'schools/schools', locals: {schools: @ell_schools, list_id: 'ell_school', display_style: 'none'} %>
+						<%= render partial: 'schools/schools', locals: {schools: @sped_schools, list_id: 'sped_school', display_style: 'none'} %>
+					</ul>
 
+					<script>
+						$('#home_schools_button').click(function() {
+							event.preventDefault();
+							$('li.list_row').hide();
+							$('li.home_school').show();
+						});
+						$('#zone_schools_button').click(function() {
+							event.preventDefault();
+							$('li.list_row').hide();
+							$('li.zone_school').show();
+						});
+						$('#ell_schools_button').click(function() {
+							event.preventDefault();
+							$('li.list_row').hide();
+							$('li.ell_school').show();
+						});
+						$('#sped_schools_button').click(function() {
+							event.preventDefault();
+							$('li.list_row').hide();
+							$('li.sped_school').show();
+						});
+					</script>
+
+				<!-- END School listing -->
 				</div>
-				<!-- END  listing of schools  -->
 
-				<%= render partial: 'schools/footer' %>
 
 			</div>
+			<!-- END  listing of schools  -->
+
+			<%= render partial: 'schools/footer' %>
 
 		</div>
+
 	</div>
 </div>
 

@@ -10,7 +10,7 @@ module Webservice
 		endpoint = "AddressMatches"
 		params = {streetnumber: street_number, street: street_name, zipcode: zipcode}.to_param
 		extract_from_array = false
-		api_response = self.get(BPS_DEV_WEBSERVICE_URL, endpoint, params)
+		api_response = self.get(endpoint, params)
 		self.extract(api_response, endpoint, extract_from_array, nil)
 	end
 
@@ -24,7 +24,8 @@ module Webservice
 		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
 		params = {schoolyear: SCHOOL_YEAR, grade: grade_level, addressid: addressid, isawc: awc, siblingschlist: sibling_school_ids}.to_param
 		extract_from_array = false
-		api_response = self.get(BPS_DEV_WEBSERVICE_URL, endpoint, params)
+		puts "****************** Getting Home schools from webservice with (#{grade_level}, #{addressid}, #{awc}, #{sibling_ids})"
+		api_response = self.get(endpoint, params)
 		self.extract(api_response, endpoint, extract_from_array, nil)
 	end
 
@@ -32,13 +33,15 @@ module Webservice
 	##### ZONE SCHOOLS #####
 
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc/GetSchoolInterestList?SchoolYear=2014-2015&Grade=03&ZipCode=02124&Geo=060&X=774444.562683105&Y=2961259.5579834&SiblingSchList=
+	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/ZoneSchools?SchoolYear=2014&Grade=07&SiblingSchList=&AddressID=68051
 
 	def self.zone_schools(grade_level, addressid, sibling_ids=[])
 		endpoint = "ZoneSchools"
 		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
 		params = {schoolyear: SCHOOL_YEAR, grade: grade_level, addressid: addressid, siblingschlist: sibling_school_ids}.to_param
 		extract_from_array = false
-		api_response = self.get(BPS_WEBSERVICE_URL, endpoint, params)
+		puts "****************** Getting Zone schools from webservice with (#{grade_level}, #{addressid}, #{sibling_ids})"
+		api_response = self.get(endpoint, params)
 		self.extract(api_response, endpoint, extract_from_array, nil)
 	end
 
@@ -50,7 +53,8 @@ module Webservice
 		endpoint = "ELLSchools"
 		params = {schyear: SCHOOL_YEAR, gradelevel: grade_level, addressid: addressid, language: language}.to_param
 		extract_from_array = false
-		api_response = self.get(BPS_DEV_WEBSERVICE_URL, endpoint, params)
+		puts "****************** Getting ELL schools from webservice with (#{grade_level}, #{addressid}, #{language})"
+		api_response = self.get(endpoint, params)
 		self.extract(api_response, endpoint, extract_from_array, nil)
 	end
 
@@ -63,7 +67,8 @@ module Webservice
 		endpoint = "SPEDSchools"
 		params = {schyear: SCHOOL_YEAR, gradelevel: grade_level, addressid: addressid}.to_param
 		extract_from_array = false
-		api_response = self.get(BPS_DEV_WEBSERVICE_URL, endpoint, params)
+		puts "****************** Getting SPED schools from webservice with (#{grade_level}, #{addressid})"
+		api_response = self.get(endpoint, params)
 		self.extract(api_response, endpoint, extract_from_array, nil)
 	end
 
@@ -74,7 +79,7 @@ module Webservice
 		endpoint = "Info"
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
-		api_response = self.get(BPS_DEV_WEBSERVICE_URL, endpoint, params)
+		api_response = self.get(endpoint, params)
 		self.extract(api_response, endpoint, extract_from_array, bps_id)
 	end
 
@@ -84,7 +89,7 @@ module Webservice
 		endpoint = "Awards"
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = false
-		api_response = self.get(BPS_DEV_WEBSERVICE_URL, endpoint, params)
+		api_response = self.get(endpoint, params)
 		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
 	end
 
@@ -94,7 +99,7 @@ module Webservice
   	endpoint = "Description"
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = true
-		api_response = self.get(BPS_DEV_WEBSERVICE_URL, endpoint, params)
+		api_response = self.get(endpoint, params)
 		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
 	end
 
@@ -104,7 +109,7 @@ module Webservice
 		endpoint = "Facilities"
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
-		api_response = self.get(BPS_DEV_WEBSERVICE_URL, endpoint, params)
+		api_response = self.get(endpoint, params)
 		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
 	end
 
@@ -114,7 +119,7 @@ module Webservice
 		endpoint = "Grades"
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = false
-		api_response = self.get(BPS_DEV_WEBSERVICE_URL, endpoint, params)
+		api_response = self.get(endpoint, params)
 		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
 	end
 
@@ -124,7 +129,7 @@ module Webservice
 		endpoint  = "Hours"
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = true
-		api_response = self.get(BPS_DEV_WEBSERVICE_URL, endpoint, params)
+		api_response = self.get(endpoint, params)
 		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
 	end
 
@@ -134,7 +139,7 @@ module Webservice
 		endpoint = "Languages"
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
-		api_response = self.get(BPS_DEV_WEBSERVICE_URL, endpoint, params)
+		api_response = self.get(endpoint, params)
 		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
 	end
 
@@ -144,7 +149,7 @@ module Webservice
 		endpoint = "Partners"
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = false
-		api_response = self.get(BPS_DEV_WEBSERVICE_URL, endpoint, params)
+		api_response = self.get(endpoint, params)
 		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
 	end
 
@@ -154,7 +159,7 @@ module Webservice
 		endpoint = "Photos"
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = false
-		api_response = self.get(BPS_DEV_WEBSERVICE_URL, endpoint, params)
+		api_response = self.get(endpoint, params)
 		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
 	end
 
@@ -164,15 +169,15 @@ module Webservice
 		endpoint = "Sports"
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
-		api_response = self.get(BPS_DEV_WEBSERVICE_URL, endpoint, params)
+		api_response = self.get(endpoint, params)
 		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
 	end
 
 
 	private
 
-	def self.get(domain, endpoint, params)
-		Faraday.new(url: "#{domain}/#{endpoint}?#{params}", ssl: {version: :SSLv3}).get.body
+	def self.get(endpoint, params)
+		Faraday.new(url: "#{BPS_DEV_WEBSERVICE_URL}/#{endpoint}?#{params}", ssl: {version: :SSLv3}).get.body
 	end
 
 	def self.extract(api_response, endpoint, extract_from_array, bps_id)
@@ -184,6 +189,7 @@ module Webservice
 			end
 			return nil
 		else
+			puts "********************* #{api_response}"
 			begin
 				if extract_from_array == true
 					# Some responses are stored as a single hash inside an array. It's easier to extract the hash from the array here

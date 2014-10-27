@@ -62,22 +62,22 @@ class Student < ActiveRecord::Base
   # SAVE SCHOOLS ON CURRENT_STUDENT
 
   def set_home_schools!
-    api_schools = Webservice.home_schools(self.formatted_grade_level, '68051', self.awc_invitation, self.sibling_school_ids).try(:[], :List)
+    api_schools = Webservice.home_schools('06', '68051', self.awc_invitation, self.sibling_school_ids).try(:[], :List)
     save_student_schools!(api_schools, 'home')
   end
 
   def set_zone_schools!
-    api_schools = Webservice.zone_schools(self.formatted_grade_level, '68051', self.sibling_school_ids).try(:[], :List)
+    api_schools = Webservice.zone_schools('07', '68051', self.sibling_school_ids).try(:[], :List)
     save_student_schools!(api_schools, 'zone')
   end
 
   def set_ell_schools!
-    api_schools = Webservice.ell_schools(self.formatted_grade_level, '68051', self.ell_language)
+    api_schools = Webservice.ell_schools('06', '68051', self.ell_language)
     save_student_schools!(api_schools, 'ell')
   end
 
   def set_sped_schools!
-    api_schools = Webservice.sped_schools(self.formatted_grade_level, '68051')
+    api_schools = Webservice.sped_schools('06', '68051')
     save_student_schools!(api_schools, 'sped')
   end
 
@@ -88,18 +88,21 @@ class Student < ActiveRecord::Base
   def save_student_schools!(api_schools, school_list_type)
     if self.longitude.present? && self.latitude.present?
 
-      self.send("#{school_list_type}_schools".to_sym).clear
-      self.update_column("#{school_list_type}_schools_json".to_sym, api_schools.to_json) rescue nil
-
       # loop through the schools returned from the API, find the matching schools in the db,
       # save the eligibility variables on student_schools, and collect the coordinates for the matrix search, below
 
       if api_schools.present?
+        self.send("#{school_list_type}_schools".to_sym).clear
+        self.update_column("#{school_list_type}_schools_json".to_sym, api_schools.to_json) rescue nil
         school_coordinates = ''
         school_ids = []
 
         api_schools.each do |api_school|
-          school = School.where(bps_id: api_school[:School]).first
+          if school_list_type == 'home' || school_list_type == 'zone'
+            school = School.where(bps_id: api_school[:School]).first
+          elsif school_list_type == 'ell' || school_list_type == 'sped'
+            school = School.where(bps_id: api_school[:SchoolID]).first
+          end
           if school.present? && !school_ids.include?(school.id)
             school_ids << school.id
             school_coordinates += "#{school.latitude},#{school.longitude}|"

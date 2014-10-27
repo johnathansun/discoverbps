@@ -105,9 +105,9 @@ class StudentsController < ApplicationController
     respond_to do |format|
       if @student.update_attributes(params[:student])
 
-				if zone_school_grades.include?(@student.grade_level)
-					@student.set_zone_schools!
-				end
+				# if zone_school_grades.include?(@student.grade_level)
+				@student.set_zone_schools!
+				# end
 
         format.js { render template: "students/ell/ell" }
         format.html { redirect_to ell_student_path(@student)}
