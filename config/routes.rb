@@ -34,6 +34,7 @@ DiscoverbpsV2::Application.routes.draw do
     get 'print', on: :member
     post 'sort', on: :collection
     get 'compare', on: :collection
+    get 'get_ready', on: :collection
   end
 
   namespace :admin do

@@ -1,21 +1,10 @@
 <%= render partial: 'schools/timeline_horizontal' %>
 
-<!-- start google map -->
-<div class="wrap global_map">
-	<section class="content_wrap">
-		<%= render partial: 'layouts/account_tab' %>
-	</section>
-	<%= render partial: 'schools/map', locals: {students_list: [current_student], school: nil, map_controls: true, resize: true, width: '100%'} %>
-</div>
-
 <!-- start bar list children -->
 <div class="wrap">
 	<!-- menu with compare button, student's name button and add_child button -->
 	<div class="menu_compare_name ">
 		<div class="f" style="width:100%;">
-			<div class="compare">
-				Compare your lists:
-			</div>
 			<div class="name_list">
 				<% current_user_students.each_with_index do |student, i| %>
 					<%= render partial: 'schools/student_tab', locals: {student: student} %>
@@ -27,13 +16,13 @@
 			<script>
 				$(".compare").click(function(){
 					document.location.href='/schools/compare';
-			  	return false;
+					return false;
 				});
 				$(".add_child").click(function(){
-			  	$('#dialog_box').html("<%= escape_javascript(render partial: 'students/address/address_search') %>");
-			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
-			  	$('#dialog_box').show();
-			  	return false;
+					$('#dialog_box').html("<%= escape_javascript(render partial: 'students/address/address_search') %>");
+					$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+					$('#dialog_box').show();
+					return false;
 				});
 			</script>
 
@@ -45,6 +34,92 @@
 
 </div>
 <!-- end bar list children -->
+
+<!-- start google map -->
+<div class="wrap global_map">
+	<%= render partial: 'schools/map', locals: {students_list: [current_student], school: nil, map_controls: true, resize: true, width: '100%'} %>
+</div>
+
+<div class="wrap">
+	<!-- menu with compare button, student's name button and add_child button -->
+	<div class="menu_school_lists" style="margin-top: -42px;">
+		<div class="f" style="width:100%;">
+			<div class="name_list">
+				<% if @home_schools.present? %>
+					<div class="school_list_tab active" id="home_schools_tab">
+						<span class="name">
+							Home-based
+							<span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span>
+						</span>
+						<div class="clr"></div>
+					</div>
+				<% end %>
+				<% if @zone_schools.present? %>
+					<div class="school_list_tab" id="zone_schools_tab">
+						<span class="name">
+							Zone-based
+							<span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span>
+						</span>
+						<div class="clr"></div>
+					</div>
+				<% end %>
+				<% if @ell_schools.present? %>
+					<div class="school_list_tab" id="ell_schools_tab">
+						<span class="name">
+							ELL
+							<span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span>
+						</span>
+						<div class="clr"></div>
+					</div>
+				<% end %>
+				<% if @sped_schools.present? %>
+					<div class="school_list_tab" id="sped_schools_tab">
+						<span class="name">
+							SPED
+							<span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span>
+						</span>
+						<div class="clr"></div>
+					</div>
+				<% end %>
+			</div>
+			<div class="clr"></div>
+		</div>
+
+		<script>
+			$('#home_schools_tab').click(function() {
+				event.preventDefault();
+				$('.school_list_tab').removeClass("active");
+				$('#home_schools_tab').addClass("active");
+				$('li.list_row').hide();
+				$('li.home_school').show();
+			});
+			$('#zone_schools_tab').click(function() {
+				event.preventDefault();
+				$('.school_list_tab').removeClass("active");
+				$('#zone_schools_tab').addClass("active");
+				$('li.list_row').hide();
+				$('li.zone_school').show();
+			});
+			$('#ell_schools_tab').click(function() {
+				event.preventDefault();
+				$('.school_list_tab').removeClass("active");
+				$('#ell_schools_tab').addClass("active");
+				$('li.list_row').hide();
+				$('li.ell_school').show();
+			});
+			$('#sped_schools_tab').click(function() {
+				event.preventDefault();
+				$('.school_list_tab').removeClass("active");
+				$('#sped_schools_tab').addClass("active");
+				$('li.list_row').hide();
+				$('li.sped_school').show();
+			});
+		</script>
+
+	</div>
+	<!-- END menu with compare button, student's name button and add_child button -->
+
+</div>
 
 
 <div class="wrap">
@@ -63,14 +138,6 @@
 
 		<!-- preferences list-->
 		<div id="school_list">
-			<div style="clear: bottom;">
-				<ul>
-					<li><%= link_to 'Home Schools', '#', id: 'home_schools_button' %></li>
-					<li><%= link_to 'Zone Schools', '#', id: 'zone_schools_button' %></li>
-					<li><%= link_to 'ELL Schools', '#', id: 'ell_schools_button' %></li>
-					<li><%= link_to 'SPED Schools', '#', id: 'sped_schools_button' %></li>
-				</ul>
-			</div>
 			<!-- listing of schools  -->
 			<div class="list_content">
 				<div class="flexible_content" style="width:1220px;">
@@ -115,34 +182,19 @@
 					<!-- END school list header -->
 
 					<ul id="sortable">
-						<%= render partial: 'schools/schools', locals: {schools: @home_schools, list_id: 'home_school', display_style: ''} %>
-						<%= render partial: 'schools/schools', locals: {schools: @zone_schools, list_id: 'zone_school', display_style: 'none'} %>
-						<%= render partial: 'schools/schools', locals: {schools: @ell_schools, list_id: 'ell_school', display_style: 'none'} %>
-						<%= render partial: 'schools/schools', locals: {schools: @sped_schools, list_id: 'sped_school', display_style: 'none'} %>
+						<% if @home_schools.present? && (@zone_schools.present? || @ell_schools.present? || @sped_schools.present? )%>
+							<%= render partial: 'schools/schools', locals: {schools: @home_schools, list_id: 'home_school', display_style: ''} %>
+						<% end %>
+						<% if @zone_schools.present? %>
+							<%= render partial: 'schools/schools', locals: {schools: @zone_schools, list_id: 'zone_school', display_style: 'none'} %>
+						<% end %>
+						<% if @zone_schools.present? %>
+							<%= render partial: 'schools/schools', locals: {schools: @ell_schools, list_id: 'ell_school', display_style: 'none'} %>
+						<% end %>
+						<% if @zone_schools.present? %>
+							<%= render partial: 'schools/schools', locals: {schools: @sped_schools, list_id: 'sped_school', display_style: 'none'} %>
+						<% end %>
 					</ul>
-
-					<script>
-						$('#home_schools_button').click(function() {
-							event.preventDefault();
-							$('li.list_row').hide();
-							$('li.home_school').show();
-						});
-						$('#zone_schools_button').click(function() {
-							event.preventDefault();
-							$('li.list_row').hide();
-							$('li.zone_school').show();
-						});
-						$('#ell_schools_button').click(function() {
-							event.preventDefault();
-							$('li.list_row').hide();
-							$('li.ell_school').show();
-						});
-						$('#sped_schools_button').click(function() {
-							event.preventDefault();
-							$('li.list_row').hide();
-							$('li.sped_school').show();
-						});
-					</script>
 
 				<!-- END School listing -->
 				</div>

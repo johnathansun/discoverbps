@@ -45,7 +45,32 @@ class SchoolsController < ApplicationController
   end
 
   def get_ready
+    if current_user_students.blank?
+      redirect_to root_url
+    else
+      # Set current_student if it's specified in the params
+      if params[:student].present?
+        if current_user.present? && current_user.students.find(params[:student]).present?
+          session[:current_student_id] = current_user.students.find(params[:student]).id
+        elsif Student.where(id: params[:student], session_id: session[:session_id]).present?
+          session[:current_student_id] = Student.where(id: params[:student], session_id: session[:session_id]).first.id
+        end
+      end
 
+      @home_schools = current_student.home_schools
+      @zone_schools = current_student.zone_schools
+      @ell_schools = current_student.ell_schools
+      @sped_schools = current_student.sped_schools
+
+      if @home_schools.blank?
+        flash[:alert] = 'There were no schools that matched your search. Please try again.'
+        redirect_to root_url
+      else
+        respond_to do |format|
+          format.html
+        end
+      end
+    end
   end
 
   # POST

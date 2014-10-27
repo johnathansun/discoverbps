@@ -1,0 +1,396 @@
+<%= render partial: 'schools/timeline_horizontal' %>
+
+<!-- start bar list children -->
+<div class="wrap">
+  <!-- menu with compare button, student's name button and add_child button -->
+  <div class="menu_compare_name ">
+    <div class="f" style="width:100%;">
+      <div class="name_list">
+        <% current_user_students.each_with_index do |student, i| %>
+          <%= render partial: 'schools/student_tab', locals: {student: student} %>
+        <% end %>
+      </div>
+      <div class="add_child" >
+        + Add a child
+      </div>
+      <script>
+        $(".compare").click(function(){
+          document.location.href='/schools/compare';
+          return false;
+        });
+        $(".add_child").click(function(){
+          $('#dialog_box').html("<%= escape_javascript(render partial: 'students/address/address_search') %>");
+          $('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+          $('#dialog_box').show();
+          return false;
+        });
+      </script>
+
+      <div class="clr"></div>
+    </div>
+
+  </div>
+  <!-- END menu with compare button, student's name button and add_child button -->
+
+</div>
+<!-- end bar list children -->
+
+<!-- start google map -->
+<div class="wrap global_map">
+  <%= render partial: 'schools/map', locals: {students_list: [current_student], school: nil, map_controls: true, resize: true, width: '100%'} %>
+</div>
+
+<div class="wrap">
+  <!-- menu with compare button, student's name button and add_child button -->
+  <div class="menu_school_lists" style="margin-top: -42px;">
+    <div class="f" style="width:100%;">
+      <div class="name_list">
+        <% if @home_schools.present? %>
+          <div class="school_list_tab active" id="home_schools_tab">
+            <span class="name">
+              Home-based
+              <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span>
+            </span>
+            <div class="clr"></div>
+          </div>
+        <% end %>
+        <% if @zone_schools.present? %>
+          <div class="school_list_tab" id="zone_schools_tab">
+            <span class="name">
+              Zone-based
+              <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span>
+            </span>
+            <div class="clr"></div>
+          </div>
+        <% end %>
+        <% if @ell_schools.present? %>
+          <div class="school_list_tab" id="ell_schools_tab">
+            <span class="name">
+              ELL
+              <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span>
+            </span>
+            <div class="clr"></div>
+          </div>
+        <% end %>
+        <% if @sped_schools.present? %>
+          <div class="school_list_tab" id="sped_schools_tab">
+            <span class="name">
+              SPED
+              <span aria-hidden="true" class="indicator icon-DBPS-Dev-Assets-SRG-08"></span>
+            </span>
+            <div class="clr"></div>
+          </div>
+        <% end %>
+      </div>
+      <div class="clr"></div>
+    </div>
+
+    <script>
+      $('#home_schools_tab').click(function() {
+        event.preventDefault();
+        $('.school_list_tab').removeClass("active");
+        $('#home_schools_tab').addClass("active");
+        $('li.list_row').hide();
+        $('li.home_school').show();
+      });
+      $('#zone_schools_tab').click(function() {
+        event.preventDefault();
+        $('.school_list_tab').removeClass("active");
+        $('#zone_schools_tab').addClass("active");
+        $('li.list_row').hide();
+        $('li.zone_school').show();
+      });
+      $('#ell_schools_tab').click(function() {
+        event.preventDefault();
+        $('.school_list_tab').removeClass("active");
+        $('#ell_schools_tab').addClass("active");
+        $('li.list_row').hide();
+        $('li.ell_school').show();
+      });
+      $('#sped_schools_tab').click(function() {
+        event.preventDefault();
+        $('.school_list_tab').removeClass("active");
+        $('#sped_schools_tab').addClass("active");
+        $('li.list_row').hide();
+        $('li.sped_school').show();
+      });
+    </script>
+
+  </div>
+  <!-- END menu with compare button, student's name button and add_child button -->
+
+</div>
+
+
+<div class="wrap">
+  <div data-icon="&#xe001;" aria-hidden="true" class='arrow_slide no_mobile'></div>
+  <script>
+    $( window ).resize(function() {
+      if ($(window).width() > 1480) {
+        $('.arrow_slide').hide();
+      } else {
+        $('.arrow_slide').show();
+      }
+    });
+  </script>
+  <div class="result">
+    <%= render partial: 'schools/preference_panel' %>
+
+    <!-- preferences list-->
+    <div id="school_list">
+      <!-- listing of schools  -->
+      <div class="list_content">
+        <div class="flexible_content" style="width:1220px;">
+          <!-- school list header -->
+          <div class="menu_list">
+            <div class="li_frame">
+              <div id="sortable_choice_order_column" class="arrow menu_bloc desktop no_mobile">
+              </div>
+              <div id="sortable_school_name_column" class="menu_bloc sortable_column">
+                <div class="column_title">School Name</div>
+              </div>
+
+              <!-- add class "open" to show "Walk time" and "Drive time"-->
+              <div id="getting_there" class=" menu_bloc ">
+                <div id="sortable_distance_column" class="first_block sortable_column" style="color: #0077cf;">
+                  <div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Getting There</div>
+                </div>
+                <div class="second_block sortable_column">
+                  <div class="column_title">Walk Time</div>
+                </div>
+                <div class="second_block sortable_column">
+                  <div class="column_title">Drive Time</div>
+                </div>
+              </div>
+              <div id="sortable_eligibility_column" class="menu_bloc sortable_column">
+                <div class="column_title">Eligibility</div>
+              </div>
+              <div id="sortable_hours_column" class="menu_bloc sortable_column">
+                <div class="column_title">School Hours</div>
+              </div>
+              <% if SURROUND_CARE_GRADES.include?(current_student.grade_level) %>
+                <div id="sortable_surround_care_column" class=" menu_bloc sortable_column">
+                  <div class="column_title">Surround Care</div>
+                </div>
+              <% end %>
+              <div id="sortable_fit_column" class=" menu_bloc sortable_column">
+                <div class="column_title">Your Fit</div>
+              </div>
+              <div class="clr"></div>
+            </div>
+          </div>
+          <!-- END school list header -->
+
+          <ul id="sortable">
+            <% if @home_schools.present? && (@zone_schools.present? || @ell_schools.present? || @sped_schools.present? )%>
+              <%= render partial: 'schools/schools', locals: {schools: @home_schools, list_id: 'home_school', display_style: ''} %>
+            <% end %>
+            <% if @zone_schools.present? %>
+              <%= render partial: 'schools/schools', locals: {schools: @zone_schools, list_id: 'zone_school', display_style: 'none'} %>
+            <% end %>
+            <% if @zone_schools.present? %>
+              <%= render partial: 'schools/schools', locals: {schools: @ell_schools, list_id: 'ell_school', display_style: 'none'} %>
+            <% end %>
+            <% if @zone_schools.present? %>
+              <%= render partial: 'schools/schools', locals: {schools: @sped_schools, list_id: 'sped_school', display_style: 'none'} %>
+            <% end %>
+          </ul>
+
+        <!-- END School listing -->
+        </div>
+
+
+      </div>
+      <!-- END  listing of schools  -->
+
+      <%= render partial: 'schools/footer' %>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $( document ).ready(function() {
+    //Click on school name to open the full school description in the school line
+    $("#school_list li .li_frame > .school_name").click(function() {
+      $(this).parent().parent().addClass("descrip_open");
+      $(this).parent().parent().find(".school_descrip").toggle();
+      }
+    );
+
+    //compare button => add class to compare_list, close school list and preferences, and show the comparaison list
+    /*$(".menu_compare_name .compare").click(function(){
+
+      $(this).parent().addClass("compare_action");
+      $("#school_list").css("display","none");
+      $(".preferences").css("display","none");
+      $("#compare_list").css("display","block");
+
+
+    })*/
+
+    //btn close preference choice in tablet size
+    $(".header_preferences #hide_btn").click(function(){
+      $(".preferences").addClass("hide");
+    })
+    //btn show preference choice in tablet size
+    $(".header_preferences #show_btn").click(function(){
+      $(".preferences").removeClass("hide");
+    })
+
+    $("#sign_up_button").click(function(){
+      $('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/signup') %>");
+      $('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+      $('#signup_panel').show();
+      $('#dialog_box').show();
+      return false;
+    });
+
+    $("#login_button").click(function(){
+      $('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/login') %>");
+      $('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+      $('#login_panel').show();
+      $('#dialog_box').show();
+      return false;
+    });
+
+    $(function() {
+      $("#sortable").sortable({
+        axis: "y",
+        scroll: true,
+        update: function(){
+          $('#sortable li').each(function(){
+            $(this).find('.sortable_row_number').html($(this).index() + 1);
+          });
+          $.ajax({
+            url: '/schools/sort',
+            type: 'post',
+            data: $('#sortable').sortable('serialize'),
+            dataType: 'script'
+          });
+        }
+      });
+      $("#sortable").disableSelection();
+    });
+
+    var choice_order_ascending = false;
+    $("#sortable_choice_order_column").click(function(){
+      $('.column_arrow').hide();
+      $('.sortable_column').css("color", "#565656")
+      $('#sortable_choice_order_column').css("color", "#0077cf")
+      if (choice_order_ascending) {
+        $('ul#sortable>li').tsort('span.sortable_row_number',{order:'desc'});
+        $('#sortable_choice_order_column').html('<div aria-hidden="true" id="choice_order_arrow" class="icon-DBPS-Dev-Assets-arrow-down"></div>');
+        choice_order_ascending = false;
+      } else {
+        $('ul#sortable>li').tsort('span.sortable_row_number',{order:'asc'});
+        $('#sortable_choice_order_column').html('<div aria-hidden="true" id="choice_order_arrow" class="icon-DBPS-Dev-Assets-arrow-up"></div>');
+        choice_order_ascending = true;
+      }
+    });
+
+    var school_name_ascending = false;
+    $("#sortable_school_name_column").click(function(){
+      $('.column_arrow').hide();
+      $('.sortable_column').css("color", "#565656")
+      $('#sortable_choice_order_column').css("color", "#565656")
+      $('#sortable_school_name_column').css("color", "#0077cf")
+      if (school_name_ascending) {
+        $('ul#sortable>li').tsort('span.sortable_school_name',{order:'desc'});
+        $('#sortable_school_name_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">School Name</div>');
+        school_name_ascending = false;
+      } else {
+        $('ul#sortable>li').tsort('span.sortable_school_name',{order:'asc'});
+        $('#sortable_school_name_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">School Name</div>');
+        school_name_ascending = true;
+      }
+    });
+
+    var getting_there_ascending = false;
+    $("#sortable_distance_column").click(function(){
+      $('.column_arrow').hide();
+      $('.sortable_column').css("color", "#565656")
+      $('#sortable_choice_order_column').css("color", "#565656")
+      $('#sortable_distance_column').css("color", "#0077cf")
+      if (getting_there_ascending) {
+        $('ul#sortable>li').tsort('span.sortable_distance',{order:'desc'});
+        $('#sortable_distance_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Getting There</div>');
+        getting_there_ascending = false;
+      } else {
+        $('ul#sortable>li').tsort('span.sortable_distance',{order:'asc'});
+        $('#sortable_distance_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Getting There</div>');
+        getting_there_ascending = true;
+      }
+    });
+
+     var eligibility_ascending = false;
+    $("#sortable_eligibility_column").click(function(){
+      $('.column_arrow').hide();
+      $('.sortable_column').css("color", "#565656")
+      $('#sortable_choice_order_column').css("color", "#565656")
+      $('#sortable_eligibility_column').css("color", "#0077cf")
+      if (eligibility_ascending) {
+        $('ul#sortable>li').tsort('span.sortable_eligibility',{order:'desc'});
+        $('#sortable_eligibility_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Eligibility</div>');
+        eligibility_ascending = false;
+      } else {
+        $('ul#sortable>li').tsort('span.sortable_eligibility',{order:'asc'});
+        $('#sortable_eligibility_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Eligibility</div>');
+        eligibility_ascending = true;
+      }
+    });
+
+     var surround_care_ascending = false;
+    $("#sortable_surround_care_column").click(function(){
+      $('.column_arrow').hide();
+      $('.sortable_column').css("color", "#565656")
+      $('#sortable_choice_order_column').css("color", "#565656")
+      $('#sortable_surround_care_column').css("color", "#0077cf")
+      if (surround_care_ascending) {
+        $('ul#sortable>li').tsort('span.sortable_surround_care',{order:'desc'});
+        $('#sortable_surround_care_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Surround Care</div>');
+        surround_care_ascending = false;
+      } else {
+        $('ul#sortable>li').tsort('span.sortable_surround_care',{order:'asc'});
+        $('#sortable_surround_care_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Surround Care</div>');
+        surround_care_ascending = true;
+      }
+    });
+
+    var hours_ascending = false;
+    $("#sortable_hours_column").click(function(){
+      $('.column_arrow').hide();
+      $('.sortable_column').css("color", "#565656")
+      $('#sortable_choice_order_column').css("color", "#565656")
+      $('#sortable_hours_column').css("color", "#0077cf")
+      if (hours_ascending) {
+        $('ul#sortable>li').tsort('span.sortable_hours',{order:'desc'});
+        $('#sortable_hours_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">School Hours</div>');
+        hours_ascending = false;
+      } else {
+        $('ul#sortable>li').tsort('span.sortable_hours',{order:'asc'});
+        $('#sortable_hours_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">School Hours</div>');
+        hours_ascending = true;
+      }
+    });
+
+    var fit_ascending = false;
+    $("#sortable_fit_column").click(function(){
+      $('.column_arrow').hide();
+      $('.sortable_column').css("color", "#565656")
+      $('#sortable_choice_order_column').css("color", "#565656")
+      $('#sortable_fit_column').css("color", "#0077cf")
+      if (fit_ascending) {
+        $('ul#sortable>li').tsort('span.sortable_fit',{order:'desc'});
+        $('#sortable_fit_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Your Fit</div>');
+        fit_ascending = false;
+      } else {
+        $('ul#sortable>li').tsort('span.sortable_fit',{order:'asc'});
+        $('#sortable_fit_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Your Fit</div>');
+        fit_ascending = true;
+      }
+    });
+
+  });
+</script>

@@ -19,7 +19,7 @@
 			<% end %>
 		</span>
 	</div>
-	
+
 	<!-- add class "open" to show "Walk time info" and "Drive time info"-->
 	<div class="box line getting_there ">
 		<div class="first_block middle">
@@ -34,12 +34,12 @@
 		</div>
 		<div class="second_bloc middle">
 			<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> <%= spacer_helper(student_school.walk_time) %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
-				
+
 		</div>
 		<div class="second_bloc middle last">
 			<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> <%= spacer_helper(student_school.drive_time) %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
-		</div>	
-		
+		</div>
+
 	</div>
 	<div class="box line eligibility ">
 		<div class="first_block middle">
@@ -51,14 +51,14 @@
 		</div>
 		<div class="second_bloc middle">
 			<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-14"></span> <%= spacer_helper(student_school.walk_time) %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
-				
+
 		</div>
 		<div class="second_bloc middle last">
 			<span aria-hidden="true" class="icon_petit icon-DBPS-Dev-Assets-SRG-17"></span> <%= spacer_helper(student_school.drive_time) %> <span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"></span>
-		</div>	
-		
+		</div>
+
 	</div>
-	
+
 	<div class="box line school_hours">
 		<span class="middle sortable_hours"> <%= truncate(school.api_hours.try(:[], :schhours1), length: 18) %><br/>
 			<div class="max_range">
@@ -74,7 +74,7 @@
 				<% if school.api_basic_info.try(:[], :BeforeSchPrograms).present? %>
 					<% surround_care_count += 1 %>
 					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> Before school<br/>
-				<% end %> 
+				<% end %>
 				<% if school.api_basic_info.try(:[], :AfterSchPrograms).present? %>
 					<% surround_care_count += 1 %>
 					<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-42"></span> After school
@@ -116,14 +116,14 @@
 	</div>
 	<div class="clr"></div>
 	<!--END brief school information -->
-	
+
 	<div class="school_descrip">
 		<div class="right_side">
 
 			<%= render partial: 'schools/school_details_desktop', locals: {school: school, student_school: student_school} %>
-					
+
 			<%= render partial: 'schools/school_details_mobile', locals: {school: school, student_school: student_school} %>
-					 
+
 			<%= render partial: 'schools/school_details_tablet', locals: {school: school, student_school: student_school} %>
 
 			<div class="clr"></div>
