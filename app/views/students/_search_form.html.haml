@@ -1,0 +1,137 @@
+.form_line
+	- if defined?(student) && student.try(:first_name).present?
+		%input{id: 'first_name', class: 'bloc_3', name: '[student]first_name', type: 'text', value: "#{student.first_name}"}
+	- else
+		%input{id: 'first_name', class: 'bloc_3', name: '[student]first_name', type: 'text', placeholder: 'First Name'}
+
+	.separation_bloc
+		.separation
+
+	- if defined?(student) && student.try(:last_name).present?
+		%input{id: 'last_name', class: 'bloc_4', name: '[student]last_name', type: 'text', value: "#{student.last_name}"}
+	- else
+		%input{id: 'last_name', class: 'bloc_4', name: '[student]last_name', type: 'text', placeholder: 'Last Name'}
+
+	.separation_bloc
+		.separation
+
+	.bloc_2.select_grade
+		%span{aria: {hidden: 'true'}, class: 'arrow icon-DBPS-Dev-Assets-SRG-41'}
+
+		- if defined?(student) && student.try(:grade_level).present?
+			%input{id: 'grade_level_placeholder', name: '[student]grade_level', type: 'text', value: "#{student.grade_level}"}
+		- else
+			%input{id: 'grade_level_placeholder', name: '[student]grade_level', type: 'text', placeholder: 'Grade'}
+
+		.option_grade
+			.btn_grade
+				K0
+			.btn_grade
+				K1
+			.btn_grade
+				K2
+			.clr
+			.btn_grade
+				1
+			.btn_grade
+				2
+			.btn_grade
+				3
+			.btn_grade
+				4
+			.btn_grade
+				5
+			.clr
+			.btn_grade
+				6
+			.btn_grade
+				7
+			.btn_grade
+				8
+			.clr
+			.btn_grade
+				9
+			.btn_grade
+				10
+			.btn_grade
+				11
+			.btn_grade
+				12
+			.clr
+
+	.clr
+
+:javascript
+	$("body").click(function(){
+		$(".option_grade").fadeOut("fast");
+	});
+	$('.btn_grade').click(function() {
+		$('input[id=grade_level_placeholder]').val(this.innerHTML);
+		$('input[id=_studentgrade_level]').val(this.innerHTML);
+		$('.option_grade').fadeOut("fast");
+	});
+	$('.select_grade').mouseover(function() {
+		$('.option_grade').show();
+	});
+
+
+.form_line
+	- if defined?(student) && student.try(:street_number).present?
+		%input{id: 'street_number', class: 'bloc_4', name: '[student]street_number', type: 'text', value: "#{student.street_number}"}
+	- else
+		%input{id: 'street_number', class: 'bloc_4', name: '[student]street_number', type: 'text', placeholder: 'Street Number'}
+
+	.separation_bloc
+		.separation
+
+	- if defined?(student) && student.try(:street_name).present?
+		%input{id: 'street_name', class: 'bloc_4', name: '[student]street_name', type: 'text', value: "#{student.street_name}"}
+	- else
+		%input{id: 'street_name', class: 'bloc_4', name: '[student]street_name', type: 'text', placeholder: 'Street Name'}
+
+	.separation_bloc
+		.separation
+
+	- if defined?(student) && student.try(:zipcode).present?
+		%input{id: 'zipcode', class: 'bloc_2', name: '[student]zipcode', type: 'text', value: "#{student.zipcode}"}
+	- else
+		%input{id: 'zipcode', class: 'bloc_2', name: '[student]zipcode', type: 'text', placeholder: 'ZIP'}
+
+	.clr
+
+
+- (1..5).each do |row_number|
+	%div{id: "sibling_search_#{row_number}", class: "form_line", style: "display: #{row_number == 1 ? 'block' : 'none'}"}
+		- unless sibling_search == false
+			#sibling_school.bloc_6
+				%span{aria: {hidden: 'true'}, class: 'select_school_icon icon-DBPS-Dev-Assets-SRG-12'}
+				%input{id: "sibling_school_#{row_number}_autocomplete", name: "[student]sibling_school_names[]", type: 'text', placeholder: "Set Sibling's School"}
+				%span{aria: {hidden: 'true'}, class: 'arrow icon-DBPS-Dev-Assets-SRG-41'}
+
+		- unless row_number == 5
+			%div{id: "add_child_#{row_number + 1}", class: 'add_child_button btn'}
+				%span{aria: {hidden: 'true'}, class: 'icon icon-DBPS-Dev-Assets-SRG-10'}
+				%span.text
+					Add another child
+
+		.clr
+
+	:javascript
+		$("#add_child_#{row_number + 1}").click(function() {
+			$('#sibling_search_#{row_number + 1}').show();
+		});
+		$(function() {
+			var schoolNames = <%= raw School.all.collect {|x| x.name}.compact %>;
+			$( "#sibling_school_#{row_number}_autocomplete" ).autocomplete({
+				source: schoolNames,
+				minLength: 2,
+				messages: {
+					noResults: '',
+					results: function() {}
+				}
+			});
+		});
+
+
+#search_form_submit.bloc_5
+	= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit', id: 'home_search_button'

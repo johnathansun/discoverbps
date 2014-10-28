@@ -218,7 +218,7 @@ DEPENDENCIES
   friendly_id (~> 4.0.10)
   geocoder
   gon
-  haml-rails
+  haml-rails (~> 0.4.0)
   jquery-rails
   jquery-ui-rails
   less-rails

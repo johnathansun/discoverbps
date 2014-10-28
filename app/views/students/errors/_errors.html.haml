@@ -1,0 +1,27 @@
+.close_icon
+	%span{aria: {hidden: 'true'}, class: 'icon-DBPS-Dev-Assets-SRG-07'}
+
+.content
+	- if @error_message.present?
+		%h3{style: 'color: red;'}
+			= @error_message
+	- elsif student.errors.present?
+		%h3
+			Please complete the following #{pluralize(student.errors.count, "field")}:
+		%br/
+
+		%ul
+			- student.errors.full_messages.each do |msg|
+				%li{style: 'color: red;'}
+					= msg
+	- else
+		%h3
+			We're sorry but something went wrong. Please try your search again later.
+
+:javascript
+	$(".close_icon").click(function() {
+		$(".dialog_box").fadeOut("fast").removeClass("active");
+	});
+	$(".dialog_box").click(function(e){
+		e.stopPropagation();
+	});

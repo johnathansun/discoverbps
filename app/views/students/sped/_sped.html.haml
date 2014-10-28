@@ -1,32 +1,34 @@
-<div class="close_icon"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-07"></span></div>
-<!-- dialog hello -->
-<div class='content'>
-	<h3>Does your child have an Individual Education Plan (IEP) for special eduction needs (SPED)?</h3>
+.close_icon
+	%span{aria: {hidden: 'true'}, class: 'icon-DBPS-Dev-Assets-SRG-07'}
 
-	<%= form_tag set_sped_student_path(@student), method: :put, remote: true, 'data-type' => 'script' do %>
+.content
+	%h2
+		Does your child have an Individual Education Plan (IEP) for special eduction needs (SPED)?
 
-		<p><%= radio_button_tag '[student]sped_needs', true, @student.sped_needs %>Yes</p>
-		<p><%= radio_button_tag '[student]sped_needs', false, @student.sped_needs %>No</p>
+	= form_tag set_sped_student_path(@student), method: :put, remote: true, 'data-type' => 'script' do
 
-		<div class='btn'><%= submit_tag 'Next', disable_with: 'Working...', id: 'sped_next_button', class: 'orange_submit' %></div>
-	<% end %>
+		%p
+			= radio_button_tag '[student]sped_needs', true, @student.sped_needs
+			Yes
+		%p
+			= radio_button_tag '[student]sped_needs', false, @student.sped_needs
+			No
 
-	<div class="footnote">
-		<p>
+		.btn
+			= submit_tag 'Next', disable_with: 'Working...', id: 'sped_next_button', class: 'orange_submit'
+
+
+	.footnote
+		%p
 			For students with disabilities, placement in a school is determined by their Individualized Education Plan (IEP) and the availability of appropriate seats. While families are able to indicate school choices through the regular assignment process, placement decisions are made by Boston Public Schools’ IEP team. Students with low levels of need (i.e. Pull-Out or Push-In Resources) can have these needs met in any district school on their Home-Based List. However, students with higher levels of needs may qualify for program seats from across a broader cluster of schools. The SPED tab on your results page will show you which schools may be available to your child. Please note that while the school list reflects all programs offered, placement is highly individualized and will depend on a student’s specific needs, as determined by the ￼￼￼IEP. For questions about SWD placements, please call: 617-635-8599
-		</p>
-	</div>
 
-</div>
-<script>
+:javascript
 	$('#sped_next_button').click(function() {
 		$('#sped_next_button').text('Working...');
 	});
-
 	$(".close_icon").click(function() {
 		$(".dialog_box").fadeOut("fast").removeClass("active");
 	});
 	$(".dialog_box").click(function(e){
-  	e.stopPropagation();
+		e.stopPropagation();
 	});
-</script>

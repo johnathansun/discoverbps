@@ -98,16 +98,13 @@ class Student < ActiveRecord::Base
         school_ids = []
 
         api_schools.each do |api_school|
-          if school_list_type == 'home' || school_list_type == 'zone'
-            school = School.where(bps_id: api_school[:School]).first
-          elsif school_list_type == 'ell' || school_list_type == 'sped'
-            school = School.where(bps_id: api_school[:SchoolID]).first
-          end
+          school = School.where(bps_id: api_school[:SchoolID]).first
+
           if school.present? && !school_ids.include?(school.id)
             school_ids << school.id
             school_coordinates += "#{school.latitude},#{school.longitude}|"
             exam_school = (api_school[:IsExamSchool] == "0" ? false : true)
-            self.student_schools.create(school_id: school.id, school_type: school_list_type, bps_id: api_school[:School], tier: api_school[:Tier], eligibility: api_school[:Eligibility], walk_zone_eligibility: api_school[:AssignmentWalkEligibilityStatus], transportation_eligibility: api_school[:TransEligible], exam_school: exam_school)
+            self.student_schools.create(school_id: school.id, school_type: school_list_type, bps_id: api_school[:SchoolID], tier: api_school[:Tier], eligibility: api_school[:Eligibility], walk_zone_eligibility: api_school[:AssignmentWalkEligibilityStatus], transportation_eligibility: api_school[:TransEligible], exam_school: exam_school)
           end
         end
 
@@ -118,7 +115,7 @@ class Student < ActiveRecord::Base
         # save distance, walk time and drive time on the student_schools join table
 
         api_schools.each_with_index do |api_school, i|
-          school = School.where(bps_id: api_school[:School]).first
+          school = School.where(bps_id: api_school[:SchoolID]).first
           if school.present?
             walk_time = walk_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
             drive_time = drive_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
