@@ -1,6 +1,6 @@
 <!-- account button ans his listing-->
-<div class="account_box">
-	<div class="btn_account">Account<!-- <span class='icon_excla'></span> --></div>
+<div class="account_box menu_item">
+	<div class="btn_account"><span class="icon icon-menu"></span>Account<!-- <span class='icon_excla'></span> --></div>
 	<!-- Start section menu account -->
 	<div class='account_menu_box font_15'>
 		<!-- Start menu account -->
@@ -86,9 +86,11 @@
 
 		$('.account_box').hover(
 			function() {
-				$('.account_menu_box').show();
+				$(this).addClass('hovered');
+				$('.account_menu_box').fadeIn(250);
 			}, function() {
-				$('.account_menu_box').hide();
+				$(this).removeClass('hovered');
+				$('.account_menu_box').fadeOut(250);
 		});
 
 		$('#login_btn').click(function() {

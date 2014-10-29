@@ -1,3 +1,7 @@
+.joel-begin {
+	display: none;
+}
+
 .sticky-footer-wrap {
 	min-height: 100%;
 	height: auto !important;
@@ -295,4 +299,8 @@ input, select {
 	background-color: #72c900; 
 	padding: 20px; 
 	margin-bottom: 30px;
+}
+
+.joel-end {
+	display: none;
 }

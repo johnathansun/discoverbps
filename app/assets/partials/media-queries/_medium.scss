@@ -1,0 +1,166 @@
+/* -Screen - tablet 2 */
+/* ----------------------------------------------
+   ELEMENT LAYOUT - TABLETTE 2
+---------------------------------------------- */
+@media screen and (max-width: 1090px) {
+  .standard .wrap {
+    padding: 0 33px;
+    margin: 0 auto;
+  }
+  .standard .wrap .content_wrap.search {
+    /*max-width: 769px;*/
+  }
+  .standard.one .wrap {
+    max-width: 769px;
+    padding: 0 33px;
+  }
+  #main_gallery_image{
+    margin: 30px 0 20px 0;
+    img{ width: 475px;}
+  }
+  .dialog_box.dialog_box_dicover {
+    width: 536px;
+    margin: 0 0 0 -268px;
+  }
+  .dialog_box.dialog_box_dicover .content {
+    width: auto;
+  }
+  .dialog_box.dialog_box_dicover .content .selection {
+    min-width: 410px;
+  }
+  .dialog_box.dialog_box_dicover .content .bloc .input_select {
+    width: 400px;
+  }
+  .dialog_box.dialog_box_dicover .content .bloc .preference {
+    width: 200px;
+  }
+  .dialog_box.dialog_box_dicover .content .bloc .preference.column_3 {
+    clear: both;
+    margin: 40px 0 0 0;
+  }
+  .dialog_box.dialog_box_dicover .content .bloc .preference.column_4 {
+    margin: 40px 0 0 0;
+  }
+  .wrap .search .search_header .title_bloc {
+    position: relative;
+  }
+  .wrap .search .search_header .title_bloc h1 {
+    width: 553px;
+  }
+  .wrap .search .search_header .title_bloc .logo_beta {
+    top: -20px;
+  }
+  .wrap .search .search_header p {
+    width: 553px;
+  }
+  .wrap .search .search_header .tablet {
+    display: block;
+    float: none;
+  }
+  .wrap .search .small_text {
+    margin-bottom: 20px;
+  }
+  .wrap .search .search_section .no_tablet {
+    display: none;
+  }
+  .wrap .search .search_section .content_right {
+    width: 100px;
+    right: -11.8px;
+  }
+  .wrap .search .search_section .content_right .event .tablette {
+    display: block;
+  }
+  .wrap .search .search_section .content_right .event .desktop {
+    display: none;
+  }
+  .wrap .search .search_section .content_right .event .point_font {
+    position: relative;
+    right: -20px;
+  }
+  .wrap .search .search_section .content_right .event .start_point {
+    position: relative;
+    display: block;
+    top: 0;
+    right: -2px;
+  }
+  .wrap .search .search_section .content_right .event.first {
+    background: #0077cf;
+    padding-bottom: 2px;
+  }
+  .wrap .search .search_section .content_right .event .desktop,
+  .wrap .search .search_section .content_right .event .mobile {
+    display: none;
+  }
+  .wrap .search .search_section .content_left {
+    width: 553px;
+    margin-right: 156px;
+  }
+  .wrap .search .search_section .content_left .text {
+    margin-left: 0;
+  }
+  .wrap .search .search_section .point_arrow {
+    margin-right: 2px;
+  }
+  .wrap .search .search_section.second {
+    /*.point{width: auto;height: auto;top:8px;position: relative;right: 0;}*/
+
+  }
+  .wrap .search .search_section.second .point_arrow {
+    margin-right: 2px;
+    margin-top: 10px;
+  }
+  .wrap .search .search_section_content {
+    position: relative;
+  }
+  .wrap .search .search_section_content .today {
+    color: #ffff00;
+    position: absolute;
+    top: 10%;
+    width: 115px;
+    font-size: 12px;
+    right: -32px !important;
+    text-align: right;
+  }
+  .wrap .search .search_section_content .today.left .left {
+    display: none;
+  }
+  .wrap .search .search_section_content .today.left .right {
+    display: none;
+  }
+  .wrap .search .search_section_content .today.right .right {
+    display: none;
+  }
+  .wrap .search .search_section_content .today.right .left {
+    display: none;
+  }
+  .wrap .search .search_section_content .today .yello_line {
+    display: inline-block;
+    width: 49px;
+    height: 2px;
+    border-top: 1px solid #ffff00;
+  }
+  .wrap .single_school {
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 96.1%;
+  }
+  .wrap .single_school .school_descrip {
+    width: 318px;
+  }
+  .wrap .single_school .box {
+    width: 150px;
+  }
+  .wrap .single_school .box .absolute {
+    position: absolute;
+    width: 150px;
+  }
+  .wrap .single_school .desktop {
+    display: none;
+  }
+  .wrap .single_school .tablet {
+    display: block;
+  }
+  .logo_header {
+    margin-left: 20px;
+  }
+}

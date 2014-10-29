@@ -1,19 +1,18 @@
 .search
+	.logo.discover
+		%span{aria: {hidden: 'true'}, class: 'icon-DBPS-Dev-Assets-SRG-01'}
 	.search_header
 		.title_bloc
 			%h1
 				Welcome to Boston Public Schools Registration
 			= image_tag('logo_beta.png', class: 'logo_beta', alt: 'beta')
 
-		%p.yellow-buttons
-			= auto_link(TextSnippet.find('home-intro').text)
-
 	.search_section_content
 		%section.search_section.first
 			.content_left
-				.logo.discover
-					%span{aria: {hidden: 'true'}, class: 'icon-DBPS-Dev-Assets-SRG-01'}
 				.text
+					%p.yellow-buttons.light_blue.big
+						= auto_link(TextSnippet.find('home-intro').text)
 					%p.yellow-buttons
 						= auto_link(TextSnippet.find('home-discover-intro').text)
 

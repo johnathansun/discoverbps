@@ -1,0 +1,10 @@
+.ie8 .wrap,
+.ie7 .wrap,
+ie6 .wrap {
+  min-width: 1210px;
+}
+.ie8 .print1 .wrap,
+.ie7 .print1 .wrap,
+ie6 .print1 .wrap {
+  min-width: auto;
+}
