@@ -1856,11 +1856,11 @@ Wrap Search
   left: -47px;
 }
 .wrap .search .logo.register {
-  font-size: 105px;
+  font-size: 70px;
   left: 0px;
 }
 .wrap .search .logo.succeed {
-  font-size: 77px;
+  font-size: 52px;
   left: 0px;
 }
 .wrap .search .small_text {
@@ -1904,10 +1904,10 @@ Wrap Search
 }
 .wrap .search .search_section .content_left {
   /*width: 815px;*/
-
-  margin-right: 160px;
-  border-top: 1px solid #fff; }
-	.wrap .search .search_section.first .content_left { border: none; }
+  margin-right: 220px;
+  margin-left: 125px;
+  border-top: 1px solid #fff; 
+}
 
 .wrap .search .search_section .content_left a.K {
   text-decoration: none;
@@ -1916,11 +1916,106 @@ Wrap Search
   text-decoration: underline;
 }
 .wrap .search .search_section .content_left .text {
-  margin-left: 125px;
-  width: 525px;
+  //width: 625px;
   font-size: 15px;
   line-height: 20px;
+  width: 525px;
 }
+
+// .search_section.first ///////////////
+.wrap .search .search_section.first .content_left { border: none; }
+.wrap .search .search_section.first .content_left .text { margin-right: 0; }
+.wrap .search .search_section.first .content_left .home_intro { max-width: 525px; margin: 0 0 50px; }
+
+// .search_section.second ///////////////
+.wrap .search .search_section.second .content_left a {
+	text-decoration: underline;
+	&:hover {
+		color: $yellow;
+	}
+}
+
+// .search_section.third ///////////////
+.wrap .search .search_section.third .content_left {
+	border:	none;
+	min-height: 120px;
+}
+
+
+
+// User Lists /////////////
+.wrap .search .user_lists {
+	margin-bottom: 80px;
+	
+	li {
+		margin-bottom: 30px;
+		@include clearfix;
+	}
+	.previous_student_search_button {
+		display: block;
+		background: $light_blue;
+		padding: 15px 10px 10px;
+		text-decoration: none;
+		@include clearfix;
+		&:hover {
+			text-decoration: none;
+			background: tint($light_blue, 75%);
+		}
+	}
+	.name { 
+		font-size: 24px;
+		text-transform: capitalize; 
+		margin-right: 5px; 
+	}
+	.schools { float: right; }
+	
+	.steps {
+		@include clearfix; 
+	}
+		.step {
+			width: 25%;
+			float: left;
+		
+			.bar {
+				height: 10px;
+				background-color: tint($light_blue, 50%);
+				border-right: 2px solid $blue;
+			}
+			.label {
+				color: $light_blue;
+				font-size: 10px;
+			}
+
+			&.last { 
+				.bar { border: none; }
+			}
+			&.complete {
+				.bar { background-color: $yellow; }
+				.label { color: $yellow; }
+			}
+			&.current {
+				.bar { 
+					background-color: shade($yellow, 20%); 
+					background-image: url(/assets/progress_bar_yellow.png)
+				}
+				.label { color: $yellow; }
+			}
+		}
+	
+	#start_new_search {
+		float: left;	
+	}
+}
+
+
+// Forms /////////////
+.search .search_section .content_left .new_search_form_wrap {
+	
+	&.hidden {
+		display: none;
+	}
+}
+
 .search .search_section .content_left form .form_line {
   margin-bottom: 12px;
   display: block;
@@ -2136,6 +2231,9 @@ a.ui-corner-all:hover {
 .search .search_section .content_left form .form_line .bloc_6.portrait {
   display: none;
 }
+
+// content_right / timeline /////////////
+
 .wrap .search .search_section .content_right {
   position: absolute;
   width: 179px;
@@ -2158,14 +2256,14 @@ a.ui-corner-all:hover {
 .wrap .search .search_section.first {
   padding-bottom: 50px;
   min-height: 500px;
-  border-right: 9px solid #80bce7;
+  border-right: 10px solid #80bce7;
 }
 .wrap .search .search_section.first .start_point {
   font-size: 16px;
   color: #fff;
   position: absolute;
-  top: -20px;
-  right: -25px;
+  top: -8px;
+	right: -31px;
 }
 .wrap .search .search_section.second {
   padding-bottom: 35px;

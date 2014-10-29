@@ -105,3 +105,24 @@ textarea:invalid {
 figure {
   margin: 0;
 }
+
+.button {
+	color: #FFF !important;
+	background: $orange;
+	font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+	font-size: 16px;
+	border: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	width: auto !important;
+	padding: 8px 12px;
+	text-decoration: none !important;
+	&:hover {
+		background: tint($orange, 20%);
+	}
+	
+	&.red { background: $red; }
+		&.red:hover { background: tint($red, 20%); }
+	&.yellow { background: $yellow; }
+		&.yellow:hover { background: tint($yellow, 20%); }
+}
