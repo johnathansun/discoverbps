@@ -22,9 +22,6 @@
 							= form_tag students_path, :method => :post, :remote => true do
 								= render partial: 'schools/search_form', locals: {sibling_search: false}
 
-
-
-
 :javascript
 	$(".close_icon").click(function() {
 		$(".dialog_box").fadeOut("fast").removeClass("active");
