@@ -1,0 +1,88 @@
+.footer_list
+	.footer_left
+		%p{style: 'color: #000; margin-bottom: 1em; font-size: 1.2em;'}
+			Notice
+		%p
+			= auto_link(TextSnippet.find('footer-intro').text)
+
+		%p{style: 'color: #000; margin-bottom: 1em; font-size: 1.2em;'}
+			Next Steps
+		%p
+			You can learn more about the School Assignment process by visiting
+			= link_to 'www.bostonpublicschools.org/assignment', 'http://www.bostonpublicschools.org/assignment', title: 'Learn more about Home-Based Eligibility', target: '_blank'}
+			or by watching a short video on &nbsp;
+			= link_to 'YouTube', 'http://www.youtube.com/watch?v=c13n5e-LJG4&feature=youtu.be', title: "What's the Home-Based School Choice Plan?", target: "_blank"}
+
+		%p{style: "color:#000;"}
+			Visit Schools:
+		%p
+			= link_to 'Learn about school preview opportunities', 'http://www.bostonpublicschools.org/research', target: "_blank", class: 'blue'
+
+		<!-- <p style="color:#000;">Pre-Register:
+		%p= link_to 'Pre-register your student', 'https://apps.mybps.org/ExternalWeb/login.aspx?tabindex=0&tabid=30',	target: "_blank", class: 'blue'	-->
+
+		%p{style: "color:#000;"}
+			Register:
+		%p
+			= link_to 'Collect the required documents', "http://www.bostonpublicschools.org/requireddocs", title: "Collect the required documents", target: "_blank"}
+		%p
+			= link_to 'Plan a visit to a Welcome Center', "http://www.bostonpublicschools.org/Page/653", title: "Plan a visit to a Welcome Center", target: "_blank"}
+
+	.footer_right">
+		%p{style: "color: #000; margin-bottom: 1.6em;"}
+			Need to think it over?
+		%p
+			My lists
+		%p
+			= link_to 'Download', schools_path(format: :csv)
+		- if params[:action] == 'zone_schools'
+			%p
+				= link_to 'Print', print_zone_schools_path, title: "Print"
+		- else
+			%p
+				= link_to 'Print', print_home_schools_path, title="Print"
+
+		- if current_user.blank?
+			%p
+				= link_to 'Save Your Lists', "#", id: "footer_save_button", title: "Save"
+
+		%br/
+
+		%p
+			Account
+		- if current_user.present?
+			= link_to 'Logout', destroy_user_session_path, method: :delete
+		- else
+			%p
+				<a href="#" id="footer_sign_up_button" title="Sign Up">Sign Up
+			%p
+				<a href="#" id="footer_login_button" title="Log In">Log In
+
+	.clr
+
+
+:javascript
+	$(document).ready(function(){
+
+		$('#footer_login_button').click(function() {
+			$('#dialog_box').show();
+			$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/login')}");
+			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+			return false;
+		});
+		$('#footer_sign_up_button').click(function() {
+			$('#dialog_box').show();
+			$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/signup')}");
+			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+			return false;
+		});
+		$('#footer_save_button').click(function() {
+			$('#dialog_box').show();
+			$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/signup')}");
+			$('.txt_join_list').show();
+			$('p.txt_login').hide();
+			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+			return false;
+		});
+
+	});

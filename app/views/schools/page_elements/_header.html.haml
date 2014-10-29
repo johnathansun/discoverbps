@@ -1,35 +1,28 @@
-<div class="account_tab">
-	<section class="content_wrap">
-		<%= render partial: 'layouts/account_tab' %>
-	</section>
+.account_tab
+	%section.content_wrap
+		= render partial: 'layouts/account_tab'
 
 	<!-- <div id="google_translate_element" class="desktop_tablet">
 	</div> -->
 
-	<script type="text/javascript">
+	:javascript
 		function googleTranslateElementInit() {
 			new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
 		}
-	</script>
 	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-</div>
 
-<div class="wrap timeline_menu">
-	<!--  navigation menu desktop and mobile -->
-	<section class="logo_header">
-		<nav class="menu_nav">
-			<span id="menu_nav_mobile" aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-25"></span>
-		</nav>
-		<div class="logo_discover" >
+
+.wrap.timeline_menu
+	%section.logo_header
+		%nav.menu_nav
+			%span{id: 'menu_nav_mobile', aria: {hidden: "true"}, class: "icon-DBPS-Dev-Assets-SRG-25"}
+
+		.logo_discover
 			<a href="/" class="no-decoration"><span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-01"></span></a>
-		</div>
-	</section>
-</div>
 
-<div class="clr"></div>
+.clr
 
-<!-- script for timeline and registration -->
-<script>
+:javascript
 
 	var is_open_menu_mobile= false;
 
@@ -41,7 +34,7 @@
 
 			$("#menu_items").animate({
 				height: "0"
-			  }, 200, function() {
+				}, 200, function() {
 				// Animation complete.
 				$(this).css("display", "none");
 				$(".menu_nav").width("31px");
@@ -59,7 +52,7 @@
 
 			$("#menu_items").animate({
 				height: autoHeight
-			  }, 200, function() {
+				}, 200, function() {
 				$('#menu_items').css('height', 'auto');
 				$("#menu_nav_mobile").removeClass( "icon-DBPS-Dev-Assets-SRG-25" ).addClass( " icon-DBPS-Dev-Assets-SRG-07" );
 			});
@@ -72,5 +65,3 @@
 		$("#menu_nav_mobile").removeClass( "icon-DBPS-Dev-Assets-SRG-07" ).addClass( " icon-DBPS-Dev-Assets-SRG-25" );
 		is_open_menu_mobile= false;
 	}
-
-</script>

@@ -1,0 +1,30 @@
+- if student == current_student
+	%div{class: "name_info active", id: "student_#{student.id}_tab"}
+		%span.name
+			= truncate(student.first_name, length: 12)
+			%span{aria: {hidden: true}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
+
+		%span.grade
+			Grade&nbsp;#{student.grade_level}
+
+	:javascript
+		$( document ).ready(function() {
+			$("#student_#{student.id}_tab").click(function(){
+				$('#dialog_box').html("#{escape_javascript(render partial: 'students/address/address_search', locals: {student: student})}");
+				$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+				$('#dialog_box').show();
+				return false;
+			});
+		});
+
+- else
+	%div{id: "student_<%= student.id %>_tab", class: "name_info"}
+		%span.name
+			= truncate(student.first_name, length: 12)
+			%span{aria: {hidden: true}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
+
+		%span.grade
+			Grade&nbsp;#{student.grade_level}
+
+		= link_to schools_path(student: student.id) do
+			%span.hyperspan

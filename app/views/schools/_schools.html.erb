@@ -1,5 +1,0 @@
-<% schools.each_with_index do |student_school, i| %>
-  <li id="<%= current_student.id %>_<%= student_school.school.bps_id %>" class="list_row <%= list_id %>" style="display: <%= display_style %>;">
-    <%= render partial: 'schools/school', locals: {student_school: student_school, school: student_school.school, index: i} %>
-  </li>
-<% end %>

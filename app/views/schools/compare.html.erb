@@ -1,15 +1,15 @@
-<%= render partial: 'schools/header' %>
+<%= render partial: 'schools/page_elements/header' %>
 
 <div class="wrap">
-	<%= render partial: 'schools/student_tabs' %>
+	<%= render partial: 'schools/page_elements/student_tabs' %>
 </div>
 
 <div class="wrap global_map">
-	<%= render partial: 'schools/map', locals: {students_list: current_user_students, school: nil, map_controls: true, height: 'resize', width: '100%'} %>
+	<%= render partial: 'schools/page_elements/map', locals: {students_list: current_user_students, school: nil, map_controls: true, height: 'resize', width: '100%'} %>
 </div>
 
 <div class="wrap">
-	<%= render partial: 'schools/school_list_tabs' %>
+	<%= render partial: 'schools/page_elements/school_list_tabs' %>
 </div>
 
 <div class="wrap compare_list" id="compare_list">
@@ -78,6 +78,6 @@
 		</div>
 	</div>
 
-	<%= render partial: 'schools/footer' %>
+	<%= render partial: 'schools/page_elements/footer' %>
 
 </div>

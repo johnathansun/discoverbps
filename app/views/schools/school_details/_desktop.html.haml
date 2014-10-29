@@ -1,0 +1,219 @@
+- if school.api_photos.present? && school.api_photos.try(:[], 0).present?
+	.school_photos.photos
+		.principal
+			.glass
+				%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-29"}
+			= image_tag(school.api_photos.try(:[], 0).try(:[], :url), id: "#{school.bps_id}_photo_1"}
+
+			:javascript
+				$("##{school.bps_id}_photo_1").click(function(){
+			  	$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 0})}");
+			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+			  	$('#dialog_box').show();
+			  	return false;
+				});
+
+		- if school.api_photos.try(:[], 1).present?
+			%div{id: "#{school.bps_id}_photo_2", class: "second small"}
+				= image_tag(school.api_photos[1].try(:[], :url))
+
+			:javascript
+				$("##{school.bps_id}_photo_2").click(function(){
+			  	$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 1})}");
+			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+			  	$('#dialog_box').show();
+			  	return false;
+				});
+
+		- if school.api_photos.try(:[], 2).present?
+			%div{id: "#{school.bps_id}_photo_3", class: "third small"}
+				= image_tag(school.api_photos[2].try(:[], :url))
+
+			:javascript
+				$("##{school.bps_id}_photo_3").click(function(){
+			  	$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 2})}");
+			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+			  	$('#dialog_box').show();
+			  	return false;
+				});
+
+		- if school.api_photos.try(:[], 3).present?
+			%div{id: "#{school.bps_id}_photo_4", class: "fourth small last"}
+				= image_tag(school.api_photos[3].try(:[], :url))
+
+			:javascript
+				$("##{school.bps_id}_photo_4").click(function(){
+			  	$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 3})}");
+			  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+			  	$('#dialog_box').show();
+			  	return false;
+				});
+
+		.clr
+
+	.school_description
+		= school.api_description.try(:[], :schoolspecial)
+
+	.clr
+- else
+	.school_description full
+		= school.api_description.try(:[], :schoolspecial)
+
+.separation_line
+%p#about_title.font_17
+	About #{school.name}
+
+.school_info_column
+	%p
+		= school.full_address
+		%br/
+		- if school.api_basic_info.try(:[], :SchLink).present?
+			= link_to 'School Website', 'http://bostonpublicschools.org/Page/628', class: "text_B0", title: "School Website", target: "_blank"
+			%br/
+
+		= mail_to school.api_basic_info.try(:[], :schemail), school.api_basic_info.try(:[], :schemail), class: "text_B0", title: "Email Address"
+
+	%p.title
+		%span{aria: {hidden: true}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"}
+			= raw student_school.distance
+			mi from home
+	%p.descrip
+		%span{aria: {hidden: 'true'}, class: "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
+			= raw student_school.walk_time
+			%span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-18"}
+			%br/
+		%span{aria: {hidden: 'true'}, class: "icon_petit icon-DBPS-Dev-Assets-SRG-17"}
+			= raw student_school.drive_time
+			%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-18"}
+
+	%p.title
+		%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"}
+		School hours
+
+	%p.descrip
+		= school.api_hours.try(:[], :schhours1)
+
+	- if school.api_basic_info.try(:[], :BeforeSchPrograms).present? || school.api_basic_info.try(:[], :AfterSchPrograms).present?
+		%p.title
+			%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
+			Surround care
+
+		%p.descrip
+			- if school.api_basic_info.try(:[], :BeforeSchPrograms).present?
+				%span.text_G1
+					Before:
+				= school.api_basic_info.try(:[], :BeforeSchPrograms)
+				%br/
+				%br/
+
+			- if school.api_basic_info.try(:[], :AfterSchPrograms).present?
+				%span.text_G1
+					After:
+				= school.api_basic_info.try(:[], :AfterSchPrograms)
+
+	%p.desktop_tablet
+		= link_to print_school_path(school.slug), title: 'Print Details', class: 'text_B0' do
+			%span{aria: {hidden: 'true'}, class: "font_20 icon-DBPS-Dev-Assets-SRG-28"}
+			Print Details
+
+	.clr
+
+.desktop
+	.school_features_column
+		.box
+			%p.title
+				%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
+					School Type
+			%p.descrip
+				= school.api_basic_info.try(:[], :SchoolType)
+
+		.box
+			%p.title
+  			%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"}
+					Grades Offered
+			%p.descrip
+				= grade_levels_helper(school.grade_levels)
+
+		.box
+			%p.title
+			  %span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
+					Enrollment
+			%p.descrip
+				= school.api_basic_info.try(:[], :SchSize)
+
+		.box
+			%p.title
+			  %span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"}
+					Eligibility
+			%p.descrip
+				= student_school.eligibility
+
+		.box
+			%p.title
+			  %span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"}
+					Special Application
+			%p.descrip
+				= special_application_helper(school.api_description.try(:[], :isspecialappprocedures))
+
+		.box
+			%p.title
+			  %span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"}
+					Advanced Work Class (AWC)
+			%p.descrip
+				= awc_helper(school.api_basic_info.try(:[], :IsAWC))
+
+		.box
+			%p.title
+			  %span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
+					MCAS Tier
+			%p.descrip
+				= school_tier_helper(student_school.tier)
+
+		.box
+			%p.title
+			  %span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
+					Uniform Policy
+			- if school.api_description.try(:[], :uniformpolicydesc).present?
+				%p.descrip
+					= school.api_description.try(:[], :uniformpolicydesc)
+			- else
+				%p.descrip
+					= school.api_description.try(:[], :uniformpolicy)
+
+	.school_features_column
+		.box
+			%p.title
+  			%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"}
+					School Focus
+			%p.descrip
+				= school.api_description.try(:[], :schfocus)
+
+		.box
+			%p.title
+				%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
+					Health & Wellness
+			%p.descrip
+				= school.api_basic_info.try(:[], :ishasfulltimenurse) == 'True' ? 'Full-Time Nurse' : ''
+
+		.box
+			%p.title
+			  %span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
+					Community Partners
+			%p.descrip
+				= partners_list_helper(school.api_partners)
+
+	.school_features_column
+		.box
+			%p.title
+			  %span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
+					Facility Features
+			%p.descrip
+				= facilities_list_helper(school.api_facilities)
+
+		- if UPPER_GRADES.include?(current_student.grade_level)
+			.box
+				%p.title
+				  %span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
+						Sports
+				%p.descrip
+					= sports_list_helper(school.api_sports)

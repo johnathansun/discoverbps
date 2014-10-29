@@ -1,13 +1,13 @@
-<%= render partial: 'schools/header' %>
+<%= render partial: 'schools/page_elements/header' %>
 
 <div class="wrap">
-  <%= render partial: 'schools/student_tabs' %>
+  <%= render partial: 'schools/page_elements/student_tabs' %>
 </div>
 
 <div class="wrap">
 
   <div class="result">
-    <%= render partial: 'schools/preference_panel' %>
+    <%= render partial: 'schools/page_elements/preference_panel' %>
 
     <!-- preferences list-->
     <div id="school_list">
@@ -55,17 +55,25 @@
           <!-- END school list header -->
 
           <ul id="sortable">
-            <% if @home_schools.present? && (@zone_schools.present? || @ell_schools.present? || @sped_schools.present? )%>
-              <%= render partial: 'schools/schools', locals: {schools: @home_schools, list_id: 'home_school', display_style: ''} %>
+            <% @home_schools.each_with_index do |student_school, i| %>
+              <li id="<%= current_student.id %>_<%= student_school.school.bps_id %>" class="list_row home_school">
+                <%= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i} %>
+              </li>
             <% end %>
-            <% if @zone_schools.present? %>
-              <%= render partial: 'schools/schools', locals: {schools: @zone_schools, list_id: 'zone_school', display_style: 'none'} %>
+            <% @zone_schools.each_with_index do |student_school, i| %>
+              <li id="<%= current_student.id %>_<%= student_school.school.bps_id %>" class="list_row zone_school" style="display: none;">
+                <%= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i} %>
+              </li>
             <% end %>
-            <% if @zone_schools.present? %>
-              <%= render partial: 'schools/schools', locals: {schools: @ell_schools, list_id: 'ell_school', display_style: 'none'} %>
+            <% @ell_schools.each_with_index do |student_school, i| %>
+              <li id="<%= current_student.id %>_<%= student_school.school.bps_id %>" class="list_row ell_school" style="display: none;">
+                <%= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i} %>
+              </li>
             <% end %>
-            <% if @zone_schools.present? %>
-              <%= render partial: 'schools/schools', locals: {schools: @sped_schools, list_id: 'sped_school', display_style: 'none'} %>
+            <% @sped_schools.each_with_index do |student_school, i| %>
+              <li id="<%= current_student.id %>_<%= student_school.school.bps_id %>" class="list_row sped_school" style="display: none;">
+                <%= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i} %>
+              </li>
             <% end %>
           </ul>
 
@@ -76,7 +84,7 @@
       </div>
       <!-- END  listing of schools  -->
 
-      <%= render partial: 'schools/footer' %>
+      <%= render partial: 'schools/page_elements/footer' %>
 
     </div>
 
