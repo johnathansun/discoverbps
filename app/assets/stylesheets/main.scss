@@ -1,0 +1,19 @@
+.main-begin { display: none; }
+
+@import '../partials/shared/variables';
+@import '../partials/shared/mixins';
+
+@import '../partials/global/base';
+@import '../partials/global/typography';
+@import '../partials/global/forms';
+@import '../partials/global/fonts';
+
+@import '../partials/layout-models';
+@import '../partials/ie';
+
+@import '../partials/media-queries/print';
+@import '../partials/media-queries/large';
+@import '../partials/media-queries/medium';
+@import '../partials/media-queries/small';
+
+.main-end { display: none; }

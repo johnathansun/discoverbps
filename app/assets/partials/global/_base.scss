@@ -1,0 +1,262 @@
+/* =============================================================================
+   HTML5 display definitions
+   ========================================================================== */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  display: block;
+}
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+audio:not([controls]) {
+  display: none;
+}
+[hidden] {
+  display: none;
+}
+/* =============================================================================
+   Base
+   ========================================================================== */
+/*
+ * 1. Correct text resizing oddly in IE6/7 when body font-size is set using em units
+ * 2. Force vertical scrollbar in non-IE
+ * 3. Prevent iOS text size adjust on device orientation change, without disabling user zoom: h5bp.com/g
+ */
+
+* {
+  margin: 0;
+}
+html {
+  position: relative;
+  min-height: 100%;
+  height: 100%;
+  font-size: 100%;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+}
+body,
+button,
+input,
+select,
+textarea {
+  font-family: sans-serif;
+  color: #222;
+}
+/* =============================================================================
+   Links
+   ========================================================================== */
+a {
+  color: #00e;
+  transition: all 250ms ease;
+}
+a:visited {
+  color: #551a8b;
+}
+a:hover {
+  color: #06e;
+}
+a:focus {
+  outline: thin dotted;
+}
+/* Improve readability when focused and hovered in all browsers: h5bp.com/h */
+a:hover,
+a:active {
+  outline: 0;
+}
+
+/* =============================================================================
+   Lists
+   ========================================================================== */
+ul,
+ol {
+  /* margin: 1em 0; padding: 0 0 0 40px; */
+  padding: 0;
+}
+dd {
+  margin: 0 0 0 40px;
+}
+nav ul,
+nav ol {
+  list-style: none;
+  list-style-image: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* =============================================================================
+   Embedded content
+   ========================================================================== */
+/*
+ * 1. Improve image quality when scaled in IE7: h5bp.com/d
+ * 2. Remove the gap between images and borders on image containers: h5bp.com/e
+ */
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  /*vertical-align: middle; */
+}
+/*
+ * Correct overflow not hidden in IE9
+ */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+
+/* !BASE STYLES ---------------------------------------------------------------------
+----------------------------------------------- */
+body {
+  font-size: 14px;
+  font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+  width: 100%;
+  color: #565656;
+  font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+  background: #0077cf;
+  -webkit-font-smoothing: antialiased;
+}
+input {
+  -webkit-font-smoothing: antialiased;
+}
+h1 {
+  -webkit-font-smoothing: antialiased;
+}
+h2 {
+  -webkit-font-smoothing: antialiased;
+}
+h3 {
+  -webkit-font-smoothing: antialiased;
+}
+h4 {
+  -webkit-font-smoothing: antialiased;
+}
+sup {
+  font-size: .475em;
+  line-height: 0;
+}
+.menu,
+nav {
+  list-style: none;
+}
+.menu a,
+nav a {
+  text-decoration: none;
+  display: block;
+}
+p,
+ul,
+ol,
+dl,
+table {
+  color: inherit;
+  line-height: 1.5em;
+  letter-spacing: normal;
+  font-weight: 300;
+  margin: 0;
+  margin-bottom: 1.5em;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+a,
+a:hover,
+a:visited {
+  color: inherit;
+}
+/* !STYLE BASE
+---------------------------------------------- */
+/* ----------------------------------------------
+   GLOBAL STYLES
+---------------------------------------------- */
+/*::-moz-selection {
+  background: #000;
+  color: #fff;
+  text-shadow: none;
+}
+::selection {
+  background: #000;
+  color: #fff;
+  text-shadow: none;
+}*/
+body {
+  -moz-font-feature-settings: "liga=1, dlig=1";
+  -ms-font-feature-settings: "liga", "dlig";
+  -o-font-feature-settings: "liga", "dlig";
+  -webkit-font-feature-settings: "liga", "dlig";
+  font-feature-settings: "liga", "dlig";
+}
+img {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+/*a,
+a:before,
+a:after {
+  -webkit-transition: all ease-in-out 0.2s;
+  -moz-transition: all ease-in-out 0.2s;
+  -o-transition: all ease-in-out 0.2s;
+  transition: all ease-in-out 0.2s;
+}*/
+
+.clr {
+  clear: both;
+}
+
+/* =============================================================================
+   Tables
+   ========================================================================== */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td {
+  vertical-align: top;
+}
+
+
+/* =============================================================================
+   Layout
+   ========================================================================== */
+.clearfix {
+	@include clearfix;
+}
+
+.alignleft {
+	float: left;
+}
+
+.alignleft_half {
+	float: left;
+	width: 45%;
+	margin-right: 5%;
+}
+
+
+
+
+
+
+

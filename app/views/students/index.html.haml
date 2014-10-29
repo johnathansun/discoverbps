@@ -1,64 +1,118 @@
 .search
+	.logo.discover
+		%span{:aria => {hidden: 'true'}, :class => 'icon-DBPS-Dev-Assets-SRG-01'}
 	.search_header
 		.title_bloc
 			%h1
 				Welcome to Boston Public Schools Registration
 			= image_tag('logo_beta.png', class: 'logo_beta', alt: 'beta')
 
-		%p.yellow-buttons
-			= auto_link(TextSnippet.find('home-intro').text)
-
 	.search_section_content
 		%section.search_section.first
 			.content_left
-				.logo.discover
-					%span{aria: {hidden: 'true'}, class: 'icon-DBPS-Dev-Assets-SRG-01'}
 				.text
-					%p.yellow-buttons
-						= auto_link(TextSnippet.find('home-discover-intro').text)
+					%p.home_intro.yellow-buttons.light_blue.big
+						= auto_link(TextSnippet.find('home-intro').text)
 
 					- if current_user_students.present?
-						%p.K
-							Please select from your previous searches:
-						%ul.horizontal_list
+						%p.W
+							View your lists:
+						%ul.user_lists
 							- for student in current_user_students
 								%li
-									= link_to student.tab_name, schools_path(student: student.id), class: 'orange_button previous_student_search_button'
+									-#= link_to student.tab_name, schools_path(student: student.id), class: 'orange_button previous_student_search_button'
+									%a{:href => schools_path(student: student.id), :class => 'previous_student_search_button' }
+										%span.name.big.dark_blue= student.tab_name
+										%span.grade.small.dark_blue
+											Grade
+											= student.grade_level
+										%span.schools.blue
+											= student.school_ids.count 
+											schools, 
+											= student.preferences_count
+											favorites
+									.steps
+										.step.first.complete
+											.bar
+											.label= 'STEP 1 - SEARCH'
+										.step.complete
+											.bar
+											.label= 'STEP 2 - LEARN'
+										.step.current
+											.bar
+											.label= 'STEP 3 - COMPARE & RANK'
+										.step.last
+											.bar
+											.label= 'STEP 4 - GET READY'
+											
+											
+											
+
 							%li
+								%a#start_new_search.button.orange{:href => '#'}
+									Start a new search									
 								= button_to 'Clear Searches', {controller: 'students', action: 'delete_all', student_ids: current_user_students.collect {|x| x.id}}, method: :delete, id: 'delete_students_button', class: 'antialiased_button', confirm: 'Are you sure you want to clear all of your previous searches?'
+								
 
 						.clr
 						- if flash[:alert].present?
 							%p{style: 'color: red;'}
 								= flash[:alert]
 						- else
-							%p.K
+							-# %p.W
 								%br/
-								Or search for a new student using the form below (grade level is for the entering grade; name is optional):
+								Or search for a new student using the form below
+								%br/
+								%span.small
+									(grade level is for the entering grade; name is optional):
+										
+						%div.new_search_form_wrap.hidden
+							%p New Search
+							= form_tag students_path, method: :post, remote: true do
+								= render partial: 'students/search_form', locals: {sibling_search: true}
+									
+						-# Script for New Search button
+						:javascript
+							$(document).ready(function(){
+								$('#start_new_search').click(function(e){
+									e.preventDefault();
+									$('.new_search_form_wrap').removeClass('hidden');
+									$('#first_name').focus();
+								});
+							});
+
 
 					- else
+						%p.yellow-buttons
+							= auto_link(TextSnippet.find('home-discover-intro').text)
+
 						- if flash[:alert].present?
 							%p{style: 'color: red;'}
 								= flash[:alert]
-						- else
-							%p.K
-								To get started, enter your home address and your student's name and grade level in the form below (name is optional):
 
-					%div
-						= form_tag students_path, method: :post, remote: true do
-							= render partial: 'students/search_form', locals: {sibling_search: true}
+						%div.new_search_form_wrap
+							= form_tag students_path, method: :post, remote: true do
+								= render partial: 'students/search_form', locals: {sibling_search: true}
 
 			= render partial: 'students/timeline_vertical'
 
 		%section.search_section.second
 			.content_left
 				.logo.register
-					%span{aria: {hidden: 'true'}, class: 'icon-DBPS-Dev-Assets-SRG-02'}
+					%span{:aria => {hidden: 'true'}, :class => 'icon-DBPS-Dev-Assets-SRG-02'}
 
-				.text
+				.text.clearfix
 					%p.yellow-buttons
 						= auto_link(TextSnippet.find('home-register-intro').text)
-					= link_to 'Learn more', 'http://www.bostonpublicschools.org/register', title: 'Learn more', class: 'K', style: 'margin-bottom: 0;', target: '_blank'
+						= link_to 'Learn more', 'http://www.bostonpublicschools.org/register', title: 'Learn more', class: 'u', style: 'margin-bottom: 0;', target: '_blank'
+					.alignleft_half
+						%h2 Visit Schools:
+						= link_to 'Learn about school preview opportunities', '#', class: 'u', target: '_blank'
+					.alignleft_half
+						%h2 Register:
+						= link_to 'Collect the required documents', '#', class: 'u', target: '_blank'
+						= link_to 'Plan a visit to a welcome center', '#', class: 'u', target: '_blank'
+						
 
 			.content_right
 				%span.event{style: 'margin-bottom: 39px;'}
@@ -85,9 +139,9 @@
 
 		%section.search_section.third
 			.content_left
-				.logo.succeed
-					%span{aria: {hidden: 'true'}, class: 'icon-DBPS-Dev-Assets-SRG-03'}
-				.text
+				-#.logo.succeed
+					%span{:aria => {hidden: 'true'}, :class => 'icon-DBPS-Dev-Assets-SRG-03'}
+				-#.text
 					%p.yellow-buttons
 					= auto_link(TextSnippet.find('home-succeed-intro').text)
 					= link_to 'Explore', 'http://www.bostonpublicschools.org/transitionsupport', title: 'Explore', style: 'margin-bottom:0;', target: '_blank'
