@@ -11,8 +11,9 @@
  *= require_self
  *= require main
  *= require_tree .
+ *= require_tree ./partials
  */
- 
+
  .application-begin {
 	 display: none;
  }
