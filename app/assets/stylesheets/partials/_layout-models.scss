@@ -1601,6 +1601,7 @@ School List
 .wrap #school_list .getting_there.open .glass_open {
   display: none;
 }
+/*
 .wrap #school_list .footer_list {
   padding: 37px 60px 37px 37px;
   background: #dfdfdf;
@@ -1633,17 +1634,17 @@ School List
 .wrap #school_list .footer_list .footer_right p {
   margin-bottom: .6em;
 }
-.wrap#compare_list {
-  background: #ebebeb;
-  /*display: none;*/
-
-}
+*/
 
 
 
 /* --------------------------------------------------------- 
 Compare List
 ------------------------------------------------------------ */
+.wrap#compare_list {
+  background: #ebebeb;
+  /*display: none;*/
+}
 .wrap#compare_list .compare_list_content {
   overflow: auto;
 }
@@ -1748,44 +1749,69 @@ Compare List
 
 
 /* --------------------------------------------------------- 
-Footer List
+Footer
 ------------------------------------------------------------ */
+.footer_notice {
+	margin: 0 0 30px 0;
+	width: 66.666%;
+}
+
 .wrap .footer_list {
-  padding: 37px;
+  padding: 30px 20px;
   background: #dfdfdf;
-  width: 760px;
-  font-size: 15px;
+  font-size: 13px;
   line-height: 20px;
-  margin-left: 0;
+  color: $med_gray;
+  margin: 0 40px 0 0;
+
+	p { 
+		margin-bottom: .5em; 
+	}
+	a {
+	  color: $blue;
+	  text-decoration: none;
+		&:hover { text-decoration: underline; }
+	}
+	
+	.footer_left,
+	.footer_center,
+	.footer_right {
+		float: left;
+		width: 33.333%;
+		box-sizing: border-box;
+	}
+	.footer_left {
+	  padding: 0 8% 0 0;
+	}
+	.footer_center {
+		border-left: 1px solid #FFF;
+		padding: 0 5%;
+		
+		.icon {
+			display: block;
+			font-size: 37px;
+			margin-bottom: 5px;
+		}
+	}
+	.footer_right {
+	  border-left: 1px solid #FFF;
+	  padding-left: 5%;
+		p {
+		  margin-bottom: .5em;
+		}
+	}
 }
-.wrap .footer_list p {
-  margin-bottom: .9em;
-}
-.wrap .footer_list a {
-  color: #0077cf;
-  text-decoration: none;
-}
-.wrap .footer_list a:hover {
-  text-decoration: underline;
-}
-.wrap .footer_list .footer_left {
-  width: 490px;
-  float: left;
-  color: #969696;
-}
-.wrap .footer_list .footer_right {
-  width: 159px;
-  border-left: 1px solid #ffffff;
-  float: right;
-  padding-left: 20px;
-}
-.wrap .footer_list .footer_right p {
-  margin-bottom: .6em;
-}
+
+
+/* --------------------------------------------------------- 
+Wrap Result
+------------------------------------------------------------ */
 .wrap .result {
   overflow: hidden;
   background: #ebebeb;
 }
+
+
 
 /* --------------------------------------------------------- 
 Menu Compare Name
