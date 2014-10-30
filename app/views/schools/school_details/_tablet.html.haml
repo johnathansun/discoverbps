@@ -1,67 +1,102 @@
-<div class="tablet">
-	<div class="school_features_column">
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"></span> School Type</p>
-			<p class="descrip"><%= school.api_basic_info.try(:[], :SchoolType) %></p>
-		</div>
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"></span> Grades Offered</p>
-			<p class="descrip"><%= grade_levels_helper(school.grade_levels) %></p>
-		</div>
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"></span> Enrollment</p>
-			<p class="descrip"><%= school.api_basic_info.try(:[], :SchSize) %></p>
-		</div>
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"></span> Eligibility</p>
-			<p class="descrip"><%= student_school.eligibility %></p>
-		</div>
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"></span> Special Application</p>
-			<p class="descrip"><%= special_application_helper(school.api_description.try(:[], :isspecialappprocedures)) %></p>
-		</div>
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"></span> Advanced Work Class (AWC)</p>
-			<p class="descrip"><%= awc_helper(school.api_basic_info.try(:[], :IsAWC)) %></p>
-		</div>
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"></span> MCAS Tier</p>
-			<p class="descrip"><%= school_tier_helper(student_school.tier) %></p>
-		</div>
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"></span> Uniform Policy</p>
-			<% if school.api_description.try(:[], :uniformpolicydesc).present? %>
-				<p class="descrip"><%= school.api_description.try(:[], :uniformpolicydesc) %></p>
-			<% else %>
-				<p class="descrip"><%= school.api_description.try(:[], :uniformpolicy) %></p>
-			<% end %>
-		</div>
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"></span> Health & Wellness</p>
-			<p class="descrip"><%= school.api_basic_info.try(:[], :ishasfulltimenurse) == 'True' ? 'Full-Time Nurse' : '' %></p>
-		</div>
-		<div class="clr"></div>
-	</div>
+.tablet
+	.school_features_column
+		.box
+			%p.title
+				%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
+					School Type
+			%p.descrip
+				= school.api_basic_info.try(:[], :SchoolType)
 
-	<div class="school_features_column">
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"></span> School Focus</p>
-			<p class="descrip"><%= school.api_description.try(:[], :schfocus) %></p>
-		</div>
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"></span> Facility Features</p>
-			<p class="descrip"><%= facilities_list_helper(school.api_facilities) %></p>
-		</div>
-		<div class="box">
-			<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"></span> Community Partners</p>
-			<p class="descrip"><%= partners_list_helper(school.api_partners) %></p>
-		</div>
-		<% if UPPER_GRADES.include?(current_student.grade_level) %>
-			<div class="box">
-				<p class="title"><span aria-hidden="true" class="fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"></span> Sports</p>
-				<p class="descrip"><%= sports_list_helper(school.api_sports) %></p>
-			</div>
-		<% end %>
-		<div class="clr"></div>
-	</div>
-</div>
+		.box
+			%p.title
+				%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"}
+					Grades Offered
+			%p.descrip
+				= grade_levels_helper(school.grade_levels)
+
+		.box
+			%p.title
+				%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
+					Enrollment
+			%p.descrip
+				= school.api_basic_info.try(:[], :SchSize)
+
+		.box
+			%p.title
+				%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"}
+					Eligibility
+			%p.descrip
+				= student_school.eligibility
+
+		.box
+			%p.title
+				%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"}
+					Special Application
+			%p.descrip
+				= special_application_helper(school.api_description.try(:[], :isspecialappprocedures))
+
+		.box
+			%p.title
+				%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"}
+					Advanced Work Class (AWC)
+			%p.descrip
+				= awc_helper(school.api_basic_info.try(:[], :IsAWC))
+
+		.box
+			%p.title
+				%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
+					MCAS Tier
+			%p.descrip
+				= school_tier_helper(student_school.tier)
+
+		.box
+			%p.title
+				%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
+					Uniform Policy
+			- if school.api_description.try(:[], :uniformpolicydesc).present?
+				%p.descrip
+					= school.api_description.try(:[], :uniformpolicydesc)
+			- else
+				%p.descrip
+					= school.api_description.try(:[], :uniformpolicy)
+
+		.box
+			%p.title
+				%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
+					Health & Wellness
+			%p.descrip
+				= school.api_basic_info.try(:[], :ishasfulltimenurse) == 'True' ? 'Full-Time Nurse' : ''
+
+		.clr
+
+	.school_features_column
+		.box
+			%p.title
+				%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"}
+					School Focus
+			%p.descrip
+				= school.api_description.try(:[], :schfocus)
+
+		.box
+			%p.title
+				%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
+					Facility Features
+			%p.descrip
+				= facilities_list_helper(school.api_facilities)
+
+		.box
+			%p.title
+				%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
+					Community Partners
+			%p.descrip
+				= partners_list_helper(school.api_partners)
+
+		- if UPPER_GRADES.include?(current_student.grade_level)
+			.box
+				%p.title
+					%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
+						Sports
+				%p.descrip
+					= sports_list_helper(school.api_sports)
+
+		.clr

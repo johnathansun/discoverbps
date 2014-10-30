@@ -2,10 +2,10 @@
 
 	.desktop
 		.no_order.line
-			%span.sortable_row_number middle
+			%span.sortable_row_number.middle
 				= index + 1
 
-	.school_name select line
+	.school_name.select.line
 		%span.middle
 			%span.sortable_school_name
 				= school.name
@@ -15,35 +15,35 @@
 			- if school.api_basic_info.try(:[], :SchoolType).present? && school.api_basic_info.try(:[], :SchoolType) == 'Exam'
 				%span{aria: {hidden: 'true'}, class: "select_icon icon-DBPS-Preferences-Icons-20130930-SRG_exam_school"}
 
-	.box.line getting_there
-		.first_block middle
-			.icon middle
+	.box.line.getting_there
+		.first_block.middle
+			.icon.middle
 				- if student_school.transportation_eligibility == 'Y'
 					%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-15 transportation_icon"}
 				- else
 					%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-14 transportation_icon"}
 
-			%span.middle sortable_distance
+			%span.middle.sortable_distance
 				= spacer_helper(student_school.distance)
-					&nbsp;mi
+				&nbsp;mi
 
-		%div.second_bloc middle
+		.second_bloc.middle
 			%span{aria: {hidden: 'true'}, class: "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
 				= spacer_helper(student_school.walk_time)
 				%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-18"}
 
-		.second_bloc middle last
-			%span{aria: {hidden: 'true'}, class: "icon_petit icon-DBPS-Dev-Assets-SRG-17}
+		.second_bloc.middle.last
+			%span{aria: {hidden: 'true'}, class: "icon_petit icon-DBPS-Dev-Assets-SRG-17"}
 				= spacer_helper(student_school.drive_time)
 				%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-18"}
 
 	.box.line.eligibility
-		.first_block middle
+		.first_block.middle
 			- if params[:action] == 'zone_schools'
-				%span.middle sortable_eligibility"
+				%span.middle.sortable_eligibility
 					Zone
 			- else
-				%span.middle sortable_eligibility
+				%span.middle.sortable_eligibility
 					=raw eligibility_helper(spacer_helper(student_school.eligibility))
 
 		.second_bloc.middle
@@ -52,12 +52,12 @@
 				%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-18"}
 
 		.second_bloc.middle.last
-			%span{aria: {hidden: 'true'}, class: "icon_petit icon-DBPS-Dev-Assets-SRG-17}
+			%span{aria: {hidden: 'true'}, class: "icon_petit icon-DBPS-Dev-Assets-SRG-17"}
 				= spacer_helper(student_school.drive_time)
 				%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-18"}
 
-	.box.line school_hours
-		%span.middle sortable_hours
+	.box.line.school_hours
+		%span.middle.sortable_hours
 			= truncate(school.api_hours.try(:[], :schhours1), length: 18)
 			%br/
 			.max_range
@@ -78,10 +78,10 @@
 					%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-42"}
 						After school
 
-				%span.sortable_surround_care, style: "visibility: hidden;"
+				%span{class: 'sortable_surround_care', style: "visibility: hidden;"}
 					= surround_care_count
 
-	.box.line your_fit_icon
+	.box.line.your_fit_icon
 		%span{id: "#{current_student.id}_#{school.bps_id}_icons", class: "middle"}
 			- tag_counter = 0
 			- student_preference_categories.each_with_index do |category, i|

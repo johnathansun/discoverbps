@@ -1,5 +1,5 @@
 .menu_compare_name
-  %div{class: "f", style="width:100%;"}
+  %div{class: "f", style: "width: 100%;"}
     .name_list
       - current_user_students.each_with_index do |student, i|
         = render partial: 'schools/page_elements/student_tab', locals: {student: student}
