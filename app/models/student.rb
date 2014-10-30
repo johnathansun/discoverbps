@@ -9,6 +9,7 @@ class Student < ActiveRecord::Base
   has_many :zone_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'zone']
   has_many :ell_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'ell']
   has_many :sped_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'sped']
+  has_many :starred_schools, class_name: 'StudentSchool', conditions: ['starred = ?', true]
 
   scope :verified, where(address_verified: true)
 
@@ -62,22 +63,22 @@ class Student < ActiveRecord::Base
   # SAVE SCHOOLS ON CURRENT_STUDENT
 
   def set_home_schools!
-    api_schools = Webservice.home_schools('06', '68051', self.awc_invitation, self.sibling_school_ids).try(:[], :List)
+    api_schools = Webservice.home_schools(self.formatted_grade_level, self.address_id, self.awc_invitation, self.sibling_school_ids).try(:[], :List)
     save_student_schools!(api_schools, 'home')
   end
 
   def set_zone_schools!
-    api_schools = Webservice.zone_schools('07', '68051', self.sibling_school_ids).try(:[], :List)
+    api_schools = Webservice.zone_schools(self.formatted_grade_level, self.address_id, self.sibling_school_ids).try(:[], :List)
     save_student_schools!(api_schools, 'zone')
   end
 
   def set_ell_schools!
-    api_schools = Webservice.ell_schools('06', '68051', self.ell_language)
+    api_schools = Webservice.ell_schools(self.formatted_grade_level, self.address_id, self.ell_language)
     save_student_schools!(api_schools, 'ell')
   end
 
   def set_sped_schools!
-    api_schools = Webservice.sped_schools('06', '68051')
+    api_schools = Webservice.sped_schools(self.formatted_grade_level, self.address_id)
     save_student_schools!(api_schools, 'sped')
   end
 
