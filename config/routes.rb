@@ -26,6 +26,11 @@ DiscoverbpsV2::Application.routes.draw do
     post 'remove_notification', on: :collection
   end
 
+  resources :student_schools do
+    post 'star', on: :member
+    post 'unstar', on: :member
+  end
+
   resources :schools do
     get 'home', on: :collection
     get 'zone_schools', on: :collection

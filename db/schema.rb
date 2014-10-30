@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141027020211) do
+ActiveRecord::Schema.define(:version => 20141030054438) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -131,6 +131,34 @@ ActiveRecord::Schema.define(:version => 20141027020211) do
 
   add_index "schools", ["slug"], :name => "index_schools_on_slug", :unique => true
 
+  create_table "searches", :force => true do |t|
+    t.string   "street_number"
+    t.string   "street_name"
+    t.string   "zipcode"
+    t.string   "iep"
+    t.string   "primary_language"
+    t.text     "session_key"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "sibling_school_name"
+    t.integer  "sibling_school_id"
+    t.string   "student_1_first_name"
+    t.string   "student_1_last_name"
+    t.string   "student_1_grade_level"
+    t.string   "student_2_first_name"
+    t.string   "student_2_last_name"
+    t.string   "student_2_grade_level"
+    t.string   "student_3_first_name"
+    t.string   "student_3_last_name"
+    t.string   "student_3_grade_level"
+    t.string   "student_4_first_name"
+    t.string   "student_4_last_name"
+    t.string   "student_4_grade_level"
+    t.string   "student_5_first_name"
+    t.string   "student_5_last_name"
+    t.string   "student_5_grade_level"
+  end
+
   create_table "stored_searches", :force => true do |t|
     t.text     "json"
     t.datetime "created_at", :null => false
@@ -154,6 +182,7 @@ ActiveRecord::Schema.define(:version => 20141027020211) do
     t.boolean  "exam_school",                :default => false
     t.string   "eligibility"
     t.string   "school_type"
+    t.boolean  "starred",                    :default => false
   end
 
   add_index "student_schools", ["bps_id"], :name => "index_student_schools_on_bps_id"
@@ -193,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20141027020211) do
     t.text     "zone_schools_json"
     t.text     "ell_schools_json"
     t.text     "sped_schools_json"
+    t.integer  "step",                    :default => 0
   end
 
   add_index "students", ["session_id"], :name => "index_students_on_session_id"

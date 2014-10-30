@@ -16,7 +16,7 @@ class Student < ActiveRecord::Base
                     :sibling_school_names, :street_name, :street_number, :neighborhood, :zipcode, :latitude, :longitude,
                     :addressid, :user_id, :preference_ids, :school_ids, :sped_needs, :ell_language, :awc_invitation,
                     :schools_last_updated_at, :x_coordinate, :y_coordinate, :address_verified, :geo_code, :preferences_count,
-                    :home_schools_json, :zone_schools_json, :ell_schools_json, :sped_schools_json
+                    :home_schools_json, :zone_schools_json, :ell_schools_json, :sped_schools_json, :favorite, :step
 
   serialize :sibling_school_names
   serialize :sibling_school_ids

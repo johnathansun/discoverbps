@@ -126,6 +126,22 @@
 			return false;
 		});
 
+		$('.star_unstarred').click(function(){
+			$.ajax({
+				url: '/student_schools/' + $(this).data('studentSchoolId') + '/star',
+				type: 'post',
+				dataType: 'script'
+			});
+		});
+
+		$('.star_starred').click(function(){
+			$.ajax({
+				url: '/student_schools/' + $(this).data('studentSchoolId') + '/unstar',
+				type: 'post',
+				dataType: 'script'
+			});
+		});
+
 		$(function() {
 			$("#sortable").sortable({
 				axis: "y",

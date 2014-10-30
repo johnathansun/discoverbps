@@ -3,7 +3,8 @@
 	.desktop
 		.no_order.line
 			%span.sortable_row_number.middle
-				= index + 1
+				= image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'block' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
+				= image_tag('star_unstarred.png', id: "star_#{student_school.id}_unstarred", class: 'star_unstarred', style: "display: #{student_school.starred? ? 'none' : 'block'}; cursor: pointer;", data: {student_school_id: student_school.id} )
 
 	.school_name.select.line
 		%span.middle
