@@ -1,7 +1,3 @@
-.joel-begin {
-	display: none;
-}
-
 .sticky-footer-wrap {
 	min-height: 100%;
 	height: auto !important;
@@ -12,9 +8,6 @@
 	clear: both;
 	height: 104px;
 }
-
-
-
 a.yellow {
 	color: #ffff00;
 }
@@ -115,11 +108,14 @@ a.student_tab {
 .preference_category_title {
 	margin-bottom: 0.8em !important;
 }
+
+/*
 .school_photos {
 	width: 310px;
 	padding: 19px;
 	float: left;
 }
+
 .school_description {
 	width: 410px;
 	padding: 17px 19px;
@@ -127,9 +123,12 @@ a.student_tab {
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: 15px;
 }
+
 .school_description .full {
 	width: 100%;
 }
+*/
+
 #about_title {
 	padding-left: 19px;
 }
@@ -242,8 +241,10 @@ input, select {
 }
 
 .transportation_icon {
-	color: #565656;
+	color: #999;
+	margin-right: 5px;
 }
+/*
 .school_info_column {
 	float: left;
 	padding-left: 19px;
@@ -254,6 +255,7 @@ input, select {
 	margin-left: 10px;
 	width: 150px;
 }
+*/
 #add_sibling {
   margin-left: 12px;
   cursor: pointer;
@@ -308,8 +310,4 @@ input, select {
 	background-color: #72c900; 
 	padding: 20px; 
 	margin-bottom: 30px;
-}
-
-.joel-end {
-	display: none;
 }

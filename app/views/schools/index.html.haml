@@ -11,35 +11,38 @@
 
 .wrap
 	= link_to compare_schools_path do
-		%span{data: {icon: "&#xe001;"}, class: 'arrow_slide no_mobile'}
+		%span{data: {icon: "&#xe001"}, class: 'arrow_slide no_mobile'}
 
-	.result
+	.result	
 		= render partial: 'schools/page_elements/preference_panel'
 
 		#school_list
+			.note.small
+				This grade level is not guaranteed a home based assignment. As such, if you are a new-to-Boston Public Schools applicant and an assignment from the home-based list below cannot be made, an assignment to a school in the former zone structure may be necessary. Use the Zone-based tab to see those results.
+				%a{href: '#', target: '_blank'}
+					Learn more
+
 			.list_content
-				%div{class: "flexible_content", style: "width:1220px;"}
+				%div{class: "flexible_content"}
 					.menu_list
 						.li_frame
 							#sortable_choice_order_column.arrow.menu_bloc.desktop.no_mobile
+								.column_title
+									Star
 
 							#sortable_school_name_column.menu_bloc.sortable_column
 								.column_title
-									School Name
+									Name
+
+							#sortable_fit_column.menu_bloc.sortable_column
+								.column_title
+									Your Fit
 
 							#getting_there.menu_bloc
 								%div{id: "sortable_distance_column", class: "first_block sortable_column", style: "color: #0077cf;"}
-									%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-up"}
+									%div{:aria => {hidden: 'true'}, :class => "column_arrow icon-DBPS-Dev-Assets-arrow-up"}
 									.column_title
-										Getting There
-
-								.second_block.sortable_column
-									.column_title
-										Walk Time
-
-								.second_block.sortable_column
-									.column_title
-										Drive Time
+										Travel
 
 							#sortable_eligibility_column.menu_bloc.sortable_column
 								.column_title
@@ -47,16 +50,12 @@
 
 							#sortable_hours_column.menu_bloc.sortable_column
 								.column_title
-									School Hours
+									Hours
 
 							- if SURROUND_CARE_GRADES.include?(current_student.grade_level)
 								#sortable_surround_care_column.menu_bloc.sortable_column
 									.column_title
 										Surround Care
-
-							#sortable_fit_column.menu_bloc.sortable_column
-								.column_title
-									Your Fit
 
 							.clr
 
@@ -147,9 +146,9 @@
 				axis: "y",
 				scroll: true,
 				update: function(){
-					$('#sortable li').each(function(){
+					/*$('#sortable li').each(function(){
 						$(this).find('.sortable_row_number').html($(this).index() + 1);
-					});
+					});*/
 					$.ajax({
 						url: '/schools/sort',
 						type: 'post',
@@ -161,7 +160,7 @@
 			$("#sortable").disableSelection();
 		});
 
-		var choice_order_ascending = false;
+		/*var choice_order_ascending = false;
 		$("#sortable_choice_order_column").click(function(){
 			$('.column_arrow').hide();
 			$('.sortable_column').css("color", "#565656")
@@ -175,7 +174,7 @@
 				$('#sortable_choice_order_column').html('<div aria-hidden="true" id="choice_order_arrow" class="icon-DBPS-Dev-Assets-arrow-up"></div>');
 				choice_order_ascending = true;
 			}
-		});
+		});*/
 
 		var school_name_ascending = false;
 		$("#sortable_school_name_column").click(function(){

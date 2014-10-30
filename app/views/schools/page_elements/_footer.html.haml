@@ -1,39 +1,60 @@
+.footer_notice.dark_gray
+	%p{style: 'margin-bottom: 0.5em;', class: 'big'}
+		Notice:
+	%p
+		= auto_link(TextSnippet.find('footer-intro').text)
+
 .footer_list
+
 	.footer_left
-		%p{style: 'color: #000; margin-bottom: 1em; font-size: 1.2em;'}
-			Notice
-		%p
-			= auto_link(TextSnippet.find('footer-intro').text)
+		%h2{style: 'margin-bottom: 1em;', class: 'dark_gray'}
+			Next Steps:
 
-		%p{style: 'color: #000; margin-bottom: 1em; font-size: 1.2em;'}
-			Next Steps
 		%p
-			You can learn more about the School Assignment process by visiting
-			= link_to 'www.bostonpublicschools.org/assignment', 'http://www.bostonpublicschools.org/assignment', title: 'Learn more about Home-Based Eligibility', target: '_blank'
-			or by watching a short video on &nbsp;
-			= link_to 'YouTube', 'http://www.youtube.com/watch?v=c13n5e-LJG4&feature=youtu.be', title: "What's the Home-Based School Choice Plan?", target: "_blank"
+			%span.big.dark_gray Visit Schools:
+			%br/
+			Visiting is the best way to learn if a school is a good fit for your child.
+			
+		%p
+			Check out
+			= link_to 'Showcase IN Our Schools on November 15', 'http://www.bostonpublicschools.org/Page/652', title: 'Showcase', target: "_blank"
+				
+		%p
+			View
+			= link_to 'School Preview Days for Grades K-8', 'http://www.bostonpublicschools.org/cms/lib07/MA01906464/Centricity/Domain/29/K-8%20pages%20for%2014-15%20FINAL2.pdf', title: 'School Preview Days K-8', target: "_blank"
+		
+		%p
+			View
+			= link_to 'School Preview Days for Grades 9-12', 'http://www.bostonpublicschools.org/cms/lib07/MA01906464/Centricity/Domain/29/HS%20schedule%202014-2015%20FINAL2.pdf', title: 'School Preview Days 9-12', target: "_blank"
+			
+		%p
+			Mark your calendar for the
+			= link_to 'High School Showcase on December 4', '#', title: '', target: "_blank"
 
-		%p{style: "color:#000;"}
-			Visit Schools:
-		%p
-			= link_to 'Learn about school preview opportunities', 'http://www.bostonpublicschools.org/research', target: "_blank", class: 'blue'
 
-		%p{style: "color:#000;"}
-			Pre-Register:
+		
+	.footer_center
+		.logo.register
+			%span{:aria => {hidden: 'true'}, :class => 'icon icon-DBPS-Dev-Assets-SRG-02 dark_gray'}
+				
 		%p
-			= link_to 'Pre-register your student', 'https://apps.mybps.org/ExternalWeb/login.aspx?tabindex=0&tabid=30',	target: "_blank", class: 'blue'
-
-		%p{style: "color:#000;"}
-			Register:
-		%p
-			= link_to 'Collect the required documents', "http://www.bostonpublicschools.org/requireddocs", title: "Collect the required documents", target: "_blank"
+			= link_to 'Collect the required documents', "http://www.bostonpublicschools.org/requireddocs", title: "Collect the required documents", target: "_blank"		
 		%p
 			= link_to 'Plan a visit to a Welcome Center', "http://www.bostonpublicschools.org/Page/653", title: "Plan a visit to a Welcome Center", target: "_blank"
+		%p
+			= link_to 'Pre-Registration (Available mid-December 2014)', 'https://apps.mybps.org/ExternalWeb/login.aspx?tabindex=0&tabid=30',	target: "_blank", class: 'blue'
+		%p
+			You can learn more about the School Assignment process by visiting
+			= link_to 'www.bostonpublic schools.org/assignment', 'http://www.bostonpublicschools.org/assignment', title: 'Learn more about Home-Based Eligibility', target: '_blank'
+			or by watching a short video on &nbsp;
+			= link_to 'YouTube', 'http://www.youtube.com/watch?v=c13n5e-LJG4&feature=youtu.be', title: "What's the Home-Based School Choice Plan?", target: "_blank"
+		
+			
+			
+			
 
 	.footer_right
-		%p{style: "color: #000; margin-bottom: 1.6em;"}
-			Need to think it over?
-		%p
+		%h2{style: 'margin-bottom: 1em;', class: 'dark_gray'}
 			My lists
 		%p
 			= link_to 'Download', schools_path(format: :csv)
@@ -44,18 +65,6 @@
 		- if current_user.blank?
 			%p
 				= link_to 'Save Your Lists', "#", id: "footer_save_button", title: "Save"
-
-		%br/
-
-		%p
-			Account
-		- if current_user.present?
-			= link_to 'Logout', destroy_user_session_path, method: :delete
-		- else
-			%p
-				= link_to 'Sign Up', '#', id: 'footer_sign_up_button', title: 'Sign Up'
-			%p
-				= link_to 'Sign Up', '#', id: 'footer_login_button', title: 'Log In'
 
 	.clr
 
