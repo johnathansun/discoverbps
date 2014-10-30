@@ -7,7 +7,7 @@
 	.clr
 
 .wrap.global_map
-	= render partial: 'schools/map', locals: {students_list: [current_student], school: nil, map_controls: false, width: '100%'}
+	= render partial: 'schools/page_elements/map', locals: {students_list: [current_student], school: nil, map_controls: false, width: '100%'}
 
 	%div{class: "menu_student_info", style: "position: absolute; z-index: 10; margin-top: 273px;"}
 		.name_list
@@ -58,20 +58,20 @@
 						- school = student_school.school
 						%li{id: "list_#{i}", class: "ui-state-default"}
 							.li_frame
-								.school_name select line
+								.school_name.select.line
 									%span.middle
 										= school.name
 										- if current_student.sibling_school_ids.present? && current_student.sibling_school_ids.include?(school.bps_id)
 											%span{aria: {hidden: 'true'}, class: "select_icon icon-DBPS-Dev-Assets-SRG-12"}
 
 								.box.line.getting_there
-									%span.icon middle
+									%span.icon.middle
 										- if student_school.transportation_eligibility == 'Y'
 											%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-15 transportation_icon"}
 										- else
 											%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-14 transportation_icon"}
 
-									%span.middle sortable_distance
+									%span.middle.sortable_distance
 										= spacer_helper(student_school.distance)
 										&nbsp;mi
 

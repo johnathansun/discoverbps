@@ -83,6 +83,10 @@ class SchoolsController < ApplicationController
     end
   end
 
+  def print_home_schools
+    @home_schools = current_student.home_schools
+  end
+
   # POST
   def sort
     key = params.keys.first

@@ -37,12 +37,9 @@
 			My lists
 		%p
 			= link_to 'Download', schools_path(format: :csv)
-		- if params[:action] == 'zone_schools'
-			%p
-				= link_to 'Print', print_zone_schools_schools_path, title: "Print"
-		- else
-			%p
-				= link_to 'Print', print_home_schools_schools_path, title: "Print"
+
+		%p
+			= link_to 'Print', print_home_schools_schools_path, title: "Print"
 
 		- if current_user.blank?
 			%p

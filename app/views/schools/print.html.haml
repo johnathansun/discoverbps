@@ -130,7 +130,7 @@
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
 								MCAS Tier
 						%p.descrip
-							= school_tier_helper(@student_school.tier) 
+							= school_tier_helper(@student_school.tier)
 
 					.box
 						%p.title
@@ -161,16 +161,17 @@
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
 								Community Partners
-						%p.descrip<%= partners_list_helper(@school.api_partners)
-					</div>
+						%p.descrip
+							= partners_list_helper(@school.api_partners)
 
 					.box
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
 								Facility Features
-						%p.descrip<%= facilities_list_helper(@school.api_facilities)
-					</div>
-					<% if UPPER_GRADES.include?(current_student.grade_level) %>
+						%p.descrip
+							= facilities_list_helper(@school.api_facilities)
+
+					- if UPPER_GRADES.include?(current_student.grade_level)
 						.box
 							%p.title
 								%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}

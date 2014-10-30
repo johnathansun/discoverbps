@@ -1,83 +1,65 @@
-<%= render partial: 'schools/page_elements/header' %>
+= render partial: 'schools/page_elements/header'
 
-<div class="wrap">
-	<%= render partial: 'schools/page_elements/student_tabs' %>
-</div>
+.wrap
+	= render partial: 'schools/page_elements/student_tabs'
 
-<div class="wrap global_map">
-	<%= render partial: 'schools/page_elements/map', locals: {students_list: current_user_students, school: nil, map_controls: true, height: 'resize', width: '100%'} %>
-</div>
+.wrap.global_map
+	= render partial: 'schools/page_elements/map', locals: {students_list: current_user_students, school: nil, map_controls: true, height: 'resize', width: '100%'}
 
-<div class="wrap">
-	<%= render partial: 'schools/page_elements/school_list_tabs' %>
-</div>
+.wrap
+	= render partial: 'schools/page_elements/school_list_tabs'
 
-<div class="wrap compare_list" id="compare_list">
-	<%= link_to get_ready_schools_path do %>
-		<span data-icon="&#xe001;" class='arrow_slide no_mobile'></span>
-	<% end %>
-	<div class="colomn_left">
-		<div class="result">
-			<div class="compare_list_numbers">
-				<ul>
-					<% (1..current_user_students.collect {|x| x.home_schools }.max.count).each do |num| %>
-						<li><h2><%= num %></h2></li>
-					<% end %>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<% colors = ['#0077cf', '#61ab00', '#ff9500', '#7400b8', '#00c9bc'] %>
-	<div class="result colomn_right">
-		<div class="compare_list_content">
-			<!-- ajust the div width when studens are add (to create left and right draggable effect of the school list)  -->
-			<div class="flexible_content" style="width:1095px;">
+#compare_list.wrap.compare_list
+	= link_to get_ready_schools_path do
+		%span{data: {icon: "&#xe001;"}, class: 'arrow_slide no_mobile'}
 
-				<% current_user_students.each_with_index do |student, student_i| %>
-					<div class="compare_students_column">
-						<ul id="sortable_<%= student_i %>">
-							<% student.home_schools.rank(:sort_order).each_with_index do |student_school, i| %>
-								<li id="<%= student.id %>_<%= student_school.school.bps_id %>">
-									<div class="li_frame">
-										<div class="school_name draggable line">
-											<% if @matching_school_ids.include?(student_school.bps_id) %>
-												<span class="middle" style="background-color: #ffff00;">
-						            	<h3 style="padding-left: 12px;"><%= student_school.school.name %></h3>
-						          	</span>
-						          <% else %>
-												<span class="middle">
-							        		<h3 style="padding-left: 12px;"><%= student_school.school.name %></h3>
-							          </span>
-						         	<% end %>
-										</div>
-									</div>
-								</li>
-							<% end %>
-						</ul>
-					</div>
-					<script>
+	.colomn_left
+		.result
+			.compare_list_numbers
+				%ul
+					- (1..current_user_students.collect {|x| x.home_schools }.max.count).each do |num|
+						%li
+							%h2
+								= num
+
+	- colors = ['#0077cf', '#61ab00', '#ff9500', '#7400b8', '#00c9bc']
+	.result.colomn_right
+		.compare_list_content
+
+			%div{class: "flexible_content", style: "width:1095px;"}
+
+				- current_user_students.each_with_index do |student, student_i|
+					.compare_students_column
+						%ul{id: "sortable_#{student_i}"}
+							- student.home_schools.rank(:sort_order).each_with_index do |student_school, i|
+								%li{id: "#{student.id}_#{student_school.school.bps_id}"}
+									.li_frame
+										.school_name.draggable.line
+											- if @matching_school_ids.include?(student_school.bps_id)
+												%span{class: "middle", style: "background-color: #ffff00;"}
+													%h3{style: "padding-left: 12px;"}
+														= student_school.school.name
+											- else
+												%span.middle
+													%h3{style: "padding-left: 12px;"}
+														= student_school.school.name
+
+					:javascript
 						$(function() {
-					    $("#sortable_<%= student_i %>").sortable({
-					    	axis: "y",
-					    	scroll: true,
-					    	update: function(){
-						      $.ajax({
-						        url: '/schools/sort',
-						        type: 'post',
-						        data: $('#sortable_<%= student_i %>').sortable('serialize'),
-						        dataType: 'script'
-						      });
-						  	}
-						  });
-					    $("#sortable_<%= student_i %>").disableSelection();
-					  });
-					</script>
-				<% end %>
-				<div class="clr"></div>
-			</div>
-		</div>
-	</div>
+							$("#sortable_#{student_i}").sortable({
+								axis: "y",
+								scroll: true,
+								update: function(){
+									$.ajax({
+										url: '/schools/sort',
+										type: 'post',
+										data: $('#sortable_#{student_i}').sortable('serialize'),
+										dataType: 'script'
+									});
+								}
+							});
+							$("#sortable_#{student_i}").disableSelection();
+						});
+				.clr
 
-	<%= render partial: 'schools/page_elements/footer' %>
-
-</div>
+	= render partial: 'schools/page_elements/footer'
