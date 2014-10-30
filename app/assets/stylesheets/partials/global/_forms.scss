@@ -118,11 +118,11 @@ figure {
 	padding: 8px 12px;
 	text-decoration: none !important;
 	&:hover {
-		background: tint($orange, 20%);
+		background: tint(#FC5B00, 20%);
 	}
 	
 	&.red { background: $red; }
-		&.red:hover { background: tint($red, 20%); }
+		&.red:hover { background: tint(#fc0d1b, 20%); }
 	&.yellow { background: $yellow; }
-		&.yellow:hover { background: tint($yellow, 20%); }
+		&.yellow:hover { background: tint(#FF0, 20%); }
 }

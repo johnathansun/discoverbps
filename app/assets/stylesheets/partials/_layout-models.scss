@@ -132,6 +132,10 @@ Dialog Box
 .dialog_box.dialog_box_dicover .content .btn {
   margin: 40px 0 0 0;
   cursor: pointer;
+  width: 88px;
+	height: auto;
+	padding: 0;
+	border: none;
 }
 .dialog_box.dialog_box_dicover .content .btn.submit {
   display: inline-block;
@@ -248,6 +252,11 @@ Dialog Box
 .dialog_box p {
   font-size: 15px;
   margin: 15px 0;
+}
+.dialog_box .footnote {
+	p {
+		color: $med_gray;
+	}
 }
 .dialog_box .btn_success {
   color: #ffffff;
@@ -1919,7 +1928,7 @@ Wrap Search
   //width: 625px;
   font-size: 15px;
   line-height: 20px;
-  width: 525px;
+  width: 77.777%;
 }
 
 // .search_section.first ///////////////
@@ -1946,6 +1955,7 @@ Wrap Search
 // User Lists /////////////
 .wrap .search .user_lists {
 	margin-bottom: 80px;
+	width: 128.5%;
 	
 	li {
 		margin-bottom: 30px;
@@ -1990,13 +2000,13 @@ Wrap Search
 				.bar { border: none; }
 			}
 			&.complete {
-				.bar { background-color: $yellow; }
-				.label { color: $yellow; }
+				.bar { background-color: $dark_blue; }
+				.label { color: $dark_blue; }
 			}
 			&.current {
 				.bar { 
-					background-color: shade($yellow, 20%); 
-					background-image: url(/assets/progress_bar_yellow.png)
+					background-color: $yellow;
+					//background-image: url(/assets/progress_bar_yellow.png)
 				}
 				.label { color: $yellow; }
 			}
