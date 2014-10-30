@@ -71,8 +71,6 @@ module DiscoverbpsV2
         'application.js'
     ]
 
-    config.sass.preferred_syntax = :sass
-    config.sass.line_comments = false
     config.sass.cache = false
 
     config.middleware.use Rack::Deflater
