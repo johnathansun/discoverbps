@@ -1,109 +1,87 @@
-<%= render partial: 'schools/page_elements/header' %>
+= render partial: 'schools/page_elements/header'
 
-<div class="wrap">
-	<%= render partial: 'schools/page_elements/student_tabs' %>
-</div>
+.wrap
+	= render partial: 'schools/page_elements/student_tabs'
 
-<div class="wrap global_map">
-	<%= render partial: 'schools/page_elements/map', locals: {students_list: [current_student], school: nil, map_controls: true, resize: true, width: '100%'} %>
-</div>
+.wrap global_map
+	= render partial: 'schools/page_elements/map', locals: {students_list: [current_student], school: nil, map_controls: true, resize: true, width: '100%'}
 
-<div class="wrap">
-	<%= render partial: 'schools/page_elements/school_list_tabs' %>
-</div>
+.wrap
+	= render partial: 'schools/page_elements/school_list_tabs'
 
+.wrap
+	= link_to compare_schools_path do
+		%span{data: {icon: "&#xe001;"}, class: 'arrow_slide no_mobile'}
 
-<div class="wrap">
-	<%= link_to compare_schools_path do %>
-		<span data-icon="&#xe001;" class='arrow_slide no_mobile'></span>
-	<% end %>
+	.result
+		= render partial: 'schools/page_elements/preference_panel'
 
-	<div class="result">
-		<%= render partial: 'schools/page_elements/preference_panel' %>
+		#school_list
+			.list_content
+				%div{class: "flexible_content", style: "width:1220px;"}
+					.menu_list
+						.li_frame
+							#sortable_choice_order_column.arrow.menu_bloc.desktop.no_mobile
 
-		<!-- preferences list-->
-		<div id="school_list">
-			<!-- listing of schools  -->
-			<div class="list_content">
-				<div class="flexible_content" style="width:1220px;">
-					<!-- school list header -->
-					<div class="menu_list">
-						<div class="li_frame">
-							<div id="sortable_choice_order_column" class="arrow menu_bloc desktop no_mobile">
-							</div>
-							<div id="sortable_school_name_column" class="menu_bloc sortable_column">
-								<div class="column_title">School Name</div>
-							</div>
+							#sortable_school_name_column.menu_bloc.sortable_column
+								.column_title
+									School Name
 
-							<!-- add class "open" to show "Walk time" and "Drive time"-->
-							<div id="getting_there" class=" menu_bloc ">
-								<div id="sortable_distance_column" class="first_block sortable_column" style="color: #0077cf;">
-									<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Getting There</div>
-								</div>
-								<div class="second_block sortable_column">
-									<div class="column_title">Walk Time</div>
-								</div>
-								<div class="second_block sortable_column">
-									<div class="column_title">Drive Time</div>
-								</div>
-							</div>
-							<div id="sortable_eligibility_column" class="menu_bloc sortable_column">
-								<div class="column_title">Eligibility</div>
-							</div>
-							<div id="sortable_hours_column" class="menu_bloc sortable_column">
-								<div class="column_title">School Hours</div>
-							</div>
-							<% if SURROUND_CARE_GRADES.include?(current_student.grade_level) %>
-								<div id="sortable_surround_care_column" class=" menu_bloc sortable_column">
-									<div class="column_title">Surround Care</div>
-								</div>
-							<% end %>
-							<div id="sortable_fit_column" class=" menu_bloc sortable_column">
-								<div class="column_title">Your Fit</div>
-							</div>
-							<div class="clr"></div>
-						</div>
-					</div>
-					<!-- END school list header -->
+							#getting_there.menu_bloc
+								%div{id: "sortable_distance_column", class: "first_block sortable_column", style: "color: #0077cf;"}
+									%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-up"}
+									.column_title
+										Getting There
 
-					<ul id="sortable">
-						<% @home_schools.each_with_index do |student_school, i| %>
-							<li id="<%= current_student.id %>_<%= student_school.school.bps_id %>" class="list_row home_school">
-								<%= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i} %>
-							</li>
-						<% end %>
-						<% @zone_schools.each_with_index do |student_school, i| %>
-							<li id="<%= current_student.id %>_<%= student_school.school.bps_id %>" class="list_row zone_school" style="display: none;">
-								<%= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i} %>
-							</li>
-						<% end %>
-						<% @ell_schools.each_with_index do |student_school, i| %>
-							<li id="<%= current_student.id %>_<%= student_school.school.bps_id %>" class="list_row ell_school" style="display: none;">
-								<%= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i} %>
-							</li>
-						<% end %>
-						<% @sped_schools.each_with_index do |student_school, i| %>
-							<li id="<%= current_student.id %>_<%= student_school.school.bps_id %>" class="list_row sped_school" style="display: none;">
-								<%= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i} %>
-							</li>
-						<% end %>
-					</ul>
+								.second_block.sortable_column
+									.column_title
+										Walk Time
 
-				<!-- END School listing -->
-				</div>
+								.second_block.sortable_column
+									.column_title
+										Drive Time
+
+							#sortable_eligibility_column.menu_bloc sortable_column
+								.column_title
+									Eligibility
+
+							#sortable_hours_column.menu_bloc.sortable_column
+								.column_title
+									School Hours
+
+							- if SURROUND_CARE_GRADES.include?(current_student.grade_level)
+								#sortable_surround_care_column.menu_bloc.sortable_column
+									.column_title
+										Surround Care
+
+							#sortable_fit_column.menu_bloc.sortable_column
+								.column_title
+									Your Fit
+
+							.clr
+
+					%ul#sortable
+						- @home_schools.each_with_index do |student_school, i|
+							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row home_school"}
+								= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i}
+
+						- @zone_schools.each_with_index do |student_school, i|
+							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row zone_school"}
+								= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i}
+
+						- @ell_schools.each_with_index do |student_school, i|
+							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row ell_school"}
+								= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i}
+
+						- @sped_schools.each_with_index do |student_school, i|
+							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row sped_school"}
+								= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i}
 
 
-			</div>
-			<!-- END  listing of schools  -->
+			= render partial: 'schools/page_elements/footer'
 
-			<%= render partial: 'schools/page_elements/footer' %>
 
-		</div>
-
-	</div>
-</div>
-
-<script>
+:javascript
 	$( document ).ready(function() {
 		//Click on school name to open the full school description in the school line
 		$("#school_list li .li_frame > .school_name").click(function() {
@@ -133,7 +111,7 @@
 		})
 
 		$("#sign_up_button").click(function(){
-	  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/signup') %>");
+	  	$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/signup')}");
 	  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
 	  	$('#signup_panel').show();
 	  	$('#dialog_box').show();
@@ -141,7 +119,7 @@
 		});
 
 		$("#login_button").click(function(){
-	  	$('#dialog_box').html("<%= escape_javascript(render partial: 'schools/dialog_boxes/login') %>");
+	  	$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/login')}");
 	  	$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
 	  	$('#login_panel').show();
 	  	$('#dialog_box').show();
@@ -286,4 +264,3 @@
 	  });
 
 	});
-</script>
