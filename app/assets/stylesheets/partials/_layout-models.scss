@@ -1446,7 +1446,9 @@ School List
 
 	.icon {
 		width: auto;
-		margin-right: 5px;	
+		margin-right: 5px;
+		font-size: 14px;
+		color: $med_gray;	
 	}
 }
 .wrap #school_list ul li.list_row .school_hours .max_range {
