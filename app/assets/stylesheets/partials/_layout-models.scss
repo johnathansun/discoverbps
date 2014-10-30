@@ -277,72 +277,85 @@ Languages
   z-index: 2;
   padding: 0;
   margin: 0;
-}
-.languages.dialog_box_lang {
-  position: absolute;
-  right: 28px;
-  top: 35px;
-}
-.languages.dialog_box_lang .current_language {
-  color: #000000;
-  padding: 0 14px 0 12px;
-}
-.languages.dialog_box_lang ul {
-  width: auto;
-  float: right;
-}
-.languages.dialog_box_lang:hover li ul {
-  display: inline-block;
-}
-.languages.dialog_box_lang:hover li ul li:hover {
-  color: #565656;
-}
-.languages.dialog_box_lang:hover .current_language {
-  color: #565656;
-  background: #ebebeb;
-}
-.languages span {
-  font-size: 8px;
-  margin: 0 5px 0 0;
-}
-.languages .current_language {
-  color: #ffffff;
-  cursor: pointer;
-  font-size: 12px;
-  text-align: right;
-  padding: 0 0 0 12px;
-  line-height: 28px;
-  display: inline-block;
-  float: right;
-}
-.languages ul {
-  background: #ebebeb;
-  color: #969696;
-  padding: 20px 36px 10px 24px;
-}
-.languages ul li {
-  cursor: pointer;
-  margin-bottom: 17px;
-}
-.languages ul .language {
-  line-height: 15px;
-  font-size: 13px;
-  text-decoration: none;
-}
-.languages li ul {
-  display: none;
-}
-.languages:hover li ul {
-  display: block;
-}
-.languages:hover li ul li:hover {
-  color: #565656;
-}
-.languages:hover .current_language {
-  color: #565656;
-  background: #ebebeb;
-  padding: 0 14px 0 12px;
-}
+  &:hover {
+	  li ul { 
+	  	display: block; 
+	  
+			li:hover { color: #565656; }
+	  }
+	  
+	  .current_language {
+		  color: #565656;
+		  background: #ebebeb;
+		  padding: 0 14px 0 12px;
+		}
+  }
+  
+  &.dialog_box_lang {
+	  position: absolute;
+	  right: 28px;
+	  top: 35px;
+	  &:hover {
+		  li ul {
+			  display: inline-block;
+			  li:hover {
+				  color: #565656;
+				}
+			}
+			
+			.current_language {
+			  color: #565656;
+			  background: #ebebeb;
+			}
+	  }
+	  
+	  .current_language {
+		  color: #000000;
+		  padding: 0 14px 0 12px;
+		}
+	
+		ul {
+		  width: auto;
+		  float: right;
+		}
+	}
+	
+	span {
+	  font-size: 8px;
+	  margin: 0 5px 0 0;
+	}
+
+	.current_language {
+	  color: #ffffff;
+	  cursor: pointer;
+	  font-size: 12px;
+	  text-align: right;
+	  padding: 0 0 0 12px;
+	  line-height: 28px;
+	  display: inline-block;
+	  float: right;
+	}
+
+	ul {
+	  background: #ebebeb;
+	  color: #969696;
+	  padding: 20px 36px 10px 24px;
+	  
+	  li {
+		  cursor: pointer;
+		  margin-bottom: 17px;
+		  
+		  ul { display: none; }
+		}
+	
+		.language {
+		  line-height: 15px;
+		  font-size: 13px;
+		  text-decoration: none;
+		}
+	}
+} // .languages
+
 
 
 /* --------------------------------------------------------- 
@@ -352,16 +365,19 @@ header {
   background: #ffffff;
   height: 56px;
   padding: 19px 0 25px;
+
+	.title {
+	  color: #0077cf;
+	  float: left;
+	  padding-top: 22px;
+	}
+	
+	.logo {
+	  width: 142px;
+	  float: right;
+	}
 }
-header .title {
-  color: #0077cf;
-  float: left;
-  padding-top: 22px;
-}
-header .logo {
-  width: 142px;
-  float: right;
-}
+
 
 
 /* --------------------------------------------------------- 
@@ -372,28 +388,32 @@ footer.footer {
   height: 60px;
   padding: 19px 0 25px;
   clear: both;
-}
-footer.footer .title_footer {
-  color: #0077cf;
-  float: left;
-  padding-top: 22px;
-  margin-bottom: 0;
-  font-size: 14px;
-  width: 450px;
-}
-footer.footer a {
-  text-decoration: none;
-}
-footer.footer a:hover {
-  text-decoration: underline;
-}
-footer.footer .title_footer .copyright {
-  color: #969696;
-}
-footer.footer .logo {
-  width: 142px;
-  float: right;
-}
+  
+  .title_footer {
+	  color: #0077cf;
+	  float: left;
+	  padding-top: 22px;
+	  margin-bottom: 0;
+	  font-size: 14px;
+	  width: 450px;
+	  
+	  .copyright { color: #969696; }
+	}
+	
+	a { 
+		text-decoration: none; 
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	
+	.logo {
+	  width: 142px;
+	  float: right;
+	}
+	
+}// footer.footer
+
 .footer_top {
   background: #0077cf;
   height: 33px;
@@ -424,22 +444,19 @@ footer.footer .logo {
 }
 
 
+
+
 /* --------------------------------------------------------- 
  Wrap
 ------------------------------------------------------------ */
 .wrap {
-  /*width:1134px;
-  margin: 0 auto;*/
-
-  margin: 0 50px;
-  min-width: 1210px\9;
+  margin: 0 auto;
+  padding: 0 50px;
+  max-width: 1185px;
   min-width: 320px;
   position: relative;
 }
 .wrap .content_wrap {
-  /*width:960px;
-    margin: 0 auto;*/
-
   margin: 0 87px;
   position: relative;
 }
@@ -837,137 +854,148 @@ footer.footer .logo {
 }
 
 
+
 /* --------------------------------------------------------- 
- Schools
+Single School
 ------------------------------------------------------------ */
 .wrap .single_school {
   background: #ffffff;
   font-size: 14px;
   width: 100%;
   padding: 25px 0;
-}
-.wrap .single_school a {
-  text-decoration: none;
-}
-.wrap .single_school a:hover {
-  text-decoration: underline;
-}
-.wrap .single_school p {
-  font-size: 15px;
-}
-#main_gallery_image{
+  
+  a { 
+  	text-decoration: none; 
+		&:hover {
+			text-decoration: underline;
+		}
+  }
+  
+  p { font-size: 15px; }
+  
+  .name_school {
+	  font-size: 26px;
+	  color: #565656;
+	}
+	
+	.school_descrip {
+	  float: left;
+	  width: 585px;
+	  margin: 0 35px;
+	  
+	  .descritiv {
+		  font-family: Georgia, "Times New Roman", Times, serif;
+		}
+	}
+	
+	.address_school {
+	  color: #969696;
+	  line-height: 40px;
+	}
+	
+	.separation_line {
+	  clear: both;
+	  border-bottom: 1px solid #c9c9c9;
+	  height: 16px;
+	  margin: 0 0 12px 0;
+	}
+	
+	.box {
+	  padding-left: 23px;
+	  width: 168px;
+	  float: left;
+	  min-height: 75px;
+	  margin-bottom: 20px;
+	  &.first { padding: 0; }
+	  
+	  .title {
+		  color: #565656;
+		  margin-bottom: 0;
+		  
+		  span {
+			  margin: 0 5px 0 0;
+			}
+		}
+		
+		.descrip {
+		  color: #969696;
+		  margin-left: 21px;
+		  
+		  span {
+			  color: #565656;
+			}
+		}
+		
+		.absolute {
+		  position: absolute;
+		  width: 168px;
+		}
+	}// .box
+
+	.tablet { display: none; }
+	
+}// .wrap .single_school
+
+#main_gallery_image {
   margin: 30px 0 20px 0;
-  img{ width: 681px;}
+  img { width: 681px; }
 }
+
+
+/* Photos
+--------------------------- */
 .wrap .photos {
   float: left;
+
+	.small {
+	  float: left;
+	  width: 30.45%;
+	  height: 66px;
+	  margin-right: 4.15%;
+	  display: block;
+	  cursor: pointer;
+	  
+	  &.last { margin-right: 0; }
+	  
+	  img { width: 100%; }
+	}
+	
+	.principal {
+	  height: 215px;
+	  margin-bottom: 12px;
+	  display: block;
+	  position: relative;
+	  cursor: pointer;
+	  &:hover {
+		  .glass { display: block; }
+	  }
+	  
+	  img { width: 100%; }
+	
+		.glass {
+		  background: #ebebeb;
+		  font-size: 22px;
+		  width: 40px;
+		  height: 24px;
+		  padding: 8px 0;
+		  text-align: center;
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  color: #c9c9c9;
+		  display: none;
+		}
+	}
 }
-.wrap .photos {
-  max-width: 289px;
-}
-.wrap .photos .small {
-  float: left;
-  width: 30.45%;
-  height: 66px;
-  margin-right: 4.15%;
-  display: block;
-  cursor: pointer;
-}
-.wrap .photos .small.last {
-  margin-right: 0;
-}
-.wrap .photos .small img {
-  width: 100%;
-}
-.wrap .photos .principal {
-  height: 215px;
-  margin-bottom: 12px;
-  display: block;
-  position: relative;
-  cursor: pointer;
-}
-.wrap .photos .principal img {
-  width: 100%;
-}
-.wrap .photos .principal .glass {
-  background: #ebebeb;
-  font-size: 22px;
-  width: 40px;
-  height: 24px;
-  padding: 8px 0;
-  text-align: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: #c9c9c9;
-  display: none;
-}
-.wrap .photos .principal:hover .glass {
-  display: block;
-}
-.wrap .single_school .name_school {
-  font-size: 26px;
-  color: #565656;
-}
-.wrap .single_school .school_descrip {
-  float: left;
-  width: 585px;
-  margin: 0 35px;
-}
-.wrap .single_school .school_descrip .descritiv {
-  font-family: Georgia, "Times New Roman", Times, serif;
-}
-.wrap .single_school .address_school {
-  color: #969696;
-  line-height: 40px;
-}
-.wrap .single_school .separation_line {
-  clear: both;
-  border-bottom: 1px solid #c9c9c9;
-  height: 16px;
-  margin: 0 0 12px 0;
-}
-.wrap .single_school .box {
-  padding-left: 23px;
-  width: 168px;
-  float: left;
-  min-height: 75px;
-  margin-bottom: 20px;
-}
-.wrap .single_school .box .title {
-  color: #565656;
-  margin-bottom: 0;
-}
-.wrap .single_school .box .title span {
-  margin: 0 5px 0 0;
-}
-.wrap .single_school .box .descrip {
-  color: #969696;
-  margin-left: 21px;
-}
-.wrap .single_school .box .descrip span {
-  color: #565656;
-}
-.wrap .single_school .box.first {
-  padding: 0;
-}
-.wrap .single_school .box .absolute {
-  position: absolute;
-  width: 168px;
-}
-.wrap .single_school .tablet {
-  display: none;
-}
-.wrap .single_school .tablet {
-  display: none;
-}
+
+
 
 
 /* --------------------------------------------------------- 
  Map
 ------------------------------------------------------------ */
 .wrap.global_map {
-  background: #ffffff;
+  //background: #ffffff;
   height: 438px;
 }
 .wrap.global_map #googleMap {
@@ -987,72 +1015,75 @@ footer.footer .logo {
   padding: 20px 18px 0 18px;
   background: #ebebeb;
   position: relative;
-}
-.wrap .preferences .down_arrow {
-  display: inline-block;
-  font-size: 13.5px !important;
-}
-.wrap .preferences .up_arrow {
-  display: none;
-}
-.wrap .preferences .header_preferences {
-  margin-left: 20px;
-  display: none;
-}
-.wrap .preferences .header_preferences #hide_btn,
-.wrap .preferences .header_preferences #show_btn {
-  font-size: 13px;
-  float: right;
-  display: inline-block;
-  width: 100px;
-  cursor: pointer;
-  width: 120px;
-  text-align: right;
-  margin-right: 17px;
-}
-.wrap .preferences .header_preferences #hide_btn span,
-.wrap .preferences .header_preferences #show_btn span {
-  font-size: 20px;
-  vertical-align: middle;
-}
-.wrap .preferences .header_preferences #show_btn {
-  display: none;
-}
-.wrap .preferences .preference {
-  padding: 17px 0 23px;
-  border-bottom: 1px solid #fafafa;
-}
-.wrap .preferences .preference label {
-  display: block;
-  color: #969696;
-  width: auto;
-  margin-left: 23px;
-  margin-bottom: 5px;
-}
-.wrap .preferences .preference label .text {
-  margin-left: 2px;
-}
-.wrap .preferences .preference label input {
-  margin: 0 5px 0 -21px;
-}
-.wrap .preferences .preference label .icon_pref {
-  margin-left: -19px;
-}
-.wrap .preferences .preference .title {
-  color: #565656;
-  padding: 0;
-  margin: 0 0 10px 0;
-  margin-left: 23px;
-}
-.wrap .preferences .preference .title .icon_pref {
-  margin-left: -21px;
-}
-.wrap .preferences .preference .icon_pref {
-  margin: 0 5px 0 0;
-}
-.wrap .preferences .preference span {
-  color: #969696;
-}
+  
+  .down_arrow {
+	  display: inline-block;
+	  font-size: 13.5px !important;
+	}
+	
+	.up_arrow {
+	  display: none;
+	}
+	
+	.header_preferences {
+	  margin-left: 20px;
+	  display: none;
+	  
+	  #hide_btn,
+	  #show_btn {
+		  font-size: 13px;
+		  float: right;
+		  display: inline-block;
+		  width: 100px;
+		  cursor: pointer;
+		  width: 120px;
+		  text-align: right;
+		  margin-right: 17px;
+		  
+		  span {
+			  font-size: 20px;
+			  vertical-align: middle;
+		  }
+	  }
+	  #show_btn { display: none; }
+	  
+	}// .header_preferences
+	
+	.preference {
+	  padding: 17px 0 23px;
+	  border-bottom: 1px solid #fafafa;
+
+		label {
+		  display: block;
+		  color: #969696;
+		  width: auto;
+		  margin-left: 23px;
+		  margin-bottom: 5px;
+		  
+		  .icon_pref { margin-left: -19px; }
+		}
+
+		.text { margin-left: 2px; }
+		
+		input { margin: 0 5px 0 -21px; }
+		
+		.title {
+		  color: #565656;
+		  padding: 0;
+		  margin: 0 0 10px 0;
+		  margin-left: 23px;
+		  
+		  .icon_pref { margin-left: -21px; }
+		}
+		
+		.icon_pref { margin: 0 5px 0 0; }
+		
+		span { color: #969696; }
+	}// .preference
+
+}// .wrap .preferences
+
+
 
 
 /* --------------------------------------------------------- 
@@ -1226,116 +1257,150 @@ School List
 .wrap #school_list ul li .your_fit_descrip {
   width: 130px;
 }
-.wrap #school_list ul li .school_descrip {
-  background: #fafafa;
-  font-size: 14px;
-  width: 862px;
-  /*margin-top: -15px;*/
 
+/* School List - Description
+----------------------------------------	*/
+.wrap #school_list ul li .school_descrip {
+  font-size: 14px;
+  //width: 862px;
+  width: 100%;
   overflow: hidden;
   display: none;
-}
-.wrap #school_list ul li .school_descrip a {
-  text-decoration: none;
-}
-.wrap #school_list ul li .school_descrip a:hover {
-  text-decoration: underline;
-}
-.wrap #school_list ul li .school_descrip .right_side {
-  margin-left: 49px;
-  border-left: 1px solid #c9c9c9;
-  background: #ffffff;
-}
-.wrap #school_list ul li .school_descrip .right_side .photos,
-.wrap #school_list ul li .school_descrip .right_side .box,
-.wrap #school_list ul li .school_descrip .right_side .school_name {
-  float: left;
-}
-.wrap #school_list ul li .school_descrip .right_side .school_name {
-  font-size: 15px;
-}
-.wrap #school_list ul li .school_descrip .right_side .school_name .descritiv {
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 15px;
-}
-.wrap #school_list ul li .school_descrip .right_side .school_name p {
-  font-size: 15px;
-}
-.wrap #school_list ul li .school_descrip .right_side .photos {
-  max-width: 289px;
-}
-.wrap #school_list ul li .school_descrip .right_side .photos .small {
-  float: left;
-  width: 30.45%;
-  height: 66px;
-  margin-right: 4.15%;
-  display: block;
-  cursor: pointer;
-}
-.wrap #school_list ul li .school_descrip .right_side .photos .small.last {
-  margin-right: 0;
-}
-.wrap #school_list ul li .school_descrip .right_side .photos .small img {
-  width: 100%;
-}
-.wrap #school_list ul li .school_descrip .right_side .photos .principal {
-  height: 215px;
-  margin-bottom: 12px;
-  display: block;
-  position: relative;
-  cursor: pointer;
-}
-.wrap #school_list ul li .school_descrip .right_side .photos .principal img {
-  width: 100%;
-}
-.wrap #school_list ul li .school_descrip .right_side .photos .principal .glass {
-  background: #ebebeb;
-  font-size: 22px;
-  width: 40px;
-  height: 24px;
-  padding: 8px 0;
-  text-align: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: #c9c9c9;
-  display: none;
-}
-.wrap #school_list ul li .school_descrip .right_side .photos .principal:hover .glass {
-  display: block;
-}
-.wrap #school_list ul li .school_descrip .right_side .adress {
-  margin-left: 19px;
-  color: #969696;
-}
-.wrap #school_list ul li .school_descrip .right_side .title {
-  color: #565656;
-  margin-bottom: 0;
-  margin-left: 16px;
-}
-.wrap #school_list ul li .school_descrip .right_side .title .fit_icon {
-  color: #565656;
-  margin-left: -20px;
-}
-.wrap #school_list ul li .school_descrip .right_side .tablet,
-.wrap #school_list ul li .school_descrip .right_side .mobile {
-  display: none;
-}
-.wrap #school_list ul li .school_descrip .right_side .descrip {
-  color: #969696;
-  margin-left: 16px;
-}
-.wrap #school_list ul li .school_descrip .separation_line {
-  clear: both;
-  border-bottom: 1px solid #c9c9c9;
-  height: 16px;
-  margin: 0 0 19px 16px;
-}
+  
+  a {
+  	text-decoration: none;
+  	&:hover {
+	  	text-decoration: underline;
+  	}
+	}
+	
+	.right_side {
+	  margin-left: 50px;
+	  
+	  .box { 
+		  padding-left: 0;
+			width: auto; 
+		}
+	  
+	  .school_name {
+		  font-size: 15px;
+		  float: left;
+		  
+		  .descritiv {
+			  font-family: Georgia, "Times New Roman", Times, serif;
+			  font-size: 15px;
+			}
+			
+			p { font-size: 15px; }
+	  }
+	  
+	 	.photos {
+		 	float: left;
+		 	padding: 19px;
+	 		max-width: 290px;
+	 		width: 30.8%;
+	 	
+	 		.photo_group {
+		 		margin: 0 0 20px;
+		 		@include clearfix;
+	 		}
+	 		.small {
+			  float: left;
+			  width: 30.45%;
+			  height: 66px;
+			  margin-right: 4.15%;
+			  display: block;
+			  cursor: pointer;
+			  &.last {
+				  margin-right: 0;
+				}
+			
+				img { width: 100%; }
+			}
+			.principal {
+			  height: 215px;
+			  margin-bottom: 12px;
+			  display: block;
+			  position: relative;
+			  cursor: pointer;
+			  &:hover {
+				  .glass { display: block; }
+			  }
+			  
+			  img { width: 100%; }
+			  
+			  .glass {
+				  background: #ebebeb;
+				  font-size: 22px;
+				  width: 40px;
+				  height: 24px;
+				  padding: 8px 0;
+				  text-align: center;
+				  position: absolute;
+				  top: 0;
+				  left: 0;
+				  color: #c9c9c9;
+				  display: none;
+				}
+			}
+	 	}
+	 	
+	 	.school_info {
+			width: 55%;
+			padding: 17px 19px;
+			float: left;
+			&.full { width: 100%; }
+			
+			.text {
+				font-family: Georgia, "Times New Roman", Times, serif;
+				font-size: 16px;
+				font-weight: normal;
+			}
+
+			.school_info_column {
+
+			}
+			.school_features_column {
+
+			}
+
+			.title {
+			  color: #565656;
+			  margin: 0 0 0 16px;
+			  
+			  .fit_icon {
+				  color: #565656;
+				  margin-left: -20px;
+				}
+			}
+			.descrip {
+				margin: 0 0 20px 16px;
+				font-size: 14px;
+				color: $med_gray;
+			}
+
+		}// .school_info
+	 	
+		.tablet,
+		.mobile { display: none; }
+		
+
+	} //.right_side
+	
+	.separation_line {
+	  clear: both;
+	  border-bottom: 1px solid #c9c9c9;
+	  height: 16px;
+	  margin: 0 0 19px 16px;
+	}
+  
+} //.wrap #school_list ul li .school_descrip
+
+
 .wrap #school_list ul li .full_details {
   width: 502px;
   float: left;
 }
-
 
 .wrap #school_list ul li.list_row {
   background: #f9f9f9;
@@ -1350,6 +1415,8 @@ School List
 		  color: $orange;
 	  }
 	}
+	
+	&.descrip_open { cursor: default; }
 }
 .wrap #school_list ul li.list_row.ui-sortable-helper {
 	box-shadow: 0 0 10px 2px #bbb;
