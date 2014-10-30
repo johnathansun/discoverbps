@@ -242,7 +242,8 @@ input, select {
 }
 
 .transportation_icon {
-	color: #565656;
+	color: #999;
+	margin-right: 5px;
 }
 .school_info_column {
 	float: left;

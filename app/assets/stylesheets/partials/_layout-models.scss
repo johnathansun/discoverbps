@@ -980,13 +980,11 @@ footer.footer .logo {
  Preferences
 ------------------------------------------------------------ */
 .wrap .preferences {
-  /*.box_shadow(5px,0,15px,0);*/
-
   z-index: 1;
   float: left;
   width: 156px;
   height: 100%;
-  padding: 37px 18px 0 18px;
+  padding: 20px 18px 0 18px;
   background: #ebebeb;
   position: relative;
 }
@@ -1064,10 +1062,16 @@ School List
   background: #ebebeb;
   margin-left: 192px;
   position: relative;
-  padding-bottom: 40px;
+  padding: 20px 0 40px 0;
+}
+.wrap #school_list .note {
+	max-width: 465px;
 }
 .wrap #school_list #sortable_eligibility_column {
   width: 100px;
+}
+.wrap #school_list #sortable_fit_column {
+  width: 170px;
 }
 .wrap #school_list #sortable_hours_column {
   width: 140px;
@@ -1114,22 +1118,34 @@ School List
   display: table-cell;
 }
 .wrap #school_list ul li .no_order {
-  background: #fafafa;
   color: #0077cf;
-  width: 49px;
-  border-right: 1px solid #c9c9c9;
+  width: 65px;
   text-align: center;
   font-size: 16px;
   line-height: 18px;
 }
 .wrap #school_list ul li .school_name {
-  color: #0077cf;
+  color: $blue;
   font-size: 17px;
   line-height: 18px;
-  width: 330px;
-  padding-left: 19px;
-  cursor: pointer;
+  width: 310px;
+  padding-left: 0;
+  cursor: row-resize;
 }
+
+.wrap #school_list ul li .school_name .icon { font-size: 16px; }
+
+.wrap #school_list ul li .school_name .icon-info {
+	float: right;
+	color: $light_blue;
+	cursor: pointer;
+	width: auto;
+	padding: 4px 0 0;
+	&:hover {
+		color: $orange;
+	}
+}
+
 .wrap #school_list ul li .school_name .full_descrip_link {
   color: #0077cf;
   font-size: 17px;
@@ -1165,20 +1181,18 @@ School List
 }
 .wrap #school_list ul li .your_fit_icon {
   display: table;
-}
-.wrap #school_list ul li .your_fit_icon.open {
-  display: block;
+	&.open { display: block; }
 }
 .wrap #school_list ul li .your_fit_descrip {
+	position: absolute;
   display: none;
-}
-.wrap #school_list ul li .your_fit_descrip.open {
-  display: table;
+	&.open { display: table; }
 }
 .wrap #school_list ul li .school_hours {
-  font-size: 13px;
+  font-size: 12px;
 }
 .wrap #school_list ul li .school_hours .max_range {
+	display: none;
   width: 106px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -1202,7 +1216,7 @@ School List
 }
 .wrap #school_list ul li .your_fit_icon,
 .wrap #school_list ul li .your_fit_descrip {
-  width: 200px;
+  width: 170px;
 }
 .wrap #school_list ul li .your_fit_icon .icon,
 .wrap #school_list ul li .your_fit_descrip .icon {
@@ -1322,11 +1336,24 @@ School List
   float: left;
 }
 
+
 .wrap #school_list ul li.list_row {
-  background: #ffffff !important;
+  background: #f9f9f9;
   margin-bottom: 12px;
   margin-top: 0;
   height: 82px;
+  cursor: row-resize;
+  transition: background 250ms ease;
+  &:hover {
+	  background: #FFF;
+	  .school_name .icon-info {
+		  color: $orange;
+	  }
+	}
+}
+.wrap #school_list ul li.list_row.ui-sortable-helper {
+	box-shadow: 0 0 10px 2px #bbb;
+	background: #FFF;
 }
 .wrap #school_list ul li.list_row .line {
   height: 82px;
@@ -1334,26 +1361,26 @@ School List
 .wrap #school_list ul li.list_row .sortable_row_number {
   color: #565656;
   font-size: 20px;
-  cursor: row-resize;
+  
+  img {
+	  width: 29px;
+	  margin: 0 auto;
+  }
 }
-.wrap #school_list ul li.list_row .no_order {
-  font-size: 27px;
-  line-height: 28px;
-}
+
 .wrap #school_list ul li.list_row .school_name {
-  color: #0077cf;
-  font-size: 27px;
+  color: $dark_gray;
+  font-size: 22px;
   line-height: 28px;
-  cursor: pointer;
-}
-.wrap #school_list ul li.list_row .icon {
-  font-size: 30px;
 }
 .wrap #school_list ul li.list_row .getting_there {
   font-size: 15px;
-}
-.wrap #school_list ul li.list_row .school_hours {
-  font-size: 15px;
+  width: 100px;
+
+	.icon {
+		width: auto;
+		margin-right: 5px;	
+	}
 }
 .wrap #school_list ul li.list_row .school_hours .max_range {
   background: #e7f1f7;
@@ -1377,20 +1404,21 @@ School List
   z-index: 5000;
 }
 .wrap #school_list .menu_list #sortable_school_name_column {
-  width: 330px;
+  width: 313px;
+  padding-left: 17px;
 }
 .wrap #school_list .menu_list .menu_bloc {
   font-size: 15px;
   float: left;
-  border-left: 1px solid #ffffff;
+// 	border-left: 1px solid #ffffff;
   padding: 5px 0px 0 20px;
-  width: 136px;
+  width: 105px;
   height: 24px;
 }
 .wrap #school_list .menu_list .menu_bloc.arrow {
   width: 49px;
   padding-left: 0;
-  text-align: center;
+//   text-align: center;
   color: #0077cf;
 }
 .wrap #school_list .menu_list .menu_bloc.choice {
