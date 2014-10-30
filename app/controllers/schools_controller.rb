@@ -98,6 +98,9 @@ class SchoolsController < ApplicationController
           student_school.update_attributes(sort_order_position: i, ranked: true)
         end
       end
+      respond_to do |format|
+        format.js { render template: "schools/actions/sort" }
+      end
     end
   end
 
