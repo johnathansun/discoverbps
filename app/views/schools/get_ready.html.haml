@@ -1,0 +1,253 @@
+= render partial: 'schools/page_elements/header'
+
+.wrap
+	= render partial: 'schools/page_elements/student_tabs'
+
+.wrap
+	.result
+		= render partial: 'schools/page_elements/preference_panel'
+
+		#school_list
+			.list_content
+				%div{class: "flexible_content", style: "width:1220px;"}
+					.menu_list
+						.li_frame
+							#sortable_choice_order_column.arrow menu_bloc.desktop.no_mobile
+							#sortable_school_name_column.menu_bloc.sortable_column
+								.column_title
+									School Name
+
+							#getting_there.menu_bloc
+								%div{id: "sortable_distance_column", class: "first_block sortable_column", style: "color: #0077cf;"}
+									%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-up"}
+									.column_title
+										Getting There
+
+								.second_block.sortable_column
+									.column_title
+										Walk Time
+
+								.second_block.sortable_column
+									.column_title
+										Drive Time
+
+							#sortable_eligibility_column.menu_bloc sortable_column
+								.column_title
+									Eligibility
+
+							#sortable_hours_column.menu_bloc sortable_column
+								.column_title
+									School Hours
+
+							- if SURROUND_CARE_GRADES.include?(current_student.grade_level)
+								#sortable_surround_care_column.menu_bloc.sortable_column
+									.column_title
+										Surround Care
+
+							#sortable_fit_column.menu_bloc.sortable_column
+								.column_title
+									Your Fit
+							.clr
+
+					%ul#sortable
+						- @home_schools.each_with_index do |student_school, i|
+							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row home_school"}
+								= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i}
+
+						- @zone_schools.each_with_index do |student_school, i|
+							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row zone_school"}
+								= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i}
+
+						- @ell_schools.each_with_index do |student_school, i|
+							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row ell_school"}
+								= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i}
+
+						- @sped_schools.each_with_index do |student_school, i|
+							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row sped_school"}
+								= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i}
+
+			= render partial: 'schools/page_elements/footer'
+
+:javascript
+	$( document ).ready(function() {
+		//Click on school name to open the full school description in the school line
+		$("#school_list li .li_frame > .school_name").click(function() {
+			$(this).parent().parent().addClass("descrip_open");
+			$(this).parent().parent().find(".school_descrip").toggle();
+			}
+		);
+
+		//compare button => add class to compare_list, close school list and preferences, and show the comparaison list
+		/*$(".menu_compare_name .compare").click(function(){
+
+			$(this).parent().addClass("compare_action");
+			$("#school_list").css("display","none");
+			$(".preferences").css("display","none");
+			$("#compare_list").css("display","block");
+
+
+		})*/
+
+		//btn close preference choice in tablet size
+		$(".header_preferences #hide_btn").click(function(){
+			$(".preferences").addClass("hide");
+		})
+		//btn show preference choice in tablet size
+		$(".header_preferences #show_btn").click(function(){
+			$(".preferences").removeClass("hide");
+		})
+
+		$("#sign_up_button").click(function(){
+			$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/signup')}");
+			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+			$('#signup_panel').show();
+			$('#dialog_box').show();
+			return false;
+		});
+
+		$("#login_button").click(function(){
+			$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/login')}");
+			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+			$('#login_panel').show();
+			$('#dialog_box').show();
+			return false;
+		});
+
+		$(function() {
+			$("#sortable").sortable({
+				axis: "y",
+				scroll: true,
+				update: function(){
+					$('#sortable li').each(function(){
+						$(this).find('.sortable_row_number').html($(this).index() + 1);
+					});
+					$.ajax({
+						url: '/schools/sort',
+						type: 'post',
+						data: $('#sortable').sortable('serialize'),
+						dataType: 'script'
+					});
+				}
+			});
+			$("#sortable").disableSelection();
+		});
+
+		var choice_order_ascending = false;
+		$("#sortable_choice_order_column").click(function(){
+			$('.column_arrow').hide();
+			$('.sortable_column').css("color", "#565656")
+			$('#sortable_choice_order_column').css("color", "#0077cf")
+			if (choice_order_ascending) {
+				$('ul#sortable>li').tsort('span.sortable_row_number',{order:'desc'});
+				$('#sortable_choice_order_column').html('<div aria-hidden="true" id="choice_order_arrow" class="icon-DBPS-Dev-Assets-arrow-down"></div>');
+				choice_order_ascending = false;
+			} else {
+				$('ul#sortable>li').tsort('span.sortable_row_number',{order:'asc'});
+				$('#sortable_choice_order_column').html('<div aria-hidden="true" id="choice_order_arrow" class="icon-DBPS-Dev-Assets-arrow-up"></div>');
+				choice_order_ascending = true;
+			}
+		});
+
+		var school_name_ascending = false;
+		$("#sortable_school_name_column").click(function(){
+			$('.column_arrow').hide();
+			$('.sortable_column').css("color", "#565656")
+			$('#sortable_choice_order_column').css("color", "#565656")
+			$('#sortable_school_name_column').css("color", "#0077cf")
+			if (school_name_ascending) {
+				$('ul#sortable>li').tsort('span.sortable_school_name',{order:'desc'});
+				$('#sortable_school_name_column').html('%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">School Name</div>');
+				school_name_ascending = false;
+			} else {
+				$('ul#sortable>li').tsort('span.sortable_school_name',{order:'asc'});
+				$('#sortable_school_name_column').html('%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">School Name</div>');
+				school_name_ascending = true;
+			}
+		});
+
+		var getting_there_ascending = false;
+		$("#sortable_distance_column").click(function(){
+			$('.column_arrow').hide();
+			$('.sortable_column').css("color", "#565656")
+			$('#sortable_choice_order_column').css("color", "#565656")
+			$('#sortable_distance_column').css("color", "#0077cf")
+			if (getting_there_ascending) {
+				$('ul#sortable>li').tsort('span.sortable_distance',{order:'desc'});
+				$('#sortable_distance_column').html('%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Getting There</div>');
+				getting_there_ascending = false;
+			} else {
+				$('ul#sortable>li').tsort('span.sortable_distance',{order:'asc'});
+				$('#sortable_distance_column').html('%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Getting There</div>');
+				getting_there_ascending = true;
+			}
+		});
+
+		 var eligibility_ascending = false;
+		$("#sortable_eligibility_column").click(function(){
+			$('.column_arrow').hide();
+			$('.sortable_column').css("color", "#565656")
+			$('#sortable_choice_order_column').css("color", "#565656")
+			$('#sortable_eligibility_column').css("color", "#0077cf")
+			if (eligibility_ascending) {
+				$('ul#sortable>li').tsort('span.sortable_eligibility',{order:'desc'});
+				$('#sortable_eligibility_column').html('%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Eligibility</div>');
+				eligibility_ascending = false;
+			} else {
+				$('ul#sortable>li').tsort('span.sortable_eligibility',{order:'asc'});
+				$('#sortable_eligibility_column').html('%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Eligibility</div>');
+				eligibility_ascending = true;
+			}
+		});
+
+		 var surround_care_ascending = false;
+		$("#sortable_surround_care_column").click(function(){
+			$('.column_arrow').hide();
+			$('.sortable_column').css("color", "#565656")
+			$('#sortable_choice_order_column').css("color", "#565656")
+			$('#sortable_surround_care_column').css("color", "#0077cf")
+			if (surround_care_ascending) {
+				$('ul#sortable>li').tsort('span.sortable_surround_care',{order:'desc'});
+				$('#sortable_surround_care_column').html('%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Surround Care</div>');
+				surround_care_ascending = false;
+			} else {
+				$('ul#sortable>li').tsort('span.sortable_surround_care',{order:'asc'});
+				$('#sortable_surround_care_column').html('%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Surround Care</div>');
+				surround_care_ascending = true;
+			}
+		});
+
+		var hours_ascending = false;
+		$("#sortable_hours_column").click(function(){
+			$('.column_arrow').hide();
+			$('.sortable_column').css("color", "#565656")
+			$('#sortable_choice_order_column').css("color", "#565656")
+			$('#sortable_hours_column').css("color", "#0077cf")
+			if (hours_ascending) {
+				$('ul#sortable>li').tsort('span.sortable_hours',{order:'desc'});
+				$('#sortable_hours_column').html('%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">School Hours</div>');
+				hours_ascending = false;
+			} else {
+				$('ul#sortable>li').tsort('span.sortable_hours',{order:'asc'});
+				$('#sortable_hours_column').html('%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">School Hours</div>');
+				hours_ascending = true;
+			}
+		});
+
+		var fit_ascending = false;
+		$("#sortable_fit_column").click(function(){
+			$('.column_arrow').hide();
+			$('.sortable_column').css("color", "#565656")
+			$('#sortable_choice_order_column').css("color", "#565656")
+			$('#sortable_fit_column').css("color", "#0077cf")
+			if (fit_ascending) {
+				$('ul#sortable>li').tsort('span.sortable_fit',{order:'desc'});
+				$('#sortable_fit_column').html('%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Your Fit</div>');
+				fit_ascending = false;
+			} else {
+				$('ul#sortable>li').tsort('span.sortable_fit',{order:'asc'});
+				$('#sortable_fit_column').html('%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Your Fit</div>');
+				fit_ascending = true;
+			}
+		});
+
+	});
