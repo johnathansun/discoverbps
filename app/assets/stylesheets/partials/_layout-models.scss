@@ -1839,16 +1839,18 @@ Menu Compare Name
 .wrap .menu_compare_name .add_child {
   float: left;
   padding: 22px 0 0 16px;
-  color: #c9c9c9;
+  background: $blue;
+  color: $light_blue;
   font-size: 15px;
   display: inline-block;
   width: 112px;
   height: 26px;
   cursor: pointer;
-}
-.wrap .menu_compare_name .add_child:hover {
-  background: #fc5b00;
-  color: #ffffff;
+  transition: all 250ms ease;
+	&:hover {
+	  background: $dark_blue;
+	  color: #ffffff;
+	}	
 }
 
 
@@ -2101,7 +2103,6 @@ Wrap Search
 			&.current {
 				.bar { 
 					background-color: $yellow;
-					//background-image: url(/assets/progress_bar_yellow.png)
 				}
 				.label { color: $yellow; }
 			}
@@ -2747,6 +2748,60 @@ Wrap Compare List
 }
 .li_frame {
   width: 100%;
+}
+
+
+/* --------------------------------------------------------- 
+ Progress Bar
+------------------------------------------------------------ */
+.progress_bar {
+	float: right;
+	width: 100%;
+	max-width: 660px;
+	margin: 35px 0 0;
+	
+	.steps {
+		@include clearfix; 
+	}
+		.step {
+			width: 25%;
+			float: left;
+			&:hover {
+				.label {
+					color: $yellow !important;
+				}
+			}
+		
+			.bar {
+				height: 10px;
+				background-color: tint($light_blue, 50%);
+				border-right: 2px solid $blue;
+			}
+			.label {
+				margin: 5px 0;
+				color: $light_blue;
+				font-size: 10px;
+				transition: color 250ms ease;
+				.step_name {
+					font-size: 18px;
+				}
+			}
+
+			&.last { 
+				.bar { border: none; }
+			}
+			&.complete {
+				.bar { background-color: $dark_blue; }
+				.label { color: $dark_blue; }
+			}
+			&.current {
+				.bar { 
+					background-color: $yellow;
+				}
+				.label { color: $yellow; }
+			}
+		}
+
 }
 
 
