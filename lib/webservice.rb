@@ -177,7 +177,7 @@ module Webservice
 	private
 
 	def self.get(endpoint, params)
-		Faraday.new(url: "#{BPS_DEV_WEBSERVICE_URL}/#{endpoint}?#{params}", ssl: {version: :SSLv3}).get.body
+		Faraday.new(url: "#{ENV['BPS_DEV_WEBSERVICE_URL']}/#{endpoint}?#{params}", ssl: {version: :SSLv3}).get.body
 	end
 
 	def self.extract(api_response, endpoint, extract_from_array, bps_id)
