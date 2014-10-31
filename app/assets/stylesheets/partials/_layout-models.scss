@@ -2786,7 +2786,11 @@ Wrap Compare List
 	float: right;
 	width: 100%;
 	max-width: 660px;
-	margin: 35px 0 0;
+	margin: 17px 0 0;
+	
+	.note {
+		margin: 0 0 18px;
+	}
 	
 	.steps {
 		@include clearfix; 
@@ -2802,12 +2806,12 @@ Wrap Compare List
 		
 			.bar {
 				height: 10px;
-				background-color: tint($light_blue, 50%);
+				background-color: $dark_blue;
 				border-right: 2px solid $blue;
 			}
 			.label {
 				margin: 5px 0;
-				color: $light_blue;
+				color: $dark_blue;
 				font-size: 10px;
 				transition: color 250ms ease;
 				.step_name {
@@ -2819,8 +2823,8 @@ Wrap Compare List
 				.bar { border: none; }
 			}
 			&.complete {
-				.bar { background-color: $dark_blue; }
-				.label { color: $dark_blue; }
+				.bar { background-color: $light_blue; }
+				.label { color: $light_blue; }
 			}
 			&.current {
 				.bar { 
