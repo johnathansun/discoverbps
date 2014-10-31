@@ -2113,11 +2113,11 @@ Wrap Search
 		
 			.bar {
 				height: 10px;
-				background-color: tint($light_blue, 50%);
+				background-color: $dark_blue;
 				border-right: 2px solid $blue;
 			}
 			.label {
-				color: $light_blue;
+				color: $dark_blue;
 				font-size: 10px;
 			}
 
@@ -2125,8 +2125,8 @@ Wrap Search
 				.bar { border: none; }
 			}
 			&.complete {
-				.bar { background-color: $dark_blue; }
-				.label { color: $dark_blue; }
+				.bar { background-color: tint($light_blue, 50%); }
+				.label { color: $light_blue; }
 			}
 			&.current {
 				.bar { 
