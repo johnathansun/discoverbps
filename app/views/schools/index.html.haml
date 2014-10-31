@@ -26,10 +26,14 @@
 			.list_content
 				%div{class: "flexible_content"}
 					.menu_list
-						= render partial: 'schools/school_details/school_header_home'
-						= render partial: 'schools/school_details/school_header_zone'
-						= render partial: 'schools/school_details/school_header_ell'
-						= render partial: 'schools/school_details/school_header_sped'
+						- if @home_schools.present?
+							= render partial: 'schools/school_details/school_header_home'
+						- if @zone_schools.present?
+							= render partial: 'schools/school_details/school_header_zone'
+						- if @ell_schools.present?
+							= render partial: 'schools/school_details/school_header_ell'
+						- if @sped_schools.present?	
+							= render partial: 'schools/school_details/school_header_sped'
 
 						.clr
 
