@@ -36,8 +36,8 @@ a.blue {
   padding: 10px;
   color: #80bce7;
 }
-.ui-menu-item { 
-  cursor: pointer; 
+.ui-menu-item {
+  cursor: pointer;
 }
 .add_child {
 	cursor: pointer;
@@ -173,7 +173,7 @@ a.student_tab {
 .column_title {
 	margin-top: 3px;
 }
-.center {	
+.center {
 	text-align: center;
 }
 a.no-decoration {
@@ -298,16 +298,19 @@ input, select {
 	cursor: pointer !important;
 }
 .flash_alert {
-	font-size: 16px; 
-	color: white; 
-	background-color: #fc0d1b; 
-	padding: 20px; 
+	font-size: 16px;
+	color: white;
+	background-color: #fc0d1b;
+	padding: 20px;
 	margin-bottom: 30px;
 }
 .flash_notice {
-	font-size: 16px; 
-	color: white; 
-	background-color: #72c900; 
-	padding: 20px; 
+	font-size: 16px;
+	color: white;
+	background-color: #72c900;
+	padding: 20px;
 	margin-bottom: 30px;
+}
+.hidden {
+	display: none;
 }

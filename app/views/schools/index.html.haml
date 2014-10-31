@@ -26,12 +26,13 @@
 			.list_content
 				%div{class: "flexible_content"}
 					.menu_list
-						= render partial: 'schools/school_details/school_header_home'
+						- if @home_schools.present?
+							= render partial: 'schools/school_details/school_header_home'
 						- if @zone_schools.present?
 							= render partial: 'schools/school_details/school_header_zone'
-						- if current_student.ell_language.present?
+						- if @ell_schools.present?
 							= render partial: 'schools/school_details/school_header_ell'
-						- if current_student.sped_needs.present?
+						- if @sped_schools.present?
 							= render partial: 'schools/school_details/school_header_sped'
 
 					%ul#sortable
@@ -40,6 +41,7 @@
 								%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row home_school"}
 									= render partial: 'schools/school_details/school_row_home', locals: {student_school: student_school, school: student_school.school, index: i}
 						- else
+							%h1#home_no_results_notice.no_results_notice
 							There are no schools that matched your search criteria.
 
 						- if @zone_schools.present?
@@ -47,21 +49,24 @@
 								%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row zone_school"}
 									= render partial: 'schools/school_details/school_row_zone', locals: {student_school: student_school, school: student_school.school, index: i}
 						- else
-							There are no schools that matched your search criteria.
+							%h1#zone_no_results_notice.no_results_notice.hidden
+								There are no schools that matched your search criteria.
 
 						- if @ell_schools.present?
 							- @ell_schools.each_with_index do |student_school, i|
 								%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row ell_school"}
 									= render partial: 'schools/school_details/school_row_ell', locals: {student_school: student_school, school: student_school.school, index: i}
 						- else
-							There are no schools that matched your search criteria.
+							%h1#ell_no_results_notice.no_results_notice.hidden
+								There are no schools that matched your search criteria.
 
 						- if @sped_schools.present?
 							- @sped_schools.each_with_index do |student_school, i|
 								%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row sped_school"}
 									= render partial: 'schools/school_details/school_row_sped', locals: {student_school: student_school, school: student_school.school, index: i}
 						- else
-							There are no schools that matched your search criteria.
+							%h1#sped_no_results_notice.no_results_notice.hidden
+								There are no schools that matched your search criteria.
 
 
 			= render partial: 'schools/page_elements/notice'
