@@ -462,9 +462,9 @@ footer.footer {
 }
 .wrap .arrow_slide {
   position: absolute;
-  right: -22px;
-  top: 105px;
-  width: 14px;
+  right: 5px;
+	top: -45px;
+	z-index: 1;
   height: 26px;
   color: #ffffff;
   font-size: 24px;
@@ -1833,16 +1833,17 @@ Menu Compare Name
   float: left;
   height: 40px;
   padding: 8px 15px 0 15px;
-  color: #969696;
-  background: #fafafa;
+  color: $light_blue;
+  background: $blue;
   cursor: pointer;
+  transition: all 250ms ease;
   #edit_button {
     visibility: hidden;
   }
 }
 .wrap .menu_compare_name .name_list .name_info:hover {
   color: #ffffff;
-  background: #fc5b00;
+  background: $dark_blue;
   #edit_button {
     visibility: visible;
   }
@@ -1876,7 +1877,6 @@ Menu Compare Name
   cursor: pointer;
   transition: all 250ms ease;
 	&:hover {
-	  background: $dark_blue;
 	  color: #ffffff;
 	}	
 }
@@ -1886,8 +1886,7 @@ Menu Compare Name
 Menu School Lists
 ------------------------------------------------------------ */
 .wrap .menu_school_lists {
-  margin: -42px 0 0 142px;
-  width: 100%;
+  margin: -42px 0 0 190px;
   position: relative;
   overflow: auto;
   left: 0;
