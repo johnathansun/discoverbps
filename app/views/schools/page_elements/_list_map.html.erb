@@ -2,8 +2,6 @@
 
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
 
-<!-- script to integrat and personnalize google map for screen (difference with zoom)-->
-
 <script>
   function initialize(){
     <% if defined?(resize) && resize == true %>
@@ -263,55 +261,32 @@
       map.data.setStyle(featureStyle);
 
 
-      <% if school.present? %>
-        <% if school.latitude.present? && school.longitude.present? %>
-          var coordinates = new google.maps.LatLng(<%= school.latitude %>, <%= school.longitude %>);
-          latlngbounds.extend(coordinates);
-          var image = {
-            url: '/assets/map_pins/DBPS_MapPins_Medium_Blue_1.png',
-            size: new google.maps.Size(19, 29),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(19, 29),
-          };
-          var marker = new google.maps.Marker({
-            position: coordinates,
-            icon: image,
-            map: map,
-            title: '<%= escape_javascript(school.name) %>'
-          });
-          var infowindow = new google.maps.InfoWindow({
-          });
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent('<div><h3><%= school.name %></h3><%= school.api_basic_info.try(:[], :campus1address1) %><br /><%= school.api_basic_info.try(:[], :campus1city) %>, <%= school.api_basic_info.try(:[], :campus1state) %>');
-            infowindow.open(map,this);
-          });
-        <% end %>
-      <% else %>
-        <% colors = ['Blue', 'Green', 'Orange', 'Purple', 'Teal'] %>
-        <% students_list.each_with_index do |student, student_i| %>
-          <% student.student_schools.rank(:sort_order).each_with_index do |student_school, i| %>
-            <% if student_school.school.latitude.present? && student_school.school.longitude.present? %>
-              var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
-              latlngbounds.extend(coordinates);
-              var image = {
-                url: '/assets/map_pins/DBPS_MapPins_Medium_<%= colors[student_i] %>_<%= i + 1 %>.png',
-                size: new google.maps.Size(19, 29),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(19, 29),
-              };
-              var marker = new google.maps.Marker({
-                position: coordinates,
-                icon: image,
-                map: map,
-                title: '<%= escape_javascript(student_school.school.name) %>'
-              });
-              var infowindow = new google.maps.InfoWindow({
-              });
-              google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info.try(:[], :campus1address1) %><br /><%= student_school.school.api_basic_info.try(:[], :campus1city) %>, <%= student_school.school.api_basic_info.try(:[], :campus1state) %>');
-                infowindow.open(map,this);
-              });
-            <% end %>
+      var markerIcon = {
+        url: '/assets/map_pins/DBPS_MapPins_Large_Blue_Blank.png',
+        size: new google.maps.Size(19, 29),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(19, 29),
+      };
+
+
+      <% students_list.each_with_index do |student, student_i| %>
+        <% student.student_schools.rank(:sort_order).each_with_index do |student_school, i| %>
+          <% if student_school.school.latitude.present? && student_school.school.longitude.present? %>
+            var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
+            latlngbounds.extend(coordinates);
+
+            var marker = new google.maps.Marker({
+              position: coordinates,
+              icon: markerIcon,
+              map: map,
+              title: '<%= escape_javascript(student_school.school.name) %>'
+            });
+            var infowindow = new google.maps.InfoWindow({
+            });
+            google.maps.event.addListener(marker, 'click', function() {
+              infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info.try(:[], :campus1address1) %><br /><%= student_school.school.api_basic_info.try(:[], :campus1city) %>, <%= student_school.school.api_basic_info.try(:[], :campus1state) %>');
+              infowindow.open(map,this);
+            });
           <% end %>
         <% end %>
       <% end %>
@@ -334,6 +309,7 @@
           map: map
         });
       <% end %>
+
       var infowindow = new google.maps.InfoWindow({
       });
       google.maps.event.addListener(marker, 'click', function() {
@@ -349,6 +325,4 @@
 
   		google.maps.event.addDomListener(window, 'load', initialize);
 
-
 </script>
-<!--END script to integrat and personnalize google map-->
