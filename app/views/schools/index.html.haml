@@ -18,58 +18,11 @@
 		= render partial: 'schools/page_elements/preference_panel'
 
 		#school_list
-			.note.small
-				This grade level is not guaranteed a home based assignment. As such, if you are a new-to-Boston Public Schools applicant and an assignment from the home-based list below cannot be made, an assignment to a school in the former zone structure may be necessary. Use the Zone-based tab to see those results.
-				%a{href: '#', target: '_blank'}
-					Learn more
+			= render partial: 'schools/school_details/home_schools'
+			= render partial: 'schools/school_details/zone_schools'
+			= render partial: 'schools/school_details/ell_schools'
+			= render partial: 'schools/school_details/sped_schools'
 
-			.list_content
-				%div{class: "flexible_content"}
-					.menu_list
-						- if @home_schools.present?
-							= render partial: 'schools/school_details/school_header_home'
-						- if @zone_schools.present?
-							= render partial: 'schools/school_details/school_header_zone'
-						- if @ell_schools.present?
-							= render partial: 'schools/school_details/school_header_ell'
-						- if @sped_schools.present?
-							= render partial: 'schools/school_details/school_header_sped'
-
-					%ul#sortable
-						- if @home_schools.present?
-							- @home_schools.each_with_index do |student_school, i|
-								%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row home_school"}
-									= render partial: 'schools/school_details/school_row_home', locals: {student_school: student_school, school: student_school.school, index: i}
-						- else
-							%h1#home_no_results_notice.no_results_notice
-							There are no schools that matched your search criteria.
-
-						- if @zone_schools.present?
-							- @zone_schools.each_with_index do |student_school, i|
-								%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row zone_school"}
-									= render partial: 'schools/school_details/school_row_zone', locals: {student_school: student_school, school: student_school.school, index: i}
-						- else
-							%h1#zone_no_results_notice.no_results_notice.hidden
-								There are no schools that matched your search criteria.
-
-						- if @ell_schools.present?
-							- @ell_schools.each_with_index do |student_school, i|
-								%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row ell_school"}
-									= render partial: 'schools/school_details/school_row_ell', locals: {student_school: student_school, school: student_school.school, index: i}
-						- else
-							%h1#ell_no_results_notice.no_results_notice.hidden
-								There are no schools that matched your search criteria.
-
-						- if @sped_schools.present?
-							- @sped_schools.each_with_index do |student_school, i|
-								%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row sped_school"}
-									= render partial: 'schools/school_details/school_row_sped', locals: {student_school: student_school, school: student_school.school, index: i}
-						- else
-							%h1#sped_no_results_notice.no_results_notice.hidden
-								There are no schools that matched your search criteria.
-
-
-			= render partial: 'schools/page_elements/notice'
 			= render partial: 'schools/page_elements/footer'
 
 
