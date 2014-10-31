@@ -62,19 +62,19 @@
 					%ul#sortable
 						- @home_schools.each_with_index do |student_school, i|
 							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row home_school"}
-								= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i}
+								= render partial: 'schools/school_details/school_row_home', locals: {student_school: student_school, school: student_school.school, index: i}
 
 						- @zone_schools.each_with_index do |student_school, i|
 							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row zone_school"}
-								= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i}
+								= render partial: 'schools/school_details/school_row_zone', locals: {student_school: student_school, school: student_school.school, index: i}
 
 						- @ell_schools.each_with_index do |student_school, i|
 							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row ell_school"}
-								= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i}
+								= render partial: 'schools/school_details/school_row_ell', locals: {student_school: student_school, school: student_school.school, index: i}
 
 						- @sped_schools.each_with_index do |student_school, i|
 							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row sped_school"}
-								= render partial: 'schools/school_details/school_row', locals: {student_school: student_school, school: student_school.school, index: i}
+								= render partial: 'schools/school_details/school_row_sped', locals: {student_school: student_school, school: student_school.school, index: i}
 
 
 			= render partial: 'schools/page_elements/footer'
