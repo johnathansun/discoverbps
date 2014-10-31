@@ -1409,6 +1409,14 @@ map_pins/DBPS_MapPins_Medium_Teal_8.png: map_pins/DBPS_MapPins_Medium_Teal_8-ce6
 map_pins/DBPS_MapPins_Medium_Teal_8/index.png: map_pins/DBPS_MapPins_Medium_Teal_8-ce648a84cdb945edbe588c980f553259.png
 map_pins/DBPS_MapPins_Medium_Teal_9.png: map_pins/DBPS_MapPins_Medium_Teal_9-60b74663ff2f1a9422943b2314a4fe39.png
 map_pins/DBPS_MapPins_Medium_Teal_9/index.png: map_pins/DBPS_MapPins_Medium_Teal_9-60b74663ff2f1a9422943b2314a4fe39.png
+next-step-2.png: next-step-2-b24959f2e3036bd0bafc2476f0f65360.png
+next-step-2/index.png: next-step-2-b24959f2e3036bd0bafc2476f0f65360.png
+next-step-2@2x.png: next-step-2@2x-46b08520f4d68f9ab36014112e9807fc.png
+next-step-2@2x/index.png: next-step-2@2x-46b08520f4d68f9ab36014112e9807fc.png
+next-step-3.png: next-step-3-c078627c12b2c742ff86548d50703f99.png
+next-step-3/index.png: next-step-3-c078627c12b2c742ff86548d50703f99.png
+next-step-3@2x.png: next-step-3@2x-746ea782d206df2d0946af60b69fda98.png
+next-step-3@2x/index.png: next-step-3@2x-746ea782d206df2d0946af60b69fda98.png
 pencil.png: pencil-3d6e495ed5c0b85640b54c8756749968.png
 pencil/index.png: pencil-3d6e495ed5c0b85640b54c8756749968.png
 progress_bar_yellow.png: progress_bar_yellow-0437e177d8e8b218ee10f73e93b3e987.png
@@ -1447,8 +1455,8 @@ application.js: application-50d77abe52657ec2afb51c076a9e5841.js
 application/index.js: application-50d77abe52657ec2afb51c076a9e5841.js
 admin.css: admin-7888c2d2129c66f82dbe316854c0706f.css
 admin/index.css: admin-7888c2d2129c66f82dbe316854c0706f.css
-application.css: application-1e4301e5dcb2c10afb0e0887b9018ce0.css
-application/index.css: application-1e4301e5dcb2c10afb0e0887b9018ce0.css
+application.css: application-de89b0c64e0c2d6430933f005fce577a.css
+application/index.css: application-de89b0c64e0c2d6430933f005fce577a.css
 jquery-ui/animated-overlay.gif: jquery-ui/animated-overlay-e0c9fc4ab5cae26e1d14c62eabb0a289.gif
 jquery-ui/animated-overlay/index.gif: jquery-ui/animated-overlay-e0c9fc4ab5cae26e1d14c62eabb0a289.gif
 jquery-ui/ui-bg_flat_0_aaaaaa_40x100.png: jquery-ui/ui-bg_flat_0_aaaaaa_40x100-6b0858a07f9b26b1fbf609593cf427f4.png
