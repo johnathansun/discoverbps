@@ -249,7 +249,7 @@
   		var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
       // Load GeoJSON.
-      map.data.loadGeoJson('/boundary.geojson');
+      map.data.loadGeoJson('/city_boundary.geojson');
 
       // Set the stroke width, and fill color for each polygon
       var featureStyle = {
@@ -260,6 +260,27 @@
       }
       map.data.setStyle(featureStyle);
 
+      var allMarkers = [];
+      var homeMarkers = [];
+      var zoneMarkers = [];
+      var ellMarkers = [];
+      var spedMarkers = [];
+
+      function setMarkers(markers) {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
+        }
+      }
+
+      function clearMarkers() {
+        for (var i = 0; i < allMarkers.length; i++) {
+          allMarkers[i].setMap(null);
+        }
+      }
+
+      for (var i = 0; i < ellMarkers.length; i++) {
+        ellMarkers[i].setMap(map);
+      }
 
       var markerIcon = {
         url: '/assets/map_pins/DBPS_MapPins_Large_Blue_Blank.png',
@@ -268,28 +289,135 @@
         anchor: new google.maps.Point(19, 29),
       };
 
+      // Display the home schools
 
-      <% students_list.each_with_index do |student, student_i| %>
-        <% student.student_schools.rank(:sort_order).each_with_index do |student_school, i| %>
-          <% if student_school.school.latitude.present? && student_school.school.longitude.present? %>
-            var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
-            latlngbounds.extend(coordinates);
+      <% current_student.home_schools.rank(:sort_order).each_with_index do |student_school, i| %>
+        <% if student_school.school.latitude.present? && student_school.school.longitude.present? %>
+          var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
+          latlngbounds.extend(coordinates);
 
-            var marker = new google.maps.Marker({
-              position: coordinates,
-              icon: markerIcon,
-              map: map,
-              title: '<%= escape_javascript(student_school.school.name) %>'
-            });
-            var infowindow = new google.maps.InfoWindow({
-            });
-            google.maps.event.addListener(marker, 'click', function() {
-              infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info.try(:[], :campus1address1) %><br /><%= student_school.school.api_basic_info.try(:[], :campus1city) %>, <%= student_school.school.api_basic_info.try(:[], :campus1state) %>');
-              infowindow.open(map,this);
-            });
-          <% end %>
+          var marker = new google.maps.Marker({
+            position: coordinates,
+            icon: markerIcon,
+            map: map,
+            title: '<%= escape_javascript(student_school.school.name) %>'
+          });
+
+          allMarkers.push(marker);
+          homeMarkers.push(marker);
+
+          var infowindow = new google.maps.InfoWindow({
+          });
+
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info.try(:[], :campus1address1) %><br /><%= student_school.school.api_basic_info.try(:[], :campus1city) %>, <%= student_school.school.api_basic_info.try(:[], :campus1state) %>');
+            infowindow.open(map,this);
+          });
         <% end %>
       <% end %>
+
+      <% current_student.zone_schools.rank(:sort_order).each_with_index do |student_school, i| %>
+        <% if student_school.school.latitude.present? && student_school.school.longitude.present? %>
+          var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
+          latlngbounds.extend(coordinates);
+
+          var marker = new google.maps.Marker({
+            position: coordinates,
+            icon: markerIcon,
+            title: '<%= escape_javascript(student_school.school.name) %>'
+          });
+
+          allMarkers.push(marker);
+          zoneMarkers.push(marker);
+
+          var infowindow = new google.maps.InfoWindow({
+          });
+
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info.try(:[], :campus1address1) %><br /><%= student_school.school.api_basic_info.try(:[], :campus1city) %>, <%= student_school.school.api_basic_info.try(:[], :campus1state) %>');
+            infowindow.open(map,this);
+          });
+        <% end %>
+      <% end %>
+
+      <% current_student.ell_schools.rank(:sort_order).each_with_index do |student_school, i| %>
+        <% if student_school.school.latitude.present? && student_school.school.longitude.present? %>
+          var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
+          latlngbounds.extend(coordinates);
+
+          var marker = new google.maps.Marker({
+            position: coordinates,
+            icon: markerIcon,
+            title: '<%= escape_javascript(student_school.school.name) %>'
+          });
+
+          allMarkers.push(marker);
+          ellMarkers.push(marker);
+
+          var infowindow = new google.maps.InfoWindow({
+          });
+
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info.try(:[], :campus1address1) %><br /><%= student_school.school.api_basic_info.try(:[], :campus1city) %>, <%= student_school.school.api_basic_info.try(:[], :campus1state) %>');
+            infowindow.open(map,this);
+          });
+        <% end %>
+      <% end %>
+
+      <% current_student.sped_schools.rank(:sort_order).each_with_index do |student_school, i| %>
+        <% if student_school.school.latitude.present? && student_school.school.longitude.present? %>
+          var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
+          latlngbounds.extend(coordinates);
+
+          var marker = new google.maps.Marker({
+            position: coordinates,
+            icon: markerIcon,
+            title: '<%= escape_javascript(student_school.school.name) %>'
+          });
+
+          allMarkers.push(marker);
+          spedMarkers.push(marker);
+
+          var infowindow = new google.maps.InfoWindow({
+          });
+
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info.try(:[], :campus1address1) %><br /><%= student_school.school.api_basic_info.try(:[], :campus1city) %>, <%= student_school.school.api_basic_info.try(:[], :campus1state) %>');
+            infowindow.open(map,this);
+          });
+        <% end %>
+      <% end %>
+
+
+      // Display the Home Schools on click
+
+      google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function() {
+        clearMarkers();
+        setMarkers(homeMarkers);
+      });
+
+      // Display the Zone Schools on click
+
+      google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function() {
+        clearMarkers();
+        setMarkers(zoneMarkers);
+      });
+
+      // Display the ELL Schools on click
+
+      google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function() {
+        clearMarkers();
+        setMarkers(ellMarkers);
+      });
+
+      // Display the SPED Schools on click
+
+      google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function() {
+        clearMarkers();
+        setMarkers(spedMarkers);
+      });
+
+      // Set the home icon
 
       <% if current_student.latitude.present? && current_student.longitude.present? && current_student.latitude != 0 && current_student.longitude != 0 %>
         var coordinates = new google.maps.LatLng(<%= current_student.latitude %>, <%= current_student.longitude %>);
@@ -312,12 +440,13 @@
 
       var infowindow = new google.maps.InfoWindow({
       });
+
       google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent('<div><h3>Home</h3><%= current_student.street_number %> <%= current_student.street_name %>, <%= current_student.zipcode %>');
         infowindow.open(map,this);
       });
 
-  		//Associate the styled map with the MapTypeId and set it to display.
+  		// Associate the styled map with the MapTypeId and set it to display.
   		  map.fitBounds(latlngbounds);
         map.mapTypes.set('map_style', styledMap);
   		  map.setMapTypeId('map_style');
