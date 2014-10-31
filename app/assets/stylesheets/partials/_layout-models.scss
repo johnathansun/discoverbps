@@ -1643,109 +1643,153 @@ School List
 /* --------------------------------------------------------- 
 Compare List
 ------------------------------------------------------------ */
-.wrap#compare_list {
-  background: #ebebeb;
-  /*display: none;*/
+.wrap.compare_lists .menu_school_lists {
+	margin-left: 140px;	
 }
-.wrap#compare_list .compare_list_content {
-  overflow: auto;
-}
-.wrap#compare_list ul {
-  padding-left: 0;
-  width: 100%;
-  /*li:nth-child(1),li:nth-child(2),li:nth-child(3),li:nth-child(4),li:nth-child(5){*/
 
-}
-.wrap#compare_list ul li {
-  list-style: none;
-  height: 48px;
-}
-.wrap#compare_list ul li.descrip_open {
-  height: auto !important;
-}
-.wrap#compare_list ul li .line {
-  height: 48px;
-  position: relative;
-  display: table;
-  float: left;
-  color: #969696;
-}
-.wrap#compare_list ul li .middle {
-  vertical-align: middle;
-  display: table-cell;
-}
-.wrap#compare_list ul li .no_order {
-  color: #0077cf;
-  width: 192px;
-  border-right: 1px solid #ffffff;
-  text-align: right;
-  font-size: 16px;
-  line-height: 18px;
-}
-.wrap#compare_list ul li .no_order .middle {
-  text-align: right;
-  width: 40px;
-  padding-right: 22px;
-}
-.wrap#compare_list ul li .no_order .middle .number {
-  width: 40px;
-  text-align: center;
-  display: inline-block;
-}
-.wrap#compare_list ul li .school_name {
-  color: #565656;
-  border-left: 1px solid #ffffff;
-  font-size: 16px;
-  line-height: 18px;
-  width: 100%;
-}
-.wrap#compare_list ul li .school_name.name_1 {
-  border: 0;
-}
-.wrap#compare_list ul li#compare_1,
-.wrap#compare_list ul li#compare_2,
-.wrap#compare_list ul li#compare_3,
-.wrap#compare_list ul li#compare_4,
-.wrap#compare_list ul li#compare_5 {
-  height: 74px;
-}
-.wrap#compare_list ul li#compare_1 .line,
-.wrap#compare_list ul li#compare_2 .line,
-.wrap#compare_list ul li#compare_3 .line,
-.wrap#compare_list ul li#compare_4 .line,
-.wrap#compare_list ul li#compare_5 .line {
-  height: 74px;
-}
-.wrap#compare_list ul li#compare_1 .school_name,
-.wrap#compare_list ul li#compare_2 .school_name,
-.wrap#compare_list ul li#compare_3 .school_name,
-.wrap#compare_list ul li#compare_4 .school_name,
-.wrap#compare_list ul li#compare_5 .school_name {
-  color: #565656;
-  font-size: 27px;
-  line-height: 28px;
-}
-.wrap#compare_list ul li#number_1,
-.wrap#compare_list ul li#number_2,
-.wrap#compare_list ul li#number_3,
-.wrap#compare_list ul li#number_4,
-.wrap#compare_list ul li#number_5 {
-  height: 74px;
-}
-.wrap#compare_list ul li#number_1 .line,
-.wrap#compare_list ul li#number_2 .line,
-.wrap#compare_list ul li#number_3 .line,
-.wrap#compare_list ul li#number_4 .line,
-.wrap#compare_list ul li#number_5 .line {
-  height: 74px;
-}
-.wrap#compare_list ul li#number_1 .no_order,
-.wrap#compare_list ul li#number_2 .no_order,
-.wrap#compare_list ul li#number_3 .no_order,
-.wrap#compare_list ul li#number_4 .no_order,
-.wrap#compare_list ul li#number_5 .no_order {
-  font-size: 27px;
-  line-height: 28px;
+.compare_list {
+	
+	#ranks {
+		margin: 0 0 5px;
+		.rank {
+			width: 20%;
+			float: left;
+			font-size: 2.5em;
+			color: $blue;
+		}
+	}
+	
+	.column { 
+		float: left; 
+		margin: 30px 0 0;
+	}
+	.column.labels { 
+		width: 12%; 
+		margin-top: 38px;
+	}
+	.column.sort_schools { width: 73%; }
+	.column.more_schools { 
+		width: 15%; 
+		margin-top: 70px;
+		
+		.school {
+			position: relative;
+			color: $med_gray;
+			
+			a {
+				display: block;
+				color: $med_gray;
+				text-decoration: none;
+				padding: 5px 0 5px 20px;
+				&:hover { color: $blue; }
+			}
+			.icon {
+				position: absolute;
+				left: 0;
+			}
+		}
+	}
+	.more_schools_frame {
+		margin: 0 15px;
+	}
+	
+	.labels_frame {
+		padding: 0 5px 0 10px;
+	}
+	.label {
+		height: 50px;
+		position: relative;
+		padding-left: 20px;
+		font-size: 13px;
+		&.long { height: 150px; }
+		&.rank { height: 56px; }
+		&.name { height: 94px; }
+		&.demand { height: 90px; }
+		&.no_icon { padding-left: 0; }
+		
+		.icon {
+			position: absolute;
+			left: 0;
+		}
+
+	}// .label
+	
+	.sortable_school {
+		width: 20%;
+		float: left;
+		&.ui-sortable-helper {
+			.li_frame {
+				background: #FFF;
+				box-shadow: 0 0 10px 2px #bbb;
+			}
+		}
+		
+		.li_frame {
+			position: relative;
+			margin-right: 10px;
+			padding: 15px 10px;
+			width: auto;
+			background: #F9F9F9;
+			cursor: col-resize;
+			transition: background 250ms ease;
+			&:hover {
+				background: #FFF;
+			}
+		}
+		
+		.line {
+			height: 50px;
+			overflow: hidden;
+			line-height: 1.3em;
+			color: $med_gray;
+			
+			&.long {
+				height: 150px;
+				font-size: 12px;
+			}
+		}
+		
+		.school_star {
+			position: absolute;
+			right: 10px;
+			top: 15px;
+			img { width: 20px; height: auto; }
+		}
+		.school_name {
+			font-size: 1.5em;
+			margin-right: 20px;
+			height: 100px;
+			color: $dark_gray;
+		}
+		.school_your_fit_icon {
+			.icon { color: $blue; }
+		}
+		.school_demand {
+			height: 90px;
+			font-size: 12px;
+			line-height: 1.25em;
+		}
+		.max_range {
+			margin: 5px 0 0;
+			.ajust_range {
+			  height: 8px;
+			  background: $blue;
+			  -webkit-border-radius: 4px;
+			  -moz-border-radius: 4px;
+			  border-radius: 4px;
+			}
+		}
+		
+	}// .sortable_school
+		
+}// .compare_list
+
+.ui-widget-content.ui-tooltip {
+	color: #FFF;
+	background: $dark_gray;
+	background: rgba(80,80,80,.8);
+	width: 90px;
+	border-radius: 7px;
 }
 
 
@@ -1816,7 +1860,7 @@ Wrap Result
 
 
 /* --------------------------------------------------------- 
-Menu Compare Name
+Menu Compare Student Name
 ------------------------------------------------------------ */
 .wrap .menu_compare_name {
   width: 100%;

@@ -56,9 +56,6 @@ q:after {
   content: "";
   content: none;
 }
-small {
-  font-size: 85%;
-}
 /* Position subscript and superscript content without affecting line-height: h5bp.com/k */
 sub,
 sup {
@@ -101,6 +98,9 @@ big, .big {
 }
 small, .small {
 	font-size: 80%;
+}
+.caps {
+	text-transform: uppercase;
 }
 
 /* !TITLE ELEMENTS
