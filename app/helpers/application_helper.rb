@@ -62,6 +62,8 @@ module ApplicationHelper
 		elsif bar_step == 4
 			if page_step == 4
 				'current'
+			elsif student_step >= 4
+				'complete'
 			end
 		end
 	end
