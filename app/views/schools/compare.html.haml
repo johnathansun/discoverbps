@@ -4,7 +4,7 @@
 	= render partial: 'schools/page_elements/student_tabs'
 
 .wrap.global_map
-	= render partial: 'schools/page_elements/map', locals: {students_list: current_user_students, school: nil, map_controls: true, height: 'resize', width: '100%'}
+	= render partial: 'schools/page_elements/list_map', locals: {students_list: current_user_students, school: nil, map_controls: true, height: 'resize', width: '100%'}
 
 .wrap.compare_lists
 	= render partial: 'schools/page_elements/school_list_tabs'
@@ -13,73 +13,73 @@
 	= link_to get_ready_schools_path do
 		%span.arrow_slide.no_mobile
 			= image_tag('next-step-3.png')
-				
+
 	.result.clearfix
-	
+
 		-# LEFT COLUMN
 		-# ----------------------------------------------
 		.labels.column_left.column
 			.labels_frame
 				.label.rank.no_icon
-					Your Rank	
+					Your Rank
 				.label.name.no_icon
-					Name	
+					Name
 				.label.your_fit.no_icon
-					Your Fit	
+					Your Fit
 				.label.demand.no_icon
-					= "2013-2014 Demand"	
+					= "2013-2014 Demand"
 				.label.travel
 					%span{:aria => {hidden: true}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"}
-					Travel	
+					Travel
 				.label.eligibility
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"}
-					Eligibility	
+					Eligibility
 				.label.hours
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"}
 					Hours
 				.label.surround_care
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
-					Surround Care	
+					Surround Care
 				.label.school_type
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
-					School Type	
+					School Type
 				.label.grades
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"}
-					Grades Offered	
+					Grades Offered
 				.label.enrollment
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
-					Enrollment	
+					Enrollment
 				.label.application
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"}
-					Special Application	
+					Special Application
 				.label.awc
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"}
-					Advanced Work Class (AWC)	
+					Advanced Work Class (AWC)
 				.label.mcas
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
-					MCAS Tier	
+					MCAS Tier
 				.label.uniform.long
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
-					Uniform Policy	
+					Uniform Policy
 				.label.school.long
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"}
-					School Focus	
+					School Focus
 				.label.health.long
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
-					Health & Wellness	
+					Health & Wellness
 				.label.comm_partners.long
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
-					Community Partners	
+					Community Partners
 				.label.facilities.long
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
-					Facility Features	
+					Facility Features
 				.label.sports.long
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
-					Sports	
-	
-	
+					Sports
+
+
 		-# CENTER COLUMN
-		-# ----------------------------------------------	
+		-# ----------------------------------------------
 		.sort_schools.column_center.column
 			%ul#ranks.clearfix
 				%li.rank 1
@@ -87,13 +87,13 @@
 				%li.rank 3
 				%li.rank 4
 				%li.rank 5
-					
-		
+
+
 			.compare_list_content{title: "Click to drag"}
-	
+
 				-# OLD CODE: %ul{id: "sortable_#{student_i}"}
 				%ul{id: "sortable_0"}
-				
+
 					-# OLD CODE: %li{id: "#{student.id}_#{student_school.school.bps_id}"}
 					-# NOTE: put a loop in here so i didnt have to write this block 5 times
 					- (1..5).each do |i|
@@ -103,10 +103,10 @@
 									%span
 										= image_tag('star_starred.png', id: "star_55555_starred", class: 'star_starred', style: "display: #{i < 3 ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: '3333'})
 										= image_tag('star_unstarred.png', id: "star_55555_unstarred", class: 'star_unstarred', style: "display: #{i < 3 ? 'none' : 'inline'}; cursor: pointer;", data: {student_school_id: '3333'} )
-	
+
 								.school_name.line
 									Harvard / Kent Elementary
-									
+
 									-# OLD CODE:
 									-# if @matching_school_ids.include?(student_school.bps_id)
 										-# %span{class: "middle", style: "background-color: #ffff00;"}
@@ -116,76 +116,76 @@
 										-# %span.middle
 											-# %h3{style: "padding-left: 12px;"}
 												-# = student_school.school.name
-								
+
 								.school_your_fit_icon.line
 									%span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
 									%span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
 									%span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"}
 									%span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
-		
+
 								.school_demand.line
 									.stats
-										20 open seats 
+										20 open seats
 										%br/
-										100 applicants 
+										100 applicants
 										%br/
 										5 applicants/open seat
 									.max_range
 										%div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
-		
+
 								.school_travel.line
 									= '1.9 mi'
-										
+
 								.school_eligibility.line
 									Citywide
-									
+
 								.school_hours.line
 									9:30am
 									%span.small.caps to
 									4:00pm
-									
+
 								.school_surround_care.line
-									Before school 
+									Before school
 									%br/
 									After school
-										
+
 								.school_type.line
 									Traditional
-									
+
 								.school_grades.line
 									= 'K1-5'
-								
+
 								.school_enrollment.line
 									550
-									
+
 								.school_special_app.line
-									yes	
-		
+									yes
+
 								.school_awc.line
 									no
-									
+
 								.school_mcas.line
 									Tier 2
-		
+
 								.school_uniform.line.long
 									= "K1-5: navy blue pants/skirt and baby blue shirt/blouse with purple school logo. 6-8: black pants/skirt. White polo shirt and black sweatshirt with school logo. No jeans. P.E. uniform with school logo."
-										
+
 								.school_focus.line.long
 									= "'Our school focus is dual language project based learning centered in the arts."
-									
+
 								.school_health.line.long
 									= "Description about health and wellness"
-										
-								.school_comm_partners.line.long		
+
+								.school_comm_partners.line.long
 									= "Boston Partners in Education, , Health Management Resources (HMR), Mass General Hospital, Peoples' Baptist & North  River Community Church, Roxbury Community College, Simmons College, SquashBusters, Technology Goes Home at School, Wheelock College"
-									
+
 								.school_facilities.line.long
 									= "Art Room, Auditorium, Cafeteria, Computer Lab, Gymnasium, Music Room"
-								
+
 								.school_facilities.line.long
 									= "Baseball, Basketball, Double Dutch, Football, Track, Volleyball"
-								
-	
+
+
 					:javascript
 						$(function() {
 							$("#sortable_0").sortable({
@@ -205,51 +205,51 @@
 								track: true
 							});
 						});
-								
-	
+
+
 		-# RIGHT COLUMN
-		-# ----------------------------------------------	
+		-# ----------------------------------------------
 		.more_schools.column_right.column
 			.more_schools_frame
 				%h3
 					More Schools:
-					
+
 				%ul
 					%li.school
 						%a{href: '#', title:'Add'}
 							%span.icon.icon-DBPS-Dev-Assets-SRG-10
 							= 'Hernandez K-8'
-	
+
 					%li.school
 						%a{href: '#', title:'Add'}
 							%span.icon.icon-DBPS-Dev-Assets-SRG-10
 							= 'Hurley K-8'
-	
+
 					%li.school
 						%a{href: '#', title:'Add'}
 							%span.icon.icon-DBPS-Dev-Assets-SRG-10
 							= 'Perkins Elementary'
-	
+
 					%li.school
 						%a{href: '#', title:'Add'}
 							%span.icon.icon-DBPS-Dev-Assets-SRG-10
 							= 'UP Academy Dorchester'
-	
+
 					%li.school
 						%a{href: '#', title:'Add'}
 							%span.icon.icon-DBPS-Dev-Assets-SRG-10
 							= 'Quincy Elementary'
-	
+
 					%li.school
 						%a{href: '#', title:'Add'}
 							%span.icon.icon-DBPS-Dev-Assets-SRG-10
 							= 'Adams Elementary'
-	
+
 					%li.school
 						%a{href: '#', title:'Add'}
 							%span.icon.icon-DBPS-Dev-Assets-SRG-10
 							= 'Tynan Elementary'
-			
-		
+
+
 
 	= render partial: 'schools/page_elements/footer'
