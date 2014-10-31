@@ -4,7 +4,7 @@
 	= render partial: 'schools/page_elements/student_tabs'
 
 .wrap.global_map
-	= render partial: 'schools/page_elements/map', locals: {students_list: [current_student], school: nil, map_controls: true, resize: true, width: '100%'}
+	= render partial: 'schools/page_elements/list_map', locals: {students_list: [current_student], school: nil, map_controls: true, resize: true, width: '100%'}
 
 .wrap
 	= render partial: 'schools/page_elements/school_list_tabs'
@@ -126,25 +126,6 @@
 				type: 'post',
 				dataType: 'script'
 			});
-		});
-
-		$(function() {
-			$("#sortable").sortable({
-				axis: "y",
-				scroll: true,
-				update: function(){
-					/*$('#sortable li').each(function(){
-						$(this).find('.sortable_row_number').html($(this).index() + 1);
-					});*/
-					$.ajax({
-						url: '/schools/sort',
-						type: 'post',
-						data: $('#sortable').sortable('serialize'),
-						dataType: 'script'
-					});
-				}
-			});
-			$("#sortable").disableSelection();
 		});
 
 		/*var choice_order_ascending = false;
