@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141030054438) do
+ActiveRecord::Schema.define(:version => 20141031004134) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -222,7 +222,7 @@ ActiveRecord::Schema.define(:version => 20141030054438) do
     t.text     "zone_schools_json"
     t.text     "ell_schools_json"
     t.text     "sped_schools_json"
-    t.integer  "step",                    :default => 0
+    t.integer  "step",                    :default => 1
   end
 
   add_index "students", ["session_id"], :name => "index_students_on_session_id"

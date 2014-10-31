@@ -2,28 +2,28 @@
 	.note.dark_blue
 		Jump to any step by clicking on it
 	.steps
-		.step.first.complete
+		%div{class: "step first #{progress_bar_class_helper(current_student.step, page_step, 1)}"}
 			%a{href: "/", class:"no-decoration"}
 				.bar
 				.label
 					%span.step_num= 'STEP 1'
 					%br/
 					%span.step_name= 'search'
-		.step.complete
+		%div{class: "step #{progress_bar_class_helper(current_student.step, page_step, 2)}"}
 			%a{href: "/schools?student=14518", class:"no-decoration"}
 				.bar
 				.label
 					%span.step_num= 'STEP 2'
 					%br/
 					%span.step_name= 'learn'
-		.step.current
+		%div{class: "step #{progress_bar_class_helper(current_student.step, page_step, 3)}"}
 			%a{href: "/schools/compare", class:"no-decoration"}
 				.bar
 				.label
 					%span.step_num= 'STEP 3'
 					%br/
 					%span.step_name= 'compare & rank'
-		.step.last
+		%div{class: "step last #{progress_bar_class_helper(current_student.step, page_step, 4)}"}
 			%a{href: "/schools/get_ready", class:"no-decoration"}
 				.bar
 				.label

@@ -6,14 +6,7 @@ class SchoolsController < ApplicationController
     if current_user_students.blank?
       redirect_to root_url
     else
-      # Set current_student if it's specified in the params
-      if params[:student].present?
-        if current_user.present? && current_user.students.find(params[:student]).present?
-          session[:current_student_id] = current_user.students.find(params[:student]).id
-        elsif Student.where(id: params[:student], session_id: session[:session_id]).present?
-          session[:current_student_id] = Student.where(id: params[:student], session_id: session[:session_id]).first.id
-        end
-      end
+      current_student.update_column(:step, 2) if current_student.step < 2
 
       @home_schools = current_student.home_schools
       @zone_schools = current_student.zone_schools
@@ -36,6 +29,8 @@ class SchoolsController < ApplicationController
       flash[:alert] = 'There were no schools that matched your search. Please try again.'
       redirect_to root_url
     else
+      current_student.update_column(:step, 3) if current_student.step < 3
+
       @home_schools = current_student.home_schools
       @zone_schools = current_student.zone_schools
       @ell_schools = current_student.ell_schools
@@ -58,14 +53,8 @@ class SchoolsController < ApplicationController
     if current_user_students.blank?
       redirect_to root_url
     else
-      # Set current_student if it's specified in the params
-      if params[:student].present?
-        if current_user.present? && current_user.students.find(params[:student]).present?
-          session[:current_student_id] = current_user.students.find(params[:student]).id
-        elsif Student.where(id: params[:student], session_id: session[:session_id]).present?
-          session[:current_student_id] = Student.where(id: params[:student], session_id: session[:session_id]).first.id
-        end
-      end
+
+      current_student.update_column(:step, 4) if current_student.step < 4
 
       @home_schools = current_student.home_schools
       @zone_schools = current_student.zone_schools

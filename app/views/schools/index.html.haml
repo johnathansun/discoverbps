@@ -1,4 +1,4 @@
-= render partial: 'schools/page_elements/header'
+= render partial: 'schools/page_elements/header', locals: {page_step: 2}
 
 .wrap
 	= render partial: 'schools/page_elements/student_tabs'
@@ -13,7 +13,7 @@
 	= link_to compare_schools_path do
 		%span{data: {icon: "&#xe001"}, class: 'arrow_slide no_mobile'}
 
-	.result	
+	.result
 		= render partial: 'schools/page_elements/preference_panel'
 
 		#school_list

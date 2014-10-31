@@ -1,4 +1,4 @@
-= render partial: 'schools/page_elements/header'
+= render partial: 'schools/page_elements/header', locals: {page_step: 4}
 
 .wrap
 	= render partial: 'schools/page_elements/student_tabs'
@@ -87,6 +87,8 @@
 
 
 		})*/
+
+		$()
 
 		//btn close preference choice in tablet size
 		$(".header_preferences #hide_btn").click(function(){

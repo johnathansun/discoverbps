@@ -20,9 +20,9 @@
 		.logo_discover
 			%a{href: "/", class:"no-decoration"}
 				%span{:aria => {hidden: "true"}, :class => "icon-DBPS-Dev-Assets-SRG-01"}
-					
-		= render partial: 'schools/progress_bar'
-		
+
+		= render partial: 'schools/page_elements/progress_bar', locals: {page_step: page_step}
+
 .clr
 
 :javascript

@@ -27,32 +27,29 @@
 											Grade
 											= student.grade_level
 										%span.schools.blue
-											= student.school_ids.count 
-											schools, 
-											= student.preferences_count
+											= student.home_schools.count
+											schools,
+											= student.starred_schools.count
 											favorites
 									.steps
-										.step.first.complete
+										%div{class: "step first #{progress_bar_class_helper(student.step, 1, 1)}"}
 											.bar
 											.label= 'STEP 1 - SEARCH'
-										.step.complete
+										%div{class: "step #{progress_bar_class_helper(student.step, 1, 2)}"}
 											.bar
 											.label= 'STEP 2 - LEARN'
-										.step.current
+										%div{class: "step #{progress_bar_class_helper(student.step, 1, 3)}"}
 											.bar
 											.label= 'STEP 3 - COMPARE & RANK'
-										.step.last
+										%div{class: "step last #{progress_bar_class_helper(student.step, 1, 4)}"}
 											.bar
 											.label= 'STEP 4 - GET READY'
-											
-											
-											
 
 							%li
 								%a#start_new_search.button.orange{:href => '#'}
-									Start a new search									
+									Start a new search
 								= button_to 'Clear Searches', {controller: 'students', action: 'delete_all', student_ids: current_user_students.collect {|x| x.id}}, method: :delete, id: 'delete_students_button', class: 'antialiased_button', confirm: 'Are you sure you want to clear all of your previous searches?'
-								
+
 
 						.clr
 						- if flash[:alert].present?
@@ -65,12 +62,12 @@
 								%br/
 								%span.small
 									(grade level is for the entering grade; name is optional):
-										
+
 						%div.new_search_form_wrap.hidden
 							%p New Search
 							= form_tag students_path, method: :post, remote: true do
 								= render partial: 'students/search_form', locals: {sibling_search: true}
-									
+
 						-# Script for New Search button
 						:javascript
 							$(document).ready(function(){
@@ -103,7 +100,7 @@
 
 				.text.clearfix
 					%p.yellow-buttons
-						= auto_link(TextSnippet.find('home-register-intro').text)
+						= auto_link(TextSnippet.find('home-register-intro').try(:text))
 						= link_to 'Learn more', 'http://www.bostonpublicschools.org/register', title: 'Learn more', class: 'u', style: 'margin-bottom: 0;', target: '_blank'
 					.alignleft_half
 						%h2 Visit Schools:
@@ -112,7 +109,7 @@
 						%h2 Register:
 						= link_to 'Collect the required documents', '#', class: 'u', target: '_blank'
 						= link_to 'Plan a visit to a welcome center', '#', class: 'u', target: '_blank'
-						
+
 
 			.content_right
 				%span.event{style: 'margin-bottom: 39px;'}

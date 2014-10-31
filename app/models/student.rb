@@ -63,22 +63,22 @@ class Student < ActiveRecord::Base
   # SAVE SCHOOLS ON CURRENT_STUDENT
 
   def set_home_schools!
-    api_schools = Webservice.home_schools(self.formatted_grade_level, self.address_id, self.awc_invitation, self.sibling_school_ids).try(:[], :List)
+    api_schools = Webservice.home_schools(self.formatted_grade_level, self.addressid, self.awc_invitation, self.sibling_school_ids).try(:[], :List)
     save_student_schools!(api_schools, 'home')
   end
 
   def set_zone_schools!
-    api_schools = Webservice.zone_schools(self.formatted_grade_level, self.address_id, self.sibling_school_ids).try(:[], :List)
+    api_schools = Webservice.zone_schools(self.formatted_grade_level, self.addressid, self.sibling_school_ids).try(:[], :List)
     save_student_schools!(api_schools, 'zone')
   end
 
   def set_ell_schools!
-    api_schools = Webservice.ell_schools(self.formatted_grade_level, self.address_id, self.ell_language)
+    api_schools = Webservice.ell_schools(self.formatted_grade_level, self.addressid, self.ell_language)
     save_student_schools!(api_schools, 'ell')
   end
 
   def set_sped_schools!
-    api_schools = Webservice.sped_schools(self.formatted_grade_level, self.address_id)
+    api_schools = Webservice.sped_schools(self.formatted_grade_level, self.addressid)
     save_student_schools!(api_schools, 'sped')
   end
 

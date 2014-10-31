@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :set_current_student_from_params
   helper_method :zone_school_grades
   helper_method :current_student
   helper_method :current_user_students
@@ -7,6 +8,17 @@ class ApplicationController < ActionController::Base
   # after_filter :store_location
 
   private
+
+  # if a student_id is in the params, set session[:current_student_id] to match
+  def set_current_student_from_params
+    if params[:student_id].present?
+      if current_user.present? && current_user.students.find(params[:student_id]).present?
+        session[:current_student_id] = current_user.students.find(params[:student_id]).id
+      elsif Student.where(id: params[:student_id], session_id: session[:session_id]).first.present?
+        session[:current_student_id] = Student.where(id: params[:student_id], session_id: session[:session_id]).first.id
+      end
+    end
+  end
 
   def zone_school_grades
   	if Date.today > Date.parse('01-11-2017')

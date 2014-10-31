@@ -39,4 +39,30 @@ module ApplicationHelper
 			"#{ ((((today - today.beginning_of_year).to_f + 93) / 365) * 100).round }%"
 		end
 	end
+
+	def progress_bar_class_helper(student_step, page_step, bar_step)
+		if bar_step == 1
+			if page_step == 1
+				'current'
+			elsif student_step >= 1
+				'complete'
+			end
+		elsif bar_step == 2
+			if page_step == 2
+				'current'
+			elsif student_step >= 2
+				'complete'
+			end
+		elsif bar_step == 3
+			if page_step == 3
+				'current'
+			elsif student_step >= 3
+				'complete'
+			end
+		elsif bar_step == 4
+			if page_step == 4
+				'current'
+			end
+		end
+	end
 end
