@@ -71,7 +71,7 @@ module DiscoverbpsV2
         'application.js'
     ]
 
-    config.sass.cache = false
+    # config.sass.cache = false
 
     config.middleware.use Rack::Deflater
   end
