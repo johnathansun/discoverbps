@@ -44,7 +44,7 @@
 	.box.line.getting_there
 		.first_block.middle
 			.icon.middle
-				%span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_distance transportation_icon"}				
+				%span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_distance transportation_icon"}
 				-#- if student_school.transportation_eligibility == 'Y'
 					%span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-15 transportation_icon"}
 				-#- else
@@ -89,24 +89,6 @@
 			%br/
 			.max_range
 				%div{class: 'ajust_range', style: "margin-left: #{school_hours_start_time_helper(school.api_hours.try(:[], :schhours1))}%; margin-right: #{school_hours_end_time_helper(school.api_hours.try(:[], :schhours1))}%;"}
-
-	- if SURROUND_CARE_GRADES.include?(current_student.grade_level)
-		.box.line.surround_care
-			%span.middle
-				- surround_care_count = 0
-				- if school.api_basic_info.try(:[], :BeforeSchPrograms).present?
-					= surround_care_count += 1
-					%span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-42"}
-						Before school
-						%br/
-
-				- if school.api_basic_info.try(:[], :AfterSchPrograms).present?
-					- surround_care_count += 1
-					%span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-42"}
-						After school
-
-				%span{class: 'sortable_surround_care', style: "visibility: hidden;"}
-					= surround_care_count
 
 	.clr
 
