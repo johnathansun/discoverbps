@@ -13,6 +13,3 @@
 //= require jquery
 //= require jquery.ui.all
 //= require jquery_ujs
-//= require admin/d3.min
-//= require admin/crossfilter-barchart
-//= require admin/crossfilter.min
