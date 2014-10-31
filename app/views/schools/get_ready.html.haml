@@ -11,43 +11,13 @@
 			.list_content
 				%div{class: "flexible_content", style: "width:1220px;"}
 					.menu_list
-						.li_frame
-							#sortable_choice_order_column.arrow.menu_bloc.desktop.no_mobile
-							#sortable_school_name_column.menu_bloc.sortable_column
-								.column_title
-									School Name
-
-							#getting_there.menu_bloc
-								%div{id: "sortable_distance_column", class: "first_block sortable_column", style: "color: #0077cf;"}
-									%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-up"}
-									.column_title
-										Getting There
-
-								.second_block.sortable_column
-									.column_title
-										Walk Time
-
-								.second_block.sortable_column
-									.column_title
-										Drive Time
-
-							#sortable_eligibility_column.menu_bloc.sortable_column
-								.column_title
-									Eligibility
-
-							#sortable_hours_column.menu_bloc.sortable_column
-								.column_title
-									School Hours
-
-							- if SURROUND_CARE_GRADES.include?(current_student.grade_level)
-								#sortable_surround_care_column.menu_bloc.sortable_column
-									.column_title
-										Surround Care
-
-							#sortable_fit_column.menu_bloc.sortable_column
-								.column_title
-									Your Fit
-							.clr
+						= render partial: 'schools/school_details/school_header_home'
+						- if @zone_schools.present?
+							= render partial: 'schools/school_details/school_header_zone'
+						- if current_student.ell_language.present?
+							= render partial: 'schools/school_details/school_header_ell'
+						- if current_student.sped_needs.present?
+							= render partial: 'schools/school_details/school_header_sped'
 
 					%ul#sortable
 						- @home_schools.each_with_index do |student_school, i|

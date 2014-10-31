@@ -1,11 +1,10 @@
 .menu_school_lists
   .name_list
 
-    - if @home_schools.present?
-      #home_schools_tab.school_list_tab.active
-        %span.name
-          Home-based
-          %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
+    #home_schools_tab.school_list_tab.active
+      %span.name
+        Home-based
+        %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
     - if @zone_schools.present?
       #zone_schools_tab.school_list_tab
@@ -13,13 +12,13 @@
           Zone-based
           %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
-    - if @ell_schools.present?
+    - if current_student.ell_language.present?
       #ell_schools_tab.school_list_tab
         %span.name
           ELL
           %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
-    - if @sped_schools.present?
+    - if current_student.sped_needs.present?
       #sped_schools_tab.school_list_tab
         %span.name
           SPED
