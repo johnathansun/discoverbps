@@ -21,7 +21,7 @@
 							- for student in current_user_students
 								%li
 									-#= link_to student.tab_name, schools_path(student: student.id), class: 'orange_button previous_student_search_button'
-									%a{:href => schools_path(student: student.id), :class => 'previous_student_search_button' }
+									%a{:href => schools_path(student_id: student.id), :class => 'previous_student_search_button' }
 										%span.name.big.dark_blue= student.tab_name
 										%span.grade.small.dark_blue
 											Grade
@@ -91,7 +91,7 @@
 							= form_tag students_path, method: :post, remote: true do
 								= render partial: 'students/search_form', locals: {sibling_search: true}
 
-			= render partial: 'students/timeline_vertical'
+			= render partial: 'layouts/vertical_timeline'
 
 		%section.search_section.second
 			.content_left
