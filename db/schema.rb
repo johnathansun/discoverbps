@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141031004134) do
+ActiveRecord::Schema.define(:version => 20141031024058) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -183,6 +183,10 @@ ActiveRecord::Schema.define(:version => 20141031004134) do
     t.string   "eligibility"
     t.string   "school_type"
     t.boolean  "starred",                    :default => false
+    t.string   "sped_cluster"
+    t.text     "sped_description"
+    t.string   "ell_cluster"
+    t.text     "ell_description"
   end
 
   add_index "student_schools", ["bps_id"], :name => "index_student_schools_on_bps_id"

@@ -31,6 +31,8 @@
         event.preventDefault();
         $('.school_list_tab').removeClass("active");
         $('#home_schools_tab').addClass("active");
+        $('.school_list_header').hide();
+        $('#home_header').show();
         $('li.list_row').hide();
         $('li.home_school').show();
       });
@@ -38,6 +40,8 @@
         event.preventDefault();
         $('.school_list_tab').removeClass("active");
         $('#zone_schools_tab').addClass("active");
+        $('.school_list_header').hide();
+        $('#zone_header').show();
         $('li.list_row').hide();
         $('li.zone_school').show();
       });
@@ -45,6 +49,8 @@
         event.preventDefault();
         $('.school_list_tab').removeClass("active");
         $('#ell_schools_tab').addClass("active");
+        $('.school_list_header').hide();
+        $('#ell_header').show();
         $('li.list_row').hide();
         $('li.ell_school').show();
       });
@@ -52,6 +58,8 @@
         event.preventDefault();
         $('.school_list_tab').removeClass("active");
         $('#sped_schools_tab').addClass("active");
+        $('.school_list_header').hide();
+        $('#sped_header').show();
         $('li.list_row').hide();
         $('li.sped_school').show();
       });

@@ -17,96 +17,16 @@
 				%span{:aria => {hidden: 'true'}, :class => "select_icon icon-DBPS-Preferences-Icons-20130930-SRG_exam_school"}
 			%span.icon.icon-info
 
-	.box.line.your_fit_icon
-		%span{id: "#{current_student.id}_#{school.bps_id}_icons", class: "middle"}
-			- tag_counter = 0
-			- student_preference_categories.each_with_index do |category, i|
-				- category.grade_level_preferences(current_student.grade_level).each do |preference|
-					- if school.has_preference?(preference)
-						- if current_student.preferences.collect {|x| x.id}.try(:include?, preference.id)
-							%span{:aria => {hidden: 'true'}, id: 'school_#{school.id}', data: {tags: '["#{preference.name}"]'}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", title: "#{preference.name}"}
-							- tag_counter += 1
-						- else
-							%span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: '["#{preference.name}"]'}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", style: "display: none;", title: "#{preference.name}"}
 
-			%span{id: "#{current_student.id}_#{school.bps_id}_icon_count", class: "sortable_fit fit_icon_count", style: "visibility: hidden;"}
-				= tag_counter
-
-	.box.line.your_fit_descrip
-		.middle
-			%span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Dev-Assets-SRG-35"}
-				Small
-	.box.line.your_fit_descrip
-		%span.middle
-			%span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Dev-Assets-SRG-35"}
-				Yes
-
-	.box.line.getting_there
+	.box.line
 		.first_block.middle
-			.icon.middle
-				%span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_distance transportation_icon"}				
-				-#- if student_school.transportation_eligibility == 'Y'
-					%span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-15 transportation_icon"}
-				-#- else
-					%span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-14 transportation_icon"}
+			= student_school.ell_description
 
-			%span.middle.sortable_distance
-				= spacer_helper(student_school.distance)
-				&nbsp;mi
-
-		.second_bloc.middle
-			%span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
-				= spacer_helper(student_school.walk_time)
-				%span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
-
-		.second_bloc.middle.last
-			%span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-17"}
-				= spacer_helper(student_school.drive_time)
-				%span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
-
-	.box.line.eligibility
+	.box.line
 		.first_block.middle
-			- if params[:action] == 'zone_schools'
-				%span.middle.sortable_eligibility
-					Zone
-			- else
-				%span.middle.sortable_eligibility
-					=raw eligibility_helper(spacer_helper(student_school.eligibility))
+			= student_school.ell_cluster
 
-		.second_bloc.middle
-			%span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
-				= spacer_helper(student_school.walk_time)
-				%span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
 
-		.second_bloc.middle.last
-			%span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-17"}
-				= spacer_helper(student_school.drive_time)
-				%span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
-
-	.box.line.school_hours
-		%span.middle.sortable_hours
-			= truncate(school.api_hours.try(:[], :schhours1), length: 18)
-			%br/
-			.max_range
-				%div{class: 'ajust_range', style: "margin-left: #{school_hours_start_time_helper(school.api_hours.try(:[], :schhours1))}%; margin-right: #{school_hours_end_time_helper(school.api_hours.try(:[], :schhours1))}%;"}
-
-	- if SURROUND_CARE_GRADES.include?(current_student.grade_level)
-		.box.line.surround_care
-			%span.middle
-				- surround_care_count = 0
-				- if school.api_basic_info.try(:[], :BeforeSchPrograms).present?
-					= surround_care_count += 1
-					%span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-42"}
-						Before school
-						%br/
-
-				- if school.api_basic_info.try(:[], :AfterSchPrograms).present?
-					- surround_care_count += 1
-					%span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-42"}
-						After school
-
-				%span{class: 'sortable_surround_care', style: "visibility: hidden;"}
-					= surround_care_count
 
 	.clr
 

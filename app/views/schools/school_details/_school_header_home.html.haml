@@ -1,0 +1,31 @@
+%div{id: 'home_header', class: 'li_frame school_list_header', style: 'display: block;'}
+  #sortable_choice_order_column.arrow.menu_bloc.desktop.no_mobile
+    .column_title
+      Star
+
+  #sortable_school_name_column.menu_bloc.sortable_column
+    .column_title
+      Name
+
+  #sortable_fit_column.menu_bloc.sortable_column
+    .column_title
+      Your Fit
+
+  #getting_there.menu_bloc
+    %div{id: "sortable_distance_column", class: "first_block sortable_column", style: "color: #0077cf;"}
+      %div{:aria => {hidden: 'true'}, :class => "column_arrow icon-DBPS-Dev-Assets-arrow-up"}
+      .column_title
+        Travel
+
+  #sortable_eligibility_column.menu_bloc.sortable_column
+    .column_title
+      Eligibility
+
+  #sortable_hours_column.menu_bloc.sortable_column
+    .column_title
+      Hours
+
+  - if SURROUND_CARE_GRADES.include?(current_student.grade_level)
+    #sortable_surround_care_column.menu_bloc.sortable_column
+      .column_title
+        Surround Care
