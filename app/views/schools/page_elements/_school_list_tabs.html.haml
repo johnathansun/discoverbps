@@ -1,57 +1,56 @@
-.wrap
-  .menu_school_lists
-    .name_list
+.menu_school_lists
+  .name_list
 
-      - if @home_schools.present?
-        #home_schools_tab.school_list_tab.active
-          %span.name
-            Home-based
-            %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
+    - if @home_schools.present?
+      #home_schools_tab.school_list_tab.active
+        %span.name
+          Home-based
+          %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
-      - if @zone_schools.present?
-        #zone_schools_tab.school_list_tab
-          %span.name
-            Zone-based
-            %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
+    - if @zone_schools.present?
+      #zone_schools_tab.school_list_tab
+        %span.name
+          Zone-based
+          %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
-      - if @ell_schools.present?
-        #ell_schools_tab.school_list_tab
-          %span.name
-            ELL
-            %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
+    - if @ell_schools.present?
+      #ell_schools_tab.school_list_tab
+        %span.name
+          ELL
+          %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
-      - if @sped_schools.present?
-        #sped_schools_tab.school_list_tab
-          %span.name
-            SPED
-            %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
+    - if @sped_schools.present?
+      #sped_schools_tab.school_list_tab
+        %span.name
+          SPED
+          %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
-    :javascript
-      $('#home_schools_tab').click(function() {
-        event.preventDefault();
-        $('.school_list_tab').removeClass("active");
-        $('#home_schools_tab').addClass("active");
-        $('li.list_row').hide();
-        $('li.home_school').show();
-      });
-      $('#zone_schools_tab').click(function() {
-        event.preventDefault();
-        $('.school_list_tab').removeClass("active");
-        $('#zone_schools_tab').addClass("active");
-        $('li.list_row').hide();
-        $('li.zone_school').show();
-      });
-      $('#ell_schools_tab').click(function() {
-        event.preventDefault();
-        $('.school_list_tab').removeClass("active");
-        $('#ell_schools_tab').addClass("active");
-        $('li.list_row').hide();
-        $('li.ell_school').show();
-      });
-      $('#sped_schools_tab').click(function() {
-        event.preventDefault();
-        $('.school_list_tab').removeClass("active");
-        $('#sped_schools_tab').addClass("active");
-        $('li.list_row').hide();
-        $('li.sped_school').show();
-      });
+  :javascript
+    $('#home_schools_tab').click(function() {
+      event.preventDefault();
+      $('.school_list_tab').removeClass("active");
+      $('#home_schools_tab').addClass("active");
+      $('li.list_row').hide();
+      $('li.home_school').show();
+    });
+    $('#zone_schools_tab').click(function() {
+      event.preventDefault();
+      $('.school_list_tab').removeClass("active");
+      $('#zone_schools_tab').addClass("active");
+      $('li.list_row').hide();
+      $('li.zone_school').show();
+    });
+    $('#ell_schools_tab').click(function() {
+      event.preventDefault();
+      $('.school_list_tab').removeClass("active");
+      $('#ell_schools_tab').addClass("active");
+      $('li.list_row').hide();
+      $('li.ell_school').show();
+    });
+    $('#sped_schools_tab').click(function() {
+      event.preventDefault();
+      $('.school_list_tab').removeClass("active");
+      $('#sped_schools_tab').addClass("active");
+      $('li.list_row').hide();
+      $('li.sped_school').show();
+    });
