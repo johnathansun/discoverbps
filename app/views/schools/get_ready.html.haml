@@ -3,40 +3,44 @@
 .wrap
 	= render partial: 'schools/page_elements/student_tabs'
 
-.wrap
-	.result
-		= render partial: 'schools/page_elements/preference_panel'
+.wrap.get_ready
+	.result.clearfix
 
-		#school_list
-			.list_content
-				%div{class: "flexible_content", style: "width:1220px;"}
-					.menu_list
-						= render partial: 'schools/school_details/school_header_home'
-						- if @zone_schools.present?
-							= render partial: 'schools/school_details/school_header_zone'
-						- if current_student.ell_language.present?
-							= render partial: 'schools/school_details/school_header_ell'
-						- if current_student.sped_needs.present?
-							= render partial: 'schools/school_details/school_header_sped'
-
-					%ul#sortable
-						- @home_schools.each_with_index do |student_school, i|
-							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row home_school"}
-								= render partial: 'schools/school_details/school_row_home', locals: {student_school: student_school, school: student_school.school, index: i}
-
-						- @zone_schools.each_with_index do |student_school, i|
-							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row zone_school"}
-								= render partial: 'schools/school_details/school_row_zone', locals: {student_school: student_school, school: student_school.school, index: i}
-
-						- @ell_schools.each_with_index do |student_school, i|
-							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row ell_school"}
-								= render partial: 'schools/school_details/school_row_ell', locals: {student_school: student_school, school: student_school.school, index: i}
-
-						- @sped_schools.each_with_index do |student_school, i|
-							%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row sped_school"}
-								= render partial: 'schools/school_details/school_row_sped', locals: {student_school: student_school, school: student_school.school, index: i}
-
+		#footer_content.column.column_left
 			= render partial: 'schools/page_elements/footer'
+
+		#school_list.column.column_center
+			= render partial: 'schools/page_elements/school_list_tabs'	
+			
+			.list_content
+				-#.menu_list
+					= render partial: 'schools/school_details/school_header_home'
+					- if @zone_schools.present?
+						= render partial: 'schools/school_details/school_header_zone'
+					- if current_student.ell_language.present?
+						= render partial: 'schools/school_details/school_header_ell'
+					- if current_student.sped_needs.present?
+						= render partial: 'schools/school_details/school_header_sped'
+
+				%ul#sortable
+					- @home_schools.each_with_index do |student_school, i|
+						%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row home_school"}
+							= render partial: 'schools/school_details/school_row_home', locals: {student_school: student_school, school: student_school.school, index: i}
+
+					- @zone_schools.each_with_index do |student_school, i|
+						%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row zone_school"}
+							= render partial: 'schools/school_details/school_row_zone', locals: {student_school: student_school, school: student_school.school, index: i}
+
+					- @ell_schools.each_with_index do |student_school, i|
+						%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row ell_school"}
+							= render partial: 'schools/school_details/school_row_ell', locals: {student_school: student_school, school: student_school.school, index: i}
+
+					- @sped_schools.each_with_index do |student_school, i|
+						%li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row sped_school"}
+							= render partial: 'schools/school_details/school_row_sped', locals: {student_school: student_school, school: student_school.school, index: i}
+		
+		#timeline_wrap.column.column_right
+			= render partial: 'schools/page_elements/get_ready_timeline'
 
 :javascript
 	$( document ).ready(function() {
@@ -58,16 +62,14 @@
 
 		})*/
 
-		$()
-
 		//btn close preference choice in tablet size
-		$(".header_preferences #hide_btn").click(function(){
+		/*$(".header_preferences #hide_btn").click(function(){
 			$(".preferences").addClass("hide");
 		})
 		//btn show preference choice in tablet size
 		$(".header_preferences #show_btn").click(function(){
 			$(".preferences").removeClass("hide");
-		})
+		})*/
 
 		$("#sign_up_button").click(function(){
 			$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/signup')}");
@@ -85,24 +87,22 @@
 			return false;
 		});
 
-		$(function() {
-			$("#sortable").sortable({
-				axis: "y",
-				scroll: true,
-				update: function(){
-					$('#sortable li').each(function(){
-						$(this).find('.sortable_row_number').html($(this).index() + 1);
-					});
-					$.ajax({
-						url: '/schools/sort',
-						type: 'post',
-						data: $('#sortable').sortable('serialize'),
-						dataType: 'script'
-					});
-				}
-			});
-			$("#sortable").disableSelection();
+		/*$("#sortable").sortable({
+			axis: "y",
+			scroll: true,
+			update: function(){
+				$('#sortable li').each(function(){
+					$(this).find('.sortable_row_number').html($(this).index() + 1);
+				});
+				$.ajax({
+					url: '/schools/sort',
+					type: 'post',
+					data: $('#sortable').sortable('serialize'),
+					dataType: 'script'
+				});
+			}
 		});
+		$("#sortable").disableSelection();
 
 		var choice_order_ascending = false;
 		$("#sortable_choice_order_column").click(function(){
@@ -220,6 +220,6 @@
 				$('#sortable_fit_column').html('%div{aria: {hidden: 'true'}, class: "column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Your Fit</div>');
 				fit_ascending = true;
 			}
-		});
+		});*/
 
 	});
