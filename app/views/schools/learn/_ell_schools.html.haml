@@ -1,9 +1,9 @@
-#sped_schools_list.schools_list.hidden
+#ell_schools_list.schools_list.hidden
   .list_content
     .flexible_content
-      - if @sped_schools.present?
+      - if @ell_schools.present?
         .menu_list
-          %div{id: 'sped_header', class: 'li_frame school_list_header', style: 'display: none;'}
+          %div{id: 'ell_header', class: 'li_frame school_list_header', style: 'display: none;'}
             #sortable_choice_order_column.arrow.menu_bloc.desktop.no_mobile
               .column_title
                 Star
@@ -14,17 +14,16 @@
 
             #sortable_fit_column.menu_bloc.sortable_column
               .column_title
-                SPED Offering
+                ELL Offering
 
             #sortable_eligibility_column.menu_bloc.sortable_column
               .column_title
                 Cluster
 
-
         %ul#sortable
-          - @sped_schools.each_with_index do |student_school, i|
+          - @ell_schools.each_with_index do |student_school, i|
             - school = student_school.school
-            %li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row sped_school"}
+            %li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row ell_school"}
               %div{id: "#{current_student.id}_#{school.bps_id}_row", class: "li_frame"}
 
                 .desktop
@@ -44,11 +43,12 @@
                       %span{:aria => {hidden: 'true'}, :class => "select_icon icon-DBPS-Preferences-Icons-20130930-SRG_exam_school"}
                     %span.icon.icon-info
 
-                .box.sped_descrip.line
-                  .first_block.middle
-                    = student_school.sped_description
 
-                .box.sped_cluster.line
+                .box.ell_descrip.line
+                  .first_block.middle
+                    = student_school.ell_description
+
+                .box.ell_cluster.line
                   .first_block.middle
                     = student_school.ell_cluster
 
@@ -57,16 +57,15 @@
                 .school_descrip
                   .right_side
 
-                    = render partial: 'schools/school_details/desktop', locals: {school: school, student_school: student_school}
+                    = render partial: 'schools/learn/desktop', locals: {school: school, student_school: student_school}
 
-                    = render partial: 'schools/school_details/mobile', locals: {school: school, student_school: student_school}
+                    = render partial: 'schools/learn/mobile', locals: {school: school, student_school: student_school}
 
-                    = render partial: 'schools/school_details/tablet', locals: {school: school, student_school: student_school}
+                    = render partial: 'schools/learn/tablet', locals: {school: school, student_school: student_school}
 
                     .clr
 
                   .clr
-
 
       - else
         %div{style: 'margin: 40px 0 60px 0;'}

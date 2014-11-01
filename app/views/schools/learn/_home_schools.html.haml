@@ -1,9 +1,14 @@
-#zone_schools_list.schools_list.hidden
+#home_schools_list.schools_list
+  .note.small
+    This grade level is not guaranteed a home based assignment. As such, if you are a new-to-Boston Public Schools applicant and an assignment from the home-based list below cannot be made, an assignment to a school in the former zone structure may be necessary. Use the Zone-based tab to see those results.
+    %a{href: '#', target: '_blank'}
+      Learn more
+
   .list_content
     .flexible_content
-      - if @zone_schools.present?
+      - if @home_schools.present?
         .menu_list
-          %div{id: 'zone_header', class: 'li_frame school_list_header', style: 'display: none;'}
+          %div{id: 'home_header', class: 'li_frame school_list_header', style: 'display: block;'}
             #sortable_choice_order_column.arrow.menu_bloc.desktop.no_mobile
               .column_title
                 Star
@@ -17,8 +22,8 @@
                 Your Fit
 
             #getting_there.menu_bloc
-              %div{id: "sortable_distance_column", class: "first_block sortable_column", style: "color: #0077cf;"}
-                %div{:aria => {hidden: 'true'}, :class => "column_arrow icon-DBPS-Dev-Assets-arrow-up"}
+              %div{id: 'sortable_distance_column', class: 'first_block sortable_column', style: 'color: #0077cf;'}
+                %div{aria: {hidden: 'true'}, class: 'column_arrow icon-DBPS-Dev-Assets-arrow-up'}
                 .column_title
                   Travel
 
@@ -31,9 +36,9 @@
                 Hours
 
         %ul#sortable
-          - @zone_schools.each_with_index do |student_school, i|
+          - @home_schools.each_with_index do |student_school, i|
             - school = student_school.school
-            %li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row zone_school"}
+            %li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row home_school"}
               %div{id: "#{current_student.id}_#{school.bps_id}_row", class: "li_frame"}
 
                 .desktop
@@ -126,23 +131,24 @@
                     .max_range
                       %div{class: 'ajust_range', style: "margin-left: #{school_hours_start_time_helper(school.api_hours.try(:[], :schhours1))}%; margin-right: #{school_hours_end_time_helper(school.api_hours.try(:[], :schhours1))}%;"}
 
-
                 .clr
 
                 .school_descrip
                   .right_side
 
-                    = render partial: 'schools/school_details/desktop', locals: {school: school, student_school: student_school}
+                    = render partial: 'schools/learn/desktop', locals: {school: school, student_school: student_school}
 
-                    = render partial: 'schools/school_details/mobile', locals: {school: school, student_school: student_school}
+                    = render partial: 'schools/learn/mobile', locals: {school: school, student_school: student_school}
 
-                    = render partial: 'schools/school_details/tablet', locals: {school: school, student_school: student_school}
+                    = render partial: 'schools/learn/tablet', locals: {school: school, student_school: student_school}
 
                     .clr
 
                   .clr
 
+        = render partial: 'schools/page_elements/notice'
+
       - else
-        %div{style: 'margin: 40px 0 60px 0;'}
-          %h2
-            There are no matching schools for the program and grade combination that you entered.
+
+        %h2
+          There are no matching schools for the program and grade combination that you entered.

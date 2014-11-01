@@ -4,7 +4,7 @@
 	= render partial: 'schools/page_elements/student_tabs'
 
 .wrap.global_map
-	= render partial: 'schools/page_elements/list_map', locals: {students_list: current_user_students, school: nil, map_controls: true, height: 'resize', width: '100%'}
+	= render partial: 'schools/page_elements/map', locals: {students_list: current_user_students, school: nil, map_controls: true, height: 'resize', width: '100%'}
 
 .wrap.compare_lists
 	= render partial: 'schools/page_elements/school_list_tabs'
