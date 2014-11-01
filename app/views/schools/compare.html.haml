@@ -58,24 +58,25 @@
 				.label.mcas
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
 					MCAS Tier
-				.label.uniform.long
+				.label.uniform
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
 					Uniform Policy
+				.label.health
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
+					Health & Wellness
 				.label.school.long
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"}
 					School Focus
-				.label.health.long
-					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
-					Health & Wellness
 				.label.comm_partners.long
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
 					Community Partners
 				.label.facilities.long
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
 					Facility Features
-				.label.sports.long
-					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
-					Sports
+				- if UPPER_GRADES.include?(current_student.grade_level)
+					.label.sports.long
+						%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
+						Sports
 
 
 		-# CENTER COLUMN
@@ -96,16 +97,17 @@
 
 					-# OLD CODE: %li{id: "#{student.id}_#{student_school.school.bps_id}"}
 					-# NOTE: put a loop in here so i didnt have to write this block 5 times
-					- (1..5).each do |i|
+					- @home_schools.rank(:sort_order).all[0...5].each_with_index do |student_school, i|
+						- school = student_school.school
 						%li{id: "55555_4444", class: "sortable_school #{i == 1 ? 'first' : ''} #{i == 5 ? 'last' : ''}"}
 							.li_frame.draggable
 								.school_star.desktop.line
 									%span
-										= image_tag('star_starred.png', id: "star_55555_starred", class: 'star_starred', style: "display: #{i < 3 ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: '3333'})
-										= image_tag('star_unstarred.png', id: "star_55555_unstarred", class: 'star_unstarred', style: "display: #{i < 3 ? 'none' : 'inline'}; cursor: pointer;", data: {student_school_id: '3333'} )
+										= image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
+										= image_tag('star_unstarred.png', id: "star_#{student_school.id}_unstarred", class: 'star_unstarred', style: "display: #{student_school.starred? ? 'none' : 'inline'}; cursor: pointer;", data: {student_school_id: student_school.id} )
 
 								.school_name.line
-									Harvard / Kent Elementary
+									= school.name
 
 									-# OLD CODE:
 									-# if @matching_school_ids.include?(student_school.bps_id)
@@ -134,56 +136,59 @@
 										%div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
 
 								.school_travel.line
-									= '1.9 mi'
+									= spacer_helper(student_school.distance)
+									&nbsp;mi
 
 								.school_eligibility.line
-									Citywide
+									=raw eligibility_helper(spacer_helper(student_school.eligibility))
 
 								.school_hours.line
-									9:30am
-									%span.small.caps to
-									4:00pm
+									= truncate(school.api_hours.try(:[], :schhours1), length: 40)
 
 								.school_surround_care.line
-									Before school
-									%br/
-									After school
+									- if school.api_basic_info.try(:[], :BeforeSchPrograms).present?
+										Before School
+										%br/
+
+									- if school.api_basic_info.try(:[], :AfterSchPrograms).present?
+										After School
 
 								.school_type.line
-									Traditional
+									= school.api_basic_info.try(:[], :SchoolType)
 
 								.school_grades.line
-									= 'K1-5'
+									= grade_levels_helper(school.grade_levels)
 
 								.school_enrollment.line
 									550
 
 								.school_special_app.line
-									yes
+									= special_application_helper(school.api_description.try(:[], :isspecialappprocedures))
 
 								.school_awc.line
-									no
+									= awc_helper(school.api_basic_info.try(:[], :IsAWC))
 
 								.school_mcas.line
-									Tier 2
+									= school_tier_helper(student_school.tier)
 
-								.school_uniform.line.long
-									= "K1-5: navy blue pants/skirt and baby blue shirt/blouse with purple school logo. 6-8: black pants/skirt. White polo shirt and black sweatshirt with school logo. No jeans. P.E. uniform with school logo."
+								.school_uniform.line
+									= school.api_description.try(:[], :uniformpolicy)
+
+								.school_health.line
+									= school.api_basic_info.try(:[], :ishasfulltimenurse) == 'True' ? 'Full-Time Nurse' : ''
 
 								.school_focus.line.long
-									= "'Our school focus is dual language project based learning centered in the arts."
-
-								.school_health.line.long
-									= "Description about health and wellness"
+									= truncate(school.api_description.try(:[], :schfocus), length: 240)
 
 								.school_comm_partners.line.long
-									= "Boston Partners in Education, , Health Management Resources (HMR), Mass General Hospital, Peoples' Baptist & North  River Community Church, Roxbury Community College, Simmons College, SquashBusters, Technology Goes Home at School, Wheelock College"
+									= truncate(partners_list_helper(school.api_partners), length: 240)
 
 								.school_facilities.line.long
-									= "Art Room, Auditorium, Cafeteria, Computer Lab, Gymnasium, Music Room"
+									= truncate(facilities_list_helper(school.api_facilities), length: 240)
 
-								.school_facilities.line.long
-									= "Baseball, Basketball, Double Dutch, Football, Track, Volleyball"
+								- if UPPER_GRADES.include?(current_student.grade_level)
+									.school_sports.line.long
+										= truncate(sports_list_helper(school.api_sports), length: 240)
 
 
 					:javascript
@@ -259,7 +264,7 @@
 						.tooltip({
 							track: true
 						});
-			
+
 
 
 	= render partial: 'schools/page_elements/footer'

@@ -31,10 +31,10 @@ class SchoolsController < ApplicationController
     else
       current_student.update_column(:step, 3) if current_student.step < 3
 
-      @home_schools = current_student.home_schools
-      @zone_schools = current_student.zone_schools
-      @ell_schools = current_student.ell_schools
-      @sped_schools = current_student.sped_schools
+      @home_schools = current_student.home_schools.rank(:sort_order)
+      @zone_schools = current_student.zone_schools.rank(:sort_order)
+      @ell_schools = current_student.ell_schools.rank(:sort_order)
+      @sped_schools = current_student.sped_schools.rank(:sort_order)
 
       @matching_school_ids = current_user_students.collect {|x| x.student_schools.collect {|y| y.bps_id}}.inject(:&)
 

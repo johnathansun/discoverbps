@@ -46,8 +46,8 @@
                     .middle
                       = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
                       = image_tag('star_unstarred.png', id: "star_#{student_school.id}_unstarred", class: 'star_unstarred', style: "display: #{student_school.starred? ? 'none' : 'inline'}; cursor: pointer;", data: {student_school_id: student_school.id} )
-                      %span{class: "sortable_star", style: "visibility: hidden;"}
-                        = student_school.starred
+                    %span{class: "sortable_star", style: "visibility: hidden;"}
+                      = student_school.starred
 
                 .school_name.select.line
                   %span.middle
@@ -88,10 +88,6 @@
                   .first_block.middle
                     .icon.middle
                       %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_distance transportation_icon"}
-                      -#- if student_school.transportation_eligibility == 'Y'
-                        %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-15 transportation_icon"}
-                      -#- else
-                        %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-14 transportation_icon"}
 
                     %span.middle.sortable_distance
                       = spacer_helper(student_school.distance)
@@ -109,12 +105,8 @@
 
                 .box.line.eligibility
                   .first_block.middle
-                    - if params[:action] == 'zone_schools'
-                      %span.middle.sortable_eligibility
-                        Zone
-                    - else
-                      %span.middle.sortable_eligibility
-                        =raw eligibility_helper(spacer_helper(student_school.eligibility))
+                    %span.middle.sortable_eligibility
+                      =raw eligibility_helper(spacer_helper(student_school.eligibility))
 
                   .second_bloc.middle
                     %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
