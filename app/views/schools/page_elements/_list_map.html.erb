@@ -266,12 +266,6 @@
           map.data.overrideStyle(feature, {strokeWeight: 2});
         });
 
-        google.maps.event.addDomListener(document.getElementByClassName('school_list_tab'), 'click', function () {
-          $.each(spedBoundaries, function (index, feature) {
-            map.data.remove(feature);
-          });
-        });
-
         google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
           $.each(cityBoundaries, function (index, feature) {
             map.data.add(feature);
@@ -285,6 +279,18 @@
             map.data.overrideStyle(feature, {strokeWeight: 2});
           });
         });
+
+        google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function () {
+          $.each(cityBoundaries, function (index, feature) {
+            map.data.remove(feature);
+          });
+        });
+
+        google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function () {
+          $.each(cityBoundaries, function (index, feature) {
+            map.data.remove(feature);
+          });
+        });
       });
 
       // Load ELL boundaries
@@ -292,17 +298,28 @@
       $.getJSON('/ell_clusters.geojson', function (data) {
         ellBoundaries = map.data.addGeoJson(data);
 
-        google.maps.event.addDomListener(document.getElementByClassName('school_list_tab'), 'click', function () {
-          $.each(spedBoundaries, function (index, feature) {
+        google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
+          $.each(ellBoundaries, function (index, feature) {
             map.data.remove(feature);
           });
         });
 
+        google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
+          $.each(ellBoundaries, function (index, feature) {
+            map.data.remove(feature);
+          });
+        });
 
         google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function () {
           $.each(ellBoundaries, function (index, feature) {
             map.data.add(feature);
             map.data.overrideStyle(feature, {strokeWeight: 2});
+          });
+        });
+
+        google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function () {
+          $.each(ellBoundaries, function (index, feature) {
+            map.data.remove(feature);
           });
         });
       });
@@ -312,7 +329,19 @@
       $.getJSON('/sped_clusters.geojson', function (data) {
         spedBoundaries = map.data.addGeoJson(data);
 
-        google.maps.event.addDomListener(document.getElementByClassName('school_list_tab'), 'click', function () {
+        google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
+          $.each(spedBoundaries, function (index, feature) {
+            map.data.remove(feature);
+          });
+        });
+
+        google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
+          $.each(spedBoundaries, function (index, feature) {
+            map.data.remove(feature);
+          });
+        });
+
+        google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function () {
           $.each(spedBoundaries, function (index, feature) {
             map.data.remove(feature);
           });
