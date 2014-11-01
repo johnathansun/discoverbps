@@ -1441,11 +1441,11 @@ School List
 }
 
 .wrap #school_list ul li.list_row {
+	position: relative;
   background: #f9f9f9;
   margin-bottom: 12px;
   margin-top: 0;
   height: 82px;
-  cursor: row-resize;
   transition: background 250ms ease;
   &:hover {
 	  background: #FFF;
@@ -1620,7 +1620,8 @@ School List
   margin-left: 0;
 }
 .wrap #school_list .list_content {
-  overflow: auto;
+  //overflow: auto;
+  overflow: visible;
 }
 .wrap #school_list #sortable .second_bloc {
   display: none !important;
@@ -1911,6 +1912,34 @@ Get Ready
 
 		.menu_school_lists {
 			margin: 0 0 25px;
+		}
+		
+		ul .list_row {
+			&:before {
+				content: attr(data-index);
+				position: absolute;
+				left: -30px;
+				top: 50%;
+				margin-top: -9px;
+				color: $blue;
+				font-size: 2em;
+			}
+			&:hover {
+				background: none;
+			}
+
+			&.secondary {
+				background: none;
+				height: 42px;
+			
+				&:before {
+					color: $med_gray;
+					font-size: 1.5em;
+				}
+				
+				.line { height: 42px; }
+				.sortable_row_number img { width: 20px; }
+			}			
 		}
 	}
 

@@ -34,7 +34,7 @@
         %ul#sortable
           - @home_schools.each_with_index do |student_school, i|
             - school = student_school.school
-            %li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row home_school"}
+            %li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row home_school #{i < 5 ? 'primary' : 'secondary'}", data: {index: "#{i + 1}"}}
               %div{id: "#{current_student.id}_#{school.bps_id}_row", class: "li_frame"}
 
                 .desktop
