@@ -314,3 +314,7 @@ input, select {
 .hidden {
 	display: none;
 }
+#googleMap {
+	/*set the background color so it's not blank while loading*/
+	background-color: #ece9e2;
+}
