@@ -1705,7 +1705,9 @@ Compare List
 		width: 12%; 
 		margin-top: 38px;
 	}
+	
 	.column.sort_schools { width: 73%; }
+	
 	.column.more_schools { 
 		width: 15%; 
 		margin-top: 70px;
@@ -1730,6 +1732,12 @@ Compare List
 	.more_schools_frame {
 		margin: 0 15px;
 	}
+	&.more_schools_hovered {
+		
+		.sortable_school.last {
+			opacity: 0.3;
+		}
+	}
 	
 	.labels_frame {
 		padding: 0 5px 0 10px;
@@ -1739,8 +1747,8 @@ Compare List
 		position: relative;
 		padding-left: 20px;
 		font-size: 13px;
-		&.long { height: 150px; }
-		&.rank { height: 56px; }
+		&.long { height: 200px; }
+		&.rank { height: 37px; }
 		&.name { height: 94px; }
 		&.demand { height: 90px; }
 		&.no_icon { padding-left: 0; }
@@ -1755,6 +1763,8 @@ Compare List
 	.sortable_school {
 		width: 20%;
 		float: left;
+		transition: opacity 250ms ease;
+		
 		&.ui-sortable-helper {
 			.li_frame {
 				background: #FFF;
@@ -1782,7 +1792,7 @@ Compare List
 			color: $med_gray;
 			
 			&.long {
-				height: 150px;
+				height: 200px;
 				font-size: 12px;
 			}
 		}
@@ -1820,13 +1830,43 @@ Compare List
 		
 	}// .sortable_school
 		
+		
+	.footer_list {
+	  margin: 0;
+	  padding-left: 142px;
+	}	
 }// .compare_list
 
+
+/* Wrap Compare List ***** OLD CODE *****
+---------------------------------- */
+.wrap.compare_list .colomn_left {
+  width: 192px;
+  float: left;
+}
+.wrap.compare_list .result {
+  overflow: visible;
+}
+.wrap.compare_list .colomn_right .menu_compare_name {
+  margin-top: 0;
+}
+.wrap.compare_list .colomn_right .compare_list_content {
+  margin-right: 0;
+  position: relative;
+}
+
+
+
+
+/* --------------------------------------------------------- 
+ UI Widgets
+------------------------------------------------------------ */
 .ui-widget-content.ui-tooltip {
 	color: #FFF;
 	background: $dark_gray;
 	background: rgba(80,80,80,.8);
 	width: 90px;
+	text-align: center;
 	border-radius: 7px;
 }
 
@@ -1947,7 +1987,7 @@ Footer
 	width: 66.666%;
 }
 
-.wrap .footer_list {
+.footer_list {
   padding: 30px 20px;
   background: #dfdfdf;
   font-size: 13px;
@@ -2919,30 +2959,10 @@ Wrap Account
 }
 
 
+
 /* --------------------------------------------------------- 
-Wrap Compare List
+ School Photos "Glass"
 ------------------------------------------------------------ */
-.wrap.compare_list .colomn_left {
-  width: 192px;
-  float: left;
-}
-.wrap.compare_list .result {
-  overflow: visible;
-}
-.wrap.compare_list .colomn_right .menu_compare_name {
-  margin-top: 0;
-}
-.wrap.compare_list .colomn_right .compare_list_content {
-  margin-right: 0;
-  position: relative;
-}
-.wrap.compare_list .footer_list {
-  margin-left: 192px;
-}
-
-
-
-
 .glass_open,
 .glass_close {
   display: inline-block;

@@ -92,12 +92,12 @@
 			.compare_list_content{title: "Click to drag"}
 
 				-# OLD CODE: %ul{id: "sortable_#{student_i}"}
-				%ul{id: "sortable_0"}
+				%ul{id: "sortable_0", class: "clearfix"}
 
 					-# OLD CODE: %li{id: "#{student.id}_#{student_school.school.bps_id}"}
 					-# NOTE: put a loop in here so i didnt have to write this block 5 times
 					- (1..5).each do |i|
-						%li{id: "55555_4444", class: "sortable_school"}
+						%li{id: "55555_4444", class: "sortable_school #{i == 1 ? 'first' : ''} #{i == 5 ? 'last' : ''}"}
 							.li_frame.draggable
 								.school_star.desktop.line
 									%span
@@ -214,42 +214,52 @@
 				%h3
 					More Schools:
 
-				%ul
+				%ul{title: "click to add"}
 					%li.school
-						%a{href: '#', title:'Add'}
+						%a{href: '#'}
 							%span.icon.icon-DBPS-Dev-Assets-SRG-10
 							= 'Hernandez K-8'
 
 					%li.school
-						%a{href: '#', title:'Add'}
+						%a{href: '#'}
 							%span.icon.icon-DBPS-Dev-Assets-SRG-10
 							= 'Hurley K-8'
 
 					%li.school
-						%a{href: '#', title:'Add'}
+						%a{href: '#'}
 							%span.icon.icon-DBPS-Dev-Assets-SRG-10
 							= 'Perkins Elementary'
 
 					%li.school
-						%a{href: '#', title:'Add'}
+						%a{href: '#'}
 							%span.icon.icon-DBPS-Dev-Assets-SRG-10
 							= 'UP Academy Dorchester'
 
 					%li.school
-						%a{href: '#', title:'Add'}
+						%a{href: '#'}
 							%span.icon.icon-DBPS-Dev-Assets-SRG-10
 							= 'Quincy Elementary'
 
 					%li.school
-						%a{href: '#', title:'Add'}
+						%a{href: '#'}
 							%span.icon.icon-DBPS-Dev-Assets-SRG-10
 							= 'Adams Elementary'
 
 					%li.school
-						%a{href: '#', title:'Add'}
+						%a{href: '#'}
 							%span.icon.icon-DBPS-Dev-Assets-SRG-10
 							= 'Tynan Elementary'
 
+
+			:javascript
+					$('.more_schools ul')
+						.hover(function(){
+							$('#compare_list').toggleClass('more_schools_hovered');
+						})
+						.tooltip({
+							track: true
+						});
+			
 
 
 	= render partial: 'schools/page_elements/footer'
