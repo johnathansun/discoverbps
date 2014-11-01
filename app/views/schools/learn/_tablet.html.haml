@@ -15,11 +15,26 @@
 				= grade_levels_helper(school.grade_levels)
 
 		.box
+			- if TRANSITION_GRADES.include?(current_student.grade_level)
+				%p.title
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
+					= "#{current_student.formatted_grade_level_name} Demand (#{last_school_year_range})"
+				%p.descrip
+					= school.open_seats(current_student.grade_level)
+					open seats
+					%br/
+					= school.applicants(current_student.grade_level)
+					applicants
+					%br/
+					= school.applicants_per_open_seat(current_student.grade_level, '2013')
+					applicants/open seat
+				.max_range
+					%div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
+
 			%p.title
-				%span{:aria => {hidden: 'true'}, :class => "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
-					Enrollment
+				= "#{current_student.formatted_grade_level_name} Enrollment (#{last_school_year_range})"
 			%p.descrip
-				= school.api_basic_info.try(:[], :SchSize)
+				= school.total_seats(current_student.grade_level)
 
 		.box
 			%p.title

@@ -60,6 +60,14 @@ class Student < ActiveRecord::Base
     grade_level.to_s.length < 2 ? ('0' + self.grade_level.try(:strip)) : self.grade_level.try(:strip)
   end
 
+  def formatted_grade_level_name
+    if grade_level.to_s.length < 2
+      "Grade #{grade_level}"
+    else
+      grade_level
+    end
+  end
+
   # SAVE SCHOOLS ON CURRENT_STUDENT
 
   def set_home_schools!
