@@ -1,13 +1,9 @@
 #home_schools_list.schools_list
-  .note.small
-    This grade level is not guaranteed a home based assignment. As such, if you are a new-to-Boston Public Schools applicant and an assignment from the home-based list below cannot be made, an assignment to a school in the former zone structure may be necessary. Use the Zone-based tab to see those results.
-    %a{href: '#', target: '_blank'}
-      Learn more
 
   .list_content
     .flexible_content
       - if @home_schools.present?
-        .menu_list
+        -#.menu_list
           %div{id: 'home_header', class: 'li_frame school_list_header', style: 'display: block;'}
             #sortable_choice_order_column.arrow.menu_bloc.desktop.no_mobile
               .column_title
@@ -23,7 +19,7 @@
 
             #getting_there.menu_bloc
               %div{id: 'sortable_distance_column', class: 'first_block sortable_column', style: 'color: #0077cf;'}
-                %div{aria: {hidden: 'true'}, class: 'column_arrow icon-DBPS-Dev-Assets-arrow-up'}
+                %div{:aria => {hidden: 'true'}, :class => 'column_arrow icon-DBPS-Dev-Assets-arrow-up'}
                 .column_title
                   Travel
 
@@ -56,7 +52,6 @@
 
                     - if school.api_basic_info.try(:[], :SchoolType).present? && school.api_basic_info.try(:[], :SchoolType) == 'Exam'
                       %span{:aria => {hidden: 'true'}, :class => "select_icon icon-DBPS-Preferences-Icons-20130930-SRG_exam_school"}
-                    %span.icon.icon-info
 
                 .box.line.your_fit_icon
                   %span{id: "#{current_student.id}_#{school.bps_id}_icons", class: "middle"}
@@ -73,16 +68,16 @@
                     %span{id: "#{current_student.id}_#{school.bps_id}_icon_count", class: "sortable_fit fit_icon_count", style: "visibility: hidden;"}
                       = tag_counter
 
-                .box.line.your_fit_descrip
+                -# .box.line.your_fit_descrip
                   .middle
                     %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Dev-Assets-SRG-35"}
                       Small
-                .box.line.your_fit_descrip
+                -# .box.line.your_fit_descrip
                   %span.middle
                     %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Dev-Assets-SRG-35"}
                       Yes
 
-                .box.line.getting_there
+                -# .box.line.getting_there
                   .first_block.middle
                     .icon.middle
                       %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_distance transportation_icon"}
@@ -105,7 +100,7 @@
                       = spacer_helper(student_school.drive_time)
                       %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
 
-                .box.line.eligibility
+                -# .box.line.eligibility
                   .first_block.middle
                     - if params[:action] == 'zone_schools'
                       %span.middle.sortable_eligibility
@@ -124,7 +119,7 @@
                       = spacer_helper(student_school.drive_time)
                       %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
 
-                .box.line.school_hours
+                -# .box.line.school_hours
                   %span.middle.sortable_hours
                     = truncate(school.api_hours.try(:[], :schhours1), length: 18)
                     %br/
@@ -132,8 +127,6 @@
                       %div{class: 'ajust_range', style: "margin-left: #{school_hours_start_time_helper(school.api_hours.try(:[], :schhours1))}%; margin-right: #{school_hours_end_time_helper(school.api_hours.try(:[], :schhours1))}%;"}
 
                 .clr
-
-        = render partial: 'schools/page_elements/notice'
 
       - else
 
