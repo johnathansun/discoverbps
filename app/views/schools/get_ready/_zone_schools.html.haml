@@ -1,0 +1,135 @@
+#zone_schools_list.schools_list.hidden
+  .list_content
+    .flexible_content
+      - if @zone_schools.present?
+        .menu_list
+          %div{id: 'zone_header', class: 'li_frame school_list_header', style: 'display: none;'}
+            #sortable_choice_order_column.arrow.menu_bloc.desktop.no_mobile
+              .column_title
+                Star
+
+            #sortable_school_name_column.menu_bloc.sortable_column
+              .column_title
+                Name
+
+            #sortable_fit_column.menu_bloc.sortable_column
+              .column_title
+                Your Fit
+
+            #getting_there.menu_bloc
+              %div{id: "sortable_distance_column", class: "first_block sortable_column", style: "color: #0077cf;"}
+                %div{:aria => {hidden: 'true'}, :class => "column_arrow icon-DBPS-Dev-Assets-arrow-up"}
+                .column_title
+                  Travel
+
+            #sortable_eligibility_column.menu_bloc.sortable_column
+              .column_title
+                Eligibility
+
+            #sortable_hours_column.menu_bloc.sortable_column
+              .column_title
+                Hours
+
+        %ul#sortable
+          - @zone_schools.each_with_index do |student_school, i|
+            - school = student_school.school
+            %li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row zone_school"}
+              %div{id: "#{current_student.id}_#{school.bps_id}_row", class: "li_frame"}
+
+                .desktop
+                  .no_order.line
+                    %span.sortable_row_number.middle
+                      = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
+                      = image_tag('star_unstarred.png', id: "star_#{student_school.id}_unstarred", class: 'star_unstarred', style: "display: #{student_school.starred? ? 'none' : 'inline'}; cursor: pointer;", data: {student_school_id: student_school.id} )
+
+                .school_name.select.line
+                  %span.middle
+                    %span.sortable_school_name
+                      = school.name
+                    - if current_student.sibling_school_ids.present? && current_student.sibling_school_ids.try(:include?, school.bps_id)
+                      %span{:aria => {hidden: 'true'}, :class => "select_icon icon-DBPS-Dev-Assets-SRG-12"}
+
+                    - if school.api_basic_info.try(:[], :SchoolType).present? && school.api_basic_info.try(:[], :SchoolType) == 'Exam'
+                      %span{:aria => {hidden: 'true'}, :class => "select_icon icon-DBPS-Preferences-Icons-20130930-SRG_exam_school"}
+                    %span.icon.icon-info
+
+                .box.line.your_fit_icon
+                  %span{id: "#{current_student.id}_#{school.bps_id}_icons", class: "middle"}
+                    - tag_counter = 0
+                    - student_preference_categories.each_with_index do |category, i|
+                      - category.grade_level_preferences(current_student.grade_level).each do |preference|
+                        - if school.has_preference?(preference)
+                          - if current_student.preferences.collect {|x| x.id}.try(:include?, preference.id)
+                            %span{:aria => {hidden: 'true'}, id: 'school_#{school.id}', data: {tags: '["#{preference.name}"]'}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", title: "#{preference.name}"}
+                            - tag_counter += 1
+                          - else
+                            %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: '["#{preference.name}"]'}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", style: "display: none;", title: "#{preference.name}"}
+
+                    %span{id: "#{current_student.id}_#{school.bps_id}_icon_count", class: "sortable_fit fit_icon_count", style: "visibility: hidden;"}
+                      = tag_counter
+
+                .box.line.your_fit_descrip
+                  .middle
+                    %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Dev-Assets-SRG-35"}
+                      Small
+                .box.line.your_fit_descrip
+                  %span.middle
+                    %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Dev-Assets-SRG-35"}
+                      Yes
+
+                .box.line.getting_there
+                  .first_block.middle
+                    .icon.middle
+                      %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_distance transportation_icon"}
+                      -#- if student_school.transportation_eligibility == 'Y'
+                        %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-15 transportation_icon"}
+                      -#- else
+                        %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-14 transportation_icon"}
+
+                    %span.middle.sortable_distance
+                      = spacer_helper(student_school.distance)
+                      &nbsp;mi
+
+                  .second_bloc.middle
+                    %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
+                      = spacer_helper(student_school.walk_time)
+                      %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
+
+                  .second_bloc.middle.last
+                    %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-17"}
+                      = spacer_helper(student_school.drive_time)
+                      %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
+
+                .box.line.eligibility
+                  .first_block.middle
+                    - if params[:action] == 'zone_schools'
+                      %span.middle.sortable_eligibility
+                        Zone
+                    - else
+                      %span.middle.sortable_eligibility
+                        =raw eligibility_helper(spacer_helper(student_school.eligibility))
+
+                  .second_bloc.middle
+                    %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
+                      = spacer_helper(student_school.walk_time)
+                      %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
+
+                  .second_bloc.middle.last
+                    %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-17"}
+                      = spacer_helper(student_school.drive_time)
+                      %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
+
+                .box.line.school_hours
+                  %span.middle.sortable_hours
+                    = truncate(school.api_hours.try(:[], :schhours1), length: 18)
+                    %br/
+                    .max_range
+                      %div{class: 'ajust_range', style: "margin-left: #{school_hours_start_time_helper(school.api_hours.try(:[], :schhours1))}%; margin-right: #{school_hours_end_time_helper(school.api_hours.try(:[], :schhours1))}%;"}
+
+
+                .clr
+                
+      - else
+        %div{style: 'margin: 40px 0 60px 0;'}
+          %h2
+            There are no matching schools for the program and grade combination that you entered.

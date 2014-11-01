@@ -1,0 +1,61 @@
+#ell_schools_list.schools_list.hidden
+  .list_content
+    .flexible_content
+      - if @ell_schools.present?
+        .menu_list
+          %div{id: 'ell_header', class: 'li_frame school_list_header', style: 'display: none;'}
+            #sortable_choice_order_column.arrow.menu_bloc.desktop.no_mobile
+              .column_title
+                Star
+
+            #sortable_school_name_column.menu_bloc.sortable_column
+              .column_title
+                Name
+
+            #sortable_fit_column.menu_bloc.sortable_column
+              .column_title
+                ELL Offering
+
+            #sortable_eligibility_column.menu_bloc.sortable_column
+              .column_title
+                Cluster
+
+        %ul#sortable
+          - @ell_schools.each_with_index do |student_school, i|
+            - school = student_school.school
+            %li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row ell_school"}
+              %div{id: "#{current_student.id}_#{school.bps_id}_row", class: "li_frame"}
+
+                .desktop
+                  .no_order.line
+                    %span.sortable_row_number.middle
+                      = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
+                      = image_tag('star_unstarred.png', id: "star_#{student_school.id}_unstarred", class: 'star_unstarred', style: "display: #{student_school.starred? ? 'none' : 'inline'}; cursor: pointer;", data: {student_school_id: student_school.id} )
+
+                .school_name.select.line
+                  %span.middle
+                    %span.sortable_school_name
+                      = school.name
+                    - if current_student.sibling_school_ids.present? && current_student.sibling_school_ids.try(:include?, school.bps_id)
+                      %span{:aria => {hidden: 'true'}, :class => "select_icon icon-DBPS-Dev-Assets-SRG-12"}
+
+                    - if school.api_basic_info.try(:[], :SchoolType).present? && school.api_basic_info.try(:[], :SchoolType) == 'Exam'
+                      %span{:aria => {hidden: 'true'}, :class => "select_icon icon-DBPS-Preferences-Icons-20130930-SRG_exam_school"}
+                    %span.icon.icon-info
+
+
+                .box.ell_descrip.line
+                  .first_block.middle
+                    = student_school.ell_description
+
+                .box.ell_cluster.line
+                  .first_block.middle
+                    = student_school.ell_cluster
+
+                .clr
+
+
+      - else
+        %div{style: 'margin: 40px 0 60px 0;'}
+          %h2
+            There are no matching schools for the program and grade combination that you entered.
