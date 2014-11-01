@@ -1170,7 +1170,6 @@ School List
 .wrap #school_list ul li.small_list_row .sortable_row_number {
   color: #565656;
   font-size: 17px;
-  cursor: row-resize;
 }
 .wrap #school_list ul li.descrip_open {
   height: auto !important;
@@ -1199,7 +1198,6 @@ School List
   line-height: 18px;
   width: 310px;
   padding-left: 0;
-  cursor: row-resize;
 }
 
 .wrap #school_list ul li .school_name .icon { font-size: 16px; }
@@ -1913,7 +1911,7 @@ Get Ready
 		.menu_school_lists {
 			margin: 0 0 25px;
 		}
-		
+
 		ul .list_row {
 			&:before {
 				content: attr(data-index);
@@ -1931,15 +1929,15 @@ Get Ready
 			&.secondary {
 				background: none;
 				height: 42px;
-			
+
 				&:before {
 					color: $med_gray;
 					font-size: 1.5em;
 				}
-				
+
 				.line { height: 42px; }
 				.sortable_row_number img { width: 20px; }
-			}			
+			}
 		}
 	}
 
