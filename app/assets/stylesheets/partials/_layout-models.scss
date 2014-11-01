@@ -1199,7 +1199,7 @@ School List
   line-height: 18px;
   width: 310px;
   padding-left: 0;
-  cursor: pointer;
+  cursor: row-resize;
 }
 
 .wrap #school_list ul li .school_name .icon { font-size: 16px; }
@@ -1445,6 +1445,7 @@ School List
   margin-bottom: 12px;
   margin-top: 0;
   height: 82px;
+  cursor: row-resize;
   transition: background 250ms ease;
   &:hover {
 	  background: #FFF;
@@ -1678,7 +1679,7 @@ School List
 
 
 /* ---------------------------------------------------------
-Compare List
+Compare and Rank
 ------------------------------------------------------------ */
 .wrap.compare_lists .menu_school_lists {
 	margin-left: 140px;
@@ -1886,7 +1887,7 @@ Get Ready
 		.footer_list {
 			padding: 0;
 			background: none;
-			font-size: 15px;
+			font-size: 14px;
 			margin: 35px 30% 35px 7%;
 
 			.footer_left,
@@ -1898,6 +1899,8 @@ Get Ready
 				margin: 0 0 30px;
 			}
 		}
+
+		.logo.register .icon { font-size: 48px; }
 	}
 
 	#school_list {
@@ -1909,21 +1912,12 @@ Get Ready
 		.menu_school_lists {
 			margin: 0 0 25px;
 		}
-
-		ul .list_row .your_fit_descrip,
-		ul .list_row .getting_there,
-		ul .list_row .eligibility,
-		ul .list_row .school_hours,
-		ul .list_row .ell_cluster,
-		ul .list_row .sped_cluster {
-			display: none;
-		}
 	}
 
 	#timeline_wrap {
 		width: 25%;
 		position: relative;
-		margin: 25px 0;
+		margin: 35px 0;
 
 		.timeline {
 			position: relative;
@@ -1992,7 +1986,7 @@ Footer
   font-size: 13px;
   line-height: 20px;
   color: $med_gray;
-  margin: 0 40px 0 0;
+  margin: 0;
 
 	p {
 		margin-bottom: .5em;
