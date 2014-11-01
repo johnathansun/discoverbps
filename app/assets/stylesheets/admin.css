@@ -4,6 +4,7 @@ body.admin {
 	font-weight: bold;
 	font-size: 15px;
 	padding-bottom: 40px;
+	color: #333333;
 
 	.page {
 		background-color: #ffffff;
