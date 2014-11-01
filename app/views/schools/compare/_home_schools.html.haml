@@ -8,8 +8,9 @@
       Name
     .label.your_fit.no_icon
       Your Fit
-    .label.demand.no_icon
-      = "2013-2014 Demand"
+    - if TRANSITION_GRADES.include?(current_student.grade_level)
+      .label.demand.no_icon
+        = "#{last_school_year_range} Demand"
     .label.travel
       %span{:aria => {hidden: true}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"}
       Travel
@@ -19,9 +20,10 @@
     .label.hours
       %span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"}
       Hours
-    .label.surround_care
-      %span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
-      Surround Care
+    - if SURROUND_CARE_GRADES.include?(current_student.grade_level)
+      .label.surround_care
+        %span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
+        Surround Care
     .label.school_type
       %span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
       School Type
@@ -94,18 +96,19 @@
               %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"}
               %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
 
-            .school_demand.line
-              .stats
-                = school.open_seats(current_student.grade_level)
-                open seats
-                %br/
-                = school.applicants(current_student.grade_level)
-                applicants
-                %br/
-                = school.applicants_per_open_seat(current_student.grade_level, '2013')
-                applicants/open seat
-              .max_range
-                %div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
+            - if TRANSITION_GRADES.include?(current_student.grade_level)
+              .school_demand.line
+                .stats
+                  = school.open_seats(current_student.grade_level)
+                  open seats
+                  %br/
+                  = school.applicants(current_student.grade_level)
+                  applicants
+                  %br/
+                  = school.applicants_per_open_seat(current_student.grade_level, '2013')
+                  applicants/open seat
+                .max_range
+                  %div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
 
             .school_travel.line
               = spacer_helper(student_school.distance)
@@ -117,13 +120,14 @@
             .school_hours.line
               = truncate(school.api_hours.try(:[], :schhours1), length: 40)
 
-            .school_surround_care.line
-              - if school.api_basic_info.try(:[], :BeforeSchPrograms).present?
-                Before School
-                %br/
+            - if SURROUND_CARE_GRADES.include?(current_student.grade_level)
+              .school_surround_care.line
+                - if school.api_basic_info.try(:[], :BeforeSchPrograms).present?
+                  Before School
+                  %br/
 
-              - if school.api_basic_info.try(:[], :AfterSchPrograms).present?
-                After School
+                - if school.api_basic_info.try(:[], :AfterSchPrograms).present?
+                  After School
 
             .school_type.line
               = school.api_basic_info.try(:[], :SchoolType)
@@ -132,7 +136,7 @@
               = grade_levels_helper(school.grade_levels)
 
             .school_enrollment.line
-              550
+              = school.total_seats(current_student.grade_level)
 
             .school_special_app.line
               = special_application_helper(school.api_description.try(:[], :isspecialappprocedures))

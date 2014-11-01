@@ -133,6 +133,19 @@ class School < ActiveRecord::Base
 		end
 	end
 
+	def total_seats(grade_level, school_year=nil)
+		grade = grade_level.try(:to_s).try(:strip).try(:gsub, /^0/, '').try(:upcase)
+		year = school_year.try(:to_s).try(:strip).try(:gsub, /\-.*/, '').try(:strip)
+
+		if year.present?
+			self.demand_data.where(grade_level: grade, year: year).last.try(:total_seats)
+		elsif grade.present?
+			self.demand_data.where(grade_level: grade).average(:total_seats).try(:to_i)
+		else
+			nil
+		end
+	end
+
 	private
 
 	def strip_bps_id

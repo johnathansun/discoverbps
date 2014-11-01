@@ -16,6 +16,26 @@ module ApplicationHelper
 
 	#####
 
+	def last_school_year
+		if Date.today.month >= 11
+			"#{Date.today.years_ago(1).year}"
+		else
+			"#{Date.today.year}"
+		end
+	end
+
+	def last_school_year_range
+		if Date.today.month >= 11
+			start_year = Date.today.years_ago(1).year
+			end_year = Date.today.year
+			"#{start_year}-#{end_year}"
+		else
+			start_year = Date.today.year
+			end_year = Date.today.years_since(1).year
+			"#{start_year}-#{end_year}"
+		end
+	end
+
 	def timeline_last_year
 		if Date.today.month > 9
 			Date.today.year
