@@ -11,7 +11,7 @@ body {
 }
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
 Dialog Box
 ------------------------------------------------------------ */
 .dialog_box {
@@ -31,32 +31,32 @@ Dialog Box
 	  width: 750px;
 	  margin: 0 0 0 -375px;
 	  font-size: 15px;
-	  
+
 	  &#dialog_preferences {
 		  .bloc { padding: 0; }
-		
+
 			.content { width: auto; }
 		}
-	
+
 		.content {
 		  float: left;
 		  color: #000000;
-		  
+
 		  .first { margin-top: 0px; }
-		  
+
 		  .tel {
 			  margin: 35px 0 0 0;
 			  color: #fc5b00;
 			  font-size: 34px;
 			}
-		
+
 			.selection {
 			  background: #ebebeb;
 			  padding: 0 10px;
 			  min-width: 410px;
 			  width: auto;
 			  display: inline-block;
-			  
+
 			  .row {
 				  line-height: 37px;
 				  font-size: 16px;
@@ -65,7 +65,7 @@ Dialog Box
 				  position: relative;
 				  cursor: pointer;
 				  &:hover { color: #000000; }
-				  
+
 				  .icon_selected {
 					  position: absolute;
 					  right: 0px;
@@ -74,19 +74,19 @@ Dialog Box
 					  line-height: 37px;
 					}
 				}
-			
+
 				.row.last { border: none; }
 			}
-			
-			.bloc { 
-				padding: 40px 0 0 0; 
-			
+
+			.bloc {
+				padding: 40px 0 0 0;
+
 				.input_select {
 				  width: 400px;
 				  height: 40px;
 				  background: #ebebeb;
 				  padding: 0 0 0 10px;
-				  
+
 				  input {
 					  margin: 0;
 					  background: none;
@@ -98,29 +98,29 @@ Dialog Box
 					  font-size: 15px;
 					  width: 380px;
 					}
-				
+
 					.arrow { font-size: 8px; }
 				}
-			
+
 				.preference {
 				  float: left;
 				  width: 175px;
-				  
+
 				  .title {
 					  margin-top: 0px;
 					  font-size: 15px;
 					  color: #000000;
-					  
+
 					  .text { margin: 0 0 0 5px; }
 					}
-				
+
 					label {
 					  position: relative;
 					  display: block;
 					  color: #969696;
 					  width: auto;
 					  margin-bottom: 5px;
-					  
+
 					  span {
 						  margin: 0 0 0 20px;
 						  display: inline-block;
@@ -133,7 +133,7 @@ Dialog Box
 					}
 				}
 			}// .bloc
-			
+
 			.btn {
 			  margin: 40px 0 0 0;
 			  cursor: pointer;
@@ -142,7 +142,7 @@ Dialog Box
 				padding: 0;
 				border: none;
 			}
-			
+
 			.btn.submit {
 			  display: inline-block;
 			  width: auto;
@@ -150,7 +150,7 @@ Dialog Box
 			  padding: 5px 10px;
 			  color: #ffffff;
 			}
-			
+
 		}// .content
 	}// &.dialog_box_dicover
 
@@ -164,7 +164,7 @@ Dialog Box
 	  margin: 0 0 0 -170px;
 	  background: url(/assets/box_point_03.png) no-repeat;
 	}
-	
+
 	&#dialog_sort_criteria {
 	  box-shadow: none;
 	  width: 340px;
@@ -222,21 +222,21 @@ Dialog Box
 		      transform:rotate(-33deg);
 		      -ms-transform:rotate(-33deg);
 		      -webkit-transform:rotate(-33deg); */
-		
+
 		  /*-webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.3));*/
-		
+
 		  /*background:url(..//assets/bg_box_welcome_triangle.png);
 		      width: 422px;
 		      height: 295px;
 		      left: -20px;
 		      top: -25px;
 		      position:absolute;*/
-		
+
 		}
 	}
-	
+
 	&#dialog_share_via_email {
-		
+
 		textarea {
 		  width: 94%;
 		  resize: none;
@@ -257,10 +257,10 @@ Dialog Box
 		  color: #969696;
 		  display: block;
 		}
-		
+
 		.btn_success { margin: 15px 0 0 0; }
-		
-		
+
+
 	}// #dialog_share_via_email
 
 
@@ -274,11 +274,11 @@ Dialog Box
 	  font-size: 15px;
 	  margin: 15px 0;
 	}
-	
+
 	.footnote {
 		p { color: $med_gray; }
 	}
-	
+
 	.btn_success {
 	  color: #ffffff;
 	  background: #72c900;
@@ -291,7 +291,7 @@ Dialog Box
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
 Languages
 ------------------------------------------------------------ */
 .languages {
@@ -302,19 +302,19 @@ Languages
   padding: 0;
   margin: 0;
   &:hover {
-	  li ul { 
-	  	display: block; 
-	  
+	  li ul {
+	  	display: block;
+
 			li:hover { color: #565656; }
 	  }
-	  
+
 	  .current_language {
 		  color: #565656;
 		  background: #ebebeb;
 		  padding: 0 14px 0 12px;
 		}
   }
-  
+
   &.dialog_box_lang {
 	  position: absolute;
 	  right: 28px;
@@ -326,24 +326,24 @@ Languages
 				  color: #565656;
 				}
 			}
-			
+
 			.current_language {
 			  color: #565656;
 			  background: #ebebeb;
 			}
 	  }
-	  
+
 	  .current_language {
 		  color: #000000;
 		  padding: 0 14px 0 12px;
 		}
-	
+
 		ul {
 		  width: auto;
 		  float: right;
 		}
 	}
-	
+
 	span {
 	  font-size: 8px;
 	  margin: 0 5px 0 0;
@@ -364,14 +364,14 @@ Languages
 	  background: #ebebeb;
 	  color: #969696;
 	  padding: 20px 36px 10px 24px;
-	  
+
 	  li {
 		  cursor: pointer;
 		  margin-bottom: 17px;
-		  
+
 		  ul { display: none; }
 		}
-	
+
 		.language {
 		  line-height: 15px;
 		  font-size: 13px;
@@ -382,7 +382,7 @@ Languages
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
  Header
 ------------------------------------------------------------ */
 header {
@@ -395,7 +395,7 @@ header {
 	  float: left;
 	  padding-top: 22px;
 	}
-	
+
 	.logo {
 	  width: 142px;
 	  float: right;
@@ -404,7 +404,7 @@ header {
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
  Footer
 ------------------------------------------------------------ */
 footer.footer {
@@ -412,7 +412,7 @@ footer.footer {
   height: 60px;
   padding: 19px 0 25px;
   clear: both;
-  
+
   .title_footer {
 	  color: #0077cf;
 	  float: left;
@@ -420,22 +420,22 @@ footer.footer {
 	  margin-bottom: 0;
 	  font-size: 14px;
 	  width: 450px;
-	  
+
 	  .copyright { color: #969696; }
 	}
-	
-	a { 
-		text-decoration: none; 
+
+	a {
+		text-decoration: none;
 		&:hover {
 			text-decoration: underline;
 		}
 	}
-	
+
 	.logo {
 	  width: 142px;
 	  float: right;
 	}
-	
+
 }// footer.footer
 
 .footer_top {
@@ -445,17 +445,17 @@ footer.footer {
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
  .standard
 ------------------------------------------------------------ */
 .standard {
-	
-	&.one {	
+
+	&.one {
 		.wrap {
 		  max-width: 1456px;
 		  margin: 0 auto;
 		  padding: 0 118px;
-		
+
 			.content_wrap {
 			  max-width: 1030px;
 			  margin: 0 auto;
@@ -463,26 +463,26 @@ footer.footer {
 			}
 		}
 	}
-	
+
 	&.two {
 		.wrap {
 		  width: 964px;
 		  margin: 0 auto;
 		  padding: 0 118px 50px;
-		  
+
 		  .content_wrap {
 			  max-width: 960px;
 			  margin: 0 auto;
 			}
-		}	
+		}
 	}
-	
+
 }// .standard
 
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
  Wrap
 ------------------------------------------------------------ */
 .wrap {
@@ -496,7 +496,7 @@ footer.footer {
 	  margin: 0 87px;
 	  position: relative;
 	}
-	
+
 	.arrow_slide {
 	  position: absolute;
 	  right: 5px;
@@ -510,7 +510,7 @@ footer.footer {
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
  Timeline
 ------------------------------------------------------------ */
 .wrap.timeline_menu .logo_discover {
@@ -688,7 +688,7 @@ footer.footer {
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
  Account
 ------------------------------------------------------------ */
 .account_tab {
@@ -708,7 +708,7 @@ footer.footer {
   cursor: pointer;
   text-align: right;
   &:hover { color: $yellow; }
-  
+
   .icon {
 	  font-size: 8px;
 	  margin-right: 5px;
@@ -796,7 +796,7 @@ footer.footer {
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
  .btn / .input_box
 ------------------------------------------------------------ */
 .btn {
@@ -893,7 +893,7 @@ footer.footer {
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
 Single School
 ------------------------------------------------------------ */
 .wrap .single_school {
@@ -901,43 +901,43 @@ Single School
   font-size: 14px;
   width: 100%;
   padding: 25px 0;
-  
-  a { 
-  	text-decoration: none; 
+
+  a {
+  	text-decoration: none;
 		&:hover {
 			text-decoration: underline;
 		}
   }
-  
+
   p { font-size: 15px; }
-  
+
   .name_school {
 	  font-size: 26px;
 	  color: #565656;
 	}
-	
+
 	.school_descrip {
 	  float: left;
 	  width: 585px;
 	  margin: 0 35px;
-	  
+
 	  .descritiv {
 		  font-family: Georgia, "Times New Roman", Times, serif;
 		}
 	}
-	
+
 	.address_school {
 	  color: #969696;
 	  line-height: 40px;
 	}
-	
+
 	.separation_line {
 	  clear: both;
 	  border-bottom: 1px solid #c9c9c9;
 	  height: 16px;
 	  margin: 0 0 12px 0;
 	}
-	
+
 	.box {
 	  padding-left: 23px;
 	  width: 168px;
@@ -945,25 +945,25 @@ Single School
 	  min-height: 75px;
 	  margin-bottom: 20px;
 	  &.first { padding: 0; }
-	  
+
 	  .title {
 		  color: #565656;
 		  margin-bottom: 0;
-		  
+
 		  span {
 			  margin: 0 5px 0 0;
 			}
 		}
-		
+
 		.descrip {
 		  color: #969696;
 		  margin-left: 21px;
-		  
+
 		  span {
 			  color: #565656;
 			}
 		}
-		
+
 		.absolute {
 		  position: absolute;
 		  width: 168px;
@@ -971,7 +971,7 @@ Single School
 	}// .box
 
 	.tablet { display: none; }
-	
+
 }// .wrap .single_school
 
 #main_gallery_image {
@@ -992,12 +992,12 @@ Single School
 	  margin-right: 4.15%;
 	  display: block;
 	  cursor: pointer;
-	  
+
 	  &.last { margin-right: 0; }
-	  
+
 	  img { width: 100%; }
 	}
-	
+
 	.principal {
 	  height: 215px;
 	  margin-bottom: 12px;
@@ -1007,9 +1007,9 @@ Single School
 	  &:hover {
 		  .glass { display: block; }
 	  }
-	  
+
 	  img { width: 100%; }
-	
+
 		.glass {
 		  background: #ebebeb;
 		  font-size: 22px;
@@ -1029,7 +1029,7 @@ Single School
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
  Map
 ------------------------------------------------------------ */
 .wrap.global_map {
@@ -1042,7 +1042,7 @@ Single School
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
  Preferences
 ------------------------------------------------------------ */
 .wrap .preferences {
@@ -1053,20 +1053,20 @@ Single School
   padding: 20px 18px 0 18px;
   background: #ebebeb;
   position: relative;
-  
+
   .down_arrow {
 	  display: inline-block;
 	  font-size: 13.5px !important;
 	}
-	
+
 	.up_arrow {
 	  display: none;
 	}
-	
+
 	.header_preferences {
 	  margin-left: 20px;
 	  display: none;
-	  
+
 	  #hide_btn,
 	  #show_btn {
 		  font-size: 13px;
@@ -1077,16 +1077,16 @@ Single School
 		  width: 120px;
 		  text-align: right;
 		  margin-right: 17px;
-		  
+
 		  span {
 			  font-size: 20px;
 			  vertical-align: middle;
 		  }
 	  }
 	  #show_btn { display: none; }
-	  
+
 	}// .header_preferences
-	
+
 	.preference {
 	  padding: 17px 0 23px;
 	  border-bottom: 1px solid #fafafa;
@@ -1097,25 +1097,25 @@ Single School
 		  width: auto;
 		  margin-left: 23px;
 		  margin-bottom: 5px;
-		  
+
 		  .icon_pref { margin-left: -19px; }
 		}
 
 		.text { margin-left: 2px; }
-		
+
 		input { margin: 0 5px 0 -21px; }
-		
+
 		.title {
 		  color: #565656;
 		  padding: 0;
 		  margin: 0 0 10px 0;
 		  margin-left: 23px;
-		  
+
 		  .icon_pref { margin-left: -21px; }
 		}
-		
+
 		.icon_pref { margin: 0 5px 0 0; }
-		
+
 		span { color: #969696; }
 	}// .preference
 
@@ -1124,7 +1124,7 @@ Single School
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
 School List
 ------------------------------------------------------------ */
 .wrap #school_list {
@@ -1199,7 +1199,7 @@ School List
   line-height: 18px;
   width: 310px;
   padding-left: 0;
-  cursor: row-resize;
+  cursor: pointer;
 }
 
 .wrap #school_list ul li .school_name .icon { font-size: 16px; }
@@ -1304,40 +1304,40 @@ School List
   width: 100%;
   overflow: hidden;
   display: none;
-  
+
   a {
   	text-decoration: none;
   	&:hover {
 	  	text-decoration: underline;
   	}
 	}
-	
+
 	.right_side {
 	  margin-left: 50px;
-	  
-	  .box { 
+
+	  .box {
 		  padding-left: 0;
-			width: auto; 
+			width: auto;
 		}
-	  
+
 	  .school_name {
 		  font-size: 15px;
 		  float: left;
-		  
+
 		  .descritiv {
 			  font-family: Georgia, "Times New Roman", Times, serif;
 			  font-size: 15px;
 			}
-			
+
 			p { font-size: 15px; }
 	  }
-	  
+
 	 	.photos {
 		 	float: left;
 		 	padding: 19px;
 	 		max-width: 290px;
 	 		width: 30.8%;
-	 	
+
 	 		.photo_group {
 		 		margin: 0 0 20px;
 		 		@include clearfix;
@@ -1352,7 +1352,7 @@ School List
 			  &.last {
 				  margin-right: 0;
 				}
-			
+
 				img { width: 100%; }
 			}
 			.principal {
@@ -1364,9 +1364,9 @@ School List
 			  &:hover {
 				  .glass { display: block; }
 			  }
-			  
+
 			  img { width: 100%; }
-			  
+
 			  .glass {
 				  background: #ebebeb;
 				  font-size: 22px;
@@ -1382,13 +1382,13 @@ School List
 				}
 			}
 	 	}
-	 	
+
 	 	.school_info {
 			width: 55%;
 			padding: 17px 19px;
 			float: left;
 			&.full { width: 100%; }
-			
+
 			.text {
 				font-family: Georgia, "Times New Roman", Times, serif;
 				font-size: 16px;
@@ -1405,7 +1405,7 @@ School List
 			.title {
 			  color: #565656;
 			  margin: 0 0 0 16px;
-			  
+
 			  .fit_icon {
 				  color: #565656;
 				  margin-left: -20px;
@@ -1418,20 +1418,20 @@ School List
 			}
 
 		}// .school_info
-	 	
+
 		.tablet,
 		.mobile { display: none; }
-		
+
 
 	} //.right_side
-	
+
 	.separation_line {
 	  clear: both;
 	  border-bottom: 1px solid #c9c9c9;
 	  height: 16px;
 	  margin: 0 0 19px 16px;
 	}
-  
+
 } //.wrap #school_list ul li .school_descrip
 
 
@@ -1445,7 +1445,6 @@ School List
   margin-bottom: 12px;
   margin-top: 0;
   height: 82px;
-  cursor: row-resize;
   transition: background 250ms ease;
   &:hover {
 	  background: #FFF;
@@ -1453,7 +1452,7 @@ School List
 		  color: $orange;
 	  }
 	}
-	
+
 	&.descrip_open { cursor: default; }
 }
 .wrap #school_list ul li.list_row.ui-sortable-helper {
@@ -1466,7 +1465,7 @@ School List
 .wrap #school_list ul li.list_row .sortable_row_number {
   color: #565656;
   font-size: 20px;
-  
+
   img {
 	  width: 29px;
 	  margin: 0 auto;
@@ -1486,7 +1485,7 @@ School List
 		width: auto;
 		margin-right: 5px;
 		font-size: 14px;
-		color: $med_gray;	
+		color: $med_gray;
 	}
 }
 .wrap #school_list ul li.list_row .school_hours .max_range {
@@ -1678,15 +1677,15 @@ School List
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
 Compare List
 ------------------------------------------------------------ */
 .wrap.compare_lists .menu_school_lists {
-	margin-left: 140px;	
+	margin-left: 140px;
 }
 
 .compare_list {
-	
+
 	#ranks {
 		margin: 0 0 5px;
 		.rank {
@@ -1696,26 +1695,26 @@ Compare List
 			color: $blue;
 		}
 	}
-	
-	.column { 
-		float: left; 
+
+	.column {
+		float: left;
 		margin: 30px 0 0;
 	}
-	.column.labels { 
-		width: 12%; 
+	.column.labels {
+		width: 12%;
 		margin-top: 38px;
 	}
-	
+
 	.column.sort_schools { width: 73%; }
-	
-	.column.more_schools { 
-		width: 15%; 
+
+	.column.more_schools {
+		width: 15%;
 		margin-top: 70px;
-		
+
 		.school {
 			position: relative;
 			color: $med_gray;
-			
+
 			a {
 				display: block;
 				color: $med_gray;
@@ -1733,12 +1732,12 @@ Compare List
 		margin: 0 15px;
 	}
 	&.more_schools_hovered {
-		
+
 		.sortable_school.last {
 			opacity: 0.3;
 		}
 	}
-	
+
 	.labels_frame {
 		padding: 0 5px 0 10px;
 	}
@@ -1752,26 +1751,26 @@ Compare List
 		&.name { height: 94px; }
 		&.demand { height: 90px; }
 		&.no_icon { padding-left: 0; }
-		
+
 		.icon {
 			position: absolute;
 			left: 0;
 		}
 
 	}// .label
-	
+
 	.sortable_school {
 		width: 20%;
 		float: left;
 		transition: opacity 250ms ease;
-		
+
 		&.ui-sortable-helper {
 			.li_frame {
 				background: #FFF;
 				box-shadow: 0 0 10px 2px #bbb;
 			}
 		}
-		
+
 		.li_frame {
 			position: relative;
 			margin-right: 10px;
@@ -1784,19 +1783,19 @@ Compare List
 				background: #FFF;
 			}
 		}
-		
+
 		.line {
 			height: 50px;
 			overflow: hidden;
 			line-height: 1.3em;
 			color: $med_gray;
-			
+
 			&.long {
 				height: 200px;
 				font-size: 12px;
 			}
 		}
-		
+
 		.school_star {
 			position: absolute;
 			right: 10px;
@@ -1827,14 +1826,14 @@ Compare List
 			  border-radius: 4px;
 			}
 		}
-		
+
 	}// .sortable_school
-		
-		
+
+
 	.footer_list {
 	  margin: 0;
 	  padding-left: 142px;
-	}	
+	}
 }// .compare_list
 
 
@@ -1858,7 +1857,7 @@ Compare List
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
  UI Widgets
 ------------------------------------------------------------ */
 .ui-widget-content.ui-tooltip {
@@ -1872,24 +1871,24 @@ Compare List
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
 Get Ready
 ------------------------------------------------------------ */
 .get_ready {
-	
+
 	.column {
 		float: left;
 	}
-	
+
 	#footer_content {
 		width: 25%;
-		
+
 		.footer_list {
 			padding: 0;
 			background: none;
 			font-size: 15px;
 			margin: 35px 30% 35px 7%;
-			
+
 			.footer_left,
 			.footer_center,
 			.footer_right {
@@ -1900,7 +1899,7 @@ Get Ready
 			}
 		}
 	}
-	
+
 	#school_list {
 		width: 50%;
 		margin: 25px 0 35px;
@@ -1908,9 +1907,9 @@ Get Ready
 		background: none;
 
 		.menu_school_lists {
-			margin: 0 0 25px;	
+			margin: 0 0 25px;
 		}
-		
+
 		ul .list_row .your_fit_descrip,
 		ul .list_row .getting_there,
 		ul .list_row .eligibility,
@@ -1920,51 +1919,51 @@ Get Ready
 			display: none;
 		}
 	}
-	
+
 	#timeline_wrap {
 		width: 25%;
 		position: relative;
 		margin: 25px 0;
-		
+
 		.timeline {
 			position: relative;
 			margin-right: 40px;
 			text-align: right;
 			color: $blue;
 			font-size: 11px;
-			
+
 			.seperator {
 				height: 1px;
 			}
-			
+
 			.event {
 				position: relative;
 				display: block;
 				border-right: 10px solid tint($blue, 25%);
 				padding: 0 20px 60px 0;
-				
+
 				&.green_bar { border-color: $green; }
 				&.dark_blue_bar { border-color: $dark_blue; }
 				&.registration { padding-bottom: 0; }
 				&.last_names { padding: 15px 20px 15px 0; }
-				&.last { 
-					margin-bottom: 0; 
+				&.last {
+					margin-bottom: 0;
 					border-color: transparent;
 					.point {
 						right: -18px;
 					}
 				}
-			
+
 				.point {
 					position: absolute;
 					right: -17px;
 					top: -1px;
 				}
-			
+
 				.tablette { display: none; }
 			}
 		}
-		
+
 		.start_point {
 			font-size: 16px;
 			color: $light_blue;
@@ -1972,14 +1971,14 @@ Get Ready
 			top: -8px;
 			right: -18px;
 		}
-		
+
 	}
 }
 
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
 Footer
 ------------------------------------------------------------ */
 .footer_notice {
@@ -1995,15 +1994,15 @@ Footer
   color: $med_gray;
   margin: 0 40px 0 0;
 
-	p { 
-		margin-bottom: .5em; 
+	p {
+		margin-bottom: .5em;
 	}
 	a {
 	  color: $blue;
 	  text-decoration: none;
 		&:hover { text-decoration: underline; }
 	}
-	
+
 	.footer_left,
 	.footer_center,
 	.footer_right {
@@ -2017,7 +2016,7 @@ Footer
 	.footer_center {
 		border-left: 1px solid #FFF;
 		padding: 0 5%;
-		
+
 		.icon {
 			display: block;
 			font-size: 37px;
@@ -2034,7 +2033,7 @@ Footer
 }
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
 Wrap Result
 ------------------------------------------------------------ */
 .wrap .result {
@@ -2044,7 +2043,7 @@ Wrap Result
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
 Menu Compare Student Name
 ------------------------------------------------------------ */
 .wrap .menu_compare_name {
@@ -2107,11 +2106,11 @@ Menu Compare Student Name
   transition: all 250ms ease;
 	&:hover {
 	  color: #ffffff;
-	}	
+	}
 }
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
 Menu School Lists
 ------------------------------------------------------------ */
 .wrap .menu_school_lists {
@@ -2172,7 +2171,7 @@ Menu School Lists
 }
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
 Wrap Search
 ------------------------------------------------------------ */
 .wrap .search {
@@ -2268,7 +2267,7 @@ Wrap Search
   /*width: 815px;*/
   margin-right: 220px;
   margin-left: 125px;
-  border-top: 1px solid #fff; 
+  border-top: 1px solid #fff;
 }
 
 .wrap .search .search_section .content_left a.K {
@@ -2309,7 +2308,7 @@ Wrap Search
 .wrap .search .user_lists {
 	margin-bottom: 80px;
 	width: 128.5%;
-	
+
 	li {
 		margin-bottom: 30px;
 		@include clearfix;
@@ -2325,20 +2324,20 @@ Wrap Search
 			background: tint($light_blue, 75%);
 		}
 	}
-	.name { 
+	.name {
 		font-size: 24px;
-		text-transform: capitalize; 
-		margin-right: 5px; 
+		text-transform: capitalize;
+		margin-right: 5px;
 	}
 	.schools { float: right; }
-	
+
 	.steps {
-		@include clearfix; 
+		@include clearfix;
 	}
 		.step {
 			width: 25%;
 			float: left;
-		
+
 			.bar {
 				height: 10px;
 				background-color: $dark_blue;
@@ -2349,7 +2348,7 @@ Wrap Search
 				font-size: 10px;
 			}
 
-			&.last { 
+			&.last {
 				.bar { border: none; }
 			}
 			&.complete {
@@ -2357,22 +2356,22 @@ Wrap Search
 				.label { color: $light_blue; }
 			}
 			&.current {
-				.bar { 
+				.bar {
 					background-color: $yellow;
 				}
 				.label { color: $yellow; }
 			}
 		}
-	
+
 	#start_new_search {
-		float: left;	
+		float: left;
 	}
 }
 
 
 // Forms /////////////
 .search .search_section .content_left .new_search_form_wrap {
-	
+
 	&.hidden {
 		display: none;
 	}
@@ -2669,7 +2668,7 @@ a.ui-corner-all:hover {
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
 Wrap Account
 ------------------------------------------------------------ */
 .wrap .account {
@@ -2960,7 +2959,7 @@ Wrap Account
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
  School Photos "Glass"
 ------------------------------------------------------------ */
 .glass_open,
@@ -2987,7 +2986,7 @@ Wrap Account
 }
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
  Progress Bar
 ------------------------------------------------------------ */
 .progress_bar {
@@ -2995,13 +2994,13 @@ Wrap Account
 	width: 100%;
 	max-width: 660px;
 	margin: 17px 0 0;
-	
+
 	.note {
 		margin: 0 0 18px;
 	}
-	
+
 	.steps {
-		@include clearfix; 
+		@include clearfix;
 	}
 		.step {
 			width: 25%;
@@ -3011,7 +3010,7 @@ Wrap Account
 					color: $yellow !important;
 				}
 			}
-		
+
 			.bar {
 				height: 10px;
 				background-color: $dark_blue;
@@ -3027,7 +3026,7 @@ Wrap Account
 				}
 			}
 
-			&.last { 
+			&.last {
 				.bar { border: none; }
 			}
 			&.complete {
@@ -3035,7 +3034,7 @@ Wrap Account
 				.label { color: $light_blue; }
 			}
 			&.current {
-				.bar { 
+				.bar {
 					background-color: $yellow;
 				}
 				.label { color: $yellow; }
@@ -3046,7 +3045,7 @@ Wrap Account
 
 
 
-/* --------------------------------------------------------- 
+/* ---------------------------------------------------------
 Print1
 ------------------------------------------------------------ */
 .print1 {

@@ -162,7 +162,7 @@ a.student_tab {
 .sortable_column {
 	cursor: pointer;
 }
-#choice_order_arrow {
+#star_arrow {
 	margin-top: 1px;
 }
 .column_arrow {
@@ -317,4 +317,8 @@ input, select {
 #googleMap {
 	/*set the background color so it's not blank while loading*/
 	background-color: #ece9e2;
+}
+#sortable_star_column {
+	width: 31px !important;
+	padding-left: 18px !important;
 }

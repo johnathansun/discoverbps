@@ -4,7 +4,7 @@
       - if @sped_schools.present?
         .menu_list
           %div{id: 'sped_header', class: 'li_frame school_list_header', style: 'display: none;'}
-            #sortable_choice_order_column.arrow.menu_bloc.desktop.no_mobile
+            #sortable_star_column.sortable_column.menu_bloc.desktop.no_mobile
               .column_title
                 Star
 
@@ -29,9 +29,11 @@
 
                 .desktop
                   .no_order.line
-                    %span.sortable_row_number.middle
+                    %span.middle
                       = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
                       = image_tag('star_unstarred.png', id: "star_#{student_school.id}_unstarred", class: 'star_unstarred', style: "display: #{student_school.starred? ? 'none' : 'inline'}; cursor: pointer;", data: {student_school_id: student_school.id} )
+                      %span{class: "sortable_star", style: "visibility: hidden;"}
+                        = student_school.starred
 
                 .school_name.select.line
                   %span.middle

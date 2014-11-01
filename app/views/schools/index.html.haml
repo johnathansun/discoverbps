@@ -87,36 +87,52 @@
 			});
 		});
 
-		/*var choice_order_ascending = false;
-		$("#sortable_choice_order_column").click(function(){
+
+		var star_ascending = false;
+		$("#sortable_star_column").click(function(){
 			$('.column_arrow').hide();
 			$('.sortable_column').css("color", "#565656")
-			$('#sortable_choice_order_column').css("color", "#0077cf")
-			if (choice_order_ascending) {
-				$('ul#sortable>li').tsort('span.sortable_row_number',{order:'desc'});
-				$('#sortable_choice_order_column').html('<div aria-hidden="true" id="choice_order_arrow" class="icon-DBPS-Dev-Assets-arrow-down"></div>');
-				choice_order_ascending = false;
+			$('#sortable_star_column').css("color", "#0077cf")
+			if (school_name_ascending) {
+				$('ul#sortable>li').tsort('span.sortable_star',{order:'desc'});
+				$('#sortable_star_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Star</div>');
+				school_name_ascending = false;
 			} else {
-				$('ul#sortable>li').tsort('span.sortable_row_number',{order:'asc'});
-				$('#sortable_choice_order_column').html('<div aria-hidden="true" id="choice_order_arrow" class="icon-DBPS-Dev-Assets-arrow-up"></div>');
-				choice_order_ascending = true;
+				$('ul#sortable>li').tsort('span.sortable_star',{order:'asc'});
+				$('#sortable_star_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Star</div>');
+				school_name_ascending = true;
 			}
-		});*/
+		});
 
 		var school_name_ascending = false;
 		$("#sortable_school_name_column").click(function(){
 			$('.column_arrow').hide();
 			$('.sortable_column').css("color", "#565656")
-			$('#sortable_choice_order_column').css("color", "#565656")
 			$('#sortable_school_name_column').css("color", "#0077cf")
 			if (school_name_ascending) {
 				$('ul#sortable>li').tsort('span.sortable_school_name',{order:'desc'});
-				$('#sortable_school_name_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">School Name</div>');
+				$('#sortable_school_name_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Name</div>');
 				school_name_ascending = false;
 			} else {
 				$('ul#sortable>li').tsort('span.sortable_school_name',{order:'asc'});
-				$('#sortable_school_name_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">School Name</div>');
+				$('#sortable_school_name_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Name</div>');
 				school_name_ascending = true;
+			}
+		});
+
+		var fit_ascending = false;
+		$("#sortable_fit_column").click(function(){
+			$('.column_arrow').hide();
+			$('.sortable_column').css("color", "#565656")
+			$('#sortable_fit_column').css("color", "#0077cf")
+			if (fit_ascending) {
+				$('ul#sortable>li').tsort('span.sortable_fit',{order:'desc'});
+				$('#sortable_fit_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Your Fit</div>');
+				fit_ascending = false;
+			} else {
+				$('ul#sortable>li').tsort('span.sortable_fit',{order:'asc'});
+				$('#sortable_fit_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Your Fit</div>');
+				fit_ascending = true;
 			}
 		});
 
@@ -124,15 +140,14 @@
 		$("#sortable_distance_column").click(function(){
 			$('.column_arrow').hide();
 			$('.sortable_column').css("color", "#565656")
-			$('#sortable_choice_order_column').css("color", "#565656")
 			$('#sortable_distance_column').css("color", "#0077cf")
 			if (getting_there_ascending) {
 				$('ul#sortable>li').tsort('span.sortable_distance',{order:'desc'});
-				$('#sortable_distance_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Getting There</div>');
+				$('#sortable_distance_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Travel</div>');
 				getting_there_ascending = false;
 			} else {
 				$('ul#sortable>li').tsort('span.sortable_distance',{order:'asc'});
-				$('#sortable_distance_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Getting There</div>');
+				$('#sortable_distance_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Travel</div>');
 				getting_there_ascending = true;
 			}
 		});
@@ -141,7 +156,6 @@
 		$("#sortable_eligibility_column").click(function(){
 			$('.column_arrow').hide();
 			$('.sortable_column').css("color", "#565656")
-			$('#sortable_choice_order_column').css("color", "#565656")
 			$('#sortable_eligibility_column').css("color", "#0077cf")
 			if (eligibility_ascending) {
 				$('ul#sortable>li').tsort('span.sortable_eligibility',{order:'desc'});
@@ -154,54 +168,19 @@
 			}
 		});
 
-	 	var surround_care_ascending = false;
-		$("#sortable_surround_care_column").click(function(){
-			$('.column_arrow').hide();
-			$('.sortable_column').css("color", "#565656")
-			$('#sortable_choice_order_column').css("color", "#565656")
-			$('#sortable_surround_care_column').css("color", "#0077cf")
-			if (surround_care_ascending) {
-				$('ul#sortable>li').tsort('span.sortable_surround_care',{order:'desc'});
-				$('#sortable_surround_care_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Surround Care</div>');
-				surround_care_ascending = false;
-			} else {
-				$('ul#sortable>li').tsort('span.sortable_surround_care',{order:'asc'});
-				$('#sortable_surround_care_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Surround Care</div>');
-				surround_care_ascending = true;
-			}
-		});
-
 		var hours_ascending = false;
 		$("#sortable_hours_column").click(function(){
 			$('.column_arrow').hide();
 			$('.sortable_column').css("color", "#565656")
-			$('#sortable_choice_order_column').css("color", "#565656")
 			$('#sortable_hours_column').css("color", "#0077cf")
 			if (hours_ascending) {
 				$('ul#sortable>li').tsort('span.sortable_hours',{order:'desc'});
-				$('#sortable_hours_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">School Hours</div>');
+				$('#sortable_hours_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Hours</div>');
 				hours_ascending = false;
 			} else {
 				$('ul#sortable>li').tsort('span.sortable_hours',{order:'asc'});
-				$('#sortable_hours_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">School Hours</div>');
+				$('#sortable_hours_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Hours</div>');
 				hours_ascending = true;
-			}
-		});
-
-		var fit_ascending = false;
-		$("#sortable_fit_column").click(function(){
-			$('.column_arrow').hide();
-			$('.sortable_column').css("color", "#565656")
-			$('#sortable_choice_order_column').css("color", "#565656")
-			$('#sortable_fit_column').css("color", "#0077cf")
-			if (fit_ascending) {
-				$('ul#sortable>li').tsort('span.sortable_fit',{order:'desc'});
-				$('#sortable_fit_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Your Fit</div>');
-				fit_ascending = false;
-			} else {
-				$('ul#sortable>li').tsort('span.sortable_fit',{order:'asc'});
-				$('#sortable_fit_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Your Fit</div>');
-				fit_ascending = true;
 			}
 		});
 
