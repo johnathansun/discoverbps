@@ -31,7 +31,11 @@ class SchoolsController < ApplicationController
     else
       current_student.update_column(:step, 3) if current_student.step < 3
 
-      @home_schools = current_student.home_schools.rank(:sort_order)
+      home_schools = current_student.starred_schools.all
+      current_student.home_schools.rank(:sort_order).all.each do |school|
+        home_schools << school unless home_schools.include?(school)
+      end
+      @home_schools = home_schools
       @zone_schools = current_student.zone_schools.rank(:sort_order)
       @ell_schools = current_student.ell_schools.rank(:sort_order)
       @sped_schools = current_student.sped_schools.rank(:sort_order)
