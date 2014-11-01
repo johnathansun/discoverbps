@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141031024058) do
+ActiveRecord::Schema.define(:version => 20141101180759) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -48,6 +48,27 @@ ActiveRecord::Schema.define(:version => 20141031024058) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "demand_data", :force => true do |t|
+    t.integer  "school_id"
+    t.string   "bps_id"
+    t.string   "year"
+    t.string   "grade_level"
+    t.integer  "seats_before_round"
+    t.integer  "seats_after_round"
+    t.integer  "total_seats"
+    t.integer  "first_choice_applicants"
+    t.integer  "second_choice_applicants"
+    t.integer  "third_choice_applicants"
+    t.integer  "total_applicants"
+    t.decimal  "applicants_per_open_seat"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  add_index "demand_data", ["grade_level"], :name => "index_demand_data_on_grade_level"
+  add_index "demand_data", ["school_id"], :name => "index_demand_data_on_school_id"
+  add_index "demand_data", ["year"], :name => "index_demand_data_on_year"
 
   create_table "notifications", :force => true do |t|
     t.text     "message"

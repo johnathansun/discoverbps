@@ -166,19 +166,19 @@
 				google.maps.Marker.prototype.setMap.apply(this, arguments);
 				(this.MarkerLabel) && this.MarkerLabel.setMap.apply(this.MarkerLabel, arguments);
 			};
-			 
+
 			// Marker Label Overlay
 			var MarkerLabel = function(options) {
 				var self = this;
 				this.setValues(options);
-				
+
 				// Create the label container
 				this.div = document.createElement('div');
 				this.div.className = 'marker-label';
 				var span = document.createElement('span');
 				span.className = "marker-icon";
 				this.div.appendChild(span);
-			 
+
 				// Trigger the marker click handler if clicking on the label
 				google.maps.event.addDomListener(this.div, 'click', function(e){
 					(e.stopPropagation) && e.stopPropagation();
@@ -199,7 +199,7 @@
 					google.maps.event.addListener(this, 'zindex_changed', function() { self.draw(); })
 				];
 			};
-			 
+
 			// Marker Label onRemove
 			MarkerLabel.prototype.onRemove = function() {
 				this.div.parentNode.removeChild(this.div);
@@ -207,7 +207,7 @@
 					google.maps.event.removeListener(this.listeners[i]);
 				}
 			};
-			 
+
 			// Implement draw
 			MarkerLabel.prototype.draw = function() {
 				var projection = this.getProjection();
@@ -222,7 +222,7 @@
 
 			// Create a new StyledMapType object, passing it the array of styles,
 			// as well as the name to be displayed on the map type control.
-			var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});	
+			var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});
 			var latlngbounds = new google.maps.LatLngBounds();
 			var myLatLng = new google.maps.LatLng(42.32,-71.0636);
 			var mapProp = {
@@ -271,13 +271,13 @@
 						});
 					<% end %>
 				<% end %>
-			<% end %>	
+			<% end %>
 			//Associate the styled map with the MapTypeId and set it to display.
 
 			map.mapTypes.set('map_style', styledMap);
 			map.setMapTypeId('map_style');
 		}
-				
+
 		google.maps.event.addDomListener(window, 'load', initialize);
 
 	</script>
@@ -310,8 +310,8 @@
 	<tbody>
 		<% for school in @schools %>
 			<tr class="hover">
-				<td width='80px'><%= school.bps_id %></td>
-				<td><strong><%= link_to school.name, admin_school_path(school) %></strong></td>
+				<td width='80px'><strong><%= link_to school.bps_id, admin_school_path(school) %></strong></td>
+				<td><strong><%= school.name %></strong></td>
 				<td><% unless school.api_basic_info.present? %><%= image_tag('cross.png') %><% end %></td>
 				<td><% unless school.api_description.present? %><%= image_tag('cross.png') %><% end %></td>
 				<td><% unless school.api_grades.present? %><%= image_tag('cross.png') %><% end %></td>

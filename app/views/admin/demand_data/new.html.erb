@@ -1,0 +1,48 @@
+<% if flash[:alert].present? %>
+  <div class="flash_alert"><%= flash[:alert] %></div>
+<% elsif flash[:notice].present? %>
+  <div class="flash_notice"><%= flash[:notice] %></div>
+<% end %>
+
+<h1>Upload Demand Data</h1>
+<p>Please upload a .csv (not .xls) with the following columns (in the following order):</p>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <td class="header"><strong>School<br />ID</strong></td>
+      <td class="header">School<br />Name</td>
+      <td class="header"><strong>School<br />Year</strong></td>
+      <td class="header"><strong>Grade<br />Level</strong></td>
+      <td class="header"><strong>Seats Before<br />Round</strong></td>
+      <td class="header">Seats After<br />Round</td>
+      <td class="header">Seats in<br />Program</td>
+      <td class="header"><strong>1st<br />Choices</strong></td>
+      <td class="header"><strong>2nd<br />Choices</strong></td>
+      <td class="header"><strong>3rd<br />Choices</strong></td>
+      <td class="header"><strong>Total<br />Choices</strong></td>
+    </tr>
+  </thead>
+</table>
+
+<p>The importer will begin with the second row; please include a single header row. School Year should be the first year of the school year from which the data was collected. <strong>Bold fields are required.</strong></p>
+
+<%= form_for(:demand_datum, :url => admin_demand_data_path, :html => {:method => :post, multipart: true}) do |f| %>
+  <% if @demand_datum.errors.any? %>
+    <h3><%= pluralize(@demand_datum.errors.count, "error") %> prohibited this school from being saved:</h3>
+    <ul>
+      <% @demand_datum.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="field">
+    <%= file_field_tag :file %>
+  </div>
+  <div style="margin-top: 20px;">
+    <%= f.submit 'Upload', class: 'add_button', style: 'font-size: 18px;', disable_with: "Please wait..." %>
+    &nbsp;&nbsp;
+    <%= link_to 'Cancel', admin_demand_data_path %>
+  </div>
+<% end %>

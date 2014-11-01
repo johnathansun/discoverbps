@@ -21,7 +21,6 @@ DiscoverbpsV2::Application.routes.draw do
     put 'set_sped', on: :member
     get 'awc', on: :member
     put 'set_awc', on: :member
-    delete 'delete_all', on: :collection
     post 'save_preference', on: :member
     post 'remove_notification', on: :collection
   end
@@ -45,6 +44,9 @@ DiscoverbpsV2::Application.routes.draw do
   namespace :admin do
     root :to => "students#index"
     resources :admins
+    resources :demand_data do
+      delete 'delete_all', on: :collection
+    end
     resources :docs, only: [:index]
     resources :preferences do
       post 'sort', on: :collection

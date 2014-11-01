@@ -166,19 +166,19 @@
 		    google.maps.Marker.prototype.setMap.apply(this, arguments);
 		    (this.MarkerLabel) && this.MarkerLabel.setMap.apply(this.MarkerLabel, arguments);
 		  };
-		   
+
 		  // Marker Label Overlay
 		  var MarkerLabel = function(options) {
 		    var self = this;
 		    this.setValues(options);
-		    
+
 		    // Create the label container
 		    this.div = document.createElement('div');
 		    this.div.className = 'marker-label';
 		    var span = document.createElement('span');
 		    span.className = "marker-icon";
 		    this.div.appendChild(span);
-		   
+
 		    // Trigger the marker click handler if clicking on the label
 		    google.maps.event.addDomListener(this.div, 'click', function(e){
 		      (e.stopPropagation) && e.stopPropagation();
@@ -199,7 +199,7 @@
 					google.maps.event.addListener(this, 'zindex_changed', function() { self.draw(); })
 				];
 			};
-		   
+
 		  // Marker Label onRemove
 		  MarkerLabel.prototype.onRemove = function() {
 		  	this.div.parentNode.removeChild(this.div);
@@ -207,7 +207,7 @@
 		  		google.maps.event.removeListener(this.listeners[i]);
 		  	}
 		  };
-		   
+
 		  // Implement draw
 		  MarkerLabel.prototype.draw = function() {
 		  	var projection = this.getProjection();
@@ -222,7 +222,7 @@
 
 		  // Create a new StyledMapType object, passing it the array of styles,
 			// as well as the name to be displayed on the map type control.
-			var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});	
+			var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});
 			var latlngbounds = new google.maps.LatLngBounds();
 			<% if @school.latitude.present? && @school.longitude.present? && @school.latitude != 0 && @school.longitude != 0 %>
 	      var myLatLng =  new google.maps.LatLng(<%= @school.latitude %>,<%= @school.longitude %>);
@@ -276,7 +276,7 @@
 			map.mapTypes.set('map_style', styledMap);
 			map.setMapTypeId('map_style');
 		}
-				
+
 		google.maps.event.addDomListener(window, 'load', initialize);
 
 	</script>
@@ -318,17 +318,6 @@
 	<% if @school.api_awards.present? %>
 	<ul class="with_bullets">
 		<% @school.api_awards[0].each_pair do |key, value| %>
-			<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
-		<% end %>
-	</ul>
-<% else %>
-	<p style="margin-left: 20px;">[ No data ]</p>
-<% end %>
-
-<h3>Extra Curricular</h3>
-<% if @school.api_extra_curricular.present? %>
-	<ul class="with_bullets">
-		<% @school.api_extra_curricular[0].each_pair do |key, value| %>
 			<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
 		<% end %>
 	</ul>
@@ -400,7 +389,7 @@
 	<ul class="with_bullets">
 		<% @school.api_photos.each do |photo| %>
 			<li>
-				<%= link_to photo[:url], photo[:url] %>
+				<%= image_tag photo[:url] %>
 			</li>
 		<% end %>
 	</ul>

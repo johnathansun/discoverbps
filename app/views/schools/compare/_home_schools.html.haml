@@ -96,11 +96,14 @@
 
             .school_demand.line
               .stats
-                20 open seats
+                = school.open_seats(current_student.grade_level)
+                open seats
                 %br/
-                100 applicants
+                = school.applicants(current_student.grade_level)
+                applicants
                 %br/
-                5 applicants/open seat
+                = school.applicants_per_open_seat(current_student.grade_level, '2013')
+                applicants/open seat
               .max_range
                 %div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
 

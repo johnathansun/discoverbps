@@ -216,17 +216,6 @@ class StudentsController < ApplicationController
     end
   end
 
-  def delete_all
-    students = Student.where('id IN (?)', params[:student_ids])
-    if students.present?
-      students.destroy_all
-    end
-    session[:current_student_id] = nil
-    respond_to do |format|
-      format.html { redirect_to root_url }
-    end
-  end
-
   def save_preference
     current_student.preferences.clear
     if params.try(:[], :student).try(:[], :preference_ids).present?

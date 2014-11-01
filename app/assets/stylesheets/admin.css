@@ -26,9 +26,9 @@ body.admin {
 	a.white { color: #ffffff; text-decoration: none; }
 	a.white:hover { color: #ffff00; text-decoration: none; }
 
-	h1 { font-size: 2.5em; margin-bottom: .1em; }
-	h2 { font-size: 2.2em; margin-bottom: .1em; }
-	h3 { font-size: 1.4em; margin-bottom: .5em; }
+	h1 { font-size: 2.8em; margin-bottom: .2em; }
+	h2 { font-size: 2.4em; margin-bottom: .6em; }
+	h3 { font-size: 1.5em; margin-bottom: .6em; }
 	h4 { font-size: 1.2em; }
 
 	table {
@@ -144,5 +144,34 @@ body.admin {
 
 	.responsive-image {
 		max-width: 100% !important;
+	}
+
+	#nav {
+		padding: 15px 0 10px 0;
+	}
+
+	a.tab {
+		padding: 10px 20px 10px 20px;
+		color: #969696;
+		background: #ebebeb;
+		font-size: 15px;
+	}
+
+	a.tab.active {
+		background: #fc5b00;
+		color: white;
+	}
+
+	a.tab:hover {
+		background: #fc5b00;
+		color: white;
+		text-decoration: none;
+	}
+
+	td.header {
+		width: 11%;
+		background-color: #dddddd;
+		border: 1px solid #777777;
+		text-align: center;
 	}
 }
