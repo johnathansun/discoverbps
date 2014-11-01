@@ -66,8 +66,8 @@
 		$(".option_grade").fadeOut("fast");
 	});
 	$('.btn_grade').click(function() {
-		$('input[id=grade_level_placeholder]').val(this.innerHTML);
-		$('input[id=_studentgrade_level]').val(this.innerHTML);
+		$('input[id=grade_level_placeholder]').val(this.innerHTML.trim());
+		$('input[id=_studentgrade_level]').val(this.innerHTML.trim());
 		$('.option_grade').fadeOut("fast");
 	});
 	$('.select_grade').mouseover(function() {
