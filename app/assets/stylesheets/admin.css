@@ -168,8 +168,8 @@ body.admin {
 		text-decoration: none;
 	}
 
-	td.header {
-		width: 11%;
+	th.header {
+		width: 8% !important;
 		background-color: #dddddd;
 		border: 1px solid #777777;
 		text-align: center;
