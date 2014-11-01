@@ -28,12 +28,24 @@
 
 :javascript
 	$( document ).ready(function() {
+		
 		//Click on school name to open the full school description in the school line
-		$("#school_list li .li_frame > .school_name").click(function() {
-			$(this).parent().parent().addClass("descrip_open");
-			$(this).parent().parent().find(".school_descrip").toggle();
+		$("#school_list li .li_frame > .school_name .icon").click(function() {
+			$(this)
+				.toggleClass("icon-info icon-close blue red")
+				.parents(".list_row")
+				.toggleClass("descrip_open")
+				.find(".school_descrip").toggle();
 			}
 		);
+
+		// Hover a Your Fit icon to see it's tooltip
+		$('.your_fit_icon .icon').tooltip({
+			track: false,
+			my: "center bottom-20",
+			at: "center top",
+			collision: "none"
+		});
 
 		//compare button => add class to compare_list, close school list and preferences, and show the comparaison list
 		/*$(".menu_compare_name .compare").click(function(){

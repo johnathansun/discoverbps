@@ -980,66 +980,19 @@ Single School
 }
 
 
-/* Photos
---------------------------- */
-.wrap .photos {
-  float: left;
-
-	.small {
-	  float: left;
-	  width: 30.45%;
-	  height: 66px;
-	  margin-right: 4.15%;
-	  display: block;
-	  cursor: pointer;
-
-	  &.last { margin-right: 0; }
-
-	  img { width: 100%; }
-	}
-
-	.principal {
-	  height: 215px;
-	  margin-bottom: 12px;
-	  display: block;
-	  position: relative;
-	  cursor: pointer;
-	  &:hover {
-		  .glass { display: block; }
-	  }
-
-	  img { width: 100%; }
-
-		.glass {
-		  background: #ebebeb;
-		  font-size: 22px;
-		  width: 40px;
-		  height: 24px;
-		  padding: 8px 0;
-		  text-align: center;
-		  position: absolute;
-		  top: 0;
-		  left: 0;
-		  color: #c9c9c9;
-		  display: none;
-		}
-	}
-}
-
-
 
 
 /* ---------------------------------------------------------
  Map
 ------------------------------------------------------------ */
-.wrap.global_map {
-  //background: #ffffff;
+.global_map {
   height: 438px;
 }
-.wrap.global_map #googleMap {
-  height: 438px;
+#googleMap {
+	height: 438px;
+	/*set the background color so it's not blank while loading*/
+	background-color: #ece9e2;
 }
-
 
 
 /* ---------------------------------------------------------
@@ -1127,176 +1080,414 @@ Single School
 /* ---------------------------------------------------------
 School List
 ------------------------------------------------------------ */
-.wrap #school_list {
+#school_list {
   background: #ebebeb;
   margin-left: 192px;
   position: relative;
   padding: 20px 0 40px 0;
-}
-.wrap #school_list .note {
-	max-width: 465px;
-}
-.wrap #school_list #sortable_eligibility_column {
-  width: 100px;
-}
-.wrap #school_list #sortable_fit_column {
-  width: 170px;
-}
-.wrap #school_list #sortable_hours_column {
-  width: 140px;
-}
-.wrap #school_list .shadow {
-  width: 24px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: url(/assets/shadow.png) repeat-y left;
-  z-index: 5001;
-}
-.wrap #school_list ul {
-  padding-left: 0;
-  /*li:nth-child(1),li:nth-child(2),li:nth-child(3),li:nth-child(4),li:nth-child(5){*/
+
+  ul {
+	  padding-left: 0;
+	}
+	
+	.note { max-width: 465px; }	
+	.shadow {
+	  width: 24px;
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  height: 100%;
+	  background: url(/assets/shadow.png) repeat-y left;
+	  z-index: 5001;
+	}
 
 }
-.wrap #school_list ul li.small_list_row {
-  list-style: none;
-  background: #ffffff !important;
-  height: 48px;
-  margin: 24px 0;
-  /*.icon-DBPS-Dev-Assets-SRG-35{color:@B0;}*/
 
-}
-.wrap #school_list ul li.small_list_row .sortable_row_number {
-  color: #565656;
-  font-size: 17px;
-}
-.wrap #school_list ul li.descrip_open {
-  height: auto !important;
-}
-.wrap #school_list ul li .line {
-  height: 48px;
-  position: relative;
-  display: table;
-  float: left;
-  color: #969696;
-}
-.wrap #school_list ul li .middle {
-  vertical-align: middle;
-  display: table-cell;
-}
-.wrap #school_list ul li .no_order {
-  color: #0077cf;
-  width: 65px;
-  text-align: center;
-  font-size: 16px;
-  line-height: 18px;
-}
-.wrap #school_list ul li .school_name {
-  color: $blue;
-  font-size: 17px;
-  line-height: 18px;
-  width: 310px;
-  padding-left: 0;
-}
 
-.wrap #school_list ul li .school_name .icon { font-size: 16px; }
+/* ---------------------------------------------------- 
+	School List Column Headers => .menu_list
+------------------------------------------------------- */
+#school_list .menu_list {
+  padding: 13px 0;
+  height: 26px;
+  background: #ebebeb;
+  z-index: 5000;
+  	
+	.menu_bloc {
+	  font-size: 15px;
+	  float: left;
+	  padding: 5px 0px 0 2%;
+	  width: 8%;
+	  height: 24px;
+	  
+		&#sortable_star_column {
+			padding-left: 0;
+			width: 7%;
+		}
+	  &#sortable_school_name_column {
+			width: 29.4%;
+		}
+		&#sortable_fit_column {
+			padding-left: 4%;
+			width: 17%;
+		}
+		&#getting_there {
+			width: 10%;
+		}
+		&#sortable_eligibility_column {
+			width: 10%;
+		}
+		&#sortable_hours_column {
+			width: 14.6%;
+		}
+	  
+	  &.arrow {
+		  width: 49px;
+		  padding-left: 0;
+		  color: #0077cf;
+		}
+		
+		&.choice {
+		  width: 305px;
+		  border: none;
+		  padding-left: 0;
+		}
+		
+		&.your_fit {
+		  color: #969696;
+		  width: 110px;
+		  &:hover {
+			  .glass_open {
+				  display: inline-block;
+				}
+				.glass_close {
+				  display: none;
+				}
+		  }
+		  
+		  .arrow,
+		  .glass_open { display: none; }
+		  
+		  .activ {
+			  color: #ffffff;
+			  background: #72c900;
+			  padding-left: 10px;
+			  &:hover {
+				  background: none;
+				  color: #565656;
+				  
+				  .glass_open {
+					  display: inline-block;
+					  color: #0077cf;
+					  margin-left: 0;
+					}
+				}
+			  
+			  .arrow {
+				  display: inline-block;
+				}
+				
+				.glass_open {
+				  display: inline-block;
+				}
+			}
+		}
+		
+		&.your_fit_show {
+		  border: none !important;
+		  display: none;
+		  font-size: 13px;
+		  
+		  &.open {
+			  display: block;
+			  
+			  &.activ {
+				  color: #ffffff;
+				  background: #72c900;
+				  padding-left: 10px;
+				  &:hover {
+					  background: none;
+					  color: #565656;
+					  
+					  .glass_open {
+						  display: inline-block;
+						  color: #0077cf;
+						  margin-left: 0;
+						}
+					}
+				  
+				  .arrow {
+					  display: inline-block;
+					}
+				}
+			}
+		}
+		
+		&.open {
+			
+			.first_block {
+			  display: inline-block;
+			  width: 120px;
+			}
+			.second_block {
+			  display: inline-block;
+			  width: 100px;
+			  padding-left: 20px;
+			}
+			.glass_open {
+			  display: inline-block;
+			}
+			.glass_close {
+			  display: inline-block;
+			}
+		}
+	
+		.first_block {
+		  display: inline-block;
+		  float: left;
+		  width: 120px;
+		}
+		
+		.second_block {
+		  display: none;
+		  float: left;
+		  font-size: 13px;
+		}
 
-.wrap #school_list ul li .school_name .icon-info {
-	float: right;
-	color: $light_blue;
-	cursor: pointer;
-	width: auto;
-	padding: 4px 0 0;
-	&:hover {
-		color: $orange;
+
 	}
 }
 
-.wrap #school_list ul li .school_name .full_descrip_link {
-  color: #0077cf;
-  font-size: 17px;
+
+
+
+
+
+#school_list .list_content {
+  //overflow: auto;
+  overflow: visible;
 }
-.wrap #school_list ul li .school_name .select_icon {
-  color: #0077cf;
-  font-size: 22px;
-  display: none;
-}
-.wrap #school_list ul li .school_name.select .select_icon {
-  display: inline-block;
-}
-.wrap #school_list ul li .box {
-  padding-left: 23px;
-  width: 133px;
-}
-.wrap #school_list ul li .icon {
-  color: #0077cf;
-  font-size: 18px;
-  width: 35px;
-}
-.wrap #school_list ul li .icon_petit {
-  width: 20px;
-  width: 20px;
-  display: inline-block;
-  text-align: center;
-}
-.wrap #school_list ul li .getting_there {
-  font-size: 13px;
-}
-.wrap #school_list ul li .eligibility {
-  width: 100px;
-}
-.wrap #school_list ul li .your_fit_icon {
-  display: table;
-	&.open { display: block; }
-}
-.wrap #school_list ul li .your_fit_descrip {
-	position: absolute;
-  display: none;
-	&.open { display: table; }
-}
-.wrap #school_list ul li .school_hours {
-  font-size: 12px;
-}
-.wrap #school_list ul li .school_hours .max_range {
-	display: none;
-  width: 106px;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  background: #ffffff;
-}
-.wrap #school_list ul li .school_hours .max_range .ajust_range {
-  height: 5px;
-  background: #0077cf;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-}
-.wrap #school_list ul li .surround_care {
-  font-size: 12px;
-  line-height: 14px;
-  width: 134px;
-}
-.wrap #school_list ul li .surround_care .icon-DBPS-Dev-Assets-SRG-42 {
-  color: #0077cf;
-}
-.wrap #school_list ul li .your_fit_icon,
-.wrap #school_list ul li .your_fit_descrip {
-  width: 170px;
-}
-.wrap #school_list ul li .your_fit_icon .icon,
-.wrap #school_list ul li .your_fit_descrip .icon {
-  color: #0077cf;
-  font-size: 17px !important;
-}
-.wrap #school_list ul li .your_fit_descrip {
+#school_list #sortable .second_bloc {
+  display: none !important;
   width: 130px;
 }
+#school_list #sortable .open .second_bloc {
+  display: table-cell !important;
+  width: 122px;
+}
+#school_list #sortable .open .second_bloc.last {
+  width: 143px;
+}
+#school_list #getting_there.open,
+#school_list .getting_there.open {
+  width: 400px;
+}
+#school_list #getting_there.open .glass_open,
+#school_list .getting_there.open .glass_open {
+  display: none;
+}
 
-/* School List - Description
-----------------------------------------	*/
-.wrap #school_list ul li .school_descrip {
+
+
+
+
+
+/* ---------------------------------------------------------
+School List Rows
+------------------------------------------------------------ */
+#school_list li {
+	position: relative;
+  background: #f9f9f9;
+  margin-bottom: 12px;
+  margin-top: 0;
+  height: 82px;
+  
+  &:hover {
+	  .school_name .icon-info {
+		  color: $orange;
+	  }
+	}
+	
+	&.descrip_open { cursor: default; }
+	
+	&.small_list_row {
+	  list-style: none;
+	  background: #ffffff !important;
+	  height: 48px;
+	  margin: 24px 0;
+
+		.sortable_row_number {
+		  color: #565656;
+		  font-size: 17px;
+		}
+	}
+	
+	&.ui-sortable-helper {
+		box-shadow: 0 0 10px 2px #bbb;
+		background: #FFF;
+	}
+	
+	&.descrip_open {
+	  height: auto !important;
+	}
+	
+	.full_details {
+	  width: 502px;
+	  float: left;
+	}
+
+	.line {
+	  height: 82px;
+	  width: 8%;
+	  padding-left: 2%;
+	  position: relative;
+	  display: table;
+	  float: left;
+	  color: #969696;
+	  
+	  .middle {
+		  display: table-cell;
+		  vertical-align: middle;
+	  }
+
+		&.no_order {
+		  width: 7%;
+		  padding: 0;
+		  color: #0077cf;
+		  text-align: center;
+		  font-size: 16px;
+		  line-height: 18px;
+		}
+		
+		&.school_name {
+			width: 29.4%;
+		  color: $dark_gray;
+		  font-size: 22px;
+		  line-height: 28px;
+		  &.select .select_icon { display: inline-block; }
+		  
+		  .icon { 
+				font-size: 16px; 
+				float: right;
+				cursor: pointer;
+				width: auto;
+				padding: 4px 0 0;
+				&.red {
+					color: $red;
+				}
+				&:hover {
+					color: $orange !important;
+				}
+			}
+			
+			.full_descrip_link {
+			  color: #0077cf;
+			  font-size: 17px;
+			}
+			
+			.select_icon {
+			  color: #0077cf;
+			  font-size: 22px;
+			  display: none;
+			}
+		}// .school_name
+			
+		&.ell_descrip,
+		&.sped_descrip {
+			padding-left: 4%;
+			width: 17%;
+		}	
+		
+		&.ell_cluster,
+		&.sped_cluster {}
+			
+		&.your_fit_icon {
+			padding-left: 4%;
+			width: 17%;
+			color: $blue;
+			display: table;
+			cursor: pointer;
+			&.open { display: block; }
+			
+			.icon:hover { 
+				color: $dark_gray; 
+			}
+		}
+
+		&.your_fit_descrip {
+		  display: none;
+			position: absolute;
+			&.open { display: table; }
+		}
+
+		&.getting_there {
+		  width: 10%;
+		  font-size: 15px;
+		  
+		  .icon {
+				width: auto;
+				margin-right: 5px;
+				font-size: 14px;
+				color: $med_gray;
+			}
+		}
+		
+		&.eligibility {
+			width: 10%;
+		}
+			
+		&.school_hours {
+			width: 14.6%;
+		  font-size: 12px;
+		  
+		  .max_range {
+				display: none;
+			  width: 106px;
+			  -webkit-border-radius: 6px;
+			  -moz-border-radius: 6px;
+			  border-radius: 6px;
+			  background: #e7f1f7;		  
+			}
+			
+		  .ajust_range {
+			  height: 5px;
+			  background: #0077cf;
+			  -webkit-border-radius: 6px;
+			  -moz-border-radius: 6px;
+			  border-radius: 6px;
+			}
+		}
+		
+		&.surround_care {
+
+		  font-size: 13px;
+		  line-height: 15px;
+		}
+					
+		.middle {
+		  vertical-align: middle;
+		  display: table-cell;
+		}
+		
+		.icon {
+		  width: 35px;
+		  font-size: 18px;
+		}
+		
+		&.icon_petit {
+		  width: 20px;
+		  display: inline-block;
+		  text-align: center;
+		}
+	}	
+
+} // #school_list li
+
+
+
+/* School Description
+----------------------------------------------------------	*/
+#school_list .school_descrip {
   font-size: 14px;
   //width: 862px;
   width: 100%;
@@ -1305,375 +1496,121 @@ School List
 
   a {
   	text-decoration: none;
-  	&:hover {
-	  	text-decoration: underline;
-  	}
+  	&:hover { text-decoration: underline; }
 	}
 
 	.right_side {
-	  margin-left: 50px;
+	  margin-left: 19px;
+	  
+	  .column_left {
+		  float: left;
+	 		width: 37%;
+	  }
+	  .column_right {
+		  float: left;
+		  width: 50%;
+			margin-left: 4%;
+	  }
 
 	  .box {
 		  padding-left: 0;
 			width: auto;
 		}
 
-	  .school_name {
-		  font-size: 15px;
-		  float: left;
-
-		  .descritiv {
-			  font-family: Georgia, "Times New Roman", Times, serif;
-			  font-size: 15px;
-			}
-
-			p { font-size: 15px; }
-	  }
-
-	 	.photos {
-		 	float: left;
-		 	padding: 19px;
-	 		max-width: 290px;
-	 		width: 30.8%;
-
-	 		.photo_group {
-		 		margin: 0 0 20px;
-		 		@include clearfix;
-	 		}
-	 		.small {
-			  float: left;
-			  width: 30.45%;
-			  height: 66px;
-			  margin-right: 4.15%;
-			  display: block;
-			  cursor: pointer;
-			  &.last {
-				  margin-right: 0;
-				}
-
-				img { width: 100%; }
-			}
-			.principal {
-			  height: 215px;
-			  margin-bottom: 12px;
-			  display: block;
-			  position: relative;
-			  cursor: pointer;
-			  &:hover {
-				  .glass { display: block; }
-			  }
-
-			  img { width: 100%; }
-
-			  .glass {
-				  background: #ebebeb;
-				  font-size: 22px;
-				  width: 40px;
-				  height: 24px;
-				  padding: 8px 0;
-				  text-align: center;
-				  position: absolute;
-				  top: 0;
-				  left: 0;
-				  color: #c9c9c9;
-				  display: none;
-				}
-			}
-	 	}
-
-	 	.school_info {
-			width: 55%;
-			padding: 17px 19px;
-			float: left;
-			&.full { width: 100%; }
-
-			.text {
-				font-family: Georgia, "Times New Roman", Times, serif;
-				font-size: 16px;
-				font-weight: normal;
-			}
-
-			.school_info_column {
-
-			}
-			.school_features_column {
-
-			}
-
-			.title {
-			  color: #565656;
-			  margin: 0 0 0 16px;
-
-			  .fit_icon {
-				  color: #565656;
-				  margin-left: -20px;
-				}
-			}
-			.descrip {
-				margin: 0 0 20px 16px;
-				font-size: 14px;
-				color: $med_gray;
-			}
-
-		}// .school_info
-
 		.tablet,
 		.mobile { display: none; }
-
-
-	} //.right_side
-
-	.separation_line {
-	  clear: both;
-	  border-bottom: 1px solid #c9c9c9;
-	  height: 16px;
-	  margin: 0 0 19px 16px;
 	}
 
-} //.wrap #school_list ul li .school_descrip
+	.title {
+	  color: #565656;
+	  margin: 0 0 0 30px;
 
-
-.wrap #school_list ul li .full_details {
-  width: 502px;
-  float: left;
-}
-
-.wrap #school_list ul li.list_row {
-	position: relative;
-  background: #f9f9f9;
-  margin-bottom: 12px;
-  margin-top: 0;
-  height: 82px;
-  transition: background 250ms ease;
-  &:hover {
-	  background: #FFF;
-	  .school_name .icon-info {
-		  color: $orange;
-	  }
+	  .fit_icon {
+		  color: #565656;
+			margin: 0 10px 0 -30px;
+		}
 	}
-
-	&.descrip_open { cursor: default; }
-}
-.wrap #school_list ul li.list_row.ui-sortable-helper {
-	box-shadow: 0 0 10px 2px #bbb;
-	background: #FFF;
-}
-.wrap #school_list ul li.list_row .line {
-  height: 82px;
-}
-.wrap #school_list ul li.list_row .sortable_row_number {
-  color: #565656;
-  font-size: 20px;
-
-  img {
-	  width: 29px;
-	  margin: 0 auto;
-  }
-}
-
-.wrap #school_list ul li.list_row .school_name {
-  color: $dark_gray;
-  font-size: 22px;
-  line-height: 28px;
-}
-.wrap #school_list ul li.list_row .getting_there {
-  font-size: 15px;
-  width: 100px;
-
-	.icon {
-		width: auto;
-		margin-right: 5px;
+	.descrip {
+		margin: 0 0 20px 33px;
 		font-size: 14px;
 		color: $med_gray;
 	}
-}
-.wrap #school_list ul li.list_row .school_hours .max_range {
-  background: #e7f1f7;
-}
-.wrap #school_list ul li.list_row .surround_care {
-  font-size: 13px;
-  line-height: 15px;
-}
-.wrap #school_list ul li.list_row .your_fit_icon {
-  display: table;
-  font-size: 17px;
-  color: #0077cf;
-}
-.wrap #school_list ul li.list_row .your_fit_icon .icon {
-  font-size: 17px;
-}
-.wrap #school_list .menu_list {
-  padding: 13px 0;
-  height: 26px;
-  background: #ebebeb;
-  z-index: 5000;
-}
-.wrap #school_list .menu_list #sortable_school_name_column {
-  width: 313px;
-  padding-left: 17px;
-}
-.wrap #school_list .menu_list .menu_bloc {
-  font-size: 15px;
-  float: left;
-// 	border-left: 1px solid #ffffff;
-  padding: 5px 0px 0 20px;
-  width: 105px;
-  height: 24px;
-}
-.wrap #school_list .menu_list .menu_bloc.arrow {
-  width: 49px;
-  padding-left: 0;
-//   text-align: center;
-  color: #0077cf;
-}
-.wrap #school_list .menu_list .menu_bloc.choice {
-  width: 305px;
-  border: none;
-  padding-left: 0;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit {
-  color: #969696;
-  width: 110px;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit .arrow {
-  display: none;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit .glass_open {
-  display: none;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit.activ {
-  color: #ffffff;
-  background: #72c900;
-  padding-left: 10px;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit.activ .arrow {
-  display: inline-block;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit.activ .glass_open {
-  display: inline-block;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit.activ:hover {
-  background: none;
-  color: #565656;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit.activ:hover .glass_open {
-  display: inline-block;
-  color: #0077cf;
-  margin-left: 0;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit:hover .glass_open {
-  display: inline-block;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit:hover .glass_close {
-  display: none;
-}
-.wrap #school_list .menu_list .menu_bloc .first_block {
-  display: inline-block;
-  float: left;
-  width: 120px;
-}
-.wrap #school_list .menu_list .menu_bloc .second_block {
-  display: none;
-  float: left;
-  font-size: 13px;
-}
-.wrap #school_list .menu_list .menu_bloc.open .first_block {
-  display: inline-block;
-  width: 120px;
-}
-.wrap #school_list .menu_list .menu_bloc.open .second_block {
-  display: inline-block;
-  width: 100px;
-  padding-left: 20px;
-}
-.wrap #school_list .menu_list .menu_bloc.open .glass_open {
-  display: inline-block;
-}
-.wrap #school_list .menu_list .menu_bloc.open .glass_close {
-  display: inline-block;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit_show {
-  border: none !important;
-  display: none;
-  font-size: 13px;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit_show.open {
-  display: block;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit_show.open.activ {
-  color: #ffffff;
-  background: #72c900;
-  padding-left: 10px;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit_show.open.activ .arrow {
-  display: inline-block;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit_show.open.activ:hover {
-  background: none;
-  color: #565656;
-}
-.wrap #school_list .menu_list .menu_bloc.your_fit_show.open.activ:hover .glass_open {
-  display: inline-block;
-  color: #0077cf;
-  margin-left: 0;
-}
-.wrap #school_list .list_content {
-  //overflow: auto;
-  overflow: visible;
-}
-.wrap #school_list #sortable .second_bloc {
-  display: none !important;
-  width: 130px;
-}
-.wrap #school_list #sortable .open .second_bloc {
-  display: table-cell !important;
-  width: 122px;
-}
-.wrap #school_list #sortable .open .second_bloc.last {
-  width: 143px;
-}
-.wrap #school_list #getting_there.open,
-.wrap #school_list .getting_there.open {
-  width: 400px;
-}
-.wrap #school_list #getting_there.open .glass_open,
-.wrap #school_list .getting_there.open .glass_open {
-  display: none;
-}
-/*
-.wrap #school_list .footer_list {
-  padding: 37px 60px 37px 37px;
-  background: #dfdfdf;
-  width: 1123px;
-  font-size: 15px;
-  line-height: 20px;
-}
-.wrap #school_list .footer_list p {
-  margin-bottom: .9em;
-}
-.wrap #school_list .footer_list a {
-  color: #0077cf;
-  text-decoration: none;
-}
-.wrap #school_list .footer_list a:hover {
-  text-decoration: underline;
-}
-.wrap #school_list .footer_list .footer_left {
-  width: 700px;
-  float: left;
-  color: #969696;
-}
-.wrap #school_list .footer_list .footer_right {
-  width: 159px;
-  border-left: 1px solid #ffffff;
-  float: left;
-  padding-left: 20px;
-  margin-left: 37px;
-}
-.wrap #school_list .footer_list .footer_right p {
-  margin-bottom: .6em;
-}
-*/
+
+	/* Schoole Description
+	--------------------------- */
+	.school_description {
+	  font-family: Georgia, "Times New Roman", Times, serif;
+	  font-size: 15px;
+	  line-height: 1.5em;
+		margin: 0 0 2em 0;
+	}
+	
+	/* School Info
+	--------------------------- */
+	.school_info {
+	
+		&.full { width: 100%; }
+	}
+	
+	/* Photos
+	--------------------------- */
+	.photos {
+	  float: none;
+	  margin-bottom: 20px;
+	  
+	  .photo_group {
+	 		margin: 0 0 20px;
+	 		@include clearfix;
+		}
+		
+		.small {
+		  float: left;
+		  width: 30.45%;
+		  height: auto;
+		  margin-right: 4.15%;
+		  display: block;
+		  cursor: pointer;
+	
+		  &.last { margin-right: 0; }
+	
+		  img { width: 100%; }
+		}
+	
+		.principal {
+		  height: auto;
+		  margin-bottom: 12px;
+		  display: block;
+		  position: relative;
+		  cursor: pointer;
+		  &:hover {
+			  .glass { display: block; }
+		  }
+	
+		  img { width: 100%; }
+	
+			.glass {
+			  background: #ebebeb;
+			  font-size: 22px;
+			  width: 40px;
+			  height: 24px;
+			  padding: 8px 0;
+			  text-align: center;
+			  position: absolute;
+			  top: 0;
+			  left: 0;
+			  color: #c9c9c9;
+			  display: none;
+			}
+		}
+	}
+
+}// #school_list .school_descrip
+
+
+
+
+
+
 
 
 
@@ -1912,7 +1849,7 @@ Get Ready
 			margin: 0 0 25px;
 		}
 
-		ul .list_row {
+		li {
 			&:before {
 				content: attr(data-index);
 				position: absolute;
@@ -1921,9 +1858,6 @@ Get Ready
 				margin-top: -9px;
 				color: $blue;
 				font-size: 2em;
-			}
-			&:hover {
-				background: none;
 			}
 
 			&.secondary {
@@ -1937,6 +1871,13 @@ Get Ready
 
 				.line { height: 42px; }
 				.sortable_row_number img { width: 20px; }
+			}
+		
+			.line {
+				
+				&.no_order { width: 10%; }
+				&.school_name { width: 50%; }
+				&.your_fit_icon { padding-left: 2%; width: 36%; }
 			}
 		}
 	}
@@ -3165,60 +3106,60 @@ Print1
 .print1 .wrap .preferences {
   display: none;
 }
-.print1 .wrap #school_list {
+.print1 #school_list {
   background: none;
   margin-left: 0;
   padding-bottom: 0;
 }
-.print1 .wrap #school_list ul {
+.print1 #school_list ul {
   width: auto;
 }
-.print1 .wrap #school_list ul li {
+.print1 #school_list ul li {
   height: 26px !important;
   border: 0;
   background: none;
   margin: 0 0 7px 0 !important;
 }
-.print1 .wrap #school_list ul li .line {
+.print1 #school_list ul li .line {
   height: 26px !important;
 }
-.print1 .wrap #school_list ul li .no_order {
+.print1 #school_list ul li .no_order {
   background: none;
   border: 0;
   font-size: 10px;
   line-height: 11px;
   width: 16px;
 }
-.print1 .wrap #school_list ul li .school_name {
+.print1 #school_list ul li .school_name {
   width: 192px;
   font-size: 10px;
   line-height: 11px;
   padding-left: 9px;
 }
-.print1 .wrap #school_list ul li .school_name .select_icon {
+.print1 #school_list ul li .school_name .select_icon {
   font-size: 15px;
 }
-.print1 .wrap #school_list ul li .school_name .full_descrip_link {
+.print1 #school_list ul li .school_name .full_descrip_link {
   display: none;
 }
-.print1 .wrap #school_list ul li .getting_there {
+.print1 #school_list ul li .getting_there {
   font-size: 7px;
   line-height: 8px;
 }
-.print1 .wrap #school_list ul li .getting_there .middle {
+.print1 #school_list ul li .getting_there .middle {
   width: 85px;
 }
-.print1 .wrap #school_list ul li .school_hours {
+.print1 #school_list ul li .school_hours {
   font-size: 8px;
 }
-.print1 .wrap #school_list ul li .school_hours .max_range {
+.print1 #school_list ul li .school_hours .max_range {
   width: 65px;
   background: #e7f1f7;
 }
-.print1 .wrap #school_list ul li .surround_care {
+.print1 #school_list ul li .surround_care {
   font-size: 9px;
 }
-.print1 .wrap #school_list ul li .box {
+.print1 #school_list ul li .box {
   padding-left: 9px;
   width: 95px;
 }
@@ -3226,29 +3167,29 @@ Print1
   font-size: 13px;
   margin-bottom: .5em;
 }
-.print1 .wrap #school_list ul li .school_name,
-.print1 .wrap #school_list ul li .no_order {
+.print1 #school_list ul li .school_name,
+.print1 #school_list ul li .no_order {
   font-size: 14px;
   line-height: 14px;
 }
-.print1 .wrap #school_list ul li .getting_there {
+.print1 #school_list ul li .getting_there {
   font-size: 7px;
   line-height: 8px;
 }
-.print1 .wrap #school_list ul li .school_hours {
+.print1 #school_list ul li .school_hours {
   font-size: 8px;
 }
-.print1 .wrap #school_list ul li .surround_care {
+.print1 #school_list ul li .surround_care {
   font-size: 9px;
 }
-.print1 .wrap #school_list .shadow {
+.print1 #school_list .shadow {
   display: none;
 }
-.print1 .wrap #school_list .menu_list {
+.print1 #school_list .menu_list {
   padding: 0;
   background: #ffffff;
 }
-.print1 .wrap #school_list .menu_list .menu_bloc {
+.print1 #school_list .menu_list .menu_bloc {
   border-color: #ebebeb;
   font-size: 10px;
   width: 95px;
@@ -3256,13 +3197,13 @@ Print1
   height: 20px;
 }
 
-.print1 .wrap #school_list .menu_list .menu_bloc .arrow {
+.print1 #school_list .menu_list .menu_bloc .arrow {
   width: 16px;
   border: none;
   text-align: left;
   padding-left: 0;
 }
-.print1 .wrap #school_list .li_frame {
+.print1 #school_list .li_frame {
   width: auto;
 }
 .print1 footer .wrap {

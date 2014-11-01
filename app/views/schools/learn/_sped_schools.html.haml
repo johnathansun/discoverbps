@@ -1,13 +1,12 @@
 #sped_schools_list.schools_list.hidden
+  .note.small
+    This list includes your home-based choices, as well as those schools in a larger community cluster that offer SPED programs. When you register for school, your choice list will include only home-based options. Your child’s IEP, which will be reviewed after registration by special education staff members, will determine if any of these schools may be presented to you as an option. For more information, call 617-635-8599.
+
   .list_content
     .flexible_content
       - if @sped_schools.present?
         .menu_list
-          %div{id: 'sped_header', class: 'li_frame school_list_header', style: 'display: none;'}
-            #sortable_star_column.sortable_column.menu_bloc.desktop.no_mobile
-              .column_title
-                Star
-
+          %div{id: 'sped_header', class: 'li_frame school_list_header'}
             #sortable_school_name_column.menu_bloc.sortable_column
               .column_title
                 Name
@@ -24,16 +23,8 @@
         %ul#sortable
           - @sped_schools.each_with_index do |student_school, i|
             - school = student_school.school
-            %li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row sped_school"}
+            %li{id: "#{current_student.id}_#{student_school.school.bps_id}", class: "list_row sped_school clearfix"}
               %div{id: "#{current_student.id}_#{school.bps_id}_row", class: "li_frame"}
-
-                .desktop
-                  .no_order.line
-                    %span.middle
-                      = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
-                      = image_tag('star_unstarred.png', id: "star_#{student_school.id}_unstarred", class: 'star_unstarred', style: "display: #{student_school.starred? ? 'none' : 'inline'}; cursor: pointer;", data: {student_school_id: student_school.id} )
-                      %span{class: "sortable_star", style: "visibility: hidden;"}
-                        = student_school.starred
 
                 .school_name.select.line
                   %span.middle
@@ -44,7 +35,7 @@
 
                     - if school.api_basic_info.try(:[], :SchoolType).present? && school.api_basic_info.try(:[], :SchoolType) == 'Exam'
                       %span{:aria => {hidden: 'true'}, :class => "select_icon icon-DBPS-Preferences-Icons-20130930-SRG_exam_school"}
-                    %span.icon.icon-info
+                    %span.icon.icon-info.light_blue
 
                 .box.sped_descrip.line
                   .first_block.middle
@@ -53,8 +44,6 @@
                 .box.sped_cluster.line
                   .first_block.middle
                     = student_school.ell_cluster
-
-                .clr
 
                 .school_descrip
                   .right_side
