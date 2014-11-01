@@ -20,7 +20,7 @@
 						%ul.user_lists
 							- for student in current_user_students
 								%li
-									-#= link_to student.tab_name, schools_path(student: student.id), class: 'orange_button previous_student_search_button'
+									%a{class: "icon icon-close", title: "delete student"}
 									%a{:href => schools_path(student_id: student.id), :class => 'previous_student_search_button' }
 										%span.name.big.dark_blue= student.tab_name
 										%span.grade.small.dark_blue
@@ -75,6 +75,10 @@
 									e.preventDefault();
 									$('.new_search_form_wrap').removeClass('hidden');
 									$('#first_name').focus();
+								});
+								
+								$('.user_lists .icon-close').tooltip({
+									track: true;
 								});
 							});
 

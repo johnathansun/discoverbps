@@ -2271,13 +2271,20 @@ Wrap Search
 	width: 128.5%;
 
 	li {
+		position: relative;
 		margin-bottom: 30px;
 		@include clearfix;
+		
+		&:hover {
+			.icon-close {
+				//margin: 0px 0 -35px -35px;
+			}
+		}
 	}
 	.previous_student_search_button {
 		display: block;
 		background: $light_blue;
-		padding: 15px 10px 10px;
+		padding: 20px 20px 15px;
 		text-decoration: none;
 		@include clearfix;
 		&:hover {
@@ -2285,6 +2292,20 @@ Wrap Search
 			background: tint($light_blue, 75%);
 		}
 	}
+	
+	.icon-close {
+		display: block;
+		cursor: pointer;
+		color: tint($blue, 20%);
+		font-size: 1.5em;
+		margin: 0px 0 -40px -35px;
+		transition: color 250ms ease;
+		&:hover {
+			color: #000;
+			text-decoration: none;
+		}
+	}
+	
 	.name {
 		font-size: 24px;
 		text-transform: capitalize;
