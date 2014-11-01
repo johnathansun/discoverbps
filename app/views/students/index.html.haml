@@ -20,7 +20,8 @@
 						%ul.user_lists
 							- for student in current_user_students
 								%li
-									%a{class: "icon icon-close", title: "delete student"}
+									= link_to student_path(student), method: :delete, confirm: 'Are you sure you want to delete your previous search?', style: 'text-decoration: none;' do
+										%span{class: "icon icon-close", title: "delete student"}
 									%a{:href => schools_path(student_id: student.id), :class => 'previous_student_search_button' }
 										%span.name.big.dark_blue= student.tab_name
 										%span.grade.small.dark_blue
@@ -48,8 +49,6 @@
 							%li
 								%a#start_new_search.button.orange{:href => '#'}
 									Start a new search
-								= button_to 'Clear Searches', {controller: 'students', action: 'delete_all', student_ids: current_user_students.collect {|x| x.id}}, method: :delete, id: 'delete_students_button', class: 'antialiased_button', confirm: 'Are you sure you want to clear all of your previous searches?'
-
 
 						.clr
 						- if flash[:alert].present?
@@ -76,7 +75,7 @@
 									$('.new_search_form_wrap').removeClass('hidden');
 									$('#first_name').focus();
 								});
-								
+
 								$('.user_lists .icon-close').tooltip({
 									track: true;
 								});
