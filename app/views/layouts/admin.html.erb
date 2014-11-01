@@ -46,18 +46,15 @@
 	</head>
 
 	<body class="standard one admin">
-		<div class="wrap" style="margin-top: 7px; margin-bottom: 10px; ">
+		<div class="wrap" style="margin-top: 7px; padding-bottom: 30px; ">
 			<div style="float: right;">
 				<% if current_admin.present? %>
-					<%= link_to 'documentation', admin_docs_path, class: 'white' %>
+					<%= link_to 'help', admin_docs_path, class: 'white' %>
 					<span style="color: #ffffff;">&nbsp;|&nbsp;</span>
 					<%= link_to 'sign out', admin_sign_out_path, class: 'white' %>
 				<% else %>
 					<%= link_to 'sign in', admin_sign_in_path, class: 'white' %>
 				<% end %>
-			</div>
-			<div style="font-size: 4em; color: #ffffff; display: inline; margin-left: -31px;" >
-				<span aria-hidden="true" class="icon-DBPS-Dev-Assets-SRG-01"></span>
 			</div>
 		</div>
 		<div class="wrap">
