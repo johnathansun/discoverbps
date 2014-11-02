@@ -1,0 +1,137 @@
+#ell_schools_list.schools_list.hidden
+  .sort_schools.column_center.column
+
+    .compare_list_content
+      %ul#sortable_0.clearfix
+
+        - @ell_schools[0...5].each_with_index do |student_school, i|
+          - school = student_school.school
+
+          %li{id: "55555_4444", class: "sortable_school #{i == 1 ? 'first' : ''} #{i == 5 ? 'last' : ''}"}
+            .li_frame.draggable
+              .school_name.line
+                = school.name
+
+              .school_your_fit_icon.line
+                %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
+                %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
+                %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"}
+                %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
+
+              - if TRANSITION_GRADES.include?(current_student.grade_level)
+                .school_demand.line
+                  .stats
+                    = school.open_seats(current_student.grade_level)
+                    open seats
+                    %br/
+                    = school.applicants(current_student.grade_level)
+                    applicants
+                    %br/
+                    = school.applicants_per_open_seat(current_student.grade_level, '2013')
+                    applicants/open seat
+                  .max_range
+                    %div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
+
+              .school_travel.line
+                = spacer_helper(student_school.distance)
+                &nbsp;mi
+
+              .school_eligibility.line
+                =raw eligibility_helper(spacer_helper(student_school.eligibility))
+
+              .school_hours.line
+                = truncate(school.api_hours.try(:[], :schhours1), length: 40)
+
+              - if SURROUND_CARE_GRADES.include?(current_student.grade_level)
+                .school_surround_care.line
+                  - if school.api_basic_info.try(:[], :BeforeSchPrograms).present?
+                    Before School
+                    %br/
+
+                  - if school.api_basic_info.try(:[], :AfterSchPrograms).present?
+                    After School
+
+              .school_type.line
+                = school.api_basic_info.try(:[], :SchoolType)
+
+              .school_grades.line
+                = grade_levels_helper(school.grade_levels)
+
+              .school_enrollment.line
+                = school.total_seats(current_student.grade_level)
+
+              .school_special_app.line
+                = special_application_helper(school.api_description.try(:[], :isspecialappprocedures))
+
+              .school_awc.line
+                = awc_helper(school.api_basic_info.try(:[], :IsAWC))
+
+              .school_mcas.line
+                = school_tier_helper(student_school.tier)
+
+              .school_uniform.line
+                = school.api_description.try(:[], :uniformpolicy)
+
+              .school_health.line
+                = school.api_basic_info.try(:[], :ishasfulltimenurse) == 'True' ? 'Full-Time Nurse' : ''
+
+              .school_focus.line.long
+                = truncate(school.api_description.try(:[], :schfocus), length: 240)
+
+              .school_facilities.line.long
+                = truncate(facilities_list_helper(school.api_facilities), length: 240)
+
+              - if UPPER_GRADES.include?(current_student.grade_level)
+                .school_sports.line.long
+                  = truncate(sports_list_helper(school.api_sports), length: 240)
+
+              .school_comm_partners.line.long
+                = truncate(partners_list_helper(school.api_partners), length: 240)
+
+
+    :javascript
+      $(function() {
+        $("#sortable_0").sortable({
+          axis: "x",
+          scroll: true,
+          /*update: function(){
+            $.ajax({
+              url: '/schools/sort',
+              type: 'post',
+              data: $('#sortable_0').sortable('serialize'),
+              dataType: 'script'
+            });
+          }*/
+        });
+        $("#sortable_0").disableSelection();
+        $('.compare_list_content').tooltip({
+          track: true
+        });
+      });
+
+  - if @ell_schools[6...-1].present?
+
+    -# RIGHT COLUMN
+    -# ----------------------------------------------
+    .more_schools.column_right.column
+      .more_schools_frame
+        %h3
+          More Schools:
+
+        %ul{title: "click to add"}
+          - @ell_schools[6...-1].each do |student_school|
+            - school = student_school.school
+            %li.school
+              %a{href: '#'}
+                %span.icon.icon-DBPS-Dev-Assets-SRG-10
+                = school.name
+
+
+      :javascript
+          $('.more_schools ul')
+            .hover(function(){
+              $('#compare_list').toggleClass('more_schools_hovered');
+            })
+            .tooltip({
+              track: true
+            });

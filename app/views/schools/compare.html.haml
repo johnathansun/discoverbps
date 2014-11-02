@@ -15,6 +15,70 @@
 			= image_tag('next-step-3.png')
 
 	.result.clearfix
+		-# LEFT COLUMN
+		-# ----------------------------------------------
+		.labels.column_left.column
+			.labels_frame
+				#your_rank_row.label.rank.no_icon
+					Your Rank
+				.label.name.no_icon
+					Name
+				.label.your_fit.no_icon
+					Your Fit
+				- if TRANSITION_GRADES.include?(current_student.grade_level)
+					.label.demand.no_icon
+						= "#{last_school_year_range} Demand"
+				.label.travel
+					%span{:aria => {hidden: true}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"}
+					Travel
+				.label.eligibility
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"}
+					Eligibility
+				.label.hours
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"}
+					Hours
+				- if SURROUND_CARE_GRADES.include?(current_student.grade_level)
+					.label.surround_care
+						%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
+						Surround Care
+				.label.school_type
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
+					School Type
+				.label.grades
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"}
+					Grades Offered
+				.label.enrollment
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
+					= "#{current_student.formatted_grade_level_name} Enrollment"
+				.label.application
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"}
+					Special Application
+				.label.awc
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"}
+					Advanced Work Class (AWC)
+				.label.mcas
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
+					MCAS Tier
+				.label.uniform
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
+					Uniform Policy
+				.label.health
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
+					Health & Wellness
+				.label.school.long
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"}
+					School Focus
+				.label.facilities.long
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
+					Facility Features
+				- if UPPER_GRADES.include?(current_student.grade_level)
+					.label.sports.long
+						%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
+						Sports
+				.label.comm_partners.long
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
+					Community Partners
+
 		= render partial: 'schools/compare/home_schools'
 		= render partial: 'schools/compare/zone_schools'
 		= render partial: 'schools/compare/ell_schools'
