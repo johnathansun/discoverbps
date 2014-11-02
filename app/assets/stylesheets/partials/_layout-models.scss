@@ -697,6 +697,7 @@ footer.footer {
 }
 
 .menu_item {
+	position: relative;
 	display: inline-block;
 	margin: 10px 0 10px 30px;
 }
@@ -727,13 +728,13 @@ footer.footer {
   position: absolute;
 	z-index: 1;
 	right: 0;
-	color: #565656;
-	background: #FFF;
+	color: #FFF;
+	background: rgba(6, 70, 118, 0.9);
 	line-height: 25px;
 	padding: 10px;
 	min-width: 130px;
-	box-shadow: 0 0 20px #064676;
-  display: none;
+	display: none;
+	border-radius: 7px;
 }
 .menu_item .account_menu_box .menu {
   //float: left;
@@ -743,11 +744,10 @@ footer.footer {
   &.last { margin: 0; }
 }
 .menu_item .account_menu_box .menu .box span {
-  color: $dark_gray;
+  color: $blue;
   font-size: 14px;
 }
 .menu_item .account_menu_box .menu .box a {
-  color: $blue;
   text-decoration: none;
   &:hover { text-decoration: underline; }
 }
@@ -2180,6 +2180,7 @@ Wrap Search
 .wrap .search .logo.register {
   font-size: 70px;
   left: 0px;
+  margin-top: 30px;
 }
 .wrap .search .logo.succeed {
   font-size: 52px;
@@ -2268,7 +2269,7 @@ Wrap Search
 // User Lists /////////////
 .wrap .search .user_lists {
 	margin-bottom: 80px;
-	width: 128.5%;
+	width: 120%;
 
 	li {
 		position: relative;
@@ -2295,13 +2296,14 @@ Wrap Search
 
 	.icon-close {
 		display: block;
+		float: right;
 		cursor: pointer;
 		color: tint($blue, 20%);
 		font-size: 1.5em;
-		margin: 0px 0 -40px -35px;
+		margin: 18px -35px 0 0;
 		transition: color 250ms ease;
 		&:hover {
-			color: #000;
+			color: $red;
 			text-decoration: none;
 		}
 	}

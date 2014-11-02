@@ -2,7 +2,7 @@
 <div class="account_box menu_item">
 	<div class="btn_account"><span class="icon icon-menu"></span>Account<!-- <span class='icon_excla'></span> --></div>
 	<!-- Start section menu account -->
-	<div class='account_menu_box font_15'>
+	<div class='account_menu_box menu_box font_15'>
 		<!-- Start menu account -->
 		<div class='menu'>
 			<div class='box'>
@@ -83,15 +83,6 @@
 		var login_panel_open = false;
 		var signup_panel_open = false;
 		var forgot_panel_open = false;
-
-		$('.account_box').hover(
-			function() {
-				$(this).addClass('hovered');
-				$('.account_menu_box').fadeIn(250);
-			}, function() {
-				$(this).removeClass('hovered');
-				$('.account_menu_box').fadeOut(250);
-		});
 
 		$('#login_btn').click(function() {
 			$('#dialog_box').show();

@@ -3,15 +3,6 @@
 		= render partial: 'layouts/language_tab'
 		= render partial: 'layouts/account_tab'
 
-	-##google_translate_element.desktop_tablet
-
-	:javascript
-		function googleTranslateElementInit() {
-			new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-		}
-	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-
 .wrap.timeline_menu
 	%section.logo_header.clearfix
 		%nav.menu_nav
@@ -26,6 +17,19 @@
 .clr
 
 :javascript
+
+	$('.menu_item').hover(
+		function() {
+			$(this)
+				.addClass('hovered')
+				.find('.menu_box')
+				.fadeIn(250);
+		}, function() {
+			$(this)
+				.removeClass('hovered')
+				.find('.menu_box')
+				.fadeOut(250);
+	});
 
 	var is_open_menu_mobile= false;
 

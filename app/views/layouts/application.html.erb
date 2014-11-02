@@ -54,9 +54,23 @@
 			<div class="wrap ">
 				<div class="content_wrap">
 
-					<div class="account_tab">
+					<div class="account_tab menu_item_list">
 					<%= render partial: 'layouts/language_tab' %>
 					<%= render partial: 'layouts/account_tab' %>
+					<script>
+							$('.menu_item').hover(
+								function() {
+									$(this)
+										.addClass('hovered')
+										.find('.menu_box')
+										.fadeIn(250);
+								}, function() {
+									$(this)
+										.removeClass('hovered')
+										.find('.menu_box')
+										.fadeOut(250);
+							});
+					</script>
 					</div>
 					
 					<div class="page_content">

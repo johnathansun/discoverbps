@@ -2,3 +2,14 @@
 	.btn_account
 		%span.icon.icon-DBPS-Dev-Assets-SRG-31
 		Language
+		
+	.account_menu_box.menu_box
+		
+		#google_translate_element.desktop_tablet
+	
+		:javascript
+			function googleTranslateElementInit() {
+				new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+			}
+		
+		%script{type: "text/javascript", src: "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"}	
