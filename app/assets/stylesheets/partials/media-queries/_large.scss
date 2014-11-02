@@ -1,0 +1,165 @@
+/* -Screen - tablet */
+/* ----------------------------------------------
+   ELEMENT LAYOUT - TABLETTE
+---------------------------------------------- */
+@media screen and (max-width: 1200px) {
+  footer.footer .title_footer {
+    width: 450px;
+    font-size: 13px;
+  }
+  .standard .wrap {
+    width: auto;
+  }
+  .standard .wrap .content_wrap {
+    width: auto;
+    margin: 0 87px;
+  }
+  .standard.two .wrap {
+    width: 703px;
+    padding: 0 33px;
+  }
+  .wrap {
+    //width: 704px;
+    margin: 0 auto;
+  }
+  .wrap .content_wrap {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .logo_header {
+    margin: 10px 0 20px 0;
+  }
+
+  /* -------------------------------------------------
+	  Progress bar
+  ---------------------------------------------------- */  
+  .progress_bar { max-width: none; float: none; }
+
+
+
+
+
+  /* -------------------------------------------------
+	  Search
+  ---------------------------------------------------- */  
+  .search .search_section .content_left {
+	  margin-left: 0;
+  }
+  
+
+
+
+
+  .wrap .menu_compare_name .compare {
+    width: 170px;
+  }
+  .wrap .menu_compare_name .name_list {
+    /*width:390px;
+        .name_info{width:50%;}*/
+
+  }  
+
+
+
+  .wrap .result {
+    padding-bottom: 0;
+  }
+  
+  /* -------------------------------------------------
+	  Header
+  ---------------------------------------------------- */  
+
+  .wrap.timeline_menu .logo_discover {
+    left: -39px;
+    float: none;
+  }
+  .wrap.timeline_menu .content_wrap {
+    padding-bottom: 15px;
+  }
+  .wrap.timeline_menu .timeline .months .month {
+    width: 7.5%;
+  }
+  .wrap.timeline_menu nav.menu_nav {
+    padding-top: 22px;
+  }
+  .wrap.timeline_menu nav.menu_nav ul li.succeed {
+    margin-left: 75px;
+  }
+  .wrap.timeline_menu nav.menu_nav ul li.register {
+    margin-left: 0;
+  }
+  .wrap .account #personnal_info .bloc_50 {
+    width: 340px;
+  }
+  .wrap .account #personnal_info .bloc_50 input {
+    width: 317px;
+  }
+  .wrap .account #personnal_info .address {
+    width: 361px;
+  }
+  .wrap .account #personnal_info .address input {
+    width: 337px;
+  }
+  .wrap .account #personnal_info .zip {
+    width: 222px;
+  }
+  .wrap .account #personnal_info .zip input {
+    width: 200px;
+  }
+  .wrap .account #personnal_info .sibling_school {
+    width: 340px;
+  }
+  .wrap .account #personnal_info .sibling_school input {
+    width: 270px;
+  }
+  .wrap .account #childrens .children label.bloc_first_name {
+    width: 280px;
+  }
+  .wrap .account #childrens .children label.bloc_first_name input {
+    width: 258px;
+  }
+  .wrap .account #childrens .children label.bloc_last_name {
+    width: 232px;
+  }
+  .wrap .account #childrens .children label.bloc_last_name input {
+    width: 210px;
+  }
+  .wrap .account #childrens .add_child {
+    width: 323px;
+  }
+  .wrap .account #childrens .add_child .text {
+    width: 290px;
+  }
+  .wrap .account #save {
+    width: 323px;
+  }
+  
+  
+  
+	/* ----------------------------------------------------
+		School List Column Headers => .menu_list
+	------------------------------------------------------- */  
+  #school_list .menu_list {
+	  .menu_bloc {
+		  &#sortable_school_name_column {
+			  width: 26%;
+		  }
+		}
+  }
+  
+  
+  /* ---------------------------------------------------------
+	School List Rows
+	------------------------------------------------------------ */
+  #school_list li {
+	  .line {
+		  &.school_name {
+			  font-size: 18px;
+			  width: 26%;
+		  }
+	  }
+  }
+  
+  
+}
