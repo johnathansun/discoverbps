@@ -85,3 +85,40 @@
 		= render partial: 'schools/compare/sped_schools'
 
 	= render partial: 'schools/page_elements/footer'
+
+:javascript
+
+	$(function() {
+		$("#sortable_0").sortable({
+			axis: "x",
+			scroll: true,
+			update: function(){
+				$('#sortable_0 li').each(function(){
+					$(this).find('.sortable_row_number').html($(this).index() + 1);
+				});
+				$.ajax({
+					url: '/schools/sort',
+					type: 'post',
+					data: $('#sortable_0').sortable('serialize'),
+					dataType: 'script'
+				});
+			}
+		});
+		$("#sortable").disableSelection();
+	});
+
+	$('.star_unstarred').click(function(){
+		$.ajax({
+			url: '/student_schools/' + $(this).data('studentSchoolId') + '/star',
+			type: 'post',
+			dataType: 'script'
+		});
+	});
+
+	$('.star_starred').click(function(){
+		$.ajax({
+			url: '/student_schools/' + $(this).data('studentSchoolId') + '/unstar',
+			type: 'post',
+			dataType: 'script'
+		});
+	});
