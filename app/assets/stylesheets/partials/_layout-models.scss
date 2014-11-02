@@ -2342,25 +2342,53 @@ Wrap Search
 			float: left;
 
 			.bar {
+				position: relative;
 				height: 10px;
 				background-color: $dark_blue;
-				border-right: 2px solid $blue;
+				margin: 0 5px 0 0;
+
+				.arrow {
+					position: absolute;
+					border-left: 5px solid;
+					border-top: 5px solid transparent;
+					border-bottom: 5px solid transparent;
+					&.back {
+						left: 0;
+						border-left-color: $blue;
+					}
+					&.front {
+						right: -5px;
+						border-left-color: $dark_blue;
+					}
+				}
 			}
 			.label {
 				color: $dark_blue;
 				font-size: 10px;
 			}
 
+			&.first {
+				.bar .arrow.back { display: none; }
+			}
 			&.last {
-				.bar { border: none; }
+				.bar { border: none; margin-right: 0; }
+				.bar .arrow.front { display: none; }
 			}
 			&.complete {
-				.bar { background-color: tint($light_blue, 50%); }
+				.bar { 
+					background-color: tint($light_blue, 50%); 
+					.arrow.front {
+						border-left-color: tint($light_blue, 50%);
+					}
+				}
 				.label { color: $light_blue; }
 			}
 			&.current {
 				.bar {
 					background-color: $yellow;
+					.arrow.front {
+						border-left-color: $yellow;
+					}
 				}
 				.label { color: $yellow; }
 			}
@@ -3034,7 +3062,6 @@ Wrap Account
 				position: relative;
 				height: 10px;
 				background-color: $dark_blue;
-				//border-right: 2px solid $blue;
 				margin: 0 5px 0 0;
 				
 				.arrow {
