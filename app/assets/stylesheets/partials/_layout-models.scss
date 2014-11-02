@@ -1089,8 +1089,8 @@ School List
   ul {
 	  padding-left: 0;
 	}
-	
-	.note { max-width: 465px; }	
+
+	.note { max-width: 800px; }	
 	.shadow {
 	  width: 24px;
 	  position: absolute;
@@ -1104,7 +1104,7 @@ School List
 }
 
 
-/* ---------------------------------------------------- 
+/* ----------------------------------------------------
 	School List Column Headers => .menu_list
 ------------------------------------------------------- */
 #school_list .menu_list {
@@ -1112,14 +1112,14 @@ School List
   height: 26px;
   background: #ebebeb;
   z-index: 5000;
-  	
+
 	.menu_bloc {
 	  font-size: 15px;
 	  float: left;
 	  padding: 5px 0px 0 2%;
 	  width: 8%;
 	  height: 24px;
-	  
+
 		&#sortable_star_column {
 			padding-left: 0;
 			width: 7%;
@@ -1140,19 +1140,19 @@ School List
 		&#sortable_hours_column {
 			width: 14.6%;
 		}
-	  
+
 	  &.arrow {
 		  width: 49px;
 		  padding-left: 0;
 		  color: #0077cf;
 		}
-		
+
 		&.choice {
 		  width: 305px;
 		  border: none;
 		  padding-left: 0;
 		}
-		
+
 		&.your_fit {
 		  color: #969696;
 		  width: 110px;
@@ -1164,10 +1164,10 @@ School List
 				  display: none;
 				}
 		  }
-		  
+
 		  .arrow,
 		  .glass_open { display: none; }
-		  
+
 		  .activ {
 			  color: #ffffff;
 			  background: #72c900;
@@ -1175,32 +1175,32 @@ School List
 			  &:hover {
 				  background: none;
 				  color: #565656;
-				  
+
 				  .glass_open {
 					  display: inline-block;
 					  color: #0077cf;
 					  margin-left: 0;
 					}
 				}
-			  
+
 			  .arrow {
 				  display: inline-block;
 				}
-				
+
 				.glass_open {
 				  display: inline-block;
 				}
 			}
 		}
-		
+
 		&.your_fit_show {
 		  border: none !important;
 		  display: none;
 		  font-size: 13px;
-		  
+
 		  &.open {
 			  display: block;
-			  
+
 			  &.activ {
 				  color: #ffffff;
 				  background: #72c900;
@@ -1208,23 +1208,23 @@ School List
 				  &:hover {
 					  background: none;
 					  color: #565656;
-					  
+
 					  .glass_open {
 						  display: inline-block;
 						  color: #0077cf;
 						  margin-left: 0;
 						}
 					}
-				  
+
 				  .arrow {
 					  display: inline-block;
 					}
 				}
 			}
 		}
-		
+
 		&.open {
-			
+
 			.first_block {
 			  display: inline-block;
 			  width: 120px;
@@ -1241,13 +1241,13 @@ School List
 			  display: inline-block;
 			}
 		}
-	
+
 		.first_block {
 		  display: inline-block;
 		  float: left;
 		  width: 120px;
 		}
-		
+
 		.second_block {
 		  display: none;
 		  float: left;
@@ -1301,15 +1301,15 @@ School List Rows
   margin-bottom: 12px;
   margin-top: 0;
   height: 82px;
-  
+
   &:hover {
 	  .school_name .icon-info {
 		  color: $orange;
 	  }
 	}
-	
+
 	&.descrip_open { cursor: default; }
-	
+
 	&.small_list_row {
 	  list-style: none;
 	  background: #ffffff !important;
@@ -1321,16 +1321,16 @@ School List Rows
 		  font-size: 17px;
 		}
 	}
-	
+
 	&.ui-sortable-helper {
 		box-shadow: 0 0 10px 2px #bbb;
 		background: #FFF;
 	}
-	
+
 	&.descrip_open {
 	  height: auto !important;
 	}
-	
+
 	.full_details {
 	  width: 502px;
 	  float: left;
@@ -1344,7 +1344,7 @@ School List Rows
 	  display: table;
 	  float: left;
 	  color: #969696;
-	  
+
 	  .middle {
 		  display: table-cell;
 		  vertical-align: middle;
@@ -1358,16 +1358,16 @@ School List Rows
 		  font-size: 16px;
 		  line-height: 18px;
 		}
-		
+
 		&.school_name {
 			width: 29.4%;
 		  color: $dark_gray;
 		  font-size: 22px;
 		  line-height: 28px;
 		  &.select .select_icon { display: inline-block; }
-		  
-		  .icon { 
-				font-size: 16px; 
+
+		  .icon {
+				font-size: 16px;
 				float: right;
 				cursor: pointer;
 				width: auto;
@@ -1379,28 +1379,28 @@ School List Rows
 					color: $orange !important;
 				}
 			}
-			
+
 			.full_descrip_link {
 			  color: #0077cf;
 			  font-size: 17px;
 			}
-			
+
 			.select_icon {
 			  color: #0077cf;
 			  font-size: 22px;
 			  display: none;
 			}
 		}// .school_name
-			
+
 		&.ell_descrip,
 		&.sped_descrip {
 			padding-left: 4%;
 			width: 17%;
-		}	
-		
+		}
+
 		&.ell_cluster,
 		&.sped_cluster {}
-			
+
 		&.your_fit_icon {
 			padding-left: 4%;
 			width: 17%;
@@ -1408,9 +1408,9 @@ School List Rows
 			display: table;
 			cursor: pointer;
 			&.open { display: block; }
-			
-			.icon:hover { 
-				color: $dark_gray; 
+
+			.icon:hover {
+				color: $dark_gray;
 			}
 		}
 
@@ -1423,7 +1423,7 @@ School List Rows
 		&.getting_there {
 		  width: 10%;
 		  font-size: 15px;
-		  
+
 		  .icon {
 				width: auto;
 				margin-right: 5px;
@@ -1431,24 +1431,24 @@ School List Rows
 				color: $med_gray;
 			}
 		}
-		
+
 		&.eligibility {
 			width: 10%;
 		}
-			
+
 		&.school_hours {
 			width: 14.6%;
 		  font-size: 12px;
-		  
+
 		  .max_range {
 				display: none;
 			  width: 106px;
 			  -webkit-border-radius: 6px;
 			  -moz-border-radius: 6px;
 			  border-radius: 6px;
-			  background: #e7f1f7;		  
+			  background: #e7f1f7;
 			}
-			
+
 		  .ajust_range {
 			  height: 5px;
 			  background: #0077cf;
@@ -1457,29 +1457,29 @@ School List Rows
 			  border-radius: 6px;
 			}
 		}
-		
+
 		&.surround_care {
 
 		  font-size: 13px;
 		  line-height: 15px;
 		}
-					
+
 		.middle {
 		  vertical-align: middle;
 		  display: table-cell;
 		}
-		
+
 		.icon {
 		  width: 35px;
 		  font-size: 18px;
 		}
-		
+
 		&.icon_petit {
 		  width: 20px;
 		  display: inline-block;
 		  text-align: center;
 		}
-	}	
+	}
 
 } // #school_list li
 
@@ -1501,7 +1501,7 @@ School List Rows
 
 	.right_side {
 	  margin-left: 19px;
-	  
+
 	  .column_left {
 		  float: left;
 	 		width: 37%;
@@ -1544,25 +1544,25 @@ School List Rows
 	  line-height: 1.5em;
 		margin: 0 0 2em 0;
 	}
-	
+
 	/* School Info
 	--------------------------- */
 	.school_info {
-	
+
 		&.full { width: 100%; }
 	}
-	
+
 	/* Photos
 	--------------------------- */
 	.photos {
 	  float: none;
 	  margin-bottom: 20px;
-	  
+
 	  .photo_group {
 	 		margin: 0 0 20px;
 	 		@include clearfix;
 		}
-		
+
 		.small {
 		  float: left;
 		  width: 30.45%;
@@ -1570,12 +1570,12 @@ School List Rows
 		  margin-right: 4.15%;
 		  display: block;
 		  cursor: pointer;
-	
+
 		  &.last { margin-right: 0; }
-	
+
 		  img { width: 100%; }
 		}
-	
+
 		.principal {
 		  height: auto;
 		  margin-bottom: 12px;
@@ -1585,9 +1585,9 @@ School List Rows
 		  &:hover {
 			  .glass { display: block; }
 		  }
-	
+
 		  img { width: 100%; }
-	
+
 			.glass {
 			  background: #ebebeb;
 			  font-size: 22px;
@@ -1872,9 +1872,9 @@ Get Ready
 				.line { height: 42px; }
 				.sortable_row_number img { width: 20px; }
 			}
-		
+
 			.line {
-				
+
 				&.no_order { width: 10%; }
 				&.school_name { width: 50%; }
 				&.your_fit_icon { padding-left: 2%; width: 36%; }
@@ -2274,7 +2274,7 @@ Wrap Search
 		position: relative;
 		margin-bottom: 30px;
 		@include clearfix;
-		
+
 		&:hover {
 			.icon-close {
 				//margin: 0px 0 -35px -35px;
@@ -2292,7 +2292,7 @@ Wrap Search
 			background: tint($light_blue, 75%);
 		}
 	}
-	
+
 	.icon-close {
 		display: block;
 		cursor: pointer;
@@ -2305,7 +2305,7 @@ Wrap Search
 			text-decoration: none;
 		}
 	}
-	
+
 	.name {
 		font-size: 24px;
 		text-transform: capitalize;
