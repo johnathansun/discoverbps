@@ -17,17 +17,9 @@ class Admin::DemandDataController < ApplicationController
       school = School.where(bps_id: row[0]).first
       year = row[2].try(:strip).try(:gsub, /\-.*/, '').try(:strip)
       grade = row[3].try(:strip).try(:gsub, /^0/, '').try(:upcase)
-      
-      if row[10].present?
-        total_applicants = row[10]
-      elsif row[7].present? && row[8].present? && row[9].present?
-        total_applicants = row[7].to_i + row[8].to_i + row[9].to_i
-      else
-        nil
-      end
 
       if school.present? && year.present? && grade.present? && row[4].present? && (row[10].present? || (row[7].present? && row[8].present? && row[9].present?))
-        DemandDatum.create(school_id: school.id, bps_id: row[0], year: year, grade_level: grade, seats_before_round: row[4], seats_after_round: row[5], total_seats: row[6], first_choice_applicants: row[7], second_choice_applicants: row[8], third_choice_applicants: row[9], total_applicants: total_applicants)
+        DemandDatum.create(school_id: school.id, bps_id: row[0], year: year, grade_level: grade, seats_before_round: row[4], seats_after_round: row[5], total_seats: row[6], first_choice_applicants: row[7], second_choice_applicants: row[8], third_choice_applicants: row[9], total_applicants: row[10])
       end
     end
 
