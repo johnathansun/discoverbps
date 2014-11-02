@@ -90,7 +90,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = false
 		api_response = self.get(endpoint, params)
-		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, extract_from_array, bps_id)
 	end
 
 	##### DESCRIPTIONS #####
@@ -100,7 +100,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, extract_from_array, bps_id)
 	end
 
 	##### FACILITIES #####
@@ -110,7 +110,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, extract_from_array, bps_id)
 	end
 
 	##### GRADE LEVELS #####
@@ -120,7 +120,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = false
 		api_response = self.get(endpoint, params)
-		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, extract_from_array, bps_id)
 	end
 
 	##### HOURS #####
@@ -130,7 +130,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, extract_from_array, bps_id)
 	end
 
 	##### LANGUAGES #####
@@ -140,7 +140,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, extract_from_array, bps_id)
 	end
 
 	##### PARTNERS #####
@@ -150,7 +150,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = false
 		api_response = self.get(endpoint, params)
-		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, extract_from_array, bps_id)
 	end
 
 	##### PHOTOS #####
@@ -160,7 +160,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = false
 		api_response = self.get(endpoint, params)
-		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, extract_from_array, bps_id)
 	end
 
 	##### SPORTS #####
@@ -170,14 +170,24 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(bps_id, api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, extract_from_array, bps_id)
 	end
 
+	##### STUDENT SUPPORT #####
+
+	def self.student_support(bps_id)
+		endpoint = "StudentSupport"
+		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
+		extract_from_array = true
+		api_response = self.get(endpoint, params)
+		self.extract(api_response, endpoint, extract_from_array, bps_id)
+	end
 
 	private
 
 	def self.get(endpoint, params)
-		Faraday.new(url: "#{ENV['BPS_DEV_WEBSERVICE_URL']}/#{endpoint}?#{params}", ssl: {version: :SSLv3}).get.body
+		response = Faraday.new(url: "#{ENV['BPS_DEV_WEBSERVICE_URL']}/#{endpoint}?#{params}", ssl: {version: :SSLv3}).get
+		response.body
 	end
 
 	def self.extract(api_response, endpoint, extract_from_array, bps_id)

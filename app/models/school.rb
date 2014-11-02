@@ -9,7 +9,7 @@ class School < ActiveRecord::Base
 	attr_protected
 	attr_accessor :tier, :transportation_eligibility, :walk_zone_eligibility, :walk_time, :drive_time, :distance
 	attr_accessible :api_basic_info, :api_awards, :api_description, :api_facilities, :api_grades, :api_hours, :api_languages,
-									:api_partners, :api_photos, :name, :bps_id, :slug, :latitude, :longitude, :api_sports
+									:api_partners, :api_photos, :name, :bps_id, :slug, :latitude, :longitude, :api_sports, :api_student_support
 
 
 	serialize :api_basic_info # Hash
@@ -22,6 +22,7 @@ class School < ActiveRecord::Base
 	serialize :api_partners # Array
 	serialize :api_photos # Array
 	serialize :api_sports # Hash
+	serialize :api_student_support # Hash
 
 	# after_validation :geocode
 	before_save :strip_bps_id

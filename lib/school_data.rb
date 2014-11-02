@@ -6,7 +6,7 @@ module SchoolData
     schools = self.find_schools(school_id)
 
     schools.each do |school|
-      response = Webservice.basic_info(school)
+      response = Webservice.basic_info(school.bps_id)
       school.update_attributes(name: response[:schname_23], latitude: response[:Latitude], longitude: response[:Longitude], api_basic_info: response) if response.present?
     end
   end
@@ -17,7 +17,7 @@ module SchoolData
     schools = self.find_schools(school_id)
 
     schools.each do |school|
-      response = Webservice.awards(school)
+      response = Webservice.awards(school.bps_id)
       school.update_attributes(api_awards: response) if response.present?
     end
   end
@@ -28,7 +28,7 @@ module SchoolData
     schools = self.find_schools(school_id)
 
     schools.each do |school|
-      response = Webservice.descriptions(school)
+      response = Webservice.description(school.bps_id)
       school.update_attributes(api_description: response) if response.present?
     end
   end
@@ -39,7 +39,7 @@ module SchoolData
     schools = self.find_schools(school_id)
 
     schools.each do |school|
-      response = Webservice.facilities(school)
+      response = Webservice.facilities(school.bps_id)
       school.update_attributes(api_facilities: response) if response.present?
     end
   end
@@ -50,7 +50,7 @@ module SchoolData
     schools = self.find_schools(school_id)
 
     schools.each do |school|
-      response = Webservice.grades(school)
+      response = Webservice.grades(school.bps_id)
       school.update_attributes(api_grades: response) if response.present?
     end
   end
@@ -61,7 +61,7 @@ module SchoolData
     schools = self.find_schools(school_id)
 
     schools.each do |school|
-      response = Webservice.hours(school)
+      response = Webservice.hours(school.bps_id)
       school.update_attributes(api_hours: response) if response.present?
     end
   end
@@ -72,7 +72,7 @@ module SchoolData
     schools = self.find_schools(school_id)
 
     schools.each do |school|
-      response = Webservice.languages(school)
+      response = Webservice.languages(school.bps_id)
       school.update_attributes(api_languages: response) if response.present?
     end
   end
@@ -83,7 +83,7 @@ module SchoolData
     schools = self.find_schools(school_id)
 
     schools.each do |school|
-      response = Webservice.partners(school)
+      response = Webservice.partners(school.bps_id)
       school.update_attributes(api_partners: response) if response.present?
     end
   end
@@ -94,7 +94,7 @@ module SchoolData
     schools = self.find_schools(school_id)
 
     schools.each do |school|
-      response = Webservice.photos(school)
+      response = Webservice.photos(school.bps_id)
       school.update_attributes(api_photos: response) if response.present?
     end
   end
@@ -105,8 +105,19 @@ module SchoolData
     schools = self.find_schools(school_id)
 
     schools.each do |school|
-      response = Webservice.sports(school)
+      response = Webservice.sports(school.bps_id)
       school.update_attributes(api_sports: response) if response.present?
+    end
+  end
+
+  ##### UPDATE STUDENT SUPPORT #####
+
+  def self.update_student_support!(school_id=nil)
+    schools = self.find_schools(school_id)
+
+    schools.each do |school|
+      response = Webservice.student_support(school.bps_id)
+      school.update_attributes(api_student_support: response) if response.present?
     end
   end
 

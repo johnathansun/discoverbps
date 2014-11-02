@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141101180759) do
+ActiveRecord::Schema.define(:version => 20141102030845) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -131,8 +131,8 @@ ActiveRecord::Schema.define(:version => 20141101180759) do
   add_index "preferences_students", ["student_id"], :name => "index_preferences_students_on_student_id"
 
   create_table "schools", :force => true do |t|
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.text     "api_basic_info"
     t.text     "api_awards"
     t.text     "api_description"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(:version => 20141101180759) do
     t.float    "latitude"
     t.float    "longitude"
     t.text     "api_sports"
+    t.text     "api_student_support"
   end
 
   add_index "schools", ["slug"], :name => "index_schools_on_slug", :unique => true

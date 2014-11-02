@@ -28,7 +28,7 @@
 <div class="field">
   <%= f.label :api_table_name, "Table Name" %>
   <br />
-  <%= f.select :api_table_name, options_for_select([ ['GetSchool', 'api_basic_info'], ['GetSchoolAwards', 'api_awards'], ['GetSchoolDescriptions', 'api_description'], ['GetSchoolExtraCurricular', 'api_extra_curricular'], ['GetSchoolFacilities', 'api_facilities'], ['GetSchoolGrades', 'api_grades'], ['GetSchoolLanguages', 'api_languages'], ['GetSchoolPartners', 'api_partners'], ['GetSchoolPhotos', 'api_photos'], ['GetSchoolSports', 'api_sports']], @preference.api_table_name) %>
+  <%= f.select :api_table_name, options_for_select([ ['Info', 'api_basic_info'], ['Awards', 'api_awards'], ['Description', 'api_description'], ['Facilities', 'api_facilities'], ['Grades', 'api_grades'], ['Hours', 'api_hours'], ['Languages', 'api_languages'], ['Partners', 'api_partners'], ['Photos', 'api_photos'], ['Sports', 'api_sports'], ['Student Support', 'api_student_support']], @preference.api_table_name) %>
 </div>
 
 <div class="field">
