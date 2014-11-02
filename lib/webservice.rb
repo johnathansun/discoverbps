@@ -163,6 +163,26 @@ module Webservice
 		self.extract(api_response, endpoint, extract_from_array, bps_id)
 	end
 
+	##### PREVIEW DATES #####
+
+	def self.preview_dates(bps_id)
+		endpoint = "PreviewDates"
+		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
+		extract_from_array = true
+		api_response = self.get(endpoint, params)
+		self.extract(api_response, endpoint, extract_from_array, bps_id)
+	end
+
+	##### PROGRAMS #####
+
+	def self.programs(bps_id)
+		endpoint = "Programs"
+		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
+		extract_from_array = false
+		api_response = self.get(endpoint, params)
+		self.extract(api_response, endpoint, extract_from_array, bps_id)
+	end
+
 	##### SPORTS #####
 
 	def self.sports(bps_id)

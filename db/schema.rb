@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141102030845) do
+ActiveRecord::Schema.define(:version => 20141102231409) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -149,6 +149,8 @@ ActiveRecord::Schema.define(:version => 20141102030845) do
     t.float    "longitude"
     t.text     "api_sports"
     t.text     "api_student_support"
+    t.text     "api_preview_dates"
+    t.text     "api_programs"
   end
 
   add_index "schools", ["slug"], :name => "index_schools_on_slug", :unique => true

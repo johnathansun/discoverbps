@@ -18,6 +18,8 @@ every(1.day, 'Update school hours', at: '09:00') 					    { SchoolData.delay.upd
 every(1.day, 'Update school languages', at: '09:00')	 		    { SchoolData.delay.update_languages! }
 every(1.day, 'Update school partners', at: '09:00')           { SchoolData.delay.update_partners! }
 every(1.day, 'Update school photos', at: '09:00') 				    { SchoolData.delay.update_photos! }
+every(1.day, 'Update school preview dates', at: '09:00') 		  { SchoolData.delay.update_preview_dates! }
+every(1.day, 'Update school programs', at: '09:00') 				  { SchoolData.delay.update_programs! }
 every(1.day, 'Update school sports', at: '09:00') 				    { SchoolData.delay.update_sports! }
 every(1.day, 'Update school student support', at: '09:00')    { SchoolData.delay.update_student_support! }
 

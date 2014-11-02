@@ -99,6 +99,28 @@ module SchoolData
     end
   end
 
+  ##### UPDATE PREVIEW DATES #####
+
+  def self.update_preview_dates!(school_id=nil)
+    schools = self.find_schools(school_id)
+
+    schools.each do |school|
+      response = Webservice.preview_dates(school.bps_id)
+      school.update_attributes(api_preview_dates: response) if response.present?
+    end
+  end
+
+  ##### UPDATE PROGRAMS #####
+
+  def self.update_programs!(school_id=nil)
+    schools = self.find_schools(school_id)
+
+    schools.each do |school|
+      response = Webservice.programs(school.bps_id)
+      school.update_attributes(api_programs: response) if response.present?
+    end
+  end
+
   ##### UPDATE SPORTS #####
 
   def self.update_sports!(school_id=nil)
