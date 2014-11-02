@@ -121,7 +121,7 @@
 			$('#sibling_search_#{row_number + 1}').show();
 		});
 		$(function() {
-			var schoolNames = <%= raw School.all.collect {|x| x.name}.compact %>;
+			var schoolNames = #{raw School.all.collect {|x| x.name}.compact};
 			$( "#sibling_school_#{row_number}_autocomplete" ).autocomplete({
 				source: schoolNames,
 				minLength: 2,
