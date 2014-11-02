@@ -252,7 +252,7 @@
 
       var boundaryStyle = {
         fillOpacity: 0,
-        strokeColor: '#777777',
+        strokeColor: '#80BCE7',
         strokeWeight: 0,
         clickable: false
       }
@@ -263,13 +263,13 @@
         cityBoundaries = map.data.addGeoJson(data);
 
         $.each(cityBoundaries, function (index, feature) {
-          map.data.overrideStyle(feature, {strokeWeight: 2});
+          map.data.overrideStyle(feature, {strokeWeight: 4});
         });
 
         google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
           $.each(cityBoundaries, function (index, feature) {
             map.data.add(feature);
-            map.data.overrideStyle(feature, {strokeWeight: 2});
+            map.data.overrideStyle(feature, {strokeWeight: 4});
           });
         });
 
@@ -277,7 +277,7 @@
           google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
             $.each(cityBoundaries, function (index, feature) {
               map.data.add(feature);
-              map.data.overrideStyle(feature, {strokeWeight: 2});
+              map.data.overrideStyle(feature, {strokeWeight: 4});
             });
           });
         <% end %>
@@ -322,7 +322,7 @@
           google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function () {
             $.each(ellBoundaries, function (index, feature) {
               map.data.add(feature);
-              map.data.overrideStyle(feature, {strokeWeight: 2});
+              map.data.overrideStyle(feature, {strokeWeight: 4});
             });
           });
 
@@ -363,11 +363,11 @@
               });
             });
           <% end %>
-          
+
           google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function () {
             $.each(spedBoundaries, function (index, feature) {
               map.data.add(feature);
-              map.data.overrideStyle(feature, {strokeWeight: 2});
+              map.data.overrideStyle(feature, {strokeWeight: 4});
             });
           });
         });
