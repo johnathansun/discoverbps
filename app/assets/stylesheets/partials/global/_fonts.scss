@@ -31,7 +31,9 @@ Instead of a list of all class selectors,
 you can use the generic selector below, but it's slower:
 [class*="icon-"] {
 */
-.icon-DBPS-Dev-Assets-SRG-45,
+
+
+//.icon-DBPS-Dev-Assets-SRG-45,
 .icon-DBPS-Dev-Assets-SRG-44,
 .icon-DBPS-Dev-Assets-SRG-43,
 .icon-DBPS-Dev-Assets-SRG-42,
@@ -45,7 +47,7 @@ you can use the generic selector below, but it's slower:
 .icon-DBPS-Dev-Assets-SRG-34,
 .icon-DBPS-Dev-Assets-SRG-33,
 .icon-DBPS-Dev-Assets-SRG-32,
-.icon-DBPS-Dev-Assets-SRG-31,
+//.icon-DBPS-Dev-Assets-SRG-31,
 .icon-DBPS-Dev-Assets-SRG-30,
 .icon-DBPS-Dev-Assets-SRG-29,
 .icon-DBPS-Dev-Assets-SRG-28,
@@ -121,7 +123,8 @@ you can use the generic selector below, but it's slower:
   -webkit-font-smoothing: antialiased;
 }
 
-.icon-DBPS-Dev-Assets-SRG-45:before {
+.icon-DBPS-Dev-Assets-SRG-45:before,
+.icon-DBPS-Dev-Assets-arrow-up:before {
 	content: "\e040";
 }
 .icon-DBPS-Dev-Assets-SRG-44:before {
@@ -163,7 +166,8 @@ you can use the generic selector below, but it's slower:
 .icon-DBPS-Dev-Assets-SRG-32:before {
 	content: "\e00c";
 }
-.icon-DBPS-Dev-Assets-SRG-31:before {
+.icon-DBPS-Dev-Assets-SRG-31:before,
+.icon-DBPS-Dev-Assets-arrow-down:before {
 	content: "\e00d";
 }
 .icon-DBPS-Dev-Assets-SRG-30:before {

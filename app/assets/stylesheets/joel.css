@@ -166,13 +166,16 @@ a.student_tab {
 	margin-top: 1px;
 }
 .column_arrow {
-	float: left;
-	margin-top: 1px;
+	margin-top: 6px;
 	margin-right: 5px;
+	font-size: 10px;
+	float: left;
 }
 .column_title {
 	margin-top: 3px;
-}
+	}
+	.column_title:hover { color: #0077CF; }
+
 .center {
 	text-align: center;
 }
