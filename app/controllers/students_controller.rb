@@ -14,7 +14,7 @@ class StudentsController < ApplicationController
       street_name   = params[:student][:street_name]
       zipcode       = params[:student][:zipcode]
 
-			@student = get_or_set_student(current_user, first_name, last_name)
+			@student = get_or_set_student(current_user, first_name, last_name, grade_level)
 
       params[:student][:sibling_school_ids] = School.where("name IN (?)", params[:student][:sibling_school_names].try(:compact).try(:reject, &:empty?)).collect {|x| x.bps_id}.uniq
 
@@ -241,14 +241,14 @@ class StudentsController < ApplicationController
 
 	private
 
-	def get_or_set_student(current_student, first_name, last_name)
+	def get_or_set_student(current_user, first_name, last_name, grade_level)
 		if current_user.present?
 			if first_name.present? && last_name.present?
 				Student.where(user_id: current_user.id, first_name: first_name, last_name: last_name).first_or_initialize
 			elsif first_name.present?
 				Student.where(user_id: current_user.id, first_name: first_name).first_or_initialize
 			else
-				Student.where(user_id: current_user.id, grade_level: current_student.grade_level).first_or_initialize
+				Student.where(user_id: current_user.id, grade_level: grade_level).first_or_initialize
 			end
 		elsif session[:session_id].present?
 			if first_name.present? && last_name.present?
@@ -256,7 +256,7 @@ class StudentsController < ApplicationController
 			elsif first_name.present?
 				Student.where(session_id: session[:session_id], first_name: first_name).first_or_initialize
 			else
-				Student.where(session_id: session[:session_id], grade_level: current_student.grade_level).first_or_initialize
+				Student.where(session_id: session[:session_id], grade_level: grade_level).first_or_initialize
 			end
 		else
 			nil
