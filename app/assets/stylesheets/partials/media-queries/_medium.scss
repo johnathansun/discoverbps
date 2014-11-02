@@ -2,7 +2,7 @@
 /* ----------------------------------------------
    ELEMENT LAYOUT - TABLETTE 2
 ---------------------------------------------- */
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 1070px) {
   .standard .wrap {
     padding: 0 33px;
     margin: 0 auto;
@@ -14,10 +14,172 @@
     max-width: 769px;
     padding: 0 33px;
   }
+
+
+
+  /* -------------------------------------------------
+	  Timeline
+  ---------------------------------------------------- */  
+	.timeline {
+		display: none;		
+	}
+
+
+
+  /* -------------------------------------------------
+	  Preferences
+  ---------------------------------------------------- */
+  .wrap .preferences {
+    width: auto;
+    position: relative;
+    padding: 23px 0 24px 7px;
+    float: none;
+    background: #dfdfdf;
+    box-shadow: 0 0 0 0 #888888;
+    -webkit-box-shadow: 0 0 0 0 #888888;
+    -moz-box-shadow: 0 0 0 0 #888888;
+  }
+  .wrap .preferences .header_preferences {
+    display: block;
+  }
+  .wrap .preferences .preference {
+    border: 0;
+  }
+  .wrap .preferences .colonn {
+    width: 20.8%;
+    padding: 0 2%;
+    float: left;
+    border-right: 1px solid #ffffff;
+    min-height: 467px;
+  }
+  .wrap .preferences .colonn.last {
+    border: 0;
+  }
+  .wrap .preferences.hide #preference_content {
+    display: none;
+  }
+  .wrap .preferences.hide .header_preferences #hide_btn {
+    display: none;
+  }
+  .wrap .preferences.hide .header_preferences #show_btn {
+    display: inline-block;
+  }
+  .wrap .preferences.hide .header_preferences .down_arrow {
+    display: none;
+  }
+  .wrap .preferences.hide .header_preferences .up_arrow {
+    display: inline-block;
+  }
+  
+  
+  
+  /* -------------------------------------------------
+	  School List
+  ---------------------------------------------------- */
+  .wrap #school_list,
+  .wrap #compare_list {
+    margin-left: 0;
+    margin: 0 0 11px 11px;
+    overflow: hidden;
+  }
+  .wrap #school_list .footer_list,
+  .wrap #compare_list .footer_list {
+    margin-left: 0;
+    width: auto;
+    margin-right: 11px;
+  }
+  .wrap #school_list .footer_list .footer_left,
+  .wrap #compare_list .footer_list .footer_left {
+    //width: 327px;
+  }
+
+  .wrap #school_list .footer_list .footer_right p,
+  .wrap #compare_list .footer_list .footer_right p {
+    margin-bottom: .4em;
+  }
+  .wrap #compare_list ul li .no_order {
+    //width: 176px;
+  }
+  .wrap #school_list {
+    padding-bottom: 0;
+  }
+  .wrap #school_list ul li .school_descrip .title {
+    margin-left: 16px;
+  }
+  .wrap #school_list ul li .school_descrip .title .fit_icon {
+    margin-left: -20px;
+    display: inline-block;
+  }
+  .wrap #school_list ul li .school_descrip .descrip {
+    margin-left: 16px;
+  }
+  .wrap #school_list ul li .school_descrip .full_details {
+    //width: 305px;
+  }
+  .wrap #school_list ul li .school_descrip .right_side .tablet {
+    display: block;
+    float: left;
+  }
+  .wrap #school_list ul li .school_descrip .right_side .tablet .box {
+    //padding-left: 20px !important;
+    //width: 130px !important;
+  }
+  .wrap #school_list ul li .school_descrip .right_side .desktop {
+    display: none;
+  }
+  .wrap #school_list ul li .school_descrip .right_side .mobile {
+    display: none;
+  }
+  .wrap #school_list ul li .school_name {
+    //width: 275px;
+  }
+  .wrap #school_list ul li .box {
+    //width: 148px;
+  }
+  .wrap #school_list ul li .eligibility {
+    //width: 100px;
+  }
+  .wrap #school_list .shadow {
+    display: none;
+  }
+  .wrap #school_list .menu_list #sortable_school_name_column {
+    //width: 273px;
+  }
+  .wrap #school_list .menu_list .menu_bloc {
+    //width: 151px;
+  }
+  .wrap #school_list .menu_list .menu_bloc.choice {
+    //width: 293px;
+  }
+  .wrap #school_list .menu_list .menu_bloc.your_fit {
+    //width: 160px;
+  }
+  .wrap #school_list .menu_list .menu_bloc.your_fit .glass_open {
+    display: inline-block;
+  }
+  .wrap #school_list .menu_list .menu_bloc.open .glass_open {
+    display: none !important;
+  }
+  .wrap #school_list .menu_list .menu_bloc#getting_there .glass_open {
+    display: inline-block;
+  }
+
+
+
+
+
+
   #main_gallery_image{
     margin: 30px 0 20px 0;
     img{ width: 475px;}
   }
+  
+  
+  
+  
+  
+  
+
   .dialog_box.dialog_box_dicover {
     width: 536px;
     margin: 0 0 0 -268px;
@@ -92,8 +254,9 @@
     display: none;
   }
   .wrap .search .search_section .content_left {
-    width: 553px;
-    margin-right: 156px;
+    //width: 553px;
+    //margin-right: 156px;
+    margin-right: 0;
   }
   .wrap .search .search_section .content_left .text {
     margin-left: 0;
