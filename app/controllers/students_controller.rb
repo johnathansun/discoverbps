@@ -248,7 +248,7 @@ class StudentsController < ApplicationController
 			elsif first_name.present?
 				Student.where(user_id: current_user.id, first_name: first_name).first_or_initialize
 			else
-				Student.where(user_id: current_user.id, grade_level: grade_level).first_or_initialize
+				Student.where(user_id: current_user.id, grade_level: current_student.grade_level).first_or_initialize
 			end
 		elsif session[:session_id].present?
 			if first_name.present? && last_name.present?
@@ -256,7 +256,7 @@ class StudentsController < ApplicationController
 			elsif first_name.present?
 				Student.where(session_id: session[:session_id], first_name: first_name).first_or_initialize
 			else
-				Student.where(session_id: session[:session_id], grade_level: grade_level).first_or_initialize
+				Student.where(session_id: session[:session_id], grade_level: current_student.grade_level).first_or_initialize
 			end
 		else
 			nil
