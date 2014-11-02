@@ -2,30 +2,38 @@
 	.note.dark_blue
 		Jump to any step by clicking on it
 	.steps
-		%div{class: "step first #{progress_bar_class_helper(current_student.step, page_step, 1)}"}
+		%div{class: "step one first #{progress_bar_class_helper(current_student.step, page_step, 1)}"}
 			%a{href: "/", class:"no-decoration"}
 				.bar
+					%span.arrow.back
+					%span.arrow.front
 				.label
 					%span.step_num= 'STEP 1'
 					%br/
 					%span.step_name= 'search'
-		%div{class: "step #{progress_bar_class_helper(current_student.step, page_step, 2)}"}
+		%div{class: "step two #{progress_bar_class_helper(current_student.step, page_step, 2)}"}
 			%a{href: "/schools", class:"no-decoration"}
 				.bar
+					%span.arrow.back
+					%span.arrow.front
 				.label
 					%span.step_num= 'STEP 2'
 					%br/
 					%span.step_name= 'learn'
-		%div{class: "step #{progress_bar_class_helper(current_student.step, page_step, 3)}"}
+		%div{class: "step three #{progress_bar_class_helper(current_student.step, page_step, 3)}"}
 			%a{href: "/schools/compare", class:"no-decoration"}
 				.bar
+					%span.arrow.back
+					%span.arrow.front
 				.label
 					%span.step_num= 'STEP 3'
 					%br/
 					%span.step_name= 'compare & rank'
-		%div{class: "step last #{progress_bar_class_helper(current_student.step, page_step, 4)}"}
+		%div{class: "step four last #{progress_bar_class_helper(current_student.step, page_step, 4)}"}
 			%a{href: "/schools/get_ready", class:"no-decoration"}
 				.bar
+					%span.arrow.back
+					%span.arrow.front
 				.label
 					%span.step_num= 'STEP 4'
 					%br/

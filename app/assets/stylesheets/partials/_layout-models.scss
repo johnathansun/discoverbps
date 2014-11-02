@@ -3017,6 +3017,7 @@ Wrap Account
 		@include clearfix;
 	}
 		.step {
+			position: relative;
 			width: 25%;
 			float: left;
 			&:hover {
@@ -3024,11 +3025,32 @@ Wrap Account
 					color: $yellow !important;
 				}
 			}
+			&.one { z-index: 4; }
+			&.two { z-index: 3; }
+			&.three { z-index: 2; }
+			&.four { z-index: 1; }
 
 			.bar {
+				position: relative;
 				height: 10px;
 				background-color: $dark_blue;
-				border-right: 2px solid $blue;
+				//border-right: 2px solid $blue;
+				margin: 0 5px 0 0;
+				
+				.arrow {
+					position: absolute;
+					border-left: 5px solid;
+					border-top: 5px solid transparent;
+					border-bottom: 5px solid transparent;
+					&.back {
+						left: 0;
+						border-left-color: $blue;
+					}
+					&.front {
+						right: -5px;
+						border-left-color: $dark_blue;
+					}
+				}
 			}
 			.label {
 				margin: 5px 0;
@@ -3044,12 +3066,20 @@ Wrap Account
 				.bar { border: none; }
 			}
 			&.complete {
-				.bar { background-color: $light_blue; }
+				.bar { 
+					background-color: $light_blue; 
+					.arrow.front {
+						border-left-color: $light_blue;
+					}
+				}
 				.label { color: $light_blue; }
 			}
 			&.current {
 				.bar {
 					background-color: $yellow;
+					.arrow.front {
+						border-left-color: $yellow;
+					}
 				}
 				.label { color: $yellow; }
 			}
