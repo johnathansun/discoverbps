@@ -105,14 +105,14 @@
 			$('.column_arrow').hide();
 			$('.sortable_column').css("color", "#565656")
 			$('#sortable_star_column').css("color", "#0077cf")
-			if (school_name_ascending) {
-				$('ul#sortable>li').tsort('span.sortable_star',{order:'desc'});
-				$('#sortable_star_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Star</div>');
-				school_name_ascending = false;
-			} else {
+			if (!star_ascending) {
 				$('ul#sortable>li').tsort('span.sortable_star',{order:'asc'});
 				$('#sortable_star_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Star</div>');
-				school_name_ascending = true;
+				star_ascending = true;
+			} else {
+				$('ul#sortable>li').tsort('span.sortable_star',{order:'desc'});
+				$('#sortable_star_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Star</div>');
+				star_ascending = false;
 			}
 		});
 
@@ -121,14 +121,14 @@
 			$('.column_arrow').hide();
 			$('.sortable_column').css("color", "#565656")
 			$('#sortable_school_name_column').css("color", "#0077cf")
-			if (school_name_ascending) {
-				$('ul#sortable>li').tsort('span.sortable_school_name',{order:'desc'});
-				$('#sortable_school_name_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Name</div>');
-				school_name_ascending = false;
-			} else {
+			if (!school_name_ascending) {
 				$('ul#sortable>li').tsort('span.sortable_school_name',{order:'asc'});
 				$('#sortable_school_name_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Name</div>');
 				school_name_ascending = true;
+			} else {
+				$('ul#sortable>li').tsort('span.sortable_school_name',{order:'desc'});
+				$('#sortable_school_name_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Name</div>');
+				school_name_ascending = false;
 			}
 		});
 
@@ -137,14 +137,14 @@
 			$('.column_arrow').hide();
 			$('.sortable_column').css("color", "#565656")
 			$('#sortable_fit_column').css("color", "#0077cf")
-			if (fit_ascending) {
-				$('ul#sortable>li').tsort('span.sortable_fit',{order:'desc'});
-				$('#sortable_fit_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Your Fit</div>');
-				fit_ascending = false;
-			} else {
+			if (!fit_ascending) {
 				$('ul#sortable>li').tsort('span.sortable_fit',{order:'asc'});
 				$('#sortable_fit_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Your Fit</div>');
 				fit_ascending = true;
+			} else {
+				$('ul#sortable>li').tsort('span.sortable_fit',{order:'desc'});
+				$('#sortable_fit_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Your Fit</div>');
+				fit_ascending = false;
 			}
 		});
 
@@ -153,14 +153,14 @@
 			$('.column_arrow').hide();
 			$('.sortable_column').css("color", "#565656")
 			$('#sortable_distance_column').css("color", "#0077cf")
-			if (getting_there_ascending) {
-				$('ul#sortable>li').tsort('span.sortable_distance',{order:'desc'});
-				$('#sortable_distance_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Travel</div>');
-				getting_there_ascending = false;
-			} else {
+			if (!getting_there_ascending) {
 				$('ul#sortable>li').tsort('span.sortable_distance',{order:'asc'});
 				$('#sortable_distance_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Travel</div>');
 				getting_there_ascending = true;
+			} else {
+				$('ul#sortable>li').tsort('span.sortable_distance',{order:'desc'});
+				$('#sortable_distance_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Travel</div>');
+				getting_there_ascending = false;
 			}
 		});
 
@@ -169,14 +169,14 @@
 			$('.column_arrow').hide();
 			$('.sortable_column').css("color", "#565656")
 			$('#sortable_eligibility_column').css("color", "#0077cf")
-			if (eligibility_ascending) {
-				$('ul#sortable>li').tsort('span.sortable_eligibility',{order:'desc'});
-				$('#sortable_eligibility_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Eligibility</div>');
-				eligibility_ascending = false;
-			} else {
+			if (!eligibility_ascending) {
 				$('ul#sortable>li').tsort('span.sortable_eligibility',{order:'asc'});
 				$('#sortable_eligibility_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Eligibility</div>');
 				eligibility_ascending = true;
+			} else {
+				$('ul#sortable>li').tsort('span.sortable_eligibility',{order:'desc'});
+				$('#sortable_eligibility_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Eligibility</div>');
+				eligibility_ascending = false;
 			}
 		});
 
@@ -185,14 +185,14 @@
 			$('.column_arrow').hide();
 			$('.sortable_column').css("color", "#565656")
 			$('#sortable_hours_column').css("color", "#0077cf")
-			if (hours_ascending) {
-				$('ul#sortable>li').tsort('span.sortable_hours',{order:'desc'});
-				$('#sortable_hours_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Hours</div>');
-				hours_ascending = false;
-			} else {
+			if (!hours_ascending) {
 				$('ul#sortable>li').tsort('span.sortable_hours',{order:'asc'});
 				$('#sortable_hours_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Hours</div>');
 				hours_ascending = true;
+			} else {
+				$('ul#sortable>li').tsort('span.sortable_hours',{order:'desc'});
+				$('#sortable_hours_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Hours</div>');
+				hours_ascending = false;
 			}
 		});
 
