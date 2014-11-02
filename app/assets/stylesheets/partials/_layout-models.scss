@@ -500,8 +500,8 @@ footer.footer {
 	.arrow_slide {
 	  position: absolute;
 	  right: 5px;
-		top: -45px;
-		z-index: 1;
+		top: -65px;
+		z-index: 2;
 	  height: 26px;
 	  color: #ffffff;
 	  font-size: 24px;
@@ -511,7 +511,7 @@ footer.footer {
 
 
 /* ---------------------------------------------------------
- Timeline
+ Header
 ------------------------------------------------------------ */
 .wrap.timeline_menu .logo_discover {
   color: #ffffff;
@@ -1301,6 +1301,7 @@ School List Rows
   margin-bottom: 12px;
   margin-top: 0;
   height: 82px;
+  overflow: hidden;
 
   &:hover {
 	  .school_name .icon-info {
@@ -1531,7 +1532,7 @@ School List Rows
 		}
 	}
 	.descrip {
-		margin: 0 0 20px 33px;
+		margin: 0 0 20px 30px;
 		font-size: 14px;
 		color: $med_gray;
 	}
@@ -2383,6 +2384,7 @@ Wrap Search
 
 .search .new_search_form_wrap {
 	margin-bottom: 50px;
+	width: 120%;
 }
 
 .search .search_section .content_left form .form_line {
