@@ -12,7 +12,7 @@ class Admin::NotificationsController < ApplicationController
 
   def create
     @notification = Notification.new(params[:notification])
-    
+
     respond_to do |format|
       if @notification.save
         format.html { redirect_to admin_notifications_url, notice: 'Notification was successfully created.' }
@@ -28,10 +28,10 @@ class Admin::NotificationsController < ApplicationController
 
 	def update
 		@notification = Notification.find(params[:id])
-    
+
     respond_to do |format|
       if @notification.update_attributes(params[:notification])
-        format.html { redirect_to admin_notifications_url, notice: 'Notification was successfully updated.' }          
+        format.html { redirect_to admin_notifications_url, notice: 'Notification was successfully updated.' }
       else
         format.html { render action: "edit" }
       end
@@ -41,7 +41,7 @@ class Admin::NotificationsController < ApplicationController
 	def destroy
     @notification = Notification.find(params[:id])
     @notification.destroy
-    
+
     respond_to do |format|
       format.html { redirect_to admin_notifications_url }
     end

@@ -120,7 +120,7 @@ figure {
 	&:hover {
 		background: tint(#FC5B00, 20%);
 	}
-	
+
 	&.red { background: $red; }
 		&.red:hover { background: tint(#fc0d1b, 20%); }
 	&.yellow { background: $yellow; }

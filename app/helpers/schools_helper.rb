@@ -45,6 +45,17 @@ module SchoolsHelper
 		end
 	end
 
+	def student_support_list_helper(school)
+		list = ''
+		list << 'Full-Time Nurse<br />'				if school.api_student_support.try(:[], :HasFullTimeNurse) == 'True'
+		list << 'Part-Time Nurse<br />'				if school.api_student_support.try(:[], :HasPartTimeNurse) == 'True'
+		list << 'Online Health Center<br />' 	if school.api_student_support.try(:[], :HasOnlineHealthCntr) == 'True'
+		list << 'Family Coordinator<br />'		if school.api_student_support.try(:[], :HasFamilyCoord) == 'True'
+		list << 'Guidance Counselor<br />'		if school.api_student_support.try(:[], :HasGuidanceCoord) == 'True'
+		list << 'Social Worker<br />'					if school.api_student_support.try(:[], :HasSocialWorker) == 'True'
+		list
+	end
+
 	def eligibility_helper(tier)
 		tier.try(:gsub, /:/, ', ')
 	end
@@ -131,30 +142,6 @@ module SchoolsHelper
 
 	def spacer_helper(string)
 		raw string.try(:strip).try(:gsub, /\s/, '&nbsp;')
-	end
-
-	def student_support_present?(school)
-		if school.api_student_support.try(:[], :HasFullTimeNurse) == 'True' ||
-			school.api_student_support.try(:[], :HasPartTimeNurse) == 'True' ||
-			school.api_student_support.try(:[], :HasOnlineHealthCntr) == 'True'
-			school.api_student_support.try(:[], :HasFamilyCoord) == 'True' ||
-			school.api_student_support.try(:[], :HasGuidanceCoord) == 'True' ||
-			school.api_student_support.try(:[], :HasSocialWorker) == 'True'
-			true
-		else
-			false
-		end
-	end
-
-	def student_support_list_helper(school)
-		list = ''
-		list << 'Full-Time Nurse<br />'				if school.api_student_support.try(:[], :HasFullTimeNurse) == 'True'
-		list << 'Part-Time Nurse<br />'				if school.api_student_support.try(:[], :HasPartTimeNurse) == 'True'
-		list << 'Online Health Center<br />' 	if school.api_student_support.try(:[], :HasOnlineHealthCntr) == 'True'
-		list << 'Family Coordinator<br />'		if school.api_student_support.try(:[], :HasFamilyCoord) == 'True'
-		list << 'Guidance Counselor<br />'		if school.api_student_support.try(:[], :HasGuidanceCoord) == 'True'
-		list << 'Social Worker<br />'					if school.api_student_support.try(:[], :HasSocialWorker) == 'True'
-		list
 	end
 
 end

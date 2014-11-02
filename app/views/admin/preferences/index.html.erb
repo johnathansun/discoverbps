@@ -33,18 +33,18 @@
 	</table>
 	<script>
 	  $('#preferences-list-<%= preference_category.id %>').sortable({
-		  axis: 'y', 
-		  dropOnEmpty: false, 
-		  handle: '.handle', 
+		  axis: 'y',
+		  dropOnEmpty: false,
+		  handle: '.handle',
 		  cursor: 'ns-resize',
 		  items: 'li',
 		  opacity: 0.4,
 		  scroll: true,
-		  update: function(event, ui){      
+		  update: function(event, ui){
 		  	$.ajax({
-		  		type: 'post', 
-		  		data: { preference: { id: ui.item.attr('id'), sort_order: ui.item.index() } }, 
-		  		dataType: 'script', 
+		  		type: 'post',
+		  		data: { preference: { id: ui.item.attr('id'), sort_order: ui.item.index() } },
+		  		dataType: 'script',
 		  		beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
 		  		url: '/admin/preferences/sort'
 		  	})

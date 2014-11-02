@@ -12,7 +12,7 @@ class Admin::AdminsController < ApplicationController
 
   def create
     @admin = Admin.new(params[:admin])
-    
+
     respond_to do |format|
       if @admin.save
         format.html { redirect_to admin_admins_url, notice: 'Admin was successfully created.' }
@@ -28,10 +28,10 @@ class Admin::AdminsController < ApplicationController
 
 	def update
 		@admin = Admin.find(params[:id])
-    
+
     respond_to do |format|
       if @admin.update_attributes(params[:admin])
-        format.html { redirect_to admin_admins_url, notice: 'Admin was successfully updated.' }          
+        format.html { redirect_to admin_admins_url, notice: 'Admin was successfully updated.' }
       else
         format.html { render action: "edit" }
       end
@@ -41,7 +41,7 @@ class Admin::AdminsController < ApplicationController
 	def destroy
     @admin = Admin.find(params[:id])
     @admin.destroy
-    
+
     respond_to do |format|
       format.html { redirect_to admin_admins_url }
     end

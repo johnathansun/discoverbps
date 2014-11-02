@@ -75,7 +75,7 @@
 				%p.descrip
 					= school.api_description.try(:[], :uniformpolicy)
 
-		- if student_support_present?(school)
+		- if school.student_support_present?
 			.box
 				%p.title
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}

@@ -2,7 +2,7 @@ class Admin::SchoolsController < ApplicationController
 	before_filter :authenticate_admin!
 	layout 'admin'
 
-	def index	
+	def index
 		@schools = School.order(:name)
 	end
 
@@ -13,10 +13,10 @@ class Admin::SchoolsController < ApplicationController
 	def new
 		@school = School.new
 	end
-  
+
   def create
     @school = School.new(params[:school])
-    
+
     respond_to do |format|
       if @school.save
       	SchoolData.update_basic_info!(@school.id)
@@ -36,12 +36,12 @@ class Admin::SchoolsController < ApplicationController
       end
     end
   end
-  
+
   def destroy
     @school = School.find(params[:id])
     StudentSchool.where(school_id: @school.id).delete_all
     @school.destroy
-    
+
     respond_to do |format|
       format.html { redirect_to admin_schools_url }
     end

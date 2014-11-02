@@ -2381,8 +2381,8 @@ Wrap Search
 				.bar .arrow.front { display: none; }
 			}
 			&.complete {
-				.bar { 
-					background-color: tint($light_blue, 50%); 
+				.bar {
+					background-color: tint($light_blue, 50%);
 					.arrow.front {
 						border-left-color: tint($light_blue, 50%);
 					}

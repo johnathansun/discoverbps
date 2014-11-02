@@ -46,10 +46,10 @@
                 .box.line.your_fit_icon
                   %span{id: "#{current_student.id}_#{school.bps_id}_icons", class: "middle"}
                     - tag_counter = 0
-                    - student_preference_categories.each_with_index do |category, i|
-                      - category.grade_level_preferences(current_student.grade_level).each do |preference|
+                    - PreferenceCategory.active(current_student.grade_level).each do |category|
+                      - category.active_preferences(current_student.grade_level).each do |preference|
                         - if school.has_preference?(preference)
-                          - if current_student.preferences.collect {|x| x.id}.try(:include?, preference.id)
+                          - if current_student.preferences_ids.try(:include?, preference.id)
                             %span{:aria => {hidden: 'true'}, id: 'school_#{school.id}', data: {tags: '["#{preference.name}"]'}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", title: "#{preference.name}"}
                             - tag_counter += 1
                           - else

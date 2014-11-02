@@ -58,25 +58,41 @@ class School < ActiveRecord::Base
 
 	def facilities_present?
 		if api_facilities.present?
-			if api_facilities[:hasartroom] == 'True' || api_facilities[:hasathleticfield] == 'True' || api_facilities[:hasauditorium] == 'True' || api_facilities[:hascafeteria] == 'True' || api_facilities[:hascomputerlab] == 'True' || api_facilities[:hasgymnasium] == 'True' || api_facilities[:haslibrary] == 'True' || api_facilities[:hasmusicroom] == 'True' || api_facilities[:hasoutdoorclassroom] == 'True' || api_facilities[:hasplayground] == 'True' || api_facilities[:haspool] == 'True' || api_facilities[:hassciencelab] == 'True'
-				return true
+			if 	api_facilities[:hasartroom] == 'True' ||
+					api_facilities[:hasathleticfield] == 'True' ||
+					api_facilities[:hasauditorium] == 'True' ||
+					api_facilities[:hascafeteria] == 'True' ||
+					api_facilities[:hascomputerlab] == 'True' ||
+					api_facilities[:hasgymnasium] == 'True' ||
+					api_facilities[:haslibrary] == 'True' ||
+					api_facilities[:hasmusicroom] == 'True' ||
+					api_facilities[:hasoutdoorclassroom] == 'True' ||
+					api_facilities[:hasplayground] == 'True' ||
+					api_facilities[:haspool] == 'True' ||
+					api_facilities[:hassciencelab] == 'True'
+				true
 			else
-				return false
+				false
 			end
 		else
-			return false
+			false
 		end
 	end
 
-	def fulltime_nurse?
-		if api_basic_info.present?
-			if api_basic_info[:ishasfulltimenurse] == 'True'
-				return true
+	def student_support_present?
+		if api_student_support.present?
+			if api_student_support.try(:[], :HasFullTimeNurse) == 'True' ||
+				api_student_support.try(:[], :HasPartTimeNurse) == 'True' ||
+				api_student_support.try(:[], :HasOnlineHealthCntr) == 'True'
+				api_student_support.try(:[], :HasFamilyCoord) == 'True' ||
+				api_student_support.try(:[], :HasGuidanceCoord) == 'True' ||
+				api_student_support.try(:[], :HasSocialWorker) == 'True'
+				true
 			else
-				return false
+				false
 			end
 		else
-			return false
+			false
 		end
 	end
 

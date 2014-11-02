@@ -12,7 +12,7 @@ class Admin::PreferencesController < ApplicationController
 
   def create
     @preference = Preference.new(params[:preference])
-    
+
     respond_to do |format|
       if @preference.save
         format.html { redirect_to admin_preferences_url, notice: 'Preference was successfully created.' }
@@ -28,10 +28,10 @@ class Admin::PreferencesController < ApplicationController
 
 	def update
 		@preference = Preference.find(params[:id])
-    
+
     respond_to do |format|
       if @preference.update_attributes(params[:preference])
-        format.html { redirect_to admin_preferences_url, notice: 'Preference was successfully updated.' }          
+        format.html { redirect_to admin_preferences_url, notice: 'Preference was successfully updated.' }
       else
         format.html { render action: "edit" }
       end
@@ -41,7 +41,7 @@ class Admin::PreferencesController < ApplicationController
 	def destroy
     @preference = Preference.find(params[:id])
     @preference.destroy
-    
+
     respond_to do |format|
       format.html { redirect_to admin_preferences_url }
     end
