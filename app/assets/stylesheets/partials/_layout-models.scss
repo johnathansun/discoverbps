@@ -1090,7 +1090,7 @@ School List
 	  padding-left: 0;
 	}
 
-	.note { max-width: 800px; }	
+	.note { max-width: 800px; }
 	.shadow {
 	  width: 24px;
 	  position: absolute;
@@ -1685,6 +1685,7 @@ Compare and Rank
 		padding-left: 20px;
 		font-size: 13px;
 		&.long { height: 200px; }
+    &.mid { height: 100px; }
 		&.rank { height: 37px; }
 		&.name { height: 94px; }
 		&.demand { height: 90px; }
@@ -1732,6 +1733,11 @@ Compare and Rank
 				height: 200px;
 				font-size: 12px;
 			}
+
+      &.mid {
+        height: 100px;
+        font-size: 12px;
+      }
 		}
 
 		.school_star {
@@ -1882,12 +1888,12 @@ Get Ready
 			}
 		}
 	}
-	
+
 	#timeline_wrap {
 		width: 25%;
 		position: relative;
 		margin: 35px 0;
-		
+
 		.timeline {
 			margin-right: 40px;
 		}
@@ -2266,7 +2272,7 @@ Wrap Search
 // .search_section.second ///////////////
 .search .search_section.second .content_left {
 	min-height: 550px;
-	
+
 	a {
 		text-decoration: underline;
 		&:hover {
@@ -3036,7 +3042,7 @@ Wrap Account
 				background-color: $dark_blue;
 				//border-right: 2px solid $blue;
 				margin: 0 5px 0 0;
-				
+
 				.arrow {
 					position: absolute;
 					border-left: 5px solid;
@@ -3066,8 +3072,8 @@ Wrap Account
 				.bar { border: none; }
 			}
 			&.complete {
-				.bar { 
-					background-color: $light_blue; 
+				.bar {
+					background-color: $light_blue;
 					.arrow.front {
 						border-left-color: $light_blue;
 					}

@@ -133,6 +133,30 @@ module SchoolsHelper
 		raw string.try(:strip).try(:gsub, /\s/, '&nbsp;')
 	end
 
+	def student_support_present?(school)
+		if school.api_student_support.try(:[], :HasFullTimeNurse) == 'True' ||
+			school.api_student_support.try(:[], :HasPartTimeNurse) == 'True' ||
+			school.api_student_support.try(:[], :HasOnlineHealthCntr) == 'True'
+			school.api_student_support.try(:[], :HasFamilyCoord) == 'True' ||
+			school.api_student_support.try(:[], :HasGuidanceCoord) == 'True' ||
+			school.api_student_support.try(:[], :HasSocialWorker) == 'True'
+			true
+		else
+			false
+		end
+	end
+
+	def student_support_list_helper(school)
+		list = ''
+		list << 'Full-Time Nurse<br />'				if school.api_student_support.try(:[], :HasFullTimeNurse) == 'True'
+		list << 'Part-Time Nurse<br />'				if school.api_student_support.try(:[], :HasPartTimeNurse) == 'True'
+		list << 'Online Health Center<br />' 	if school.api_student_support.try(:[], :HasOnlineHealthCntr) == 'True'
+		list << 'Family Coordinator<br />'		if school.api_student_support.try(:[], :HasFamilyCoord) == 'True'
+		list << 'Guidance Counselor<br />'		if school.api_student_support.try(:[], :HasGuidanceCoord) == 'True'
+		list << 'Social Worker<br />'					if school.api_student_support.try(:[], :HasSocialWorker) == 'True'
+		list
+	end
+
 	################ helper methods fo generating category data tags
 
 	# def preference_category_tags_helper(category, school, student_school)
@@ -141,13 +165,13 @@ module SchoolsHelper
 
 	# 	elsif category.name == 'Facility Features'
 	# 		tags = facilities_tags_helper(school.api_facilities)
-		
+
 	# 	elsif category.name == 'Sports'
 	# 		tags = sports_tags_helper(school.api_sports)
-		
+
 	# 	elsif category.name == 'Health & Wellness'
 	# 		tags = health_tags_helper(school.api_basic_info)
-		
+
 	# 	elsif category.name == 'Enrollment'
 	# 		tags = enrollment_tags_helper(school.api_basic_info)
 
@@ -157,7 +181,7 @@ module SchoolsHelper
 	# 	elsif category.name == 'AWC'
 	# 		tags = awc_tags_helper(school.api_basic_info)
 	# 	end
-		
+
 	# 	return tags
 	# end
 
@@ -213,9 +237,9 @@ module SchoolsHelper
 	# 	if hash.present?
 	# 		list = []
 	# 		if hash[:ishasfulltimenurse] == 'True'
-	# 			list << 'Full-Time Nurse' 
+	# 			list << 'Full-Time Nurse'
 	# 		else
-	# 			list << 'Part-Time Nurse' 
+	# 			list << 'Part-Time Nurse'
 	# 		end
 	# 		return list
 	# 	else
@@ -224,7 +248,7 @@ module SchoolsHelper
 	# end
 
 	# def uniform_policy_tags_helper(hash)
-	# 	# ["", "No Uniform", "Not Specified", "Voluntary", "Mandatory", "Varies"] 
+	# 	# ["", "No Uniform", "Not Specified", "Voluntary", "Mandatory", "Varies"]
 	# 	if hash.present?
 	# 		list = []
 	# 		if hash[:uniformpolicy] == 'Mandatory'

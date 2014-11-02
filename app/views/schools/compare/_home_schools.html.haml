@@ -83,8 +83,8 @@
               .school_uniform.line
                 = school.api_description.try(:[], :uniformpolicy)
 
-              .school_health.line
-                = school.api_basic_info.try(:[], :ishasfulltimenurse) == 'True' ? 'Full-Time Nurse' : ''
+              .school_health.line.mid
+                =raw student_support_list_helper(school)
 
               .school_focus.line.long
                 = truncate(school.api_description.try(:[], :schfocus), length: 240)

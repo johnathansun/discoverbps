@@ -202,29 +202,14 @@
 				%p.descrip
 					= school.api_description.try(:[], :schfocus)
 
-			.box
-				%p.title
-					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
-					Student Support
+			- if student_support_present?(school)
+				.box
+					%p.title
+						%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
+						Student Support
 
-				- if school.api_student_support.try(:[], :HasFullTimeNurse) == 'True'
 					%p.descrip
-						Full-Time Nurse
-				- if school.api_student_support.try(:[], :HasPartTimeNurse) == 'True'
-					%p.descrip
-						Part-Time Nurse
-				- if school.api_student_support.try(:[], :HasOnlineHealthCntr) == 'True'
-					%p.descrip
-						Online Health Center
-				- if school.api_student_support.try(:[], :HasFamilyCoord) == 'True'
-					%p.descrip
-						Family Coordinator
-				- if school.api_student_support.try(:[], :HasGuidanceCoord) == 'True'
-					%p.descrip
-						Guidance Counselor
-				- if school.api_student_support.try(:[], :HasSocialWorker) == 'True'
-					%p.descrip
-						Social Worker
+						=raw student_support_list_helper(school)
 
 			.box
 				%p.title
