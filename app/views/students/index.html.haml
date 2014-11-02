@@ -9,6 +9,8 @@
 
 	.search_section_content
 		%section.search_section.first
+			
+			-# CONTENT ---------------------
 			.content_left
 				.text
 					%p.home_intro.yellow-buttons.light_blue.big
@@ -94,8 +96,59 @@
 							= form_tag students_path, method: :post, remote: true do
 								= render partial: 'students/search_form', locals: {sibling_search: true}
 
-			= render partial: 'vertical_timeline'
+			-# TIMELINE ---------------------
+			.content_right
+			
+				.timeline
+					.event.first
+						%span.light_blue REGISTRATION TIMELINE
+						= image_tag('point_white_onBlue.png', class: 'start_point point')
+				
+					.event.Y
+						%span.desktop
+							Discover schools
+				
+						%span.tablette
+							= image_tag('yellow_point.png', class: 'point')
+				
+					.event.Y
+						%span.desktop
+							Compare options
+				
+						%span.tablette
+							= image_tag('yellow_point.png', class: 'point')
+				
+					.event
+						%span.desktop
+							%span.light_blue Nov 3
+							%br/
+							%span.W
+								School Previews and
+								%br/
+								School Showcases start
+				
+						%span.tablette
+							= image_tag('yellow_point.png', class: 'point')
+				
+					.event.Y
+						%span.desktop
+							Create your list
+				
+						%span.tablette
+							= image_tag('yellow_point.png', class: 'point')
+				
+					.event
+						%span.desktop
+							%span.light_blue Dec 15
+							%br/
+							%span.W
+								Pre-register
+				
+						%span.tablette
+							= image_tag('blue_point_white.png', class: 'point')
 
+
+		-# CONTENT ---------------------
 		%section.search_section.second
 			.content_left
 				.logo.register
@@ -114,45 +167,91 @@
 						= link_to 'Plan a visit to a welcome center', '#', class: 'u', target: '_blank'
 
 
+			-# TIMELINE ---------------------
 			.content_right
-				%span.event{style: 'margin-bottom: 39px;'}
-					%span.desktop
-						Jan 5
-						= image_tag('red_point.png', class: 'point')
+			
+				.timeline
+					.event.W.registration.green_bar
+						%span.desktop
+							= image_tag('point_green_white.png', class: 'point')
+							%span
+								Registration begins
+								%br/
+								for K, 6 & 9
+				
+							%span.tablette
+								= image_tag('blue_point_arrow.png', class: 'point_arrow')
+				
+					.event.last_names.ai.green_bar
+						%span.light_blue
+							= 'Jan 5-9'
 						%br/
 						%span.W
-							Registration begins
-							%br/
-							for K, 6 9
-							%br/
-							(All other grades: Feb 5th)
+							Last names A&ndash;I
+				
+					.seperator
+				
+					.event.last_names.jq.green_bar
+						%span.light_blue
+							= 'Jan 12-16'
+						%br/
+						%span.W
+							Last names J&ndash;Q
+				
+					.seperator
+				
+					.event.last_names.rz.green_bar
+						%span.light_blue
+							= 'Jan 20-23'
+						%br/
+						%span.W
+							Last names R&ndash;Z
+				
+					.seperator
+				
+					.event.last_names.all.green_bar
+						%span.light_blue
+							= 'Jan 26-30'
+						%br/
+						%span.W
+							All last names
+				
+					.event.blank.light_blue_bar
 
-						%span.tablette
-							= image_tag('blue_point_arrow.png', class: 'point_arrow')
-
-					%span.event.Y
+					.event.dark_blue_bar
 						%span.desktop
-							Mar - Jul
+							= image_tag('point_green_onBlue.png', class: 'point')
+							%span.light_blue
+								= 'Feb 5'
+							%br/
+						%span.W
+							All other grades' registration
+				
+					.event.dark_blue_bar
+						%span.desktop
+							%span.light_blue
+								= 'Mar - Jul'
 							%br/
 						%span.W
 							Assignments mailed
-
-		%section.search_section.third
+				
+					.event.last.blue_bar
+						%span.desktop
+							%span.light_blue Sept 4
+							= image_tag('point_white_onBlue.png', class: 'point')
+							%br/
+							%span.W
+								First day of school!
+		
+		
+		-#%section.search_section.third
+			
+			-# CONTENT ---------------------
 			.content_left
-				-#.logo.succeed
+				.logo.succeed
 					%span{:aria => {hidden: 'true'}, :class => 'icon-DBPS-Dev-Assets-SRG-03'}
-				-#.text
+				.text
 					%p.yellow-buttons
 					= auto_link(TextSnippet.find('home-succeed-intro').text)
 					= link_to 'Explore', 'http://www.bostonpublicschools.org/transitionsupport', title: 'Explore', style: 'margin-bottom:0;', target: '_blank'
 
-			.content_right
-				%span.event
-					%span.desktop
-						Sept 4
-						= image_tag('blue_point.png', class: 'point')
-						%br/
-						%span.W{style: 'font-size: 12px; line-height: 15px;'}
-							First day of school!
-
-			= image_tag('star_point.png', class: 'final_point')

@@ -1881,61 +1881,67 @@ Get Ready
 			}
 		}
 	}
-
+	
 	#timeline_wrap {
 		width: 25%;
 		position: relative;
 		margin: 35px 0;
-
+		
 		.timeline {
-			position: relative;
 			margin-right: 40px;
-			text-align: right;
-			color: $blue;
-			font-size: 11px;
-
-			.seperator {
-				height: 1px;
-			}
-
-			.event {
-				position: relative;
-				display: block;
-				border-right: 10px solid tint($blue, 25%);
-				padding: 0 20px 60px 0;
-
-				&.green_bar { border-color: $green; }
-				&.dark_blue_bar { border-color: $dark_blue; }
-				&.registration { padding-bottom: 0; }
-				&.last_names { padding: 15px 20px 15px 0; }
-				&.last {
-					margin-bottom: 0;
-					border-color: transparent;
-					.point {
-						right: -18px;
-					}
-				}
-
-				.point {
-					position: absolute;
-					right: -17px;
-					top: -1px;
-				}
-
-				.tablette { display: none; }
-			}
 		}
-
-		.start_point {
-			font-size: 16px;
-			color: $light_blue;
-			position: absolute;
-			top: -8px;
-			right: -18px;
-		}
-
 	}
 }
+
+
+
+/* --------------------------------------------------------
+	Timeline
+----------------------------------------------------------- */
+.timeline {
+	position: relative;
+	text-align: right;
+	color: $blue;
+	font-size: 11px;
+	border-right: 10px solid tint($blue, 25%);
+
+	.seperator {
+		height: 1px;
+	}
+
+	.event {
+		position: relative;
+		display: block;
+		padding: 0 20px 60px 0;
+		margin: 0 -10px 0 0;
+		border-right: 10px solid transparent;
+
+		&.green_bar { border-color: $green; }
+		&.blue_bar { border-color: $blue; }
+		&.dark_blue_bar { border-color: $dark_blue; }
+		&.light_blue_bar { border-color: tint($blue, 25%); }
+		&.light_gray_bar { border-color: $light_gray; }
+		&.registration { padding-bottom: 0; }
+		&.last_names { padding: 15px 20px 15px 0; }
+		&.last { margin-bottom: 0; }
+
+		.point {
+			position: absolute;
+			right: -17px;
+			top: -1px;
+			width: 24px;
+			height: auto;
+
+			&.start_point {
+				top: -8px;
+			}
+		}
+
+		.tablette { display: none; }
+	}
+
+}
+
 
 
 
@@ -2136,139 +2142,151 @@ Menu School Lists
 /* ---------------------------------------------------------
 Wrap Search
 ------------------------------------------------------------ */
-.wrap .search {
+.search {
   color: #ffffff;
   padding-bottom: 20px;
 }
-.wrap .search .search_header {
+.search .search_header {
   color: #80bce7;
   font-size: 18px;
   line-height: 24px;
   padding-bottom: 17px;
   position: relative;
 }
-.wrap .search .search_header .tablet {
+.search .search_header .tablet {
   display: none;
 }
-.wrap .search .search_header .title_bloc h1 {
+.search .search_header .title_bloc h1 {
   font-size: 33px;
   color: #ffffff;
   margin-bottom: 23px;
   line-height: 1em;
   display: inline-block;
 }
-.wrap .search .search_header .title_bloc .logo_beta {
+.search .search_header .title_bloc .logo_beta {
   display: inline-block;
   position: relative;
   top: 10px;
   right: 0;
 }
-.wrap .search .search_header p {
+.search .search_header p {
   width: 675px;
 }
-.wrap .search .logo {
+.search .logo {
   color: #ffffff;
-  position: relative;
-  float: left;
   display: block;
   width: 100%;
 }
-.wrap .search .logo.discover {
+.search .logo.discover {
   font-size: 95px;
-  left: -47px;
+  margin-left: -47px;
 }
-.wrap .search .logo.register {
+.search .logo.register {
   font-size: 70px;
-  left: 0px;
   margin-top: 30px;
 }
-.wrap .search .logo.succeed {
+.search .logo.succeed {
   font-size: 52px;
   left: 0px;
 }
-.wrap .search .small_text {
+.search .small_text {
   font-size: 12px;
   color: #80bce7;
   margin-bottom: 38px;
 }
-.wrap .search .search_section_content {
+.search .search_section_content {
   position: relative;
 }
-.wrap .search .search_section_content .today {
+.search .search_section_content .today {
   color: #ffffff;
   position: absolute;
   top: 10%;
   width: 75px;
   font-size: 12px;
 }
-.wrap .search .search_section_content .today.left {
+.search .search_section_content .today.left {
   right: 3px;
 }
-.wrap .search .search_section_content .today.left .left {
+.search .search_section_content .today.left .left {
   display: inline-block;
 }
-.wrap .search .search_section_content .today.left .right {
+.search .search_section_content .today.left .right {
   display: none;
 }
-.wrap .search .search_section_content .today.right {
+.search .search_section_content .today.right {
   right: -85px;
 }
-.wrap .search .search_section_content .today.right .right {
+.search .search_section_content .today.right .right {
   display: inline-block;
 }
-.wrap .search .search_section_content .today.right .left {
+.search .search_section_content .today.right .left {
   display: none;
 }
-.wrap .search .search_section_content .today .yello_line {
+.search .search_section_content .today .yello_line {
   display: none;
 }
-.wrap .search .search_section {
+.search .search_section {
   position: relative;
 }
-.wrap .search .search_section .content_left {
-  /*width: 815px;*/
-  margin-right: 220px;
-  margin-left: 125px;
+.search .search_section .content_left {
+  margin: 0 220px 0 125px;
   border-top: 1px solid #fff;
+  padding: 0 0 50px 0;
 }
-
-.wrap .search .search_section .content_left a.K {
+.search .search_section .content_left a.K {
   text-decoration: none;
 }
-.wrap .search .search_section .content_left a.K:hover {
+.search .search_section .content_left a.K:hover {
   text-decoration: underline;
 }
-.wrap .search .search_section .content_left .text {
-  //width: 625px;
+.search .search_section .content_left .text {
   font-size: 15px;
   line-height: 20px;
   width: 77.777%;
 }
 
+
+// .search .timeline ///////////////
+.search_section .timeline {
+	position: absolute;
+	right: 0;
+	top: 0px;
+	bottom: 0;
+}
+.search_section.second .timeline {
+	border-color: $blue;
+}
+
 // .search_section.first ///////////////
-.wrap .search .search_section.first .content_left { border: none; }
-.wrap .search .search_section.first .content_left .text { margin-right: 0; }
-.wrap .search .search_section.first .content_left .home_intro { max-width: 525px; margin: 0 0 50px; }
+.search .search_section.first .content_left { border: none; }
+.search .search_section.first .content_left .text { margin-right: 0; }
+.search .search_section.first .content_left .home_intro { max-width: 525px; margin: 0 0 50px; }
 
 // .search_section.second ///////////////
-.wrap .search .search_section.second .content_left a {
-	text-decoration: underline;
-	&:hover {
-		color: $yellow;
+.search .search_section.second .content_left {
+	min-height: 550px;
+	
+	a {
+		text-decoration: underline;
+		&:hover {
+			color: $yellow;
+		}
 	}
 }
 
 // .search_section.third ///////////////
-.wrap .search .search_section.third .content_left {
+.search .search_section.third .content_left {
 	border:	none;
 	min-height: 120px;
 }
 
 
 
-// User Lists /////////////
-.wrap .search .user_lists {
-	margin-bottom: 80px;
+/* ------------------------------------------------
+ User Lists
+--------------------------------------------------- */
+.search .user_lists {
+	margin-bottom: 50px;
 	width: 120%;
 
 	li {
@@ -2353,12 +2371,18 @@ Wrap Search
 }
 
 
-// Forms /////////////
+/* ------------------------------------------------------------
+ Student Input Form
+--------------------------------------------------------------- */
 .search .search_section .content_left .new_search_form_wrap {
 
 	&.hidden {
 		display: none;
 	}
+}
+
+.search .new_search_form_wrap {
+	margin-bottom: 50px;
 }
 
 .search .search_section .content_left form .form_line {
@@ -2577,8 +2601,13 @@ a.ui-corner-all:hover {
   display: none;
 }
 
-// content_right / timeline /////////////
+/* ------------------------------------------------------
+ Search Page Timeline
+--------------------------------------------------------- */
 
+
+
+/*
 .wrap .search .search_section .content_right {
   position: absolute;
   width: 179px;
@@ -2613,7 +2642,6 @@ a.ui-corner-all:hover {
 .wrap .search .search_section.second {
   padding-bottom: 35px;
   border-right: 9px solid #2b8fd7;
-  /*.icon-DBPS-Dev-Assets-SRG-35{*/
 
 }
 .wrap .search .search_section.second .point {
@@ -2628,7 +2656,6 @@ a.ui-corner-all:hover {
 }
 .wrap .search .search_section.third {
   border-right: 9px solid #0066bc;
-  /*.icon-DBPS-Dev-Assets-SRG-35{*/
 
 }
 .wrap .search .search_section.third .point {
@@ -2649,6 +2676,7 @@ a.ui-corner-all:hover {
 .wrap .search .search_section.third .content_right {
   top: -20px;
 }
+*/
 
 
 
