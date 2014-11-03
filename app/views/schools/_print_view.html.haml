@@ -7,7 +7,7 @@
 	.clr
 
 .wrap.global_map
-	= render partial: 'schools/page_elements/list_map', locals: {students_list: [current_student], school: nil, map_controls: false, width: '100%'}
+	= render partial: 'schools/page_elements/map', locals: {students_list: [current_student], school: nil, map_controls: false, width: '100%'}
 
 	%div{class: "menu_student_info", style: "position: absolute; z-index: 10; margin-top: 273px;"}
 		.name_list
@@ -25,14 +25,8 @@
 		.clr
 	.clr
 
-.wrap.result
-	.preferences
-		#preference_content
-			.colonn
 
-			.clr
-
-		#school_list
+	#school_list
 		.shadow
 		.list_content
 			.flexible_content
@@ -87,3 +81,8 @@
 										= eligibility_helper(student_school.eligibility)
 
 								.clr
+							.clr
+						.clr
+					.clr
+				.clr
+			.clr
