@@ -109,8 +109,13 @@ class StudentsController < ApplicationController
 					@student.set_zone_schools!
 				end
 
-        format.js { render template: "students/ell/ell" }
-        format.html { redirect_to ell_student_path(@student)}
+				@student.set_home_schools!
+				
+				format.html { redirect_to schools_path}
+				format.js { render :js => "window.location = '/schools'" }
+
+        # format.js { render template: "students/ell/ell" }
+        # format.html { redirect_to ell_student_path(@student)}
       else
         format.js { render template: "students/errors/errors" }
         flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
@@ -126,23 +131,23 @@ class StudentsController < ApplicationController
 	end
 
 	def set_ell
-		@student = Student.find(params[:id])
-
-		respond_to do |format|
-			if @student.update_attributes(params[:student])
-
-				if @student.ell_language != false
-					@student.set_ell_schools!
-				end
-
-				format.html { redirect_to sped_student_path(@student)}
-				format.js { render template: "students/sped/sped" }
-			else
-				format.js { render template: "students/ell/ell" }
-				flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
-				format.html { redirect_to root_url }
-			end
-		end
+		# @student = Student.find(params[:id])
+		#
+		# respond_to do |format|
+		# 	if @student.update_attributes(params[:student])
+		#
+		# 		if @student.ell_language != false
+		# 			@student.set_ell_schools!
+		# 		end
+		#
+		# 		format.html { redirect_to sped_student_path(@student)}
+		# 		format.js { render template: "students/sped/sped" }
+		# 	else
+		# 		format.js { render template: "students/ell/ell" }
+		# 		flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
+		# 		format.html { redirect_to root_url }
+		# 	end
+		# end
 	end
 
 
@@ -153,32 +158,29 @@ class StudentsController < ApplicationController
 	end
 
 	def set_sped
-		@student = Student.find(params[:id])
-
-		respond_to do |format|
-			if @student.update_attributes(params[:student])
-
-				if @student.sped_needs == true
-					@student.set_sped_schools!
-				end
-
-				# if AWC_GRADES.include?(@student.grade_level)
-				# 	format.html { redirect_to awc_student_path(@student)}
-				# 	format.js { render template: "students/awc/awc" }
-				# else
-				# end
-				# set the home schools
-
-				@student.set_home_schools!
-
-				format.html { redirect_to schools_path}
-				format.js { render :js => "window.location = '/schools'" }
-			else
-				format.js { render template: "students/sped/sped" }
-				flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
-				format.html { redirect_to root_url }
-			end
-		end
+		# @student = Student.find(params[:id])
+		#
+		# respond_to do |format|
+		# 	if @student.update_attributes(params[:student])
+		#
+		# 		if @student.sped_needs == true
+		# 			@student.set_sped_schools!
+		# 		end
+		#
+		# 		if AWC_GRADES.include?(@student.grade_level)
+		# 			format.html { redirect_to awc_student_path(@student)}
+		# 			format.js { render template: "students/awc/awc" }
+		# 		else
+		# 			@student.set_home_schools!
+		# 			format.html { redirect_to schools_path}
+		# 			format.js { render :js => "window.location = '/schools'" }
+		# 		end
+		# 	else
+		# 		format.js { render template: "students/sped/sped" }
+		# 		flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
+		# 		format.html { redirect_to root_url }
+		# 	end
+		# end
 	end
 
 	# AWC DIALOG BOX
@@ -188,21 +190,21 @@ class StudentsController < ApplicationController
 	end
 
 	def set_awc
-		@student = Student.find(params[:id])
-
-		respond_to do |format|
-			if @student.update_attributes(params[:student])
-
-				@student.set_home_schools!
-
-				format.html { redirect_to schools_path}
-				format.js { render :js => "window.location = '/schools'" }
-			else
-				format.js { render template: "students/awc/awc" }
-				flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
-				format.html { redirect_to root_url }
-			end
-		end
+		# @student = Student.find(params[:id])
+		#
+		# respond_to do |format|
+		# 	if @student.update_attributes(params[:student])
+		#
+		# 		@student.set_home_schools!
+		#
+		# 		format.html { redirect_to schools_path}
+		# 		format.js { render :js => "window.location = '/schools'" }
+		# 	else
+		# 		format.js { render template: "students/awc/awc" }
+		# 		flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
+		# 		format.html { redirect_to root_url }
+		# 	end
+		# end
 	end
 
 
