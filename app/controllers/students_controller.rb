@@ -162,16 +162,17 @@ class StudentsController < ApplicationController
 					@student.set_sped_schools!
 				end
 
-				if AWC_GRADES.include?(@student.grade_level)
-					format.html { redirect_to awc_student_path(@student)}
-					format.js { render template: "students/awc/awc" }
-				else
-					# set the home schools
-					@student.set_home_schools!
+				# if AWC_GRADES.include?(@student.grade_level)
+				# 	format.html { redirect_to awc_student_path(@student)}
+				# 	format.js { render template: "students/awc/awc" }
+				# else
+				# end
+				# set the home schools
 
-					format.html { redirect_to schools_path}
-					format.js { render :js => "window.location = '/schools'" }
-				end
+				@student.set_home_schools!
+
+				format.html { redirect_to schools_path}
+				format.js { render :js => "window.location = '/schools'" }
 			else
 				format.js { render template: "students/sped/sped" }
 				flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
