@@ -89,6 +89,37 @@
   }
 
 
+	/* ------------------------------------------------
+	Menu List (column Headers)
+	--------------------------------------------------- */
+	#school_list .menu_list .menu_bloc {
+		font-size: 12px;
+	}
+	
+  #school_list .menu_list .menu_bloc#sortable_school_name_column {
+		width: 24%;
+  }
+	#school_list .menu_list .menu_bloc#sortable_star_column {
+		width: 5.5%;
+	}
+  #school_list .menu_list .menu_bloc {
+
+  }
+  #school_list .menu_list .menu_bloc.choice {
+
+  }
+  #school_list .menu_list .menu_bloc.your_fit {
+
+  }
+  #school_list .menu_list .menu_bloc.your_fit .glass_open {
+    display: inline-block;
+  }
+  #school_list .menu_list .menu_bloc.open .glass_open {
+    display: none !important;
+  }
+  #school_list .menu_list .menu_bloc#getting_there .glass_open {
+    display: inline-block;
+  }
 
   /* -------------------------------------------------
 	  School List
@@ -179,36 +210,6 @@
   }
   
   
-	/* Menu List (column Headers)
-	------------------------------------------- */
-	#school_list .menu_list .menu_bloc {
-		font-size: 12px;
-	}
-	
-  #school_list .menu_list #sortable_school_name_column {
-
-  }
-	#school_list .menu_list .menu_bloc#sortable_star_column {
-		width: 5.5%;
-	}
-  #school_list .menu_list .menu_bloc {
-
-  }
-  #school_list .menu_list .menu_bloc.choice {
-
-  }
-  #school_list .menu_list .menu_bloc.your_fit {
-
-  }
-  #school_list .menu_list .menu_bloc.your_fit .glass_open {
-    display: inline-block;
-  }
-  #school_list .menu_list .menu_bloc.open .glass_open {
-    display: none !important;
-  }
-  #school_list .menu_list .menu_bloc#getting_there .glass_open {
-    display: inline-block;
-  }
 
 
 
@@ -347,6 +348,26 @@
     height: 2px;
     border-top: 1px solid #ffff00;
   }
+  
+  
+	/* --------------------------------------- 
+	Get Ready Page
+	------------------------------------------ */
+  .get_ready {
+
+		.column { float: none; }
+
+		#footer_content {
+			display: none;			
+		}
+		#school_list {
+			width: auto;
+			margin: 25px 25px 35px;
+		}
+	}
+
+
+
   .wrap .single_school {
     padding-left: 2%;
     padding-right: 2%;
