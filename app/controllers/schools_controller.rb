@@ -164,6 +164,35 @@ class SchoolsController < ApplicationController
         csv << ["SPED: #{current_student.sped_needs}"]
         csv << ["AWC: #{current_student.awc_invitation}"]
         csv << []
+        csv << ['',
+          'Name',
+          'Eligibility',
+          'Address',
+          'Distance from Home',
+          'Walk Time',
+          'Drive Time',
+          'Transportation Eligibility',
+          'Hours',
+          'Grades Offered',
+          'MCAS Tier',
+          'School Type',
+          'Before School Programs',
+          'After School Programs',
+          'Facilities',
+          'Student Support',
+          'Partners',
+          'Sports',
+          'School Focus',
+          'Special Application',
+          'Uniform Policy',
+          'School Email',
+          "#{current_student.formatted_grade_level_name} Demand (#{last_school_year_range})",
+          "Open Seats",
+          "Applicants",
+          "Applicants/Open Seat"
+
+          ]
+        csv << []
 
         if @home_schools.present?
           csv << ['HOME-BASED SCHOOLS']
@@ -193,38 +222,12 @@ class SchoolsController < ApplicationController
     end
 
     def csv_row(schools, csv)
-      csv << ['Name',
-        'Eligibility',
-        'Address',
-        'Distance from Home',
-        'Walk Time',
-        'Drive Time',
-        'Transportation Eligibility',
-        'Hours',
-        'Grades Offered',
-        'MCAS Tier',
-        'School Type',
-        'Before School Programs',
-        'After School Programs',
-        'Facilities',
-        'Student Support',
-        'Partners',
-        'Sports',
-        'School Focus',
-        'Special Application',
-        'Uniform Policy',
-        'School Email',
-        "#{current_student.formatted_grade_level_name} Demand (#{last_school_year_range})",
-        "Open Seats",
-        "Applicants",
-        "Applicants/Open Seat"
-
-        ]
 
       schools.each do |student_school|
         school = student_school.school
 
-        csv << [ school.name,
+        csv << [ '',
+          school.name,
           eligibility_helper(student_school.eligibility),
           school.full_address,
           "#{student_school.distance} mi",
