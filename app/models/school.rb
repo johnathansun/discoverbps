@@ -145,9 +145,9 @@ class School < ActiveRecord::Base
 		year = school_year.try(:to_s).try(:strip).try(:gsub, /\-.*/, '').try(:strip)
 
 		if year.present?
-			self.demand_data.where(grade_level: grade, year: year).last.try(:applicants_per_open_seat)
+			self.demand_data.where(grade_level: grade, year: year).last.try(:applicants_per_open_seat).try(:round, 2)
 		elsif grade.present?
-			self.demand_data.where(grade_level: grade).average(:applicants_per_open_seat).try(:to_i)
+			self.demand_data.where(grade_level: grade).average(:applicants_per_open_seat).try(:round, 2)
 		else
 			nil
 		end

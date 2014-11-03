@@ -16,21 +16,20 @@
 
     - if TRANSITION_GRADES.include?(current_student.grade_level)
       .school_demand.line
-        .stats
-          = school.open_seats(current_student.grade_level)
-          open seats
-          %br/
-          = school.applicants(current_student.grade_level)
-          applicants
-          %br/
-          = school.applicants_per_open_seat(current_student.grade_level, last_school_year)
-          applicants/open seat
-        .max_range
-          %div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
+        = school.open_seats(current_student.grade_level)
+        open seats
+        %br/
+        = school.applicants(current_student.grade_level)
+        applicants
+        %br/
+        = school.applicants_per_open_seat(current_student.grade_level, last_school_year)
+        applicants/open seat
+
 
     .school_travel.line
-      = spacer_helper(student_school.distance)
-      &nbsp;mi
+      - if student_school.distance.present?
+        = spacer_helper(student_school.distance)
+        &nbsp;mi
 
     .school_eligibility.line
       =raw eligibility_helper(spacer_helper(student_school.eligibility))
@@ -47,8 +46,8 @@
         - if school.api_basic_info.try(:[], :AfterSchPrograms).present?
           After School
 
-    .school_type.line
-      = school.api_basic_info.try(:[], :SchoolType)
+    -# .school_type.line
+    -#   = school.api_basic_info.try(:[], :SchoolType)
 
     .school_grades.line
       = grade_levels_helper(school.grade_levels)

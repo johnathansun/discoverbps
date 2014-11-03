@@ -1094,9 +1094,9 @@ School List
 	  padding-left: 0;
 	}
 
-	.note { 
+	.note {
 		max-width: 800px;
-		margin: 0 10px 0 0; 
+		margin: 0 10px 0 0;
 	}
 	.shadow {
 	  width: 24px;
@@ -1693,8 +1693,8 @@ Compare and Rank
 		font-size: 13px;
 		&.long { height: 200px; }
     &.mid { height: 100px; }
-		&.rank { height: 41px; }
-		&.name { height: 94px; }
+		&.rank { height: 27px; }
+		&.name { height: 94px; margin-top: 14px; }
 		&.demand { height: 90px; }
 		&.no_icon { padding-left: 0; }
 
@@ -2921,22 +2921,22 @@ Wrap Account
 	.steps .step {
 
 		.bar {
-			
+
 			.point.terminal {
 				position: absolute;
-				
+
 				width: 16px;
 				height: 16px;
-			}			
+			}
 		}
 		&.first {
-			.bar .point.terminal { 
+			.bar .point.terminal {
 				top: -4px; left: -5px;
 				background: url("/assets/blue_point_white.png") no-repeat center center;
 			}
 		}
 		&.last {
-			.bar .point.terminal { 
+			.bar .point.terminal {
 				top: -3px; right: -5px;
 				background: url("/assets/star_point.png") no-repeat center center;
 				background-size: 16px;
@@ -2948,7 +2948,7 @@ Wrap Account
 // Steps -----------
 .steps {
 	@include clearfix;
-	
+
 	.step {
 		position: relative;
 		width: 25%;
@@ -2970,7 +2970,7 @@ Wrap Account
 			margin: 0 5px 0 0;
 
 			.point.terminal { display: none; }
-			
+
 			.arrow {
 				position: absolute;
 				border-left: 5px solid;
@@ -3002,7 +3002,7 @@ Wrap Account
 			.bar .arrow.back { display: none; }
 		}
 		&.last {
-			.bar { 
+			.bar {
 				margin-right: 0;
 				.arrow.front { display: none; }
 			}
@@ -3019,13 +3019,13 @@ Wrap Account
 		&.in_progress {
 			.bar {
 				background: url('/assets/progress_bar_blue.png') $light_blue;
-				margin-right: 0;	
-				.arrow.front { 
+				margin-right: 0;
+				.arrow.front {
 					background: url('/assets/in_progress_blue.png');
 					width: 5px;
 					height: 10px;
 					border: none;
-					right: 0; 
+					right: 0;
 				}
 			}
 			.label { color: $light_blue; }
