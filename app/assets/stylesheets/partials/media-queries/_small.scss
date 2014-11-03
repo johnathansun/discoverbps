@@ -91,7 +91,8 @@
   }
   #main_gallery_image{
     margin: 30px 0 20px 0;
-    img{ width: 475px;}
+    
+    img { width: 100%; }
   }
   .wrap .photos {
     float: none;
@@ -166,8 +167,7 @@
   
   
   
-  .wrap .preferences,
-  .wrap #sortable .box {
+  .wrap .preferences {
     display: none !important;
   }
   #school_list {
@@ -184,26 +184,39 @@
   #school_list ul li .box {
     width: auto;
   }
-  #school_list ul li .no_order {
-    position: absolute;
-  }
-  #school_list ul li .school_name {
-    width: 100%;
-    padding-left: 0;
-  }
-  #school_list ul li .school_name .middle {
-    padding-left: 68px;
-    padding-right: 20px;
-  }
-  #school_list ul li .school_name.photos {
-    padding-left: 19px;
-  }
+	#school_list {
+		
+		.list_content { overflow: hidden; }
+		
+		li {
+			.line {
+				
+				&.no_order {
+					width: 12%;
+					img { max-width: none }
+				}
+				&.school_name {
+					font-size: 22px;
+					width: 80%;
+				}
+				&.your_fit_icon,
+				&.getting_there,
+				&.eligibility,
+				&.school_hours {
+					display: none;
+				}
+			}
+		}
+	}
+
+
+
+
   #school_list ul li .school_name .full_descrip_link {
     display: none;
   }
   #school_list ul li .school_descrip {
-    width: auto;
-    padding-right: 20px;
+    width: 100%;
   }
   #school_list ul li .school_descrip .school_name {
     padding-left: 19px;
@@ -218,9 +231,7 @@
   #school_list ul li .school_descrip .full_details {
     width: auto;
   }
-  #school_list ul#sortable li .box {
-    display: none;
-  }
+
   #school_list ul#sortable li .mobile .box {
     display: block;
     float: none;
@@ -239,19 +250,24 @@
     padding: 28px 11px 10px;
     margin-right: 11px;
   }
-  #school_list .footer_list .footer_left {
+
+
+
+
+
+  .footer_list .footer_left {
     width: 100%;
     float: none;
     padding: 0 0 20px 0;
   }
-  #school_list .footer_list .footer_center {
+  .footer_list .footer_center {
 	  width: 100%;
 	  float: none;
 	  border: 0;
     border-top: 1px solid #ffffff;
     padding: 20px 0;
   }
-  #school_list .footer_list .footer_right {
+ .footer_list .footer_right {
     width: 100%;
     float: none;
     border: 0;
@@ -259,15 +275,16 @@
     padding: 20px 0 ;
     margin-left: 0;
   }
-  #school_list .list_content {
-    overflow: hidden;
-  }
   
   
   
   
   .dialog_box.dialog_box_dicover {
-	  width: 465px;
+	  width: auto;
+		left: 10px;
+		right: 10px;
+		margin: 0;
+		padding: 20px;
   }
   
   
@@ -507,6 +524,9 @@
   .wrap .account #save {
     width: 100%;
   }
+  
+
+
   footer.footer {
     padding: 19px;
     height: auto;
@@ -614,7 +634,7 @@
 
 			.bar {
 
-				.point.terminal { display: block; }
+				//.point.terminal { display: block; }
 			}
 			.label {
 				line-height: 1.2em;
@@ -627,10 +647,38 @@
 	}
 	
 	
+	.wrap .menu_school_lists { margin-top: 0; }
 	.wrap .menu_school_lists .name_list .school_list_tab {
 		width: 100%;
-		border-bottom: 1px solid $blue;
+		margin-bottom: 2px;
 	}
+
+
+
+	#school_list {
+				
+		li {
+			.line {
+				&.no_order {
+					width: 20%;
+					img { max-width: 20px; }
+				}
+				&.school_name {
+					font-size: 14px;
+					width: 70%;
+				}
+			}
+		}
+	}
+
+	#school_list .school_descrip .right_side { margin: 0 10px; }
+	#school_list .school_descrip .right_side .column_left,
+	#school_list .school_descrip .right_side .column_right {
+		width: auto;
+		float: none;
+		margin: 0;
+	}
+
 
   footer.footer .title_footer {
     padding-top: 0;

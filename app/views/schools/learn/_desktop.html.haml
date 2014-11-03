@@ -128,118 +128,117 @@
 			.school_description
 				= school.api_description.try(:[], :schoolspecial)
 
-		.desktop
-			-# .box
-			-# 	%p.title
-			-# 		%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
-			-# 		School Type
-			-# 	%p.descrip
-			-# 		= school.api_basic_info.try(:[], :SchoolType)
+		-# .box
+		-# 	%p.title
+		-# 		%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
+		-# 		School Type
+		-# 	%p.descrip
+		-# 		= school.api_basic_info.try(:[], :SchoolType)
 
-			.box
+		.box
+			%p.title
+				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"}
+				Grades Offered
+			%p.descrip
+				= grade_levels_helper(school.grade_levels)
+
+		.box
+			- if TRANSITION_GRADES.include?(current_student.grade_level)
 				%p.title
-					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"}
-					Grades Offered
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
+					= "#{current_student.formatted_grade_level_name} Demand (#{last_school_year_range})"
 				%p.descrip
-					= grade_levels_helper(school.grade_levels)
+					= school.open_seats(current_student.grade_level)
+					open seats
+					%br/
+					= school.applicants(current_student.grade_level)
+					applicants
+					%br/
+					= school.applicants_per_open_seat(current_student.grade_level, '2013')
+					applicants/open seat
+				.max_range
+					%div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
 
-			.box
-				- if TRANSITION_GRADES.include?(current_student.grade_level)
-					%p.title
-						%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
-						= "#{current_student.formatted_grade_level_name} Demand (#{last_school_year_range})"
-					%p.descrip
-						= school.open_seats(current_student.grade_level)
-						open seats
-						%br/
-						= school.applicants(current_student.grade_level)
-						applicants
-						%br/
-						= school.applicants_per_open_seat(current_student.grade_level, '2013')
-						applicants/open seat
-					.max_range
-						%div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
+			%p.title
+				- unless TRANSITION_GRADES.include?(current_student.grade_level)
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
+				= "#{current_student.formatted_grade_level_name} Enrollment (#{last_school_year_range})"
+			%p.descrip
+				= school.api_basic_info.try(:[], :SchSize)
 
-				%p.title
-					- unless TRANSITION_GRADES.include?(current_student.grade_level)
-						%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
-					= "#{current_student.formatted_grade_level_name} Enrollment (#{last_school_year_range})"
+		.box
+			%p.title
+				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"}
+				Eligibility
+			%p.descrip
+				= student_school.eligibility
+
+		.box
+			%p.title
+				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"}
+				Special Application
+			%p.descrip
+				= special_application_helper(school.api_description.try(:[], :isspecialappprocedures))
+
+		.box
+			%p.title
+				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"}
+				Advanced Work Class (AWC)
+			%p.descrip
+				= awc_helper(school.api_basic_info.try(:[], :IsAWC))
+
+		.box
+			%p.title
+				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
+				MCAS Tier
+			%p.descrip
+				= school_tier_helper(student_school.tier)
+
+		.box
+			%p.title
+				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
+				Uniform Policy
+			- if school.api_description.try(:[], :uniformpolicydesc).present?
 				%p.descrip
-					= school.api_basic_info.try(:[], :SchSize)
-
-			.box
-				%p.title
-					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"}
-					Eligibility
+					= school.api_description.try(:[], :uniformpolicydesc)
+			- else
 				%p.descrip
-					= student_school.eligibility
+					= school.api_description.try(:[], :uniformpolicy)
 
+		.box
+			%p.title
+				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"}
+				School Focus
+			%p.descrip
+				= school.api_description.try(:[], :schfocus)
+
+		- if school.student_support_present?
 			.box
 				%p.title
-					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"}
-					Special Application
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
+					Student Support
+
 				%p.descrip
-					= special_application_helper(school.api_description.try(:[], :isspecialappprocedures))
+					=raw student_support_list_helper(school)
 
+		.box
+			%p.title
+				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
+				Community Partners
+			%p.descrip
+				= partners_list_helper(school.api_partners)
+
+		.box
+			%p.title
+				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
+				Facility Features
+			%p.descrip
+				= facilities_list_helper(school.api_facilities)
+
+		- if UPPER_GRADES.include?(current_student.grade_level)
 			.box
 				%p.title
-					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"}
-					Advanced Work Class (AWC)
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
+					Sports
 				%p.descrip
-					= awc_helper(school.api_basic_info.try(:[], :IsAWC))
-
-			.box
-				%p.title
-					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
-					MCAS Tier
-				%p.descrip
-					= school_tier_helper(student_school.tier)
-
-			.box
-				%p.title
-					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
-					Uniform Policy
-				- if school.api_description.try(:[], :uniformpolicydesc).present?
-					%p.descrip
-						= school.api_description.try(:[], :uniformpolicydesc)
-				- else
-					%p.descrip
-						= school.api_description.try(:[], :uniformpolicy)
-
-			.box
-				%p.title
-					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"}
-					School Focus
-				%p.descrip
-					= school.api_description.try(:[], :schfocus)
-
-			- if school.student_support_present?
-				.box
-					%p.title
-						%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
-						Student Support
-
-					%p.descrip
-						=raw student_support_list_helper(school)
-
-			.box
-				%p.title
-					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
-					Community Partners
-				%p.descrip
-					= partners_list_helper(school.api_partners)
-
-			.box
-				%p.title
-					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
-					Facility Features
-				%p.descrip
-					= facilities_list_helper(school.api_facilities)
-
-			- if UPPER_GRADES.include?(current_student.grade_level)
-				.box
-					%p.title
-						%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
-						Sports
-					%p.descrip
-						= sports_list_helper(school.api_sports)
+					= sports_list_helper(school.api_sports)
