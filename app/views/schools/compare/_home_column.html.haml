@@ -36,7 +36,7 @@
       =raw eligibility_helper(spacer_helper(student_school.eligibility))
 
     .school_hours.line
-      = truncate(school.api_hours.try(:[], :schhours1), length: 40)
+      = truncate(school.api_hours.try(:[], :Description), length: 40)
 
     - if SURROUND_CARE_GRADES.include?(current_student.grade_level)
       .school_surround_care.line
