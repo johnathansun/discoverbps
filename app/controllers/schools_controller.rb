@@ -1,4 +1,5 @@
 class SchoolsController < ApplicationController
+  include ApplicationHelper
   include SchoolsHelper
   layout :layout_selector
 
@@ -33,6 +34,9 @@ class SchoolsController < ApplicationController
       else
         respond_to do |format|
           format.html
+          format.csv do
+            generate_csv
+          end
         end
       end
     end
@@ -147,6 +151,107 @@ class SchoolsController < ApplicationController
       else
         'schools'
       end
+    end
+
+    def generate_csv
+      require 'csv'
+      csv_string = CSV.generate do |csv|
+
+        csv << [current_student.full_name]
+        csv << [current_student.formatted_grade_level_name]
+        csv << [current_student.full_address]
+        csv << ["ELL: #{current_student.ell_language}"]
+        csv << ["SPED: #{current_student.sped_needs}"]
+        csv << ["AWC: #{current_student.awc_invitation}"]
+        csv << []
+
+        if @home_schools.present?
+          csv << ['HOME-BASED SCHOOLS']
+          csv_row(@home_schools, csv)
+        end
+
+        if @zone_schools.present?
+          csv << ['ZONE-BASED SCHOOLS']
+          csv_row(@zone_schools, csv)
+        end
+
+        if @ell_schools.present?
+          csv << ['ELL SCHOOLS']
+          csv_row(@ell_schools, csv)
+        end
+
+        if @sped_schools.present?
+          csv << ['SPED SCHOOLS']
+          csv_row(@sped_schools, csv)
+        end
+      end
+
+      send_data csv_string,
+                :type => 'text/csv; charset=iso-8859-1; header=present',
+                :disposition => "attachment; filename=#{current_student.first_name}s_eligible_schools.csv"
+
+    end
+
+    def csv_row(schools, csv)
+      csv << ['Name',
+        'Eligibility',
+        'Address',
+        'Distance from Home',
+        'Walk Time',
+        'Drive Time',
+        'Transportation Eligibility',
+        'Hours',
+        'Grades Offered',
+        'MCAS Tier',
+        'School Type',
+        'Before School Programs',
+        'After School Programs',
+        'Facilities',
+        'Student Support',
+        'Partners',
+        'Sports',
+        'School Focus',
+        'Special Application',
+        'Uniform Policy',
+        'School Email',
+        "#{current_student.formatted_grade_level_name} Demand (#{last_school_year_range})",
+        "Open Seats",
+        "Applicants",
+        "Applicants/Open Seat"
+
+        ]
+
+      schools.each do |student_school|
+        school = student_school.school
+
+        csv << [ school.name,
+          eligibility_helper(student_school.eligibility),
+          school.full_address,
+          "#{student_school.distance} mi",
+          student_school.walk_time,
+          student_school.drive_time,
+          student_school.transportation_eligibility,
+          school.api_hours.try(:[], :Description),
+          grade_levels_helper(school.grade_levels),
+          school_tier_helper(student_school.tier),
+          school.api_basic_info.try(:[], :SchoolType),
+          school.api_basic_info.try(:[], :BeforeSchPrograms),
+          school.api_basic_info.try(:[], :AfterSchPrograms),
+          facilities_list_helper(school.api_facilities),
+          student_support_list_helper(school.api_student_support),
+          partners_list_helper(school.api_partners),
+          sports_list_helper(school.api_sports),
+          school.api_description.try(:[], :schfocus),
+          school.api_description.try(:[], :specialapplicationnarrative),
+          school.api_description.try(:[], :uniformpolicy),
+          school.api_basic_info.try(:[], :schemail),
+          '',
+          school.open_seats(current_student.grade_level),
+          school.applicants(current_student.grade_level),
+          school.applicants_per_open_seat(current_student.grade_level, last_school_year)
+          ]
+      end
+      csv << []
     end
 
 end

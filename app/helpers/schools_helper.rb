@@ -45,25 +45,25 @@ module SchoolsHelper
 		end
 	end
 
-	def student_support_list_helper(school)
+	def student_support_list_helper(hash)
 		list = ''
-		list << 'Full-Time Nurse<br />'				if school.api_student_support.try(:[], :HasFullTimeNurse) == 'True'
-		list << 'Part-Time Nurse<br />'				if school.api_student_support.try(:[], :HasPartTimeNurse) == 'True'
-		list << 'Online Health Center<br />' 	if school.api_student_support.try(:[], :HasOnlineHealthCntr) == 'True'
-		list << 'Family Coordinator<br />'		if school.api_student_support.try(:[], :HasFamilyCoord) == 'True'
-		list << 'Guidance Counselor<br />'		if school.api_student_support.try(:[], :HasGuidanceCoord) == 'True'
-		list << 'Social Worker<br />'					if school.api_student_support.try(:[], :HasSocialWorker) == 'True'
+		list << 'Full-Time Nurse, '				if hash.try(:[], :HasFullTimeNurse) == 'True'
+		list << 'Part-Time Nurse, '				if hash.try(:[], :HasPartTimeNurse) == 'True'
+		list << 'Online Health Center, ' 	if hash.try(:[], :HasOnlineHealthCntr) == 'True'
+		list << 'Family Coordinator, '		if hash.try(:[], :HasFamilyCoord) == 'True'
+		list << 'Guidance Counselor, '		if hash.try(:[], :HasGuidanceCoord) == 'True'
+		list << 'Social Worker'					if hash.try(:[], :HasSocialWorker) == 'True'
 		list
 	end
 
-	def preview_dates_list_helper(school)
+	def preview_dates_list_helper(hash)
 		list = ''
-		list << "Preview date 1: #{school.api_preview_dates.try(:[], :PreviewDate1)}<br />" 	if school.api_preview_dates.try(:[], :PreviewDate1).present?
-		list << "Preview date 2: #{school.api_preview_dates.try(:[], :PreviewDate2)}<br />" 	if school.api_preview_dates.try(:[], :PreviewDate2).present?
-		list << "Preview date 3: #{school.api_preview_dates.try(:[], :PreviewDate3)}<br />" 	if school.api_preview_dates.try(:[], :PreviewDate3).present?
-		list << "Preview date 4: #{school.api_preview_dates.try(:[], :PreviewDate4)}<br />" 	if school.api_preview_dates.try(:[], :PreviewDate4).present?
-		list << "Preview date 5: #{school.api_preview_dates.try(:[], :PreviewDate5)}<br />" 	if school.api_preview_dates.try(:[], :PreviewDate5).present?
-		list << "Preview date 6: #{school.api_preview_dates.try(:[], :PreviewDate6)}<br />" 	if school.api_preview_dates.try(:[], :PreviewDate6).present?
+		list << "Preview date 1: #{hash.try(:[], :PreviewDate1)}, " 	if hash.try(:[], :PreviewDate1).present?
+		list << "Preview date 2: #{hash.try(:[], :PreviewDate2)}, " 	if hash.try(:[], :PreviewDate2).present?
+		list << "Preview date 3: #{hash.try(:[], :PreviewDate3)}, " 	if hash.try(:[], :PreviewDate3).present?
+		list << "Preview date 4: #{hash.try(:[], :PreviewDate4)}, " 	if hash.try(:[], :PreviewDate4).present?
+		list << "Preview date 5: #{hash.try(:[], :PreviewDate5)}, " 	if hash.try(:[], :PreviewDate5).present?
+		list << "Preview date 6: #{hash.try(:[], :PreviewDate6)}" 	if hash.try(:[], :PreviewDate6).present?
 		list
 	end
 

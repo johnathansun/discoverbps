@@ -26,7 +26,7 @@
 					= school.applicants(current_student.grade_level)
 					applicants
 					%br/
-					= school.applicants_per_open_seat(current_student.grade_level, '2013')
+					= school.applicants_per_open_seat(current_student.grade_level, last_school_year)
 					applicants/open seat
 				.max_range
 					%div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
@@ -84,7 +84,7 @@
 					Student Support
 
 				%p.descrip
-					=raw student_support_list_helper(school)
+					=raw student_support_list_helper(school.api_student_support)
 		.clr
 
 	.school_features_column

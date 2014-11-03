@@ -82,13 +82,13 @@
 		%p.descrip
 			= school.api_hours.try(:[], :Description)
 
-		- if preview_dates_list_helper(school).present?
+		- if preview_dates_list_helper(school.api_preview_dates).present?
 			-# Preview Dates
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"}
 				Preview Dates
 			%p.descrip
-				=raw preview_dates_list_helper(school)
+				=raw preview_dates_list_helper(school.api_preview_dates)
 
 
 		-# Surround Care
@@ -154,7 +154,7 @@
 					= school.applicants(current_student.grade_level)
 					applicants
 					%br/
-					= school.applicants_per_open_seat(current_student.grade_level, '2013')
+					= school.applicants_per_open_seat(current_student.grade_level, last_school_year)
 					applicants/open seat
 				.max_range
 					%div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
@@ -219,7 +219,7 @@
 					Student Support
 
 				%p.descrip
-					=raw student_support_list_helper(school)
+					=raw student_support_list_helper(school.api_student_support)
 
 		.box
 			%p.title

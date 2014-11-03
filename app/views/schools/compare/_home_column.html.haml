@@ -69,7 +69,7 @@
       = school.api_description.try(:[], :uniformpolicy)
 
     .school_health.line.mid
-      =raw student_support_list_helper(school)
+      =raw student_support_list_helper(school.api_student_support)
 
     .school_focus.line.long
       = truncate(school.api_description.try(:[], :schfocus), length: 240)
