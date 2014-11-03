@@ -236,7 +236,7 @@ ActiveRecord::Schema.define(:version => 20141103212520) do
     t.float    "longitude"
     t.string   "neighborhood"
     t.boolean  "sped_needs",              :default => false
-    t.string   "ell_language",            :default => false
+    t.string   "ell_language"
     t.time     "schools_last_updated_at"
     t.float    "x_coordinate"
     t.float    "y_coordinate"
