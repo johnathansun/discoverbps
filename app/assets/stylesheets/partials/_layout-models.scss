@@ -3014,7 +3014,7 @@ Wrap Account
 					border-left-color: $light_blue;
 				}
 			}
-			.label { color: $yellow; }
+			.label { color: $yellow !important; }
 		}
 		&.in_progress {
 			.bar {

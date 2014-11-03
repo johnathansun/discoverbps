@@ -64,6 +64,10 @@ module ApplicationHelper
 		class_style_list = ''
 
 		# if the current page is the same as the step in question, mark the step as current
+		puts "**************** student_step = #{student_step}"
+		puts "**************** page_step = #{page_step}"
+		puts "**************** bar_step = #{bar_step}"
+
 		if page_step == bar_step
 			class_style_list += 'current '
 		end
@@ -75,6 +79,8 @@ module ApplicationHelper
 		elsif student_step > bar_step
 			class_style_list += 'complete '
 		end
+
+		puts "**************** class_style_list = #{class_style_list}"
 
 		return class_style_list
 	end
