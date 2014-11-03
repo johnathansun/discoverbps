@@ -89,6 +89,13 @@
 :javascript
 
 	$(function() {
+		$("#sortable_0").disableSelection();
+		$('.compare_list_content').tooltip({
+			track: true
+		});
+	});
+
+	$(function() {
 		$("#sortable_0").sortable({
 			axis: "x",
 			scroll: true,
@@ -97,7 +104,7 @@
 					$(this).find('.sortable_row_number').html($(this).index() + 1);
 				});
 				$.ajax({
-					url: '/schools/sort',
+					url: '/student_schools/sort',
 					type: 'post',
 					data: $('#sortable_0').sortable('serialize'),
 					dataType: 'script'

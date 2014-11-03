@@ -76,7 +76,7 @@
 					$(this).find('.sortable_row_number').html($(this).index() + 1);
 				});
 				$.ajax({
-					url: '/schools/sort',
+					url: '/student_schools/sort',
 					type: 'post',
 					data: $('#sortable').sortable('serialize'),
 					dataType: 'script'

@@ -26,8 +26,10 @@ DiscoverbpsV2::Application.routes.draw do
   end
 
   resources :student_schools do
+    post 'sort', on: :collection
     post 'star', on: :member
     post 'unstar', on: :member
+    post 'add_another', on: :member
   end
 
   resources :schools do
@@ -36,7 +38,6 @@ DiscoverbpsV2::Application.routes.draw do
     get 'print_home_schools', on: :collection
     get 'print_zone_schools', on: :collection
     get 'print', on: :member
-    post 'sort', on: :collection
     get 'compare', on: :collection
     get 'get_ready', on: :collection
   end

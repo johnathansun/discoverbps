@@ -1,0 +1,3 @@
+$('ul#sortable_0').prepend("<%= escape_javascript(render partial: 'schools/compare/home_column', locals: {student_school: @current_school, school: @current_school.school, i: 0}) %>");
+$('#school_column_<%= @last_school.id %>').hide();
+$("#add_more_button_<%= @current_school.id %>").hide();

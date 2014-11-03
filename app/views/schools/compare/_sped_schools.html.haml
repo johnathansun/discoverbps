@@ -89,26 +89,6 @@
                 = truncate(partners_list_helper(school.api_partners), length: 240)
 
 
-    :javascript
-      $(function() {
-        $("#sortable_0").sortable({
-          axis: "x",
-          scroll: true,
-          /*update: function(){
-            $.ajax({
-              url: '/schools/sort',
-              type: 'post',
-              data: $('#sortable_0').sortable('serialize'),
-              dataType: 'script'
-            });
-          }*/
-        });
-        $("#sortable_0").disableSelection();
-        $('.compare_list_content').tooltip({
-          track: true
-        });
-      });
-
   - if @sped_schools[6...-1].present?
 
     -# RIGHT COLUMN

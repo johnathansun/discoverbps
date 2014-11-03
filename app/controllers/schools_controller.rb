@@ -118,19 +118,6 @@ class SchoolsController < ApplicationController
     @home_schools = current_student.home_schools
   end
 
-  # POST
-  def sort
-    key = params.keys.first
-    student = Student.find(key)
-    if student.present?
-      params[key].flatten.each_with_index do |bps_id, i|
-        student_school = student.student_schools.where(bps_id: bps_id).first
-        if student_school.present?
-          student_school.update_attributes(sort_order_position: i, ranked: true)
-        end
-      end
-    end
-  end
 
   private
 

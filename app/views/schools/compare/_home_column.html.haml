@@ -1,0 +1,85 @@
+%li{id: "school_column_#{student_school.id}", class: "sortable_school #{i ==0 ? 'first' : ''} #{i == 4 ? 'last' : ''}"}
+  .li_frame.draggable
+    .school_star.desktop.line
+      %span
+        = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
+        = image_tag('star_unstarred.png', id: "star_#{student_school.id}_unstarred", class: 'star_unstarred', style: "display: #{student_school.starred? ? 'none' : 'inline'}; cursor: pointer;", data: {student_school_id: student_school.id} )
+
+    .school_name.line
+      = school.name
+
+    .school_your_fit_icon.line
+      %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
+      %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
+      %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"}
+      %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
+
+    - if TRANSITION_GRADES.include?(current_student.grade_level)
+      .school_demand.line
+        .stats
+          = school.open_seats(current_student.grade_level)
+          open seats
+          %br/
+          = school.applicants(current_student.grade_level)
+          applicants
+          %br/
+          = school.applicants_per_open_seat(current_student.grade_level, last_school_year)
+          applicants/open seat
+        .max_range
+          %div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
+
+    .school_travel.line
+      = spacer_helper(student_school.distance)
+      &nbsp;mi
+
+    .school_eligibility.line
+      =raw eligibility_helper(spacer_helper(student_school.eligibility))
+
+    .school_hours.line
+      = truncate(school.api_hours.try(:[], :schhours1), length: 40)
+
+    - if SURROUND_CARE_GRADES.include?(current_student.grade_level)
+      .school_surround_care.line
+        - if school.api_basic_info.try(:[], :BeforeSchPrograms).present?
+          Before School
+          %br/
+
+        - if school.api_basic_info.try(:[], :AfterSchPrograms).present?
+          After School
+
+    .school_type.line
+      = school.api_basic_info.try(:[], :SchoolType)
+
+    .school_grades.line
+      = grade_levels_helper(school.grade_levels)
+
+    .school_enrollment.line
+      = school.total_seats(current_student.grade_level)
+
+    .school_special_app.line
+      = special_application_helper(school.api_description.try(:[], :isspecialappprocedures))
+
+    .school_awc.line
+      = awc_helper(school.api_basic_info.try(:[], :IsAWC))
+
+    .school_mcas.line
+      = school_tier_helper(student_school.tier)
+
+    .school_uniform.line
+      = school.api_description.try(:[], :uniformpolicy)
+
+    .school_health.line.mid
+      =raw student_support_list_helper(school)
+
+    .school_focus.line.long
+      = truncate(school.api_description.try(:[], :schfocus), length: 240)
+
+    .school_facilities.line.long
+      = truncate(facilities_list_helper(school.api_facilities), length: 240)
+
+    - if UPPER_GRADES.include?(current_student.grade_level)
+      .school_sports.line.long
+        = truncate(sports_list_helper(school.api_sports), length: 240)
+
+    .school_comm_partners.line.long
+      = truncate(partners_list_helper(school.api_partners), length: 240)
