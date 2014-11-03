@@ -1,0 +1,52 @@
+.wrap.timeline_menu
+  %section.content_wrap
+    .logo_discover
+      %span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-01"}
+
+    .clr
+  .clr
+
+.wrap.global_map{style: 'padding: 0px;'}
+  = render partial: 'schools/page_elements/map', locals: {students_list: [current_student], school: nil, map_controls: false, width: '100%'}
+
+  %div{class: "menu_student_info", style: "position: absolute; z-index: 10; margin-top: 273px;"}
+    .name_list
+      #name_1.name_info.active
+        .grade{style: 'float: right;'}
+          %span{style: 'font-size: 10px;'}
+            Grade
+          %span.number{style: 'font-size: 15px;'}
+            = current_student.grade_level
+        .name
+          = current_student.first_name
+          %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
+
+        .clr
+    .clr
+  .clr
+
+.wrap.result
+  #school_list
+    .shadow
+    .list_content
+      .flexible_content
+
+        - if @home_schools.present?
+          %h1{style: 'margin-bottom: 10px;'}
+            Home-Based Schools
+          = render partial: 'schools/print_school_list', locals: {schools: @home_schools}
+
+        - if @zone_schools.present?
+          %h1{style: 'margin-bottom: 10px;'}
+            Zone-Based Schools
+          = render partial: 'schools/print_school_list', locals: {schools: @zone_schools}
+
+        - if @ell_schools.present?
+          %h1{style: 'margin-bottom: 10px;'}
+            ELL Schools
+          = render partial: 'schools/print_school_list', locals: {schools: @ell_schools}
+
+        - if @sped_schools.present?
+          %h1{style: 'margin-bottom: 10px;'}
+            SPED Schools
+          = render partial: 'schools/print_school_list', locals: {schools: @sped_schools}

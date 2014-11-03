@@ -8,7 +8,7 @@
 			<div class='box'>
 				<% if params[:controller] == 'schools' && params[:action] == 'index' %>
 					<span>My lists</span>
-					<%= link_to 'Print', print_home_schools_schools_path %>
+					<%= link_to 'Print', print_lists_schools_path %>
 					<%= link_to 'Download', schools_path(format: :csv) %>
 					<% if current_user.blank? %>
 						<a id='save_btn' href='#'>Save</a>
@@ -47,12 +47,12 @@
 				<label><input type='checkbox' name='register_check_bpsexpress' value='BPSExpress'/>Submit your lists to <a href='#'>BPSExpress</a></label><br/>
 				<span class='warning'>Available soon!</span><br/>
 				<label><input type='checkbox' name='register_check_required_documents' value='required documents'/>Collect the <a href='#'>required documents</a></label><br/>
-				<label><input  type='checkbox' name='register_check_welcome_center' value='Welcome Center'/>Visit to a <a href='#'>Welcome Center</a></label>		
+				<label><input  type='checkbox' name='register_check_welcome_center' value='Welcome Center'/>Visit to a <a href='#'>Welcome Center</a></label>
 			</div>
 			<div class='clr'></div>
 		</div>
 		<!-- End register box -->
-		
+
 		<div class='clr'></div>
 	</div>
 	<!-- Start section menu account -->
