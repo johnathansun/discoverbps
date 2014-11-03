@@ -3048,9 +3048,9 @@ Wrap Account
 		}
 		&.current {
 			.bar {
-				background-color: $yellow;
+				background-color: $light_blue;
 				.arrow.front {
-					border-left-color: $yellow;
+					border-left-color: $light_blue;
 				}
 			}
 			.label { color: $yellow; }
