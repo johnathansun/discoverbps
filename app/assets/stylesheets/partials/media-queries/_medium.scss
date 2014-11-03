@@ -16,6 +16,20 @@
   }
 
 
+  /* -------------------------------------------------
+	  Header
+  ---------------------------------------------------- */  
+  .search .logo.discover,
+  .timeline_menu .logo_discover {
+    font-size: 75px;
+		margin-left: -40px;
+  }
+  
+  /* Progress bar
+  --------------------------- */  
+  .progress_bar {  }
+
+
 
   /* -------------------------------------------------
 	  Timeline
@@ -24,6 +38,11 @@
 		display: none;
 	}
 
+
+
+  .wrap .menu_school_lists {
+		margin-left: 0;
+	}
 
 
   /* -------------------------------------------------
@@ -38,9 +57,15 @@
     box-shadow: 0 0 0 0 #888888;
     -webkit-box-shadow: 0 0 0 0 #888888;
     -moz-box-shadow: 0 0 0 0 #888888;
+    
+    
+    .note {
+	    margin: 10px 50px 30px 10px;
+    }
   }
   .wrap .preferences .header_preferences {
     display: block;
+		margin-left: 10px;
   }
   .wrap .preferences .preference {
     border: 0;
@@ -76,91 +101,92 @@
   /* -------------------------------------------------
 	  School List
   ---------------------------------------------------- */
-  .wrap #school_list,
+  #school_list {
+    padding-bottom: 0;
+  }
+
+  #school_list,
   .wrap #compare_list {
     margin-left: 0;
     margin: 0 0 11px 11px;
     overflow: hidden;
   }
-  .wrap #school_list .footer_list,
+  #school_list .footer_list,
   .wrap #compare_list .footer_list {
     margin-left: 0;
     width: auto;
     margin-right: 11px;
   }
-  .wrap #school_list .footer_list .footer_left,
+  #school_list .footer_list .footer_left,
   .wrap #compare_list .footer_list .footer_left {
     //width: 327px;
   }
 
-  .wrap #school_list .footer_list .footer_right p,
+  #school_list .footer_list .footer_right p,
   .wrap #compare_list .footer_list .footer_right p {
     margin-bottom: .4em;
   }
   .wrap #compare_list ul li .no_order {
     //width: 176px;
   }
-  .wrap #school_list {
-    padding-bottom: 0;
-  }
-  .wrap #school_list ul li .school_descrip .title {
+  #school_list ul li .school_descrip .title {
     margin-left: 16px;
   }
-  .wrap #school_list ul li .school_descrip .title .fit_icon {
+  #school_list ul li .school_descrip .title .fit_icon {
     margin-left: -20px;
     display: inline-block;
   }
-  .wrap #school_list ul li .school_descrip .descrip {
+  #school_list ul li .school_descrip .descrip {
     margin-left: 16px;
   }
-  .wrap #school_list ul li .school_descrip .full_details {
+  #school_list ul li .school_descrip .full_details {
     //width: 305px;
   }
-  .wrap #school_list ul li .school_descrip .right_side .tablet {
+  #school_list ul li .school_descrip .right_side .tablet {
     display: block;
     float: left;
   }
-  .wrap #school_list ul li .school_descrip .right_side .tablet .box {
+  #school_list ul li .school_descrip .right_side .tablet .box {
     //padding-left: 20px !important;
     //width: 130px !important;
   }
-  .wrap #school_list ul li .school_descrip .right_side .desktop {
+  #school_list ul li .school_descrip .right_side .desktop {
     display: none;
   }
-  .wrap #school_list ul li .school_descrip .right_side .mobile {
+  #school_list ul li .school_descrip .right_side .mobile {
     display: none;
   }
-  .wrap #school_list ul li .school_name {
+  #school_list ul li .school_name {
     //width: 275px;
   }
-  .wrap #school_list ul li .box {
+  #school_list ul li .box {
     //width: 148px;
   }
-  .wrap #school_list ul li .eligibility {
+  #school_list ul li .eligibility {
     //width: 100px;
   }
-  .wrap #school_list .shadow {
+  #school_list .shadow {
     display: none;
   }
-  .wrap #school_list .menu_list #sortable_school_name_column {
+  #school_list .menu_list #sortable_school_name_column {
     //width: 273px;
   }
-  .wrap #school_list .menu_list .menu_bloc {
+  #school_list .menu_list .menu_bloc {
     //width: 151px;
   }
-  .wrap #school_list .menu_list .menu_bloc.choice {
+  #school_list .menu_list .menu_bloc.choice {
     //width: 293px;
   }
-  .wrap #school_list .menu_list .menu_bloc.your_fit {
+  #school_list .menu_list .menu_bloc.your_fit {
     //width: 160px;
   }
-  .wrap #school_list .menu_list .menu_bloc.your_fit .glass_open {
+  #school_list .menu_list .menu_bloc.your_fit .glass_open {
     display: inline-block;
   }
-  .wrap #school_list .menu_list .menu_bloc.open .glass_open {
+  #school_list .menu_list .menu_bloc.open .glass_open {
     display: none !important;
   }
-  .wrap #school_list .menu_list .menu_bloc#getting_there .glass_open {
+  #school_list .menu_list .menu_bloc#getting_there .glass_open {
     display: inline-block;
   }
 
@@ -203,79 +229,79 @@
   .dialog_box.dialog_box_dicover .content .bloc .preference.column_4 {
     margin: 40px 0 0 0;
   }
-  .wrap .search .search_header .title_bloc {
+  .search .search_header .title_bloc {
     position: relative;
   }
-  .wrap .search .search_header .title_bloc h1 {
+  .search .search_header .title_bloc h1 {
     width: 553px;
   }
-  .wrap .search .search_header .title_bloc .logo_beta {
+  .search .search_header .title_bloc .logo_beta {
     top: -20px;
   }
-  .wrap .search .search_header p {
+  .search .search_header p {
     width: 553px;
   }
-  .wrap .search .search_header .tablet {
+  .search .search_header .tablet {
     display: block;
     float: none;
   }
-  .wrap .search .small_text {
+  .search .small_text {
     margin-bottom: 20px;
   }
-  .wrap .search .search_section .no_tablet {
+  .search .search_section .no_tablet {
     display: none;
   }
-  .wrap .search .search_section .content_right {
+  .search .search_section .content_right {
     width: 100px;
     right: -11.8px;
   }
-  .wrap .search .search_section .content_right .event .tablette {
+  .search .search_section .content_right .event .tablette {
     display: block;
   }
-  .wrap .search .search_section .content_right .event .desktop {
+  .search .search_section .content_right .event .desktop {
     display: none;
   }
-  .wrap .search .search_section .content_right .event .point_font {
+  .search .search_section .content_right .event .point_font {
     position: relative;
     right: -20px;
   }
-  .wrap .search .search_section .content_right .event .start_point {
+  .search .search_section .content_right .event .start_point {
     position: relative;
     display: block;
     top: 0;
     right: -2px;
   }
-  .wrap .search .search_section .content_right .event.first {
+  .search .search_section .content_right .event.first {
     background: #0077cf;
     padding-bottom: 2px;
   }
-  .wrap .search .search_section .content_right .event .desktop,
-  .wrap .search .search_section .content_right .event .mobile {
+  .search .search_section .content_right .event .desktop,
+  .search .search_section .content_right .event .mobile {
     display: none;
   }
-  .wrap .search .search_section .content_left {
+  .search .search_section .content_left {
     //width: 553px;
     //margin-right: 156px;
     margin-right: 0;
   }
-  .wrap .search .search_section .content_left .text {
+  .search .search_section .content_left .text {
     margin-left: 0;
   }
-  .wrap .search .search_section .point_arrow {
+  .search .search_section .point_arrow {
     margin-right: 2px;
   }
-  .wrap .search .search_section.second {
+  .search .search_section.second {
     /*.point{width: auto;height: auto;top:8px;position: relative;right: 0;}*/
 
   }
-  .wrap .search .search_section.second .point_arrow {
+  .search .search_section.second .point_arrow {
     margin-right: 2px;
     margin-top: 10px;
   }
-  .wrap .search .search_section_content {
+  .search .search_section_content {
     position: relative;
   }
-  .wrap .search .search_section_content .today {
+  .search .search_section_content .today {
     color: #ffff00;
     position: absolute;
     top: 10%;
@@ -284,19 +310,19 @@
     right: -32px !important;
     text-align: right;
   }
-  .wrap .search .search_section_content .today.left .left {
+  .search .search_section_content .today.left .left {
     display: none;
   }
-  .wrap .search .search_section_content .today.left .right {
+  .search .search_section_content .today.left .right {
     display: none;
   }
-  .wrap .search .search_section_content .today.right .right {
+  .search .search_section_content .today.right .right {
     display: none;
   }
-  .wrap .search .search_section_content .today.right .left {
+  .search .search_section_content .today.right .left {
     display: none;
   }
-  .wrap .search .search_section_content .today .yello_line {
+  .search .search_section_content .today .yello_line {
     display: inline-block;
     width: 49px;
     height: 2px;
@@ -322,8 +348,5 @@
   }
   .wrap .single_school .tablet {
     display: block;
-  }
-  .logo_header {
-    margin-left: 20px;
   }
 }

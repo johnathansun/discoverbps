@@ -27,14 +27,17 @@
     margin: 0 auto;
   }
   
-  .logo_header {
-    margin: 10px 0 20px 0;
-  }
-
   /* -------------------------------------------------
-	  Progress bar
+	  Page Header
   ---------------------------------------------------- */  
+  .logo_header {
+    margin: 0 0 20px 0;
+  }
+  
+  /* Progress bar
+  --------------------------- */  
   .progress_bar { max-width: none; float: none; }
+
 
 
 
@@ -67,26 +70,26 @@
   }
   
   /* -------------------------------------------------
-	  Header
+	Page Header
   ---------------------------------------------------- */  
 
-  .wrap.timeline_menu .logo_discover {
-    left: -39px;
+  .timeline_menu .logo_discover {
+    margin-left: -39px;
     float: none;
   }
-  .wrap.timeline_menu .content_wrap {
+  .timeline_menu .content_wrap {
     padding-bottom: 15px;
   }
-  .wrap.timeline_menu .timeline .months .month {
+  .timeline_menu .timeline .months .month {
     width: 7.5%;
   }
-  .wrap.timeline_menu nav.menu_nav {
+  .timeline_menu nav.menu_nav {
     padding-top: 22px;
   }
-  .wrap.timeline_menu nav.menu_nav ul li.succeed {
+  .timeline_menu nav.menu_nav ul li.succeed {
     margin-left: 75px;
   }
-  .wrap.timeline_menu nav.menu_nav ul li.register {
+  .timeline_menu nav.menu_nav ul li.register {
     margin-left: 0;
   }
   .wrap .account #personnal_info .bloc_50 {
