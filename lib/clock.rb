@@ -23,4 +23,4 @@ every(1.day, 'Update school programs', at: '09:00') 				  { SchoolData.delay.upd
 every(1.day, 'Update school sports', at: '09:00') 				    { SchoolData.delay.update_sports! }
 every(1.day, 'Update school student support', at: '09:00')    { SchoolData.delay.update_student_support! }
 
-every(1.hour, 'Store searches json') { StoredSearch.first.update_attributes(json: Student.order(:last_name).to_json(only: [ :grade_level, :latitude, :longitude, :zipcode, :ell_language, :sped_needs, :awc_invitation, :preferences_count  ], methods: :created_at_date)) }
+every(1.hour, 'Store searches json') { StoredSearch.first_or_create.update_attributes(json: Student.order(:last_name).to_json(only: [ :grade_level, :latitude, :longitude, :zipcode, :ell_language, :sped_needs, :awc_invitation, :preferences_count  ], methods: :created_at_date)) }
