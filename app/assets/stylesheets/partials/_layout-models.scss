@@ -724,9 +724,9 @@ footer.footer {
   left: 142px;
   display: inline-block;
 }
-.menu_item .account_menu_box {
+.menu_item .menu_box {
   position: absolute;
-	z-index: 1;
+	z-index: 900;
 	right: 0;
 	color: #FFF;
 	background: rgba(6, 70, 118, 0.9);
@@ -736,26 +736,26 @@ footer.footer {
 	display: none;
 	border-radius: 7px;
 }
-.menu_item .account_menu_box .menu {
+.menu_item .menu_box .menu {
   //float: left;
 }
-.menu_item .account_menu_box .menu .box {
+.menu_item .menu_box .menu .box {
   margin: 0 0 10px 0;
   &.last { margin: 0; }
 }
-.menu_item .account_menu_box .menu .box span {
+.menu_item .menu_box .menu .box span {
   color: $blue;
   font-size: 14px;
 }
-.menu_item .account_menu_box .menu .box a {
+.menu_item .menu_box .menu .box a {
   text-decoration: none;
   &:hover { text-decoration: underline; }
 }
-.menu_item .account_menu_box .menu .box a .icon {
+.menu_item .menu_box .menu .box a .icon {
   display: inline-block;
   font-size: 12px;
 }
-.menu_item .account_menu_box .action_box {
+.menu_item .menu_box .action_box {
   float: left;
   top: 0px;
   left: 168px;
@@ -765,31 +765,31 @@ footer.footer {
   margin: 0 0 0 35px;
 }
 
-.menu_item .account_menu_box .action_box.register_box span {
+.menu_item .menu_box .action_box.register_box span {
   display: inline-block;
 }
-.menu_item .account_menu_box .action_box.register_box label {
+.menu_item .menu_box .action_box.register_box label {
   display: inline-block;
 }
-.menu_item .account_menu_box .action_box.register_box input {
+.menu_item .menu_box .action_box.register_box input {
   display: inline-block;
   margin: 0 5px 0 0;
 }
-.menu_item .account_menu_box .action_box .actions {
+.menu_item .menu_box .action_box .actions {
   float: left;
   padding: 0 0 0 20px;
   border-left: 1px solid #ebebeb;
   min-height: 221px;
 }
-.menu_item .account_menu_box .action_box .actions a {
+.menu_item .menu_box .action_box .actions a {
   color: #0077cf;
   text-decoration: none;
 }
-.menu_item .account_menu_box .action_box .actions .warning {
+.menu_item .menu_box .action_box .actions .warning {
   font-size: 13px;
   color: #ff0000;
 }
-.menu_item .account_menu_box .action_box .actions label {
+.menu_item .menu_box .action_box .actions label {
   display: inline-block;
   width: 100%;
 }
@@ -3048,9 +3048,9 @@ Wrap Account
 		}
 		&.current {
 			.bar {
-				background-color: $yellow;
+				background-color: $light_blue;
 				.arrow.front {
-					border-left-color: $yellow;
+					border-left-color: $light_blue;
 				}
 			}
 			.label { color: $yellow; }
