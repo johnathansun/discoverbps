@@ -25,7 +25,7 @@
 		.clr
 	.clr
 
-
+.wrap.result
 	#school_list
 		.shadow
 		.list_content
@@ -37,7 +37,7 @@
 
 						#getting_there.menu_bloc
 							.first_block
-								Getting There
+								Transit
 
 						.menu_bloc
 							School Hours
@@ -45,9 +45,9 @@
 						.menu_bloc
 							Eligibility
 
-						.clr
+				.clr
 
-				%ul#sortable
+				%ul
 					- schools.each_with_index do |student_school, i|
 						- school = student_school.school
 						%li{id: "list_#{i}", class: "ui-state-default"}
@@ -60,7 +60,7 @@
 
 								.box.line.getting_there
 									%span.icon.middle
-										- if student_school.transportation_eligibility == 'Y'
+										- if student_school.transportation_eligibility == 'WY'
 											%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-15 transportation_icon"}
 										- else
 											%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-14 transportation_icon"}
@@ -81,8 +81,3 @@
 										= eligibility_helper(student_school.eligibility)
 
 								.clr
-							.clr
-						.clr
-					.clr
-				.clr
-			.clr
