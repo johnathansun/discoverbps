@@ -47,8 +47,8 @@
         - if school.api_basic_info.try(:[], :AfterSchPrograms).present?
           After School
 
-    .school_type.line
-      = school.api_basic_info.try(:[], :SchoolType)
+    -# .school_type.line
+    -#   = school.api_basic_info.try(:[], :SchoolType)
 
     .school_grades.line
       = grade_levels_helper(school.grade_levels)

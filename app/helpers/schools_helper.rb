@@ -56,6 +56,17 @@ module SchoolsHelper
 		list
 	end
 
+	def preview_dates_list_helper(school)
+		list = ''
+		list << "Preview date 1: #{school.api_preview_dates.try(:[], :PreviewDate1)}<br />" 	if school.api_preview_dates.try(:[], :PreviewDate1).present?
+		list << "Preview date 2: #{school.api_preview_dates.try(:[], :PreviewDate2)}<br />" 	if school.api_preview_dates.try(:[], :PreviewDate2).present?
+		list << "Preview date 3: #{school.api_preview_dates.try(:[], :PreviewDate3)}<br />" 	if school.api_preview_dates.try(:[], :PreviewDate3).present?
+		list << "Preview date 4: #{school.api_preview_dates.try(:[], :PreviewDate4)}<br />" 	if school.api_preview_dates.try(:[], :PreviewDate4).present?
+		list << "Preview date 5: #{school.api_preview_dates.try(:[], :PreviewDate5)}<br />" 	if school.api_preview_dates.try(:[], :PreviewDate5).present?
+		list << "Preview date 6: #{school.api_preview_dates.try(:[], :PreviewDate6)}<br />" 	if school.api_preview_dates.try(:[], :PreviewDate6).present?
+		list
+	end
+
 	def eligibility_helper(tier)
 		tier.try(:gsub, /:/, ', ')
 	end
