@@ -206,7 +206,7 @@ module Webservice
 	private
 
 	def self.get(endpoint, params)
-		response = Faraday.new(url: "#{ENV['BPS_STAGING_WEBSERVICE_URL']}/#{endpoint}?#{params}", ssl: {version: :SSLv3}).get
+		response = Faraday.new(url: "#{ENV['BPS_WEBSERVICE_URL']}/#{endpoint}?#{params}", ssl: {version: :SSLv3}).get
 		response.body
 	end
 
