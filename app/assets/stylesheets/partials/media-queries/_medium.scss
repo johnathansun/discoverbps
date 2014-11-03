@@ -3,16 +3,8 @@
    ELEMENT LAYOUT - TABLETTE 2
 ---------------------------------------------- */
 @media screen and (max-width: 1070px) {
-  .standard .wrap {
-    padding: 0 33px;
-    margin: 0 auto;
-  }
-  .standard .wrap .content_wrap.search {
-    /*max-width: 769px;*/
-  }
-  .standard.one .wrap {
-    max-width: 769px;
-    padding: 0 33px;
+  .wrap {
+    max-width: 770px;
   }
 
 
@@ -126,9 +118,26 @@
   .wrap #compare_list .footer_list .footer_right p {
     margin-bottom: .4em;
   }
-  .wrap #compare_list ul li .no_order {
-    //width: 176px;
+  #school_list li .line.no_order {
+	  width: 5.5%;
+	  
+	  img { max-width: 20px; }
   }
+  #school_list li .line.school_name {
+	  font-size: 14px;
+	  width: 24%;
+  }
+  #school_list li .line.getting_there {
+	  font-size: 12px;
+	  .icon { display: none; }
+  }
+  #school_list li .line.eligibility {
+	  font-size: 12px;
+  }
+  
+  
+	/* School Descrip
+	------------------------------------------- */
   #school_list ul li .school_descrip .title {
     margin-left: 16px;
   }
@@ -168,17 +177,28 @@
   #school_list .shadow {
     display: none;
   }
+  
+  
+	/* Menu List (column Headers)
+	------------------------------------------- */
+	#school_list .menu_list .menu_bloc {
+		font-size: 12px;
+	}
+	
   #school_list .menu_list #sortable_school_name_column {
-    //width: 273px;
+
   }
+	#school_list .menu_list .menu_bloc#sortable_star_column {
+		width: 5.5%;
+	}
   #school_list .menu_list .menu_bloc {
-    //width: 151px;
+
   }
   #school_list .menu_list .menu_bloc.choice {
-    //width: 293px;
+
   }
   #school_list .menu_list .menu_bloc.your_fit {
-    //width: 160px;
+
   }
   #school_list .menu_list .menu_bloc.your_fit .glass_open {
     display: inline-block;
@@ -189,7 +209,6 @@
   #school_list .menu_list .menu_bloc#getting_there .glass_open {
     display: inline-block;
   }
-
 
 
 

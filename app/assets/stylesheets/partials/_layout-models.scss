@@ -25,6 +25,7 @@ Dialog Box
   background: #ffffff;
   padding: 20px;
   box-shadow: 0px 2px 25px 0px rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
 
 	&.dialog_box_dicover {
 	  padding: 38px;
@@ -452,9 +453,11 @@ footer.footer {
 
 	&.one {
 		.wrap {
+/*
 		  max-width: 1456px;
 		  margin: 0 auto;
 		  padding: 0 118px;
+*/
 
 			.content_wrap {
 			  max-width: 1030px;
@@ -466,9 +469,11 @@ footer.footer {
 
 	&.two {
 		.wrap {
+/*
 		  width: 964px;
 		  margin: 0 auto;
 		  padding: 0 118px 50px;
+*/
 
 		  .content_wrap {
 			  max-width: 960px;
@@ -489,7 +494,6 @@ footer.footer {
   margin: 0 auto;
   padding: 0 50px;
   max-width: 1185px;
-  min-width: 320px;
   position: relative;
 
 	.content_wrap {
@@ -1090,7 +1094,10 @@ School List
 	  padding-left: 0;
 	}
 
-	.note { max-width: 800px; }
+	.note { 
+		max-width: 800px;
+		margin: 0 10px 0 0; 
+	}
 	.shadow {
 	  width: 24px;
 	  position: absolute;
@@ -2097,7 +2104,7 @@ Menu School Lists
 }
 
 .wrap .menu_school_lists .name_list {
-  float: left;
+  //float: left;
 }
 .wrap .menu_school_lists .name_list .school_list_tab {
   position: relative;
@@ -2910,6 +2917,32 @@ Wrap Account
 	.note {
 		margin: 0 0 18px;
 	}
+
+	.steps .step {
+
+		.bar {
+			
+			.point.terminal {
+				position: absolute;
+				
+				width: 16px;
+				height: 16px;
+			}			
+		}
+		&.first {
+			.bar .point.terminal { 
+				top: -4px; left: -5px;
+				background: url("/assets/blue_point_white.png") no-repeat center center;
+			}
+		}
+		&.last {
+			.bar .point.terminal { 
+				top: -3px; right: -5px;
+				background: url("/assets/star_point.png") no-repeat center center;
+				background-size: 16px;
+			}
+		}
+	}
 }
 
 // Steps -----------
@@ -2936,6 +2969,8 @@ Wrap Account
 			background-color: $dark_blue;
 			margin: 0 5px 0 0;
 
+			.point.terminal { display: none; }
+			
 			.arrow {
 				position: absolute;
 				border-left: 5px solid;

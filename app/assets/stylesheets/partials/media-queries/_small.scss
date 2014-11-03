@@ -6,15 +6,21 @@
     display: none;
   }
 
+	.wrap {
+		padding: 0 30px;
+	}
 
+/*
   .standard .wrap.search {
     width: auto;
     padding: 0 33px;
     margin: 0;
   }
+*/
   .standard .wrap.search .content_wrap {
     width: 100%;
   }
+/*
   .standard.one .wrap {
     min-width: 254px;
     padding: 0 33px;
@@ -24,6 +30,7 @@
     min-width: 254px;
     padding: 0 33px;
   }
+*/
   
   
   
@@ -235,13 +242,21 @@
   #school_list .footer_list .footer_left {
     width: 100%;
     float: none;
+    padding: 0 0 20px 0;
+  }
+  #school_list .footer_list .footer_center {
+	  width: 100%;
+	  float: none;
+	  border: 0;
+    border-top: 1px solid #ffffff;
+    padding: 20px 0;
   }
   #school_list .footer_list .footer_right {
     width: 100%;
     float: none;
     border: 0;
     border-top: 1px solid #ffffff;
-    padding: 14px 0 0 0;
+    padding: 20px 0 ;
     margin-left: 0;
   }
   #school_list .list_content {
@@ -545,15 +560,22 @@
 ---------------------------------------------- */
 @media screen and (max-width: 607px) {
 
-
-
   .wrap.standard {
     width: 100%;
     margin: 0;
   }
+  
+  
+  .account_tab {
+		margin: 0;
+	}
+	.menu_item { margin-left: 10px; }
 
-
-
+	.search .logo.discover,
+  .timeline_menu .logo_discover {
+    font-size: 50px;
+		margin-left: -25px;
+  }
 
   .timeline_menu nav.menu_nav ul li.succeed {
     margin-left: 75px;
@@ -576,19 +598,40 @@
     padding-bottom: 30px;
   }
 
-  .search .logo.discover {
-    font-size: 65px;
-  }
   .search .logo.register {
     font-size: 68px;
   }
   .search .logo.succeed {
     font-size: 47px;
   }
-  
-  
-  
-  
+
+
+	.progress_bar {
+
+		.steps .step {
+			width: 50%;
+			margin: 0 0 10px 0;
+
+			.bar {
+
+				.point.terminal { display: block; }
+			}
+			.label {
+				line-height: 1.2em;
+				.step_name {
+					font-size: 10px;
+					text-transform: uppercase;
+				}
+			}
+		}
+	}
+	
+	
+	.wrap .menu_school_lists .name_list .school_list_tab {
+		width: 100%;
+		border-bottom: 1px solid $blue;
+	}
+
   footer.footer .title_footer {
     padding-top: 0;
     font-size: 12px;
@@ -599,10 +642,7 @@
     line-height: 17px;
     padding: 0 !important;
   }
+	.footer_notice { width: 96%; }
 
 
-
-  .logo_header {
-    margin-left: 20px;
-  }
 }
