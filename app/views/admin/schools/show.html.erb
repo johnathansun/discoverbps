@@ -349,11 +349,22 @@
 	<p style="margin-left: 20px;">[ No data ]</p>
 <% end %>
 
+<h3>Hours</h3>
+<% if @school.api_hours.present? %>
+	<ul class="with_bullets">
+		<% @school.api_hours.each_pair do |key, value| %>
+			<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<p style="margin-left: 20px;">[ No data ]</p>
+<% end %>
+
 <h3>Languages</h3>
 <% if @school.api_languages.present? %>
 	<ul class="with_bullets">
-		<% @school.api_languages.each do |language| %>
-			<li><%= language[:Language] %></li>
+		<% @school.api_languages.each_pair do |key, value| %>
+			<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
 		<% end %>
 	</ul>
 <% else %>
@@ -373,10 +384,43 @@
 	<p style="margin-left: 20px;">[ No data ]</p>
 <% end %>
 
+<h3>Preview Dates</h3>
+<% if @school.api_preview_dates.present? %>
+	<ul class="with_bullets">
+		<% @school.api_preview_dates.each_pair do |key, value| %>
+			<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<p style="margin-left: 20px;">[ No data ]</p>
+<% end %>
+
+<h3>Programs</h3>
+<% if @school.api_programs.present? %>
+	<ul class="with_bullets">
+		<% @school.api_programs.each_pair do |key, value| %>
+			<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<p style="margin-left: 20px;">[ No data ]</p>
+<% end %>
+
 <h3>Sports</h3>
 <% if @school.api_sports.present? %>
 	<ul class="with_bullets">
 		<% @school.api_sports.each_pair do |key, value| %>
+			<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<p style="margin-left: 20px;">[ No data ]</p>
+<% end %>
+
+<h3>Student Support</h3>
+<% if @school.api_student_support.present? %>
+	<ul class="with_bullets">
+		<% @school.api_student_support.each_pair do |key, value| %>
 			<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
 		<% end %>
 	</ul>
