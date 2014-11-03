@@ -2309,13 +2309,13 @@ Wrap Search
 	}
 	.previous_student_search_button {
 		display: block;
-		background: $light_blue;
+		background: tint($light_blue, 50%);
 		padding: 20px 20px 15px;
 		text-decoration: none;
 		@include clearfix;
 		&:hover {
 			text-decoration: none;
-			background: tint($light_blue, 75%);
+			background: tint($light_blue, 90%);
 		}
 	}
 
@@ -2339,66 +2339,6 @@ Wrap Search
 		margin-right: 5px;
 	}
 	.schools { float: right; }
-
-	.steps {
-		@include clearfix;
-	}
-		.step {
-			width: 25%;
-			float: left;
-
-			.bar {
-				position: relative;
-				height: 10px;
-				background-color: $dark_blue;
-				margin: 0 5px 0 0;
-
-				.arrow {
-					position: absolute;
-					border-left: 5px solid;
-					border-top: 5px solid transparent;
-					border-bottom: 5px solid transparent;
-					&.back {
-						left: 0;
-						border-left-color: $blue;
-					}
-					&.front {
-						right: -5px;
-						border-left-color: $dark_blue;
-					}
-				}
-			}
-			.label {
-				color: $dark_blue;
-				font-size: 10px;
-			}
-
-			&.first {
-				.bar .arrow.back { display: none; }
-			}
-			&.last {
-				.bar { border: none; margin-right: 0; }
-				.bar .arrow.front { display: none; }
-			}
-			&.complete {
-				.bar {
-					background-color: tint($light_blue, 50%);
-					.arrow.front {
-						border-left-color: tint($light_blue, 50%);
-					}
-				}
-				.label { color: $light_blue; }
-			}
-			&.current {
-				.bar {
-					background-color: $yellow;
-					.arrow.front {
-						border-left-color: $yellow;
-					}
-				}
-				.label { color: $yellow; }
-			}
-		}
 
 	#start_new_search {
 		float: left;
@@ -3046,78 +2986,99 @@ Wrap Account
 	.note {
 		margin: 0 0 18px;
 	}
+}
 
-	.steps {
-		@include clearfix;
-	}
-		.step {
-			position: relative;
-			width: 25%;
-			float: left;
-			&:hover {
-				.label {
-					color: $yellow !important;
-				}
-			}
-			&.one { z-index: 4; }
-			&.two { z-index: 3; }
-			&.three { z-index: 2; }
-			&.four { z-index: 1; }
-
-			.bar {
-				position: relative;
-				height: 10px;
-				background-color: $dark_blue;
-				margin: 0 5px 0 0;
-
-				.arrow {
-					position: absolute;
-					border-left: 5px solid;
-					border-top: 5px solid transparent;
-					border-bottom: 5px solid transparent;
-					&.back {
-						left: 0;
-						border-left-color: $blue;
-					}
-					&.front {
-						right: -5px;
-						border-left-color: $dark_blue;
-					}
-				}
-			}
+// Steps -----------
+.steps {
+	@include clearfix;
+	
+	.step {
+		position: relative;
+		width: 25%;
+		float: left;
+		&:hover {
 			.label {
-				margin: 5px 0;
-				color: $dark_blue;
-				font-size: 10px;
-				transition: color 250ms ease;
-				.step_name {
-					font-size: 18px;
-				}
+				color: $yellow !important;
 			}
+		}
+		&.one { z-index: 4; }
+		&.two { z-index: 3; }
+		&.three { z-index: 2; }
+		&.four { z-index: 1; }
 
-			&.last {
-				.bar { border: none; }
-			}
-			&.complete {
-				.bar {
-					background-color: $light_blue;
-					.arrow.front {
-						border-left-color: $light_blue;
-					}
+		.bar {
+			position: relative;
+			height: 10px;
+			background-color: $dark_blue;
+			margin: 0 5px 0 0;
+
+			.arrow {
+				position: absolute;
+				border-left: 5px solid;
+				border-top: 5px solid transparent;
+				border-bottom: 5px solid transparent;
+				&.back {
+					left: 0;
+					border-left-color: $blue;
 				}
-				.label { color: $light_blue; }
-			}
-			&.current {
-				.bar {
-					background-color: $yellow;
-					.arrow.front {
-						border-left-color: $yellow;
-					}
+				&.front {
+					right: -5px;
+					border-left-color: $dark_blue;
 				}
-				.label { color: $yellow; }
+			}
+		}
+		.label {
+			margin: 5px 0;
+			color: $dark_blue;
+			font-size: 10px;
+			transition: color 250ms ease;
+			.step_name {
+				font-size: 18px;
 			}
 		}
 
+		&.first {
+			.bar .arrow.back { display: none; }
+		}
+		&.last {
+			.bar { 
+				margin-right: 0;
+				.arrow.front { display: none; }
+			}
+		}
+		&.current {
+			.bar {
+				background-color: $yellow;
+				.arrow.front {
+					border-left-color: $yellow;
+				}
+			}
+			.label { color: $yellow; }
+		}
+		&.in_progress {
+			.bar {
+				background: url('/assets/progress_bar_blue.png') $light_blue;
+				margin-right: 0;	
+				.arrow.front { 
+					background: url('/assets/in_progress_blue.png');
+					width: 5px;
+					height: 10px;
+					border: none;
+					right: 0; 
+				}
+			}
+			.label { color: $light_blue; }
+		}
+		&.complete {
+			.bar {
+				background-color: $light_blue;
+				.arrow.front {
+					border-left-color: $light_blue;
+				}
+			}
+			.label { color: $light_blue; }
+		}
+	}
 }
 
 

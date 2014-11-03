@@ -64,25 +64,33 @@ module ApplicationHelper
 		if bar_step == 1
 			if page_step == 1
 				'current'
-			elsif student_step >= 1
+			elsif student_step == 1
+				'in_progress'
+			elsif student_step > 1
 				'complete'
 			end
 		elsif bar_step == 2
 			if page_step == 2
 				'current'
-			elsif student_step >= 2
+			elsif student_step == 2
+				'in_progress'
+			elsif student_step > 2
 				'complete'
 			end
 		elsif bar_step == 3
 			if page_step == 3
 				'current'
-			elsif student_step >= 3
+			elsif student_step == 3
+				'in_progress'
+			elsif student_step > 3
 				'complete'
 			end
 		elsif bar_step == 4
 			if page_step == 4
 				'current'
-			elsif student_step >= 4
+			elsif student_step == 4
+				'in_progress'
+			elsif student_step > 4
 				'complete'
 			end
 		end

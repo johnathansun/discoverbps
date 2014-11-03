@@ -34,7 +34,7 @@
 											schools,
 											= student.starred_schools.count
 											favorites
-									.steps
+									.steps{class: "#{student.step}"}
 										%div{class: "step first #{progress_bar_class_helper(student.step, 1, 1)}"}
 											.bar
 												%span.arrow.back
