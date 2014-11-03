@@ -1,7 +1,6 @@
--# Probably need some kind of IF statement here to manage when this content gets shown.
-
-.footer_notice.dark_gray
-	%p{style: 'margin-bottom: 0.5em;', class: 'big'}
-		Notice:
-	%p
-		= auto_link(TextSnippet.find('footer-intro').text)
+- if TextSnippet.find('footer-intro').present?
+  .footer_notice.dark_gray
+    %p{style: 'margin-bottom: 0.5em;', class: 'big'}
+      Notice:
+    %p.light
+      = auto_link(TextSnippet.find('footer-intro').text)
