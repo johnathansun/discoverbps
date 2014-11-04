@@ -281,7 +281,7 @@ Dialog Box
 		padding: 0;
 		&:hover { color: $red; }
 	}
-	
+
 	.photos {
 		text-align: center;
 	}
@@ -988,7 +988,7 @@ Single School
 		}
 
 		.descrip {
-		  color: #969696;
+		  color: #565656;
 		  margin-left: 21px;
 
 		  span {
@@ -1570,7 +1570,7 @@ School List Rows
 	.descrip {
 		margin: 0 0 20px 30px;
 		font-size: 14px;
-		color: $med_gray;
+		color: #565656;
 	}
 
 	/* Schoole Description
@@ -1680,8 +1680,8 @@ Compare and Rank
 		margin-top: 38px;
 	}
 
-	.column.sort_schools { 
-		width: 73%; 
+	.column.sort_schools {
+		width: 73%;
 		box-sizing: border-box;
 	}
 
@@ -2207,10 +2207,10 @@ Menu School Lists
 		&.two { z-index: 3; }
 		&.three { z-index: 2; }
 		&.four { z-index: 1; }
-		
-		a, 
-		a:hover { 
-			text-decoration: none; 
+
+		a,
+		a:hover {
+			text-decoration: none;
 		}
 
 		.bar {
@@ -2457,10 +2457,10 @@ Wrap Search
 // .search_section.first ///////////////
 .search .search_section.first .content_left { border: none; }
 .search .search_section.first .content_left .text { margin-right: 0; }
-.search .search_section.first .content_left .home_intro { 
-	max-width: 525px; 
-	margin: 0 0 50px; 
-	
+.search .search_section.first .content_left .home_intro {
+	max-width: 525px;
+	margin: 0 0 50px;
+
 	a {
 		color: #FFF;
 		text-decoration: none;
@@ -2572,7 +2572,7 @@ Wrap Search
   display: block;
   height: 38px;
   width: 100%;
-  
+
 	input {
 	  border: 0;
 	  font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;

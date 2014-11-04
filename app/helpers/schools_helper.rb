@@ -57,14 +57,14 @@ module SchoolsHelper
 	end
 
 	def preview_dates_list_helper(hash)
-		list = ''
-		list << "Preview date 1: #{hash.try(:[], :PreviewDate1)}, " 	if hash.try(:[], :PreviewDate1).present?
-		list << "Preview date 2: #{hash.try(:[], :PreviewDate2)}, " 	if hash.try(:[], :PreviewDate2).present?
-		list << "Preview date 3: #{hash.try(:[], :PreviewDate3)}, " 	if hash.try(:[], :PreviewDate3).present?
-		list << "Preview date 4: #{hash.try(:[], :PreviewDate4)}, " 	if hash.try(:[], :PreviewDate4).present?
-		list << "Preview date 5: #{hash.try(:[], :PreviewDate5)}, " 	if hash.try(:[], :PreviewDate5).present?
-		list << "Preview date 6: #{hash.try(:[], :PreviewDate6)}" 	if hash.try(:[], :PreviewDate6).present?
-		list
+		array = []
+		array << hash[:PreviewDate1] 	if hash.try(:[], :PreviewDate1).present?
+		array << hash[:PreviewDate2] 	if hash.try(:[], :PreviewDate2).present?
+		array << hash[:PreviewDate3] 	if hash.try(:[], :PreviewDate3).present?
+		array << hash[:PreviewDate4] 	if hash.try(:[], :PreviewDate4).present?
+		array << hash[:PreviewDate5] 	if hash.try(:[], :PreviewDate5).present?
+		array << hash[:PreviewDate6] 	if hash.try(:[], :PreviewDate6).present?
+		array
 	end
 
 	def eligibility_helper(tier)
