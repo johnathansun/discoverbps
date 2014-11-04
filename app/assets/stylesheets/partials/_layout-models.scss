@@ -22,13 +22,13 @@ Dialog Box
   margin: 0 0 0 -185px;
   width: 330px;
   height: auto;
-  background: #ffffff;
+  background: $light_gray;
   padding: 20px;
   box-shadow: 0px 2px 25px 0px rgba(0, 0, 0, 0.6);
   box-sizing: border-box;
 
-	&.dialog_box_dicover {
-	  padding: 38px;
+	&.dialog_box_discover {
+	  padding: 40px;
 	  width: 750px;
 	  margin: 0 0 0 -375px;
 	  font-size: 15px;
@@ -153,9 +153,7 @@ Dialog Box
 			}
 
 		}// .content
-	}// &.dialog_box_dicover
-
-
+	}// &.dialog_box_discover
 
 	&#dialog_discover_detail {
 	  box-shadow: none;
@@ -264,6 +262,37 @@ Dialog Box
 
 	}// #dialog_share_via_email
 
+	.dialog_title {
+		width: 82%;
+	}
+
+	// hide "add another child" in dialogue boxes
+	#sibling_search_1 { display: none !important; }
+
+	#delete_student_button {
+		margin-top: 20px;
+		background: none;
+		color: #999;
+		font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+		font-size: 14px;
+		border: 0;
+		-webkit-border-radius: 0;
+		border-radius: 0;
+		padding: 0;
+		&:hover { color: $red; }
+	}
+	
+	.photos {
+		text-align: center;
+	}
+
+	.close_icon {
+		position: absolute;
+		cursor: pointer;
+		top: 14px;
+		right: 13px;
+		&:hover { color: $red; }
+	}
 
 	.title {
 	  color: #0077cf;
@@ -979,7 +1008,7 @@ Single School
 
 #main_gallery_image {
   margin: 30px 0 20px 0;
-  img { width: 681px; }
+  img { width: 100%; }
 }
 
 
@@ -2523,231 +2552,216 @@ Wrap Search
 /* ------------------------------------------------------------
  Student Input Form
 --------------------------------------------------------------- */
-.search .search_section .content_left .new_search_form_wrap {
+.new_search_form_wrap {
+	margin-bottom: 50px;
+	width: 90%;
 
 	&.hidden {
 		display: none;
 	}
 }
 
-.search .new_search_form_wrap {
-	margin-bottom: 50px;
-	width: 90%;
-}
-
-.search .search_section .content_left form .form_line {
+.form_line {
   margin-bottom: 12px;
   display: block;
   height: 38px;
   width: 100%;
-}
-.search .search_section .content_left form .form_line input {
-  border: 0;
-  font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
-  font-size: 16px;
-  color: #565656;
-  height: 29px;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
-}
-.search .search_section .content_left form .form_line input:-moz-placeholder {
-  color: #a4a4a4;
-}
-.search .search_section .content_left form .form_line input::-moz-placeholder {
-  color: #a4a4a4;
-}
-.search .search_section .content_left form .form_line input:-ms-input-placeholder {
-  color: #a4a4a4;
-}
-.search .search_section .content_left form .form_line input::-webkit-input-placeholder {
-  color: #a4a4a4;
-}
-.search .search_section .content_left form .form_line .bloc_1 {
-  width: 315px;
-  display: block;
-  float: left;
-  padding: 9px 0 0 11px;
-}
-.search .search_section .content_left form .form_line .bloc_2 {
-  display: block;
-  float: left;
-  padding: 6px 0 3px 8px;
-  width: 80px;
-}
-.search .search_section .content_left form .form_line .bloc_2.select_grade {
-  cursor: pointer;
-  position: relative;
-  height: 29px !important;
-  width: 80px;
-  background: #ffffff;
-  color: #565656;
-  font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
-  color: #565656;
-  font-size: 16px;
-}
-.search .search_section .content_left form .form_line .bloc_2.select_grade .arrow {
-  position: absolute;
-  top: 16px;
-  right: 5px;
-  font-size: 9px;
-}
-.search .search_section .content_left form .form_line .bloc_2.select_grade .option_grade {
-  display: none;
-  width: 165px;
-  height: auto;
-  position: absolute;
-  background: #ffffff;
-  padding: 6px 4px;
-  left: -2px;
-  top: 37px;
-  z-index: 500;
-}
-.search .search_section .content_left form .form_line .bloc_2.select_grade .option_grade .btn_grade {
-  width: 25px;
-  height: 23px;
-  text-align: center;
-  line-height: 25px;
-  float: left;
-  background: url(/assets/bg_grade.png);
-  font-size: 11px;
-  color: #000000;
-  margin: 4px;
-  padding-top: 2px;
-  letter-spacing: 1px;
-}
-.search .search_section .content_left form .form_line .bloc_2.select_grade:hover .option_grade {
-  display: block;
-}
-.search .search_section .content_left form .form_line .bloc_2.select_grade:hover .option_grade .btn_grade:hover {
-  background-position: 0 -25px;
-  color: #ffffff;
-}
-.search .search_section .content_left form .form_line .bloc_3 {
-  width: 200px;
-  display: block;
-  float: left;
-  padding: 6px 0 3px 11px;
-}
-.search .search_section .content_left form .form_line .bloc_4 {
-  width: 200px;
-  display: block;
-  float: left;
-  padding: 6px 0 3px 11px;
-}
-.search .search_section .content_left form .form_line .separation_bloc {
-  background: #ffffff;
-  float: left;
-  height: 38px;
-}
-.search .search_section .content_left form .form_line .separation_bloc .separation {
-  border-left: 1px solid #0059a3;
-  width: 2px;
-  height: 24px;
-  margin-top: 7px;
-}
-.search .search_section .content_left form .form_line .btn {
-  background: #0059a3;
-  padding: 6px 11px 0 6px;
-  width: 99px;
-  height: 32px;
-  display: block;
-  float: left;
-  font-size: 12px;
-  line-height: 14px;
-  color: #80bce7;
-}
-.search .search_section .content_left form .form_line .btn .text {
-  vertical-align: middle;
-  width: 80px;
-  font-size: 12px;
-  line-height: 14px;
-  margin-left: 0;
-  display: inline-block;
-  text-align: center;
-}
-.search .search_section .content_left form .form_line .btn .icon {
-  vertical-align: middle;
-}
-.search .search_section .content_left form .form_line .bloc_5 {
-  /*
-                width:39px;
-                display:block;
-                float:left;
-                background: @OR;
-                color: @W;
-                padding:3px 11px 0 6px;
-                height:30px;
-                font-size: 16px;
-                line-height: 16px;
-                padding-top: 4px;
-                border:0;
-                font-family: @current;
-                color: @W;*/
+  
+	input {
+	  border: 0;
+	  font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+	  font-size: 16px;
+	  color: #565656;
+	  height: 29px;
+	  -webkit-border-radius: 0;
+	  -moz-border-radius: 0;
+	  border-radius: 0;
+	}
+	input:-moz-placeholder {
+	  color: #a4a4a4;
+	}
+	input::-moz-placeholder {
+	  color: #a4a4a4;
+	}
+	input:-ms-input-placeholder {
+	  color: #a4a4a4;
+	}
+	input::-webkit-input-placeholder {
+	  color: #a4a4a4;
+	}
+	.bloc_1 {
+	  width: 315px;
+	  display: block;
+	  float: left;
+	  padding: 9px 0 0 11px;
+	}
+	.bloc_2 {
+	  display: block;
+	  float: left;
+	  padding: 6px 0 3px 8px;
+	  width: 80px;
+	}
+	.bloc_2.select_grade {
+	  cursor: pointer;
+	  position: relative;
+	  height: 29px !important;
+	  width: 80px;
+	  background: #ffffff;
+	  color: #565656;
+	  font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+	  color: #565656;
+	  font-size: 16px;
+	}
+	.bloc_2.select_grade .arrow {
+	  position: absolute;
+	  top: 16px;
+	  right: 5px;
+	  font-size: 9px;
+	}
+	.bloc_2.select_grade .option_grade {
+	  display: none;
+	  width: 165px;
+	  height: auto;
+	  position: absolute;
+	  background: #ffffff;
+	  padding: 6px 4px;
+	  left: -2px;
+	  top: 37px;
+	  z-index: 500;
+	}
+	.bloc_2.select_grade .option_grade .btn_grade {
+	  width: 25px;
+	  height: 23px;
+	  text-align: center;
+	  line-height: 25px;
+	  float: left;
+	  background: url(/assets/bg_grade.png);
+	  font-size: 11px;
+	  color: #000000;
+	  margin: 4px;
+	  padding-top: 2px;
+	  letter-spacing: 1px;
+	}
+	.bloc_2.select_grade:hover .option_grade {
+	  display: block;
+	}
+	.bloc_2.select_grade:hover .option_grade .btn_grade:hover {
+	  background-position: 0 -25px;
+	  color: #ffffff;
+	}
+	.bloc_3 {
+	  width: 200px;
+	  display: block;
+	  float: left;
+	  padding: 6px 0 3px 11px;
+	}
+	.bloc_4 {
+	  width: 200px;
+	  display: block;
+	  float: left;
+	  padding: 6px 0 3px 11px;
+	}
+	.separation_bloc {
+	  background: #ffffff;
+	  float: left;
+	  height: 38px;
+	}
+	.separation_bloc .separation {
+	  border-left: 1px solid $light_gray;
+	  width: 2px;
+	  height: 24px;
+	  margin-top: 7px;
+	}
+	.btn {
+	  background: #0059a3;
+	  padding: 6px 11px 0 6px;
+	  width: 99px;
+	  height: 32px;
+	  display: block;
+	  float: left;
+	  font-size: 12px;
+	  line-height: 14px;
+	  color: #80bce7;
+	}
+	.btn#add_child_2 .text {
+	  vertical-align: middle;
+	  width: 80px;
+	  font-size: 12px;
+	  line-height: 14px;
+	  margin-left: 0;
+	  display: inline-block;
+	  text-align: center;
+	}
+	.btn .icon {
+	  vertical-align: middle;
+	}
+	.bloc_5 {
+	  height: 38px;
+	  float: left;
+	  background: #fc5b00;
+	}
+	.bloc_5 input {
+	  width: 65px;
+	  height: 38px;
+	}
 
-  height: 38px;
-  float: left;
-  background: #fc5b00;
+	.bloc_6 {
+	  width: 220px;
+	  display: block;
+	  float: left;
+	  background: none;
+	  font-size: 16px;
+	  line-height: 14px;
+	  color: #80bce7;
+	  border: 0;
+	  margin-left: 12px;
+	  font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+	  position: relative;
+	}
+	.bloc_6 input {
+	  background: none;
+	  border: 0;
+	  font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
+	  color: #80bce7;
+	  padding: 9px 32px 0 39px;
+	  height: 29px;
+	  width: 149px;
+	}
+	.bloc_6 input:-moz-placeholder {
+	  color: #80bce7;
+	}
+	 .bloc_6 input::-moz-placeholder {
+	  color: #80bce7;
+	}
+	.bloc_6 input:-ms-input-placeholder {
+	  color: #80bce7;
+	}
+	.bloc_6 input::-webkit-input-placeholder {
+	  color: #80bce7;
+	}
+	.bloc_6 .select_school_icon {
+	  position: absolute;
+	  display: inline-block;
+	  top: 10px;
+	  left: 11px;
+	  color: #80bce7;
+	  font-size: 19px;
+	}
+	.bloc_6 .arrow {
+	  position: absolute;
+	  display: inline-block;
+	  top: 16px;
+	  right: 11px;
+	  color: #80bce7;
+	  font-size: 9px;
+	}
+	.bloc_6.portrait {
+	  display: none;
+	}
 }
-.search .search_section .content_left form .form_line .bloc_5 input {
-  width: 65px;
-  height: 38px;
-}
-a.ui-corner-all:hover {
+
+form a.ui-corner-all:hover {
   color: #ffffff !important;
-}
-.search .search_section .content_left form .form_line .bloc_6 {
-  width: 220px;
-  display: block;
-  float: left;
-  background: none;
-  font-size: 16px;
-  line-height: 14px;
-  color: #80bce7;
-  border: 0;
-  margin-left: 12px;
-  font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
-  position: relative;
-}
-.search .search_section .content_left form .form_line .bloc_6 input {
-  background: none;
-  border: 0;
-  font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
-  color: #80bce7;
-  padding: 9px 32px 0 39px;
-  height: 29px;
-  width: 149px;
-}
-.search .search_section .content_left form .form_line .bloc_6 input:-moz-placeholder {
-  color: #80bce7;
-}
-.search .search_section .content_left form .form_line .bloc_6 input::-moz-placeholder {
-  color: #80bce7;
-}
-.search .search_section .content_left form .form_line .bloc_6 input:-ms-input-placeholder {
-  color: #80bce7;
-}
-.search .search_section .content_left form .form_line .bloc_6 input::-webkit-input-placeholder {
-  color: #80bce7;
-}
-.search .search_section .content_left form .form_line .bloc_6 .select_school_icon {
-  position: absolute;
-  display: inline-block;
-  top: 10px;
-  left: 11px;
-  color: #80bce7;
-  font-size: 19px;
-}
-.search .search_section .content_left form .form_line .bloc_6 .arrow {
-  position: absolute;
-  display: inline-block;
-  top: 16px;
-  right: 11px;
-  color: #80bce7;
-  font-size: 9px;
-}
-.search .search_section .content_left form .form_line .bloc_6.portrait {
-  display: none;
 }
 
 

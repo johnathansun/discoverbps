@@ -153,10 +153,6 @@ a.student_tab {
 .icon-map-home:before {
 	content: "\e00a";
 }
-.close_icon {
-	float: right;
-	cursor: pointer;
-}
 .sortable_column {
 	cursor: pointer;
 }
@@ -203,21 +199,6 @@ input, select {
 	height:100%;
 	left:0;
 	top:0;
-}
-#delete_student_button {
-	float: left;
-	margin-top: -50px;
-	margin-left: 400px;
-	background-color: white !important;
-	color: #fc0d1b !important;
-	font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
-	font-size: 16px;
-	border: 0;
-	-webkit-border-radius: 0;
-	border-radius: 0;
-	width: auto !important;
-	padding: 1px 12px 0 12px;
-	height: 38px;
 }
 #delete_students_button {
 	color: white !important;

@@ -1,26 +1,27 @@
 .close_icon
-	%span{aria: {hidden: 'true'}, class: 'icon-DBPS-Dev-Assets-SRG-07'}
+	%span{:aria => {hidden: 'true'}, :class => 'icon-DBPS-Dev-Assets-SRG-07'}
 
-.wrap
+-#.wrap
 	.search
 		.search_section_content
 			%section.search_section
 				.content_left.no_right_margin
 					.content
-						- if defined?(student) && student.present?
-							%h3
-								To edit your student's information, please modify the form fields below and click next:
-							%br/
-							= form_tag student_path(student), :method => :put, :remote => true, 'data-type' => 'script' do
-								= render partial: 'students/search_form', locals: {student: student, sibling_search: false}
 
-							= button_to 'Clear Student', student_path(student), method: :delete, id: 'delete_student_button', class: 'antialiased_button', confirm: 'Are you sure you want to clear this student?'
-						- else
-							%h3
-								Please enter your student's home address, name and grade level:
-							%br/
-							= form_tag students_path, :method => :post, :remote => true do
-								= render partial: 'students/search_form', locals: {sibling_search: false}
+- if defined?(student) && student.present?
+	%h3.dialog_title
+		To edit your student's information, please modify the form fields below and click next:
+	%br/
+	= form_tag student_path(student), :method => :put, :remote => true, 'data-type' => 'script' do
+		= render partial: 'students/search_form', locals: {student: student, sibling_search: false}
+
+	= button_to 'Clear Student', student_path(student), method: :delete, id: 'delete_student_button', class: 'antialiased_button', confirm: 'Are you sure you want to clear this student?'
+- else
+	%h3.dialog_title
+		Please enter your student's home address, name and grade level:
+	%br/
+	= form_tag students_path, :method => :post, :remote => true do
+		= render partial: 'students/search_form', locals: {sibling_search: false}
 
 :javascript
 	$(".close_icon").click(function() {

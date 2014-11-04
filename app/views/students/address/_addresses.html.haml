@@ -1,9 +1,9 @@
 .close_icon
-	%span{aria: {hidden: 'true'}, class: 'icon-DBPS-Dev-Assets-SRG-07'}
+	%span{:aria => {hidden: 'true'}, class => 'icon-DBPS-Dev-Assets-SRG-07'}
 
 .content
 	= form_tag verify_address_student_path(student), method: :put, remote: true, 'data-type' => 'script' do
-		%h3
+		%h3.dialog_title
 			Please verify your student's home address:
 		%br/
 
