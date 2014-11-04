@@ -2316,7 +2316,8 @@ Wrap Search
 	.previous_student_search_button {
 		display: block;
 		background: tint($light_blue, 50%);
-		padding: 20px 20px 15px;
+		padding: 14px 10px 4px;
+		line-height: 1.5em;
 		text-decoration: none;
 		@include clearfix;
 		&:hover {
@@ -2331,7 +2332,7 @@ Wrap Search
 		cursor: pointer;
 		color: tint($blue, 20%);
 		font-size: 1.5em;
-		margin: 18px -35px 0 0;
+		margin: 11px -35px 0 0;
 		transition: color 250ms ease;
 		&:hover {
 			color: $red;
@@ -2340,11 +2341,19 @@ Wrap Search
 	}
 
 	.name {
-		font-size: 24px;
+		font-size: 28px;
 		text-transform: capitalize;
 		margin-right: 5px;
 	}
-	.schools { float: right; }
+	.grade {
+		font-size: 12px;
+	}
+	.schools { 
+		float: right;
+		font-size: 18px; 
+	}
+
+	.steps .step .label { margin-top: 5px; }
 
 	#start_new_search {
 		float: left;
