@@ -2153,6 +2153,155 @@ Menu School Lists
 }
 
 
+
+/* ---------------------------------------------------------
+ Steps
+------------------------------------------------------------ */
+.steps {
+	@include clearfix;
+
+	.step {
+		position: relative;
+		width: 25%;
+		float: left;
+		&:hover {
+			.label {
+				color: $yellow !important;
+			}
+		}
+		&.one { z-index: 4; }
+		&.two { z-index: 3; }
+		&.three { z-index: 2; }
+		&.four { z-index: 1; }
+		
+		a, 
+		a:hover { 
+			text-decoration: none; 
+		}
+
+		.bar {
+			position: relative;
+			height: 10px;
+			background-color: $dark_blue;
+			margin: 0 5px 0 0;
+
+			.point.terminal { display: none; }
+
+			.arrow {
+				position: absolute;
+				border-left: 5px solid;
+				border-top: 5px solid transparent;
+				border-bottom: 5px solid transparent;
+				&.back {
+					left: 0;
+					border-left-color: $blue;
+				}
+				&.front {
+					right: -5px;
+					border-left-color: $dark_blue;
+				}
+			}
+		}
+		.label {
+			display: block;
+			margin: 10px 0 0;
+			color: $dark_blue;
+			font-size: 10px;
+			line-height: 1.5em;
+			transition: color 250ms ease;
+			.step_name {
+				font-size: 18px;
+			}
+		}
+
+		&.first {
+			.bar .arrow.back { display: none; }
+		}
+		&.last {
+			.bar {
+				margin-right: 0;
+				.arrow.front { display: none; }
+			}
+		}
+		&.current {
+			.bar {
+				background-color: $light_blue;
+				.arrow.front {
+					border-left-color: $light_blue;
+				}
+			}
+			.label { color: $yellow !important; }
+		}
+		&.in_progress {
+			.bar {
+				background: url('/assets/progress_bar_blue.png') $light_blue;
+				margin-right: 0;
+				.arrow.front {
+					background: url('/assets/in_progress_blue.png');
+					width: 5px;
+					height: 10px;
+					border: none;
+					right: 0;
+				}
+			}
+			.label { color: $light_blue; }
+		}
+		&.complete {
+			.bar {
+				background-color: $light_blue;
+				.arrow.front {
+					border-left-color: $light_blue;
+				}
+			}
+			.label { color: $light_blue; }
+		}
+	}
+}
+
+
+
+/* ---------------------------------------------------------
+ Progress Bar
+------------------------------------------------------------ */
+.progress_bar {
+	float: right;
+	width: 100%;
+	max-width: 660px;
+	margin: 17px 0 0;
+
+	.note {
+		margin: 0 0 18px;
+	}
+
+	.steps .step {
+
+		.bar {
+
+			.point.terminal {
+				position: absolute;
+
+				width: 16px;
+				height: 16px;
+			}
+		}
+		&.first {
+			.bar .point.terminal {
+				top: -4px; left: -5px;
+				background: url("/assets/blue_point_white.png") no-repeat center center;
+			}
+		}
+		&.last {
+			.bar .point.terminal {
+				top: -3px; right: -5px;
+				background: url("/assets/star_point.png") no-repeat center center;
+				background-size: 16px;
+			}
+		}
+	}
+}
+
+
+
 /* ---------------------------------------------------------
 Wrap Search
 ------------------------------------------------------------ */
@@ -2274,13 +2423,23 @@ Wrap Search
 // .search_section.first ///////////////
 .search .search_section.first .content_left { border: none; }
 .search .search_section.first .content_left .text { margin-right: 0; }
-.search .search_section.first .content_left .home_intro { max-width: 525px; margin: 0 0 50px; }
+.search .search_section.first .content_left .home_intro { 
+	max-width: 525px; 
+	margin: 0 0 50px; 
+	
+	a {
+		color: #FFF;
+		text-decoration: none;
+		&:hover { color: $yellow; text-decoration: underline; }
+	}
+}
 
 // .search_section.second ///////////////
 .search .search_section.second .content_left {
 	min-height: 550px;
 
 	a {
+		color: #FFF;
 		text-decoration: underline;
 		&:hover {
 			color: $yellow;
@@ -2301,7 +2460,7 @@ Wrap Search
 --------------------------------------------------- */
 .search .user_lists {
 	margin-bottom: 50px;
-	width: 120%;
+	width: 90%;
 
 	li {
 		position: relative;
@@ -2374,7 +2533,7 @@ Wrap Search
 
 .search .new_search_form_wrap {
 	margin-bottom: 50px;
-	width: 120%;
+	width: 90%;
 }
 
 .search .search_section .content_left form .form_line {
@@ -2913,142 +3072,8 @@ Wrap Account
 }
 
 
-/* ---------------------------------------------------------
- Progress Bar
------------------------------------------------------------- */
-.progress_bar {
-	float: right;
-	width: 100%;
-	max-width: 660px;
-	margin: 17px 0 0;
 
-	.note {
-		margin: 0 0 18px;
-	}
 
-	.steps .step {
-
-		.bar {
-
-			.point.terminal {
-				position: absolute;
-
-				width: 16px;
-				height: 16px;
-			}
-		}
-		&.first {
-			.bar .point.terminal {
-				top: -4px; left: -5px;
-				background: url("/assets/blue_point_white.png") no-repeat center center;
-			}
-		}
-		&.last {
-			.bar .point.terminal {
-				top: -3px; right: -5px;
-				background: url("/assets/star_point.png") no-repeat center center;
-				background-size: 16px;
-			}
-		}
-	}
-}
-
-// Steps -----------
-.steps {
-	@include clearfix;
-
-	.step {
-		position: relative;
-		width: 25%;
-		float: left;
-		&:hover {
-			.label {
-				color: $yellow !important;
-			}
-		}
-		&.one { z-index: 4; }
-		&.two { z-index: 3; }
-		&.three { z-index: 2; }
-		&.four { z-index: 1; }
-
-		.bar {
-			position: relative;
-			height: 10px;
-			background-color: $dark_blue;
-			margin: 0 5px 0 0;
-
-			.point.terminal { display: none; }
-
-			.arrow {
-				position: absolute;
-				border-left: 5px solid;
-				border-top: 5px solid transparent;
-				border-bottom: 5px solid transparent;
-				&.back {
-					left: 0;
-					border-left-color: $blue;
-				}
-				&.front {
-					right: -5px;
-					border-left-color: $dark_blue;
-				}
-			}
-		}
-		.label {
-			display: block;
-			margin: 10px 0 0;
-			color: $dark_blue;
-			font-size: 10px;
-			line-height: 1.5em;
-			transition: color 250ms ease;
-			.step_name {
-				font-size: 18px;
-			}
-		}
-
-		&.first {
-			.bar .arrow.back { display: none; }
-		}
-		&.last {
-			.bar {
-				margin-right: 0;
-				.arrow.front { display: none; }
-			}
-		}
-		&.current {
-			.bar {
-				background-color: $light_blue;
-				.arrow.front {
-					border-left-color: $light_blue;
-				}
-			}
-			.label { color: $yellow !important; }
-		}
-		&.in_progress {
-			.bar {
-				background: url('/assets/progress_bar_blue.png') $light_blue;
-				margin-right: 0;
-				.arrow.front {
-					background: url('/assets/in_progress_blue.png');
-					width: 5px;
-					height: 10px;
-					border: none;
-					right: 0;
-				}
-			}
-			.label { color: $light_blue; }
-		}
-		&.complete {
-			.bar {
-				background-color: $light_blue;
-				.arrow.front {
-					border-left-color: $light_blue;
-				}
-			}
-			.label { color: $light_blue; }
-		}
-	}
-}
 
 
 

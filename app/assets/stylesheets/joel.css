@@ -269,14 +269,6 @@ input, select {
 .wrap .page_content {
 	padding: 48px 0 60px 0;
 }
-.wrap .page_content a {
-	color: #ffffff;
-	text-decoration :none;
-}
-.wrap .page_content a:hover {
-	color: #ffffff;
-	text-decoration :underline;
-}
 .wrap .page_instructions {
   color: #80bce7;
   font-size: 18px;
