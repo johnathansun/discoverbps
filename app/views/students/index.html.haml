@@ -39,22 +39,26 @@
 											.bar
 												%span.arrow.back
 												%span.arrow.front
-											.label= 'STEP 1 - SEARCH'
+											.label
+												= link_to 'STEP 1 - SEARCH', root_url
 										%div{class: "step #{progress_bar_class_helper(student.step, 1, 2)}"}
 											.bar
 												%span.arrow.back
 												%span.arrow.front
-											.label= 'STEP 2 - LEARN'
+											.label
+												= link_to 'STEP 2 - LEARN', schools_path
 										%div{class: "step #{progress_bar_class_helper(student.step, 1, 3)}"}
 											.bar
 												%span.arrow.back
 												%span.arrow.front
-											.label= 'STEP 3 - COMPARE & RANK'
+											.label
+												= link_to 'STEP 3 - COMPARE & RANK', compare_schools_path
 										%div{class: "step last #{progress_bar_class_helper(student.step, 1, 4)}"}
 											.bar
 												%span.arrow.back
 												%span.arrow.front
-											.label= 'STEP 4 - GET READY'
+											.label
+												= link_to 'STEP 4 - GET READY', get_ready_schools_path
 
 							%li
 								%a#start_new_search.button.orange{:href => '#'}
