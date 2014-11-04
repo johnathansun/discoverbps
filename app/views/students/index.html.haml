@@ -36,25 +36,29 @@
 											favorites
 									.steps{class: "#{student.step}"}
 										%div{class: "step first #{progress_bar_class_helper(student.step, 1, 1)}"}
-											.bar
-												%span.arrow.back
-												%span.arrow.front
-											.label= 'STEP 1 - SEARCH'
+											%a{href: "#", class: "no-decoration"}
+												.bar
+													%span.arrow.back
+													%span.arrow.front
+												.label= 'STEP 1 - SEARCH'
 										%div{class: "step #{progress_bar_class_helper(student.step, 1, 2)}"}
-											.bar
-												%span.arrow.back
-												%span.arrow.front
-											.label= 'STEP 2 - LEARN'
+											%a{href: "#", class: "no-decoration"}
+												.bar
+													%span.arrow.back
+													%span.arrow.front
+												.label= 'STEP 2 - LEARN'
 										%div{class: "step #{progress_bar_class_helper(student.step, 1, 3)}"}
-											.bar
-												%span.arrow.back
-												%span.arrow.front
-											.label= 'STEP 3 - COMPARE & RANK'
+											%a{href: "#", class: "no-decoration"}
+												.bar
+													%span.arrow.back
+													%span.arrow.front
+												.label= 'STEP 3 - COMPARE & RANK'
 										%div{class: "step last #{progress_bar_class_helper(student.step, 1, 4)}"}
-											.bar
-												%span.arrow.back
-												%span.arrow.front
-											.label= 'STEP 4 - GET READY'
+											%a{href: "#", class: "no-decoration"}
+												.bar
+													%span.arrow.back
+													%span.arrow.front
+												.label= 'STEP 4 - GET READY'
 
 							%li
 								%a#start_new_search.button.orange{:href => '#'}
