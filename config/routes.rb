@@ -55,7 +55,10 @@ DiscoverbpsV2::Application.routes.draw do
       post 'sort', on: :collection
     end
     resources :notifications
-    resources :schools
+    resources :schools do
+      post 'sync', on: :member
+      post 'sync_all', on: :collection
+    end
     resources :students, path: 'searches'
     resources :text_snippets
   end

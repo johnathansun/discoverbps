@@ -291,6 +291,8 @@
 
 <h2><%= @school.bps_id %> &mdash; <%= @school.name %></h2>
 <p><strong>Last Updated:</strong> <%= @school.updated_at %> EST</p>
+<p><%= link_to 'Update School Data from API', sync_admin_school_path(@school.id), method: :post, class: 'add_button', style: 'color: white; font-weight: bold;' %></p>
+
 
 <h3>Basic Info</h3>
 	<% if @school.api_basic_info.present? %>
