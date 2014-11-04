@@ -139,6 +139,11 @@ class SchoolsController < ApplicationController
     @sped_schools = current_student.sped_schools.order(:distance)
   end
 
+  def print
+    @school = School.find(params[:id])
+    @student_school = current_student.student_schools.where(school_id: @school.id).try(:first)
+  end
+
 
   private
 
