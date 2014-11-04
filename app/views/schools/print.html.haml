@@ -30,7 +30,7 @@
 				%h1
 					= @school.name
 				%br/
-				%p{style: "font-family: georgia; font-size: 14px;"}
+				%p{class: 'light', style: "font-size: 12px;"}
 					= @school.api_description.try(:[], :schoolspecial)
 
 			%div{class: "desktop", style: "clear: top;"}
@@ -49,7 +49,7 @@
 						%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"}
 						= raw @student_school.distance
 						mi from home
-					%p.descrip
+					%p.descrip.light
 						%span{aria: {hidden: 'true'}, class: "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
 							= raw @student_school.walk_time
 							%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-18"}
@@ -61,8 +61,8 @@
 					.box
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"}
-								School hours
-						%p.descrip
+							School hours
+						%p.descrip.light
 							= @school.api_hours.try(:[], :Description)
 
 					- if SURROUND_CARE_GRADES.include?(current_student.grade_level)
@@ -70,113 +70,123 @@
 							.box
 								%p.title
 									%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
-										Surround care
+									Surround care
 
-								%p.descrip
+								%p.descrip.light
 									- if @school.api_basic_info.try(:[], :BeforeSchPrograms).present?
 										%span.text_G1
-											Before:
+										Before:
+
 										= @school.api_basic_info.try(:[], :BeforeSchPrograms)
 										%br/
 										%br/
 
 									- if @school.api_basic_info.try(:[], :AfterSchPrograms).present?
 										%span.text_G1
-											After:
+										After:
+
 										= @school.api_basic_info.try(:[], :AfterSchPrograms)
 
-					.box
-						%p.title
-							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
-								School Type
-						%p.descrip
-							= @school.api_basic_info.try(:[], :SchoolType)
 
 					.box
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"}
-								Grades Offered
-						%p.descrip
+							Grades Offered
+						%p.descrip.light
 							= grade_levels_helper(@school.grade_levels)
 
 					.box
-						%p.title
-							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
-								Enrollment
-						%p.descrip
-							= @school.api_basic_info.try(:[], :SchSize)
+						- if TRANSITION_GRADES.include?(current_student.grade_level)
+							%p.title
+								%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
+								= "Demand Data (#{current_student.formatted_grade_level_name} - #{last_school_year_range})"
+							%p.descrip.light
+								= @school.open_seats(current_student.grade_level)
+								open seats
+								%br/
+								= @school.applicants(current_student.grade_level)
+								applicants
+								%br/
+								= @school.applicants_per_open_seat(current_student.grade_level, last_school_year)
+								applicants/open seat
+
+							%p.title
+								%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
+								= "Enrollment (#{current_student.formatted_grade_level_name} - #{last_school_year_range})"
+							%p.descrip
+								= @school.api_basic_info.try(:[], :SchSize)
 
 					.box
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"}
-								Eligibility
-						%p.descrip
+							Eligibility
+						%p.descrip.light
 							= @student_school.eligibility
 
 					.box
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"}
-								Special Application
-						%p.descrip
+							Special Application
+						%p.descrip.light
 							= special_application_helper(@school.api_description.try(:[], :isspecialappprocedures))
 
 					.box
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"}
-								Advanced Work Class (AWC)
-						%p.descrip
+							Advanced Work Class (AWC)
+						%p.descrip.light
 							= awc_helper(@school.api_basic_info.try(:[], :IsAWC))
 
 					.box
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
-								MCAS Tier
-						%p.descrip
+							MCAS Tier
+						%p.descrip.light
 							= school_tier_helper(@student_school.tier)
 
 					.box
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
-								Uniform Policy
+							Uniform Policy
 						- if @school.api_description.try(:[], :uniformpolicydesc).present?
-							%p.descrip
+							%p.descrip.light
 								= @school.api_description.try(:[], :uniformpolicydesc)
 						- else
-							%p.descrip
+							%p.descrip.light
 								= @school.api_description.try(:[], :uniformpolicy)
 
 					.box
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"}
-								School Focus
-						%p.descrip
+							School Focus
+						%p.descrip.light
 							= @school.api_description.try(:[], :schfocus)
 
 					.box
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
-								Health & Wellness
-						%p.descrip
-							= @school.api_basic_info.try(:[], :ishasfulltimenurse) == 'True' ? 'Full-Time Nurse' : ''
+							Student Support
+						%p.descrip.light
+							=raw student_support_list_helper(@school.api_student_support)
 
 					.box
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
-								Community Partners
-						%p.descrip
+							Community Partners
+						%p.descrip.light
 							= partners_list_helper(@school.api_partners)
 
 					.box
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
-								Facility Features
-						%p.descrip
+							Facility Features
+						%p.descrip.light
 							= facilities_list_helper(@school.api_facilities)
 
 					- if UPPER_GRADES.include?(current_student.grade_level)
 						.box
 							%p.title
 								%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
-									Sports
-							%p.descrip
+								Sports
+							%p.descrip.light
 								= sports_list_helper(@school.api_sports)
