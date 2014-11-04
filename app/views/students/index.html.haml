@@ -24,7 +24,8 @@
 								%li
 									= link_to student_path(student), method: :delete, confirm: 'Are you sure you want to delete your previous search?', style: 'text-decoration: none;' do
 										%span{class: "icon icon-close", title: "delete student"}
-									%a{:href => schools_path(student_id: student.id), :class => 'previous_student_search_button' }
+
+									= link_to schools_path(student_id: student.id), class: 'previous_student_search_button' do
 										%span.name.big.dark_blue= student.tab_name
 										%span.grade.small.dark_blue
 											Grade
