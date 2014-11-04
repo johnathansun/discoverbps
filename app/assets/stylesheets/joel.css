@@ -1,4 +1,4 @@
-.sticky-footer-wrap {
+body.standard .select_grade.sticky-footer-wrap {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
@@ -45,9 +45,7 @@ a.blue {
 #grade_level_placeholder {
 	width: 50px;
 }
-body.standard .select_grade {
-	padding-top: 9px !important;
-}
+
 body.standard #sibling_school {
 	background: #0059a3;
 	margin-left: 0;
