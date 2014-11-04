@@ -513,31 +513,37 @@
 
       // Display the Home Schools on click
 
-      google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function() {
-        clearMarkers();
-        setMarkers(homeMarkers);
-      });
+      if ($('#home_schools_tab').length > 0) {
+        google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function() {
+          clearMarkers();
+          setMarkers(homeMarkers);
+        });
+      }
 
       // Display the Zone Schools on click
-
-      google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function() {
-        clearMarkers();
-        setMarkers(zoneMarkers);
-      });
+      if ($('#zone_schools_tab').length > 0) {
+        google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function() {
+          clearMarkers();
+          setMarkers(zoneMarkers);
+        });
+      }
 
       // Display the ELL Schools on click
-
-      google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function() {
-        clearMarkers();
-        setMarkers(ellMarkers);
-      });
+      if ($('#ell_schools_tab').length > 0) {
+        google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function() {
+          clearMarkers();
+          setMarkers(ellMarkers);
+        });
+      }
 
       // Display the SPED Schools on click
+      if ($('#sped_schools_tab').length > 0) {
+        google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function() {
+          clearMarkers();
+          setMarkers(spedMarkers);
+        });
+      }
 
-      google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function() {
-        clearMarkers();
-        setMarkers(spedMarkers);
-      });
 
       // Set the home icon
 
