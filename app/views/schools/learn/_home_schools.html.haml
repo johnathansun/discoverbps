@@ -94,8 +94,6 @@
                 .box.line.eligibility
                   .first_block.middle
                     %span.middle.sortable_eligibility
-                      =raw transportation_eligibility_icon_helper(student_school)
-
                       =raw eligibility_helper(spacer_helper(student_school.eligibility))
 
                   .second_bloc.middle
@@ -111,8 +109,10 @@
 
                 .box.line.getting_there
                   .first_block.middle
-                    -# .icon.middle
-                    -#   %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_distance transportation_icon"}
+                    .icon.middle
+                      =raw transportation_eligibility_icon_helper(student_school)
+                      &nbsp;
+
                     %span.middle.sortable_distance
                       = spacer_helper(student_school.distance)
                       mi
