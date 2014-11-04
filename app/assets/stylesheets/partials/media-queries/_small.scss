@@ -709,4 +709,41 @@
 	.footer_notice { width: 96%; }
 
 
+	.compare_list {
+		
+		.column.more_schools { margin: 0 0 0 20%; }
+		.column.labels { margin: 20px 0 0 }
+		
+		.label.rank { width: 20%; }
+		.label.name { width: 68%; margin-left: 12%; }
+		.label.your_fit { display: none; }
+		
+		.compare_list_content {
+			width: 80%;
+		}
+		
+		#ranks {
+			width: 20%;
+		}
+		
+		.sortable_school {
+			
+			.line {
+				
+				&.school_star {
+					width: 10%;	
+					font-size: 32px;
+					img { width: 20px; height: auto; }
+				}
+				&.school_name {
+					font-size: 1.2em;
+					line-height: 54px;
+				}
+				&.school_your_fit_icon { display: none; }
+			}
+		}
+	}
+
+
+
 }
