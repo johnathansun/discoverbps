@@ -88,7 +88,8 @@
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"}
 				Preview Dates
 			- preview_dates_list_helper(school.api_preview_dates).each do |date|
-				%p.descrip.light= date
+				%p.descrip.light
+					= date
 
 
 		-# Surround Care
