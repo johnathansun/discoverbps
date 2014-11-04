@@ -78,10 +78,10 @@
                 .box.line.getting_there
                   .first_block.middle
                     .icon.middle
-                      %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_distance transportation_icon"}
-                      -#- if student_school.transportation_eligibility == 'Y'
+                      -#%span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_distance transportation_icon"}
+                      - if student_school.transportation_eligibility == 'Y'
                         %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-15 transportation_icon"}
-                      -#- else
+                      - else
                         %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-14 transportation_icon"}
 
                     %span.middle.sortable_distance
