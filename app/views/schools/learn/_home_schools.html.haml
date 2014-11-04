@@ -29,15 +29,15 @@
               .column_title
                 Fit Score
 
+            #sortable_eligibility_column.menu_bloc.sortable_column
+              .column_title
+                Eligibility
+
             #getting_there.menu_bloc
               %div{id: 'sortable_distance_column', class: 'first_block sortable_column', style: 'color: #0077cf;'}
                 %div{:aria => {hidden: 'true'}, :class => 'column_arrow icon-DBPS-Dev-Assets-arrow-up'}
                 .column_title
                   Travel
-
-            #sortable_eligibility_column.menu_bloc.sortable_column
-              .column_title
-                Eligibility
 
             #sortable_hours_column.menu_bloc.sortable_column
               .column_title
@@ -91,32 +91,14 @@
                     %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Dev-Assets-SRG-35"}
                       Yes
 
-                .box.line.getting_there
-                  .first_block.middle
-                    .icon.middle
-                      -# %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_distance transportation_icon"}
-                      - if student_school.transportation_eligibility == 'Y'
-                        %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-15 transportation_icon"}
-                      - else
-                        %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-14 transportation_icon"}
-
-                    %span.middle.sortable_distance
-                      = spacer_helper(student_school.distance)
-                      &nbsp;mi
-
-                  .second_bloc.middle
-                    %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
-                      = spacer_helper(student_school.walk_time)
-                      %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
-
-                  .second_bloc.middle.last
-                    %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-17"}
-                      = spacer_helper(student_school.drive_time)
-                      %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
-
                 .box.line.eligibility
                   .first_block.middle
                     %span.middle.sortable_eligibility
+                      - if student_school.transportation_eligibility == 'WY'
+                        %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-14 transportation_icon", style: 'font-size: 18px;'}
+                      - else
+                        %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-15 transportation_icon", style: 'font-size: 18px;'}
+
                       =raw eligibility_helper(spacer_helper(student_school.eligibility))
 
                   .second_bloc.middle
@@ -128,6 +110,27 @@
                     %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-17"}
                       = spacer_helper(student_school.drive_time)
                       %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
+
+
+                .box.line.getting_there
+                  .first_block.middle
+                    -# .icon.middle
+                    -#   %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_distance transportation_icon"}
+                    %span.middle.sortable_distance
+                      = spacer_helper(student_school.distance)
+                      mi
+
+                  .second_bloc.middle
+                    %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
+                      = spacer_helper(student_school.walk_time)
+                      %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
+
+                  .second_bloc.middle.last
+                    %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-17"}
+                      = spacer_helper(student_school.drive_time)
+                      %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
+
+
 
                 .box.line.school_hours
                   %span.middle.sortable_hours

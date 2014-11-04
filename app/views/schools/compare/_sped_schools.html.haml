@@ -13,10 +13,14 @@
                 = school.name
 
               .school_your_fit_icon.line
-                %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
-                %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
-                %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"}
-                %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
+                - PreferenceCategory.active(current_student.grade_level).each do |category|
+                  - category.active_preferences(current_student.grade_level).each do |preference|
+                    - if school.has_preference?(preference)
+                      - if current_student.preference_ids.try(:include?, preference.id)
+                        %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: "['#{preference.name}']"}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", title: "#{preference.name}"}
+                      - else
+                        %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: "['#{preference.name}']"}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", style: "display: none;", title: "#{preference.name}"}
+
 
               - if TRANSITION_GRADES.include?(current_student.grade_level)
                 .school_demand.line
@@ -36,6 +40,10 @@
                   &nbsp;mi
 
               .school_eligibility.line
+                - if student_school.transportation_eligibility == 'WY'
+                  %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-14 transportation_icon", style: 'font-size: 18px;'}
+                - else
+                  %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-15 transportation_icon", style: 'font-size: 18px;'}
                 =raw eligibility_helper(spacer_helper(student_school.eligibility))
 
               .school_hours.line
