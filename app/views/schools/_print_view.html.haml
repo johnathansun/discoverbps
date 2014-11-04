@@ -60,10 +60,7 @@
 
 								.box.line.getting_there
 									%span.icon.middle
-										- if student_school.transportation_eligibility == 'WY'
-											%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-15 transportation_icon"}
-										- else
-											%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-14 transportation_icon"}
+										=raw transportation_eligibility_icon_helper(student_school)
 
 									%span.middle.sortable_distance
 										= spacer_helper(student_school.distance)

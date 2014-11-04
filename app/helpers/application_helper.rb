@@ -60,6 +60,14 @@ module ApplicationHelper
 		end
 	end
 
+	def transportation_eligibility_icon_helper(student_school)
+		if student_school.transportation_eligibility == 'WY'
+			"<span aria-hidden='true' class='icon-DBPS-Dev-Assets-SRG-14 transportation_icon' style='font-size: 18px;'></span>"
+		elsif student_school.transportation_eligibility == 'SY'
+			"<span aria-hidden='true' class='icon-DBPS-Dev-Assets-SRG-15 transportation_icon' style='font-size: 18px;'></span>"
+		end
+	end
+
 	def progress_bar_class_helper(student_step, page_step, bar_step)
 		class_style_list = ''
 

@@ -40,10 +40,7 @@
                   &nbsp;mi
 
               .school_eligibility.line
-                - if student_school.transportation_eligibility == 'WY'
-                  %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-14 transportation_icon", style: 'font-size: 18px;'}
-                - else
-                  %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-15 transportation_icon", style: 'font-size: 18px;'}
+                =raw transportation_eligibility_icon_helper(student_school)
                 =raw eligibility_helper(spacer_helper(student_school.eligibility))
 
               .school_hours.line
