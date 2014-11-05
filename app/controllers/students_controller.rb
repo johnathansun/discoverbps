@@ -25,7 +25,7 @@ class StudentsController < ApplicationController
     end
 
     respond_to do |format|
-      if @addresses.present? && @student.update_attributes(params[:student])
+      if @addresses.present? && @student.present? && @student.update_attributes(params[:student])
 				session[:current_student_id] = @student.id
         format.js { render template: "students/address/addresses" }
         format.html { redirect_to addresses_student_path(@student)}
@@ -110,7 +110,7 @@ class StudentsController < ApplicationController
 				end
 
 				@student.set_home_schools!
-				
+
 				format.html { redirect_to schools_path}
 				format.js { render :js => "window.location = '/schools'" }
 
