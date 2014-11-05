@@ -71,19 +71,21 @@ module ApplicationHelper
 	def progress_bar_class_helper(student_step, page_step, bar_step)
 		class_style_list = ''
 
-		# if the student's last touched page is the same as the step in question, make the step in progress
-		if student_step == bar_step
-			class_style_list += 'in_progress '
-		# otherwise, if the student's last touched page is greater than the step in question, make the current step as complete
-		elsif student_step > bar_step
-			class_style_list += 'complete '
-		end
+		if student_step.present? && page_step.present? && bar_step.present?
+			# if the student's last touched page is the same as the step in question, make the step in progress
+			if student_step == bar_step
+				class_style_list += 'in_progress '
+			# otherwise, if the student's last touched page is greater than the step in question, make the current step as complete
+			elsif student_step > bar_step
+				class_style_list += 'complete '
+			end
 
-		# if the current page is the same as the step in question, mark the step as current
-		if page_step == bar_step
-			class_style_list += 'current '
+			# if the current page is the same as the step in question, mark the step as current
+			if page_step == bar_step
+				class_style_list += 'current '
+			end
 		end
-
+		
 		return class_style_list
 	end
 end
