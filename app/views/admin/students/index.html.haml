@@ -1,4 +1,4 @@
-.map-container{style: "margin: -30px -30px 20px -30px;"}
+.map-container{style: "margin-bottom: 30px;"}
 	#map-canvas{style: "width: 100%; height: 700px;"}
 		%div{style: "text-align: center; margin-top: 200px;"}
 			Loading map data
@@ -18,21 +18,21 @@
 		%br/
 		= image_tag('dashboard-loader.gif')
 
-#ell_preferences_chart{style: "display: inline-block; width: 33%; height: 450px;"}
+#ell_preferences_chart{style: "display: inline-block; width: 30%; height: 300px; margin-left: 50px;"}
 	%center
 		Loading ELL data
 		%br/
 		= image_tag('dashboard-loader.gif')
 
-#iep_preferences_chart{style: "display: inline-block; width: 33%; height: 450px;"}
+#sped_preferences_chart{style: "display: inline-block; width: 30%; height: 300px;"}
 	%center
-		Loading IEP data
+		Loading SPED data
 		%br/
 		= image_tag('dashboard-loader.gif')
 
-#preferences_chart{style: "display: inline-block; width: 33%; height: 450px;"}
+#awc_preferences_chart{style: "display: inline-block; width: 30%; height: 300px;"}
 	%center
-		Loading preferences data
+		Loading AWC data
 		%br/
 		= image_tag('dashboard-loader.gif')
 
@@ -40,7 +40,9 @@
 - content_for :scripts do
 	<script src="http://maps.googleapis.com/maps/api/js?libraries=geometry,visualization&sensor=false"></script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	:javascript
+
+:javascript
+
 		google.load("visualization", "1", {packages:["corechart"]});
 		d3.json("/admin/searches.json", function(error, searches) {
 
@@ -198,7 +200,7 @@
 				}
 			};
 
-			var map = new google.maps.Map(document.getElementById("map-canvas"),mapProp);
+			var map = new google.maps.Map(document.getElementById("map-canvas"), mapProp);
 
 			map.data.loadGeoJson("/zipcodes.geojson");
 
@@ -222,12 +224,19 @@
 			all = search.groupAll(),
 			searchesByDate = search.dimension(function(d) { return d.date; }),
 			dates = searchesByDate.group(d3.time.day),
+
 			searchesByGrade = search.dimension(function(d) { return d.grade_level; }),
 			grades = searchesByGrade.group(),
+
 			searchesByEllPreference = search.dimension(function(d) { return d.ell_language; }),
 			ellPreferences = searchesByEllPreference.group();
-			searchesByIepPreference = search.dimension(function(d) { return d.sped_needs; }),
-			iepPreferences = searchesByIepPreference.group();
+
+			searchesBySpedPreference = search.dimension(function(d) { return d.sped_needs; }),
+			spedPreferences = searchesBySpedPreference.group();
+
+			searchesByAwcPreference = search.dimension(function(d) { return d.awc_invitation; }),
+			awcPreferences = searchesByAwcPreference.group();
+
 			searchesByPreference = search.dimension(function(d) { return d.preferences_count; }),
 			preferences = searchesByPreference.group();
 
@@ -320,7 +329,6 @@
 				var options = {title: "Searches by Grade Level", legend: {position: 'none'}};
 				var chart = new google.visualization.ColumnChart(document.getElementById('grades_chart'));
 				chart.draw(data, options);
-
 			}
 
 			function drawEllChart() {
@@ -333,34 +341,64 @@
 				var options = {title: "ELL Needs", pieHole: 0.4};
 				var chart = new google.visualization.PieChart(document.getElementById('ell_preferences_chart'));
 				chart.draw(data, options);
-
 			}
 
-			function drawIepChart() {
+			function drawSpedChart() {
 				var data = new google.visualization.DataTable();
 				data.addColumn('string', 'Preferences');
 				data.addColumn('number', 'Volume');
-				iepPreferences.top(Infinity).forEach(function(d, i) {
+				spedPreferences.top(Infinity).forEach(function(d, i) {
 					data.addRow([d.key.toString(), d.value]);
 				});
-				var options = {title: "IEP Needs", pieHole: 0.4};
-				var chart = new google.visualization.PieChart(document.getElementById('iep_preferences_chart'));
+				var options = {title: "SPED Needs", pieHole: 0.4};
+				var chart = new google.visualization.PieChart(document.getElementById('sped_preferences_chart'));
 				chart.draw(data, options);
+			}
 
+			function drawAwcChart() {
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', 'Preferences');
+				data.addColumn('number', 'Volume');
+				awcPreferences.top(Infinity).forEach(function(d, i) {
+					data.addRow([d.key.toString(), d.value]);
+				});
+				var options = {title: "AWC Invitation", pieHole: 0.4};
+				var chart = new google.visualization.PieChart(document.getElementById('awc_preferences_chart'));
+				chart.draw(data, options);
 			}
 
 			function drawPreferencesChart() {
 				var data = new google.visualization.DataTable();
 				data.addColumn('string', 'Preferences');
 				data.addColumn('number', 'Volume');
-				preferences.top(Infinity).forEach(function(d, i) {
-					data.addRow([d.key.toString(), d.value]);
-				});
-				var options = {title: "Preferences Count", pieHole: 0.4};
-				var chart = new google.visualization.PieChart(document.getElementById('preferences_chart'));
-				chart.draw(data, options);
+				data.addRows([
+					["1", preferences.top(Infinity)[1]['value']],
+					["2", preferences.top(Infinity)[2]['value']],
+					["3", preferences.top(Infinity)[3]['value']],
+					["4", preferences.top(Infinity)[4]['value']],
+					["5", preferences.top(Infinity)[5]['value']],
+					["6", preferences.top(Infinity)[6]['value']],
+					["7", preferences.top(Infinity)[7]['value']],
+					["8", preferences.top(Infinity)[8]['value']],
+					["9", preferences.top(Infinity)[9]['value']],
+					["10", preferences.top(Infinity)[10]['value']],
+					["11", preferences.top(Infinity)[11]['value']],
+					["12", preferences.top(Infinity)[12]['value']],
+					["13", preferences.top(Infinity)[13]['value']],
+					["14", preferences.top(Infinity)[14]['value']],
+					["15", preferences.top(Infinity)[14]['value']],
+					["16", preferences.top(Infinity)[14]['value']],
+					["17", preferences.top(Infinity)[14]['value']],
+					["18", preferences.top(Infinity)[14]['value']],
+					["19", preferences.top(Infinity)[14]['value']],
+					["20", preferences.top(Infinity)[14]['value']]
+				]);
 
+				var options = {title: "Number of Selected Preferences", legend: {position: 'none'}};
+				var chart = new google.visualization.ColumnChart(document.getElementById('preferences_chart'));
+				chart.draw(data, options);
 			}
+
 
 			renderAll();
 
@@ -373,8 +411,8 @@
 				drawSearchesChart();
 				drawGradesChart();
 				drawEllChart();
-				drawIepChart();
-				drawPreferencesChart();
+				drawSpedChart();
+				drawAwcChart();
 			}
 
 			// Like d3.time.format, but faster.
