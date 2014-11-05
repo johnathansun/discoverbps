@@ -66,9 +66,9 @@
 								Preview Dates
 							%p.descrip.light
 								- preview_dates_list_helper(@school.api_preview_dates).each do |date|
-									%span
-										= date
-										%br/
+									•
+									= date
+									%br/
 					.box
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"}
