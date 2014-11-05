@@ -112,11 +112,11 @@ class StudentsController < ApplicationController
 					@student.set_zone_schools!
 				end
 
-				format.html { redirect_to schools_path}
-				format.js { render :js => "window.location = '/schools'" }
-				
-        # format.js { render template: "students/ell/ell" }
-        # format.html { redirect_to ell_student_path(@student)}
+				# format.html { redirect_to schools_path}
+				# format.js { render :js => "window.location = '/schools'" }
+
+        format.js { render template: "students/ell/ell" }
+        format.html { redirect_to ell_student_path(@student)}
 
       else
         format.js { render template: "students/errors/errors" }

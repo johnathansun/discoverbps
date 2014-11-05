@@ -295,7 +295,7 @@
 
 
 <h3>Basic Info</h3>
-	<% if @school.api_basic_info.present? %>
+	<% if @school.api_basic_info.present? && @school.api_basic_info.is_a?(Hash) %>
 	<ul class="with_bullets">
 		<% @school.api_basic_info.each_pair do |key, value| %>
 			<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
@@ -306,7 +306,7 @@
 <% end %>
 
 <h3>Description</h3>
-<% if @school.api_description.present? %>
+<% if @school.api_description.present? && @school.api_description.is_a?(Hash) %>
 	<ul class="with_bullets">
 		<% @school.api_description.each_pair do |key, value| %>
 			<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
@@ -317,7 +317,7 @@
 <% end %>
 
 <h3>Awards</h3>
-	<% if @school.api_awards.present? %>
+	<% if @school.api_awards.present? && @school.api_awards.is_a?(Hash) %>
 	<ul class="with_bullets">
 		<% @school.api_awards[0].each_pair do |key, value| %>
 			<li><strong><%= key %>:&nbsp;</strong> <%= auto_link(value) %></li>
@@ -352,7 +352,7 @@
 <% end %>
 
 <h3>Hours</h3>
-<% if @school.api_hours.present? %>
+<% if @school.api_hours.present? && @school.api_hours.is_a?(Hash) %>
 	<ul class="with_bullets">
 		<% @school.api_hours.each_pair do |key, value| %>
 			<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
@@ -363,7 +363,7 @@
 <% end %>
 
 <h3>Languages</h3>
-<% if @school.api_languages.present? %>
+<% if @school.api_languages.present? && @school.api_languages.is_a?(Hash) %>
 	<ul class="with_bullets">
 		<% @school.api_languages.each_pair do |key, value| %>
 			<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
@@ -387,7 +387,7 @@
 <% end %>
 
 <h3>Preview Dates</h3>
-<% if @school.api_preview_dates.present? %>
+<% if @school.api_preview_dates.present? && @school.api_preview_dates.is_a?(Hash) %>
 	<ul class="with_bullets">
 		<% @school.api_preview_dates.each_pair do |key, value| %>
 			<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
@@ -397,8 +397,8 @@
 	<p style="margin-left: 20px;">[ No data ]</p>
 <% end %>
 
-<!-- <h3>Programs</h3>
-<% if @school.api_programs.present? %>
+<h3>Programs</h3>
+<% if @school.api_programs.present? && @school.api_programs.is_a?(Hash) %>
 	<ul class="with_bullets">
 		<% @school.api_programs.each_pair do |key, value| %>
 			<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
@@ -406,10 +406,10 @@
 	</ul>
 <% else %>
 	<p style="margin-left: 20px;">[ No data ]</p>
-<% end %> -->
+<% end %>
 
 <h3>Sports</h3>
-<% if @school.api_sports.present? %>
+<% if @school.api_sports.present? && @school.api_sports.is_a?(Hash) %>
 	<ul class="with_bullets">
 		<% @school.api_sports.each_pair do |key, value| %>
 			<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
@@ -420,7 +420,7 @@
 <% end %>
 
 <h3>Student Support</h3>
-<% if @school.api_student_support.present? %>
+<% if @school.api_student_support.present? && @school.api_student_support.is_a?(Hash) %>
 	<ul class="with_bullets">
 		<% @school.api_student_support.each_pair do |key, value| %>
 			<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
