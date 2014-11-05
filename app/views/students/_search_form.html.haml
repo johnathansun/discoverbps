@@ -105,8 +105,8 @@
 		- unless sibling_search == false
 			#sibling_school.bloc_6
 				%span{aria: {hidden: 'true'}, class: 'select_school_icon icon-DBPS-Dev-Assets-SRG-12'}
-				%input{id: "sibling_school_#{row_number}_autocomplete", name: "[student]sibling_school_names[]", type: 'text', placeholder: "Set Sibling's School"}
-				%span{aria: {hidden: 'true'}, class: 'arrow icon-DBPS-Dev-Assets-SRG-41'}
+				%input{id: "sibling_school_#{row_number}_autocomplete", name: "[student]sibling_school_names[]", type: 'text', placeholder: "Enter sibling's school (optional)"}
+				-# %span{aria: {hidden: 'true'}, class: 'arrow icon-DBPS-Dev-Assets-SRG-41'}
 
 		- unless row_number == 5
 			%div{id: "add_child_#{row_number + 1}", class: 'add_child_button btn'}
