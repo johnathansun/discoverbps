@@ -178,7 +178,7 @@ module Webservice
 	def self.programs(bps_id)
 		endpoint = "Programs"
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
-		extract_from_array = false
+		extract_from_array = true
 		api_response = self.get(endpoint, params)
 		self.extract(api_response, endpoint, extract_from_array, bps_id)
 	end

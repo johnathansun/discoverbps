@@ -23,7 +23,7 @@ class School < ActiveRecord::Base
 	serialize :api_partners # Array
 	serialize :api_photos # Array
 	serialize :api_preview_dates # Hash
-	serialize :api_programs # Array
+	serialize :api_programs # Hash
 	serialize :api_sports # Hash
 	serialize :api_student_support # Hash
 
