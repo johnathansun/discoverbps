@@ -264,6 +264,8 @@ Dialog Box
 
 	.dialog_title {
 		width: 82%;
+		color: $dark_gray;
+		font-size: 1.5em;
 	}
 
 	// hide "add another child" in dialogue boxes
@@ -1333,7 +1335,7 @@ School List Rows
 ------------------------------------------------------------ */
 #school_list li {
 	position: relative;
-  background: #f9f9f9;
+  background: #FFFFFF;
   margin-bottom: 12px;
   margin-top: 0;
   height: 72px;
