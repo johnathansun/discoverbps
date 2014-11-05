@@ -40,8 +40,8 @@ Dialog Box
 		}
 
 		.content {
-		  float: left;
-		  color: #000000;
+		  //float: left;
+		  //color: #000000;
 
 		  .first { margin-top: 0px; }
 
@@ -53,7 +53,7 @@ Dialog Box
 
 			.selection {
 			  background: #ebebeb;
-			  padding: 0 10px;
+			  padding: 0;
 			  min-width: 410px;
 			  width: auto;
 			  display: inline-block;
@@ -2679,7 +2679,7 @@ Wrap Search
 	  margin-top: 7px;
 	}
 	.btn {
-	  background: #0059a3;
+	  background: $dark_blue;
 	  padding: 6px 11px 0 6px;
 	  width: 99px;
 	  height: 32px;
@@ -2688,12 +2688,14 @@ Wrap Search
 	  font-size: 12px;
 	  line-height: 14px;
 	  color: #80bce7;
+	  transition: all 250ms ease;
+	  &:hover { background: $orange; color: #FFF;}
 	}
-	.btn#add_child_2 .text {
+	.btn .text {
 	  vertical-align: middle;
-	  width: 80px;
-	  font-size: 12px;
-	  line-height: 14px;
+	  width: 80px !important;
+		font-size: 12px !important;
+		line-height: 14px !important;
 	  margin-left: 0;
 	  display: inline-block;
 	  text-align: center;
@@ -2712,7 +2714,7 @@ Wrap Search
 	}
 
 	.bloc_6 {
-	  width: 220px;
+	  width: auto;
 	  display: block;
 	  float: left;
 	  background: none;
@@ -2728,29 +2730,41 @@ Wrap Search
 	  background: none;
 	  border: 0;
 	  font-family: AvenirLT-Black, Arial Black, Arial Black, Gadget, sans-serif;
-	  color: #80bce7;
-	  padding: 9px 32px 0 39px;
+	  color: $dark_blue;
+	  padding: 9px 9px 0 40px;
 	  height: 29px;
-	  width: 149px;
+	  width: 245px;
 	}
 	.bloc_6 input:-moz-placeholder {
-	  color: #80bce7;
+	  color: $blue;
 	}
 	 .bloc_6 input::-moz-placeholder {
-	  color: #80bce7;
+	  color: $blue;
 	}
 	.bloc_6 input:-ms-input-placeholder {
-	  color: #80bce7;
+	  color: $blue;
 	}
 	.bloc_6 input::-webkit-input-placeholder {
-	  color: #80bce7;
+	  color: $blue;
+	}
+	#grade_level_placeholder {
+		width: 50px;
+	}
+	.bloc_6#sibling_school {
+		background: tint($blue, 50%);
+		margin-left: 0;
+		margin-right: 12px;
+		transition: background 250ms ease;
+	}
+	.bloc_6#sibling_school #sibling_school_autocomplete {
+		background: $dark_blue;
 	}
 	.bloc_6 .select_school_icon {
 	  position: absolute;
 	  display: inline-block;
 	  top: 10px;
 	  left: 11px;
-	  color: #80bce7;
+	  color: $blue;
 	  font-size: 19px;
 	}
 	.bloc_6 .arrow {
