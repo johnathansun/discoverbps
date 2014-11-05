@@ -107,16 +107,17 @@ class StudentsController < ApplicationController
 
 				# set the basic school lists here, since this step will save the student
 				# home schools will be overwritten in set_awc if awc_invitation = true
-				@student.delay.set_home_schools!
+				@student.set_home_schools!
 				if zone_school_grades.include?(@student.grade_level)
-					@student.delay.set_zone_schools!
+					@student.set_zone_schools!
 				end
 
-				# format.html { redirect_to schools_path}
-				# format.js { render :js => "window.location = '/schools'" }
+				format.html { redirect_to schools_path}
+				format.js { render :js => "window.location = '/schools'" }
+				
+        # format.js { render template: "students/ell/ell" }
+        # format.html { redirect_to ell_student_path(@student)}
 
-        format.js { render template: "students/ell/ell" }
-        format.html { redirect_to ell_student_path(@student)}
       else
         format.js { render template: "students/errors/errors" }
         flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
