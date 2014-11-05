@@ -5,8 +5,8 @@
 	<div class='account_menu_box menu_box font_15'>
 		<!-- Start menu account -->
 		<div class='menu'>
-			<div class='box'>
-				<% if params[:controller] == 'schools' && params[:action] == 'index' %>
+			<% if params[:controller] == 'schools' && params[:action] == 'index' %>
+				<div class='box'>
 					<span>My lists</span>
 					<%= link_to 'Print', print_lists_schools_path %>
 					<%= link_to 'Download', schools_path(format: :csv) %>
@@ -18,8 +18,8 @@
 					<% for student in current_user_students %>
 						<%= link_to student.tab_name, schools_path(student: student.tab_name) %>
 					<% end %>
-				<% end %>
-			</div>
+				</div>
+			<% end %>
 			<div class='mobile_only box list_child'>
 				<span>&nbsp;</span>
 				<% for student in current_user_students %>
@@ -27,7 +27,7 @@
 				<% end %>
 			</div>
 			<div class='clr box last'>
-				<span>Account</span>
+				<!-- <span>Account</span> -->
 
 				<% if current_user.present? %>
 					<%= link_to raw('Log&nbsp;Out'), destroy_user_session_path, method: :delete %>

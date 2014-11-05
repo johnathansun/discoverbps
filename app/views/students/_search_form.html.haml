@@ -16,7 +16,7 @@
 		.separation
 
 	.bloc_2.select_grade
-		%span{aria: {hidden: 'true'}, class: 'arrow icon-DBPS-Dev-Assets-SRG-41'}
+		%span{:aria => {hidden: 'true'}, :class => 'arrow icon-DBPS-Dev-Assets-SRG-41'}
 
 		- if defined?(student) && student.try(:grade_level).present?
 			%input{id: 'grade_level_placeholder', name: '[student]grade_level', type: 'text', value: "#{student.grade_level}"}
@@ -104,13 +104,13 @@
 	%div{id: "sibling_search_#{row_number}", class: "form_line", style: "display: #{row_number == 1 ? 'block' : 'none'}"}
 		- unless sibling_search == false
 			#sibling_school.bloc_6
-				%span{aria: {hidden: 'true'}, class: 'select_school_icon icon-DBPS-Dev-Assets-SRG-12'}
+				%span{:aria => {hidden: 'true'}, :class => 'select_school_icon icon-DBPS-Dev-Assets-SRG-12'}
 				%input{id: "sibling_school_#{row_number}_autocomplete", name: "[student]sibling_school_names[]", type: 'text', placeholder: "Enter sibling's school (optional)"}
-				-# %span{aria: {hidden: 'true'}, class: 'arrow icon-DBPS-Dev-Assets-SRG-41'}
+				-# %span{:aria => {hidden: 'true'}, :class => 'arrow icon-DBPS-Dev-Assets-SRG-41'}
 
 		- unless row_number == 5
 			%div{id: "add_child_#{row_number + 1}", class: 'add_child_button btn'}
-				%span{aria: {hidden: 'true'}, class: 'icon icon-DBPS-Dev-Assets-SRG-10'}
+				%span{:aria => {hidden: 'true'}, :class => 'icon icon-DBPS-Dev-Assets-SRG-10'}
 				%span.text
 					Add another child
 
