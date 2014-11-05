@@ -23,7 +23,7 @@
 				= render partial: 'students/address/address', locals: {address: address, index: index}
 		%br/
 		.btn
-			= submit_tag 'Next', disable_with: 'Working...', class: 'orange_submit', id: "addresses_next_button"
+			= submit_tag 'Next', class: 'orange_submit', id: "addresses_next_button"
 
 :javascript
 	$('#addresses_next_button').click(function() {
@@ -34,4 +34,7 @@
 	});
 	$(".dialog_box").click(function(e){
 		e.stopPropagation();
+	});
+	$('#addresses_next_button').click(function() {
+		$('#addresses_next_button').prop('value', 'Working...');
 	});

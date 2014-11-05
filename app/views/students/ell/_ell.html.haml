@@ -42,7 +42,7 @@
 
 :javascript
 	$('#ell_next_button').click(function() {
-		$('#ell_next_button').text('Working...');
+		$('#ell_next_button').prop('value', 'Working...');
 	});
 	$(".close_icon").click(function() {
 		$(".dialog_box").fadeOut("fast").removeClass("active");
