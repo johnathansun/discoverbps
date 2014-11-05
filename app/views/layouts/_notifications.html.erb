@@ -1,5 +1,5 @@
 <% for notification in Notification.order('start_time DESC').active(session[:removed_notifications]) %>
-	<% if notification.home_page? && params[:action] == 'home' %>
+	<% if notification.home_page? && params[:controller] == 'students' && params[:action] == 'index' %>
 		<div id="notification_<%= notification.id %>" class="notification" style="display: none;">
 			<div class="wrap">
 				<div class="content_wrap">
@@ -8,7 +8,7 @@
 				</div>
 			</div>
 		</div>
-	<% elsif notification.schools_page? && params[:controller] == 'schools' && (params[:action] == 'index' || params[:action] == 'zone_schools' || params[:action] == 'compare') %>
+	<% elsif notification.schools_page? && params[:controller] == 'schools' && (params[:action] == 'index' || params[:action] == 'compare' || params[:action] == 'get_ready') %>
 		<div id="notification_<%= notification.id %>" class="notification" style="display: none;">
 			<div class="wrap">
 				<span style="color: #ffff00;">Announcement:</span>
@@ -26,7 +26,7 @@
 	      url: '/students/remove_notification',
 	      type: 'post',
 	      data: {
-	      	notification_id: '<%= notification.id %>', 
+	      	notification_id: '<%= notification.id %>',
 	      	user_id: '<%= current_user.try(:id) %>'
 	      },
 	      dataType: 'script'
