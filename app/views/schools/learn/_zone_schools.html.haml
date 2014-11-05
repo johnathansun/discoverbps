@@ -78,8 +78,6 @@
                 .box.line.eligibility
                   .first_block.middle
                     %span.middle.sortable_eligibility
-                      =raw transportation_eligibility_icon_helper(student_school)
-
                       =raw eligibility_helper(spacer_helper(student_school.eligibility))
 
                 .box.line.getting_there
@@ -87,7 +85,7 @@
                     .icon.middle
                       =raw transportation_eligibility_icon_helper(student_school)
                       &nbsp;
-                      
+
                     %span.middle.sortable_distance
                       = spacer_helper(student_school.distance)
                       mi
