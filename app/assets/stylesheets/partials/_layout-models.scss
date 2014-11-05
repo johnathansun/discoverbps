@@ -2477,6 +2477,8 @@ Wrap Search
 	a {
 		color: #FFF;
 		text-decoration: underline;
+		display: inline-block;
+		margin-bottom: 0.7em;
 		&:hover {
 			color: $yellow;
 		}
