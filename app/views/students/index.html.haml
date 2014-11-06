@@ -31,10 +31,8 @@
 										Grade
 										= student.grade_level
 									%span.schools.blue
-										= student.home_schools.count
-										schools,
-										= student.starred_schools.count
-										favorites
+										#{pluralize(student.home_schools.count, 'school')}, #{pluralize(student.starred_schools.count, 'favorite')}
+
 								.steps{class: "#{student.step}"}
 
 									%div{class: "step first #{progress_bar_class_helper(student.step, 1, 1)}"}
