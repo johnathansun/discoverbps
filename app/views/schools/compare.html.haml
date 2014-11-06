@@ -21,11 +21,11 @@
 		.labels.column_left.column
 			.labels_frame
 				#your_rank_row.label.rank.no_icon
-					Fit Score
+					Your Rank
 				#school_name.label.name.no_icon
 					Name
 				.label.your_fit.no_icon
-					Your Fit
+					Fit Score
 				- if TRANSITION_GRADES.include?(current_student.grade_level)
 					.label.demand.no_icon
 						= "#{last_school_year_range} Demand"
@@ -63,19 +63,21 @@
 				.label.uniform
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
 					Uniform Policy
-				.label.health.mid
-					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
-					Student Support
 				.label.school.long
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"}
 					School Focus
+				.label.programs.mid
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
+					Programs
 				.label.facilities.long
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
 					Facility Features
-				- if UPPER_GRADES.include?(current_student.grade_level)
-					.label.sports.long
-						%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
-						Sports
+				.label.health.long
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
+					Student Support
+				.label.sports.long
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
+					Sports
 				.label.comm_partners.long
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
 					Community Partners

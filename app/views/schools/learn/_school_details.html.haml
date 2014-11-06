@@ -124,7 +124,6 @@
 
 
 .column.column_right
-
 	.school_info
 
 		- if school.api_description.try(:[], :schoolspecial).present?
@@ -215,33 +214,37 @@
 			%p.descrip.light
 				= school.api_description.try(:[], :schfocus)
 
-		- if school.student_support_present?
-			.box
-				%p.title
-					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
-					Student Support
-
-				%p.descrip.light
-					=raw student_support_list_helper(school.api_student_support)
-
 		.box
 			%p.title
-				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
-				Community Partners
+				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
+				Programs
 			%p.descrip.light
-				= partners_list_helper(school.api_partners)
+				= programs_list_helper(school.api_programs).try(:join, ', ')
 
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
 				Facility Features
 			%p.descrip.light
-				= facilities_list_helper(school.api_facilities)
+				= facilities_list_helper(school.api_facilities).try(:join, ', ')
 
-		- if UPPER_GRADES.include?(current_student.grade_level)
-			.box
-				%p.title
-					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
-					Sports
-				%p.descrip.light
-					= sports_list_helper(school.api_sports)
+		.box
+			%p.title
+				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
+				Student Support
+			%p.descrip.light
+				=raw student_support_list_helper(school.api_student_support).try(:join, ', ')
+
+		.box
+			%p.title
+				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
+				Sports
+			%p.descrip.light
+				= sports_list_helper(school.api_sports).try(:join, ', ')
+
+		.box
+			%p.title
+				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
+				Community Partners
+			%p.descrip.light
+				= partners_list_helper(school.api_partners).try(:join, ', ')

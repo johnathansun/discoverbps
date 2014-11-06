@@ -2,100 +2,20 @@
   .sort_schools.column_center.column
 
     .compare_list_content
-      %ul#sortable_0.clearfix
+      - if @sped_schools.present?
+        %ul#sortable_0.clearfix
 
-        - @sped_schools[0...5].each_with_index do |student_school, i|
-          - school = student_school.school
-
-          %li{id: "#{current_student.id}_#{school.bps_id}", class: "sortable_school #{i == 1 ? 'first' : ''} #{i == 5 ? 'last' : ''}"}
-            .li_frame.draggable
-              .school_name.line
-                = school.name
-
-              .school_your_fit_icon.line.light
-                - PreferenceCategory.active(current_student.grade_level).each do |category|
-                  - category.active_preferences(current_student.grade_level).each do |preference|
-                    - if school.has_preference?(preference)
-                      - if current_student.preference_ids.try(:include?, preference.id)
-                        %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: "['#{preference.name}']"}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", title: "#{preference.name}"}
-                      - else
-                        %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: "['#{preference.name}']"}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", style: "display: none;", title: "#{preference.name}"}
-
-
-              - if TRANSITION_GRADES.include?(current_student.grade_level)
-                .school_demand.line.light
-                  = school.open_seats(current_student.grade_level)
-                  open seats
-                  %br/
-                  = school.applicants(current_student.grade_level)
-                  applicants
-                  %br/
-                  = school.applicants_per_open_seat(current_student.grade_level, last_school_year)
-                  applicants/open seat
-
-
-              .school_travel.line.light
-                - if student_school.distance.present?
-                  = spacer_helper(student_school.distance)
-                  &nbsp;mi
-
-              .school_eligibility.line.light
-                =raw eligibility_helper(spacer_helper(student_school.eligibility))
-
-              .school_hours.line.light
-                = truncate(school.api_hours.try(:[], :Description), length: 40)
-
-              - if SURROUND_CARE_GRADES.include?(current_student.grade_level)
-                .school_surround_care.line.light
-                  - if school.api_basic_info.try(:[], :BeforeSchPrograms).present?
-                    Before School
-                    %br/
-
-                  - if school.api_basic_info.try(:[], :AfterSchPrograms).present?
-                    After School
-
-              -# .school_type.line
-              -#   = school.api_basic_info.try(:[], :SchoolType)
-
-              .school_grades.line.light
-                = grade_levels_helper(school.grade_levels)
-
-              .school_enrollment.line.light
-                = school.total_seats(current_student.grade_level)
-
-              .school_special_app.line.light
-                = special_application_helper(school.api_description.try(:[], :isspecialappprocedures))
-
-              .school_awc.line.light
-                = awc_helper(school.api_basic_info.try(:[], :IsAWC))
-
-              .school_mcas.line.light
-                = school_tier_helper(student_school.tier)
-
-              .school_uniform.line.light
-                = school.api_description.try(:[], :uniformpolicy)
-
-              .school_health.line.mid.light
-                =raw student_support_list_helper(school.api_student_support)
-
-              .school_focus.line.long.light
-                = truncate(school.api_description.try(:[], :schfocus), length: 240)
-
-              .school_facilities.line.long.light
-                = truncate(facilities_list_helper(school.api_facilities), length: 240)
-
-              - if UPPER_GRADES.include?(current_student.grade_level)
-                .school_sports.line.long.light
-                  = truncate(sports_list_helper(school.api_sports), length: 240)
-
-              .school_comm_partners.line.long.light
-                = truncate(partners_list_helper(school.api_partners), length: 240)
+          - @sped_schools[0...5].each_with_index do |student_school, i|
+            - school = student_school.school
+            %li{id: "#{current_student.id}_#{school.bps_id}", class: "sortable_school #{i == 1 ? 'first' : ''} #{i == 5 ? 'last' : ''}"}
+              .li_frame.draggable
+                = render partial: 'schools/compare/school_details', locals: {student_school: student_school, school: school}
+      - else
+        %h2{style: 'margin-top: 15px;'}
+          There are no matching SPED schools for the address and grade level that you entered.
 
 
   - if @sped_schools[6...-1].present?
-
-    -# RIGHT COLUMN
-    -# ----------------------------------------------
     .more_schools.column_right.column
       .more_schools_frame
         %h3

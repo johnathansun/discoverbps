@@ -103,7 +103,8 @@
 
 				- else
 					%p.yellow-buttons
-						= auto_link(TextSnippet.find('home-discover-intro').text)
+						%span.light
+							= auto_link(TextSnippet.find('home-discover-intro').text)
 
 					- if flash[:alert].present?
 						%p{style: 'color: red;'}

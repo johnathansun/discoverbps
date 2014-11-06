@@ -1,71 +1,120 @@
 module SchoolsHelper
+
 	def facilities_list_helper(hash)
 		if hash.present?
-			list = ''
-			list << 'Art Room, ' 						if hash[:hasartroom] == 'True'
-			list << 'Athletic Field, ' 			if hash[:hasathleticfield] == 'True'
-			list << 'Auditorium, ' 					if hash[:hasauditorium] == 'True'
-			list << 'Cafeteria, ' 					if hash[:hascafeteria] == 'True'
-			list << 'Computer Lab, ' 				if hash[:hascomputerlab] == 'True'
-			list << 'Gymnasium, ' 					if hash[:hasgymnasium] == 'True'
-			list << 'Library, ' 						if hash[:haslibrary] == 'True'
-			list << 'Music Room, ' 					if hash[:hasmusicroom] == 'True'
-			list << 'Outdoor Classrooms, ' 	if hash[:hasoutdoorclassroom] == 'True'
-			list << 'Playground, ' 					if hash[:hasplayground] == 'True'
-			list << 'Pool, ' 								if hash[:haspool] == 'True'
-			list << 'Science Lab'	 					if hash[:hassciencelab] == 'True'
-			return list.strip.gsub(/,$/, '')
+			array = []
+			array << 'Art Room' 							if hash[:hasartroom] == 'True'
+			array << 'Athletic Field' 				if hash[:hasathleticfield] == 'True'
+			array << 'Auditorium' 						if hash[:hasauditorium] == 'True'
+			array << 'Cafeteria' 							if hash[:hascafeteria] == 'True'
+			array << 'Computer Lab' 					if hash[:hascomputerlab] == 'True'
+			array << 'Gymnasium' 							if hash[:hasgymnasium] == 'True'
+			array << 'Library' 								if hash[:haslibrary] == 'True'
+			array << 'Music Room' 						if hash[:hasmusicroom] == 'True'
+			array << 'Outdoor Classrooms' 		if hash[:hasoutdoorclassroom] == 'True'
+			array << 'Playground' 						if hash[:hasplayground] == 'True'
+			array << 'Pool' 									if hash[:haspool] == 'True'
+			array << 'Science Lab'	 					if hash[:hassciencelab] == 'True'
+			return array.compact
 		else
-			return nil
+			return []
 		end
 	end
 
 	def sports_list_helper(hash)
 		if hash.present?
-			list = ''
-			list << 'Baseball, ' 						if hash[:Baseball] == true
-			list << 'Basketball, ' 					if (hash[:boyBasketball] == true || hash[:girlBasketball] == true)
-			list << 'Cheerleading, ' 				if hash[:Cheer] == true
-			list << 'Cross Country, ' 			if (hash[:boyCrossCountry] == true || hash[:girlCrossCountry] == true)
-			list << 'Double Dutch, ' 				if (hash[:boyDoubleDutch] == true || hash[:girlDoubleDutch] == true)
-			list << 'Football, ' 						if hash[:Football] == true
-			list << 'Golf, '								if hash[:Golf] == true
-			list << 'Hockey, ' 							if hash[:Hockey] == true
-			list << 'Indoor Track, ' 				if (hash[:boyIndoorTrack] == true || hash[:girlIndoorTrack] == true)
-			list << 'Soccer, ' 							if (hash[:boySoccer] == true || hash[:girlSoccer] == true)
-			list << 'Softball, ' 						if hash[:Softball] == true
-			list << 'Swimming, ' 						if (hash[:boySwim] == true || hash[:girlSwim] == true)
-			list << 'Tennis, ' 							if (hash[:boyTennis] == true || hash[:girlTennis] == true)
-			list << 'Track, ' 							if (hash[:boyOutdoorTrack] == true || hash[:girlOutdoorTrack] == true)
-			list << 'Volleyball, ' 					if (hash[:boyVolleyball] == true || hash[:girlVolleyball] == true)
-			list << 'Wrestling' 						if hash[:Wrestling] == true
-			return list.strip.gsub(/,$/, '')
+			array = []
+			array << 'Baseball' 						if hash[:Baseball] == true
+			array << 'Basketball' 					if (hash[:boyBasketball] == true || hash[:girlBasketball] == true)
+			array << 'Cheerleading' 				if hash[:Cheer] == true
+			array << 'Cross Country' 				if (hash[:boyCrossCountry] == true || hash[:girlCrossCountry] == true)
+			array << 'Double Dutch' 				if (hash[:boyDoubleDutch] == true || hash[:girlDoubleDutch] == true)
+			array << 'Football' 						if hash[:Football] == true
+			array << 'Golf'									if hash[:Golf] == true
+			array << 'Hockey' 							if hash[:Hockey] == true
+			array << 'Indoor Track' 				if (hash[:boyIndoorTrack] == true || hash[:girlIndoorTrack] == true)
+			array << 'Soccer' 							if (hash[:boySoccer] == true || hash[:girlSoccer] == true)
+			array << 'Softball' 						if hash[:Softball] == true
+			array << 'Swimming' 						if (hash[:boySwim] == true || hash[:girlSwim] == true)
+			array << 'Tennis' 							if (hash[:boyTennis] == true || hash[:girlTennis] == true)
+			array << 'Track' 								if (hash[:boyOutdoorTrack] == true || hash[:girlOutdoorTrack] == true)
+			array << 'Volleyball' 					if (hash[:boyVolleyball] == true || hash[:girlVolleyball] == true)
+			array << 'Wrestling' 						if hash[:Wrestling] == true
+			return array.compact
 		else
-			return nil
+			return []
 		end
 	end
 
 	def student_support_list_helper(hash)
-		list = ''
-		list << 'Full-Time Nurse, '				if hash.try(:[], :HasFullTimeNurse) == 'True'
-		list << 'Part-Time Nurse, '				if hash.try(:[], :HasPartTimeNurse) == 'True'
-		list << 'Online Health Center, ' 	if hash.try(:[], :HasOnlineHealthCntr) == 'True'
-		list << 'Family Coordinator, '		if hash.try(:[], :HasFamilyCoord) == 'True'
-		list << 'Guidance Counselor, '		if hash.try(:[], :HasGuidanceCoord) == 'True'
-		list << 'Social Worker'					if hash.try(:[], :HasSocialWorker) == 'True'
-		list
+		if hash.present?
+			array = []
+			array << 'Full-Time Nurse'				if hash.try(:[], :HasFullTimeNurse) == 'True'
+			array << 'Part-Time Nurse'				if hash.try(:[], :HasPartTimeNurse) == 'True'
+			array << 'Online Health Center' 	if hash.try(:[], :HasOnlineHealthCntr) == 'True'
+			array << 'Family Coordinator'			if hash.try(:[], :HasFamilyCoord) == 'True'
+			array << 'Guidance Counselor'			if hash.try(:[], :HasGuidanceCoord) == 'True'
+			array << 'Social Worker'					if hash.try(:[], :HasSocialWorker) == 'True'
+			return array.compact
+		else
+			return []
+		end
+	end
+
+	def programs_list_helper(hash)
+		if hash.present?
+			array = []
+			array << 'Advanced Work Class'					if hash.try(:[], :HasAdvancedClassWork) == 'True'
+			array << 'Advanced Placement'						if hash.try(:[], :HasAdvancedPlacement) == 'True'
+			array << 'Arts' 												if hash.try(:[], :HasArts) == 'True'
+			array << 'Dual Enrollment'							if hash.try(:[], :HasDualEnroll) == 'True'
+			array << 'Dual Language'								if hash.try(:[], :HasDualLanguage) == 'True'
+			array << 'ELL'													if hash.try(:[], :HasELL) == 'True'
+			array << 'Health'												if hash.try(:[], :HasHealth) == 'True'
+			array << 'Inclusion'										if hash.try(:[], :HasInclusion) == 'True'
+			array << 'Internship'										if hash.try(:[], :HasInternship) == 'True'
+			array << 'International Baccalaureate'	if hash.try(:[], :HasIntnlBaccalr) == 'True'
+			array << 'Phys Education'								if hash.try(:[], :HasPhysicalEd) == 'True'
+			array << 'SPED'													if hash.try(:[], :HasSPED) == 'True'
+			array << 'STEAM'												if hash.try(:[], :HasSTEAM) == 'True'
+			array << 'STEM'													if hash.try(:[], :HasSTEM) == 'True'
+			array << 'Tech Focus'										if hash.try(:[], :HasTechFocus) == 'True'
+			array << 'Vocational'										if hash.try(:[], :HasVocational) == 'True'
+			array << 'World Language'								if hash.try(:[], :HasWorldLanguage) == 'True'
+			return array.compact
+		else
+			return []
+		end
 	end
 
 	def preview_dates_list_helper(hash)
-		array = []
-		array << hash[:PreviewDate1] 	if hash.try(:[], :PreviewDate1).present?
-		array << hash[:PreviewDate2] 	if hash.try(:[], :PreviewDate2).present?
-		array << hash[:PreviewDate3] 	if hash.try(:[], :PreviewDate3).present?
-		array << hash[:PreviewDate4] 	if hash.try(:[], :PreviewDate4).present?
-		array << hash[:PreviewDate5] 	if hash.try(:[], :PreviewDate5).present?
-		array << hash[:PreviewDate6] 	if hash.try(:[], :PreviewDate6).present?
-		array
+		if hash.present?
+			array = []
+			array << hash[:PreviewDate1] 	if hash.try(:[], :PreviewDate1).present?
+			array << hash[:PreviewDate2] 	if hash.try(:[], :PreviewDate2).present?
+			array << hash[:PreviewDate3] 	if hash.try(:[], :PreviewDate3).present?
+			array << hash[:PreviewDate4] 	if hash.try(:[], :PreviewDate4).present?
+			array << hash[:PreviewDate5] 	if hash.try(:[], :PreviewDate5).present?
+			array << hash[:PreviewDate6] 	if hash.try(:[], :PreviewDate6).present?
+			array.compact
+		else
+			return []
+		end
 	end
+
+	def partners_list_helper(array)
+		if array.present?
+			list = []
+			array.each do |partner|
+				list << "#{partner[:description]}, "
+			end
+			return list.compact
+		else
+			return []
+		end
+	end
+
+	
 
 	def eligibility_helper(tier)
 		tier.try(:gsub, /:/, ', ')
@@ -95,18 +144,6 @@ module SchoolsHelper
 			else
 				"#{array[0]} - #{array[-1]}"
 			end
-		else
-			return nil
-		end
-	end
-
-	def partners_list_helper(array)
-		if array.present?
-			list = ''
-			array.each do |partner|
-				list << "#{partner[:description]}, "
-			end
-			return list.gsub(/,\s?$/, '')
 		else
 			return nil
 		end

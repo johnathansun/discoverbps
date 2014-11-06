@@ -11,12 +11,18 @@
       %ul#sortable_0.clearfix
 
         - @home_schools[0...5].each_with_index do |student_school, i|
-          = render partial: 'schools/compare/home_column', locals: {student_school: student_school, school: student_school.school, i: i}
+          - school = student_school.school
+          %li{id: "school_column_#{student_school.id}", class: "sortable_school #{i ==0 ? 'first' : ''} #{i == 4 ? 'last' : ''}"}
+            .li_frame.draggable
+              .school_star.desktop.line
+                %span
+                  = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
+                  = image_tag('star_unstarred.png', id: "star_#{student_school.id}_unstarred", class: 'star_unstarred', style: "display: #{student_school.starred? ? 'none' : 'inline'}; cursor: pointer;", data: {student_school_id: student_school.id} )
+
+              = render partial: 'schools/compare/school_details', locals: {student_school: student_school, school: school}
+
 
   - if @home_schools[6...-1].present?
-
-    -# RIGHT COLUMN
-    -# ----------------------------------------------
     .more_schools.column_right.column
       .more_schools_frame
         %h3
