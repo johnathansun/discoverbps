@@ -396,10 +396,6 @@
         }
       }
 
-      for (var i = 0; i < ellMarkers.length; i++) {
-        ellMarkers[i].setMap(map);
-      }
-
       var markerIcon = {
         url: '/assets/map_pins/DBPS_MapPins_Large_Blue_Blank.png',
         size: new google.maps.Size(19, 29),
@@ -417,18 +413,16 @@
           var marker = new google.maps.Marker({
             position: coordinates,
             icon: markerIcon,
-            map: map,
             title: '<%= escape_javascript(student_school.school.name) %>'
           });
 
           allMarkers.push(marker);
           homeMarkers.push(marker);
 
-          var infowindow = new google.maps.InfoWindow({
-          });
+          var infowindow = new google.maps.InfoWindow({});
 
           google.maps.event.addListener(marker, 'mouseover', function() {
-            infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info.try(:[], :campus1address1) %><br /><%= student_school.school.api_basic_info.try(:[], :campus1city) %>, <%= student_school.school.api_basic_info.try(:[], :campus1state) %>');
+            infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%=raw student_school.school.map_address %></div>');
             infowindow.open(map,this);
           });
 
@@ -452,13 +446,17 @@
           allMarkers.push(marker);
           zoneMarkers.push(marker);
 
-          var infowindow = new google.maps.InfoWindow({
-          });
+          var infowindow = new google.maps.InfoWindow({});
 
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info.try(:[], :campus1address1) %><br /><%= student_school.school.api_basic_info.try(:[], :campus1city) %>, <%= student_school.school.api_basic_info.try(:[], :campus1state) %>');
+          google.maps.event.addListener(marker, 'mouseover', function() {
+            infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%=raw student_school.school.map_address %></div>');
             infowindow.open(map,this);
           });
+
+          google.maps.event.addListener(marker, 'mouseout', function() {
+            infowindow.close(map,this);
+          });
+
         <% end %>
       <% end %>
 
@@ -476,13 +474,17 @@
           allMarkers.push(marker);
           ellMarkers.push(marker);
 
-          var infowindow = new google.maps.InfoWindow({
-          });
+          var infowindow = new google.maps.InfoWindow({});
 
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info.try(:[], :campus1address1) %><br /><%= student_school.school.api_basic_info.try(:[], :campus1city) %>, <%= student_school.school.api_basic_info.try(:[], :campus1state) %>');
+          google.maps.event.addListener(marker, 'mouseover', function() {
+            infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%=raw student_school.school.map_address %></div>');
             infowindow.open(map,this);
           });
+
+          google.maps.event.addListener(marker, 'mouseout', function() {
+            infowindow.close(map,this);
+          });
+
         <% end %>
       <% end %>
 
@@ -500,14 +502,40 @@
           allMarkers.push(marker);
           spedMarkers.push(marker);
 
-          var infowindow = new google.maps.InfoWindow({
-          });
+          var infowindow = new google.maps.InfoWindow({});
 
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%= student_school.school.api_basic_info.try(:[], :campus1address1) %><br /><%= student_school.school.api_basic_info.try(:[], :campus1city) %>, <%= student_school.school.api_basic_info.try(:[], :campus1state) %>');
+          google.maps.event.addListener(marker, 'mouseover', function() {
+            infowindow.setContent('<div><h3><%= student_school.school.name %></h3><%=raw student_school.school.map_address %></div>');
             infowindow.open(map,this);
           });
+
+          google.maps.event.addListener(marker, 'mouseout', function() {
+            infowindow.close(map,this);
+          });
+
         <% end %>
+      <% end %>
+
+      // Display the appropriate markers on page load
+
+      <% unless (params[:list_type] == 'zone' || params[:list_type] == 'ell' || params[:list_type] == 'sped') %>
+        clearMarkers();
+        setMarkers(homeMarkers);
+      <% end %>
+
+      <% if params[:list_type] == 'zone' %>
+        clearMarkers();
+        setMarkers(zoneMarkers);
+      <% end %>
+
+      <% if params[:list_type] == 'ell' %>
+        clearMarkers();
+        setMarkers(ellMarkers);
+      <% end %>
+
+      <% if params[:list_type] == 'sped' %>
+        clearMarkers();
+        setMarkers(spedMarkers);
       <% end %>
 
 
@@ -544,13 +572,12 @@
         });
       }
 
-
       // Set the home icon
 
       <% if current_student.latitude.present? && current_student.longitude.present? && current_student.latitude != 0 && current_student.longitude != 0 %>
         var coordinates = new google.maps.LatLng(<%= current_student.latitude %>, <%= current_student.longitude %>);
         latlngbounds.extend(coordinates);
-        var marker = new google.maps.Marker({
+        var homeMarker = new google.maps.Marker({
           position: coordinates,
           icon: {
             path: MAP_HOME,
@@ -566,12 +593,15 @@
         });
       <% end %>
 
-      var infowindow = new google.maps.InfoWindow({
+      var homeInfowindow = new google.maps.InfoWindow({});
+
+      google.maps.event.addListener(HomeMarker, 'mouseover', function() {
+        homeInfowindow.setContent('<div><h3>Home</h3><%= current_student.street_number %> <%= current_student.street_name %>, <%= current_student.zipcode %>');
+        homeInfowindow.open(map,this);
       });
 
-      google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent('<div><h3>Home</h3><%= current_student.street_number %> <%= current_student.street_name %>, <%= current_student.zipcode %>');
-        infowindow.open(map,this);
+      google.maps.event.addListener(HomeMarker, 'mouseout', function() {
+        homeInfowindow.close(map,this);
       });
 
   		// Associate the styled map with the MapTypeId and set it to display.

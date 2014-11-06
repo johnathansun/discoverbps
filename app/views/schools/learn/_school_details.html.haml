@@ -95,7 +95,7 @@
 
 
 		-# Surround Care
-		- if SURROUND_CARE_GRADES.include?(current_student.grade_level)
+		- if school.before_care?(current_student.grade_level) || school.after_care?(current_student.grade_level)
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
 				Surround care

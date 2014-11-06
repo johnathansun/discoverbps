@@ -1,4 +1,4 @@
-#home_schools_list.schools_list
+%div{id: 'home_schools_list', class: "schools_list #{(params[:list_type] == 'zone' || params[:list_type] == 'ell' || params[:list_type] == 'sped') ? 'hidden' : ''}"}
   .sort_schools.column_center.column
     %ul#ranks.clearfix
       %li.rank 1

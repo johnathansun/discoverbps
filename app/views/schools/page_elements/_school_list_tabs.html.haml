@@ -1,28 +1,32 @@
 .menu_school_lists
   .name_list
 
-    #home_schools_tab.school_list_tab.active
-      %span.name
-        Home-based
-        %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
+    %div{id: 'home_schools_tab', class: "school_list_tab #{(params[:list_type] == 'zone' || params[:list_type] == 'ell' || params[:list_type] == 'sped' ) ? '' : 'active' }"}
+      = link_to schools_path(list_type: 'home') do
+        %span.name
+          Home-based
+          %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
     - if @zone_schools.present?
-      #zone_schools_tab.school_list_tab
-        %span.name
-          Zone-based
-          %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
+      %div{id: 'zone_schools_tab', class: "school_list_tab #{params[:list_type] == 'zone' ? 'active' : '' }"}
+        = link_to schools_path(list_type: 'zone') do
+          %span.name
+            Zone-based
+            %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
     - if current_student.ell_language.present?
-      #ell_schools_tab.school_list_tab
-        %span.name
-          ELL
-          %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
+      %div{id: 'ell_schools_tab', class: "school_list_tab #{params[:list_type] == 'ell' ? 'active' : '' }"}
+        = link_to schools_path(list_type: 'ell') do
+          %span.name
+            ELL
+            %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
     - if @sped_schools.present?
-      #sped_schools_tab.school_list_tab
-        %span.name
-          SPED
-          %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
+      %div{id: 'sped_schools_tab', class: "school_list_tab #{params[:list_type] == 'sped' ? 'active' : '' }"}
+        = link_to schools_path(list_type: 'sped') do
+          %span.name
+            SPED
+            %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
 
     :javascript

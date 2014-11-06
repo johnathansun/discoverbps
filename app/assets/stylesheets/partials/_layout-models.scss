@@ -2168,6 +2168,9 @@ Menu School Lists
 .wrap .menu_school_lists .name_list .school_list_tab .name {
   font-size: 18px;
 }
+.wrap .menu_school_lists .name_list .school_list_tab a {
+  text-decoration: none;
+}
 .wrap .menu_school_lists.compare_action .name_list .school_list_tab {
   border-left: 1px solid #ffffff;
 }

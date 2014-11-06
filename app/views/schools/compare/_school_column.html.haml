@@ -44,11 +44,11 @@
 
     - if SURROUND_CARE_GRADES.include?(current_student.grade_level)
       .school_surround_care.line.light
-        - if school.api_basic_info.try(:[], :BeforeSchPrograms).present?
+        - if school.before_care?(current_student.grade_level)
           Before School
           %br/
 
-        - if school.api_basic_info.try(:[], :AfterSchPrograms).present?
+        - if school.after_care?(current_student.grade_level)
           After School
 
     -# .school_type.line
