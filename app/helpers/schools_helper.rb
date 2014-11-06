@@ -106,7 +106,7 @@ module SchoolsHelper
 		if array.present?
 			list = []
 			array.each do |partner|
-				list << "#{partner[:description]}, "
+				list << partner[:description]
 			end
 			return list.compact
 		else
@@ -114,7 +114,7 @@ module SchoolsHelper
 		end
 	end
 
-	
+
 
 	def eligibility_helper(tier)
 		tier.try(:gsub, /:/, ', ')

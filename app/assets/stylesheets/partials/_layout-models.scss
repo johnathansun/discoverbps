@@ -59,17 +59,20 @@ Dialog Box
 			  display: inline-block;
 
 			  .row {
-				  line-height: 37px;
-				  font-size: 16px;
-				  color: #969696;
-				  border-bottom: 2px solid #c9c9c9;
-				  position: relative;
-				  cursor: pointer;
+				  line-height: 20px;
+					font-size: 16px;
+					color: #969696;
+					border-bottom: 2px solid #c9c9c9;
+					position: relative;
+					cursor: pointer;
+					padding: 10px 30px 10px 0;
 				  &:hover { color: #000000; }
 
 				  .icon_selected {
 					  position: absolute;
 					  right: 0px;
+					  top: 50%;
+					  margin-top: -18px;
 					  color: #72c900;
 					  font-size: 12px;
 					  line-height: 37px;

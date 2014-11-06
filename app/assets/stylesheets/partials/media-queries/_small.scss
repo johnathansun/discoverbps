@@ -296,10 +296,6 @@
 
 
 
-  .search {
-    margin: 0 33px;
-    width: auto;
-  }
   .search .search_header {
     width: auto;
   }
@@ -351,7 +347,7 @@
   
   .search .user_lists,
   .search .new_search_form_wrap {
-	  width: 100%;
+	  width: 75%;
   }
   
 	/* Search Form
@@ -396,7 +392,7 @@
 	  }
 	  .bloc_2 {
 	    padding-left: 4%;
-	    width: 56%;
+	    width: 46%;
 	    margin-bottom: 30px;
 	  }
 	  .bloc_2.select_grade {
@@ -416,10 +412,10 @@
 	
 	  .bloc_6 {
 	    float: none;
-	    width: 96%;
-	    padding-left: 4%;
-	    display: none;
+	    width: 100%;
+	    //display: none;
 	    margin-left: 0;
+			margin-bottom: 12px;
 	  }
 	  .bloc_6 input {
 	    margin-bottom: 0;
@@ -432,6 +428,9 @@
 	    margin-bottom: 12px;
 	    padding-right: 0;
 	  }
+	  .btn.add_child_button {
+			margin-bottom: 30px;
+		}
 	  .btn.current_location {
 	    width: 36%;
 	    padding-left: 4%;
@@ -578,14 +577,13 @@
 
 
 /* ----------------------------------------------
-   Mobile portrait Layout
+   Mobile Landscape Layout
 ---------------------------------------------- */
 @media screen and (max-width: 607px) {
 
 	.wrap {
 		padding: 0 14px;
 	}
-
   .wrap.standard {
     width: 100%;
     margin: 0;
@@ -599,7 +597,6 @@
 			right: 20px;
 	  }
 	}
-
   
   
   .account_tab {
@@ -621,7 +618,6 @@
   }
 
 
-
   .search .search_header h1 {
     display: inline;
   }
@@ -632,8 +628,9 @@
   }
   .search .search_section.first .content_left {
     padding-bottom: 30px;
+    
+    .home_intro { font-size: 100%; }
   }
-
   .search .logo.register {
     font-size: 68px;
   }
@@ -645,13 +642,7 @@
 	.progress_bar {
 
 		.steps .step {
-			width: 50%;
-			margin: 0 0 10px 0;
 
-			.bar {
-
-				//.point.terminal { display: block; }
-			}
 			.label {
 				line-height: 1.2em;
 				.step_name {
@@ -663,12 +654,23 @@
 	}
 	
 	
+	.search .new_search_form_wrap {
+	  width: 100%;
+  }
+	.form_line {
+
+		.bloc_6 input {
+			margin-bottom: 0;
+			font-size: 14px;
+		}
+	}
+
+
 	.wrap .menu_school_lists { margin-top: 0; }
 	.wrap .menu_school_lists .name_list .school_list_tab {
 		width: 100%;
 		margin-bottom: 2px;
 	}
-
 
 
 	#school_list {
@@ -745,5 +747,18 @@
 	}
 
 
+}
+
+/* ----------------------------------------------
+   Mobile portrait Layout
+---------------------------------------------- */
+@media screen and (max-width: 480px) {
+
+	.progress_bar {
+		.steps .step {
+			width: 50%;
+			margin: 0 0 10px 0;
+		}
+	}
 
 }

@@ -105,6 +105,13 @@ small, .small {
 .light {
   font-family: Avenir-Roman, Arial Black, Arial Black, Gadget, sans-serif;
 }
+.error {
+	background: #FFF;
+	padding: 10px 4%;
+	line-height: 1.3em;
+	color: $red;
+}
+
 
 /* !TITLE ELEMENTS
 ---------------------------------------------- */
