@@ -78,7 +78,7 @@
 		-# School Hours
 		%p.title
 			%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"}
-			School hours
+			School Hours
 		%p.descrip.light
 			= school.api_hours.try(:[], :Description)
 
@@ -97,18 +97,24 @@
 		-# Surround Care
 		%p.title
 			%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
-			Surround care
+			Surround Care
 
 		%p.descrip.light
-			%span.text_G1
-				Before:
-			= school.api_surround_care.try(:[], :BeforeSchPrograms)
-			%br/
-			%br/
+			- if school.api_surround_care.try(:[], :BeforeSchPrograms).present?
+				%span.text_G1
+					Before:
+					= school.api_surround_care.try(:[], :BeforeSchPrograms)
+				%br/
+				%br/
 
-			%span.text_G1
-				After:
-			= school.api_surround_care.try(:[], :AfterSchPrograms)
+			- if school.api_surround_care.try(:[], :AfterSchPrograms).present?
+				%span.text_G1
+					After:
+					= school.api_surround_care.try(:[], :AfterSchPrograms)
+
+			- if school.api_surround_care.try(:[], :BeforeSchPrograms).blank? && school.api_surround_care.try(:[], :AfterSchPrograms).blank?
+				%span.text_G1
+					None offered
 
 		%hr/
 

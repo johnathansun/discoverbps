@@ -37,10 +37,9 @@
 				.label.hours
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"}
 					Hours
-				- if SURROUND_CARE_GRADES.include?(current_student.grade_level)
-					.label.surround_care
-						%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
-						Surround Care
+				.label.surround_care
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
+					Surround Care
 				-# .label.school_type
 				-# 	%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
 				-# 	School Type
@@ -114,20 +113,4 @@
 			}
 		});
 		$("#sortable").disableSelection();
-	});
-
-	$('.star_unstarred').click(function(){
-		$.ajax({
-			url: '/student_schools/' + $(this).data('studentSchoolId') + '/star',
-			type: 'post',
-			dataType: 'script'
-		});
-	});
-
-	$('.star_starred').click(function(){
-		$.ajax({
-			url: '/student_schools/' + $(this).data('studentSchoolId') + '/unstar',
-			type: 'post',
-			dataType: 'script'
-		});
 	});

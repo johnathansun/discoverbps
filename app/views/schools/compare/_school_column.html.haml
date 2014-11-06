@@ -42,14 +42,12 @@
     .school_hours.line.light
       = truncate(school.api_hours.try(:[], :Description), length: 40)
 
-    - if SURROUND_CARE_GRADES.include?(current_student.grade_level)
-      .school_surround_care.line.light
-        - if school.before_care?(current_student.grade_level)
-          Before School
-          %br/
+    .school_surround_care.line.light
+      - if school.before_care?(current_student.grade_level)
+        Before School
 
-        - if school.after_care?(current_student.grade_level)
-          After School
+      - if school.after_care?(current_student.grade_level)
+        After School
 
     -# .school_type.line
     -#   = school.api_basic_info.try(:[], :SchoolType)
