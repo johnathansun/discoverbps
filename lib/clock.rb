@@ -16,6 +16,7 @@ every(1.day, 'Update school facilities', at: '09:00') 		    { SchoolData.delay.u
 every(1.day, 'Update school grades', at: '09:00') 				    { SchoolData.delay.update_grades! }
 every(1.day, 'Update school hours', at: '09:00') 					    { SchoolData.delay.update_hours! }
 every(1.day, 'Update school languages', at: '09:00')	 		    { SchoolData.delay.update_languages! }
+every(1.day, 'Update school other programs', at: '09:00') 		{ SchoolData.delay.update_other_programs! }
 every(1.day, 'Update school partners', at: '09:00')           { SchoolData.delay.update_partners! }
 every(1.day, 'Update school photos', at: '09:00') 				    { SchoolData.delay.update_photos! }
 every(1.day, 'Update school preview dates', at: '09:00') 		  { SchoolData.delay.update_preview_dates! }

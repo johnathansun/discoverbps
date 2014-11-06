@@ -77,6 +77,17 @@ module SchoolData
     end
   end
 
+  ##### UPDATE OTHER PROGRAMS #####
+
+  def self.update_other_programs!(school_id=nil)
+    schools = self.find_schools(school_id)
+
+    schools.each do |school|
+      response = Webservice.other_programs(school.bps_id)
+      school.update_attributes(api_programs: response) if response.present?
+    end
+  end
+
   ##### UPDATE PARTNERS #####
 
   def self.update_partners!(school_id=nil)

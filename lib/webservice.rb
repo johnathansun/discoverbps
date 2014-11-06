@@ -143,6 +143,16 @@ module Webservice
 		self.extract(api_response, endpoint, extract_from_array, bps_id)
 	end
 
+	##### OTHER PROGRAMS #####
+
+	def self.other_programs(bps_id)
+		endpoint = "GetSchoolOtherProgramsInfo"
+		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
+		extract_from_array = true
+		api_response = self.get(endpoint, params)
+		self.extract(api_response, endpoint, extract_from_array, bps_id)
+	end
+
 	##### PARTNERS #####
 
 	def self.partners(bps_id)
