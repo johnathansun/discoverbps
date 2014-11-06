@@ -7,8 +7,7 @@
 	= render partial: 'schools/page_elements/map', locals: {students_list: current_user_students, school: nil, map_controls: true, height: 'resize', width: '100%'}
 
 .wrap.compare_lists
-	- if @zone_schools.present? || @ell_schools.present? || @sped_schools.present?
-		= render partial: 'schools/page_elements/school_list_tabs'
+	= render partial: 'schools/page_elements/school_list_tabs'
 
 #compare_list.compare_list.wrap
 	= link_to get_ready_schools_path do
