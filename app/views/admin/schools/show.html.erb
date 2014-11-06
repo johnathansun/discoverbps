@@ -409,9 +409,9 @@
 <% end %>
 
 <h3>Surround Care Programs</h3>
-<% if @school.api_other_programs.present? && @school.api_other_programs.is_a?(Hash) %>
+<% if @school.api_surround_care.present? && @school.api_surround_care.is_a?(Hash) %>
 	<ul class="with_bullets">
-		<% @school.api_other_programs.each_pair do |key, value| %>
+		<% @school.api_surround_care.each_pair do |key, value| %>
 			<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
 		<% end %>
 	</ul>

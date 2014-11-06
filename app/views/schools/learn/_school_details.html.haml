@@ -101,17 +101,17 @@
 				Surround care
 
 			%p.descrip.light
-				- if school.api_basic_info.try(:[], :BeforeSchPrograms).present?
+				- if school.before_care?(current_student.grade_level)
 					%span.text_G1
 						Before:
-					= school.api_basic_info.try(:[], :BeforeSchPrograms)
+					= school.api_surround_care.try(:[], :BeforeSchPrograms)
 					%br/
 					%br/
 
-				- if school.api_basic_info.try(:[], :AfterSchPrograms).present?
+				- if school.after_care?(current_student.grade_level)
 					%span.text_G1
 						After:
-					= school.api_basic_info.try(:[], :AfterSchPrograms)
+					= school.api_surround_care.try(:[], :AfterSchPrograms)
 
 		%hr/
 
