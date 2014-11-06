@@ -84,7 +84,7 @@ module SchoolData
 
     schools.each do |school|
       response = Webservice.other_programs(school.bps_id)
-      school.update_attributes(api_programs: response) if response.present?
+      school.update_attributes(api_other_programs: response) if response.present?
     end
   end
 
