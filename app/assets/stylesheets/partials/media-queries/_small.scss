@@ -577,7 +577,7 @@
 
 
 /* ----------------------------------------------
-   Mobile portrait Layout
+   Mobile Landscape Layout
 ---------------------------------------------- */
 @media screen and (max-width: 607px) {
 
@@ -642,13 +642,7 @@
 	.progress_bar {
 
 		.steps .step {
-			width: 50%;
-			margin: 0 0 10px 0;
 
-			.bar {
-
-				//.point.terminal { display: block; }
-			}
 			.label {
 				line-height: 1.2em;
 				.step_name {
@@ -752,5 +746,19 @@
 		}
 	}
 
+
+}
+
+/* ----------------------------------------------
+   Mobile portrait Layout
+---------------------------------------------- */
+@media screen and (max-width: 480px) {
+
+	.progress_bar {
+		.steps .step {
+			width: 50%;
+			margin: 0 0 10px 0;
+		}
+	}
 
 }
