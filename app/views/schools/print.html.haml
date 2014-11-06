@@ -101,7 +101,7 @@
 
 					.box
 						%p.title
-							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"}
+							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_gradesoffered"}
 							Grades Offered
 						%p.descrip.light
 							= grade_levels_helper(@school.grade_levels)
@@ -110,7 +110,7 @@
 						- if TRANSITION_GRADES.include?(current_student.grade_level)
 							%p.title
 								%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
-								= "Demand Data (#{current_student.formatted_grade_level_name} - #{last_school_year_range})"
+								= "#{current_student.formatted_grade_level_name} Demand (#{last_school_year_range})"
 							%p.descrip.light
 								= @school.open_seats(current_student.grade_level)
 								open seats
@@ -120,44 +120,47 @@
 								%br/
 								= @school.applicants_per_open_seat(current_student.grade_level, last_school_year)
 								applicants/open seat
+							.max_range
+								%div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
 
-							%p.title
+						%p.title
+							- unless TRANSITION_GRADES.include?(current_student.grade_level)
 								%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
-								= "Enrollment (#{current_student.formatted_grade_level_name} - #{last_school_year_range})"
-							%p.descrip
-								= @school.api_basic_info.try(:[], :SchSize)
+							School Size
+						%p.descrip.light
+							= @school.api_basic_info.try(:[], :SchSize)
 
 					.box
 						%p.title
-							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"}
+							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"}
 							Eligibility
 						%p.descrip.light
 							= @student_school.eligibility
 
 					.box
 						%p.title
-							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"}
+							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"}
 							Special Application
 						%p.descrip.light
 							= special_application_helper(@school.api_description.try(:[], :isspecialappprocedures))
 
 					.box
 						%p.title
-							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"}
+							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"}
 							Advanced Work Class (AWC)
 						%p.descrip.light
 							= awc_helper(@school.api_basic_info.try(:[], :IsAWC))
 
 					.box
 						%p.title
-							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
+							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
 							MCAS Tier
 						%p.descrip.light
 							= school_tier_helper(@student_school.tier)
 
 					.box
 						%p.title
-							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
+							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
 							Uniform Policy
 						- if @school.api_description.try(:[], :uniformpolicydesc).present?
 							%p.descrip.light
@@ -168,36 +171,42 @@
 
 					.box
 						%p.title
-							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"}
+							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"}
 							School Focus
 						%p.descrip.light
 							= @school.api_description.try(:[], :schfocus)
 
 					.box
 						%p.title
-							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
-							Student Support
+							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
+							Programs
 						%p.descrip.light
-							=raw student_support_list_helper(@school.api_student_support)
+							= programs_list_helper(@school.api_programs).try(:join, ', ')
 
 					.box
 						%p.title
-							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
-							Community Partners
-						%p.descrip.light
-							= partners_list_helper(@school.api_partners)
-
-					.box
-						%p.title
-							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
+							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
 							Facility Features
 						%p.descrip.light
-							= facilities_list_helper(@school.api_facilities)
+							= facilities_list_helper(@school.api_facilities).try(:join, ', ')
 
-					- if UPPER_GRADES.include?(current_student.grade_level)
-						.box
-							%p.title
-								%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
-								Sports
-							%p.descrip.light
-								= sports_list_helper(@school.api_sports)
+					.box
+						%p.title
+							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
+							Student Support
+						%p.descrip.light
+							=raw student_support_list_helper(@school.api_student_support).try(:join, ', ')
+
+					.box
+						%p.title
+							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
+							Sports
+						%p.descrip.light
+							= sports_list_helper(@school.api_sports).try(:join, ', ')
+
+					.box
+						%p.title
+							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
+							Community Partners
+						%p.descrip.light
+							= partners_list_helper(@school.api_partners).try(:join, ', ')
