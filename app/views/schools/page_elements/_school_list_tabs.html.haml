@@ -18,7 +18,7 @@
           ELL
           %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
-    - if current_student.sped_needs.present?
+    - if @sped_schools.present?
       #sped_schools_tab.school_list_tab
         %span.name
           SPED
