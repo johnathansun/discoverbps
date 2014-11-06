@@ -95,23 +95,20 @@
 
 
 		-# Surround Care
-		- if school.before_care?(current_student.grade_level) || school.after_care?(current_student.grade_level)
-			%p.title
-				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
-				Surround care
+		%p.title
+			%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
+			Surround care
 
-			%p.descrip.light
-				- if school.before_care?(current_student.grade_level)
-					%span.text_G1
-						Before:
-					= school.api_surround_care.try(:[], :BeforeSchPrograms)
-					%br/
-					%br/
+		%p.descrip.light
+			%span.text_G1
+				Before:
+			= school.api_surround_care.try(:[], :BeforeSchPrograms)
+			%br/
+			%br/
 
-				- if school.after_care?(current_student.grade_level)
-					%span.text_G1
-						After:
-					= school.api_surround_care.try(:[], :AfterSchPrograms)
+			%span.text_G1
+				After:
+			= school.api_surround_care.try(:[], :AfterSchPrograms)
 
 		%hr/
 

@@ -76,27 +76,25 @@
 						%p.descrip.light
 							= @school.api_hours.try(:[], :Description)
 
+					.box
+						%p.title
+							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
+							Surround care
 
-					- if @school.before_care?(current_student.grade_level) || @school.after_care?(current_student.grade_level)
-						.box
-							%p.title
-								%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
-								Surround care
+						%p.descrip.light
+							- if @school.api_surround_care.try(:[], :BeforeSchPrograms).present?
+								%span.text_G1
+								Before:
 
-							%p.descrip.light
-								- if @school.api_surround_care.try(:[], :BeforeSchPrograms).present?
-									%span.text_G1
-									Before:
+								= @school.api_surround_care.try(:[], :BeforeSchPrograms)
+								%br/
+								%br/
 
-									= @school.api_surround_care.try(:[], :BeforeSchPrograms)
-									%br/
-									%br/
+							- if @school.api_surround_care.try(:[], :AfterSchPrograms).present?
+								%span.text_G1
+								After:
 
-								- if @school.api_surround_care.try(:[], :AfterSchPrograms).present?
-									%span.text_G1
-									After:
-
-									= @school.api_surround_care.try(:[], :AfterSchPrograms)
+								= @school.api_surround_care.try(:[], :AfterSchPrograms)
 
 
 					.box
