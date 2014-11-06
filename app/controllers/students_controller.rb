@@ -142,8 +142,11 @@ class StudentsController < ApplicationController
 					@student.set_ell_schools!
 				end
 
-				format.html { redirect_to sped_student_path(@student)}
-				format.js { render template: "students/sped/sped" }
+				format.html { redirect_to schools_path}
+				format.js { render :js => "window.location = '/schools'" }
+
+				# format.html { redirect_to sped_student_path(@student)}
+				# format.js { render template: "students/sped/sped" }
 			else
 				format.js { render template: "students/ell/ell" }
 				flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
