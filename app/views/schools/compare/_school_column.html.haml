@@ -89,3 +89,22 @@
 
     .school_comm_partners.line.long.light
       = truncate(partners_list_helper(school.api_partners).try(:join, ', '), length: 240)
+
+
+:javascript
+
+  $('.star_unstarred').click(function(){
+    $.ajax({
+      url: '/student_schools/' + $(this).data('studentSchoolId') + '/star',
+      type: 'post',
+      dataType: 'script'
+    });
+  });
+
+  $('.star_starred').click(function(){
+    $.ajax({
+      url: '/student_schools/' + $(this).data('studentSchoolId') + '/unstar',
+      type: 'post',
+      dataType: 'script'
+    });
+  });
