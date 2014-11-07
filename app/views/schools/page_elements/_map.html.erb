@@ -299,46 +299,10 @@
         <% end %>
       });
 
-      // Load ELL boundaries
-      <% if @ell_schools.present? %>
-
-        $.getJSON('/ell_clusters.geojson', function (data) {
-          ellBoundaries = map.data.addGeoJson(data);
-
-          google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
-            $.each(ellBoundaries, function (index, feature) {
-              map.data.remove(feature);
-            });
-          });
-
-          <% if @zone_schools.present? %>
-            google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
-              $.each(ellBoundaries, function (index, feature) {
-                map.data.remove(feature);
-              });
-            });
-          <% end %>
-
-          google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function () {
-            $.each(ellBoundaries, function (index, feature) {
-              map.data.add(feature);
-              map.data.overrideStyle(feature, {strokeWeight: 4});
-            });
-          });
-
-          <% if @sped_schools.present? %>
-            google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function () {
-              $.each(ellBoundaries, function (index, feature) {
-                map.data.remove(feature);
-              });
-            });
-          <% end %>
-        });
-      <% end %>
 
       // Load SPED boundaries
 
-      <% if @sped_schools.present? %>
+      <% if @sped_schools.present? || @ell_schools.present? %>
         $.getJSON('/sped_clusters.geojson', function (data) {
           spedBoundaries = map.data.addGeoJson(data);
 
@@ -359,7 +323,8 @@
           <% if @ell_schools.present? %>
             google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function () {
               $.each(spedBoundaries, function (index, feature) {
-                map.data.remove(feature);
+                map.data.add(feature);
+                map.data.overrideStyle(feature, {strokeWeight: 4});
               });
             });
           <% end %>
