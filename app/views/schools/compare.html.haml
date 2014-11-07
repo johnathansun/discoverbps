@@ -1,7 +1,8 @@
 = render partial: 'schools/page_elements/header', locals: {page_step: 3}
 
-.wrap
-	= render partial: 'schools/page_elements/student_tabs'
+- if @home_schools.present? && @zone_schools.present?
+	.wrap
+		= render partial: 'schools/page_elements/student_tabs'
 
 .wrap.global_map
 	= render partial: 'schools/page_elements/map', locals: {students_list: current_user_students, school: nil, map_controls: true, height: 'resize', width: '100%'}
