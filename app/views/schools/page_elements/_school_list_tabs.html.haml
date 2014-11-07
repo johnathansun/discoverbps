@@ -14,6 +14,20 @@
             Zone-based
             %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
+    - if current_student.ell_language.present?
+      %div{id: 'ell_schools_tab', class: "school_list_tab #{params[:list_type] == 'ell' ? 'active' : '' }"}
+        = link_to schools_path(list_type: 'ell') do
+          %span.name
+            ELL
+            %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
+
+    - if @sped_schools.present?
+      %div{id: 'sped_schools_tab', class: "school_list_tab #{params[:list_type] == 'sped' ? 'active' : '' }"}
+        = link_to schools_path(list_type: 'sped') do
+          %span.name
+            SPED
+            %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
+
 
     :javascript
       $('#home_schools_tab').click(function() {

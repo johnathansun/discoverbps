@@ -1,8 +1,7 @@
 = render partial: 'schools/page_elements/header', locals: {page_step: 4}
 
-- if @home_schools.present? && @zone_schools.present?
-	.wrap
-		= render partial: 'schools/page_elements/student_tabs'
+.wrap
+	= render partial: 'schools/page_elements/student_tabs'
 
 .wrap.get_ready
 	.result.clearfix
@@ -11,7 +10,7 @@
 			= render partial: 'schools/page_elements/footer'
 
 		#school_list.column.column_center
-			= render partial: 'schools/page_elements/school_list_tabs'
+			-# = render partial: 'schools/page_elements/school_list_tabs'
 
 			= render partial: 'schools/get_ready/home_schools'
 			= render partial: 'schools/get_ready/zone_schools'

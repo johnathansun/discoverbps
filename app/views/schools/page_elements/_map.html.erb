@@ -266,36 +266,44 @@
           map.data.overrideStyle(feature, {strokeWeight: 4});
         });
 
-        google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
-          $.each(cityBoundaries, function (index, feature) {
-            map.data.add(feature);
-            map.data.overrideStyle(feature, {strokeWeight: 4});
-          });
-        });
-
-        <% if @zone_schools.present? %>
-          google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
+        if ($('#home_schools_tab').length > 0) {
+          google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
             $.each(cityBoundaries, function (index, feature) {
               map.data.add(feature);
               map.data.overrideStyle(feature, {strokeWeight: 4});
             });
           });
+        }
+
+        <% if @zone_schools.present? %>
+          if ($('#zone_schools_tab').length > 0) {
+            google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
+              $.each(cityBoundaries, function (index, feature) {
+                map.data.add(feature);
+                map.data.overrideStyle(feature, {strokeWeight: 4});
+              });
+            });
+          }
         <% end %>
 
         <% if @ell_schools.present? %>
-          google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function () {
-            $.each(cityBoundaries, function (index, feature) {
-              map.data.remove(feature);
+          if ($('#ell_schools_tab').length > 0) {
+            google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function () {
+              $.each(cityBoundaries, function (index, feature) {
+                map.data.remove(feature);
+              });
             });
-          });
+          }
         <% end %>
 
         <% if @sped_schools.present? %>
-          google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function () {
-            $.each(cityBoundaries, function (index, feature) {
-              map.data.remove(feature);
+          if ($('#sped_schools_tab').length > 0) {
+            google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function () {
+              $.each(cityBoundaries, function (index, feature) {
+                map.data.remove(feature);
+              });
             });
-          });
+          }
         <% end %>
       });
 
@@ -306,35 +314,45 @@
         $.getJSON('/sped_clusters.geojson', function (data) {
           spedBoundaries = map.data.addGeoJson(data);
 
-          google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
-            $.each(spedBoundaries, function (index, feature) {
-              map.data.remove(feature);
-            });
-          });
-
-          <% if @zone_schools.present? %>
-            google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
+          if ($('#home_schools_tab').length > 0) {
+            google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
               $.each(spedBoundaries, function (index, feature) {
                 map.data.remove(feature);
               });
             });
+          }
+
+          <% if @zone_schools.present? %>
+            if ($('#zone_schools_tab').length > 0) {
+              google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
+                $.each(spedBoundaries, function (index, feature) {
+                  map.data.remove(feature);
+                });
+              });
+            }
           <% end %>
 
           <% if @ell_schools.present? %>
-            google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function () {
-              $.each(spedBoundaries, function (index, feature) {
-                map.data.add(feature);
-                map.data.overrideStyle(feature, {strokeWeight: 4});
+            if ($('#ell_schools_tab').length > 0) {
+              google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function () {
+                $.each(spedBoundaries, function (index, feature) {
+                  map.data.add(feature);
+                  map.data.overrideStyle(feature, {strokeWeight: 4});
+                });
               });
-            });
+            }
           <% end %>
 
-          google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function () {
-            $.each(spedBoundaries, function (index, feature) {
-              map.data.add(feature);
-              map.data.overrideStyle(feature, {strokeWeight: 4});
-            });
-          });
+          <% if @sped_schools.present? %>
+            if ($('#sped_schools_tab').length > 0) {
+              google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function () {
+                $.each(spedBoundaries, function (index, feature) {
+                  map.data.add(feature);
+                  map.data.overrideStyle(feature, {strokeWeight: 4});
+                });
+              });
+            }
+          <% end %>
         });
       <% end %>
 
@@ -560,12 +578,12 @@
 
       var homeInfowindow = new google.maps.InfoWindow({});
 
-      google.maps.event.addListener(HomeMarker, 'mouseover', function() {
-        homeInfowindow.setContent('<div><h3>Home</h3><%= current_student.street_number %> <%= current_student.street_name %>, <%= current_student.zipcode %>');
+      google.maps.event.addListener(homeMarker, 'mouseover', function() {
+        homeInfowindow.setContent('<div><%= current_student.street_number %>&nbsp;<%= current_student.street_name %> <br /><%= current_student.neighborhood %> MA</div>');
         homeInfowindow.open(map,this);
       });
 
-      google.maps.event.addListener(HomeMarker, 'mouseout', function() {
+      google.maps.event.addListener(homeMarker, 'mouseout', function() {
         homeInfowindow.close(map,this);
       });
 

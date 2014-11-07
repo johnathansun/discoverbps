@@ -108,9 +108,9 @@ class StudentsController < ApplicationController
 				# set the basic school lists here, since this step will save the student
 				# home schools will be overwritten in set_awc if awc_invitation = true
 				@student.set_home_schools!
-				if zone_school_grades.include?(@student.grade_level)
-					@student.set_zone_schools!
-				end
+				# if zone_school_grades.include?(@student.grade_level)
+				# 	@student.set_zone_schools!
+				# end
 
 				format.html { redirect_to schools_path}
 				format.js { render :js => "window.location = '/schools'" }
