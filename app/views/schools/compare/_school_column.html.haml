@@ -74,19 +74,19 @@
       = truncate(school.api_description.try(:[], :schfocus), length: 240)
 
     .school_facilities.line.mid.light
-      = truncate(facilities_list_helper(school.api_programs).try(:join, ', '), length: 240)
+      = truncate(facilities_list_helper(school).try(:join, ', '), length: 240)
 
     .school_facilities.line.long.light
-      = truncate(facilities_list_helper(school.api_facilities).try(:join, ', '), length: 240)
+      = truncate(facilities_list_helper(school).try(:join, ', '), length: 240)
 
     .school_health.line.long.light
-      = truncate(student_support_list_helper(school.api_student_support).try(:join, ', '), length: 240)
+      = truncate(student_support_list_helper(school).try(:join, ', '), length: 240)
 
     .school_sports.line.long.light
-      = truncate(sports_list_helper(school.api_sports).try(:join, ', '), length: 240)
+      = truncate(sports_list_helper(school).try(:join, ', '), length: 240)
 
     .school_comm_partners.line.long.light
-      = truncate(partners_list_helper(school.api_partners).try(:join, ', '), length: 240)
+      = truncate(partners_list_helper(school).try(:join, ', '), length: 240)
 
 
 :javascript

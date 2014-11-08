@@ -82,13 +82,13 @@
 		%p.descrip.light
 			= school.api_hours.try(:[], :Description)
 
-		- if preview_dates_list_helper(school.api_preview_dates).present?
+		- if preview_dates_list_helper(school).present?
 			-# Preview Dates
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"}
 				Preview Dates
 			%p.descrip.light
-				- preview_dates_list_helper(school.api_preview_dates).each do |date|
+				- preview_dates_list_helper(school).each do |date|
 					•
 					= date
 					%br/
@@ -222,32 +222,32 @@
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
 				Programs
 			%p.descrip.light
-				= programs_list_helper(school.api_programs).try(:join, ', ')
+				= programs_list_helper(school).try(:join, ', ')
 
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
 				Facility Features
 			%p.descrip.light
-				= facilities_list_helper(school.api_facilities).try(:join, ', ')
+				= facilities_list_helper(school).try(:join, ', ')
 
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
 				Student Support
 			%p.descrip.light
-				=raw student_support_list_helper(school.api_student_support).try(:join, ', ')
+				=raw student_support_list_helper(school).try(:join, ', ')
 
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
 				Sports
 			%p.descrip.light
-				= sports_list_helper(school.api_sports).try(:join, ', ')
+				= sports_list_helper(school).try(:join, ', ')
 
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
 				Community Partners
 			%p.descrip.light
-				= partners_list_helper(school.api_partners).try(:join, ', ')
+				= partners_list_helper(school).try(:join, ', ')
