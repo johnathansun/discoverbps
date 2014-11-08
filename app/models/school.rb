@@ -10,8 +10,7 @@ class School < ActiveRecord::Base
 	attr_accessor :tier, :transportation_eligibility, :walk_zone_eligibility, :walk_time, :drive_time, :distance
 	attr_accessible :api_basic_info, :api_awards, :api_description, :api_facilities, :api_grades, :api_hours, :api_languages,
 									:api_partners, :api_photos, :name, :bps_id, :slug, :latitude, :longitude, :api_sports, :api_student_support,
-									:api_preview_dates, :api_programs
-
+									:api_preview_dates, :api_programs, :api_surround_care
 
 	serialize :api_basic_info # Hash
 	serialize :api_awards # Array
@@ -26,13 +25,96 @@ class School < ActiveRecord::Base
 	serialize :api_programs # Hash
 	serialize :api_sports # Hash
 	serialize :api_student_support # Hash
+	serialize :api_surround_care # Hash
 
 	# after_validation :geocode
 	before_save :strip_bps_id
 	after_save :update_school_data_callback
 
 	def full_address
-		"#{api_basic_info[:campus1address1]} #{api_basic_info[:campus1city]} #{api_basic_info[:campus1zip]}"
+		"#{api_basic_info[:campus1address1]} #{api_basic_info[:campus1city]} #{api_basic_info[:campus1state]} #{api_basic_info[:campus1zip]} "
+	end
+
+	def map_address
+		"#{api_basic_info[:campus1address1]}<br />#{api_basic_info[:campus1city]} #{api_basic_info[:campus1state]} #{api_basic_info[:campus1zip]}"
+	end
+
+	def before_care?(grade_level)
+		if api_surround_care.present?
+			case grade_level
+			when 'K0'
+				api_surround_care[:IsBeforeK0] == 'True'
+			when 'K1'
+				api_surround_care[:IsBeforeK1] == 'True'
+			when 'K2'
+				api_surround_care[:IsBeforeK2] == 'True'
+			when '1'
+				api_surround_care[:IsBefore1To5] == 'True'
+			when '2'
+				api_surround_care[:IsBefore1To5] == 'True'
+			when '3'
+				api_surround_care[:IsBefore1To5] == 'True'
+			when '4'
+				api_surround_care[:IsBefore1To5] == 'True'
+			when '5'
+				api_surround_care[:IsBefore1To5] == 'True'
+			when '6'
+				api_surround_care[:IsBefore6] == 'True'
+			when '7'
+				api_surround_care[:IsBefore7To8] == 'True'
+			when '8'
+				api_surround_care[:IsBefore7To8] == 'True'
+			when '9'
+				api_surround_care[:IsBefore9To12] == 'True'
+			when '10'
+				api_surround_care[:IsBefore9To12] == 'True'
+			when '11'
+				api_surround_care[:IsBefore9To12] == 'True'
+			when '12'
+				api_surround_care[:IsBefore9To12] == 'True'
+			end
+		else
+			false
+		end
+	end
+
+	def after_care?(grade_level)
+		if api_surround_care.present?
+			case grade_level
+			when 'K0'
+				api_surround_care[:IsAfterK0] == 'True'
+			when 'K1'
+				api_surround_care[:IsAfterK1] == 'True'
+			when 'K2'
+				api_surround_care[:IsAfterK2] == 'True'
+			when '1'
+				api_surround_care[:IsAfter1To5] == 'True'
+			when '2'
+				api_surround_care[:IsAfter1To5] == 'True'
+			when '3'
+				api_surround_care[:IsAfter1To5] == 'True'
+			when '4'
+				api_surround_care[:IsAfter1To5] == 'True'
+			when '5'
+				api_surround_care[:IsAfter1To5] == 'True'
+			when '6'
+				api_surround_care[:IsAfter6] == 'True'
+			when '7'
+				api_surround_care[:IsAfter7To8] == 'True'
+			when '8'
+				api_surround_care[:IsAfter7To8] == 'True'
+			when '9'
+				api_surround_care[:IsAfter9To12] == 'True'
+			when '10'
+				api_surround_care[:IsAfter9To12] == 'True'
+			when '11'
+				api_surround_care[:IsAfter9To12] == 'True'
+			when '12'
+				api_surround_care[:IsAfter9To12] == 'True'
+			end
+		else
+			false
+		end
 	end
 
 	# turn api_grades into an array

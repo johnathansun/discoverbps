@@ -203,6 +203,16 @@ module Webservice
 		self.extract(api_response, endpoint, extract_from_array, bps_id)
 	end
 
+	##### SURROUND CARE #####
+
+	def self.surround_care(bps_id)
+		endpoint = "SurroundCare"
+		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
+		extract_from_array = true
+		api_response = self.get(endpoint, params)
+		self.extract(api_response, endpoint, extract_from_array, bps_id)
+	end
+
 	private
 
 	def self.get(endpoint, params)

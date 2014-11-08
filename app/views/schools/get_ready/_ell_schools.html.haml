@@ -1,4 +1,4 @@
-#ell_schools_list.schools_list.hidden
+%div{id: 'ell_schools_list', class: "schools_list #{params[:list_type] == 'ell' ? '' : 'hidden' }"}
   .list_content
     .flexible_content
       - if @ell_schools.present?

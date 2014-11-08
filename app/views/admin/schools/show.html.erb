@@ -408,6 +408,17 @@
 	<p style="margin-left: 20px;">[ No data ]</p>
 <% end %>
 
+<h3>Surround Care Programs</h3>
+<% if @school.api_surround_care.present? && @school.api_surround_care.is_a?(Hash) %>
+	<ul class="with_bullets">
+		<% @school.api_surround_care.each_pair do |key, value| %>
+			<li><strong><%= key %>:&nbsp;</strong> <%= value %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<p style="margin-left: 20px;">[ No data ]</p>
+<% end %>
+
 <h3>Sports</h3>
 <% if @school.api_sports.present? && @school.api_sports.is_a?(Hash) %>
 	<ul class="with_bullets">

@@ -143,6 +143,17 @@ module SchoolData
     end
   end
 
+  ##### UPDATE OTHER PROGRAMS #####
+
+  def self.update_surround_care!(school_id=nil)
+    schools = self.find_schools(school_id)
+
+    schools.each do |school|
+      response = Webservice.surround_care(school.bps_id)
+      school.update_attributes(api_surround_care: response) if response.present?
+    end
+  end
+
 
   private
 

@@ -23,12 +23,32 @@
 
 <br />
 <h3>API Info</h3>
-<p style="margin-bottom: 10px;">In order to determine whether a school has a given attribute, we need to know whether this attribute exists in the data returned by the API. To do so, the system needs to know what key and value to look for in which table. For instance, to determine whether a school has a swimming pool, the system would need to look in GetSchoolFacilities and find that 'haspool' = 'True'. For more information on the tables, keys and values provided by the API, please see <%= link_to "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help", 'https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help', target: "_blank" %>.</p>
+<p style="margin-bottom: 10px;">
+  In order to determine whether a school has a given attribute, we need to know whether this attribute exists in the data returned by the API.
+  To do so, the system needs to know what key and value to look for in which table.
+  For instance, to determine whether a school has a swimming pool, the system would need to find 'haspool' = 'True' in the /Facilities endpoint. 
+  For more information on the tables, keys and values provided by the API, please see
+  <%= link_to "https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help", 'https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help', target: "_blank" %>.
+</p>
 
 <div class="field">
   <%= f.label :api_table_name, "Table Name" %>
   <br />
-  <%= f.select :api_table_name, options_for_select([ ['Info', 'api_basic_info'], ['Awards', 'api_awards'], ['Description', 'api_description'], ['Facilities', 'api_facilities'], ['Grades', 'api_grades'], ['Hours', 'api_hours'], ['Languages', 'api_languages'], ['Partners', 'api_partners'], ['Photos', 'api_photos'], ['Sports', 'api_sports'], ['Student Support', 'api_student_support']], @preference.api_table_name) %>
+  <%= f.select :api_table_name, options_for_select([
+    ['Info', 'api_basic_info'],
+    ['Awards', 'api_awards'],
+    ['Description', 'api_description'],
+    ['Facilities', 'api_facilities'],
+    ['Grades', 'api_grades'],
+    ['Hours', 'api_hours'],
+    ['Languages', 'api_languages'],
+    ['Partners', 'api_partners'],
+    ['Photos', 'api_photos'],
+    ['Programs', 'api_programs'],
+    ['Sports', 'api_sports'],
+    ['Student Support', 'api_student_support'],
+    ['Surround Care', 'api_surround_care']
+  ], @preference.api_table_name) %>
 </div>
 
 <div class="field">

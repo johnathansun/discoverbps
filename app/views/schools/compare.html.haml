@@ -6,9 +6,8 @@
 .wrap.global_map
 	= render partial: 'schools/page_elements/map', locals: {students_list: current_user_students, school: nil, map_controls: true, height: 'resize', width: '100%'}
 
-.wrap.compare_lists
-	- if @zone_schools.present? || @ell_schools.present? || @sped_schools.present?
-		= render partial: 'schools/page_elements/school_list_tabs'
+-# .wrap.compare_lists
+-# 	= render partial: 'schools/page_elements/school_list_tabs'
 
 #compare_list.compare_list.wrap
 	= link_to get_ready_schools_path do
@@ -38,10 +37,9 @@
 				.label.hours
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"}
 					Hours
-				- if SURROUND_CARE_GRADES.include?(current_student.grade_level)
-					.label.surround_care
-						%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
-						Surround Care
+				.label.surround_care
+					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_surroundcare"}
+					Surround Care
 				-# .label.school_type
 				-# 	%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
 				-# 	School Type
@@ -115,20 +113,4 @@
 			}
 		});
 		$("#sortable").disableSelection();
-	});
-
-	$('.star_unstarred').click(function(){
-		$.ajax({
-			url: '/student_schools/' + $(this).data('studentSchoolId') + '/star',
-			type: 'post',
-			dataType: 'script'
-		});
-	});
-
-	$('.star_starred').click(function(){
-		$.ajax({
-			url: '/student_schools/' + $(this).data('studentSchoolId') + '/unstar',
-			type: 'post',
-			dataType: 'script'
-		});
 	});
