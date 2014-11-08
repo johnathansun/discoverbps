@@ -21,7 +21,7 @@
             ELL
             %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
-    - if @sped_schools.present?
+    - if current_student.sped_needs.present?
       %div{id: 'sped_schools_tab', class: "school_list_tab #{params[:list_type] == 'sped' ? 'active' : '' }"}
         = link_to schools_path(list_type: 'sped') do
           %span.name
