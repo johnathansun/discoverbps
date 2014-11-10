@@ -43,7 +43,7 @@
   .wrap .preferences {
     width: auto;
     position: relative;
-    padding: 23px 0 24px 7px;
+    padding: 20px 0 0;
     float: none;
     background: #dfdfdf;
     box-shadow: 0 0 0 0 #888888;
@@ -57,20 +57,22 @@
   }
   .wrap .preferences .header_preferences {
     display: block;
-		margin-left: 10px;
+		margin: 0 0 0 10px;
+		padding-bottom: 10px;
   }
   .wrap .preferences .preference {
     border: 0;
   }
   .wrap .preferences .colonn {
-    width: 20.8%;
+    width: 20.9%;
     padding: 0 2%;
     float: left;
-    border-right: 1px solid #ffffff;
-    min-height: 467px;
+    border-top: 1px solid $light_gray;
+    border-right: 1px solid $light_gray;
+    min-height: 120px;
   }
-  .wrap .preferences .colonn.last {
-    border: 0;
+  .wrap .preferences .colonn:nth-child(4n+4) {
+    border-right: 0;
   }
   .wrap .preferences.hide #preference_content {
     display: none;

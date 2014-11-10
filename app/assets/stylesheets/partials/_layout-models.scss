@@ -1074,10 +1074,47 @@ Single School
 	  #show_btn { display: none; }
 
 	}// .header_preferences
+	
+	.preference_category_title {
+		margin-bottom: 0.8em !important;
+		padding: 0 20px 0 23px;
+		line-height: 1.2em;
+		position: relative;
+		cursor: pointer;
+		color: #565656;
+		&:hover { color: $blue; }
+		
+		.icon {
+			position: absolute;
+			top: 50%;
+		}
+		.cat-icon { 
+			left: 0;
+			margin-top: -11px; 
+		}
+		.icon-arrow { 
+			right: 0; 
+			margin-top: -6px;
+			font-size: 10px;
+		}
+	}
 
 	.preference {
-	  padding: 17px 0 23px;
+	  padding: 18px 0 0;
 	  border-bottom: 1px solid #fafafa;
+		&.open {
+			.preference_category_title {
+				color: $blue;
+				.icon-arrow:before {
+					content: '\e040' !important;
+				}
+			}
+		}
+
+		.pref_choices {
+			display: none;
+			padding-bottom: 23px;
+		}
 
 		label {
 		  display: block;
@@ -1088,8 +1125,6 @@ Single School
 
 		  .icon_pref { margin-left: -19px; }
 		}
-
-		.text { margin-left: 2px; }
 
 		input { margin: 0 5px 0 -21px; }
 
@@ -1104,7 +1139,6 @@ Single School
 
 		.icon_pref { margin: 0 5px 0 0; }
 
-		span { color: #969696; }
 	}// .preference
 
 }// .wrap .preferences
