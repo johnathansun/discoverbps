@@ -1041,6 +1041,11 @@ Single School
   padding: 20px 18px 0 18px;
   background: #ebebeb;
   position: relative;
+  
+  .note {
+	  color: #818181;
+	  margin-bottom: 14px;
+  }
 
   .down_arrow {
 	  display: inline-block;
@@ -1160,6 +1165,7 @@ School List
 	}
 
 	.note {
+		color: #818181;
 		max-width: 800px;
 		margin: 0 10px 0 0;
     font-size: 12px;
@@ -2180,11 +2186,12 @@ Menu School Lists
 .wrap .menu_school_lists .name_list .school_list_tab {
   position: relative;
   float: left;
-  height: 27px;
-  padding: 8px 15px 0 15px;
+	height: auto;
+	padding: 11px 15px 9px 15px;
   color: #969696;
   background: #ffffff;
   cursor: pointer;
+  box-sizing: border-box;
 }
 .wrap .menu_school_lists .name_list .school_list_tab:hover {
   color: #ffffff;
@@ -2198,7 +2205,7 @@ Menu School Lists
   display: none;
 }
 .wrap .menu_school_lists .name_list .school_list_tab .name {
-  font-size: 18px;
+  font-size: 16px;
 }
 .wrap .menu_school_lists .name_list .school_list_tab a {
   text-decoration: none;
