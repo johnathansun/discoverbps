@@ -88,32 +88,6 @@ a.student_tab {
 .signup {
 	margin-top: 10px;
 }
-.preference_category_title span {
-	color: #565656 !important;
-}
-.preference_category_title {
-	margin-bottom: 0.8em !important;
-}
-
-/*
-.school_photos {
-	width: 310px;
-	padding: 19px;
-	float: left;
-}
-
-.school_description {
-	width: 410px;
-	padding: 17px 19px;
-	float: left;
-	font-family: Georgia, "Times New Roman", Times, serif;
-	font-size: 15px;
-}
-
-.school_description .full {
-	width: 100%;
-}
-*/
 
 #about_title {
 	padding-left: 19px;

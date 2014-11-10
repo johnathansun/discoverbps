@@ -1,13 +1,24 @@
 <!-- preferences menu side bar for shool listing -->
 <div id="preferences" class="preferences">
 
-<div class="note light small">
+<div class="note small">
 	Check the options below to generate a 'Fit Score' for each school.
 </div>
 
 <!-- header only in tablet -->
 	<div class="header_preferences">
-		<span class="font_17">Choose what matters to <%= current_student.first_name %>: <span id="hide_btn">Hide Criteria &nbsp;<span aria-hidden="true" class="down_arrow icon-DBPS-Dev-Assets-SRG-41"></span></span><span id="show_btn">Show Criteria &nbsp;<span aria-hidden="true" class="up_arrow icon-DBPS-Dev-Assets-SRG-39"></span></span></span>
+		<span class="font_17">Choose what matters to <%= current_student.first_name %>: 
+<!--
+			<span id="hide_btn">Hide Criteria &nbsp;
+				<span aria-hidden="true" class="down_arrow icon-DBPS-Dev-Assets-SRG-41"></span>
+			</span>
+-->
+<!--
+			<span id="show_btn">Show Criteria &nbsp;
+				<span aria-hidden="true" class="up_arrow icon-DBPS-Dev-Assets-SRG-39"></span>
+			</span>
+-->
+		</span>
 	</div>
 	<!-- END header only in tablet -->
 
@@ -22,13 +33,19 @@
 					<div class="colonn">
 				<% end %>
 					<div id="preference_category_<%= category.id %>" class="preference preference_category">
-						<p class='preference_category_title font_16'><span aria-hidden="true" class="<%= category.glyph_class %>"></span> <span class="text"><%= category.name %></span></p>
+						<p class='preference_category_title font_15'>
+							<span aria-hidden="true" class="icon cat-icon <%= category.glyph_class %>"></span> 
+							<span class="text"><%= category.name %></span>
+							<span aria-hidden="true" class="icon icon-arrow icon-DBPS-Dev-Assets-arrow-down"></span> 
+						</p>
+						<div class="pref_choices closed">
 						<% category.active_preferences(current_student.grade_level).each do |preference| %>
 							<label class='font_13_14'>
 								<input data-category="preference_category_<%= category.id %>" id="preference_<%= preference.id %>" class="preference_checkbox" type='checkbox' name='[student][preference_ids][]' value='<%= preference.name %>', <%= current_student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
 								<span class="text"><%= preference.name %></span>
 							</label>
 						<% end %>
+						</div>
 					</div>
 				<% if i.remainder(2) == 1 %>
 					<% @closing_tags += 1 %>
@@ -46,6 +63,13 @@
 <script>
 	$(document).ready(function() {
 		$(function() {
+			
+			$('.preference_category_title').click(function(e){
+				e.preventDefault();
+				$(this).parent().toggleClass('open closed');
+				$(this).siblings('.pref_choices').slideToggle();
+			});
+			
 			return $('.preference_checkbox').click(function() {
 
 				// save the preference to student.preferences
@@ -68,7 +92,9 @@
 				$('.list_row').each(function(i, list_row) {
 					$('#' + list_row.getAttribute('id') + '_icon_count').text($('#' + list_row.getAttribute('id') + '_icons').children('.category_icon:visible').size());
 				});
+				
 			});
+			
 		});
 	});
 </script>

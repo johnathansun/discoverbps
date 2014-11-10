@@ -1,5 +1,5 @@
 %div{id: 'home_schools_list', class: "schools_list #{(params[:list_type] == 'ell' || params[:list_type] == 'sped' || params[:list_type] == 'zone') ? 'hidden' : ''}"}
-  .note.light.small
+  .note.small
     - if zone_school_grades.include?(current_student.grade_level)
       The grade you selected
       (#{current_student.formatted_grade_level_name})
