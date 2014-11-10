@@ -2,7 +2,7 @@
 	%span{aria: {hidden: 'true'}, class: 'icon-DBPS-Dev-Assets-SRG-07'
 
 .content
-	- if student.errors.present?
+	- if student.try(:errors).present?
 		%h3
 			Please complete the following #{pluralize(student.errors.count, "field")}:
 		%br/
