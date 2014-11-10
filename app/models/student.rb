@@ -113,7 +113,7 @@ class Student < ActiveRecord::Base
             school_ids << school.id
             school_coordinates += "#{school.latitude},#{school.longitude}|"
             exam_school = (api_school[:IsExamSchool] == "0" ? false : true)
-            self.student_schools.create(school_id: school.id, school_type: school_list_type, bps_id: api_school[:SchoolID], tier: api_school[:Tier], eligibility: api_school[:Eligibility], walk_zone_eligibility: api_school[:AssignmentWalkEligibilityStatus], transportation_eligibility: api_school[:TransEligible], exam_school: exam_school, sped_cluster: api_school[:SPEDCluster], sped_description: api_school[:ProgramDescription], ell_cluster: api_school[:ELLCluster], ell_description: api_school[:ProgramDescription])
+            self.student_schools.create(school_id: school.id, school_type: school_list_type, bps_id: api_school[:SchoolID], tier: api_school[:Tier], eligibility: api_school[:Eligibility], walk_zone_eligibility: api_school[:AssignmentWalkEligibilityStatus], transportation_eligibility: api_school[:TransEligible], distance: api_school[:StraightLineDistance], exam_school: exam_school, sped_cluster: api_school[:SPEDCluster], sped_description: api_school[:ProgramDescription], ell_cluster: api_school[:ELLCluster], ell_description: api_school[:ProgramDescription])
           end
         end
 
@@ -130,7 +130,7 @@ class Student < ActiveRecord::Base
             drive_time = drive_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
 
             student_school = self.student_schools.where(school_id: school.id).first_or_initialize
-            student_school.update_attributes(distance: api_school[:StraightLineDistance], walk_time: walk_time, drive_time: drive_time)
+            student_school.update_attributes(walk_time: walk_time, drive_time: drive_time)
           end
         end
 
