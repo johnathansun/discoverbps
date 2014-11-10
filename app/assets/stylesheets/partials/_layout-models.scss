@@ -1698,7 +1698,7 @@ School List Rows
 Compare and Rank
 ------------------------------------------------------------ */
 .wrap.compare_lists .menu_school_lists {
-	margin-left: 140px;
+	margin-left: 12%;
 }
 
 .compare_list {
@@ -2285,10 +2285,10 @@ Menu School Lists
 		}
 		.label {
 			display: block;
-			margin: 5px 0 0;
+			margin: 5px 10px 0 0;
 			color: $dark_blue;
 			font-size: 10px;
-			line-height: 1.5em;
+			line-height: 1em;
 			transition: color 250ms ease;
 			.step_name {
 				font-size: 18px;
@@ -2378,6 +2378,8 @@ Menu School Lists
 				background-size: 16px;
 			}
 		}
+		
+		.label { line-height: 1.5em; }
 	}
 }
 
@@ -2595,8 +2597,6 @@ Wrap Search
 		float: right;
 		font-size: 18px;
 	}
-
-	.steps .step .label { margin-top: 5px; }
 
 	#start_new_search {
 		float: left;

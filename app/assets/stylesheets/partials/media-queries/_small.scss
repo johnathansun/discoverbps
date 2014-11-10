@@ -345,10 +345,8 @@
     display: none !important;
   }
   
-  .search .user_lists,
-  .search .new_search_form_wrap {
-	  width: 75%;
-  }
+  .search .user_lists { width: 93%; }
+  .search .new_search_form_wrap { width: 75%; }
   
 	/* Search Form
 	------------------------------------------------------------- */  
@@ -617,6 +615,12 @@
     margin-left: 0;
   }
 
+	.search .user_lists { width: 100%; }
+	.search .user_lists li { margin-right: 35px; }
+	.search .user_lists .schools {
+		font-size: 14px;
+		line-height: 1.9em;
+	}
 
   .search .search_header h1 {
     display: inline;
@@ -638,6 +642,18 @@
     font-size: 47px;
   }
 
+	.steps .step { 
+		width: 50%; 
+		margin-bottom: 10px; 
+	
+		&.second .bar { 
+			margin: 0;
+			.arrow.front { display: none; }  
+		}
+		&.third .bar { 
+			.arrow.back { display: none; }  
+		}
+	}
 
 	.progress_bar {
 
@@ -710,6 +726,9 @@
   }
 	.footer_notice { width: 96%; }
 
+	.compare_lists .menu_school_lists {
+		margin-left: 0;
+	}
 
 	.compare_list {
 		

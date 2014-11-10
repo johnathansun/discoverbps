@@ -148,6 +148,9 @@
     margin: 0 0 11px 11px;
     overflow: hidden;
   }
+  .wrap.compare_lists .menu_school_lists {
+		margin-left: 13%;
+	}
   #school_list .footer_list,
   .wrap #compare_list .footer_list {
     margin-left: 0;
@@ -158,7 +161,6 @@
   .wrap #compare_list .footer_list .footer_left {
     //width: 327px;
   }
-
   #school_list .footer_list .footer_right p,
   .wrap #compare_list .footer_list .footer_right p {
     margin-bottom: .4em;
