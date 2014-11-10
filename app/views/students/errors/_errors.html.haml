@@ -5,7 +5,7 @@
 	- if @error_message.present?
 		%h3{style: 'color: red;'}
 			= @error_message
-	- elsif student.errors.present?
+	- elsif student.try(:errors).present?
 		%h3
 			Please complete the following #{pluralize(student.errors.count, "field")}:
 		%br/
