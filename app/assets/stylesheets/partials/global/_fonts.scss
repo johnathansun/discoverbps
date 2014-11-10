@@ -88,6 +88,8 @@ you can use the generic selector below, but it's slower:
 .icon-DBPS-Dev-Assets-SRG-01,
 .icon-DBPS-Dev-Assets-arrow-up,
 .icon-DBPS-Dev-Assets-arrow-down,
+.icon-DBPS-Dev-Assets-arrow-left,
+.icon-DBPS-Dev-Assets-arrow-right,
 .icon-DBPS-Preferences-Icons-20130930-SRG_exam_school,
 .icon-DBPS-Preferences-Icons-20130930-SRG_walktime,
 .icon-DBPS-Preferences-Icons-20130930-SRG_sports,
@@ -174,14 +176,16 @@ you can use the generic selector below, but it's slower:
 .icon-DBPS-Dev-Assets-SRG-45:before {
 	content: "\e040";
 }
-.icon-DBPS-Dev-Assets-SRG-32:before {
+.icon-DBPS-Dev-Assets-SRG-32:before,
+.icon-DBPS-Dev-Assets-arrow-right:before {
 	content: "\e00c";
 }
 .icon-DBPS-Dev-Assets-SRG-31:before,
 .icon-DBPS-Dev-Assets-arrow-down:before {
 	content: "\e00d";
 }
-.icon-DBPS-Dev-Assets-SRG-30:before {
+.icon-DBPS-Dev-Assets-SRG-30:before,
+.icon-DBPS-Dev-Assets-arrow-left:before {
 	content: "\e00e";
 }
 .icon-DBPS-Dev-Assets-SRG-29:before {

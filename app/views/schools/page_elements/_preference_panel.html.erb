@@ -7,7 +7,7 @@
 
 <!-- header only in tablet -->
 	<div class="header_preferences">
-		<span class="font_17">Choose what matters to <%= current_student.first_name %>: 
+		<span class="font_17">Choose what matters to <%= current_student.first_name %>:
 <!--
 			<span id="hide_btn">Hide Criteria &nbsp;
 				<span aria-hidden="true" class="down_arrow icon-DBPS-Dev-Assets-SRG-41"></span>
@@ -34,9 +34,9 @@
 				<% end %>
 					<div id="preference_category_<%= category.id %>" class="preference preference_category">
 						<p class='preference_category_title font_15'>
-							<span aria-hidden="true" class="icon cat-icon <%= category.glyph_class %>"></span> 
+							<span aria-hidden="true" class="icon cat-icon <%= category.glyph_class %>"></span>
 							<span class="text"><%= category.name %></span>
-							<span aria-hidden="true" class="icon icon-arrow icon-DBPS-Dev-Assets-arrow-down"></span> 
+							<span aria-hidden="true" class="icon icon-arrow icon-DBPS-Dev-Assets-arrow-left"></span>
 						</p>
 						<div class="pref_choices closed">
 						<% category.active_preferences(current_student.grade_level).each do |preference| %>
@@ -63,13 +63,13 @@
 <script>
 	$(document).ready(function() {
 		$(function() {
-			
+
 			$('.preference_category_title').click(function(e){
 				e.preventDefault();
-				$(this).parent().toggleClass('open closed');
+				$(this).parent().toggleClass('open');
 				$(this).siblings('.pref_choices').slideToggle();
 			});
-			
+
 			return $('.preference_checkbox').click(function() {
 
 				// save the preference to student.preferences
@@ -92,9 +92,9 @@
 				$('.list_row').each(function(i, list_row) {
 					$('#' + list_row.getAttribute('id') + '_icon_count').text($('#' + list_row.getAttribute('id') + '_icons').children('.category_icon:visible').size());
 				});
-				
+
 			});
-			
+
 		});
 	});
 </script>

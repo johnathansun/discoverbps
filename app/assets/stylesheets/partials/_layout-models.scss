@@ -1041,7 +1041,7 @@ Single School
   padding: 20px 18px 0 18px;
   background: #ebebeb;
   position: relative;
-  
+
   .note {
 	  color: #818181;
 	  margin-bottom: 14px;
@@ -1079,7 +1079,7 @@ Single School
 	  #show_btn { display: none; }
 
 	}// .header_preferences
-	
+
 	.preference_category_title {
 		margin-bottom: 0.8em !important;
 		padding: 0 20px 0 23px;
@@ -1088,17 +1088,17 @@ Single School
 		cursor: pointer;
 		color: #565656;
 		&:hover { color: $blue; }
-		
+
 		.icon {
 			position: absolute;
 			top: 50%;
 		}
-		.cat-icon { 
+		.cat-icon {
 			left: 0;
-			margin-top: -11px; 
+			margin-top: -11px;
 		}
-		.icon-arrow { 
-			right: 0; 
+		.icon-arrow {
+			right: 0;
 			margin-top: -6px;
 			font-size: 10px;
 		}
@@ -1111,7 +1111,7 @@ Single School
 			.preference_category_title {
 				color: $blue;
 				.icon-arrow:before {
-					content: '\e040' !important;
+					content: '\e00d' !important;
 				}
 			}
 		}
@@ -2378,7 +2378,7 @@ Menu School Lists
 				background-size: 16px;
 			}
 		}
-		
+
 		.label { line-height: 1.5em; }
 	}
 }
