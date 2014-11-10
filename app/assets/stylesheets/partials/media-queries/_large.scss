@@ -33,7 +33,7 @@
   
   /* Progress bar
   --------------------------- */  
-  .progress_bar { max-width: none; float: none; }
+  .progress_bar { max-width: none; float: none; margin: 10px 0; }
 
 
 
@@ -69,9 +69,11 @@
   /* -------------------------------------------------
 	Page Header
   ---------------------------------------------------- */  
-
+	.timeline_menu {
+		margin-top: -30px;	
+	}
   .timeline_menu .logo_discover {
-    margin-left: -22px;
+    margin-left: -19px;
     float: none;
   }
   .timeline_menu .content_wrap {

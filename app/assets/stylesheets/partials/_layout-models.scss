@@ -59,11 +59,11 @@ header {
 }
 
 .timeline_menu {
-	margin-top: 48px;
+	//margin-top: 48px;
 }
 .timeline_menu .logo_discover {
   color: #ffffff;
-  font-size: 95px;
+  font-size: 80px;
   position: relative;
   margin-left: -9px;
   float: left;
@@ -2285,7 +2285,7 @@ Menu School Lists
 		}
 		.label {
 			display: block;
-			margin: 10px 0 0;
+			margin: 5px 0 0;
 			color: $dark_blue;
 			font-size: 10px;
 			line-height: 1.5em;
@@ -2347,11 +2347,11 @@ Menu School Lists
 .progress_bar {
 	float: right;
 	width: 100%;
-	max-width: 660px;
+	max-width: 730px;
 	margin: 17px 0 0;
 
 	.note {
-		margin: 0 0 18px;
+		margin: 0 0 5px;
 	}
 
 	.steps .step {
