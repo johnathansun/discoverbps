@@ -36,7 +36,7 @@
 						<p class='preference_category_title font_15'>
 							<span aria-hidden="true" class="icon cat-icon <%= category.glyph_class %>"></span>
 							<span class="text"><%= category.name %></span>
-							<span aria-hidden="true" class="icon icon-arrow icon-DBPS-Dev-Assets-arrow-down"></span>
+							<span aria-hidden="true" class="icon icon-arrow icon-DBPS-Dev-Assets-arrow-left"></span>
 						</p>
 						<div class="pref_choices closed">
 						<% category.active_preferences(current_student.grade_level).each do |preference| %>
@@ -66,7 +66,7 @@
 
 			$('.preference_category_title').click(function(e){
 				e.preventDefault();
-				$(this).parent().toggleClass('open closed');
+				$(this).parent().toggleClass('open');
 				$(this).siblings('.pref_choices').slideToggle();
 			});
 
