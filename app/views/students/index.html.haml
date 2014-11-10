@@ -43,7 +43,7 @@
 											.label
 												STEP 1 - SEARCH
 
-									%div{class: "step #{progress_bar_class_helper(student.step, 1, 2)}"}
+									%div{class: "step second #{progress_bar_class_helper(student.step, 1, 2)}"}
 										= link_to schools_path do
 											.bar
 												%span.arrow.back
@@ -51,7 +51,7 @@
 											.label
 												STEP 2 - LEARN
 
-									%div{class: "step #{progress_bar_class_helper(student.step, 1, 3)}"}
+									%div{class: "step third #{progress_bar_class_helper(student.step, 1, 3)}"}
 										= link_to compare_schools_path do
 											.bar
 												%span.arrow.back
@@ -59,7 +59,7 @@
 											.label
 												STEP 3 - COMPARE & RANK
 
-									%div{class: "step last #{progress_bar_class_helper(student.step, 1, 4)}"}
+									%div{class: "step fourth last #{progress_bar_class_helper(student.step, 1, 4)}"}
 										= link_to get_ready_schools_path do
 											.bar
 												%span.arrow.back

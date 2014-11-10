@@ -1,0 +1,133 @@
+-# account button ans his listing
+.account_box.menu_item
+	.btn_account
+		%span.icon.icon-menu
+		Account
+	
+	-# Start section menu account
+	.account_menu_box.menu_box.font_15
+		-# Start menu account
+		.menu
+			- if params[:controller] == 'schools' && params[:action] == 'index'
+				.box
+					%span
+						My lists
+					= link_to 'Print', print_lists_schools_path
+					= link_to 'Download', schools_path(format: :csv)
+					- if current_user.blank?
+						%a#save_btn{href: '#'}
+							Save
+			- elsif current_user_students.present?
+				.box
+					%span
+						My lists
+					- for student in current_user_students
+						= link_to student.tab_name, schools_path(student: student.tab_name)
+
+			.mobile_only.box.list_child
+				%span
+					&nbsp;
+				- for student in current_user_students
+					= link_to student.tab_name, schools_url(student: student.id), class: 'child'
+
+			.clr.box.last
+				- if current_user.present?
+					= link_to raw('Log&nbsp;Out'), destroy_user_session_path, method: :delete
+				- else
+					%a#login_btn{href:'#'}
+						Log In
+					%a#signup_btn{href:'#'}
+						Sign Up
+
+			.clr
+
+		-# End menu account
+
+		-# Start register box
+		.action_box.register_box{style:'display:none;'}
+			.actions
+				%span.text
+					Registration Checklist:
+				%br/
+				%label
+					%input{type:'checkbox', name:'register_check_bpsexpress', value:'BPSExpress'}
+					Submit your lists to 
+					%a{href:'#'}
+						BPSExpress
+				%br/
+				%span.warning
+					Available soon!
+				%br/
+				%label
+					%input{type:'checkbox', name:'register_check_required_documents', value:'required documents'}
+					Collect the 
+					%a{href:'#'}
+						required documents
+				%br/
+				%label
+					%input{type:'checkbox', name:'register_check_welcome_center', value:'Welcome Center'}
+					Visit to a 
+					%a{href:'#'}
+						Welcome Center
+
+			.clr
+
+		-# End register box
+
+		.clr
+
+	-# Start section menu account
+
+-# END account button ans his listing
+
+-# script account button
+:javascript
+
+	$(document).ready(function(){
+		if(!Modernizr.input.placeholder) {
+			$("input[placeholder]").each(function() {
+				var placeholder = $(this).attr("placeholder");
+
+				$(this).val(placeholder).focus(function() {
+					if($(this).val() == placeholder) {
+						$(this).val("")
+					}
+				}).blur(function() {
+					if($(this).val() == "") {
+						$(this).val(placeholder)
+					}
+				});
+			});
+		}
+	});
+
+	$(document).ready(function(){
+		var login_panel_open = false;
+		var signup_panel_open = false;
+		var forgot_panel_open = false;
+
+		$('#login_btn').click(function() {
+			$('#dialog_box').show();
+			$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/login')}");
+			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+			return false;
+		});
+
+		$('#signup_btn').click(function() {
+			$('#dialog_box').show();
+			$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/signup')}");
+			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+			return false;
+		});
+
+		$('#save_btn').click(function() {
+			$('#dialog_box').show();
+			$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/login')}");
+			$('.txt_join_list').show();
+			$('p.txt_login').hide();
+			$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+			return false;
+		});
+	});
+
+-# END script account button
