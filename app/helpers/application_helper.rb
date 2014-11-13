@@ -16,11 +16,31 @@ module ApplicationHelper
 
 	#####
 
-	def last_school_year
+	def current_school_year
 		if Date.today.month >= 11
 			"#{Date.today.years_ago(1).year}"
 		else
 			"#{Date.today.year}"
+		end
+	end
+
+	def current_school_year_range
+		if Date.today.month >= 11
+			start_year = Date.today.year
+			end_year = Date.today.years_since(1).year
+			"#{start_year}-#{end_year}"
+		else
+			start_year = Date.today.years_since(1).year
+			end_year = Date.today.years_since(2).year
+			"#{start_year}-#{end_year}"
+		end
+	end
+
+	def last_school_year
+		if Date.today.month >= 11
+			"#{Date.today.year}"
+		else
+			"#{Date.today.years_since(1).year}"
 		end
 	end
 
@@ -85,7 +105,7 @@ module ApplicationHelper
 				class_style_list += 'current '
 			end
 		end
-		
+
 		return class_style_list
 	end
 end
