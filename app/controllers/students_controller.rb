@@ -108,12 +108,9 @@ class StudentsController < ApplicationController
 				# set the basic school lists here, since this step will save the student
 				# home schools will be overwritten in set_awc if awc_invitation = true
 				@student.set_home_schools!
-				# if zone_school_grades.include?(@student.grade_level)
-				# 	@student.set_zone_schools!
-				# end
-
-				# format.html { redirect_to schools_path}
-				# format.js { render :js => "window.location = '/schools'" }
+				if zone_school_grades.include?(@student.grade_level)
+					@student.set_zone_schools!
+				end
 
         format.js { render template: "students/ell/ell" }
         format.html { redirect_to ell_student_path(@student)}
@@ -142,11 +139,8 @@ class StudentsController < ApplicationController
 					@student.set_ell_schools!
 				end
 
-				format.html { redirect_to schools_path}
-				format.js { render :js => "window.location = '/schools'" }
-
-				# format.html { redirect_to sped_student_path(@student)}
-				# format.js { render template: "students/sped/sped" }
+				format.html { redirect_to sped_student_path(@student)}
+				format.js { render template: "students/sped/sped" }
 			else
 				format.js { render template: "students/ell/ell" }
 				flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
@@ -163,29 +157,32 @@ class StudentsController < ApplicationController
 	end
 
 	def set_sped
-		# @student = Student.find(params[:id])
-		#
-		# respond_to do |format|
-		# 	if @student.update_attributes(params[:student])
-		#
-		# 		if @student.sped_needs == true
-		# 			@student.set_sped_schools!
-		# 		end
-		#
-		# 		if AWC_GRADES.include?(@student.grade_level)
-		# 			format.html { redirect_to awc_student_path(@student)}
-		# 			format.js { render template: "students/awc/awc" }
-		# 		else
-		# 			@student.set_home_schools!
-		# 			format.html { redirect_to schools_path}
-		# 			format.js { render :js => "window.location = '/schools'" }
-		# 		end
-		# 	else
-		# 		format.js { render template: "students/sped/sped" }
-		# 		flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
-		# 		format.html { redirect_to root_url }
-		# 	end
-		# end
+		@student = Student.find(params[:id])
+
+		respond_to do |format|
+			if @student.update_attributes(params[:student])
+
+				if @student.sped_needs == true
+					@student.set_sped_schools!
+				end
+
+				format.html { redirect_to schools_path}
+				format.js { render :js => "window.location = '/schools'" }
+
+				# if AWC_GRADES.include?(@student.grade_level)
+				# 	format.html { redirect_to awc_student_path(@student)}
+				# 	format.js { render template: "students/awc/awc" }
+				# else
+				# 	@student.set_home_schools!
+				# 	format.html { redirect_to schools_path}
+				# 	format.js { render :js => "window.location = '/schools'" }
+				# end
+			else
+				format.js { render template: "students/sped/sped" }
+				flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
+				format.html { redirect_to root_url }
+			end
+		end
 	end
 
 	# AWC DIALOG BOX

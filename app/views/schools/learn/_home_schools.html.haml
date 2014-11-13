@@ -82,34 +82,17 @@
                     %span{id: "#{current_student.id}_#{school.bps_id}_icon_count", class: "sortable_fit fit_icon_count", style: "visibility: hidden;"}
                       = tag_counter
 
-                .box.line.your_fit_descrip
-                  .middle
-                    %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Dev-Assets-SRG-35"}
-                      Small
-                .box.line.your_fit_descrip
-                  %span.middle
-                    %span{:aria => {hidden: 'true'}, :class => "icon icon-DBPS-Dev-Assets-SRG-35"}
-                      Yes
 
                 .box.line.eligibility
                   .first_block.middle
                     %span.middle.sortable_eligibility
                       =raw eligibility_helper(spacer_helper(student_school.eligibility))
 
-                  .second_bloc.middle
-                    %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
-                      = spacer_helper(student_school.walk_time)
-                      %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
-
-                  .second_bloc.middle.last
-                    %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-17"}
-                      = spacer_helper(student_school.drive_time)
-                      %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
-
 
                 .box.line.getting_there
                   .first_block.middle
                     %span.middle.sortable_distance
+                      =raw transportation_eligibility_icon_helper(student_school)
                       = spacer_helper(student_school.distance)
                       mi
 

@@ -62,9 +62,9 @@ module ApplicationHelper
 
 	def transportation_eligibility_icon_helper(student_school)
 		if student_school.transportation_eligibility == 'WY'
-			"<span aria-hidden='true' class='icon-DBPS-Dev-Assets-SRG-14 transportation_icon' style='font-size: 18px;'></span>"
+			"<span aria-hidden='true' class='icon-DBPS-Dev-Assets-SRG-14 transportation_icon' style='font-size: 18px; color: #565656;'></span>"
 		elsif student_school.transportation_eligibility == 'SY'
-			"<span aria-hidden='true' class='icon-DBPS-Dev-Assets-SRG-15 transportation_icon' style='font-size: 18px;'></span>"
+			"<span aria-hidden='true' class='icon-DBPS-Dev-Assets-SRG-15 transportation_icon' style='font-size: 18px; color: #565656;'></span>"
 		end
 	end
 
@@ -85,7 +85,7 @@ module ApplicationHelper
 				class_style_list += 'current '
 			end
 		end
-		
+
 		return class_style_list
 	end
 end
