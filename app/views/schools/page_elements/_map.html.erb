@@ -262,9 +262,11 @@
       $.getJSON('/city_boundary.geojson', function (data) {
         cityBoundaries = map.data.addGeoJson(data);
 
-        $.each(cityBoundaries, function (index, feature) {
-          map.data.overrideStyle(feature, {strokeWeight: 4});
-        });
+        <% unless params[:list_type] == 'ell' || params[:list_type] == 'sped' %>
+          $.each(cityBoundaries, function (index, feature) {
+            map.data.overrideStyle(feature, {strokeWeight: 4});
+          });
+        <% end %>
 
         if ($('#home_schools_tab').length > 0) {
           google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
@@ -308,11 +310,17 @@
       });
 
 
-      // Load SPED boundaries
+      // Load ELL/SPED boundaries
 
       <% if @sped_schools.present? || @ell_schools.present? %>
         $.getJSON('/sped_clusters.geojson', function (data) {
           spedBoundaries = map.data.addGeoJson(data);
+
+          <% if params[:list_type] == 'ell' || params[:list_type] == 'sped' %>
+            $.each(spedBoundaries, function (index, feature) {
+              map.data.overrideStyle(feature, {strokeWeight: 4});
+            });
+          <% end %>
 
           if ($('#home_schools_tab').length > 0) {
             google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
