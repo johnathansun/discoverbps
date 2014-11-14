@@ -29,7 +29,7 @@ class School < ActiveRecord::Base
 
 	# after_validation :geocode
 	before_save :strip_bps_id
-	after_save :sync_school_data_callback
+	# after_save :sync_school_data_callback
 
 	def full_address
 		"#{api_basic_info[:campus1address1]} #{api_basic_info[:campus1city]} #{api_basic_info[:campus1state]} #{api_basic_info[:campus1zip]} "
@@ -273,6 +273,6 @@ class School < ActiveRecord::Base
 	end
 
 	def sync_school_data_callback
-		self.delay(priority: 3).sync_school_data!(self.id)
+		School.delay(priority: 3).sync_school_data!(self.id)
 	end
 end
