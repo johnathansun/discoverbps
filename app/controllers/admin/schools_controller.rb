@@ -38,16 +38,17 @@ class Admin::SchoolsController < ApplicationController
 
 	def sync_all
 		respond_to do |format|
-			School.update_school_data!
+			School.delay(priority: 2).sync_school_data!
 			format.html { redirect_to admin_schools_url, notice: 'School data is being synced from the API' }
 		end
 	end
 
 	def sync
 		@school = School.find(params[:id])
+		puts "************************ school = #{@school.bps_id}"
 		respond_to do |format|
 			if @school.present?
-				School.update_school_data!(@school.id)
+				School.delay(priority: 1).sync_school_data!(@school.id)
 				format.html { redirect_to admin_school_url(@school), notice: 'School data is being synced from the API' }
 			else
 				format.html { render action: "list", alert: "We couldn't find that school" }

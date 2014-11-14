@@ -29,7 +29,7 @@ class School < ActiveRecord::Base
 
 	# after_validation :geocode
 	before_save :strip_bps_id
-	after_save :update_school_data_callback
+	after_save :sync_school_data_callback
 
 	def full_address
 		"#{api_basic_info[:campus1address1]} #{api_basic_info[:campus1city]} #{api_basic_info[:campus1state]} #{api_basic_info[:campus1zip]} "
@@ -249,20 +249,20 @@ class School < ActiveRecord::Base
 		end
 	end
 
-	def self.update_school_data!(school_id=nil)
-		SchoolData.delay.update_basic_info!(school_id)
-		SchoolData.delay.update_awards!(school_id)
-		SchoolData.delay.update_descriptions!(school_id)
-		SchoolData.delay.update_facilities!(school_id)
-		SchoolData.delay.update_grades!(school_id)
-		SchoolData.delay.update_hours!(school_id)
-		SchoolData.delay.update_languages!(school_id)
-		SchoolData.delay.update_partners!(school_id)
-		SchoolData.delay.update_photos!(school_id)
-		SchoolData.delay.update_preview_dates!(school_id)
-		SchoolData.delay.update_programs!(school_id)
-		SchoolData.delay.update_sports!(school_id)
-		SchoolData.delay.update_student_support!(school_id)
+	def self.sync_school_data!(school_id=nil)
+		SchoolData.update_basic_info!(school_id)
+		SchoolData.update_awards!(school_id)
+		SchoolData.update_descriptions!(school_id)
+		SchoolData.update_facilities!(school_id)
+		SchoolData.update_grades!(school_id)
+		SchoolData.update_hours!(school_id)
+		SchoolData.update_languages!(school_id)
+		SchoolData.update_partners!(school_id)
+		SchoolData.update_photos!(school_id)
+		SchoolData.update_preview_dates!(school_id)
+		SchoolData.update_programs!(school_id)
+		SchoolData.update_sports!(school_id)
+		SchoolData.update_student_support!(school_id)
 	end
 
 	private
@@ -271,7 +271,7 @@ class School < ActiveRecord::Base
 		self.bps_id.try(:strip!)
 	end
 
-	def update_school_data_callback
-		School.update_school_data!(self.id)
+	def sync_school_data_callback
+		self.delay(priority: 3).sync_school_data!(self.id)
 	end
 end
