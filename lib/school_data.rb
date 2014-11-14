@@ -157,10 +157,10 @@ module SchoolData
 
   private
 
-  def self.find_schools(school_id)
+  def self.find_schools(school_id=nil)
     if school_id.present?
       schools = School.where(id: school_id)
-      puts "**************** found school #{schools.first.try(:id)}"
+      puts "************************ SchoolData.find_schools school_id = #{schools.first.id}"
       return schools
     else
       School.all

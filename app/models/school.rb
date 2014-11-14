@@ -250,6 +250,7 @@ class School < ActiveRecord::Base
 	end
 
 	def self.sync_school_data!(school_id=nil)
+		puts "************************ School.sync_school_data! school_id = #{school_id}"
 		SchoolData.update_basic_info!(school_id)
 		SchoolData.update_awards!(school_id)
 		SchoolData.update_descriptions!(school_id)

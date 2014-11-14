@@ -45,7 +45,9 @@ class Admin::SchoolsController < ApplicationController
 
 	def sync
 		@school = School.find(params[:id])
-		puts "************************ school = #{@school.bps_id}"
+		puts "************************ school_id = #{@school.id}"
+		puts "************************ bps_id = #{@school.bps_id}"
+
 		respond_to do |format|
 			if @school.present?
 				School.delay(priority: 1).sync_school_data!(@school.id)
