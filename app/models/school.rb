@@ -27,9 +27,9 @@ class School < ActiveRecord::Base
 	serialize :api_student_support # Hash
 	serialize :api_surround_care # Hash
 
+	after_create :sync_school_data_callback
 	# after_validation :geocode
 	before_save :strip_bps_id
-	# after_save :sync_school_data_callback
 
 	def full_address
 		"#{api_basic_info[:campus1address1]} #{api_basic_info[:campus1city]} #{api_basic_info[:campus1state]} #{api_basic_info[:campus1zip]} "
