@@ -330,3 +330,6 @@
 <p>
 	<%= link_to 'Add a New School', new_admin_school_path, class: 'add_button', style: 'color: white; font-weight: bold;' %>
 </p>
+<p>
+	<%= link_to 'Sync All Schools', sync_all_admin_schools_path, method: :post, confirm: "This will update each school's data from the data in the API.", class: 'add_button', style: 'color: white; font-weight: bold;' %>
+</p>
