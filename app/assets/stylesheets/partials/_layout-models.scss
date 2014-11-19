@@ -1889,14 +1889,22 @@ Compare and Rank
 /* ---------------------------------------------------------
  UI Widgets
 ------------------------------------------------------------ */
-.ui-widget-content.ui-tooltip {
-	color: #FFF;
-	background: $dark_gray;
-	//background: rgba(80,80,80,.8);
-	width: 90px;
-	text-align: center;
-	border-radius: 7px;
+.ui-widget-content {
+  background-color: #0059a3;
+  width: 400px;
+  padding: 10px;
+  color: #80bce7;
+  line-height: 1em;
+  
+  &.ui-tooltip {
+		color: #FFF;
+		background: $dark_gray;
+		width: 90px;
+		text-align: center;
+		border-radius: 7px;
+	}
 }
+
 
 
 
