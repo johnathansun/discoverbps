@@ -308,10 +308,10 @@
       });
 
 
-      // Load SPED boundaries
+      // Load ELL/SPED boundary
 
       <% if @sped_schools.present? || @ell_schools.present? %>
-        $.getJSON('/sped_clusters.geojson', function (data) {
+        $.getJSON('/<%= current_student.sped_cluster.present? ? "cluster_#{current_student.sped_cluster}.geojson" : "clusters.geojson" %>', function (data) {
           spedBoundaries = map.data.addGeoJson(data);
 
           if ($('#home_schools_tab').length > 0) {

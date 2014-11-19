@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141106203003) do
+ActiveRecord::Schema.define(:version => 20141119233223) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -254,6 +254,9 @@ ActiveRecord::Schema.define(:version => 20141106203003) do
     t.integer  "step",                    :default => 1
     t.integer  "old_user_id"
     t.string   "old_session_id"
+    t.string   "ell_cluster"
+    t.string   "sped_cluster"
+    t.string   "zone"
   end
 
   add_index "students", ["session_id"], :name => "index_students_on_session_id"
