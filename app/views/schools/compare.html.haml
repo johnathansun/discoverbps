@@ -92,7 +92,10 @@
 	$(function() {
 		$("#sortable_0").disableSelection();
 		$('.compare_list_content').tooltip({
-			track: true
+			track: true,
+			hide: {
+				duration: 0
+			}
 		});
 	});
 
@@ -100,6 +103,9 @@
 		$("#sortable_0").sortable({
 			axis: "x",
 			scroll: true,
+			sort: function( event, ui ) {
+				$('.compare_list_content').tooltip('close');
+			},
 			update: function(){
 				$('#sortable_0 li').each(function(){
 					$(this).find('.sortable_row_number').html($(this).index() + 1);
