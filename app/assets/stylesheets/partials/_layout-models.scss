@@ -1492,6 +1492,8 @@ School List Rows
 			.icon:hover {
 				color: $dark_gray;
 			}
+			
+			.middle { line-height: 1em; }
 		}
 
 		&.your_fit_descrip {
@@ -1514,6 +1516,8 @@ School List Rows
 
 		&.eligibility {
 			width: 10%;
+			
+			.middle { line-height: 1em; }
 		}
 
 		&.school_hours {
