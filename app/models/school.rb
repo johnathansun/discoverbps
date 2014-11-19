@@ -273,6 +273,6 @@ class School < ActiveRecord::Base
 	end
 
 	def sync_school_data_callback
-		School.delay(priority: 3).sync_school_data!(self.id)
+		School.delay(priority: 5).sync_school_data!(self.id)
 	end
 end
