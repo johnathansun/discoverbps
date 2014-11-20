@@ -151,7 +151,7 @@
 			- if TRANSITION_GRADES.include?(current_student.grade_level)
 				%p.title
 					%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
-					= "#{current_student.formatted_grade_level_name} Demand (#{last_school_year_range})"
+					= "#{current_student.formatted_grade_level_name} Demand (#{current_school_year_range})"
 				%p.descrip.light
 					= school.open_seats(current_student.grade_level)
 					open seats

@@ -208,23 +208,27 @@
         clickable: false
       }
 
-      // Load city boundaries
+      // City boundaries
 
       $.getJSON('/city_boundary.geojson', function (data) {
         cityBoundaries = map.data.addGeoJson(data);
 
-        $.each(cityBoundaries, function (index, feature) {
-          map.data.overrideStyle(feature, {strokeWeight: 3});
-        });
-
-        if ($('#home_schools_tab').length > 0) {
-          google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
-            $.each(cityBoundaries, function (index, feature) {
-              map.data.add(feature);
-              map.data.overrideStyle(feature, {strokeWeight: 3});
-            });
+        <% unless params[:list_type] == 'ell' || params[:list_type] == 'sped' %>
+          $.each(cityBoundaries, function (index, feature) {
+            map.data.overrideStyle(feature, {strokeWeight: 3});
           });
-        }
+        <% end %>
+
+        <% if @home_schools.present? %>
+          if ($('#home_schools_tab').length > 0) {
+            google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
+              $.each(cityBoundaries, function (index, feature) {
+                map.data.add(feature);
+                map.data.overrideStyle(feature, {strokeWeight: 3});
+              });
+            });
+          }
+        <% end %>
 
         <% if @zone_schools.present? %>
           if ($('#zone_schools_tab').length > 0) {
@@ -258,72 +262,32 @@
         <% end %>
       });
 
-      // Load ELL boundaries
+      // ELL boundaries
 
       <% if @ell_schools.present? %>
-      $.getJSON('/<%= current_student.ell_cluster.present? ? "cluster_#{current_student.ell_cluster}.geojson" : "clusters.geojson" %>', function (data) {
-        spedBoundaries = map.data.addGeoJson(data);
+        $.getJSON('/<%= current_student.ell_cluster.present? ? "cluster_#{current_student.ell_cluster}.geojson" : "clusters.geojson" %>', function (data) {
+          ellBoundary = map.data.addGeoJson(data);
 
-        if ($('#home_schools_tab').length > 0) {
-          google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
-            $.each(spedBoundaries, function (index, feature) {
-              map.data.remove(feature);
-            });
-          });
-        }
-
-        <% if @zone_schools.present? %>
-        if ($('#zone_schools_tab').length > 0) {
-          google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
-            $.each(spedBoundaries, function (index, feature) {
-              map.data.remove(feature);
-            });
-          });
-        }
-        <% end %>
-
-        <% if @ell_schools.present? %>
-        if ($('#ell_schools_tab').length > 0) {
-          google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function () {
-            $.each(spedBoundaries, function (index, feature) {
-              map.data.add(feature);
+          <% if params[:list_type] == 'ell' %>
+            $.each(ellBoundary, function (index, feature) {
               map.data.overrideStyle(feature, {strokeWeight: 3});
             });
-          });
-        }
-        <% end %>
+          <% end %>
 
-        <% if @sped_schools.present? %>
-        if ($('#sped_schools_tab').length > 0) {
-          google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function () {
-            $.each(spedBoundaries, function (index, feature) {
-              map.data.remove(feature);
-            });
-          });
-        }
-        <% end %>
-      });
-      <% end %>
-
-
-      // Load SPED boundaries
-
-      <% if @sped_schools.present? %>
-        $.getJSON('/<%= current_student.sped_cluster.present? ? "cluster_#{current_student.sped_cluster}.geojson" : "clusters.geojson" %>', function (data) {
-          spedBoundaries = map.data.addGeoJson(data);
-
-          if ($('#home_schools_tab').length > 0) {
-            google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
-              $.each(spedBoundaries, function (index, feature) {
-                map.data.remove(feature);
+          <% if @home_schools.present? %>
+            if ($('#home_schools_tab').length > 0) {
+              google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
+                $.each(ellBoundary, function (index, feature) {
+                  map.data.remove(feature);
+                });
               });
-            });
-          }
+            }
+          <% end %>
 
           <% if @zone_schools.present? %>
             if ($('#zone_schools_tab').length > 0) {
               google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
-                $.each(spedBoundaries, function (index, feature) {
+                $.each(ellBoundary, function (index, feature) {
                   map.data.remove(feature);
                 });
               });
@@ -333,7 +297,63 @@
           <% if @ell_schools.present? %>
             if ($('#ell_schools_tab').length > 0) {
               google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function () {
-                $.each(spedBoundaries, function (index, feature) {
+                $.each(ellBoundary, function (index, feature) {
+                  map.data.add(feature);
+                  map.data.overrideStyle(feature, {strokeWeight: 3});
+                });
+              });
+            }
+          <% end %>
+
+          <% if @sped_schools.present? %>
+            if ($('#sped_schools_tab').length > 0) {
+              google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function () {
+                $.each(ellBoundary, function (index, feature) {
+                  map.data.remove(feature);
+                });
+              });
+            }
+          <% end %>
+        });
+      <% end %>
+
+
+      // SPED boundaries
+
+      <% if @sped_schools.present? %>
+        $.getJSON('/<%= current_student.sped_cluster.present? ? "cluster_#{current_student.sped_cluster}.geojson" : "clusters.geojson" %>', function (data) {
+          spedBoundary = map.data.addGeoJson(data);
+
+          <% if params[:list_type] == 'sped' %>
+            $.each(spedBoundary, function (index, feature) {
+              map.data.overrideStyle(feature, {strokeWeight: 3});
+            });
+          <% end %>
+
+          <% if @zone_schools.present? %>
+            if ($('#home_schools_tab').length > 0) {
+              google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
+                $.each(spedBoundary, function (index, feature) {
+                  map.data.remove(feature);
+                });
+              });
+            }
+          <% end %>
+          
+          <% if @zone_schools.present? %>
+            if ($('#zone_schools_tab').length > 0) {
+              google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
+                $.each(spedBoundary, function (index, feature) {
+                  map.data.remove(feature);
+                });
+              });
+            }
+          <% end %>
+
+          <% if @ell_schools.present? %>
+            if ($('#ell_schools_tab').length > 0) {
+              google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function () {
+                $.each(spedBoundary, function (index, feature) {
                   map.data.remove(feature);
                 });
               });
@@ -343,7 +363,7 @@
           <% if @sped_schools.present? %>
             if ($('#sped_schools_tab').length > 0) {
               google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function () {
-                $.each(spedBoundaries, function (index, feature) {
+                $.each(spedBoundary, function (index, feature) {
                   map.data.add(feature);
                   map.data.overrideStyle(feature, {strokeWeight: 3});
                 });
