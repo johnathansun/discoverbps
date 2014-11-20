@@ -12,16 +12,15 @@
     // Create an array of styles.
     var map_styles = [
       {
-        "featureType": "administrative.locality",
-        "stylers": [
-          { "visibility": "off" }
-        ]
-      },{
         "featureType": "administrative",
         "elementType": "labels.text.fill",
         "stylers": [
-          { "saturation": -100 },
-          { "lightness": 20 }
+          { "saturation": -100 }
+        ]
+      },{
+        "featureType": "administrative.locality",
+        "stylers": [
+          { "visibility": "off" }
         ]
       },{
         "featureType": "administrative.land_parcel",
@@ -34,42 +33,7 @@
         { "visibility": "off" }
         ]
       },{
-        "featureType": "poi.attraction",
-        "stylers": [
-          { "visibility": "off" }
-        ]
-      },{
-        "featureType": "poi.business",
-        "stylers": [
-          { "visibility": "off" }
-        ]
-      },{
-        "featureType": "poi.place_of_worship",
-        "stylers": [
-          { "visibility": "off" }
-        ]
-      },{
-        "featureType": "transit.line",
-        "stylers": [
-          { "visibility": "off" }
-        ]
-      },{
-        "featureType": "poi.attraction",
-        "stylers": [
-          { "visibility": "off" }
-        ]
-      },{
-        "featureType": "poi.medical",
-        "stylers": [
-          { "visibility": "off" }
-        ]
-      },{
-        "featureType": "poi.school",
-        "stylers": [
-          { "visibility": "on" }
-        ]
-      },{
-        "featureType": "landscape.man_made",
+        "featureType": "poi",
         "stylers": [
           { "visibility": "off" }
         ]
@@ -79,11 +43,6 @@
         "stylers": [
           { "saturation": -100 },
           { "lightness": 41 }
-        ]
-      },{
-        "featureType": "transit.station.airport",
-        "stylers": [
-          { "lightness": 49 }
         ]
       },{
         "featureType": "road",
@@ -103,19 +62,21 @@
         "elementType": "geometry.stroke",
         "stylers": [
           { "visibility": "off" }
-        ]
-      },{
-        "featureType": "road.highway",
+        ],
         "elementType": "geometry.fill",
         "stylers": [
           { "visibility": "on" },
           { "lightness": -5 }
         ]
       },{
-        "featureType": "poi.park",
-        "elementType": "labels",
+        "featureType": "transit.line",
         "stylers": [
           { "visibility": "off" }
+        ]
+      },{
+        "featureType": "transit.station.airport",
+        "stylers": [
+          { "lightness": 49 }
         ]
       },{
         "featureType": "transit.station.rail",
