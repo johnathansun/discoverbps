@@ -29,19 +29,18 @@
               .column_title
                 Fit Score
 
-            #sortable_eligibility_column.menu_bloc.sortable_column
+            %div{id: 'sortable_distance_column', class: 'menu_bloc sortable_column', style: 'color: rgb(0, 119, 207)'}
+              %div{aria: {hidden: 'true'}, class: 'column_arrow icon-DBPS-Dev-Assets-arrow-up'}
               .column_title
-                Eligibility
-
-            #getting_there.menu_bloc
-              %div{id: 'sortable_distance_column', class: 'first_block sortable_column', style: 'color: #0077cf;'}
-                %div{:aria => {hidden: 'true'}, :class => 'column_arrow icon-DBPS-Dev-Assets-arrow-up'}
-                .column_title
-                  Travel
+                Travel
 
             #sortable_hours_column.menu_bloc.sortable_column
               .column_title
                 Hours
+
+            #sortable_eligibility_column.menu_bloc.sortable_column
+              .column_title
+                Eligibility
 
         %ul#sortable
           - @home_schools.each_with_index do |student_school, i|
@@ -83,12 +82,6 @@
                       = tag_counter
 
 
-                .box.line.eligibility
-                  .first_block.middle
-                    %span.middle.sortable_eligibility
-                      =raw eligibility_helper(spacer_helper(student_school.eligibility))
-
-
                 .box.line.getting_there
                   .first_block.middle
                     %span.middle.sortable_distance
@@ -107,13 +100,18 @@
                       %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
 
 
-
                 .box.line.school_hours
                   %span.middle.sortable_hours
                     = truncate(school.api_hours.try(:[], :Description), length: 18)
                     %br/
                     .max_range
                       %div{class: 'ajust_range', style: "margin-left: #{school_hours_start_time_helper(school.api_hours.try(:[], :Description))}%; margin-right: #{school_hours_end_time_helper(school.api_hours.try(:[], :Description))}%;"}
+
+
+                .box.line.eligibility
+                  .first_block.middle
+                    %span.middle.sortable_eligibility
+                      =raw eligibility_helper(spacer_helper(student_school.eligibility))
 
                 .school_descrip
                   .right_side

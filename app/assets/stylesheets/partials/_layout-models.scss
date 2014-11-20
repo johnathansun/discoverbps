@@ -1204,20 +1204,23 @@ School List
 			width: 7%;
 		}
 	  &#sortable_school_name_column {
-			width: 29.4%;
+			width: 29.1%;
 		}
 		&#sortable_fit_column {
 			padding-left: 4%;
 			width: 17%;
 		}
 		&#getting_there {
-			width: 10%;
+			width: 9%;
 		}
 		&#sortable_eligibility_column {
-			width: 10%;
+			width: 12%;
 		}
+    &#sortable_distance_column {
+      width: 9%;
+    }
 		&#sortable_hours_column {
-			width: 14.6%;
+			width: 12%;
 		}
 
 	  &.arrow {
@@ -1501,7 +1504,7 @@ School List Rows
 		}
 
 		&.getting_there {
-		  width: 10%;
+		  width: 9%;
 		  font-size: 15px;
 
 		  .icon {
@@ -1513,11 +1516,11 @@ School List Rows
 		}
 
 		&.eligibility {
-			width: 10%;
+			width: 12%;
 		}
 
 		&.school_hours {
-			width: 14.6%;
+			width: 12%;
 		  font-size: 12px;
 
 		  .max_range {
