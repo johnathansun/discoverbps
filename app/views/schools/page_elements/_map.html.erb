@@ -12,10 +12,32 @@
     // Create an array of styles.
     var map_styles = [
       {
-      "featureType": "poi.attraction",
-      "stylers": [
+        "featureType": "administrative.locality",
+        "stylers": [
+          { "visibility": "off" }
+        ]
+      },{
+        "featureType": "administrative",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          { "saturation": -100 },
+          { "lightness": 20 }
+        ]
+      },{
+        "featureType": "administrative.land_parcel",
+        "stylers": [
+          { "visibility": "off" }
+        ]
+      },{
+        "featureType": "landscape",
+        "stylers": [
         { "visibility": "off" }
-      ]
+        ]
+      },{
+        "featureType": "poi.attraction",
+        "stylers": [
+          { "visibility": "off" }
+        ]
       },{
         "featureType": "poi.business",
         "stylers": [
@@ -44,7 +66,7 @@
       },{
         "featureType": "poi.school",
         "stylers": [
-          { "visibility": "off" }
+          { "visibility": "on" }
         ]
       },{
         "featureType": "landscape.man_made",
@@ -55,6 +77,7 @@
         "featureType": "poi.park",
         "elementType": "geometry",
         "stylers": [
+          { "saturation": -100 },
           { "lightness": 41 }
         ]
       },{
@@ -63,62 +86,17 @@
           { "lightness": 49 }
         ]
       },{
-        "featureType": "administrative",
-        "elementType": "labels.text.fill",
+        "featureType": "road",
         "stylers": [
-          { "saturation": -100 },
-          { "lightness": 24 }
-        ]
-      },{
-        "featureType": "road.highway",
-        "stylers": [
-          { "lightness": 26 }
+          { "saturation": -90 },
+          { "lightness": 35 }
         ]
       },{
         "featureType": "road.arterial",
         "elementType": "geometry",
         "stylers": [
           { "visibility": "simplified" },
-          { "color": "#d6cfc6" },
-          { "lightness": 43 }
-        ]
-      },{
-        "featureType": "road.local",
-        "elementType": "geometry.fill",
-        "stylers": [
-          { "color": "#d6cfc6" },
-          { "lightness": 42 }
-        ]
-      },{
-        "featureType": "road.local",
-        "elementType": "geometry.stroke",
-        "stylers": [
-          { "visibility": "off" }
-        ]
-      },{
-        "featureType": "road.arterial",
-        "elementType": "geometry.stroke",
-        "stylers": [
-          { "visibility": "off" }
-        ]
-      },{
-        "featureType": "road.arterial",
-        "elementType": "geometry.fill",
-        "stylers": [
-          { "visibility": "on" }
-        ]
-      },{
-        "featureType": "poi.park",
-        "elementType": "labels",
-        "stylers": [
-          { "visibility": "off" }
-        ]
-      },{
-        "featureType": "transit.station.rail",
-        "elementType": "labels",
-        "stylers": [
-          { "saturation": -73 },
-          { "lightness": 27 }
+          { "color": "#d6cfc6" }
         ]
       },{
         "featureType": "road.highway",
@@ -134,11 +112,18 @@
           { "lightness": -5 }
         ]
       },{
-        "featureType": "administrative.land_parcel",
+        "featureType": "poi.park",
+        "elementType": "labels",
         "stylers": [
           { "visibility": "off" }
         ]
       },{
+        "featureType": "transit.station.rail",
+        "elementType": "labels",
+        "stylers": [
+          { "saturation": -90 },
+          { "lightness": 35 }
+        ]
       }
     ];
 
@@ -252,7 +237,7 @@
 
       var boundaryStyle = {
         fillOpacity: 0,
-        strokeColor: '#80BCE7',
+        strokeColor: '#777777',
         strokeWeight: 0,
         clickable: false
       }
@@ -263,14 +248,14 @@
         cityBoundaries = map.data.addGeoJson(data);
 
         $.each(cityBoundaries, function (index, feature) {
-          map.data.overrideStyle(feature, {strokeWeight: 4});
+          map.data.overrideStyle(feature, {strokeWeight: 3});
         });
 
         if ($('#home_schools_tab').length > 0) {
           google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
             $.each(cityBoundaries, function (index, feature) {
               map.data.add(feature);
-              map.data.overrideStyle(feature, {strokeWeight: 4});
+              map.data.overrideStyle(feature, {strokeWeight: 3});
             });
           });
         }
@@ -280,7 +265,7 @@
             google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
               $.each(cityBoundaries, function (index, feature) {
                 map.data.add(feature);
-                map.data.overrideStyle(feature, {strokeWeight: 4});
+                map.data.overrideStyle(feature, {strokeWeight: 3});
               });
             });
           }
@@ -307,10 +292,57 @@
         <% end %>
       });
 
+      // Load ELL boundaries
 
-      // Load ELL/SPED boundary
+      <% if @ell_schools.present? %>
+      $.getJSON('/<%= current_student.ell_cluster.present? ? "cluster_#{current_student.ell_cluster}.geojson" : "clusters.geojson" %>', function (data) {
+        spedBoundaries = map.data.addGeoJson(data);
 
-      <% if @sped_schools.present? || @ell_schools.present? %>
+        if ($('#home_schools_tab').length > 0) {
+          google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
+            $.each(spedBoundaries, function (index, feature) {
+              map.data.remove(feature);
+            });
+          });
+        }
+
+        <% if @zone_schools.present? %>
+        if ($('#zone_schools_tab').length > 0) {
+          google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
+            $.each(spedBoundaries, function (index, feature) {
+              map.data.remove(feature);
+            });
+          });
+        }
+        <% end %>
+
+        <% if @ell_schools.present? %>
+        if ($('#ell_schools_tab').length > 0) {
+          google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function () {
+            $.each(spedBoundaries, function (index, feature) {
+              map.data.add(feature);
+              map.data.overrideStyle(feature, {strokeWeight: 3});
+            });
+          });
+        }
+        <% end %>
+
+        <% if @sped_schools.present? %>
+        if ($('#sped_schools_tab').length > 0) {
+          google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function () {
+            $.each(spedBoundaries, function (index, feature) {
+              map.data.remove(feature);
+            });
+          });
+        }
+        <% end %>
+      });
+      <% end %>
+
+
+      // Load SPED boundaries
+
+      <% if @sped_schools.present? %>
         $.getJSON('/<%= current_student.sped_cluster.present? ? "cluster_#{current_student.sped_cluster}.geojson" : "clusters.geojson" %>', function (data) {
           spedBoundaries = map.data.addGeoJson(data);
 
@@ -336,8 +368,7 @@
             if ($('#ell_schools_tab').length > 0) {
               google.maps.event.addDomListener(document.getElementById('ell_schools_tab'), 'click', function () {
                 $.each(spedBoundaries, function (index, feature) {
-                  map.data.add(feature);
-                  map.data.overrideStyle(feature, {strokeWeight: 4});
+                  map.data.remove(feature);
                 });
               });
             }
@@ -348,7 +379,7 @@
               google.maps.event.addDomListener(document.getElementById('sped_schools_tab'), 'click', function () {
                 $.each(spedBoundaries, function (index, feature) {
                   map.data.add(feature);
-                  map.data.overrideStyle(feature, {strokeWeight: 4});
+                  map.data.overrideStyle(feature, {strokeWeight: 3});
                 });
               });
             }
