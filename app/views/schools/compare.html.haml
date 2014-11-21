@@ -10,9 +10,13 @@
 	= render partial: 'schools/page_elements/school_list_tabs'
 
 #compare_list.compare_list.wrap
-	= link_to get_ready_schools_path do
-		%span.arrow_slide.no_mobile
-			= image_tag('next-step-3.png')
+	%a.next_step{:href => "#{get_ready_schools_path}"}
+		%span.next
+			= 'Next'
+		%span.text
+			= 'Step 3 - Compare & Rank'
+
+			
 
 	.result.clearfix
 		-# LEFT COLUMN

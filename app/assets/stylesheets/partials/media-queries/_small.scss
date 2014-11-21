@@ -122,12 +122,8 @@
     display: none;
   }
   
-  
-  
-  
-  
-  
-  
+
+
   
   .wrap.global_map {
     height: 290px;
@@ -136,6 +132,16 @@
     height: 290px;
   }
   
+  
+  
+  
+ 	/* ----------------------------------------------------
+		Next Step Button
+	------------------------------------------------------- */   
+	.wrap .next_step {
+		margin: 12px 10px 12px 0;
+	}
+    
     
   
   
@@ -529,6 +535,7 @@
   footer.footer {
     padding: 19px;
     height: auto;
+    margin-bottom: 47px;
   }
   footer.footer .title_footer {
     float: left;
@@ -572,11 +579,6 @@
   
 }
 
-
-
-/* ----------------------------------------------
-   Mobile Landscape Layout
----------------------------------------------- */
 @media screen and (max-width: 607px) {
 
 	.wrap {
@@ -726,7 +728,7 @@
   }
 	.footer_notice { width: 96%; }
 
-	.compare_lists .menu_school_lists {
+	.wrap.compare_lists .menu_school_lists {
 		margin-left: 0;
 	}
 
