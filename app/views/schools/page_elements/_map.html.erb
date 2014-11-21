@@ -142,33 +142,33 @@
 
     // Marker Label onAdd
     MarkerLabel.prototype.onAdd = function() {
-         var pane = this.getPanes().overlayImage.appendChild(this.div);
-         var self = this;
-         this.listeners = [
-              google.maps.event.addListener(this, 'position_changed', function() { self.draw(); }),
-              google.maps.event.addListener(this, 'text_changed', function() { self.draw(); }),
-              google.maps.event.addListener(this, 'zindex_changed', function() { self.draw(); })
-         ];
+      var pane = this.getPanes().overlayImage.appendChild(this.div);
+      var self = this;
+      this.listeners = [
+        google.maps.event.addListener(this, 'position_changed', function() { self.draw(); }),
+        google.maps.event.addListener(this, 'text_changed', function() { self.draw(); }),
+        google.maps.event.addListener(this, 'zindex_changed', function() { self.draw(); })
+      ];
     };
 
     // Marker Label onRemove
     MarkerLabel.prototype.onRemove = function() {
-         this.div.parentNode.removeChild(this.div);
-         for (var i = 0, I = this.listeners.length; i < I; ++i) {
-              google.maps.event.removeListener(this.listeners[i]);
-         }
+      this.div.parentNode.removeChild(this.div);
+      for (var i = 0, I = this.listeners.length; i < I; ++i) {
+        google.maps.event.removeListener(this.listeners[i]);
+      }
     };
 
     // Implement draw
     MarkerLabel.prototype.draw = function() {
-         var projection = this.getProjection();
-         var position = projection.fromLatLngToDivPixel(this.get('position'));
-         var div = this.div;
-         div.style.left = position.x + 'px';
-         div.style.top = position.y + 'px';
-         div.style.display = 'block';
-         div.style.zIndex = this.get('zIndex'); //ALLOW LABEL TO OVERLAY MARKER
-         this.div.innerHTML = this.get('text').toString();
+      var projection = this.getProjection();
+      var position = projection.fromLatLngToDivPixel(this.get('position'));
+      var div = this.div;
+      div.style.left = position.x + 'px';
+      div.style.top = position.y + 'px';
+      div.style.display = 'block';
+      div.style.zIndex = this.get('zIndex'); //ALLOW LABEL TO OVERLAY MARKER
+      this.div.innerHTML = this.get('text').toString();
     };
 
      // Create a new StyledMapType object, passing it the array of styles,
@@ -265,7 +265,7 @@
       // ELL boundaries
 
       <% if @ell_schools.present? %>
-        $.getJSON('/<%= current_student.ell_cluster.present? ? "cluster_#{current_student.ell_cluster}.geojson" : "clusters.geojson" %>', function (data) {
+        $.getJSON('<%= current_student.ell_cluster.present? ? "/cluster_#{current_student.ell_cluster.try(:downcase)}.geojson" : "/clusters.geojson" %>', function (data) {
           ellBoundary = map.data.addGeoJson(data);
 
           <% if params[:list_type] == 'ell' %>
@@ -321,7 +321,7 @@
       // SPED boundaries
 
       <% if @sped_schools.present? %>
-        $.getJSON('/<%= current_student.sped_cluster.present? ? "cluster_#{current_student.sped_cluster}.geojson" : "clusters.geojson" %>', function (data) {
+        $.getJSON('<%= current_student.sped_cluster.present? ? "/cluster_#{current_student.sped_cluster.try(:downcase)}.geojson" : "/clusters.geojson" %>', function (data) {
           spedBoundary = map.data.addGeoJson(data);
 
           <% if params[:list_type] == 'sped' %>
@@ -339,7 +339,7 @@
               });
             }
           <% end %>
-          
+
           <% if @zone_schools.present? %>
             if ($('#zone_schools_tab').length > 0) {
               google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
