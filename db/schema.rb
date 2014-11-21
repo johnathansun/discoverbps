@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141119233223) do
+ActiveRecord::Schema.define(:version => 20141121182331) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -212,6 +212,7 @@ ActiveRecord::Schema.define(:version => 20141119233223) do
     t.text     "sped_description"
     t.string   "ell_cluster"
     t.text     "ell_description"
+    t.string   "sped_mid_code"
   end
 
   add_index "student_schools", ["bps_id"], :name => "index_student_schools_on_bps_id"

@@ -1222,6 +1222,18 @@ School List
 		&#sortable_hours_column {
 			width: 12%;
 		}
+    &#sortable_sped_offering_column {
+      padding-left: 4%;
+      width: 33%;
+    }
+    &#sortable_sped_cluster_column {
+      padding-left: 4%;
+      width: 6%;
+    }
+    &#sortable_sped_mid_code_column {
+      padding-left: 4%;
+      width: 8%;
+    }
 
 	  &.arrow {
 		  width: 49px;
@@ -1478,7 +1490,7 @@ School List Rows
 		&.ell_descrip,
 		&.sped_descrip {
 			padding-left: 4%;
-			width: 17%;
+			width: 35%;
 		}
 
 		&.ell_cluster,

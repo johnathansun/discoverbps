@@ -16,13 +16,17 @@
               .column_title
                 Name
 
-            #sortable_fit_column.menu_bloc.sortable_column
+            #sortable_sped_offering_column.menu_bloc.sortable_column
               .column_title
                 SPED Offering
 
-            #sortable_eligibility_column.menu_bloc.sortable_column
+            #sortable_sped_cluster_column.menu_bloc.sortable_column
               .column_title
                 Cluster
+
+            #sortable_sped_mid_code_column.menu_bloc.sortable_column
+              .column_title
+                Mid Code
 
 
         %ul#sortable
@@ -45,6 +49,12 @@
                 .box.sped_descrip.line
                   .first_block.middle
                     = student_school.sped_description
+
+                .box.sped_cluster.line
+                  .first_block.middle
+                    = student_school.sped_cluster
+
+
 
                 .box.sped_cluster.line
                   .first_block.middle
