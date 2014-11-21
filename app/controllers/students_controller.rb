@@ -107,7 +107,7 @@ class StudentsController < ApplicationController
 
 				# set the basic school lists here, since this step will save the student
 				# home schools will be overwritten in set_awc if awc_invitation = true
-				@student.set_home_schools!
+				@student.delay(priority: 1).set_home_schools!
 				if zone_school_grades.include?(@student.grade_level)
 					@student.delay(priority: 1).set_zone_schools!
 				end
