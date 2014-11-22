@@ -24,10 +24,6 @@
               .column_title
                 Cluster
 
-            #sortable_sped_mid_code_column.menu_bloc.sortable_column
-              .column_title
-                Mid Code
-
 
         %ul#sortable
           - @sped_schools.each_with_index do |student_school, i|
@@ -54,11 +50,6 @@
                   .first_block.middle
                     = student_school.sped_cluster
 
-
-
-                .box.sped_cluster.line
-                  .first_block.middle
-                    = student_school.sped_mid_code
 
                 .school_descrip
                   .right_side

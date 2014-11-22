@@ -114,7 +114,7 @@ class Student < ActiveRecord::Base
             school_ids << school.id
             school_coordinates += "#{school.latitude},#{school.longitude}|"
             exam_school = (api_school[:IsExamSchool] == "0" ? false : true)
-            self.student_schools.create(school_id: school.id, school_type: school_list_type, bps_id: api_school[:SchoolID], tier: api_school[:Tier], eligibility: api_school[:Eligibility], walk_zone_eligibility: api_school[:AssignmentWalkEligibilityStatus], transportation_eligibility: api_school[:TransEligible], distance: api_school[:StraightLineDistance], exam_school: exam_school, sped_cluster: api_school[:SPEDCluster], sped_description: api_school[:Program], sped_mid_code: api_school[:MidCode], ell_cluster: api_school[:ELLCluster], ell_description: api_school[:ProgramDescription])
+            self.student_schools.create(school_id: school.id, school_type: school_list_type, bps_id: api_school[:SchoolID], tier: api_school[:Tier], eligibility: api_school[:Eligibility], walk_zone_eligibility: api_school[:AssignmentWalkEligibilityStatus], transportation_eligibility: api_school[:TransEligible], distance: api_school[:StraightLineDistance], exam_school: exam_school, sped_cluster: api_school[:SPEDCluster], sped_description: api_school[:Program], ell_cluster: api_school[:ELLCluster], ell_description: api_school[:ProgramDescription])
           end
         end
 
