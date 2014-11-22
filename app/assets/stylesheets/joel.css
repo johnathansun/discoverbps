@@ -250,3 +250,12 @@ input, select {
 .hidden {
 	display: none;
 }
+.search .address-row {
+	font-size: 16px;
+	padding: 6px 0 0 15px;
+}
+.search .address-row:hover {
+	font-size: 16px;
+	color: #ffff00;
+	padding: 6px 0 0 15px;
+}

@@ -1,0 +1,220 @@
+.search
+  .logo.discover
+    %span{:aria => {hidden: 'true'}, :class => 'icon-DBPS-Dev-Assets-SRG-01'}
+  .search_header
+    .title_bloc
+      %h1
+        Welcome to Boston Public Schools Registration
+
+  .search_section_content
+    %section.search_section.first
+
+      -# CONTENT ---------------------
+      .content_left
+        .text
+          %p.home_intro.yellow-buttons.light_blue.big
+            = auto_link(TextSnippet.find('home-intro').text)
+
+
+        .content
+          %h2
+            Does your child have specialized language needs?
+
+          = form_tag set_ell_student_path(@student), method: :put, 'data-type' => 'script' do
+
+            %div{style: 'padding: 20px 0 0 15px;'}
+              %p
+                = radio_button_tag '[student]ell_language', 'Cape Verdean', @student.ell_language
+                Cape Verdean
+              %p
+                = radio_button_tag '[student]ell_language', 'Chinese', @student.ell_language
+                Chinese
+              %p
+                = radio_button_tag '[student]ell_language', 'Haitian Creole', @student.ell_language
+                Haitian Creole
+              %p
+                = radio_button_tag '[student]ell_language', 'Spanish', @student.ell_language
+                Spanish
+              %p
+                = radio_button_tag '[student]ell_language', 'Vietnamese', @student.ell_language
+                Vietnamese
+              %p
+                = radio_button_tag '[student]ell_language', 'Other', @student.ell_language
+                Other (including multi-lingual)
+              %p
+                = radio_button_tag '[student]ell_language', '', @student.ell_language
+                Not Applicable
+
+            .btn
+              = submit_tag 'Next', disable_with: 'Working...', id: 'ell_next_button', class: 'orange_submit'
+
+          .footnote.light
+            %p{style: "color: #ffffff; padding: 50px 0;"}
+              As part of the registration process, every applicant is asked to complete a Home Language Survey.
+              The results of this Survey determine whether a child needs additional language assessment at our Newcomers Assessment and Counseling ￼￼Center.
+              If this is the case, a child's school choices may expand beyond his/her Home Based options to include program ￼￼seats in a wider community cluster of schools.
+              The ELL tab on your results page will show you which schools may be available to child, pending his/her test results.
+              For more information on clusters, the Language Assessment, or the Newcomer's Assessment and Counseling Center, please call a Welcome Center near you or contact the Newcomers Center directly at: 617-635-1565
+
+
+
+      -# TIMELINE ---------------------
+      .content_right
+
+        .timeline
+          .event.first
+            %span.light_blue REGISTRATION TIMELINE
+            = image_tag('point_white_onBlue.png', class: 'start_point point')
+
+          .event.Y
+            %span.desktop
+              Discover schools
+
+            -#%span.tablette
+              = image_tag('yellow_point.png', class: 'point')
+
+          .event.Y
+            %span.desktop
+              Compare options
+
+            -#%span.tablette
+              = image_tag('yellow_point.png', class: 'point')
+
+          .event
+            %span.desktop
+              %span.light_blue Nov 3
+              %br/
+              %span.W
+                School Previews and
+                %br/
+                School Showcases start
+
+            -#%span.tablette
+              = image_tag('yellow_point.png', class: 'point')
+
+          .event.Y
+            %span.desktop
+              Create your list
+
+            -#%span.tablette
+              = image_tag('yellow_point.png', class: 'point')
+
+          .event
+            %span.desktop
+              %span.light_blue Dec 15
+              %br/
+              %span.W
+                Pre-register
+
+            -#%span.tablette
+              = image_tag('blue_point_white.png', class: 'point')
+
+
+    -# CONTENT ---------------------
+    %section.search_section.second
+      .content_left
+        .logo.register
+          %span{:aria => {hidden: 'true'}, :class => 'icon-DBPS-Dev-Assets-SRG-02'}
+
+        .text.clearfix
+          %p.yellow-buttons
+            = auto_link(TextSnippet.find('home-register-intro').try(:text))
+            = link_to 'Learn more', 'http://www.bostonpublicschools.org/register', title: 'Learn more', class: 'u', style: 'margin-bottom: 0;', target: '_blank'
+          .alignleft_half
+            %h2{style: 'margin-bottom: 15px;'}
+              Visit Schools
+            = link_to 'Learn about school preview opportunities', '#', class: 'u', target: '_blank'
+          .alignleft_half
+            %h2{style: 'margin-bottom: 15px;'}
+              Register
+            = link_to 'Collect the required documents', '#', class: 'u', target: '_blank'
+            = link_to 'Plan a visit to a welcome center', '#', class: 'u', target: '_blank'
+
+
+      -# TIMELINE ---------------------
+      .content_right
+
+        .timeline
+          .event.W.registration.green_bar
+            %span.desktop
+              = image_tag('point_green_white_open.png', class: 'point')
+              %span
+                Registration begins
+                %br/
+                for K, 6 & 9
+
+              -#%span.tablette
+                = image_tag('blue_point_arrow.png', class: 'point_arrow')
+
+          .event.last_names.ai.green_bar
+            %span.light_blue
+              = 'Jan 5-9'
+            %br/
+            %span.W
+              Last names A&ndash;I
+
+          .seperator
+
+          .event.last_names.jq.green_bar
+            %span.light_blue
+              = 'Jan 12-16'
+            %br/
+            %span.W
+              Last names J&ndash;Q
+
+          .seperator
+
+          .event.last_names.rz.green_bar
+            %span.light_blue
+              = 'Jan 20-23'
+            %br/
+            %span.W
+              Last names R&ndash;Z
+
+          .seperator
+
+          .event.last_names.all.green_bar
+            %span.light_blue
+              = 'Jan 26-30'
+            %br/
+            %span.W
+              All last names
+
+          .event.blank.light_blue_bar
+
+          .event.dark_blue_bar
+            %span.desktop
+              = image_tag('point_green_onBlue.png', class: 'point')
+              %span.light_blue
+                = 'Feb 5'
+              %br/
+            %span.W
+              All other grades' registration
+
+          .event.dark_blue_bar
+            %span.desktop
+              %span.light_blue
+                = 'Mar - Jul'
+              %br/
+            %span.W
+              Assignments mailed
+
+          .event.last.blue_bar
+            %span.desktop
+              %span.light_blue Sept 4
+              = image_tag('point_white_onBlue.png', class: 'point')
+              %br/
+              %span.W
+                First day of school!
+
+
+    -#%section.search_section.third
+
+      -# CONTENT ---------------------
+      .content_left
+        .logo.succeed
+          %span{:aria => {hidden: 'true'}, :class => 'icon-DBPS-Dev-Assets-SRG-03'}
+        .text
+          %p.yellow-buttons
+          = auto_link(TextSnippet.find('home-succeed-intro').text)
+          = link_to 'Explore', 'http://www.bostonpublicschools.org/transitionsupport', title: 'Explore', style: 'margin-bottom:0;', target: '_blank'

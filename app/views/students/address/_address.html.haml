@@ -1,4 +1,4 @@
-%div{id: "addresses_row_#{index}", class: 'row button-pointer'}
+%div{id: "addresses_row_#{index}", class: 'row address-row button-pointer'}
 	#{address[:StreetNum]} #{address[:Street].try(:titleize)}, #{address[:SectionOfCity]} #{address[:ZipCode]}
 
 	- if index == 0
@@ -21,5 +21,5 @@
 		$('#_studentgeo_code').val("#{address[:GeoCode]}");
 		$('#_studentell_cluster').val("#{address[:ELLCluster]}");
 		$('#_studentsped_cluster').val("#{address[:SPEDCluster]}");
-		$('#_studentzone').val("#{address[:Zone]}");	
+		$('#_studentzone').val("#{address[:Zone]}");
 	});
