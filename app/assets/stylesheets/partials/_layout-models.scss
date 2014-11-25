@@ -659,6 +659,34 @@ Dialog Box
 	  cursor: pointer;
 	}
 
+	.modal_steps {
+		margin: 0 0 20px;
+		
+		a {
+			display: inline-block;
+			text-decoration: none;
+			margin: 0 15px 0 0;
+			color: $blue;
+			outline: none !important;
+			
+			&.one:hover {
+				.icon:before {
+					content: "\e608";
+				}
+			}
+			&.two:hover {
+				.icon:before {
+					content: "\e609";
+				}
+			}
+			&.three:hover {
+				.icon:before {
+					content: "\e60a";
+				}
+			}
+		}
+	}
+	
 }// .dialog_box
 
 
