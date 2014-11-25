@@ -48,14 +48,14 @@
 		display: block;
 		margin: 12px 0;
 		
-		.next, .text {
-			display: inline-block;
-			float: none;
+		.next,
+		.text {
+			width: 50%;
+			text-align: center;
 		}
 		.next {
 			background: $light_blue;
 			color: $dark_blue;
-			width: 9%;
 		}
 	}
 

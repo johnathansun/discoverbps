@@ -34,14 +34,14 @@ body {
 		color: #FFF;
 		text-decoration: none;
 		transition: all 250ms ease;
+		@include clearfix;
 		&:hover { 
 			background: $orange; 
-			&:after {
+			.arrow {
 				border-left-color: $orange;
 			}
 		}
-		&:after {
-			content: "";
+		.arrow {
 			position: absolute;
 			left: 100%;
 			top: 0;
@@ -50,15 +50,19 @@ body {
 			border-bottom: 19px solid rgba(0, 0, 0, 0);
 			transition: all 250ms ease;
 		}
-		
+		.next,
+		.text {
+			display: block;
+			box-sizing: border-box;
+			float: left;
+			padding: 11px 15px;
+		}
 		.next {
 			background: $blue;
-			padding: 11px 15px;
-			float: left;
+			text-align: center;
 		}
 		.text {
-			padding: 11px 15px;
-			float: left;
+
 		}
 	}
 }
