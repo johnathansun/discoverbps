@@ -1960,6 +1960,7 @@ Compare and Rank
   line-height: 1em;
   
   &.ui-tooltip {
+	  position: absolute !important; // Fixes "jumpiness" of tooltips
 		color: #FFF;
 		background: $dark_gray;
 		width: 90px;
