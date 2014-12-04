@@ -1,7 +1,15 @@
 .close_icon
-  %span{aria: {hidden: 'true'}, class: 'icon-DBPS-Dev-Assets-SRG-07'}
+  %span{:aria => {hidden: 'true'}, :class => 'icon-DBPS-Dev-Assets-SRG-07'}
 
 .content
+	-#.modal_steps
+		%a.step.one{:href => '#'}
+			%span.icon.icon-openone
+		%a.step.two{:href => '#'}
+			%span.icon.icon-opentwo
+		%a.step.three{:href => '#'}
+			%span.icon.icon-closedthree
+
   %h2
     Has your child been invited to the Advanced Work Class (AWC) Program?
 

@@ -10,9 +10,13 @@
 	= render partial: 'schools/page_elements/school_list_tabs'
 
 #compare_list.compare_list.wrap
-	= link_to get_ready_schools_path do
-		%span.arrow_slide.no_mobile
-			= image_tag('next-step-3.png')
+	%a.next_step{:href => "#{get_ready_schools_path}"}
+		%span.next
+			= 'Next'
+		%span.text
+			= 'Step 4 - Get Ready!'
+		%span.arrow
+			
 
 	.result.clearfix
 		-# LEFT COLUMN
@@ -92,7 +96,10 @@
 	$(function() {
 		$("#sortable_0").disableSelection();
 		$('.compare_list_content').tooltip({
-			track: true
+			track: true,
+			hide: {
+				duration: 0
+			}
 		});
 	});
 
@@ -100,6 +107,9 @@
 		$("#sortable_0").sortable({
 			axis: "x",
 			scroll: true,
+			sort: function( event, ui ) {
+				$('.compare_list_content').tooltip('close');
+			},
 			update: function(){
 				$('#sortable_0 li').each(function(){
 					$(this).find('.sortable_row_number').html($(this).index() + 1);

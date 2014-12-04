@@ -35,6 +35,30 @@
   .wrap .menu_school_lists {
 		margin-left: 0;
 	}
+	
+	
+	
+	/* ----------------------------------------------------
+		Next Step Button
+	------------------------------------------------------- */  
+	.wrap .next_step {
+		position: relative;
+		top: auto;
+		right: auto;
+		display: block;
+		margin: 12px 0;
+		
+		.next,
+		.text {
+			width: 50%;
+			text-align: center;
+		}
+		.next {
+			background: $light_blue;
+			color: $dark_blue;
+		}
+	}
+
 
 
   /* -------------------------------------------------
