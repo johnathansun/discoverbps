@@ -1,4 +1,4 @@
-SCHOOL_YEAR  = "2014".freeze
+SCHOOL_YEAR  = "2015".freeze
 AWC_GRADES = ['4', '5', '6'].freeze
 TRANSITION_GRADES = ['K0', 'K1', 'K2', '6', '9'].freeze
 NON_TRANSITION_GRADES = ['1', '2', '3', '4', '5', '7', '8', '10', '11', '12'].freeze
