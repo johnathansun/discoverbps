@@ -14,17 +14,21 @@ class StudentsController < ApplicationController
       street_name   = params[:student][:street_name]
       zipcode       = params[:student][:zipcode]
 
-			@student = get_or_set_student(current_user, first_name, last_name, grade_level)
+			street_number_numeric = (true if Integer(street_number) rescue false)
 
-      params[:student][:sibling_school_ids] = School.where("name IN (?)", params[:student][:sibling_school_names].try(:compact).try(:reject, &:empty?)).collect {|x| x.bps_id}.uniq
+			if street_number_numeric == true
+				@student = get_or_set_student(current_user, first_name, last_name, grade_level)
 
-			api_response = Webservice.address_matches(street_number, street_name, zipcode)
-      @addresses = api_response.try(:[], :List)
-			@errors = api_response.try(:[], :Error).try(:[], 0)
+				params[:student][:sibling_school_ids] = School.where("name IN (?)", params[:student][:sibling_school_names].try(:compact).try(:reject, &:empty?)).collect {|x| x.bps_id}.uniq
 
+				api_response = Webservice.address_matches(street_number, street_name, zipcode)
+				@addresses = api_response.try(:[], :List)
+				@errors = api_response.try(:[], :Error).try(:[], 0)
+			end
     end
 
     respond_to do |format|
+
       if @addresses.present? && @student.present? && @student.update_attributes(params[:student])
 				session[:current_student_id] = @student.id
         format.js { render template: "students/address/addresses" }
@@ -40,8 +44,10 @@ class StudentsController < ApplicationController
               flash[:alert] = "We couldn't find any addresses in Boston that match your search. Please try again."
             end
           end
-
-        else
+        elsif street_number_numeric == false
+					@error_message = "Street number must be a number. Please try again."
+					flash[:alert] = "Street number must be a number. Please try again."
+				else
           @error_message = "Please enter the required search fields and try again."
           flash[:alert] = "Please enter the required search fields and try again."
         end
