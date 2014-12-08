@@ -176,17 +176,17 @@ class StudentsController < ApplicationController
 					@student.set_sped_schools!
 				end
 
-				format.html { redirect_to schools_path}
-				format.js { render :js => "window.location = '/schools'" }
+				# format.html { redirect_to schools_path}
+				# format.js { render :js => "window.location = '/schools'" }
 
-				# if AWC_GRADES.include?(@student.grade_level)
-				# 	format.html { redirect_to awc_student_path(@student)}
-				# 	format.js { render template: "students/awc/awc" }
-				# else
-				# 	@student.set_home_schools!
-				# 	format.html { redirect_to schools_path}
-				# 	format.js { render :js => "window.location = '/schools'" }
-				# end
+				if AWC_GRADES.include?(@student.grade_level)
+					format.html { redirect_to awc_student_path(@student)}
+					format.js { render template: "students/awc/awc" }
+				else
+					@student.set_home_schools!
+					format.html { redirect_to schools_path}
+					format.js { render :js => "window.location = '/schools'" }
+				end
 			else
 				format.js { render template: "students/sped/sped" }
 				flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
@@ -202,24 +202,24 @@ class StudentsController < ApplicationController
 	end
 
 	def set_awc
-		# @student = Student.find(params[:id])
-		#
-		# respond_to do |format|
-		# 	if @student.update_attributes(params[:student])
-		#
-		# 		# overwrite home_schools if awc = true
-		# 		if params[:student][:awc_invitation] == true
-		# 			@student.delay(priority: 1).set_home_schools!
-		# 		end
-		#
-		# 		format.html { redirect_to schools_path}
-		# 		format.js { render :js => "window.location = '/schools'" }
-		# 	else
-		# 		format.js { render template: "students/awc/awc" }
-		# 		flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
-		# 		format.html { redirect_to root_url }
-		# 	end
-		# end
+		@student = Student.find(params[:id])
+
+		respond_to do |format|
+			if @student.update_attributes(params[:student])
+
+				# overwrite home_schools if awc = true
+				if params[:student][:awc_invitation] == true
+					@student.set_home_schools!
+				end
+
+				format.html { redirect_to schools_path}
+				format.js { render :js => "window.location = '/schools'" }
+			else
+				format.js { render template: "students/awc/awc" }
+				flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
+				format.html { redirect_to root_url }
+			end
+		end
 	end
 
 
