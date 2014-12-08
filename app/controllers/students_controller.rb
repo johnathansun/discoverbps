@@ -15,8 +15,9 @@ class StudentsController < ApplicationController
       zipcode       = params[:student][:zipcode]
 
 			street_number_numeric = (true if Integer(street_number) rescue false)
+			zipcode_length = (zipcode.length == 5)
 
-			if street_number_numeric == true
+			if street_number_numeric == true && zipcode_length == true
 				@student = get_or_set_student(current_user, first_name, last_name, grade_level)
 
 				params[:student][:sibling_school_ids] = School.where("name IN (?)", params[:student][:sibling_school_names].try(:compact).try(:reject, &:empty?)).collect {|x| x.bps_id}.uniq
@@ -47,6 +48,9 @@ class StudentsController < ApplicationController
         elsif street_number_numeric == false
 					@error_message = "Street number must be a number. Please try again."
 					flash[:alert] = "Street number must be a number. Please try again."
+				elsif zipcode_length == false
+					@error_message = "Zip code must be a 5-digit number. Please try again."
+					flash[:alert] = "Zip code must be a 5-digit number. Please try again."
 				else
           @error_message = "Please enter the required search fields and try again."
           flash[:alert] = "Please enter the required search fields and try again."
