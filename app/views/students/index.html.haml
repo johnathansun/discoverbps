@@ -13,12 +13,12 @@
 			-# CONTENT ---------------------
 			.content_left
 				.text
-					%p.home_intro.yellow-buttons.light_blue.big
+					%p.big.light_blue.white-buttons
 						= auto_link(TextSnippet.find('home-intro').text)
 
 				- if current_user_students.present?
 					%p.W
-						View your lists:
+						View your existing lists or add a new student by starting a new search:
 					%ul.user_lists
 						- for student in current_user_students
 							%li
@@ -100,9 +100,10 @@
 
 
 				- else
-					%p.yellow-buttons
-						%span.light
-							= auto_link(TextSnippet.find('home-discover-intro').text)
+					.text
+						%p.yellow-buttons
+							%span.light
+								= auto_link(TextSnippet.find('home-discover-intro').text)
 
 					- if flash[:alert].present?
 						%p{style: 'color: red;'}
