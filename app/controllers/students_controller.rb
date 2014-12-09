@@ -119,7 +119,7 @@ class StudentsController < ApplicationController
 				# home schools will be overwritten in set_awc if awc_invitation = true
 				@student.set_home_schools!
 				if zone_school_grades.include?(@student.grade_level)
-					@student.delay(priority: 1).set_zone_schools!
+					@student.set_zone_schools!
 				end
 
         format.js { render template: "students/ell/ell" }
