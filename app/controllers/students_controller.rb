@@ -115,10 +115,6 @@ class StudentsController < ApplicationController
     respond_to do |format|
       if @student.update_attributes(params[:student])
 
-				if zone_school_grades.include?(@student.grade_level)
-					@student.set_zone_schools!
-				end
-
 				if AWC_GRADES.include?(@student.grade_level)
 					format.html { redirect_to awc_student_path(@student)}
 					format.js { render template: "students/awc/awc" }
@@ -149,6 +145,10 @@ class StudentsController < ApplicationController
 
 				@student.set_home_schools!
 
+				if zone_school_grades.include?(@student.grade_level)
+					@student.set_zone_schools!
+				end
+
 				format.html { redirect_to ell_student_path(@student)}
 				format.js { render template: "students/ell/ell" }
 			else
@@ -171,7 +171,15 @@ class StudentsController < ApplicationController
 		respond_to do |format|
 			if @student.update_attributes(params[:student])
 
-				if @student.ell_language != false
+				unless AWC_GRADES.include?(@student.grade_level)
+					@student.set_home_schools!
+
+					if zone_school_grades.include?(@student.grade_level)
+						@student.set_zone_schools!
+					end
+				end
+
+				if @student.ell_language == true
 					@student.set_ell_schools!
 				end
 
