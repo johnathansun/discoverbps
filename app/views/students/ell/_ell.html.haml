@@ -38,7 +38,7 @@
 			= radio_button_tag '[student]ell_language', 'Other', @student.ell_language
 			Other (including multi-lingual)
 		%p
-			= radio_button_tag '[student]ell_language', '', @student.ell_language
+			= radio_button_tag '[student]ell_language', '', @student.ell_language.present? ? @student.ell_language : true
 			Not Applicable
 
 		.btn

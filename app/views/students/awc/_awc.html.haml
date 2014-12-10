@@ -2,9 +2,7 @@
 	%span{:aria => {hidden: 'true'}, :class => 'icon-DBPS-Dev-Assets-SRG-07'}
 
 .content
-  
-	%h2
-		Has your child been invited to the Advanced Work Class (AWC) Program?
+	%h2 Has your child been invited to the Advanced Work Class (AWC) Program?
 
 	= form_tag set_awc_student_path(@student), method: :put, remote: true, 'data-type' => 'script' do
 
@@ -12,7 +10,7 @@
 			= radio_button_tag '[student]awc_invitation', true, @student.awc_invitation
 			Yes
 		%p
-			= radio_button_tag '[student]awc_invitation', false, @student.awc_invitation
+			= radio_button_tag '[student]awc_invitation', false, @student.awc_invitation.present? ? @student.awc_invitation : true
 			No
 
 		.btn

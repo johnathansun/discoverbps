@@ -15,10 +15,10 @@
 	= form_tag set_sped_student_path(@student), method: :put, remote: true, 'data-type' => 'script' do
 
 		%p
-			= radio_button_tag '[student]sped_needs', true
+			= radio_button_tag '[student]sped_needs', true, @student.sped_needs
 			Yes
 		%p
-			= radio_button_tag '[student]sped_needs', false, true
+			= radio_button_tag '[student]sped_needs', false, @student.sped_needs.present? ? @student.sped_needs : true
 			No
 
 		.btn
