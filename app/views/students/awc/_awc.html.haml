@@ -7,10 +7,10 @@
 	= form_tag set_awc_student_path(@student), method: :put, remote: true, 'data-type' => 'script' do
 
 		%p
-			= radio_button_tag '[student]awc_invitation', true, @student.awc_invitation
+			= radio_button_tag '[student]awc_invitation', true, @student.awc_invitation == true
 			Yes
 		%p
-			= radio_button_tag '[student]awc_invitation', false, @student.awc_invitation.present? ? @student.awc_invitation : true
+			= radio_button_tag '[student]awc_invitation', false, @student.awc_invitation == false
 			No
 
 		.btn

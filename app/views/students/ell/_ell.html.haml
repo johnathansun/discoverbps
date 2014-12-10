@@ -20,25 +20,25 @@
 	= form_tag set_ell_student_path(@student), method: :put, remote: true, 'data-type' => 'script' do
 
 		%p
-			= radio_button_tag '[student]ell_language', 'Cape Verdean', @student.ell_language
+			= radio_button_tag '[student]ell_language', 'Cape Verdean', @student.ell_language == 'Cape Verdean'
 			Cape Verdean
 		%p
-			= radio_button_tag '[student]ell_language', 'Chinese', @student.ell_language
+			= radio_button_tag '[student]ell_language', 'Chinese', @student.ell_language == 'Chinese'
 			Chinese
 		%p
-			= radio_button_tag '[student]ell_language', 'Haitian Creole', @student.ell_language
+			= radio_button_tag '[student]ell_language', 'Haitian Creole', @student.ell_language == 'Haitian Creole'
 			Haitian Creole
 		%p
-			= radio_button_tag '[student]ell_language', 'Spanish', @student.ell_language
+			= radio_button_tag '[student]ell_language', 'Spanish', @student.ell_language == 'Spanish'
 			Spanish
 		%p
-			= radio_button_tag '[student]ell_language', 'Vietnamese', @student.ell_language
+			= radio_button_tag '[student]ell_language', 'Vietnamese', @student.ell_language == 'Vietnamese'
 			Vietnamese
 		%p
-			= radio_button_tag '[student]ell_language', 'Other', @student.ell_language
+			= radio_button_tag '[student]ell_language', 'Other', @student.ell_language == 'Other'
 			Other (including multi-lingual)
 		%p
-			= radio_button_tag '[student]ell_language', '', @student.ell_language.present? ? @student.ell_language : true
+			= radio_button_tag '[student]ell_language', '', @student.ell_language.present? ? false : true
 			Not Applicable
 
 		.btn
