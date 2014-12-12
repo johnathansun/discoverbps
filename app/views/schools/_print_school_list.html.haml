@@ -16,7 +16,7 @@
 .clr
 
 %ul
-  - @home_schools.each_with_index do |student_school, i|
+  - schools.each_with_index do |student_school, i|
     - school = student_school.school
     %li{id: "list_#{i}", class: "ui-state-default"}
       .li_frame
