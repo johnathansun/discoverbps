@@ -174,7 +174,7 @@ class StudentsController < ApplicationController
 					@student.set_zone_schools!
 				end
 
-				if @student.ell_language == true
+				unless @student.ell_language.blank?
 					@student.set_ell_schools!
 				end
 
