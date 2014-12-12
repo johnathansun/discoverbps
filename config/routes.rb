@@ -15,12 +15,12 @@ DiscoverbpsV2::Application.routes.draw do
   resources :students do
     get 'addresses', on: :member
     put 'verify_address', on: :member
+    get 'awc', on: :member
+    put 'set_awc', on: :member
     get 'ell', on: :member
     put 'set_ell', on: :member
     get 'sped', on: :member
     put 'set_sped', on: :member
-    get 'awc', on: :member
-    put 'set_awc', on: :member
     post 'save_preference', on: :member
     post 'remove_notification', on: :collection
   end

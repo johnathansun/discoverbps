@@ -20,14 +20,14 @@
           %h2
             Does your child have an Individual Education Plan (IEP) for special eduction needs (SPED)?
 
-          = form_tag set_sped_student_path(@student), method: :put, 'data-type' => 'script' do
+          = form_tag set_sped_student_path(@student), method: :put do
 
             %div{style: 'padding: 20px 0 0 15px;'}
               %p
-                = radio_button_tag '[student]sped_needs', true
+                = radio_button_tag '[student]sped_needs', true, @student.sped_needs == true
                 Yes
               %p
-                = radio_button_tag '[student]sped_needs', false, true
+                = radio_button_tag '[student]sped_needs', false, @student.sped_needs == false
                 No
 
             .btn
