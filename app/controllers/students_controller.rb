@@ -119,6 +119,7 @@ class StudentsController < ApplicationController
 					format.html { redirect_to awc_student_path(@student)}
 					format.js { render template: "students/awc/awc" }
 				else
+					# if we don't need to ask about AWC, we can set the home schools now
 					@student.set_home_schools!
 					format.html { redirect_to ell_student_path(@student)}
 					format.js { render template: "students/ell/ell" }
@@ -144,11 +145,8 @@ class StudentsController < ApplicationController
 		respond_to do |format|
 			if @student.update_attributes(params[:student])
 
+				# the home schools call must always preceed zone schools
 				@student.set_home_schools!
-
-				if zone_school_grades.include?(@student.grade_level)
-					@student.set_zone_schools!
-				end
 
 				format.html { redirect_to ell_student_path(@student)}
 				format.js { render template: "students/ell/ell" }
@@ -172,10 +170,8 @@ class StudentsController < ApplicationController
 		respond_to do |format|
 			if @student.update_attributes(params[:student])
 
-				unless AWC_GRADES.include?(@student.grade_level)
-					if zone_school_grades.include?(@student.grade_level)
-						@student.set_zone_schools!
-					end
+				if zone_school_grades.include?(@student.grade_level)
+					@student.set_zone_schools!
 				end
 
 				if @student.ell_language == true
