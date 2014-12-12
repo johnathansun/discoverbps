@@ -119,6 +119,7 @@ class StudentsController < ApplicationController
 					format.html { redirect_to awc_student_path(@student)}
 					format.js { render template: "students/awc/awc" }
 				else
+					@student.set_home_schools!
 					format.html { redirect_to ell_student_path(@student)}
 					format.js { render template: "students/ell/ell" }
 				end
@@ -172,8 +173,6 @@ class StudentsController < ApplicationController
 			if @student.update_attributes(params[:student])
 
 				unless AWC_GRADES.include?(@student.grade_level)
-					@student.set_home_schools!
-
 					if zone_school_grades.include?(@student.grade_level)
 						@student.set_zone_schools!
 					end
