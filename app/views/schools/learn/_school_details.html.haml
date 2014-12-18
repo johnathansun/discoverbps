@@ -120,7 +120,7 @@
 
 		-# Print Details
 		%p.title.big.desktop_tablet
-			= link_to print_school_path(school.slug), title: 'Print Details', class: 'text_B0' do
+			= link_to print_school_path(school.slug, student_school_id: student_school.id), title: 'Print Details', class: 'text_B0' do
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Dev-Assets-SRG-28"}
 				Print Details
 

@@ -141,7 +141,7 @@ class SchoolsController < ApplicationController
 
   def print
     @school = School.find(params[:id])
-    @student_school = current_student.student_schools.where(school_id: @school.id).try(:first)
+    @student_school = StudentSchool.where(id: params[:student_school_id]).try(:first)
   end
 
 

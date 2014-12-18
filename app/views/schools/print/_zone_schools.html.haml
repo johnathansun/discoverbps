@@ -1,0 +1,48 @@
+%div{style: 'margin-top: 15px; padding-top: 15px; border-top: solid 1px gray;'}
+  %h2{style: 'margin-bottom: 5px; color: #0077CF;'}
+    Zone-Based Schools
+
+  .menu_list
+    .li_frame
+      %div{class: "choice menu_bloc", style: "width: 193px;"}
+        School Name
+
+      .menu_bloc
+        .first_block
+          Transit
+
+      .menu_bloc
+        School Hours
+
+      .menu_bloc
+        Eligibility
+
+  .clr
+
+  %ul
+    - schools.each_with_index do |student_school, i|
+      - school = student_school.school
+      %li{id: "list_#{i}", class: "ui-state-default"}
+        .li_frame
+          .school_name.select.line
+            %span{style: 'font-size: 12px;'}
+              = school.name
+              - if current_student.sibling_school_ids.present? && current_student.sibling_school_ids.include?(school.bps_id)
+                %span{aria: {hidden: 'true'}, class: "select_icon icon-DBPS-Dev-Assets-SRG-12"}
+
+          .box.line.getting_there
+            - if student_school.distance.present?
+              %span.middle.sortable_distance
+                = spacer_helper(student_school.distance)
+                &nbsp;mi
+
+          .box.line.school_hours
+            %span.middle
+              = truncate(school.api_hours.try(:[], :Description), length: 18)
+              %br/
+              .max_range
+                %div{class: "ajust_range", style: "margin-left: #{school_hours_start_time_helper(school.api_hours.try(:[], :Description))}%; margin-right: #{school_hours_end_time_helper(school.api_hours.try(:[], :Description))}%;"}
+
+          .box.line.surround_care
+            .middle
+              = eligibility_helper(student_school.eligibility)

@@ -1,30 +1,17 @@
-.wrap.global_map{style: 'padding: 0px;'}
+.wrap.global_map{style: 'margin-top: 30px; padding: 0px;'}
 	= render partial: 'schools/page_elements/map', locals: {students_list: [current_student], school: @school, map_controls: false, width: '100%'}
 
-	%div{class: "menu_student_info", style: "position: absolute; z-index: 10; margin-top: 273px;"}
-		.name_list
-			#name_1.name_info.active
-				%span.name
-					= current_student.first_name
-					%span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
-				%span.grade
-					Grade
-					%br/
-					%span.number
-						= current_student.grade_level
-				.clr
-		.clr
-	.clr
-
-.wrap.result
-	.preferences
-		#preference_content
-			.colonn
-
-			.clr
-
+.wrap.result{style: 'color: #222222;'}
 	#school_list
 		.flexible_content
+			%div{style: 'padding: 10px 0 12px 0; '}
+				%div{style: 'float: right;'}
+					%h2
+						Grade #{current_student.grade_level}
+				%h1{style: 'margin-bottom: 5px;'}
+					= current_student.full_name
+				%h3
+					#{current_student.full_address}
 
 			%div{style: "margin-top: 20px;"}
 				%h1
@@ -35,7 +22,7 @@
 
 			%div{class: "desktop", style: "clear: top;"}
 				.box
-					%p.title
+					%h3
 						#{@school.api_basic_info.try(:[], :campus1address1)}, #{@school.api_basic_info.try(:[], :campus1city)} #{@school.api_basic_info.try(:[], :campus1zip)}
 					%br/
 					%p
@@ -45,18 +32,22 @@
 
 						= mail_to @school.api_basic_info.try(:[], :schemail), @school.api_basic_info.try(:[], :schemail), class: "text_B0", title: "Email Address"
 
-					%p.title
-						%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"}
-						= raw @student_school.distance
-						mi from home
+					- if @student_school.try(:distance).present?
+						%p.title
+							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"}
+							= raw @student_school.try(:distance)
+							mi from home
+
 					%p.descrip.light
-						%span{aria: {hidden: 'true'}, class: "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
-							= raw @student_school.walk_time
-							%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-18"}
-							%br/
-						%span{aria: {hidden: 'true'}, class: "icon_petit icon-DBPS-Dev-Assets-SRG-17"}
-							= raw @student_school.drive_time
-							%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-18"}
+						- if @student_school.try(:walk_time).present?
+							%span{aria: {hidden: 'true'}, class: "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
+								= raw @student_school.try(:walk_time)
+								%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-18"}
+								%br/
+						- if @student_school.try(:drive_time).present?
+							%span{aria: {hidden: 'true'}, class: "icon_petit icon-DBPS-Dev-Assets-SRG-17"}
+								= raw @student_school.try(:drive_time)
+								%span{aria: {hidden: 'true'}, class: "icon-DBPS-Dev-Assets-SRG-18"}
 
 
 					- if preview_dates_list_helper(@school).present?
@@ -133,7 +124,7 @@
 							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_eligibility"}
 							Eligibility
 						%p.descrip.light
-							= @student_school.eligibility
+							= @student_school.try(:eligibility)
 
 					.box
 						%p.title
@@ -154,7 +145,7 @@
 							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
 							MCAS Tier
 						%p.descrip.light
-							= school_tier_helper(@student_school.tier)
+							= school_tier_helper(@student_school.try(:tier))
 
 					.box
 						%p.title

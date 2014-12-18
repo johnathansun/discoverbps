@@ -1,0 +1,35 @@
+%div{style: 'margin-top: 15px; padding-top: 15px; border-top: solid 1px gray;'}
+  %h2{style: 'margin-bottom: 5px; color: #0077CF;'}
+    ELL Schools
+
+  .menu_list
+    .li_frame
+      %div{class: "choice menu_bloc", style: "width: 193px;"}
+        School Name
+
+      .menu_bloc{style: 'width: 200px;'}
+        ELL Offering
+
+      .menu_bloc
+        Cluster
+
+  .clr
+
+  %ul
+    - schools.each_with_index do |student_school, i|
+      - school = student_school.school
+      %li{id: "list_#{i}", class: "ui-state-default"}
+        .li_frame
+          .school_name.select.line
+            %span{style: 'font-size: 12px;'}
+              = school.name
+              - if current_student.sibling_school_ids.present? && current_student.sibling_school_ids.include?(school.bps_id)
+                %span{aria: {hidden: 'true'}, class: "select_icon icon-DBPS-Dev-Assets-SRG-12"}
+
+          .box.line.distance{style: 'width: 200px;'}
+            .middle
+              = student_school.ell_description
+
+          .box.line.surround_care
+            .middle
+              = student_school.ell_cluster
