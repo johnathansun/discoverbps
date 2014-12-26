@@ -102,16 +102,18 @@
 
                 .box.line.school_hours
                   %span.middle.sortable_hours
-                    = truncate(school.api_hours.try(:[], :Description), length: 18)
-                    %br/
-                    .max_range
-                      %div{class: 'ajust_range', style: "margin-left: #{school_hours_start_time_helper(school.api_hours.try(:[], :Description))}%; margin-right: #{school_hours_end_time_helper(school.api_hours.try(:[], :Description))}%;"}
-
+                    - if school.api_hours.try(:[], :Description).present?
+                      = truncate(school.api_hours.try(:[], :Description), length: 18)
+                    - else
+                      &nbsp;
 
                 .box.line.eligibility
                   .first_block.middle
                     %span.middle.sortable_eligibility
-                      =raw eligibility_helper(spacer_helper(student_school.eligibility))
+                      - if student_school.eligibility.present?
+                        =raw truncate(eligibility_helper(spacer_helper(student_school.eligibility)), length: 30)
+                      - else
+                        &nbsp;
 
                 .school_descrip
                   .right_side
