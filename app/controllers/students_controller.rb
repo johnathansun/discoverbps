@@ -110,7 +110,22 @@ class StudentsController < ApplicationController
 
   def verify_address
     @student = Student.find(params[:id])
-    params[:student][:address_verified] = true
+		address = response = MultiJson.load(params[:address], :symbolize_keys => true)
+
+    @student.address_verified = true
+		@student.street_number = address.try(:[], :StreetNum)
+		@student.street_name = address.try(:[], :Street).try(:titleize)
+		@student.neighborhood = address.try(:[], :SectionOfCity)
+		@student.zipcode = address.try(:[], :ZipCode)
+		@student.x_coordinate = address.try(:[], :X)
+		@student.y_coordinate = address.try(:[], :Y)
+		@student.latitude = address.try(:[], :Lat)
+		@student.longitude = address.try(:[], :Lng)
+		@student.geo_code = address.try(:[], :GeoCode)
+		@student.addressid = address.try(:[], :AddressID)
+		@student.ell_cluster = address.try(:[], :ELLCluster)
+		@student.sped_cluster = address.try(:[], :SPEDCluster)
+		@student.zone = address.try(:[], :Zone)
 
     respond_to do |format|
       if @student.update_attributes(params[:student])

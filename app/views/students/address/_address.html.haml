@@ -1,25 +1,9 @@
-%div{id: "addresses_row_#{index}", class: 'row address-row button-pointer'}
-	#{address[:StreetNum]} #{address[:Street].try(:titleize)}, #{address[:SectionOfCity]} #{address[:ZipCode]}
+%div{id: "addresses_row_#{index}", class: 'row address-row'}
 
 	- if index == 0
-		%span{id: "address_check_mark_#{index}", class: 'address_check_mark icon_selected green icon-DBPS-Dev-Assets-SRG-42', style: 'display: visible;'}
-	- else
-		%span{id: "address_check_mark_#{index}", class: 'address_check_mark icon_selected green icon-DBPS-Dev-Assets-SRG-42', style: 'display: none;'}
+		= radio_button_tag :address, address.to_json, true
+		#{address[:StreetNum]} #{address[:Street].try(:titleize)}, #{address[:SectionOfCity]} #{address[:ZipCode]}
 
-:javascript
-	$("#addresses_row_#{index}").click(function() {
-		$('.address_check_mark').hide();
-		$("#address_check_mark_#{index}").show();
-		$('#_studentstreet_number').val("#{address[:StreetNum]}");
-		$('#_studentstreet_name').val("#{address[:Street].try(:titleize)}");
-		$('#_studentneighborhood').val("#{address[:SectionOfCity]}");
-		$('#_studentzipcode').val("#{address[:ZipCode]}");
-		$('#_studentx_coordinate').val("#{address[:X]}");
-		$('#_studenty_coordinate').val("#{address[:Y]}");
-		$('#_studentlatitude').val("#{address[:Lat]}");
-		$('#_studentlongitude').val("#{address[:Lng]}");
-		$('#_studentgeo_code').val("#{address[:GeoCode]}");
-		$('#_studentell_cluster').val("#{address[:ELLCluster]}");
-		$('#_studentsped_cluster').val("#{address[:SPEDCluster]}");
-		$('#_studentzone').val("#{address[:Zone]}");
-	});
+	- else
+		= radio_button_tag :address, address.to_json
+		#{address[:StreetNum]} #{address[:Street].try(:titleize)}, #{address[:SectionOfCity]} #{address[:ZipCode]}
