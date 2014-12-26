@@ -13,14 +13,14 @@
           There are no matching ELL schools for the address and grade level that you entered.
 
 
-  - if @ell_schools[6...-1].present?
+  - if @ell_schools[5..-1].present?
     .more_schools.column_right.column
       .more_schools_frame
         %h3
           More Schools:
 
         %ul{title: "click to add"}
-          - @ell_schools[6...-1].each do |student_school|
+          - @ell_schools[5..-1].each do |student_school|
             - school = student_school.school
             %li.school
               %a{href: '#'}

@@ -13,14 +13,14 @@
         - @home_schools[0...5].each_with_index do |student_school, i|
           = render partial: 'schools/compare/school_column', locals: {student_school: student_school, school: student_school.school, list_type: 'home', i: i}
 
-  - if @home_schools[6...-1].present?
+  - if @home_schools[5..-1].present?
     .more_schools.column_right.column
       .more_schools_frame
         %h3
           More Schools:
 
         %ul{id: 'add_more_schools_list', title: "click to add"}
-          - @home_schools[6...-1].each do |student_school|
+          - @home_schools[5..-1].each do |student_school|
             - school = student_school.school
             %li{id: "add_more_button_#{student_school.id}", class: "school"}
               %a{href: '#', class: 'addable_school', data: {student_school_id: student_school.id}}
