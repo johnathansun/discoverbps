@@ -5,7 +5,7 @@
       - if @ell_schools.present?
         %ul#sortable_0.clearfix
 
-          - @ell_schools[0...5].each_with_index do |student_school, i|
+          - @ell_schools[0..4].each_with_index do |student_school, i|
             = render partial: 'schools/compare/school_column', locals: {student_school: student_school, school: student_school.school, list_type: 'ell', i: i}
 
       - else
