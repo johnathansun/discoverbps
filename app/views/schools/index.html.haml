@@ -16,8 +16,8 @@
 		%span.text
 			= 'Step 3 - Compare & Rank'
 		%span.arrow
-			
-	
+
+
 
 	.result
 		= render partial: 'schools/page_elements/preference_panel'
@@ -33,7 +33,7 @@
 
 :javascript
 	$( document ).ready(function() {
-		
+
 		// Sticky "Next Step" button
 		/*var winTop = 0;
 		var winHt = $(window).height();
@@ -50,7 +50,7 @@
 			} else {
 				$('.arrow_slide').removeClass('fixed');
 			}
-			
+
 			if (winTop >= 190) {
 				$('.arrow_slide .text_version').addClass('visible');
 			} else {
@@ -58,7 +58,7 @@
 			}
 		});*/
 
-		//Click on school name to open the full school description in the school line
+		//Click on school name to open the full school description in the school line.
 		$("#school_list li .li_frame > .school_name .icon").click(function() {
 			$(this)
 				.toggleClass("icon-info icon-close blue red")
