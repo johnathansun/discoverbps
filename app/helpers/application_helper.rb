@@ -30,8 +30,8 @@ module ApplicationHelper
 			end_year = Date.today.years_since(1).year
 			"#{start_year}-#{end_year}"
 		else
-			start_year = Date.today.years_since(1).year
-			end_year = Date.today.years_since(2).year
+			start_year = Date.today.years_ago(1).year
+			end_year = Date.today.year
 			"#{start_year}-#{end_year}"
 		end
 	end
