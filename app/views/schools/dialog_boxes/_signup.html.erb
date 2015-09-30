@@ -5,10 +5,10 @@
 	<p class='txt_join_list' style='display:none;'>To save your lists in DiscoverBPS, please create an account:</p>
 	<p class='txt_login'>To create an account in DiscoverBPS, please enter your name, <br />email address and password in the form below:</p>
 		
-	<%= form_for(:user, :as => 'user', :url => session_path(:user)) do |f| %>
+	<%= form_for(:user, :as => 'user', :url => user_registration_path) do |f| %>
 		<form method='' action='' name=''>
 			<div class='input_box'>
-				<%= f.text_field :name, placeholder: 'Name' %>
+				<%= f.text_field :name, placeholder: 'Full Name' %>
 			</div>
 			<div class='input_box'>
 				<%= f.email_field :email, placeholder: 'Email' %>
