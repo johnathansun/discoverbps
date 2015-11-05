@@ -4,7 +4,7 @@ class AdminMailer < ActionMailer::Base
     @endpoint = endpoint
     @school = School.where(bps_id: bps_id).first
 
-    mail(to: "joelmahoney@gmail.com", from: "errors@discoverbps.org", subject: "API Error")
+    mail(to: ["joelmahoney@gmail.com", "bavery@bostonpublicschools.org", "ehankwitz@bostonpublicschools.org", "dganesan@bostonpublicschools.org"], from: "errors@discoverbps.org", subject: "API Error")
   end
 
 end
