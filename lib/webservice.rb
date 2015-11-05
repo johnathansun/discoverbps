@@ -242,8 +242,10 @@ module Webservice
 				end
 			rescue
 				if bps_id.present?
+					AdminMailer.api_error(endpoint, bps_id).deliver
 					puts "********** Something went wrong when parsing #{endpoint} for school #{bps_id}"
 				else
+					AdminMailer.api_error(endpoint, bps_id).deliver
 					puts "********** Something went wrong when parsing #{endpoint} endpoint"
 				end
 				return nil
