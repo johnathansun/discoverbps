@@ -304,7 +304,7 @@
 		<th style="text-align: left;">Partners</th>
 		<th style="text-align: left;">Sports</th>
 		<th style="text-align: left;">Photos</th>
-		<th style="text-align: left;">Last Synched</th>
+		<th style="text-align: left;">Last Sync</th>
 		<th style="text-align: left;"></th>
 	</thead>
 	<tbody>
@@ -320,7 +320,7 @@
 				<td><% unless school.api_partners.present? %><%= image_tag('cross.png') %><% end %></td>
 				<td><% unless school.api_sports.present? %><%= image_tag('cross.png') %><% end %></td>
 				<td><% unless school.api_photos.present? %><%= image_tag('cross.png') %><% end %></td>
-				<td><%= distance_of_time_in_words_to_now(school.updated_at) %> ago</td>
+				<td><%= distance_of_time_in_words_to_now(school.last_synced %> ago</td>
 				<td width="40px"><%= button_to 'Delete', admin_school_path(school), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this school and remove it from all existing student lists?" %></td>
 			</tr>
 		<% end %>

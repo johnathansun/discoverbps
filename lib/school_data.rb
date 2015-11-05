@@ -7,7 +7,9 @@ module SchoolData
 
     schools.each do |school|
       response = Webservice.basic_info(school.bps_id)
-      school.update_attributes(name: response[:schname_23], latitude: response[:Latitude], longitude: response[:Longitude], api_basic_info: response) if response.present?
+      if response.present?
+        school.update_attributes(name: response[:schname_23], latitude: response[:Latitude], longitude: response[:Longitude], api_basic_info: response, last_synced: Time.now)
+      end
     end
   end
 
@@ -18,7 +20,9 @@ module SchoolData
 
     schools.each do |school|
       response = Webservice.awards(school.bps_id)
-      school.update_attributes(api_awards: response) if response.present?
+      if response.present?
+        school.update_attributes(api_awards: response, last_synced: Time.now)
+      end
     end
   end
 
@@ -29,7 +33,9 @@ module SchoolData
 
     schools.each do |school|
       response = Webservice.description(school.bps_id)
-      school.update_attributes(api_description: response) if response.present?
+      if response.present?
+        school.update_attributes(api_description: response, last_synced: Time.now)
+      end
     end
   end
 
@@ -40,7 +46,9 @@ module SchoolData
 
     schools.each do |school|
       response = Webservice.facilities(school.bps_id)
-      school.update_attributes(api_facilities: response) if response.present?
+      if response.present?
+        school.update_attributes(api_facilities: response, last_synced: Time.now)
+      end
     end
   end
 
@@ -51,7 +59,9 @@ module SchoolData
 
     schools.each do |school|
       response = Webservice.grades(school.bps_id)
-      school.update_attributes(api_grades: response) if response.present?
+      if response.present?
+        school.update_attributes(api_grades: response, last_synced: Time.now)
+      end
     end
   end
 
@@ -62,7 +72,9 @@ module SchoolData
 
     schools.each do |school|
       response = Webservice.hours(school.bps_id)
-      school.update_attributes(api_hours: response) if response.present?
+      if response.present?
+        school.update_attributes(api_hours: response, last_synced: Time.now)
+      end
     end
   end
 
@@ -73,7 +85,9 @@ module SchoolData
 
     schools.each do |school|
       response = Webservice.languages(school.bps_id)
-      school.update_attributes(api_languages: response) if response.present?
+      if response.present?
+        school.update_attributes(api_languages: response, last_synced: Time.now)
+      end
     end
   end
 
@@ -84,7 +98,9 @@ module SchoolData
 
     schools.each do |school|
       response = Webservice.partners(school.bps_id)
-      school.update_attributes(api_partners: response) if response.present?
+      if response.present?
+        school.update_attributes(api_partners: response, last_synced: Time.now)
+      end
     end
   end
 
@@ -95,7 +111,9 @@ module SchoolData
 
     schools.each do |school|
       response = Webservice.photos(school.bps_id)
-      school.update_attributes(api_photos: response) if response.present?
+      if response.present?
+        school.update_attributes(api_photos: response, last_synced: Time.now)
+      end
     end
   end
 
@@ -106,7 +124,9 @@ module SchoolData
 
     schools.each do |school|
       response = Webservice.preview_dates(school.bps_id)
-      school.update_attributes(api_preview_dates: response) if response.present?
+      if response.present?
+        school.update_attributes(api_preview_dates: response, last_synced: Time.now)
+      end
     end
   end
 
@@ -117,7 +137,9 @@ module SchoolData
 
     schools.each do |school|
       response = Webservice.programs(school.bps_id)
-      school.update_attributes(api_programs: response) if response.present?
+      if response.present?
+        school.update_attributes(api_programs: response, last_synced: Time.now)
+      end
     end
   end
 
@@ -128,7 +150,9 @@ module SchoolData
 
     schools.each do |school|
       response = Webservice.sports(school.bps_id)
-      school.update_attributes(api_sports: response) if response.present?
+      if response.present?
+        school.update_attributes(api_sports: response, last_synced: Time.now)
+      end
     end
   end
 
@@ -139,7 +163,9 @@ module SchoolData
 
     schools.each do |school|
       response = Webservice.student_support(school.bps_id)
-      school.update_attributes(api_student_support: response) if response.present?
+      if response.present?
+        school.update_attributes(api_student_support: response, last_synced: Time.now)
+      end
     end
   end
 
@@ -150,7 +176,9 @@ module SchoolData
 
     schools.each do |school|
       response = Webservice.surround_care(school.bps_id)
-      school.update_attributes(api_surround_care: response) if response.present?
+      if response.present?
+        school.update_attributes(api_surround_care: response, last_synced: Time.now)
+      end
     end
   end
 

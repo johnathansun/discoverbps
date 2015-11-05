@@ -10,7 +10,7 @@ class School < ActiveRecord::Base
 	attr_accessor :tier, :transportation_eligibility, :walk_zone_eligibility, :walk_time, :drive_time, :distance
 	attr_accessible :api_basic_info, :api_awards, :api_description, :api_facilities, :api_grades, :api_hours, :api_languages,
 									:api_partners, :api_photos, :name, :bps_id, :slug, :latitude, :longitude, :api_sports, :api_student_support,
-									:api_preview_dates, :api_programs, :api_surround_care
+									:api_preview_dates, :api_programs, :api_surround_care, :last_synced
 
 	serialize :api_basic_info # Hash
 	serialize :api_awards # Array
