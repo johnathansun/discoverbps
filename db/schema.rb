@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151105022000) do
+ActiveRecord::Schema.define(:version => 20151105025119) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -131,8 +131,8 @@ ActiveRecord::Schema.define(:version => 20151105022000) do
   add_index "preferences_students", ["student_id"], :name => "index_preferences_students_on_student_id"
 
   create_table "schools", :force => true do |t|
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.text     "api_basic_info"
     t.text     "api_awards"
     t.text     "api_description"
@@ -153,6 +153,20 @@ ActiveRecord::Schema.define(:version => 20151105022000) do
     t.text     "api_programs"
     t.text     "api_surround_care"
     t.datetime "last_synced"
+    t.datetime "last_sync_basic_info"
+    t.datetime "last_sync_awards"
+    t.datetime "last_sync_descriptions"
+    t.datetime "last_sync_facilities"
+    t.datetime "last_sync_grades"
+    t.datetime "last_sync_hours"
+    t.datetime "last_sync_languages"
+    t.datetime "last_sync_partners"
+    t.datetime "last_sync_photos"
+    t.datetime "last_sync_preview_dates"
+    t.datetime "last_sync_programs"
+    t.datetime "last_sync_sports"
+    t.datetime "last_sync_student_support"
+    t.datetime "last_sync_surround_care"
   end
 
   add_index "schools", ["slug"], :name => "index_schools_on_slug", :unique => true

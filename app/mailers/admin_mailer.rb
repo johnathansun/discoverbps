@@ -1,7 +1,8 @@
 class AdminMailer < ActionMailer::Base
 
-  def api_error(endpoint, params, bps_id)
+  def api_error(endpoint, sync_method, params, bps_id)
     @endpoint = endpoint
+    @sync_method = sync_method
     @params = params
     @school = School.where(bps_id: bps_id).first
 

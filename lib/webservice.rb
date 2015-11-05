@@ -80,7 +80,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id, "basic_info")
 	end
 
 	##### AWARDS #####
@@ -90,7 +90,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = false
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id, "awards")
 	end
 
 	##### DESCRIPTIONS #####
@@ -100,7 +100,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id, "descriptions")
 	end
 
 	##### FACILITIES #####
@@ -110,7 +110,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id, "facilities")
 	end
 
 	##### GRADE LEVELS #####
@@ -120,7 +120,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = false
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id, "grades")
 	end
 
 	##### HOURS #####
@@ -130,7 +130,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id, "hours")
 	end
 
 	##### LANGUAGES #####
@@ -140,7 +140,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id, "languages")
 	end
 
 	##### PARTNERS #####
@@ -150,7 +150,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = false
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id, "partners")
 	end
 
 	##### PHOTOS #####
@@ -160,7 +160,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = false
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id, "photos")
 	end
 
 	##### PREVIEW DATES #####
@@ -170,7 +170,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id, "preview_dates")
 	end
 
 	##### PROGRAMS #####
@@ -180,7 +180,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id, "programs")
 	end
 
 	##### SPORTS #####
@@ -190,7 +190,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id, "sports")
 	end
 
 	##### STUDENT SUPPORT #####
@@ -200,7 +200,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id, "student_support")
 	end
 
 	##### SURROUND CARE #####
@@ -210,7 +210,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id, "surround_care")
 	end
 
 	private
@@ -220,14 +220,14 @@ module Webservice
 		response.body
 	end
 
-	def self.extract(api_response, endpoint, params, extract_from_array, bps_id)
+	def self.extract(api_response, endpoint, params, extract_from_array, bps_id, sync_method=nil)
 		if api_response.blank?
 			if bps_id.present?
 				puts "********** No API response from #{endpoint} for school #{bps_id}"
-				AdminMailer.api_error(endpoint, params, bps_id).deliver
+				AdminMailer.api_error(endpoint, sync_method, params, bps_id).deliver
 			else
 				puts "********** No API response from #{endpoint}"
-				AdminMailer.api_error(endpoint, params, bps_id).deliver
+				AdminMailer.api_error(endpoint, sync_method, params, bps_id).deliver
 			end
 			return nil
 		else
@@ -242,10 +242,10 @@ module Webservice
 				end
 			rescue
 				if bps_id.present?
-					AdminMailer.api_error(endpoint, params, bps_id).deliver
+					AdminMailer.api_error(endpoint, sync_method, params, bps_id).deliver
 					puts "********** Something went wrong when parsing #{endpoint} for school #{bps_id}"
 				else
-					AdminMailer.api_error(endpoint, params, bps_id).deliver
+					AdminMailer.api_error(endpoint, sync_method, params, bps_id).deliver
 					puts "********** Something went wrong when parsing #{endpoint} endpoint"
 				end
 				return nil
