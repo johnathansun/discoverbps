@@ -11,7 +11,7 @@ module Webservice
 		params = {streetnumber: street_number, street: street_name, zipcode: zipcode}.to_param
 		extract_from_array = false
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, nil)
+		self.extract(api_response, endpoint, params, extract_from_array, nil)
 	end
 
 
@@ -26,7 +26,7 @@ module Webservice
 		extract_from_array = false
 		puts "****************** Getting Home schools from webservice with (#{grade_level}, #{addressid}, #{awc}, #{sibling_ids})"
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, nil)
+		self.extract(api_response, endpoint, params, extract_from_array, nil)
 	end
 
 
@@ -42,7 +42,7 @@ module Webservice
 		extract_from_array = false
 		puts "****************** Getting Zone schools from webservice with (#{grade_level}, #{addressid}, #{sibling_ids})"
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, nil)
+		self.extract(api_response, endpoint, params, extract_from_array, nil)
 	end
 
 	##### ELL SCHOOLS #####
@@ -55,7 +55,7 @@ module Webservice
 		extract_from_array = false
 		puts "****************** Getting ELL schools from webservice with (#{grade_level}, #{addressid}, #{language})"
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, nil)
+		self.extract(api_response, endpoint, params, extract_from_array, nil)
 	end
 
 
@@ -69,7 +69,7 @@ module Webservice
 		extract_from_array = false
 		puts "****************** Getting SPED schools from webservice with (#{grade_level}, #{addressid})"
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, nil)
+		self.extract(api_response, endpoint, params, extract_from_array, nil)
 	end
 
 
@@ -80,7 +80,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
 	end
 
 	##### AWARDS #####
@@ -90,7 +90,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = false
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
 	end
 
 	##### DESCRIPTIONS #####
@@ -100,7 +100,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
 	end
 
 	##### FACILITIES #####
@@ -110,7 +110,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
 	end
 
 	##### GRADE LEVELS #####
@@ -120,7 +120,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = false
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
 	end
 
 	##### HOURS #####
@@ -130,7 +130,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
 	end
 
 	##### LANGUAGES #####
@@ -140,7 +140,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
 	end
 
 	##### PARTNERS #####
@@ -150,7 +150,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil}.to_param
 		extract_from_array = false
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
 	end
 
 	##### PHOTOS #####
@@ -160,7 +160,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = false
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
 	end
 
 	##### PREVIEW DATES #####
@@ -170,7 +170,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
 	end
 
 	##### PROGRAMS #####
@@ -180,7 +180,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
 	end
 
 	##### SPORTS #####
@@ -190,7 +190,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
 	end
 
 	##### STUDENT SUPPORT #####
@@ -200,7 +200,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
 	end
 
 	##### SURROUND CARE #####
@@ -210,7 +210,7 @@ module Webservice
 		params = {schyear: SCHOOL_YEAR, sch: bps_id}.to_param
 		extract_from_array = true
 		api_response = self.get(endpoint, params)
-		self.extract(api_response, endpoint, extract_from_array, bps_id)
+		self.extract(api_response, endpoint, params, extract_from_array, bps_id)
 	end
 
 	private
@@ -220,14 +220,14 @@ module Webservice
 		response.body
 	end
 
-	def self.extract(api_response, endpoint, extract_from_array, bps_id)
+	def self.extract(api_response, endpoint, params, extract_from_array, bps_id)
 		if api_response.blank?
 			if bps_id.present?
 				puts "********** No API response from #{endpoint} for school #{bps_id}"
-				AdminMailer.api_error(endpoint, bps_id).deliver
+				AdminMailer.api_error(endpoint, params, bps_id).deliver
 			else
 				puts "********** No API response from #{endpoint}"
-				AdminMailer.api_error(endpoint, bps_id).deliver
+				AdminMailer.api_error(endpoint, params, bps_id).deliver
 			end
 			return nil
 		else
@@ -242,10 +242,10 @@ module Webservice
 				end
 			rescue
 				if bps_id.present?
-					AdminMailer.api_error(endpoint, bps_id).deliver
+					AdminMailer.api_error(endpoint, params, bps_id).deliver
 					puts "********** Something went wrong when parsing #{endpoint} for school #{bps_id}"
 				else
-					AdminMailer.api_error(endpoint, bps_id).deliver
+					AdminMailer.api_error(endpoint, params, bps_id).deliver
 					puts "********** Something went wrong when parsing #{endpoint} endpoint"
 				end
 				return nil

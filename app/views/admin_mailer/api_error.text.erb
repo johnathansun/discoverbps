@@ -1,8 +1,9 @@
+There was an error connecting to the following endpoint:
+
+<%= ENV['BPS_WEBSERVICE_URL'] %>/<%= @endpoint %>?<%= params %>
+
 <% if @school.present? %>
-  There was an error connecting to the <%= @endpoint %> endpoint with school id <%= @school.bps_id %> (<%= @school.name %>).
 
-  The last sync for this school was <%= @school.last_synced %>
+  The last successful sync for this endpoint was <%= @school.last_synced %>
 
-<% else %>
-  There was an error connecting to the <%= @endpoint %> endpoint.
 <% end %>
