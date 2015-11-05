@@ -1,1 +1,8 @@
-There was an error connecting to the <%= @endpoint %> endpoint for bps_id <%= @bps_id %>.
+<% if @school.present? %>
+  There was an error connecting to the <%= @endpoint %> endpoint for bps_id <%= @school.bps_id %>.
+
+  The last sync for this school was <%= @school.last_synced %>
+
+<% else %>
+  There was an error connecting to the <%= @endpoint %> endpoint.
+<% end %>
