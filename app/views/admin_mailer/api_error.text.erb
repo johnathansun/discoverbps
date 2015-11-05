@@ -3,5 +3,7 @@ There was an error connecting to the following endpoint:
 <%= ENV['BPS_WEBSERVICE_URL'] %>/<%= @endpoint %>?<%= @params %>
 
 <% if @school.present? && @sync_method.present? %>
-  The last successful sync for this endpoint was <%= @school.send("last_sync_#{@sync_method}".to_sym) %>
+  The last successful sync for this endpoint was: 
+
+  <%= @school.send("last_sync_#{@sync_method}".to_sym) %>
 <% end %>
