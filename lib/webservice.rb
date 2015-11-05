@@ -224,8 +224,10 @@ module Webservice
 		if api_response.blank?
 			if bps_id.present?
 				puts "********** No API response from #{endpoint} for school #{bps_id}"
+				AdminMailer.api_error(endpoint, bps_id).deliver
 			else
 				puts "********** No API response from #{endpoint}"
+				AdminMailer.api_error(endpoint, bps_id).deliver
 			end
 			return nil
 		else
@@ -234,9 +236,9 @@ module Webservice
 				if extract_from_array == true
 					# Some responses are stored as a single hash inside an array. It's easier to extract the hash from the array here
 					# instead of calling .first in the views
-					response = MultiJson.load(api_response, :symbolize_keys => true).first
+					response = MultiJson.load(api_response, symbolize_keys: true).first
 				else
-					response = MultiJson.load(api_response, :symbolize_keys => true)
+					response = MultiJson.load(api_response, symbolize_keys: true)
 				end
 			rescue
 				if bps_id.present?
