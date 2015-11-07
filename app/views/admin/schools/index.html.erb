@@ -319,42 +319,42 @@
 				</td>
 				<td>
 					<% unless school.last_sync_basic_info.present? && school.last_sync_basic_info > two_days_ago %>
-						<%= image_tag('cross.png') %>
+						<%= image_tag('cross.png', alt: school.last_sync_basic_info) %>
 					<% end %>
 				</td>
 				<td>
 					<% unless school.last_sync_descriptions.present? && school.last_sync_descriptions > two_days_ago %>
-						<%= image_tag('cross.png') %>
+						<%= image_tag('cross.png', alt: school.last_sync_descriptions) %>
 					<% end %>
 				</td>
 				<td>
 					<% unless school.last_sync_grades.present? && school.last_sync_grades > two_days_ago %>
-						<%= image_tag('cross.png') %>
+						<%= image_tag('cross.png', alt: school.last_sync_grades) %>
 					<% end %>
 				</td>
 				<td>
 					<% unless school.last_sync_awards.present? && school.last_sync_awards > two_days_ago %>
-						<%= image_tag('cross.png') %>
+						<%= image_tag('cross.png', alt: school.last_sync_awards) %>
 					<% end %>
 				</td>
 				<td>
 					<% unless school.last_sync_facilities.present? && school.last_sync_facilities > two_days_ago %>
-						<%= image_tag('cross.png') %>
+						<%= image_tag('cross.png', alt: school.last_sync_facilities) %>
 					<% end %>
 				</td>
 				<td>
 					<% unless school.last_sync_partners.present? && school.last_sync_partners > two_days_ago %>
-						<%= image_tag('cross.png') %>
+						<%= image_tag('cross.png', alt: school.last_sync_partners) %>
 					<% end %>
 				</td>
 				<td>
 					<% unless school.last_sync_sports.present? && school.last_sync_sports > two_days_ago %>
-						<%= image_tag('cross.png') %>
+						<%= image_tag('cross.png', alt: school.last_sync_sports) %>
 					<% end %>
 				</td>
 				<td>
 					<% unless school.last_sync_photos.present? && school.last_sync_photos > two_days_ago %>
-						<%= image_tag('cross.png') %>
+						<%= image_tag('cross.png', alt: school.last_sync_photos) %>
 					<% end %>
 				</td>
 				<td>
