@@ -296,7 +296,7 @@
 	<thead>
 		<th style="text-align: left;">BPS ID</th>
 		<th style="text-align: left;">Name</th>
-		<th style="text-align: left;">Basic Info</th>
+		<th style="text-align: left;">Info&nbsp;</th>
 		<th style="text-align: left;">Description</th>
 		<th style="text-align: left;">Grades</th>
 		<th style="text-align: left;">Awards</th>
@@ -308,20 +308,65 @@
 		<th style="text-align: left;"></th>
 	</thead>
 	<tbody>
+		<% two_days_ago = (Time.now - 2.days) %>
 		<% for school in @schools %>
 			<tr class="hover">
-				<td width='80px'><strong><%= link_to school.bps_id, admin_school_path(school) %></strong></td>
-				<td><strong><%= school.name %></strong></td>
-				<td><% unless school.api_basic_info.present? %><%= image_tag('cross.png') %><% end %></td>
-				<td><% unless school.api_description.present? %><%= image_tag('cross.png') %><% end %></td>
-				<td><% unless school.api_grades.present? %><%= image_tag('cross.png') %><% end %></td>
-				<td><% unless school.api_awards.present? %><%= image_tag('cross.png') %><% end %></td>
-				<td><% unless school.api_facilities.present? %><%= image_tag('cross.png') %><% end %></td>
-				<td><% unless school.api_partners.present? %><%= image_tag('cross.png') %><% end %></td>
-				<td><% unless school.api_sports.present? %><%= image_tag('cross.png') %><% end %></td>
-				<td><% unless school.api_photos.present? %><%= image_tag('cross.png') %><% end %></td>
-				<td><%= distance_of_time_in_words_to_now(school.last_synced %> ago</td>
-				<td width="40px"><%= button_to 'Delete', admin_school_path(school), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this school and remove it from all existing student lists?" %></td>
+				<td width='80px'>
+					<strong><%= link_to school.bps_id, admin_school_path(school) %></strong>
+				</td>
+				<td>
+					<strong><%= school.name %></strong>
+				</td>
+				<td>
+					<% unless school.last_sync_basic_info.present? && school.last_sync_basic_info > two_days_ago %>
+						<%= image_tag('cross.png') %>
+					<% end %>
+				</td>
+				<td>
+					<% unless school.last_sync_descriptions.present? && school.last_sync_descriptions > two_days_ago %>
+						<%= image_tag('cross.png') %>
+					<% end %>
+				</td>
+				<td>
+					<% unless school.last_sync_grades.present? && school.last_sync_grades > two_days_ago %>
+						<%= image_tag('cross.png') %>
+					<% end %>
+				</td>
+				<td>
+					<% unless school.last_sync_awards.present? && school.last_sync_awards > two_days_ago %>
+						<%= image_tag('cross.png') %>
+					<% end %>
+				</td>
+				<td>
+					<% unless school.last_sync_facilities.present? && school.last_sync_facilities > two_days_ago %>
+						<%= image_tag('cross.png') %>
+					<% end %>
+				</td>
+				<td>
+					<% unless school.last_sync_partners.present? && school.last_sync_partners > two_days_ago %>
+						<%= image_tag('cross.png') %>
+					<% end %>
+				</td>
+				<td>
+					<% unless school.last_sync_sports.present? && school.last_sync_sports > two_days_ago %>
+						<%= image_tag('cross.png') %>
+					<% end %>
+				</td>
+				<td>
+					<% unless school.last_sync_photos.present? && school.last_sync_photos > two_days_ago %>
+						<%= image_tag('cross.png') %>
+					<% end %>
+				</td>
+				<td>
+					<% if school.last_sync.present? %>
+						<%= distance_of_time_in_words_to_now(school.last_sync) %> ago
+					<% else %>
+						never
+					<% end %>
+				</td>
+				<td width="40px">
+					<%= button_to 'Delete', admin_school_path(school), method: :delete, class: 'delete_button', confirm: "Are you sure you want to permanently delete this school and remove it from all existing student lists?" %>
+				</td>
 			</tr>
 		<% end %>
 	</tbody>

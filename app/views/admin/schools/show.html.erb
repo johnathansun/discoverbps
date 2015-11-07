@@ -290,7 +290,7 @@
 <% end %>
 
 <h2><%= @school.bps_id %> &mdash; <%= @school.name %></h2>
-<p><strong>Last Sync:</strong> <%= @school.last_synced %> EST</p>
+<p><strong>Last Sync:</strong> <%= @school.last_sync %> EST</p>
 <p><%= link_to 'Sync Now', sync_admin_school_path(@school.id), method: :post, confirm: "This will update the school's data from the data in the API.", class: 'add_button', style: 'color: white; font-weight: bold;' %></p>
 
 

@@ -11,7 +11,7 @@ class School < ActiveRecord::Base
 	attr_accessible :api_basic_info, :api_awards, :api_description, :api_facilities, :api_grades, :api_hours, :api_languages,
 									:api_partners, :api_photos, :name, :bps_id, :slug, :latitude, :longitude, :api_sports, :api_student_support,
 									:api_preview_dates, :api_programs, :api_surround_care, 
-									:last_synced, :last_sync_basic_info, :last_sync_awards, :last_sync_descriptions, :last_sync_facilities, :last_sync_grades, 
+									:last_sync, :last_sync_basic_info, :last_sync_awards, :last_sync_descriptions, :last_sync_facilities, :last_sync_grades, 
 									:last_sync_hours, :last_sync_languages, :last_sync_partners, :last_sync_photos, :last_sync_preview_dates, :last_sync_programs, 
 									:last_sync_sports, :last_sync_student_support, :last_sync_surround_care
 

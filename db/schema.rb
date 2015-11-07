@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151105025119) do
+ActiveRecord::Schema.define(:version => 20151107220323) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(:version => 20151105025119) do
     t.text     "api_preview_dates"
     t.text     "api_programs"
     t.text     "api_surround_care"
-    t.datetime "last_synced"
+    t.datetime "last_sync"
     t.datetime "last_sync_basic_info"
     t.datetime "last_sync_awards"
     t.datetime "last_sync_descriptions"
