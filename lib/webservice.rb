@@ -224,10 +224,10 @@ module Webservice
 		if api_response.blank?
 			if bps_id.present?
 				puts "********** No API response from #{endpoint} for school #{bps_id}"
-				AdminMailer.api_error(endpoint, sync_method, params, bps_id).deliver
+				# AdminMailer.api_error(endpoint, sync_method, params, bps_id).deliver
 			else
 				puts "********** No API response from #{endpoint}"
-				AdminMailer.api_error(endpoint, sync_method, params, bps_id).deliver
+				# AdminMailer.api_error(endpoint, sync_method, params, bps_id).deliver
 			end
 			return nil
 		else
@@ -242,10 +242,10 @@ module Webservice
 				end
 			rescue
 				if bps_id.present?
-					AdminMailer.api_error(endpoint, sync_method, params, bps_id).deliver
+					# AdminMailer.api_error(endpoint, sync_method, params, bps_id).deliver
 					puts "********** Something went wrong when parsing #{endpoint} for school #{bps_id}"
 				else
-					AdminMailer.api_error(endpoint, sync_method, params, bps_id).deliver
+					# AdminMailer.api_error(endpoint, sync_method, params, bps_id).deliver
 					puts "********** Something went wrong when parsing #{endpoint} endpoint"
 				end
 				return nil
