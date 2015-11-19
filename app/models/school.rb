@@ -264,6 +264,7 @@ class School < ActiveRecord::Base
 		SchoolData.update_programs!(school_id)
 		SchoolData.update_sports!(school_id)
 		SchoolData.update_student_support!(school_id)
+		SchoolData.update_surround_care!(school_id)
 	end
 
 	private
