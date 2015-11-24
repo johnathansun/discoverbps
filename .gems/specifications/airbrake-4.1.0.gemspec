@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://www.airbrake.io"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "2.0.14"
+  s.rubygems_version = "2.0.14.1"
   s.summary = "Send your application errors to our hosted service and reclaim your inbox."
 
   if s.respond_to? :specification_version then

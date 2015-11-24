@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/collectiveidea/delayed_job"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "2.0.14"
+  s.rubygems_version = "2.0.14.1"
   s.summary = "Database-backed asynchronous priority queue system -- Extracted from Shopify"
 
   if s.respond_to? :specification_version then

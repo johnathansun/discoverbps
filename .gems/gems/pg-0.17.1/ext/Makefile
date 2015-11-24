@@ -11,12 +11,12 @@ ECHO = $(ECHO1:0=@echo)
 #### Start of system configuration section. ####
 
 srcdir = .
-topdir = /usr/local/var/rbenv/versions/2.0.0-p598/include/ruby-2.0.0
+topdir = /Users/joelmahoney/.rbenv/versions/2.0.0-p647/include/ruby-2.0.0
 hdrdir = $(topdir)
-arch_hdrdir = /usr/local/var/rbenv/versions/2.0.0-p598/include/ruby-2.0.0/x86_64-darwin13.4.0
+arch_hdrdir = /Users/joelmahoney/.rbenv/versions/2.0.0-p647/include/ruby-2.0.0/x86_64-darwin15.0.0
 PATH_SEPARATOR = :
 VPATH = $(srcdir):$(arch_hdrdir)/ruby:$(hdrdir)/ruby
-prefix = /usr/local/var/rbenv/versions/2.0.0-p598
+prefix = $(DESTDIR)/Users/joelmahoney/.rbenv/versions/2.0.0-p647
 rubysitearchprefix = $(rubylibprefix)/$(sitearch)
 rubyarchprefix = $(rubylibprefix)/$(arch)
 rubylibprefix = $(libdir)/$(RUBY_BASE_NAME)
@@ -30,8 +30,8 @@ rubyhdrdir = $(includedir)/$(RUBY_VERSION_NAME)
 vendorarchdir = $(vendorlibdir)/$(sitearch)
 vendorlibdir = $(vendordir)/$(ruby_version)
 vendordir = $(rubylibprefix)/vendor_ruby
-sitearchdir = ./.gem.20150929-78992-h6wk7v
-sitelibdir = ./.gem.20150929-78992-h6wk7v
+sitearchdir = $(DESTDIR)./.gem.20151111-52736-ekpu5y
+sitelibdir = $(DESTDIR)./.gem.20151111-52736-ekpu5y
 sitedir = $(rubylibprefix)/site_ruby
 rubyarchdir = $(rubylibdir)/$(arch)
 rubylibdir = $(rubylibprefix)/$(ruby_version)
@@ -49,7 +49,7 @@ dvidir = $(docdir)
 htmldir = $(docdir)
 infodir = $(datarootdir)/info
 docdir = $(datarootdir)/doc/$(PACKAGE)
-oldincludedir = /usr/include
+oldincludedir = $(DESTDIR)/usr/include
 includedir = $(prefix)/include
 localstatedir = $(prefix)/var
 sharedstatedir = $(prefix)/com
@@ -63,7 +63,7 @@ archdir = $(rubyarchdir)
 
 
 CC = clang
-CXX = g++
+CXX = clang++
 LIBRUBY = $(LIBRUBY_A)
 LIBRUBY_A = lib$(RUBY_SO_NAME)-static.a
 LIBRUBYARG_SHARED = 
@@ -81,9 +81,9 @@ CCDLFLAGS = -fno-common
 CFLAGS   = $(CCDLFLAGS)  -O3 -Wno-error=shorten-64-to-32  -pipe $(ARCH_FLAG)
 INCFLAGS = -I. -I$(arch_hdrdir) -I$(hdrdir)/ruby/backward -I$(hdrdir) -I$(srcdir)
 DEFS     = 
-CPPFLAGS = -DRUBY_EXTCONF_H=\"$(RUBY_EXTCONF_H)\" -I/usr/local/Cellar/postgresql/9.4.2/include -I/usr/local/var/rbenv/versions/2.0.0-p598/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags)
+CPPFLAGS = -DRUBY_EXTCONF_H=\"$(RUBY_EXTCONF_H)\" -I/usr/local/Cellar/postgresql/9.4.5_2/include -I/Users/joelmahoney/.rbenv/versions/2.0.0-p647/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags)
 CXXFLAGS = $(CCDLFLAGS) $(cxxflags) $(ARCH_FLAG)
-ldflags  = -L. -L/usr/local/var/rbenv/versions/2.0.0-p598/lib  -L/usr/local/lib -Wl,-rpath,/usr/local/Cellar/postgresql/9.4.2/lib
+ldflags  = -L. -L/Users/joelmahoney/.rbenv/versions/2.0.0-p647/lib  -Wl,-rpath,/usr/local/lib
 dldflags = -Wl,-undefined,dynamic_lookup -Wl,-multiply_defined,suppress 
 ARCH_FLAG = 
 DLDFLAGS = $(ldflags) $(dldflags) $(ARCH_FLAG)
@@ -99,7 +99,7 @@ RUBY_VERSION_NAME = $(RUBY_BASE_NAME)-$(ruby_version)
 RUBYW_BASE_NAME = rubyw
 RUBY_BASE_NAME = ruby
 
-arch = x86_64-darwin13.4.0
+arch = x86_64-darwin15.0.0
 sitearch = $(arch)
 ruby_version = 2.0.0
 ruby = $(bindir)/ruby
@@ -120,8 +120,8 @@ TOUCH = exit >
 
 preload = 
 
-libpath = . $(libdir) /usr/local/Cellar/postgresql/9.4.2/lib
-LIBPATH =  -L. -L$(libdir) -L/usr/local/Cellar/postgresql/9.4.2/lib
+libpath = . $(libdir) /usr/local/lib
+LIBPATH =  -L. -L$(libdir) -L/usr/local/lib
 DEFFILE = 
 
 CLEANFILES = mkmf.log
@@ -144,12 +144,12 @@ DLLIB = $(TARGET).bundle
 EXTSTATIC = 
 STATIC_LIB = 
 
-BINDIR        = $(DESTDIR)$(bindir)
-RUBYCOMMONDIR = $(DESTDIR)$(sitedir)$(target_prefix)
-RUBYLIBDIR    = $(DESTDIR)$(sitelibdir)$(target_prefix)
-RUBYARCHDIR   = $(DESTDIR)$(sitearchdir)$(target_prefix)
-HDRDIR        = $(DESTDIR)$(rubyhdrdir)/ruby$(target_prefix)
-ARCHHDRDIR    = $(DESTDIR)$(rubyhdrdir)/$(arch)/ruby$(target_prefix)
+BINDIR        = $(bindir)
+RUBYCOMMONDIR = $(sitedir)$(target_prefix)
+RUBYLIBDIR    = $(sitelibdir)$(target_prefix)
+RUBYARCHDIR   = $(sitearchdir)$(target_prefix)
+HDRDIR        = $(rubyhdrdir)/ruby$(target_prefix)
+ARCHHDRDIR    = $(rubyhdrdir)/$(arch)/ruby$(target_prefix)
 
 TARGET_SO     = $(DLLIB)
 CLEANLIBS     = $(TARGET).bundle 

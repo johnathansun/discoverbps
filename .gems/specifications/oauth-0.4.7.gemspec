@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.files = ["bin/oauth", "LICENSE", "README.rdoc", "TODO"]
   s.require_paths = ["lib"]
   s.rubyforge_project = "oauth"
-  s.rubygems_version = "2.0.14"
+  s.rubygems_version = "2.0.14.1"
   s.summary = "OAuth Core Ruby implementation"
 
   if s.respond_to? :specification_version then

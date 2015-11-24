@@ -12,6 +12,6 @@ Gem::Specification.new do |s|
   s.licenses = ["Ruby"]
   s.require_paths = ["lib"]
   s.rubyforge_project = "xml-simple"
-  s.rubygems_version = "2.0.14"
+  s.rubygems_version = "2.0.14.1"
   s.summary = "A simple API for XML processing."
 end

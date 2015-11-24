@@ -26,6 +26,7 @@ DiscoverbpsV2::Application.routes.draw do
   end
 
   resources :student_schools do
+    get 'index', on: :collection
     post 'sort', on: :collection
     post 'star', on: :member
     post 'unstar', on: :member

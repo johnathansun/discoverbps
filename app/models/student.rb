@@ -71,6 +71,10 @@ class Student < ActiveRecord::Base
 
   # SAVE SCHOOLS ON CURRENT_STUDENT
 
+  def set_student_schools!(school_hash)
+    save_student_schools!(school_hash, 'home')
+  end
+
   def set_home_schools!
     api_schools = Webservice.home_schools(self.formatted_grade_level, self.addressid, self.awc_invitation, self.sibling_school_ids).try(:[], :List)
     save_student_schools!(api_schools, 'home')

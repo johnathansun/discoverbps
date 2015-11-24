@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/goncalossilva/rails3_acts_as_paranoid"
   s.require_paths = ["lib"]
   s.rubyforge_project = "acts_as_paranoid"
-  s.rubygems_version = "2.0.14"
+  s.rubygems_version = "2.0.14.1"
   s.summary = "Active Record (~>3.2) plugin which allows you to hide and restore records without actually deleting them."
 
   if s.respond_to? :specification_version then

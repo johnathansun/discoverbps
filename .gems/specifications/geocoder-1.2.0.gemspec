@@ -13,6 +13,6 @@ Gem::Specification.new do |s|
   s.files = ["bin/geocode"]
   s.homepage = "http://www.rubygeocoder.com"
   s.require_paths = ["lib"]
-  s.rubygems_version = "2.0.14"
+  s.rubygems_version = "2.0.14.1"
   s.summary = "Complete geocoding solution for Ruby."
 end

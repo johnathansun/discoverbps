@@ -12,6 +12,6 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/heroku/rails_serve_static_assets"
   s.licenses = ["LICENSE"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "2.0.14"
+  s.rubygems_version = "2.0.14.1"
   s.summary = "Sets serve_static_assets to true so Rails will sere your static assets"
 end

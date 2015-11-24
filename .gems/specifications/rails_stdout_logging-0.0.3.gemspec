@@ -11,6 +11,6 @@ Gem::Specification.new do |s|
   s.email = ["david@heroku.com", "jd@heroku.com", "richard@heroku.com"]
   s.homepage = "https://github.com/heroku/rails_stdout_logging"
   s.require_paths = ["lib"]
-  s.rubygems_version = "2.0.14"
+  s.rubygems_version = "2.0.14.1"
   s.summary = "Overrides Rails' built in logger to send all logs to stdout"
 end
