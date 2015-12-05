@@ -39,7 +39,7 @@ class StudentSchoolsController < ApplicationController
       @schools = nil
       @student = nil
     end
-    render template: "schools/index"
+    render template: "schools/index", layout: "layouts/schools"
   end
 
   def sort
