@@ -1,4 +1,4 @@
-DiscoverbpsV2::Application.routes.draw do
+DiscoverBPS::Application.routes.draw do
   devise_for :admins, :controllers => { :sessions => "admin/sessions", :registrations => "admin/registrations", :passwords => "admin/passwords" }
   devise_scope :admin do
     get "admin_sign_in", :to => "admin/sessions#new"
@@ -26,7 +26,6 @@ DiscoverbpsV2::Application.routes.draw do
   end
 
   resources :student_schools do
-    get 'index', on: :collection
     post 'sort', on: :collection
     post 'star', on: :member
     post 'unstar', on: :member

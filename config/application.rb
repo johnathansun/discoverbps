@@ -9,7 +9,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module DiscoverbpsV2
+module DiscoverBPS
   class Application < Rails::Application
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
     Dir[File.join(Rails.root, "lib", "core_ext", "*.rb")].each {|l| require l }
@@ -43,6 +43,7 @@ module DiscoverbpsV2
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
+    Rails.logger = Logger.new(STDOUT)
 
     # Use SQL instead of Active Record's schema dumper when creating the database.
     # This is necessary if your schema can't be completely dumped by the schema dumper,

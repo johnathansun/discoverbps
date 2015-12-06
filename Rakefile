@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-DiscoverbpsV2::Application.load_tasks
+DiscoverBPS::Application.load_tasks
