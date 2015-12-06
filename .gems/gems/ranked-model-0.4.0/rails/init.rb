@@ -1,1 +1,0 @@
-require 'ranked-model/railtie'

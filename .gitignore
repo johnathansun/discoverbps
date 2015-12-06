@@ -33,5 +33,5 @@ pickle-email-*.html
 /db/dumps
 
 .powrc.swp
-
+/.gems/*
 .ruby-version
