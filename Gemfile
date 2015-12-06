@@ -23,6 +23,7 @@ gem 'jquery-ui-rails'
 gem 'multi_json'
 gem 'newrelic_rpm'
 gem 'pg'
+gem "puma"
 gem 'rails_autolink'
 gem 'rails_12factor'
 gem 'ranked-model'
@@ -31,7 +32,6 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'rake', '~> 10.3.1'
-gem 'unicorn'
 gem 'will_paginate', '~> 3.0'
 
 # Gems used only for assets and not required
