@@ -20,7 +20,7 @@ class StudentSchoolsController < ApplicationController
         token: student_info[:Token],
         first_name: student_info[:FirstName], 
         last_name: student_info[:LastName], 
-        grade_level: student_info[:Grade],
+        grade_level: student_info[:Grade].try(:gsub, /^0/, ''),
         street_number: student_info[:Streetno],
         street_name: student_info[:Street],
         neighborhood: student_info[:City],
@@ -30,8 +30,9 @@ class StudentSchoolsController < ApplicationController
         latitude: student_info[:Latitude],
         longitude: student_info[:Longitude],
         addressid: student_info[:AddressID].try(:to_s),
-        geo_code: student_info[:GeoCode]
-      ).first_or_create
+        geo_code: student_info[:GeoCode],
+        address_verified: true
+      ).first_or_create!
       session[:current_student_id] = @student.id
       @student.set_student_schools!(student_schools[:choiceList])
       @home_schools = @student.home_schools.rank(:sort_order)

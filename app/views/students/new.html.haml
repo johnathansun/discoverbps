@@ -86,7 +86,7 @@
 					%div.new_search_form_wrap.hidden
 						%p New Search
 						= form_tag students_path, method: :post, remote: true do
-							= render partial: 'students/page_elements/search_form', locals: {sibling_search: true}
+							= render partial: 'students/search_form', locals: { sibling_search: true }
 
 					-# Script for New Search button
 					:javascript
@@ -111,7 +111,7 @@
 
 					%div.new_search_form_wrap
 						= form_tag students_path, method: :post, remote: true do
-							= render partial: 'students/page_elements/search_form', locals: {sibling_search: true}
+							= render partial: 'students/search_form', locals: { sibling_search: true }
 
 			-# TIMELINE ---------------------
 			.content_right
@@ -167,12 +167,12 @@
 
 		-# CONTENT ---------------------
 		%section.search_section.second
-			= render partial: 'students/page_elements/footer_links'
+			= render partial: 'students/footer_links'
 
 
 			-# TIMELINE ---------------------
 			.content_right
-				= render partial: 'students/page_elements/timeline'
+				= render partial: 'students/timeline'
 
 		-#%section.search_section.third
 

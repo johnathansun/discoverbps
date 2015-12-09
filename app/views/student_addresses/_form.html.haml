@@ -2,14 +2,14 @@
 	%span{aria: {hidden: 'true'}, class: 'icon-DBPS-Dev-Assets-SRG-07'}
 
 .content
-	= form_tag verify_address_student_path(student), method: :put, remote: true, 'data-type' => 'script' do
+	= form_tag student_addresses_path, method: :post, remote: true, 'data-type' => 'script' do
 		%h3.dialog_title
 			Please verify your student's home address:
 		%br/
 
 		#address_matches.selection
 			- @addresses.each_with_index do |address, index|
-				= render partial: 'students/address/address', locals: {address: address, index: index}
+				= render partial: 'student_addresses/address', locals: {address: address, index: index}
 		%br/
 		.btn
 			= submit_tag 'Next', class: 'orange_submit', id: "addresses_next_button"

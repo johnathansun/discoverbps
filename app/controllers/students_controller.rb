@@ -1,10 +1,9 @@
 class StudentsController < ApplicationController
 
-  def index
+  def new
   end
 
   def create
-
     if params[:student].present? && params[:student][:grade_level].present? && params[:student][:street_number].present? && params[:student][:street_name].present? && params[:student][:zipcode].present?
 
       first_name    = params[:student][:first_name]
@@ -32,18 +31,16 @@ class StudentsController < ApplicationController
 
       if @addresses.present? && @student.present? && @student.update_attributes(params[:student])
         session[:current_student_id] = @student.id
-        format.js { render template: "students/address/addresses" }
-        format.html { redirect_to addresses_student_path(@student)}
+        format.js { render template: "student_addresses/new" }
+        format.html { redirect_to new_student_address_path }
       else
         if api_response.present?
-          if @addresses.blank?
-            if @errors.present?
-              @error_message = @errors
-              flash[:alert] = "There were problems with your search. Please enter the required fields and try again."
-            else
-              @error_message = "We couldn't find any addresses in Boston that match your search. Please try again."
-              flash[:alert] = "We couldn't find any addresses in Boston that match your search. Please try again."
-            end
+          if @errors.present?
+            @error_message = @errors
+            flash[:alert] = "There were problems with your search. Please enter the required fields and try again."
+          else
+            @error_message = "We couldn't find any addresses in Boston that match your search. Please try again."
+            flash[:alert] = "We couldn't find any addresses in Boston that match your search. Please try again."
           end
         elsif street_number_numeric == false
           @error_message = "Street number must be a number. Please try again."
@@ -77,8 +74,8 @@ class StudentsController < ApplicationController
       if @addresses.present? && @student.update_attributes(params[:student])
         session[:current_student_id] = @student.id
 
-        format.js { render template: "students/address/addresses" }
-        format.html { redirect_to addresses_student_path(@student)}
+        format.js { render template: "student_addresses/new" }
+        format.html { redirect_to new_student_address_path }
       else
         if @addresses.blank?
           if @errors.present?
@@ -93,144 +90,6 @@ class StudentsController < ApplicationController
       end
     end
   end
-
-  # ADDRESS DIALOG BOX
-
-  def addresses
-    @student = Student.find(params[:id])
-
-    street_number = @student.street_number
-    street_name   = @student.street_name
-    zipcode       = @student.zipcode
-
-    api_response = Webservice.address_matches(street_number, street_name, zipcode)
-    @addresses = api_response.try(:[], :List)
-    @errors = api_response.try(:[], :Error).try(:[], 0)
-  end
-
-  def verify_address
-    @student = Student.find(params[:id])
-    address = response = MultiJson.load(params[:address], :symbolize_keys => true)
-
-    @student.address_verified = true
-    @student.street_number = address.try(:[], :StreetNum)
-    @student.street_name = address.try(:[], :Street).try(:titleize)
-    @student.neighborhood = address.try(:[], :SectionOfCity)
-    @student.zipcode = address.try(:[], :ZipCode)
-    @student.x_coordinate = address.try(:[], :X)
-    @student.y_coordinate = address.try(:[], :Y)
-    @student.latitude = address.try(:[], :Lat)
-    @student.longitude = address.try(:[], :Lng)
-    @student.geo_code = address.try(:[], :GeoCode)
-    @student.addressid = address.try(:[], :AddressID)
-    @student.ell_cluster = address.try(:[], :ELLCluster)
-    @student.sped_cluster = address.try(:[], :SPEDCluster)
-    @student.zone = address.try(:[], :Zone)
-
-    respond_to do |format|
-      if @student.update_attributes(params[:student])
-
-        if AWC_GRADES.include?(@student.grade_level)
-          format.html { redirect_to awc_student_path(@student)}
-          format.js { render template: "students/awc/awc" }
-        else
-          # if we don't need to ask about AWC, we can set the home schools now
-          @student.set_home_schools!
-          format.html { redirect_to ell_student_path(@student)}
-          format.js { render template: "students/ell/ell" }
-        end
-
-      else
-        format.js { render template: "students/errors/errors" }
-        flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
-        format.html { redirect_to root_url }
-      end
-    end
-  end
-
-  # AWC DIALOG BOX
-
-  def awc
-    @student = Student.find(params[:id])
-  end
-
-  def set_awc
-    @student = Student.find(params[:id])
-
-    respond_to do |format|
-      if @student.update_attributes(params[:student])
-
-        # the home schools call must always preceed zone schools
-        @student.set_home_schools!
-
-        format.html { redirect_to ell_student_path(@student)}
-        format.js { render template: "students/ell/ell" }
-      else
-        format.js { render template: "students/awc/awc" }
-        flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
-        format.html { redirect_to root_url }
-      end
-    end
-  end
-
-  # ELL DIALOG BOX
-
-  def ell
-    @student = Student.find(params[:id])
-  end
-
-  def set_ell
-    @student = Student.find(params[:id])
-
-    respond_to do |format|
-      if @student.update_attributes(params[:student])
-
-        if zone_school_grades.include?(@student.grade_level)
-          @student.set_zone_schools!
-        end
-
-        unless @student.ell_language.blank?
-          @student.set_ell_schools!
-        end
-
-        format.html { redirect_to sped_student_path(@student)}
-        format.js { render template: "students/sped/sped" }
-      else
-        format.js { render template: "students/ell/ell" }
-        flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
-        format.html { redirect_to root_url }
-      end
-    end
-  end
-
-
-  # SPED DIALOG BOX
-
-  def sped
-    @student = Student.find(params[:id])
-  end
-
-  def set_sped
-    @student = Student.find(params[:id])
-
-    respond_to do |format|
-      if @student.update_attributes(params[:student])
-
-        if @student.sped_needs == true
-          @student.set_sped_schools!
-        end
-
-        format.html { redirect_to schools_path}
-        format.js { render :js => "window.location = '/schools'" }
-
-      else
-        format.js { render template: "students/sped/sped" }
-        flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
-        format.html { redirect_to root_url }
-      end
-    end
-  end
-
 
   def destroy
     @student = Student.find(params[:id])

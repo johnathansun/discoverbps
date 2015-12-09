@@ -18,44 +18,31 @@
 
         .content
           %h2
-            Does your child have specialized language needs?
+            Does your child have an Individual Education Plan (IEP) for special education needs (SPED)?
 
-          = form_tag set_ell_student_path(@student), method: :put do
+          = form_tag student_sped_preferences_path, method: :put do
 
             %div{style: 'padding: 20px 0 0 15px;'}
               %p
-                = radio_button_tag '[student]ell_language', 'Cape Verdean', @student.ell_language
-                Cape Verdean
+                = radio_button_tag '[student]sped_needs', true, current_student.sped_needs == true
+                Yes
               %p
-                = radio_button_tag '[student]ell_language', 'Chinese', @student.ell_language
-                Chinese
-              %p
-                = radio_button_tag '[student]ell_language', 'Haitian Creole', @student.ell_language
-                Haitian Creole
-              %p
-                = radio_button_tag '[student]ell_language', 'Spanish', @student.ell_language
-                Spanish
-              %p
-                = radio_button_tag '[student]ell_language', 'Vietnamese', @student.ell_language
-                Vietnamese
-              %p
-                = radio_button_tag '[student]ell_language', 'Other', @student.ell_language
-                Other (including multi-lingual)
-              %p
-                = radio_button_tag '[student]ell_language', '', @student.ell_language.present? ? false : true
-                Not Applicable
+                = radio_button_tag '[student]sped_needs', false, current_student.sped_needs == false
+                No
 
             .btn
-              = submit_tag 'Next', disable_with: 'Working...', id: 'ell_next_button', class: 'orange_submit'
+              = submit_tag 'Next', disable_with: 'Working...', id: 'sped_next_button', class: 'orange_submit'
+
 
           .footnote.light
             %p{style: "color: #ffffff; padding: 50px 0;"}
-              As part of the registration process, every applicant is asked to complete a Home Language Survey.
-              The results of this Survey determine whether a child needs additional language assessment at our Newcomers Assessment and Counseling ￼￼Center.
-              If this is the case, a child's school choices may expand beyond his/her Home Based options to include program ￼￼seats in a wider community cluster of schools.
-              The ELL tab on your results page will show you which schools may be available to child, pending his/her test results.
-              For more information on clusters, the Language Assessment, or the Newcomer's Assessment and Counseling Center, please call a Welcome Center near you or contact the Newcomers Center directly at: 617-635-1565
-
+              For students with disabilities, placement in a school is determined by their Individualized Education Plan (IEP) and the availability of appropriate seats.
+              While families are able to indicate school choices through the regular assignment process, placement decisions are made by Boston Public Schools’ IEP team.
+              Students with low levels of need (i.e. Pull-Out or Push-In Resources) can have these needs met in any district school on their Home-Based List.
+              However, students with higher levels of needs may qualify for program seats from across a broader cluster of schools.
+              The SPED tab on your results page will show you which schools may be available to your child.
+              Please note that while the school list reflects all programs offered, placement is highly individualized and will depend on a student’s specific needs, as determined by the ￼￼￼IEP.
+              For questions about SWD placements, please call: 617-635-8599
 
 
       -# TIMELINE ---------------------
@@ -118,7 +105,6 @@
       -# TIMELINE ---------------------
       .content_right
         = render partial: 'students/page_elements/timeline'
-
 
     -#%section.search_section.third
 

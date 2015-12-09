@@ -21,6 +21,9 @@ DiscoverBPS::Application.configure do
 
   config.log_level = :debug
 
+  config.logger = Logger.new File.open('log/development.log', 'a')
+  # config.logger = Logger.new(STDOUT)
+
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 

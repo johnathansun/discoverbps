@@ -14,36 +14,46 @@
         .text
           %p.home_intro.yellow-buttons.light_blue.big
             = auto_link(TextSnippet.find('home-intro').text)
-
-
         .content
-          %h2
-            Does your child have an Individual Education Plan (IEP) for special education needs (SPED)?
+          = form_tag student_addresses_path, method: :post, 'data-type' => 'script' do
+            %h2
+              Please verify your student's home address:
+            %br/
 
-          = form_tag set_sped_student_path(@student), method: :put do
+            = hidden_field_tag '[student]street_number', @addresses.first.try(:[], :StreetNum)
+            = hidden_field_tag '[student]street_name', @addresses.first.try(:[], :Street).try(:titleize)
+            = hidden_field_tag '[student]neighborhood', @addresses.first.try(:[], :SectionOfCity)
+            = hidden_field_tag '[student]zipcode', @addresses.first.try(:[], :ZipCode)
+            = hidden_field_tag '[student]x_coordinate', @addresses.first.try(:[], :X)
+            = hidden_field_tag '[student]y_coordinate', @addresses.first.try(:[], :Y)
+            = hidden_field_tag '[student]latitude', @addresses.first.try(:[], :Lat)
+            = hidden_field_tag '[student]longitude', @addresses.first.try(:[], :Lng)
+            = hidden_field_tag '[student]geo_code', @addresses.first.try(:[], :GeoCode)
+            = hidden_field_tag '[student]addressid', @addresses.first.try(:[], :AddressID)
+            = hidden_field_tag '[student]ell_cluster', @addresses.first.try(:[], :ELLCluster)
+            = hidden_field_tag '[student]sped_cluster', @addresses.first.try(:[], :SPEDCluster)
+            = hidden_field_tag '[student]zone', @addresses.first.try(:[], :Zone)
 
-            %div{style: 'padding: 20px 0 0 15px;'}
-              %p
-                = radio_button_tag '[student]sped_needs', true, @student.sped_needs == true
-                Yes
-              %p
-                = radio_button_tag '[student]sped_needs', false, @student.sped_needs == false
-                No
-
+            #address_matches.selection
+              - @addresses.each_with_index do |address, index|
+                = render partial: 'student_addresses/address', locals: {address: address, index: index}
+            %br/
             .btn
-              = submit_tag 'Next', disable_with: 'Working...', id: 'sped_next_button', class: 'orange_submit'
+              = submit_tag 'Next', class: 'orange_submit', id: "addresses_next_button"
 
-
-          .footnote.light
-            %p{style: "color: #ffffff; padding: 50px 0;"}
-              For students with disabilities, placement in a school is determined by their Individualized Education Plan (IEP) and the availability of appropriate seats.
-              While families are able to indicate school choices through the regular assignment process, placement decisions are made by Boston Public Schools’ IEP team.
-              Students with low levels of need (i.e. Pull-Out or Push-In Resources) can have these needs met in any district school on their Home-Based List.
-              However, students with higher levels of needs may qualify for program seats from across a broader cluster of schools.
-              The SPED tab on your results page will show you which schools may be available to your child.
-              Please note that while the school list reflects all programs offered, placement is highly individualized and will depend on a student’s specific needs, as determined by the ￼￼￼IEP.
-              For questions about SWD placements, please call: 617-635-8599
-
+        :javascript
+          $('#addresses_next_button').click(function() {
+            $('#addresses_next_button').text('Working...');
+          });
+          $(".close_icon").click(function() {
+            $(".dialog_box").fadeOut("fast").removeClass("active");
+          });
+          $(".dialog_box").click(function(e){
+            e.stopPropagation();
+          });
+          $('#addresses_next_button').click(function() {
+            $('#addresses_next_button').prop('value', 'Working...');
+          });
 
       -# TIMELINE ---------------------
       .content_right
@@ -99,12 +109,13 @@
 
     -# CONTENT ---------------------
     %section.search_section.second
-      = render partial: 'students/page_elements/footer_links'
+			= render partial: 'students/page_elements/footer_links'
 
 
       -# TIMELINE ---------------------
       .content_right
-        = render partial: 'students/page_elements/timeline'
+				= render partial: 'students/page_elements/timeline'
+
 
     -#%section.search_section.third
 

@@ -23,7 +23,7 @@ module Webservice
 
 	def self.student_schools(token)
 		endpoint = "https://apps.mybps.org/BPSChoiceServiceStaging/api/Student"
-		params = { token: token }.to_param
+		params = { token: token, schyear: "2015" }.to_param
 		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
 		MultiJson.load(response, symbolize_keys: true)
 	end

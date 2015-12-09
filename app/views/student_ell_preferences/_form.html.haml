@@ -17,28 +17,28 @@
 		%br/
 		If yes, please check the student's native language below.
 
-	= form_tag set_ell_student_path(@student), method: :put, remote: true, 'data-type' => 'script' do
+	= form_tag student_ell_preferences_path, method: :post, remote: true, 'data-type' => 'script' do
 
 		%p
-			= radio_button_tag '[student]ell_language', 'Cape Verdean', @student.ell_language == 'Cape Verdean'
+			= radio_button_tag '[student]ell_language', 'Cape Verdean', current_student.ell_language == 'Cape Verdean'
 			Cape Verdean
 		%p
-			= radio_button_tag '[student]ell_language', 'Chinese', @student.ell_language == 'Chinese'
+			= radio_button_tag '[student]ell_language', 'Chinese', current_student.ell_language == 'Chinese'
 			Chinese
 		%p
-			= radio_button_tag '[student]ell_language', 'Haitian Creole', @student.ell_language == 'Haitian Creole'
+			= radio_button_tag '[student]ell_language', 'Haitian Creole', current_student.ell_language == 'Haitian Creole'
 			Haitian Creole
 		%p
-			= radio_button_tag '[student]ell_language', 'Spanish', @student.ell_language == 'Spanish'
+			= radio_button_tag '[student]ell_language', 'Spanish', current_student.ell_language == 'Spanish'
 			Spanish
 		%p
-			= radio_button_tag '[student]ell_language', 'Vietnamese', @student.ell_language == 'Vietnamese'
+			= radio_button_tag '[student]ell_language', 'Vietnamese', current_student.ell_language == 'Vietnamese'
 			Vietnamese
 		%p
-			= radio_button_tag '[student]ell_language', 'Other', @student.ell_language == 'Other'
+			= radio_button_tag '[student]ell_language', 'Other', current_student.ell_language == 'Other'
 			Other (including multi-lingual)
 		%p
-			= radio_button_tag '[student]ell_language', '', @student.ell_language.present? ? false : true
+			= radio_button_tag '[student]ell_language', '', current_student.ell_language.present? ? false : true
 			Not Applicable
 
 		.btn

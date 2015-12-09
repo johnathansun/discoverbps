@@ -14,46 +14,28 @@
         .text
           %p.home_intro.yellow-buttons.light_blue.big
             = auto_link(TextSnippet.find('home-intro').text)
+
+
         .content
-          = form_tag verify_address_student_path(@student), method: :put, 'data-type' => 'script' do
-            %h2
-              Please verify your student's home address:
-            %br/
+          %h2 Has your child been invited to the Advanced Work Class (AWC) Program?
 
-            = hidden_field_tag '[student]street_number', @addresses.first.try(:[], :StreetNum)
-            = hidden_field_tag '[student]street_name', @addresses.first.try(:[], :Street).try(:titleize)
-            = hidden_field_tag '[student]neighborhood', @addresses.first.try(:[], :SectionOfCity)
-            = hidden_field_tag '[student]zipcode', @addresses.first.try(:[], :ZipCode)
-            = hidden_field_tag '[student]x_coordinate', @addresses.first.try(:[], :X)
-            = hidden_field_tag '[student]y_coordinate', @addresses.first.try(:[], :Y)
-            = hidden_field_tag '[student]latitude', @addresses.first.try(:[], :Lat)
-            = hidden_field_tag '[student]longitude', @addresses.first.try(:[], :Lng)
-            = hidden_field_tag '[student]geo_code', @addresses.first.try(:[], :GeoCode)
-            = hidden_field_tag '[student]addressid', @addresses.first.try(:[], :AddressID)
-            = hidden_field_tag '[student]ell_cluster', @addresses.first.try(:[], :ELLCluster)
-            = hidden_field_tag '[student]sped_cluster', @addresses.first.try(:[], :SPEDCluster)
-            = hidden_field_tag '[student]zone', @addresses.first.try(:[], :Zone)
+          = form_tag student_awc_preferences_path, method: :post do
 
-            #address_matches.selection
-              - @addresses.each_with_index do |address, index|
-                = render partial: 'students/address/address', locals: {address: address, index: index}
-            %br/
+            %p
+              = radio_button_tag '[student]awc_invitation', true, current_student.awc_invitation == true
+              Yes
+            %p
+              = radio_button_tag '[student]awc_invitation', false, current_student.awc_invitation == false
+              No
+
             .btn
-              = submit_tag 'Next', class: 'orange_submit', id: "addresses_next_button"
+              = submit_tag 'Next', disable_with: 'Working...', id: 'awc_next_button', class: 'orange_submit'
 
-        :javascript
-          $('#addresses_next_button').click(function() {
-            $('#addresses_next_button').text('Working...');
-          });
-          $(".close_icon").click(function() {
-            $(".dialog_box").fadeOut("fast").removeClass("active");
-          });
-          $(".dialog_box").click(function(e){
-            e.stopPropagation();
-          });
-          $('#addresses_next_button').click(function() {
-            $('#addresses_next_button').prop('value', 'Working...');
-          });
+          .footnote.light
+            %p{style: "color: #565656;"}
+              Advanced Work Class (AWC) is a full-time program in the Boston Public Schools that provides an accelerated academic curriculum for students in grades 4, 5 and 6.
+              By responding “Yes” above, this tool will include AWC schools in your student’s list.
+              However, only students that have been formally invited to AWC will have these schools appear on their actual registration form.
 
       -# TIMELINE ---------------------
       .content_right
@@ -109,13 +91,12 @@
 
     -# CONTENT ---------------------
     %section.search_section.second
-			= render partial: 'students/page_elements/footer_links'
+      = render partial: 'students/page_elements/footer_links'
 
 
       -# TIMELINE ---------------------
       .content_right
-				= render partial: 'students/page_elements/timeline'
-
+        = render partial: 'students/page_elements/timeline'
 
     -#%section.search_section.third
 

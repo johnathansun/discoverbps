@@ -1,3 +1,0 @@
-$('#dialog_box').show();
-$('#dialog_box').html("<%= escape_javascript(render partial: 'students/address/addresses', locals: {student: @student, addresses: @addresses}) %>");
-$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});

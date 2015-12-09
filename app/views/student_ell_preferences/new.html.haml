@@ -17,25 +17,46 @@
 
 
         .content
-          %h2 Has your child been invited to the Advanced Work Class (AWC) Program?
+          %h2
+            Does your child have specialized language needs?
 
-          = form_tag set_awc_student_path(@student), method: :put do
+          = form_tag student_ell_preferences_path, method: :post do
 
-            %p
-              = radio_button_tag '[student]awc_invitation', true, @student.awc_invitation == true
-              Yes
-            %p
-              = radio_button_tag '[student]awc_invitation', false, @student.awc_invitation == false
-              No
+            %div{style: 'padding: 20px 0 0 15px;'}
+              %p
+                = radio_button_tag '[student]ell_language', 'Cape Verdean', current_student.ell_language
+                Cape Verdean
+              %p
+                = radio_button_tag '[student]ell_language', 'Chinese', current_student.ell_language
+                Chinese
+              %p
+                = radio_button_tag '[student]ell_language', 'Haitian Creole', current_student.ell_language
+                Haitian Creole
+              %p
+                = radio_button_tag '[student]ell_language', 'Spanish', current_student.ell_language
+                Spanish
+              %p
+                = radio_button_tag '[student]ell_language', 'Vietnamese', current_student.ell_language
+                Vietnamese
+              %p
+                = radio_button_tag '[student]ell_language', 'Other', current_student.ell_language
+                Other (including multi-lingual)
+              %p
+                = radio_button_tag '[student]ell_language', '', current_student.ell_language.present? ? false : true
+                Not Applicable
 
             .btn
-              = submit_tag 'Next', disable_with: 'Working...', id: 'awc_next_button', class: 'orange_submit'
+              = submit_tag 'Next', disable_with: 'Working...', id: 'ell_next_button', class: 'orange_submit'
 
           .footnote.light
-            %p{style: "color: #565656;"}
-              Advanced Work Class (AWC) is a full-time program in the Boston Public Schools that provides an accelerated academic curriculum for students in grades 4, 5 and 6.
-              By responding “Yes” above, this tool will include AWC schools in your student’s list.
-              However, only students that have been formally invited to AWC will have these schools appear on their actual registration form.
+            %p{style: "color: #ffffff; padding: 50px 0;"}
+              As part of the registration process, every applicant is asked to complete a Home Language Survey.
+              The results of this Survey determine whether a child needs additional language assessment at our Newcomers Assessment and Counseling ￼￼Center.
+              If this is the case, a child's school choices may expand beyond his/her Home Based options to include program ￼￼seats in a wider community cluster of schools.
+              The ELL tab on your results page will show you which schools may be available to child, pending his/her test results.
+              For more information on clusters, the Language Assessment, or the Newcomer's Assessment and Counseling Center, please call a Welcome Center near you or contact the Newcomers Center directly at: 617-635-1565
+
+
 
       -# TIMELINE ---------------------
       .content_right
@@ -97,6 +118,7 @@
       -# TIMELINE ---------------------
       .content_right
         = render partial: 'students/page_elements/timeline'
+
 
     -#%section.search_section.third
 

@@ -1,16 +1,16 @@
 .close_icon
-	%span{:aria => {hidden: 'true'}, :class => 'icon-DBPS-Dev-Assets-SRG-07'}
+	%span{ aria: { hidden: 'true' }, class: 'icon-DBPS-Dev-Assets-SRG-07' }
 
 .content
 	%h2 Has your child been invited to the Advanced Work Class (AWC) Program?
 
-	= form_tag set_awc_student_path(@student), method: :put, remote: true, 'data-type' => 'script' do
+	= form_tag student_awc_preferences_path, method: :post, remote: true, 'data-type' => 'script' do
 
 		%p
-			= radio_button_tag '[student]awc_invitation', true, @student.awc_invitation == true
+			= radio_button_tag '[student]awc_invitation', true, current_student.awc_invitation == true
 			Yes
 		%p
-			= radio_button_tag '[student]awc_invitation', false, @student.awc_invitation == false
+			= radio_button_tag '[student]awc_invitation', false, current_student.awc_invitation == false
 			No
 
 		.btn

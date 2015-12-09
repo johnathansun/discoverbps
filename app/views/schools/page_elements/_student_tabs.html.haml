@@ -13,7 +13,7 @@
         return false;
       });
       $(".add_child").click(function(){
-        $('#dialog_box').html("#{escape_javascript(render partial: 'students/address/address_search')}");
+        $('#dialog_box').html("#{escape_javascript(render partial: 'students/address_search')}");
         $('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
         $('#dialog_box').show();
         return false;
