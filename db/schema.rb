@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151124074746) do
+ActiveRecord::Schema.define(:version => 20151210154720) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -220,7 +220,7 @@ ActiveRecord::Schema.define(:version => 20151124074746) do
     t.string   "bps_id"
     t.boolean  "ranked",                     :default => false
     t.boolean  "exam_school",                :default => false
-    t.string   "eligibility"
+    t.text     "eligibility"
     t.string   "school_type"
     t.boolean  "starred",                    :default => false
     t.string   "sped_cluster"
