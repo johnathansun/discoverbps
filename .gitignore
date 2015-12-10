@@ -43,4 +43,4 @@ bower.json
 
 .DS_Store
 
-application.yml
+config/application.yml
