@@ -35,7 +35,7 @@ class StudentSchoolsController < ApplicationController
       ).first_or_create!
       session[:current_student_id] = @student.id
       @student.set_student_schools!(student_schools[:choiceList])
-      @home_schools = @student.home_schools.rank(:sort_order)
+      @home_schools = @student.home_schools.order(:distance)
     else
       @schools = nil
       @student = nil
