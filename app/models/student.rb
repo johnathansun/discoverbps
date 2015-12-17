@@ -122,22 +122,22 @@ class Student < ActiveRecord::Base
           end
         end
 
-        school_coordinates.gsub!(/\|$/,'')
-        walk_matrix = Google.walk_times(self.latitude, self.longitude, school_coordinates)
-        drive_matrix = Google.drive_times(self.latitude, self.longitude, school_coordinates)
+        # school_coordinates.gsub!(/\|$/,'')
+        # walk_matrix = Google.walk_times(self.latitude, self.longitude, school_coordinates)
+        # drive_matrix = Google.drive_times(self.latitude, self.longitude, school_coordinates)
 
-        # save distance, walk time and drive time on the student_schools join table
+        # # save distance, walk time and drive time on the student_schools join table
 
-        api_schools.each_with_index do |api_school, i|
-          school = School.where(bps_id: api_school[:SchoolID]).first
-          if school.present?
-            walk_time = walk_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
-            drive_time = drive_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
+        # api_schools.each_with_index do |api_school, i|
+        #   school = School.where(bps_id: api_school[:SchoolID]).first
+        #   if school.present?
+        #     walk_time = walk_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
+        #     drive_time = drive_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
 
-            student_school = self.student_schools.where(school_id: school.id).first_or_initialize
-            student_school.update_attributes(walk_time: walk_time, drive_time: drive_time)
-          end
-        end
+        #     student_school = self.student_schools.where(school_id: school.id).first_or_initialize
+        #     student_school.update_attributes(walk_time: walk_time, drive_time: drive_time)
+        #   end
+        # end
 
         self.update_column(:schools_last_updated_at, Time.now)
       end

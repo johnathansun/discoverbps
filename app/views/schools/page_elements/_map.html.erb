@@ -219,16 +219,7 @@
           });
         <% end %>
 
-        <% if @home_schools.present? %>
-          if ($('#home_schools_tab').length > 0) {
-            google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
-              $.each(cityBoundaries, function (index, feature) {
-                map.data.add(feature);
-                map.data.overrideStyle(feature, {strokeWeight: 3});
-              });
-            });
-          }
-        <% end %>
+
 
         <% if @zone_schools.present? %>
           if ($('#zone_schools_tab').length > 0) {

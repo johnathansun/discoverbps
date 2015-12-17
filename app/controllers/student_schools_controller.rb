@@ -16,7 +16,7 @@ class StudentSchoolsController < ApplicationController
           student_info[key] = value
         end
       end
-      @student = Student.where(session_id: session[:session_id], 
+      student = Student.where(session_id: session[:session_id], 
         token: student_info[:Token],
         first_name: student_info[:FirstName], 
         last_name: student_info[:LastName], 
@@ -33,12 +33,13 @@ class StudentSchoolsController < ApplicationController
         geo_code: student_info[:GeoCode],
         address_verified: true
       ).first_or_create!
-      session[:current_student_id] = @student.id
-      @student.set_student_schools!(student_schools[:choiceList])
-      @home_schools = @student.home_schools.order(:distance)
+      session[:current_student_id] = student.id
+      student.set_student_schools!(student_schools[:choiceList])
+
+      @home_schools = current_student.home_schools.rank(:sort_order)
     else
-      @schools = nil
       @student = nil
+      @home_schools = nil
     end
     render template: "schools/index", layout: "layouts/schools"
   end
