@@ -1,2 +1,220 @@
-= debug session
-= current_student.inspect
+= render partial: 'schools/page_elements/header', locals: {page_step: 2}
+
+.wrap
+  = render partial: 'schools/page_elements/student_tabs'
+
+.wrap.global_map
+  = render partial: 'schools/page_elements/map', locals: {students_list: [current_student], school: nil, map_controls: true, resize: true, width: '100%'}
+
+.wrap
+  %a.next_step{:href => "#{rank_schools_path}"}
+    %span.next
+      = 'Next'
+    %span.text
+      = 'Step 3 - Rank & Submit'
+    %span.arrow
+
+
+  .result
+    = render partial: 'schools/page_elements/preference_panel'
+
+    #school_list
+      = render partial: 'student_schools/schools'
+
+      = render partial: 'schools/page_elements/footer'
+
+
+:javascript
+  $( document ).ready(function() {
+
+    // Sticky "Next Step" button
+    /*var winTop = 0;
+    var winHt = $(window).height();
+    var nextBtnTop = $('.arrow_slide img').offset().top;
+    $(window).resize(function(){
+      winTop = $(window).scrollTop();;
+      winHt = $(window).height();
+      nextBtnTop = $('.arrow_slide img').offset().top;
+    });
+    $(window).scroll(function(){
+      winTop = $(window).scrollTop();
+      if ((winTop + (winHt/2)) >= nextBtnTop) {
+        $('.arrow_slide').addClass('fixed');
+      } else {
+        $('.arrow_slide').removeClass('fixed');
+      }
+
+      if (winTop >= 190) {
+        $('.arrow_slide .text_version').addClass('visible');
+      } else {
+        $('.arrow_slide .text_version').removeClass('visible');
+      }
+    });*/
+
+    //Click on school name to open the full school description in the school line.
+    $("#school_list li .li_frame > .school_name .icon").click(function() {
+      $(this)
+        .toggleClass("icon-info icon-close blue red")
+        .parents(".list_row")
+        .toggleClass("descrip_open")
+        .find(".school_descrip").toggle();
+      }
+    );
+
+    // Hover a Your Fit icon to see its tooltip
+    $('.your_fit_icon .icon').tooltip({
+      track: false,
+      my: "center bottom-20",
+      at: "center top",
+      collision: "none"
+    });
+
+    //compare button => add class to compare_list, close school list and preferences, and show the comparaison list
+    /*$(".menu_compare_name .compare").click(function(){
+
+      $(this).parent().addClass("compare_action");
+      $("#school_list").css("display","none");
+      $(".preferences").css("display","none");
+      $("#compare_list").css("display","block");
+
+
+    })*/
+
+    //btn close preference choice in tablet size
+    $(".header_preferences #hide_btn").click(function(){
+      $(".preferences").addClass("hide");
+    })
+    //btn show preference choice in tablet size
+    $(".header_preferences #show_btn").click(function(){
+      $(".preferences").removeClass("hide");
+    })
+
+    $("#sign_up_button").click(function(){
+      $('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/signup')}");
+      $('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+      $('#signup_panel').show();
+      $('#dialog_box').show();
+      return false;
+    });
+
+    $("#login_button").click(function(){
+      $('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/login')}");
+      $('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
+      $('#login_panel').show();
+      $('#dialog_box').show();
+      return false;
+    });
+
+    $('.star_unstarred').click(function(){
+      $.ajax({
+        url: '/student_schools/' + $(this).data('studentSchoolId') + '/star',
+        type: 'post',
+        dataType: 'script'
+      });
+    });
+
+    $('.star_starred').click(function(){
+      $.ajax({
+        url: '/student_schools/' + $(this).data('studentSchoolId') + '/unstar',
+        type: 'post',
+        dataType: 'script'
+      });
+    });
+
+    var star_ascending = false;
+    $("#sortable_star_column").click(function(){
+      $('.column_arrow').hide();
+      $('.sortable_column').css("color", "#565656")
+      $('#sortable_star_column').css("color", "#0077cf")
+      if (!star_ascending) {
+        $('ul#sortable>li').tsort('span.sortable_star',{order:'asc'});
+        $('#sortable_star_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Star</div>');
+        star_ascending = true;
+      } else {
+        $('ul#sortable>li').tsort('span.sortable_star',{order:'desc'});
+        $('#sortable_star_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Star</div>');
+        star_ascending = false;
+      }
+    });
+
+    var school_name_ascending = false;
+    $("#sortable_school_name_column").click(function(){
+      $('.column_arrow').hide();
+      $('.sortable_column').css("color", "#565656")
+      $('#sortable_school_name_column').css("color", "#0077cf")
+      if (!school_name_ascending) {
+        $('ul#sortable>li').tsort('span.sortable_school_name',{order:'asc'});
+        $('#sortable_school_name_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Name</div>');
+        school_name_ascending = true;
+      } else {
+        $('ul#sortable>li').tsort('span.sortable_school_name',{order:'desc'});
+        $('#sortable_school_name_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Name</div>');
+        school_name_ascending = false;
+      }
+    });
+
+    var fit_ascending = false;
+    $("#sortable_fit_column").click(function(){
+      $('.column_arrow').hide();
+      $('.sortable_column').css("color", "#565656")
+      $('#sortable_fit_column').css("color", "#0077cf")
+      if (!fit_ascending) {
+        $('ul#sortable>li').tsort('span.sortable_fit',{order:'asc'});
+        $('#sortable_fit_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Your Fit</div>');
+        fit_ascending = true;
+      } else {
+        $('ul#sortable>li').tsort('span.sortable_fit',{order:'desc'});
+        $('#sortable_fit_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Your Fit</div>');
+        fit_ascending = false;
+      }
+    });
+
+    var getting_there_ascending = false;
+    $("#sortable_distance_column").click(function(){
+      $('.column_arrow').hide();
+      $('.sortable_column').css("color", "#565656")
+      $('#sortable_distance_column').css("color", "#0077cf")
+      if (!getting_there_ascending) {
+        $('ul#sortable>li').tsort('span.sortable_distance',{order:'asc'});
+        $('#sortable_distance_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Travel</div>');
+        getting_there_ascending = true;
+      } else {
+        $('ul#sortable>li').tsort('span.sortable_distance',{order:'desc'});
+        $('#sortable_distance_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Travel</div>');
+        getting_there_ascending = false;
+      }
+    });
+
+    var eligibility_ascending = false;
+    $("#sortable_eligibility_column").click(function(){
+      $('.column_arrow').hide();
+      $('.sortable_column').css("color", "#565656")
+      $('#sortable_eligibility_column').css("color", "#0077cf")
+      if (!eligibility_ascending) {
+        $('ul#sortable>li').tsort('span.sortable_eligibility',{order:'asc'});
+        $('#sortable_eligibility_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Eligibility</div>');
+        eligibility_ascending = true;
+      } else {
+        $('ul#sortable>li').tsort('span.sortable_eligibility',{order:'desc'});
+        $('#sortable_eligibility_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Eligibility</div>');
+        eligibility_ascending = false;
+      }
+    });
+
+    var hours_ascending = false;
+    $("#sortable_hours_column").click(function(){
+      $('.column_arrow').hide();
+      $('.sortable_column').css("color", "#565656")
+      $('#sortable_hours_column').css("color", "#0077cf")
+      if (!hours_ascending) {
+        $('ul#sortable>li').tsort('span.sortable_hours',{order:'asc'});
+        $('#sortable_hours_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Hours</div>');
+        hours_ascending = true;
+      } else {
+        $('ul#sortable>li').tsort('span.sortable_hours',{order:'desc'});
+        $('#sortable_hours_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Hours</div>');
+        hours_ascending = false;
+      }
+    });
+
+  });

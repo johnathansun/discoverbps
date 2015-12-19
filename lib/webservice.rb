@@ -19,12 +19,23 @@ module Webservice
 
 	##### STUDENT SCHOOLS #####
 
-	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/schools.svc/HomeSchools?SchYear=2014&Grade=06&AddressID=68051&IsAwc=true&SiblingSchList=
-
 	def self.student_schools(token)
 		endpoint = "https://apps.mybps.org/BPSChoiceServiceStaging/api/Student"
 		params = { token: token, schyear: "2015" }.to_param
 		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
+		MultiJson.load(response, symbolize_keys: true)
+	end
+
+	##### SUBMIT RANKED STUDENT SCHOOLS #####
+
+	def self.submit_ranked_choices(school_ids)
+		endpoint = "https://apps.mybps.org/BPSChoiceServiceStaging/api/student"
+		params = []
+		school_ids.each_with_index do |school_id, i|
+			params << { SchoolRankID: "", CallID: 2, ProgramCode: "", SchoolID: school_id, Rank: i + 1, CreatedDateTime: "" }
+		end
+		puts params.to_json
+		response = Faraday.new(url: "#{endpoint}", ssl: { version: :SSLv3 }).post.body
 		MultiJson.load(response, symbolize_keys: true)
 	end
 

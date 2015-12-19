@@ -1,0 +1,120 @@
+%div{id: 'home_schools_list', class: "schools_list #{(params[:list_type] == 'ell' || params[:list_type] == 'sped' || params[:list_type] == 'zone') ? 'hidden' : ''}"}
+  - if @home_schools.present?
+    %div.light{ style: "margin: 0 3em 1em 0;" }
+      - if zone_school_grades.include?(current_student.grade_level)
+        The grade you selected
+        (#{current_student.formatted_grade_level_name})
+        is not guaranteed a home-based assignment. As such, if you are a new-to-Boston Public Schools applicant and an assignment from the home-based list below cannot be made, an assignment to a school in the former zone structure may be necessary. Use the Zone-based tab to see those results.
+        %a{href: '#', target: '_blank'}
+          Learn more
+      - else
+        Below is a list of your Home-Based schools.
+        To see more information on each school, please click the 'i' icon.
+        To generate a customized Fit Score for your student, please expand the categories in the right sidebar and select the options that are of interest to your student.
+
+  .list_content
+    .flexible_content
+      - if @home_schools.present?
+        .menu_list
+          %div{id: 'home_header', class: 'li_frame school_list_header', style: 'display: block;'}
+            #sortable_school_name_column.menu_bloc.sortable_column
+              .column_title
+                Name
+
+            #sortable_fit_column.menu_bloc.sortable_column
+              .column_title
+                Fit Score
+
+            #sortable_distance_column.menu_bloc.sortable_column
+              .column_title
+                Travel
+
+            #sortable_hours_column.menu_bloc.sortable_column
+              .column_title
+                Hours
+
+            #sortable_eligibility_column.menu_bloc.sortable_column
+              .column_title
+                Eligibility
+
+        %ul#sortable
+          - @home_schools.each_with_index do |student_school, i|
+            - school = student_school.school
+            %li{id: "#{current_student.id}_#{school.bps_id}", class: "list_row home_school clearfix"}
+              %div{id: "#{current_student.id}_#{school.bps_id}_row", class: "li_frame"}
+
+                .school_name.select.line
+                  %span.middle
+                    %span.sortable_school_name
+                      = school.name
+                    - if current_student.sibling_school_ids.present? && current_student.sibling_school_ids.try(:include?, school.bps_id)
+                      %span{:aria => {hidden: 'true'}, :class => "select_icon icon-DBPS-Dev-Assets-SRG-12"}
+
+                    - if school.api_basic_info.try(:[], :SchoolType).present? && school.api_basic_info.try(:[], :SchoolType) == 'Exam'
+                      %span{:aria => {hidden: 'true'}, :class => "select_icon icon-DBPS-Preferences-Icons-20130930-SRG_exam_school"}
+                    %span.icon.icon-info.light_blue
+
+                .box.line.your_fit_icon
+                  %span{id: "#{current_student.id}_#{school.bps_id}_icons", class: "middle"}
+                    - tag_counter = 0
+                    - PreferenceCategory.active(current_student.grade_level).each do |category|
+                      - category.active_preferences(current_student.grade_level).each do |preference|
+                        - if school.has_preference?(preference)
+                          - if current_student.preference_ids.try(:include?, preference.id)
+                            %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: "['#{preference.name}']"}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", title: "#{preference.name}"}
+                            - tag_counter += 1
+                          - else
+                            %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: "['#{preference.name}']"}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", style: "display: none;", title: "#{preference.name}"}
+
+                    %span{id: "#{current_student.id}_#{school.bps_id}_icon_count", class: "sortable_fit fit_icon_count", style: "visibility: hidden;"}
+                      = tag_counter
+
+
+                .box.line.getting_there
+                  .first_block.middle
+                    %span.middle.sortable_distance
+                      =raw transportation_eligibility_icon_helper(student_school)
+                      = spacer_helper(student_school.distance)
+                      mi
+
+                  .second_bloc.middle
+                    %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
+                      = spacer_helper(student_school.walk_time)
+                      %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
+
+                  .second_bloc.middle.last
+                    %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-17"}
+                      = spacer_helper(student_school.drive_time)
+                      %span{:aria => {hidden: 'true'}, :class => "icon-DBPS-Dev-Assets-SRG-18"}
+
+
+                .box.line.school_hours
+                  %span.middle.sortable_hours
+                    - if school.api_hours.try(:[], :Description).present?
+                      = truncate(school.api_hours.try(:[], :Description), length: 18)
+                    - else
+                      &nbsp;
+
+                .box.line.eligibility
+                  .first_block.middle
+                    %span.middle.sortable_eligibility
+                      - if student_school.eligibility.present?
+                        =raw truncate(eligibility_helper(spacer_helper(student_school.eligibility)), length: 30)
+                      - else
+                        &nbsp;
+
+                .school_descrip
+                  .right_side
+
+                    = render partial: 'schools/learn/school_details', locals: {school: school, student_school: student_school}
+
+                    .clr
+
+                  .clr
+
+        = render partial: 'schools/page_elements/notice'
+
+      - else
+        %div{style: 'margin: 3em 0 4em 0;'}
+          %h2
+            There are no matching schools for the program and grade combination that you entered.

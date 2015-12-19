@@ -1,0 +1,38 @@
+%div{id: 'sped_schools_list', class: "schools_list #{params[:list_type] == 'sped' ? '' : 'hidden' }"}
+  .sort_schools.column_center.column
+
+    .compare_list_content
+      - if @sped_schools.present?
+        %ul#sortable_0.clearfix
+
+          - @sped_schools[0..4].each_with_index do |student_school, i|
+            = render partial: 'schools/compare/school_column', locals: {student_school: student_school, school: student_school.school, list_type: 'sped', i: i}
+
+      - else
+        %h2{style: 'margin-top: 15px;'}
+          There are no matching SPED schools for the address and grade level that you entered.
+
+
+  - if @sped_schools[5..-1].present?
+    .more_schools.column_right.column
+      .more_schools_frame
+        %h3
+          More Schools:
+
+        %ul{title: "click to add"}
+          - @sped_schools[5..-1].each do |student_school|
+            - school = student_school.school
+            %li.school
+              %a{href: '#'}
+                %span.icon.icon-DBPS-Dev-Assets-SRG-10
+                = school.name
+
+
+      :javascript
+          $('.more_schools ul')
+            .hover(function(){
+              $('#compare_list').toggleClass('more_schools_hovered');
+            })
+            .tooltip({
+              track: true
+            });

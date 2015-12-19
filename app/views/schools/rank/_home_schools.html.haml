@@ -1,0 +1,15 @@
+%div{id: 'home_schools_list', class: "schools_list #{(params[:list_type] == 'zone' || params[:list_type] == 'ell' || params[:list_type] == 'sped') ? 'hidden' : ''}"}
+  .sort_schools.column_center.column{ style: "margin-bottom: 3em;" }
+    %div.light{ style: "margin: 0 3em 2.5em 0;" }
+      Please use the form below to enter your schools in the order in which you would like to submit. When you are ready to submit your list to the school department, please click "Submit".
+
+    = form_for(:schools, url: submit_ranked_schools_path, html: {method: :post}) do |f|
+      - @home_schools.each_with_index do |student_school, i|
+        %div{ style: "font-size: 20px; margin-bottom: 1em;" }
+          %div{ style: "display: inline-block;" }
+            = text_field_tag "schools[]", nil, style: "font-size: 20px; padding: 5px; width: 30px;"
+          %div{ style: "display: inline-block;" }
+            %h3
+              = student_school.school.name
+
+      = f.submit 'Submit', data: { disable_with: 'Saving...' }

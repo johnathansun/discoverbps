@@ -35,7 +35,9 @@ DiscoverBPS::Application.routes.draw do
     get 'print_lists', on: :collection
     get 'print', on: :member
     get 'compare', on: :collection
+    get 'rank', on: :collection
     get 'get_ready', on: :collection
+    post 'submit_ranked', on: :collection
   end
 
   namespace :admin do
