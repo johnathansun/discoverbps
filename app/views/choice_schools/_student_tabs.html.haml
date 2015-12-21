@@ -1,7 +1,7 @@
 .menu_compare_name
   %div{class: "f", style: "width: 100%;"}
     .name_list
-      %div{class: "name_info active", id: "student_#{student.id}_tab"}
+      %div{class: "name_info active", id: "student_#{@student.id}_tab"}
         %span.name
           = truncate(@student.first_name, length: 12)
           %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
