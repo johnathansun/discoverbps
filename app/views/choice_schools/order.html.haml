@@ -1,40 +1,34 @@
-= render partial: 'layouts/choice_schools/header', locals: {page_step: 3}
+= render partial: 'layouts/choice_schools/header'
 
 .wrap
   = render partial: 'layouts/choice_schools/student_tabs'
 
-.wrap.global_map
-  = render partial: 'layouts/choice_schools/map', locals: {students_list: current_user_students, school: nil, map_controls: true, height: 'resize', width: '100%'}
+.wrap
+  #choice-layout
+    .result.clearfix
+      %h2{ style: "margin-bottom: 1em;" }
+        Rank Your Schools
 
-#compare_list.compare_list.wrap
+      %div{id: 'home_schools_list', class: "schools_list #{(params[:list_type] == 'zone' || params[:list_type] == 'ell' || params[:list_type] == 'sped') ? 'hidden' : ''}"}
+        .sort_schools.column_center.column.light{ style: "margin-bottom: 3em;" }
+          - if flash[:alert].present?
+            %h3{style: 'color: red; margin-bottom: 2em;'}
+              = flash[:alert]
+          - else
+            %p
+              Please use the form below to enter your schools in the order in which you would like to submit. When you are ready to submit your list to the school department, please click "Submit".
 
-  .result.clearfix
-    -# LEFT COLUMN
-    -# ----------------------------------------------
-    .labels.column_left.column
-      .labels_frame
+          = form_for(:schools, url: rank_choice_schools_path(token: params[:token]), html: {method: :post}) do |f|
+            - @choice_schools.each do |student_school|
+              %div{ style: "font-size: 20px; margin-bottom: 1em;" }
+                %div{ style: "display: inline-block; margin-right: 5px;" }
+                  = text_field_tag "schools[#{student_school.id}]", student_school.choice_rank, style: "font-size: 20px; padding: 5px; width: 30px;"
+                %div{ style: "display: inline-block;" }
+                  %h3
+                    = student_school.school.name
 
-
-    %div{id: 'home_schools_list', class: "schools_list #{(params[:list_type] == 'zone' || params[:list_type] == 'ell' || params[:list_type] == 'sped') ? 'hidden' : ''}"}
-      .sort_schools.column_center.column.light{ style: "margin-bottom: 3em;" }
-        - if flash[:alert].present?
-          %h3{style: 'color: red; margin-bottom: 2em;'}
-            = flash[:alert]
-        - else
-          %p
-            Please use the form below to enter your schools in the order in which you would like to submit. When you are ready to submit your list to the school department, please click "Submit".
-
-        = form_for(:schools, url: rank_choice_schools_path(token: params[:token]), html: {method: :post}) do |f|
-          - @choice_schools.each do |student_school|
-            %div{ style: "font-size: 20px; margin-bottom: 1em;" }
-              %div{ style: "display: inline-block; margin-right: 5px;" }
-                = text_field_tag "schools[#{student_school.id}]", student_school.choice_rank, style: "font-size: 20px; padding: 5px; width: 30px;"
-              %div{ style: "display: inline-block;" }
-                %h3
-                  = student_school.school.name
-
-          %div{ style: "margin: 3em 0 4em 0;" }
-            = f.submit 'Submit', id: "continue-button", data: { disable_with: 'Submitting...' }
+            %div{ style: "margin: 3em 0 4em 0;" }
+              = f.submit 'Submit', id: "continue-button", data: { disable_with: 'Submitting...' }
 
 
 :javascript
