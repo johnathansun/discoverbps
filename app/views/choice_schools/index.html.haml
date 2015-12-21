@@ -18,4 +18,4 @@
           Tommy Chang, Superintendent
 
       %br/
-      = link_to "Continue", verify_choice_schools_path(params), id: "continue-button"
+      = link_to "Continue", verify_choice_schools_path(token: params[:token]), id: "continue-button"

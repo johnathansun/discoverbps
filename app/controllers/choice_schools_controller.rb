@@ -53,9 +53,9 @@ class ChoiceSchoolsController < ApplicationController
   end
 
   def order
-    if current_user_students.blank?
+    if current_student.choice_schools.blank?
       flash[:alert] = 'There were no schools that matched your search. Please try again.'
-      redirect_to root_url
+      redirect_to choice_schools_path(token: params[:token])
     else
       if schools = current_student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
         @choice_schools = schools
@@ -69,13 +69,8 @@ class ChoiceSchoolsController < ApplicationController
         @choice_schools << student_school unless @choice_schools.include?(student_school)
       end
 
-      if @choice_schools.blank?
-        flash[:alert] = 'There were no schools that matched your search. Please try again.'
-        redirect_to root_url
-      else
-        respond_to do |format|
-          format.html
-        end
+      respond_to do |format|
+        format.html
       end
     end
   end
@@ -94,7 +89,7 @@ class ChoiceSchoolsController < ApplicationController
             school.update_column(:choice_rank, rank)
           end
         end
-        redirect_to summary_choice_schools_path
+        redirect_to summary_choice_schools_path(token: params[:token])
       else
         redirect_to order_choice_schools_path(token: params[:token]), alert: "There are errors with your sort order. Please ensure that your rankings are sequential and start with number one:"
       end
