@@ -104,7 +104,7 @@ class Student < ActiveRecord::Base
 
         # save the schools on the student
 
-        student.set_choice_schools!(student_schools[:choiceList])
+        student.set_choice_schools!(student_schools)
 
         # return the student
 
