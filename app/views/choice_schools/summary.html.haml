@@ -27,4 +27,4 @@
           %div{ style: "display: inline-block;" }
             = link_to "Back", order_choice_schools_path(token: params[:token]), id: "back-button"
           %div{ style: "display: inline-block;" }
-            = button_to "Submit", submit_choice_schools_path(token: params[:token]), id: "continue-button", data: { confirm: "Are you ready to submit your official choice list to the school department?", disable_with: 'Submitting...' }
+            = button_to "Submit Choice List", submit_choice_schools_path(token: params[:token]), id: "continue-button", data: { confirm: "Are you ready to submit your official choice list to the school department?", disable_with: 'Submitting...' }
