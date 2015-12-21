@@ -10,7 +10,7 @@ module Webservice
 	# :Street=>"GARDNER ST", :Streetno=>"4", :City=>"Allston", :ZipCode=>"02134", :State=>"MA",
 	# :GeoCode=>"801", :Latitude=>"42.3536288141557", :Longitude=>"-71.1316370974287", :X=>"755735.124511719", :Y=>"2954106.35369873"}
 
-	def self.get_student_schools(token)
+	def self.get_choice_schools(token)
 		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student"
 		params = { token: token, schyear: "2015" }.to_param
 		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body

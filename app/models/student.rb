@@ -73,7 +73,7 @@ class Student < ActiveRecord::Base
   # SAVE SCHOOLS ON CURRENT_STUDENT
 
   def self.save_student_and_choice_schools(token, session_id)
-    student_schools = Webservice.get_student_schools(token)
+    student_schools = Webservice.get_choice_schools(token)
 
     if student_schools && student_schools[:choiceList] && student_schools[:studentInfo]
 
