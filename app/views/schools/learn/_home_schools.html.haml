@@ -18,8 +18,6 @@
         .menu_list
           %div{id: 'home_header', class: 'li_frame school_list_header', style: 'display: block;'}
             #sortable_star_column.sortable_column.menu_bloc.desktop.no_mobile
-              .column_title
-                Star
 
             #sortable_school_name_column.menu_bloc.sortable_column
               .column_title
@@ -47,7 +45,7 @@
             %li{id: "#{current_student.id}_#{school.bps_id}", class: "list_row home_school clearfix"}
               %div{id: "#{current_student.id}_#{school.bps_id}_row", class: "li_frame"}
 
-                .desktop.no_order.line
+                .desktop.star.line
                   .middle
                     = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
                     = image_tag('star_unstarred.png', id: "star_#{student_school.id}_unstarred", class: 'star_unstarred', style: "display: #{student_school.starred? ? 'none' : 'inline'}; cursor: pointer;", data: {student_school_id: student_school.id} )

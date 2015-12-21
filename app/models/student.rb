@@ -51,7 +51,7 @@ class Student < ActiveRecord::Base
   end
 
   def full_address
-    "#{street_number} #{street_name}, #{neighborhood} MA #{zipcode}"
+    "#{street_number} #{street_name.try(:titleize)}, #{neighborhood} MA #{zipcode}"
   end
 
   def created_at_date

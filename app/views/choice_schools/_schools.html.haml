@@ -8,7 +8,12 @@
         %a{href: '#', target: '_blank'}
           Learn more
       - else
-        Below is a list of eligible schools for #{current_student.full_name}.
+        Below is a list of eligible schools for
+        %strong
+          #{current_student.full_name}, Grade #{current_student.grade_level}
+        with a home address of
+        %strong
+          #{current_student.full_address}.
         Click the school name to see more information.
         Open the categories in the left sidebar to create a customized Fit Score for your child.
         When you are ready to rank your list, click the "Continue" button at the bottom of the page.
