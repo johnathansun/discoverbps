@@ -124,6 +124,11 @@ class StudentsController < ApplicationController
     render nothing: true
   end
 
+  def swtich_current
+    session[:student_id] = params[:id]
+    redirect_to(:back)
+  end
+
   private
 
   def get_or_set_student(current_user, first_name, last_name, grade_level)

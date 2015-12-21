@@ -28,6 +28,7 @@ DiscoverBPS::Application.routes.draw do
   resources :students do
     post 'save_preference', on: :member
     post 'remove_notification', on: :collection
+    post 'switch_current', on: :member
   end
 
   resources :student_addresses, only: [:new, :create]

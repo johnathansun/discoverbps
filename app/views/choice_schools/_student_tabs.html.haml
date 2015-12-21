@@ -20,5 +20,5 @@
             %span.grade
               Grade&nbsp;#{student.grade_level}
 
-            = link_to schools_path(student_id: student.id) do
+            = link_to switch_current_student_path(student.id, params) do
               %span.hyperspan
