@@ -32,20 +32,18 @@ class ChoiceSchoolsController < ApplicationController
   end
 
   def list
-    if current_student.try(:token) == params[:token]
-      student = current_student
-    else
+    unless current_student.present? && current_student[:token] == params[:token]
       student = Student.save_student_and_choice_schools(params[:token], session[:session_id])
-    end
-    if student.present?
       session[:student_id] = student.id
+    end
+    if current_student.present? && current_student[:token] == params[:token]
       if current_student.starred_schools.present?
         @choice_schools = current_student.starred_schools.all
         current_student.choice_schools.all.each do |school|
           @choice_schools << school unless @choice_schools.include?(school)
         end
       else
-        @choice_schools = student.choice_schools
+        @choice_schools = current_student.choice_schools
       end
     else
       @choice_schools = nil
