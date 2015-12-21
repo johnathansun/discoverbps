@@ -22,66 +22,62 @@
   </head>
   <body>
 
-
-  <div id="placeholder" class="wrap ">
-    <div id="placeholder_title" class="content_wrap center">
-      <h1 style="color: #FFFF00; font-size: 150px; line-height: 56px; margin-bottom: 50px;">Oops</h1>
-      <br />
-      <br />
-      <span style="color: white; font-size: 16px; line-height: 21px;">
-        Error 404: The page you are looking for does not exist.
-        <br />You may have mistyped the address or the page may have moved.
-        <br />Please return to the <a href= '/'>home page</a> and try again.
-      </span>
+    <div id="placeholder" class="wrap ">
+      <div id="placeholder_title" class="content_wrap center">
+        <h1 style="color: #FFFF00; font-size: 150px; line-height: 56px; margin-bottom: 50px;">Oops</h1>
+        <br />
+        <br />
+        <span style="color: white; font-size: 16px; line-height: 21px;">
+          Error 404: The page you are looking for does not exist.
+          <br />You may have mistyped the address or the page may have moved.
+          <br />Please return to the <a href= '/'>home page</a> and try again.
+        </span>
+      </div>
     </div>
-  </div>
 
-<script>
-  var resizeDiv;
+    <div class="footer_top"></div>
 
-  resizeDiv = function() {
-    var percent, vph, vpw;
-    vpw = $(window).width();
-    vph = $(window).height();
-    percent = vph * 0.3;
-    $("#placeholder").css({
-      height: (vph - 135) + "px"
-    });
-    return $("#placeholder_title").css({
-      "padding-top": percent + "px"
-    });
-  };
+    <footer class="footer">
+      <div class="wrap">
+        <section class="content_wrap">
+          <p class='title_footer'>Boston Public Schools<br/>
+          <span class="copyright">Copyright &copy; 2011-2016 Boston Public Schools. All Rights Reserved.</p>
+          <div class='logo'><a href='javascript:void();'><img src='/assets/bps-logo.png'/></a></div>
+          <div class='clr'></div>
+        </section>
+      </div>
+    </footer>
 
-  $(document).ready(function() {
-    return resizeDiv();
-  });
+    <script>
+      $("body").click(function(){
+        $(".dialog_box").fadeOut("fast").removeClass("active");
+      });
+      $(".dialog_box").click(function(e){
+        e.stopPropagation();
+      });
 
-  window.onresize = function(event) {
-    return resizeDiv();
-  };
-</script>
+      var resizeDiv;
 
+      resizeDiv = function() {
+        var percent, vph, vpw;
+        vpw = $(window).width();
+        vph = $(window).height();
+        percent = vph * 0.3;
+        $("#placeholder").css({
+          height: (vph - 135) + "px"
+        });
+        return $("#placeholder_title").css({
+          "padding-top": percent + "px"
+        });
+      };
 
-<div class="footer_top"></div>
+      $(document).ready(function() {
+        return resizeDiv();
+      });
 
-<footer class="footer">
-  <div class="wrap">
-    <section class="content_wrap">
-      <p class='title_footer'>Boston Public Schools<br/>
-      <span class="copyright">Copyright &copy; 2011-2016 Boston Public Schools. All Rights Reserved.</p>
-      <div class='logo'><a href='javascript:void();'><img src='/assets/bps-logo.png'/></a></div>
-      <div class='clr'></div>
-    </section>
-  </div>
-</footer>
-
-<script>
-  $("body").click(function(){
-    $(".dialog_box").fadeOut("fast").removeClass("active");
-  });
-  $(".dialog_box").click(function(e){
-    e.stopPropagation();
-  });
-</script>
+      window.onresize = function(event) {
+        return resizeDiv();
+      };
+    </script>
 </body>
 </html>
