@@ -77,9 +77,9 @@ class Student < ActiveRecord::Base
     student_info = Webservice.get_student(token)
 
     if student_info.present?
-      student_schools = Webservice.get_choice_schools(token)
+      choice_schools = Webservice.get_choice_schools(token)
 
-      if student_schools.present?
+      if choice_schools.present?
 
         student = Student.where(token: student_info[:Token]).first_or_initialize
 
@@ -104,7 +104,7 @@ class Student < ActiveRecord::Base
 
         # save the schools on the student
 
-        student.set_choice_schools!(student_schools)
+        student.set_choice_schools!(choice_schools)
 
         # return the student
 
