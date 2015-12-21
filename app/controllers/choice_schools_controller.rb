@@ -99,7 +99,7 @@ class ChoiceSchoolsController < ApplicationController
       @choice_schools.each do |student_school|
         payload << { "CallID" => student_school.call_id, "ProgramCode" => student_school.program_code, "SchoolID" => student_school.school.bps_id, "Rank" => student_school.choice_rank, "CreatedDateTime" => "", "SchoolRankID" => "" }
       end
-      Webservice.submit_ranked_choices(payload)
+      Webservice.save_choice_rank(payload)
       redirect_to success_choice_schools_path
     end
   end

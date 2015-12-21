@@ -73,42 +73,43 @@ class Student < ActiveRecord::Base
   # SAVE SCHOOLS ON CURRENT_STUDENT
 
   def self.save_student_and_choice_schools(token, session_id)
-    student_schools = Webservice.get_choice_schools(token)
 
-    if student_schools && student_schools[:choiceList] && student_schools[:studentInfo]
+    student_info = Webservice.get_student(token)
 
-      # save the student
+    if student_info.present?
+      student_schools = Webservice.get_choice_schools(token)
 
-      student_info = student_schools[:studentInfo]
+      if student_schools.present?
 
-      student = Student.where(token: student_info[:Token]).first_or_initialize
+        student = Student.where(token: student_info[:Token]).first_or_initialize
 
-      student.session_id = session_id
-      student.first_name = student_info[:FirstName].try(:strip)
-      student.last_name = student_info[:LastName].try(:strip)
-      student.grade_level = student_info[:Grade].try(:strip).try(:gsub, /^0/, '')
-      student.street_number = student_info[:Streetno].try(:strip)
-      student.street_name = student_info[:Street].try(:strip)
-      student.neighborhood = student_info[:City].try(:strip)
-      student.zipcode = student_info[:ZipCode].try(:strip)
-      student.x_coordinate = student_info[:X]
-      student.y_coordinate = student_info[:Y]
-      student.latitude = student_info[:Latitude]
-      student.longitude = student_info[:Longitude]
-      student.addressid = student_info[:AddressID].try(:to_s).try(:strip)
-      student.geo_code = student_info[:GeoCode]
-      student.address_verified = true
-      student.awc_invitation = student_info[:IsAWCEligible]
+        student.session_id = session_id
+        student.first_name = student_info[:FirstName].try(:strip)
+        student.last_name = student_info[:LastName].try(:strip)
+        student.grade_level = student_info[:Grade].try(:strip).try(:gsub, /^0/, '')
+        student.street_number = student_info[:Streetno].try(:strip)
+        student.street_name = student_info[:Street].try(:strip)
+        student.neighborhood = student_info[:City].try(:strip)
+        student.zipcode = student_info[:ZipCode].try(:strip)
+        student.x_coordinate = student_info[:X]
+        student.y_coordinate = student_info[:Y]
+        student.latitude = student_info[:Latitude]
+        student.longitude = student_info[:Longitude]
+        student.addressid = student_info[:AddressID].try(:to_s).try(:strip)
+        student.geo_code = student_info[:GeoCode]
+        student.address_verified = true
+        student.awc_invitation = student_info[:IsAWCEligible]
 
-      student.save!
+        student.save!
 
-      # save the schools on the student
+        # save the schools on the student
 
-      student.set_choice_schools!(student_schools[:choiceList])
+        student.set_choice_schools!(student_schools[:choiceList])
 
-      # return the student
+        # return the student
 
-      student
+        student
+      end
     end
   end
 

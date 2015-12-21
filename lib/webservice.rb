@@ -4,23 +4,30 @@ module Webservice
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help
 
 
-	##### STUDENT SCHOOLS #####
+	##### CHOICE SCHOOLS #####
 
 	# {:Token=>"DC74E778-00E3-749A-56E3-001D7EAD42D0", :FirstName=>"Mario", :LastName=>"Haley", :StudentName=>"Haley, MarioStacey", :Grade=>"11", :AddressID=>348690,
 	# :Street=>"GARDNER ST", :Streetno=>"4", :City=>"Allston", :ZipCode=>"02134", :State=>"MA",
 	# :GeoCode=>"801", :Latitude=>"42.3536288141557", :Longitude=>"-71.1316370974287", :X=>"755735.124511719", :Y=>"2954106.35369873"}
 
-	def self.get_choice_schools(token)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student"
+	def self.get_student(token)
+		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/getstudent"
 		params = { token: token, schyear: "2015" }.to_param
 		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
-	##### SUBMIT RANKED STUDENT SCHOOLS #####
+	def self.get_choice_schools(token)
+		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/getchoiceschools"
+		params = { token: token, schyear: "2015" }.to_param
+		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
+		MultiJson.load(response, symbolize_keys: true)
+	end
 
-	def self.submit_ranked_choices(payload)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student"
+	##### SUBMIT RANKED CHOICE LIST #####
+
+	def self.save_choice_rank(payload)
+		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/savechoicerank"
 		response = self.post(endpoint, payload)
 		Rails.logger.info "******************** #{response.body}"
 	end
