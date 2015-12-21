@@ -8,15 +8,18 @@
         %a{href: '#', target: '_blank'}
           Learn more
       - else
-        Below is a list of your Home-Based schools.
-        To see more information on each school, please click the 'i' icon.
-        To generate a customized Fit Score for your student, please expand the categories in the right sidebar and select the options that are of interest to your student.
+        Below is a list of eligible schools for #{current_student.full_name}.
+        Click the school name to see more information.
+        Open the categories in the left sidebar to create a customized Fit Score for your child.
+        When you are ready to rank your list, click the "Continue" button at the bottom of the page.
 
   .list_content
     .flexible_content
       - if @choice_schools.present?
         .menu_list
           %div{id: 'home_header', class: 'li_frame school_list_header', style: 'display: block;'}
+            #sortable_star_column.sortable_column.menu_bloc.desktop.no_mobile
+
             #sortable_school_name_column.menu_bloc.sortable_column
               .column_title
                 Name
@@ -43,6 +46,13 @@
             %li{id: "#{current_student.id}_#{school.bps_id}", class: "list_row home_school clearfix"}
               %div{id: "#{current_student.id}_#{school.bps_id}_row", class: "li_frame"}
 
+                .desktop.star.line
+                  .middle
+                    = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
+                    = image_tag('star_unstarred.png', id: "star_#{student_school.id}_unstarred", class: 'star_unstarred', style: "display: #{student_school.starred? ? 'none' : 'inline'}; cursor: pointer;", data: {student_school_id: student_school.id} )
+                  %span{class: "sortable_star", style: "visibility: hidden; display: none;"}
+                    = student_school.starred? ? 1 : 3
+
                 .school_name.select.line
                   %span.middle
                     %span.sortable_school_name
@@ -52,7 +62,6 @@
 
                     - if school.api_basic_info.try(:[], :SchoolType).present? && school.api_basic_info.try(:[], :SchoolType) == 'Exam'
                       %span{:aria => {hidden: 'true'}, :class => "select_icon icon-DBPS-Preferences-Icons-20130930-SRG_exam_school"}
-                    %span.icon.icon-info.light_blue
 
                 .box.line.your_fit_icon
                   %span{id: "#{current_student.id}_#{school.bps_id}_icons", class: "middle"}

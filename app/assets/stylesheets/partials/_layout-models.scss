@@ -1259,7 +1259,7 @@ School List
 
 		&#sortable_star_column {
 			padding-left: 0;
-			width: 7%;
+			width: 5.5%;
 		}
 	  &#sortable_school_name_column {
 			width: 29.1%;
@@ -1516,6 +1516,15 @@ School List Rows
 		  font-size: 16px;
 		  line-height: 18px;
 		}
+
+    &.star {
+      width: 4%;
+      padding: 0 0 0 2%;
+      color: #0077cf;
+      text-align: center;
+      font-size: 16px;
+      line-height: 18px;
+    }
 
 		&.school_name {
 			width: 29.4%;

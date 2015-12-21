@@ -63,7 +63,6 @@
 
                     - if school.api_basic_info.try(:[], :SchoolType).present? && school.api_basic_info.try(:[], :SchoolType) == 'Exam'
                       %span{:aria => {hidden: 'true'}, :class => "select_icon icon-DBPS-Preferences-Icons-20130930-SRG_exam_school"}
-                    %span.icon.icon-info.light_blue
 
                 .box.line.your_fit_icon
                   %span{id: "#{current_student.id}_#{school.bps_id}_icons", class: "middle"}

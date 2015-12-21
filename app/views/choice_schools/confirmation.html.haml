@@ -1,4 +1,4 @@
-= render partial: 'layouts/choice_schools/header'
+= render partial: "header"
 
 .wrap
   .result
@@ -19,7 +19,10 @@
           = text_field_tag :confirmation_code, nil, placeholder: "Confirmation Code", class: "large-input"
 
           %div{ style: "margin-top: 2em;" }
-            = submit_tag "Continue", id: "continue-button", data: { disable_with: 'Submitting...' }
+            %div{ style: "display: inline-block;" }
+              = link_to "Back", verify_choice_schools_path(token: params[:token]), id: "back-button"
+            %div{ style: "display: inline-block;" }
+              = submit_tag "Continue", id: "continue-button", data: { disable_with: 'Submitting...' }
 
         %div{ style: "margin-top: 1em;" }
           Didn't reveive a confirmation code?

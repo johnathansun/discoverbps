@@ -93,7 +93,7 @@ class SchoolsController < ApplicationController
         elsif current_student.starred_schools.present?
           @home_schools = current_student.starred_schools.all
           current_student.home_schools.rank(:sort_order).all.each do |school|
-            @home_schools << school unless home_schools.include?(school)
+            @home_schools << school unless @home_schools.include?(school)
           end
         # match the default sort order on the lean page (distance)
         else

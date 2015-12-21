@@ -1,5 +1,7 @@
-= render partial: 'layouts/choice_schools/header'
+= render partial: "header"
 
+.wrap
+  = render partial: "student_tabs"
 .wrap
   .result
     #choice-layout
@@ -19,7 +21,10 @@
         %p
           If this list is correct, please click the "submit" button below to submit your official selection to the school department.
         %p
-          If you would like to change your list, please #{link_to "click here", order_choice_schools_path(token: params[:token])} to return to the previous screen.
+          If you would like to change your list, click the "Back" button to return to the previous screen.
 
-        %div{ style: "margin-top: 2em;" }
-          = button_to "Submit", submit_choice_schools_path(token: params[:token]), id: "continue-button", data: { disable_with: 'Submitting...' }
+        %div{ style: "margin: 3em 0 3em 0;" }
+          %div{ style: "display: inline-block;" }
+            = link_to "Back", order_choice_schools_path(token: params[:token]), id: "back-button"
+          %div{ style: "display: inline-block;" }
+            = button_to "Submit", submit_choice_schools_path(token: params[:token]), id: "continue-button", data: { disable_with: 'Submitting...' }

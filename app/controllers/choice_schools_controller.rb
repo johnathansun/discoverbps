@@ -39,7 +39,14 @@ class ChoiceSchoolsController < ApplicationController
     end
     if student.present?
       session[:student_id] = student.id
-      @choice_schools = student.choice_schools.rank(:sort_order)
+      if current_student.starred_schools.present?
+        @choice_schools = current_student.starred_schools.all
+        current_student.choice_schools.all.each do |school|
+          @choice_schools << school unless @choice_schools.include?(school)
+        end
+      else
+        @choice_schools = student.choice_schools
+      end
     else
       @choice_schools = nil
     end
@@ -50,10 +57,17 @@ class ChoiceSchoolsController < ApplicationController
       flash[:alert] = 'There were no schools that matched your search. Please try again.'
       redirect_to root_url
     else
-      current_student.update_column(:step, 3) if current_student.step < 3
-      @matching_school_ids = current_user_students.collect {|x| x.student_schools.collect {|y| y.bps_id}}.inject(:&)
+      if schools = current_student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
+        @choice_schools = schools
+      elsif schools = current_student.starred_schools.all
+        @choice_schools = schools
+      else
+        @choice_schools = []
+      end
 
-      @choice_schools = current_student.choice_schools.includes(:school).order("schools.name")
+      current_student.choice_schools.includes(:school).order("schools.name").all.each do |student_school|
+        @choice_schools << student_school unless @choice_schools.include?(student_school)
+      end
 
       if @choice_schools.blank?
         flash[:alert] = 'There were no schools that matched your search. Please try again.'
@@ -70,13 +84,20 @@ class ChoiceSchoolsController < ApplicationController
     if params[:schools].blank? || params[:schools].values.all? {|x| x.blank?}
       redirect_to order_choice_schools_path(token: params[:token]), alert: "Please rank one or more schools and then submit your list:"
     else
-      params[:schools].each do |id, rank|
-        if rank.present?
-          school = StudentSchool.find(id)
-          school.update_column(:choice_rank, rank)
+      rankings = params[:schools].values.select {|x| x.present?}.map {|x| x.try(:to_i)}
+      properly_formatted = rankings.sort == (rankings.sort[0]..rankings.sort[-1]).to_a rescue false
+
+      if properly_formatted
+        params[:schools].each do |id, rank|
+          if rank.present?
+            school = StudentSchool.find(id)
+            school.update_column(:choice_rank, rank)
+          end
         end
+        redirect_to summary_choice_schools_path
+      else
+        redirect_to order_choice_schools_path(token: params[:token]), alert: "There are errors with your sort order. Please ensure that your rankings are sequential and start with number one:"
       end
-      redirect_to summary_choice_schools_path
     end
   end
 

@@ -1,4 +1,4 @@
-= render partial: 'layouts/choice_schools/header'
+= render partial: "header"
 
 .wrap
   .result
@@ -26,4 +26,7 @@
           joelmxxxxx@gmail.com
 
           %div{ style: "margin-top: 2em;" }
-            = submit_tag "Continue", id: "continue-button", data: { disable_with: 'Submitting...' }
+            %div{ style: "display: inline-block;" }
+              = link_to "Back", choice_schools_path, id: "back-button"
+            %div{ style: "display: inline-block;" }
+              = submit_tag "Continue", id: "continue-button", data: { disable_with: 'Submitting...' }
