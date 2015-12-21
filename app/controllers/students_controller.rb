@@ -124,7 +124,7 @@ class StudentsController < ApplicationController
     render nothing: true
   end
 
-  def swtich_current
+  def switch_current
     session[:student_id] = params[:id]
     redirect_to(:back)
   end
