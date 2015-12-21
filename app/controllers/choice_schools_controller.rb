@@ -69,9 +69,9 @@ class ChoiceSchoolsController < ApplicationController
       redirect_to order_choice_schools_path(token: params[:token]), alert: "Please rank one or more schools and then submit your list:"
     else
       rankings = params[:schools].values.select {|x| x.present?}
-      properly_formatted? = rankings.map {|x| x.try(:to_i)}.sort == (rankings.map {|x| x.try(:to_i)}.sort[0]..rankings.map {|x| x.try(:to_i)}.sort[-1]).to_a rescue false
+      properly_formatted = rankings.map {|x| x.try(:to_i)}.sort == (rankings.map {|x| x.try(:to_i)}.sort[0]..rankings.map {|x| x.try(:to_i)}.sort[-1]).to_a rescue false
 
-      if properly_formatted?
+      if properly_formatted
         params[:schools].each do |id, rank|
           if rank.present?
             school = StudentSchool.find(id)
