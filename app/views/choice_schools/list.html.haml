@@ -16,8 +16,9 @@
       %div{ style: "margin: 3em 0 3em 0;" }
         %div{ style: "display: inline-block;" }
           = link_to "Back", confirmation_choice_schools_path(token: params[:token]), id: "back-button"
-        %div{ style: "display: inline-block;" }
-          = link_to "Continue", order_choice_schools_path(token: params[:token]), id: "continue-button"
+        - if @choice_schools.present?
+          %div{ style: "display: inline-block;" }
+            = link_to "Continue", order_choice_schools_path(token: params[:token]), id: "continue-button"
 
 
 :javascript
