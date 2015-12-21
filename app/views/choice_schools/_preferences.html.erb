@@ -4,7 +4,7 @@
 
 		<!-- header only in tablet -->
 		<div class="header_preferences">
-			<span class="font_17">Choose what matters to <%= current_student.first_name %>:
+			<span class="font_17">Choose what matters to <%= @student.first_name %>:
 		<!--
 				<span id="hide_btn">Hide Criteria &nbsp;
 					<span aria-hidden="true" class="down_arrow icon-DBPS-Dev-Assets-SRG-41"></span>
@@ -21,10 +21,10 @@
 
 	<!-- preferences list for desktop and tablet situation -->
 		<div id="preference_content" style="margin-top: 5em;">
-			<% if PreferenceCategory.active(current_student.grade_level).present? %>
+			<% if PreferenceCategory.active(@student.grade_level).present? %>
 				<% @opening_tags = 0 %>
 				<% @closing_tags = 0 %>
-				<% PreferenceCategory.active(current_student.grade_level).each_with_index do |category, i| %>
+				<% PreferenceCategory.active(@student.grade_level).each_with_index do |category, i| %>
 					<% if i.remainder(2) == 0 %>
 						<% @opening_tags += 1 %>
 						<div class="colonn">
@@ -36,9 +36,9 @@
 								<span aria-hidden="true" class="icon icon-arrow icon-DBPS-Dev-Assets-arrow-left"></span>
 							</p>
 							<div class="pref_choices closed">
-							<% category.active_preferences(current_student.grade_level).each do |preference| %>
+							<% category.active_preferences(@student.grade_level).each do |preference| %>
 								<label class='font_13_14'>
-									<input data-category="preference_category_<%= category.id %>" id="preference_<%= preference.id %>" class="preference_checkbox" type='checkbox' name='[student][preference_ids][]' value='<%= preference.name %>', <%= current_student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
+									<input data-category="preference_category_<%= category.id %>" id="preference_<%= preference.id %>" class="preference_checkbox" type='checkbox' name='[student][preference_ids][]' value='<%= preference.name %>', <%= @student.preference_ids.include?(preference.id) ? 'checked' : '' %> />
 									<span class="text"><%= preference.name %></span>
 								</label>
 							<% end %>
@@ -48,7 +48,7 @@
 						<% @closing_tags += 1 %>
 						</div>
 					<% end %>
-					<% if ((i + 1) == PreferenceCategory.active(current_student.grade_level).count) && (@opening_tags > @closing_tags) %>
+					<% if ((i + 1) == PreferenceCategory.active(@student.grade_level).count) && (@opening_tags > @closing_tags) %>
 						</div>
 					<% end %>
 				<% end %>
@@ -72,7 +72,7 @@
 
 				// save the preference to student.preferences
 				$.ajax({
-	        url: '/students/<%= current_student.id %>/save_preference',
+	        url: '/students/<%= @student.id %>/save_preference',
 	        type: 'post',
 	        data: $('.preference_checkbox:checked').serialize(),
 	        dataType: 'script'

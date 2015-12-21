@@ -4,6 +4,9 @@
   .result
     #choice-layout
       .light
+        - if flash[:alert].present?
+          %p{style: 'color: red;'}
+            = flash[:alert]
         %p
           Dear Boston Public Schools Family,
         %p

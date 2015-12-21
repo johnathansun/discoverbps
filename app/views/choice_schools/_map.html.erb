@@ -174,8 +174,8 @@
      // Create a new StyledMapType object, passing it the array of styles,
       // as well as the name to be displayed on the map type control.
       var styledMap = new google.maps.StyledMapType(map_styles,{name: "Styled Map"});
-      <% if current_student.latitude.present? && current_student.longitude.present? && current_student.latitude != 0 && current_student.longitude != 0 %>
-        var myLatlng =  new google.maps.LatLng(<%= current_student.latitude %>,<%= current_student.longitude %>);
+      <% if @student.latitude.present? && @student.longitude.present? && @student.latitude != 0 && @student.longitude != 0 %>
+        var myLatlng =  new google.maps.LatLng(<%= @student.latitude %>,<%= @student.longitude %>);
       <% else %>
         var myLatlng = new google.maps.LatLng(42.3581,-71.0636);
       <% end %>
@@ -250,7 +250,7 @@
 
       // Display the chocie schools
 
-      <% current_student.choice_schools.rank(:sort_order).each_with_index do |student_school, i| %>
+      <% @student.choice_schools.rank(:sort_order).each_with_index do |student_school, i| %>
         <% if student_school.school.latitude.present? && student_school.school.longitude.present? %>
           var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
           latlngbounds.extend(coordinates);
@@ -286,8 +286,8 @@
 
       // Set the home icon
 
-      <% if current_student.latitude.present? && current_student.longitude.present? && current_student.latitude != 0 && current_student.longitude != 0 %>
-        var coordinates = new google.maps.LatLng(<%= current_student.latitude %>, <%= current_student.longitude %>);
+      <% if @student.latitude.present? && @student.longitude.present? && @student.latitude != 0 && @student.longitude != 0 %>
+        var coordinates = new google.maps.LatLng(<%= @student.latitude %>, <%= @student.longitude %>);
         latlngbounds.extend(coordinates);
         var homeMarker = new google.maps.Marker({
           position: coordinates,
@@ -308,7 +308,7 @@
       var homeInfowindow = new google.maps.InfoWindow({});
 
       google.maps.event.addListener(homeMarker, 'mouseover', function() {
-        homeInfowindow.setContent('<div><%= current_student.street_number %>&nbsp;<%= current_student.street_name %> <br /><%= current_student.neighborhood %> MA</div>');
+        homeInfowindow.setContent('<div><%= @student.street_number %>&nbsp;<%= @student.street_name %> <br /><%= @student.neighborhood %> MA</div>');
         homeInfowindow.open(map,this);
       });
 

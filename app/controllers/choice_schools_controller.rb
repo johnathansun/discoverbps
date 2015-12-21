@@ -1,14 +1,14 @@
 class ChoiceSchoolsController < ApplicationController
   include ApplicationHelper
   include SchoolsHelper
+  before_filter :redirect_if_token_is_blank, except: [:index]
+  before_filter :get_or_set_student, except: [:index, :verify, :send_verification, :confirmation, :authenticate]
   layout "choice_schools"
 
   def index
   end
 
   def verify
-    if params[:token].present?
-    end
   end
 
   def send_verification
@@ -32,38 +32,29 @@ class ChoiceSchoolsController < ApplicationController
   end
 
   def list
-    unless current_student.present? && current_student[:token] == params[:token]
-      student = Student.save_student_and_choice_schools(params[:token], session[:session_id])
-      session[:student_id] = student.id
-    end
-    if current_student.present? && current_student[:token] == params[:token]
-      if current_student.starred_schools.present?
-        @choice_schools = current_student.starred_schools.all
-        current_student.choice_schools.all.each do |school|
-          @choice_schools << school unless @choice_schools.include?(school)
-        end
-      else
-        @choice_schools = current_student.choice_schools
+    if @student.starred_schools.present?
+      @choice_schools = @student.starred_schools.all
+      @student.choice_schools.all.each do |school|
+        @choice_schools << school unless @choice_schools.include?(school)
       end
     else
-      @choice_schools = nil
+      @choice_schools = @student.choice_schools
     end
   end
 
   def order
-    if current_student.choice_schools.blank?
-      flash[:alert] = 'There were no schools that matched your search. Please try again.'
-      redirect_to choice_schools_path(token: params[:token])
+    if @student.choice_schools.blank?
+      redirect_to choice_schools_path(token: params[:token]), alert: "There were no schools that matched your search. Please try again."
     else
-      if schools = current_student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
+      if schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
         @choice_schools = schools
-      elsif schools = current_student.starred_schools.all
+      elsif schools = @student.starred_schools.all
         @choice_schools = schools
       else
         @choice_schools = []
       end
 
-      current_student.choice_schools.includes(:school).order("schools.name").all.each do |student_school|
+      @student.choice_schools.includes(:school).order("schools.name").all.each do |student_school|
         @choice_schools << student_school unless @choice_schools.include?(student_school)
       end
 
@@ -78,9 +69,9 @@ class ChoiceSchoolsController < ApplicationController
       redirect_to order_choice_schools_path(token: params[:token]), alert: "Please rank one or more schools and then submit your list:"
     else
       rankings = params[:schools].values.select {|x| x.present?}
-      properly_formatted = rankings.map {|x| x.try(:to_i)}.sort == (rankings.map {|x| x.try(:to_i)}.sort[0]..rankings.map {|x| x.try(:to_i)}.sort[-1]).to_a rescue false
+      properly_formatted? = rankings.map {|x| x.try(:to_i)}.sort == (rankings.map {|x| x.try(:to_i)}.sort[0]..rankings.map {|x| x.try(:to_i)}.sort[-1]).to_a rescue false
 
-      if properly_formatted
+      if properly_formatted?
         params[:schools].each do |id, rank|
           if rank.present?
             school = StudentSchool.find(id)
@@ -95,11 +86,11 @@ class ChoiceSchoolsController < ApplicationController
   end
 
   def summary
-    @choice_schools = current_student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
+    @choice_schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
   end
 
   def submit
-    @choice_schools = current_student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
+    @choice_schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
 
     if @choice_schools.blank?
       redirect_to order_choice_schools_path(token: params[:token]), alert: "Please rank one or more schools and then submit your list:"
@@ -114,9 +105,25 @@ class ChoiceSchoolsController < ApplicationController
   end
 
   def success
-    @choice_schools = current_student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
+    @choice_schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
   end
 
+  private
 
+  def redirect_if_token_is_blank
+    if params[:token].blank?
+      redirect_to choice_schools_path, alert: "Please access this site from a valid URL found in your invitation email."
+    end
+  end
+
+  def get_or_set_student
+    if student = Student.where(token: params[:token]).first
+      @student = student
+    elsif student = Student.save_student_and_choice_schools(params[:token], session[:session_id])
+      @student = student
+    else
+      redirect_to choice_schools_path, alert: "We couldn't find a student using the URL you provided. Please check the link and try again."
+    end
+  end
 
 end
