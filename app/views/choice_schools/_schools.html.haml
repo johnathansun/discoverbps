@@ -1,5 +1,5 @@
 %div{id: 'home_schools_list', class: "schools_list #{(params[:list_type] == 'ell' || params[:list_type] == 'sped' || params[:list_type] == 'zone') ? 'hidden' : ''}"}
-  - if @home_schools.present?
+  - if @choice_schools.present?
     %div.light{ style: "margin: 0 3em 1em 0;" }
       - if zone_school_grades.include?(current_student.grade_level)
         The grade you selected
@@ -10,17 +10,13 @@
       - else
         Below is a list of your Home-Based schools.
         To see more information on each school, please click the 'i' icon.
-        You can also click the star icon to highlight your favorites.
+        To generate a customized Fit Score for your student, please expand the categories in the right sidebar and select the options that are of interest to your student.
 
   .list_content
     .flexible_content
-      - if @home_schools.present?
+      - if @choice_schools.present?
         .menu_list
           %div{id: 'home_header', class: 'li_frame school_list_header', style: 'display: block;'}
-            #sortable_star_column.sortable_column.menu_bloc.desktop.no_mobile
-              .column_title
-                Star
-
             #sortable_school_name_column.menu_bloc.sortable_column
               .column_title
                 Name
@@ -42,17 +38,10 @@
                 Eligibility
 
         %ul#sortable
-          - @home_schools.each_with_index do |student_school, i|
+          - @choice_schools.each_with_index do |student_school, i|
             - school = student_school.school
             %li{id: "#{current_student.id}_#{school.bps_id}", class: "list_row home_school clearfix"}
               %div{id: "#{current_student.id}_#{school.bps_id}_row", class: "li_frame"}
-
-                .desktop.no_order.line
-                  .middle
-                    = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
-                    = image_tag('star_unstarred.png', id: "star_#{student_school.id}_unstarred", class: 'star_unstarred', style: "display: #{student_school.starred? ? 'none' : 'inline'}; cursor: pointer;", data: {student_school_id: student_school.id} )
-                  %span{class: "sortable_star", style: "visibility: hidden; display: none;"}
-                    = student_school.starred? ? 1 : 3
 
                 .school_name.select.line
                   %span.middle
@@ -122,8 +111,6 @@
                     .clr
 
                   .clr
-
-        = render partial: 'layouts/schools/notice'
 
       - else
         %div{style: 'margin: 3em 0 4em 0;'}

@@ -1,5 +1,5 @@
 .wrap.global_map{style: 'margin-top: 30px; padding: 0px;'}
-  = render partial: 'schools/page_elements/map', locals: {students_list: [current_student], school: nil, map_controls: false, width: '100%'}
+  = render partial: 'layouts/schools/map', locals: {students_list: [current_student], school: nil, map_controls: false, width: '100%'}
 
 .wrap.result
   #school_list{style: 'padding-top: 0px; color: #222222;'}

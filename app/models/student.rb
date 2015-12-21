@@ -5,6 +5,7 @@ class Student < ActiveRecord::Base
 	has_and_belongs_to_many :preferences, uniq: true, after_add: :count_preferences, after_remove: :count_preferences
 	has_many :student_schools, uniq: true
   has_many :schools, through: :student_schools
+  has_many :choice_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'choice']
   has_many :home_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'home']
   has_many :zone_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'zone']
   has_many :ell_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'ell']
@@ -71,27 +72,67 @@ class Student < ActiveRecord::Base
 
   # SAVE SCHOOLS ON CURRENT_STUDENT
 
-  def set_student_schools!(school_hash)
-    save_student_schools!(school_hash, 'home')
+  def self.save_student_and_choice_schools(token, session_id)
+    student_schools = Webservice.get_student_schools(token)
+
+    if student_schools && student_schools[:choiceList] && student_schools[:studentInfo]
+
+      # save the student
+
+      student_info = student_schools[:studentInfo]
+
+      student = Student.where(token: student_info[:Token]).first_or_initialize
+
+      student.session_id = session_id
+      student.first_name = student_info[:FirstName].try(:strip)
+      student.last_name = student_info[:LastName].try(:strip)
+      student.grade_level = student_info[:Grade].try(:strip).try(:gsub, /^0/, '')
+      student.street_number = student_info[:Streetno].try(:strip)
+      student.street_name = student_info[:Street].try(:strip)
+      student.neighborhood = student_info[:City].try(:strip)
+      student.zipcode = student_info[:ZipCode].try(:strip)
+      student.x_coordinate = student_info[:X]
+      student.y_coordinate = student_info[:Y]
+      student.latitude = student_info[:Latitude]
+      student.longitude = student_info[:Longitude]
+      student.addressid = student_info[:AddressID].try(:to_s).try(:strip)
+      student.geo_code = student_info[:GeoCode]
+      student.address_verified = true
+      student.awc_invitation = student_info[:IsAWCEligible]
+
+      student.save!
+
+      # save the schools on the student
+
+      student.set_choice_schools!(student_schools[:choiceList])
+
+      # return the student
+
+      student
+    end
+  end
+
+  def set_choice_schools!(school_hash)
+    save_student_schools!(school_hash, 'choice')
   end
 
   def set_home_schools!
-    api_schools = Webservice.home_schools(self.formatted_grade_level, self.addressid, self.awc_invitation, self.sibling_school_ids).try(:[], :List)
+    api_schools = Webservice.get_home_schools(self.formatted_grade_level, self.addressid, self.awc_invitation, self.sibling_school_ids).try(:[], :List)
     save_student_schools!(api_schools, 'home')
   end
 
   def set_zone_schools!
-    api_schools = Webservice.zone_schools(self.formatted_grade_level, self.addressid, self.sibling_school_ids).try(:[], :List)
+    api_schools = Webservice.get_zone_schools(self.formatted_grade_level, self.addressid, self.sibling_school_ids).try(:[], :List)
     save_student_schools!(api_schools, 'zone')
   end
 
   def set_ell_schools!
-    api_schools = Webservice.ell_schools(self.formatted_grade_level, self.addressid, self.ell_language)
+    api_schools = Webservice.get_ell_schools(self.formatted_grade_level, self.addressid, self.ell_language)
     save_student_schools!(api_schools, 'ell')
   end
 
   def set_sped_schools!
-    api_schools = Webservice.sped_schools(self.formatted_grade_level, self.addressid)
+    api_schools = Webservice.get_sped_schools(self.formatted_grade_level, self.addressid)
     save_student_schools!(api_schools, 'sped')
   end
 
@@ -118,7 +159,22 @@ class Student < ActiveRecord::Base
             school_ids << school.id
             school_coordinates += "#{school.latitude},#{school.longitude}|"
             exam_school = (api_school[:IsExamSchool] == "0" ? false : true)
-            self.student_schools.create(school_id: school.id, school_type: school_list_type, bps_id: api_school[:SchoolID], tier: api_school[:Tier], eligibility: api_school[:Eligibility], walk_zone_eligibility: api_school[:AssignmentWalkEligibilityStatus], transportation_eligibility: api_school[:TransEligible], distance: api_school[:StraightLineDistance], exam_school: exam_school, sped_cluster: api_school[:SPEDCluster], sped_description: api_school[:Program], ell_cluster: api_school[:ELLCluster], ell_description: api_school[:ProgramDescription])
+            self.student_schools.create(school_id: school.id,
+              school_type: school_list_type,
+              bps_id: api_school[:SchoolID],
+              tier: api_school[:Tier],
+              eligibility: api_school[:Eligibility],
+              walk_zone_eligibility: api_school[:AssignmentWalkEligibilityStatus],
+              transportation_eligibility: api_school[:TransEligible],
+              distance: api_school[:StraightLineDistance],
+              exam_school: exam_school,
+              sped_cluster: api_school[:SPEDCluster],
+              sped_description: api_school[:Program],
+              ell_cluster: api_school[:ELLCluster],
+              ell_description: api_school[:ProgramDescription],
+              program_code: api_school[:ProgramCode],
+              call_id: api_school[:CallID]
+            )
           end
         end
 

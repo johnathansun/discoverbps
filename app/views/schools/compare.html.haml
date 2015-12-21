@@ -1,13 +1,13 @@
-= render partial: 'schools/page_elements/header', locals: {page_step: 3}
+= render partial: 'layouts/schools/header', locals: {page_step: 3}
 
 .wrap
-	= render partial: 'schools/page_elements/student_tabs'
+	= render partial: 'layouts/schools/student_tabs'
 
 .wrap.global_map
-	= render partial: 'schools/page_elements/map', locals: {students_list: current_user_students, school: nil, map_controls: true, height: 'resize', width: '100%'}
+	= render partial: 'layouts/schools/map', locals: {students_list: current_user_students, school: nil, map_controls: true, height: 'resize', width: '100%'}
 
 .wrap.compare_lists
-	= render partial: 'schools/page_elements/school_list_tabs'
+	= render partial: 'layouts/schools/school_list_tabs'
 
 #compare_list.compare_list.wrap
 	%a.next_step{:href => "#{get_ready_schools_path}"}
@@ -16,7 +16,7 @@
 		%span.text
 			= 'Step 4 - Get Ready!'
 		%span.arrow
-			
+
 
 	.result.clearfix
 		-# LEFT COLUMN
@@ -89,7 +89,7 @@
 		= render partial: 'schools/compare/ell_schools'
 		= render partial: 'schools/compare/sped_schools'
 
-	= render partial: 'schools/page_elements/footer'
+	= render partial: 'layouts/schools/footer'
 
 :javascript
 

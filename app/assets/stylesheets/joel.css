@@ -257,3 +257,27 @@ input, select {
 	color: #ffff00;
 	padding: 6px 0 0 15px;
 }
+
+.large-input {
+	padding: 7px;
+}
+
+#choice-layout {
+  background: #ebebeb;
+  position: relative;
+  padding: 4em 10% 5em 10%;
+  font-size: 17px;
+}
+
+#continue-button {
+	font-family: "Avenir-Black";
+	color: white;
+	text-decoration: none;
+	border: none;
+	background-color: $dark_blue;
+	padding: 10px 15px 10px 15px;
+}
+
+#continue-button:hover {
+	background-color: $orange;
+}

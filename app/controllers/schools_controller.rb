@@ -44,34 +44,6 @@ class SchoolsController < ApplicationController
     end
   end
 
-  def rank
-    if current_user_students.blank?
-      flash[:alert] = 'There were no schools that matched your search. Please try again.'
-      redirect_to root_url
-    else
-      current_student.update_column(:step, 3) if current_student.step < 3
-
-      @matching_school_ids = current_user_students.collect {|x| x.student_schools.collect {|y| y.bps_id}}.inject(:&)
-
-      if @home_schools.blank?
-        flash[:alert] = 'There were no schools that matched your search. Please try again.'
-        redirect_to root_url
-      else
-        respond_to do |format|
-          format.html
-        end
-      end
-    end
-  end
-
-  def submit_ranked
-    school_ids = []
-    params[:schools].all.each do |name|
-      school_ids << School.where(name: name).try(:bps_id)
-    end
-    Webservice.submit_ranked_choices(school_ids)
-  end
-
   def get_ready
     if current_user_students.blank?
       redirect_to root_url

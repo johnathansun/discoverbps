@@ -1,16 +1,16 @@
-= render partial: 'schools/page_elements/header', locals: {page_step: 4}
+= render partial: 'layouts/schools/header', locals: {page_step: 4}
 
 .wrap
-	= render partial: 'schools/page_elements/student_tabs'
+	= render partial: 'layouts/schools/student_tabs'
 
 .wrap.get_ready
 	.result.clearfix
 
 		#footer_content.column.column_left
-			= render partial: 'schools/page_elements/footer'
+			= render partial: 'layouts/schools/footer'
 
 		#school_list.column.column_center
-			= render partial: 'schools/page_elements/school_list_tabs'
+			= render partial: 'layouts/schools/school_list_tabs'
 
 			= render partial: 'schools/get_ready/home_schools'
 			= render partial: 'schools/get_ready/zone_schools'
@@ -18,9 +18,9 @@
 			= render partial: 'schools/get_ready/sped_schools'
 
 		#timeline_wrap.column.column_right
-			= render partial: 'schools/page_elements/get_ready_timeline'
+			= render partial: 'layouts/schools/get_ready_timeline'
 
-	= render partial: 'schools/page_elements/footer'
+	= render partial: 'layouts/schools/footer'
 
 
 :javascript

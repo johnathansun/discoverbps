@@ -1,13 +1,13 @@
-= render partial: 'schools/page_elements/header', locals: {page_step: 2}
+= render partial: 'layouts/schools/header', locals: {page_step: 2}
 
 .wrap
-	= render partial: 'schools/page_elements/student_tabs'
+	= render partial: 'layouts/schools/student_tabs'
 
 .wrap.global_map
-	= render partial: 'schools/page_elements/map', locals: {students_list: [current_student], school: nil, map_controls: true, resize: true, width: '100%'}
+	= render partial: 'layouts/schools/map', locals: {students_list: [current_student], school: nil, map_controls: true, resize: true, width: '100%'}
 
 .wrap
-	= render partial: 'schools/page_elements/school_list_tabs'
+	= render partial: 'layouts/schools/school_list_tabs'
 
 .wrap
 	%a.next_step{:href => "#{rank_schools_path}"}
@@ -19,7 +19,7 @@
 
 
 	.result
-		= render partial: 'schools/page_elements/preference_panel'
+		= render partial: 'layouts/schools/preference_panel'
 
 		#school_list
 			= render partial: 'schools/learn/home_schools'
@@ -27,7 +27,7 @@
 			= render partial: 'schools/learn/ell_schools'
 			= render partial: 'schools/learn/sped_schools'
 
-			= render partial: 'schools/page_elements/footer'
+			= render partial: 'layouts/schools/footer'
 
 
 :javascript

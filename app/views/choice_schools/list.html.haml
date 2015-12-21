@@ -1,28 +1,20 @@
-= render partial: 'layouts/schools/header', locals: {page_step: 2}
+= render partial: 'layouts/choice_schools/header', locals: {page_step: 2}
 
 .wrap
-  = render partial: 'layouts/schools/student_tabs'
+  = render partial: 'layouts/choice_schools/student_tabs'
 
 .wrap.global_map
-  = render partial: 'layouts/schools/map', locals: {students_list: [current_student], school: nil, map_controls: true, resize: true, width: '100%'}
+  = render partial: 'layouts/choice_schools/map', locals: {students_list: [current_student], school: nil, map_controls: true, resize: true, width: '100%'}
 
 .wrap
-  %a.next_step{:href => "#{new_choice_path}"}
-    %span.next
-      = 'Next'
-    %span.text
-      = 'Step 3 - Rank & Submit'
-    %span.arrow
-
-
   .result
-    = render partial: 'layouts/schools/preference_panel'
+    = render partial: 'layouts/choice_schools/preference_panel'
 
     #school_list
       = render partial: 'schools'
 
-      = render partial: 'layouts/schools/footer'
-
+      %div{ style: "margin: 3em 0 3em 0;" }
+        = link_to "Continue", order_choice_schools_path(token: params[:token]), id: "continue-button"
 
 :javascript
   $( document ).ready(function() {
@@ -103,38 +95,6 @@
       $('#login_panel').show();
       $('#dialog_box').show();
       return false;
-    });
-
-    $('.star_unstarred').click(function(){
-      $.ajax({
-        url: '/student_schools/' + $(this).data('studentSchoolId') + '/star',
-        type: 'post',
-        dataType: 'script'
-      });
-    });
-
-    $('.star_starred').click(function(){
-      $.ajax({
-        url: '/student_schools/' + $(this).data('studentSchoolId') + '/unstar',
-        type: 'post',
-        dataType: 'script'
-      });
-    });
-
-    var star_ascending = false;
-    $("#sortable_star_column").click(function(){
-      $('.column_arrow').hide();
-      $('.sortable_column').css("color", "#565656")
-      $('#sortable_star_column').css("color", "#0077cf")
-      if (!star_ascending) {
-        $('ul#sortable>li').tsort('span.sortable_star',{order:'asc'});
-        $('#sortable_star_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Star</div>');
-        star_ascending = true;
-      } else {
-        $('ul#sortable>li').tsort('span.sortable_star',{order:'desc'});
-        $('#sortable_star_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Star</div>');
-        star_ascending = false;
-      }
     });
 
     var school_name_ascending = false;

@@ -1,0 +1,17 @@
+= render partial: 'layouts/choice_schools/header'
+
+.wrap
+  .result
+    #choice-layout
+      %h2{ style: "margin-bottom: 1em;" }
+        Success
+
+      .light
+        %p
+          Your choice list has been submitted. You will receive a confirmation email shortly.
+
+        %ol{ style: "margin: 2em 0 0 1.3em;" }
+          - @choice_schools.each do |school|
+            %li
+              %h3
+                = school.school.name

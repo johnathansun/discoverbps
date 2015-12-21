@@ -12,6 +12,19 @@ DiscoverBPS::Application.routes.draw do
   root to: 'students#new'
   match 'home' => 'students#new'
 
+  resources :choice_schools do
+    get 'verify', on: :collection
+    post 'send_verification', on: :collection
+    get 'confirmation', on: :collection
+    post 'authenticate', on: :collection
+    get 'list', on: :collection
+    get 'order', on: :collection
+    post 'rank', on: :collection
+    get 'summary', on: :collection
+    post 'submit', on: :collection
+    get 'success', on: :collection
+  end
+
   resources :students do
     post 'save_preference', on: :member
     post 'remove_notification', on: :collection
@@ -35,9 +48,7 @@ DiscoverBPS::Application.routes.draw do
     get 'print_lists', on: :collection
     get 'print', on: :member
     get 'compare', on: :collection
-    get 'rank', on: :collection
     get 'get_ready', on: :collection
-    post 'submit_ranked', on: :collection
   end
 
   namespace :admin do

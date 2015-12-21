@@ -1,0 +1,26 @@
+= render partial: 'layouts/choice_schools/header'
+
+.wrap
+  .result
+    #choice-layout
+      %h2{ style: "margin-bottom: 1em;" }
+        Enter Confirmation Code
+
+      .light
+        - if flash[:alert].present?
+          %p{style: 'color: red;'}
+            = flash[:alert]
+        - else
+          %p
+            Please enter the confirmation code that you received via #{params[:contact_method]}:
+
+        = form_tag(authenticate_choice_schools_path(token: params[:token]), method: "post") do
+
+          = text_field_tag :confirmation_code, nil, placeholder: "Confirmation Code", class: "large-input"
+
+          %div{ style: "margin-top: 2em;" }
+            = submit_tag "Continue", id: "continue-button", data: { disable_with: 'Submitting...' }
+
+        %div{ style: "margin-top: 1em;" }
+          Didn't reveive a confirmation code?
+          = link_to "try again", verify_choice_schools_path(token: params[:token])

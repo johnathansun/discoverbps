@@ -1,0 +1,29 @@
+= render partial: 'layouts/choice_schools/header'
+
+.wrap
+  .result
+    #choice-layout
+      %h2{ style: "margin-bottom: 1em;" }
+        Verify Your Identity
+
+      .light
+        - if flash[:alert].present?
+          %p{style: 'color: red;'}
+            = flash[:alert]
+        - else
+          %p
+            Before we can display your choice list, we need to verify your identity.
+          %p
+            How should we contact you?
+
+        = form_tag(send_verification_choice_schools_path(token: params[:token]), method: "post") do
+
+          = radio_button_tag :contact_method, "text message"
+          617-444-xxxx
+
+          %br/
+          = radio_button_tag :contact_method, "email"
+          joelmxxxxx@gmail.com
+
+          %div{ style: "margin-top: 2em;" }
+            = submit_tag "Continue", id: "continue-button", data: { disable_with: 'Submitting...' }
