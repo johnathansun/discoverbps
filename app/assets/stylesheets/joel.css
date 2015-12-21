@@ -274,10 +274,10 @@ input, select {
 	color: white;
 	text-decoration: none;
 	border: none;
-	background-color: $dark_blue;
+	background-color: #064676;
 	padding: 10px 15px 10px 15px;
 }
 
 #continue-button:hover {
-	background-color: $orange;
+	background-color: #FC5B00;
 }
