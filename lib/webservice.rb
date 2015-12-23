@@ -17,19 +17,35 @@ module Webservice
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
-	def self.get_choice_schools(token)
+	def self.generate_passcode(token, email)
+		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/generatepasscode"
+		response = self.post(endpoint, { studentToken: token, contactEmail: email }).body
+		Rails.logger.info "******************** #{response}"
+		MultiJson.load(response, symbolize_keys: true)
+	end
+
+	def self.generate_session_token(token, passcode)
+		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/authenticate/getsessiontoken"
+		response = self.post(endpoint, { studentToken: token, passCode: passcode }).body
+		Rails.logger.info "******************** #{response}"
+		MultiJson.load(response, symbolize_keys: true)
+	end
+
+	def self.get_choice_schools(session_token)
 		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/getchoiceschools"
-		params = { token: token, schyear: "2015" }.to_param
+		params = { sessionToken: session_token, schyear: "2015" }.to_param
 		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	##### SUBMIT RANKED CHOICE LIST #####
 
-	def self.save_choice_rank(payload)
+	def self.save_choice_rank(session_token, schools)
 		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/savechoicerank"
-		response = self.post(endpoint, payload)
-		Rails.logger.info "******************** #{response.body}"
+		payload = { sessionToken: session_token }.merge(schools)
+		response = self.post(endpoint, payload).body
+		Rails.logger.info "******************** #{response}"
+		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	##### ADDRESS MATCHES #####

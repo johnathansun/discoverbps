@@ -16,7 +16,7 @@
 
         = form_tag(authenticate_choice_schools_path(token: params[:token]), method: "post") do
 
-          = text_field_tag :confirmation_code, nil, placeholder: "Confirmation Code", class: "large-input"
+          = text_field_tag :passcode, nil, placeholder: "Confirmation Code", class: "large-input"
 
           %div{ style: "margin-top: 2em;" }
             %div{ style: "display: inline-block;" }

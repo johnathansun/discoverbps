@@ -1,5 +1,5 @@
 %div{id: 'home_schools_list', class: "schools_list #{(params[:list_type] == 'ell' || params[:list_type] == 'sped' || params[:list_type] == 'zone') ? 'hidden' : ''}"}
-  - if @choice_schools.present?
+  - if @student.choice_schools.present?
     %div.light{ style: "margin: 0 3em 1em 0;" }
       Below is a list of eligible schools for
       %strong
@@ -13,7 +13,7 @@
 
   .list_content
     .flexible_content
-      - if @choice_schools.present?
+      - if @student.choice_schools.present?
         .menu_list
           %div{id: 'home_header', class: 'li_frame school_list_header', style: 'display: block;'}
             #sortable_star_column.sortable_column.menu_bloc.desktop.no_mobile
@@ -39,7 +39,7 @@
                 Eligibility
 
         %ul#sortable
-          - @choice_schools.each_with_index do |student_school, i|
+          - @student.choice_schools.each_with_index do |student_school, i|
             - school = student_school.school
             %li{id: "#{@student.id}_#{school.bps_id}", class: "list_row home_school clearfix"}
               %div{id: "#{@student.id}_#{school.bps_id}_row", class: "li_frame"}

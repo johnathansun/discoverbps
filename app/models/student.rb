@@ -19,7 +19,7 @@ class Student < ActiveRecord::Base
                     :addressid, :user_id, :preference_ids, :school_ids, :sped_needs, :ell_language, :awc_invitation,
                     :schools_last_updated_at, :x_coordinate, :y_coordinate, :address_verified, :geo_code, :preferences_count,
                     :home_schools_json, :zone_schools_json, :ell_schools_json, :sped_schools_json, :favorite, :step,
-                    :ell_cluster, :sped_cluster, :zone
+                    :ell_cluster, :sped_cluster, :zone, :token, :session_token
 
   serialize :sibling_school_names
   serialize :sibling_school_ids
@@ -35,6 +35,40 @@ class Student < ActiveRecord::Base
 
   before_validation :format_grade_level
   before_save :strip_first_name, :strip_last_name, :strip_street_number, :strip_street_name, :strip_zipcode
+
+
+  def self.save_choice_student!(token, session_token, session_id)
+    student_hash = Webservice.get_student(token)
+
+    if student_hash.try(:[], :Token) == token
+
+      student = Student.where(token: student_hash[:Token]).first_or_initialize
+
+      student.session_id = session_id
+      student.session_token = session_token
+      student.first_name = student_hash[:FirstName].try(:strip)
+      student.last_name = student_hash[:LastName].try(:strip)
+      student.grade_level = student_hash[:Grade].try(:strip).try(:gsub, /^0/, '')
+      student.street_number = student_hash[:Streetno].try(:strip)
+      student.street_name = student_hash[:Street].try(:strip).try(:titleize)
+      student.neighborhood = student_hash[:City].try(:strip).try(:titleize)
+      student.zipcode = student_hash[:ZipCode].try(:strip)
+      student.x_coordinate = student_hash[:X]
+      student.y_coordinate = student_hash[:Y]
+      student.latitude = student_hash[:Latitude]
+      student.longitude = student_hash[:Longitude]
+      student.addressid = student_hash[:AddressID].try(:to_s).try(:strip)
+      student.geo_code = student_hash[:GeoCode]
+      student.address_verified = true
+      student.awc_invitation = student_hash[:IsAWCEligible]
+
+      if student.save
+        student
+      else
+        nil
+      end
+    end
+  end
 
   def tab_name
   	if first_name.present?
@@ -67,49 +101,6 @@ class Student < ActiveRecord::Base
       "Grade #{grade_level}"
     else
       grade_level
-    end
-  end
-
-  # SAVE SCHOOLS ON CURRENT_STUDENT
-
-  def self.save_student_and_choice_schools(token, session_id)
-
-    student_info = Webservice.get_student(token)
-
-    if student_info.present?
-      choice_schools = Webservice.get_choice_schools(token)
-
-      if choice_schools.present?
-
-        student = Student.where(token: student_info[:Token]).first_or_initialize
-
-        student.session_id = session_id
-        student.first_name = student_info[:FirstName].try(:strip)
-        student.last_name = student_info[:LastName].try(:strip)
-        student.grade_level = student_info[:Grade].try(:strip).try(:gsub, /^0/, '')
-        student.street_number = student_info[:Streetno].try(:strip)
-        student.street_name = student_info[:Street].try(:strip)
-        student.neighborhood = student_info[:City].try(:strip)
-        student.zipcode = student_info[:ZipCode].try(:strip)
-        student.x_coordinate = student_info[:X]
-        student.y_coordinate = student_info[:Y]
-        student.latitude = student_info[:Latitude]
-        student.longitude = student_info[:Longitude]
-        student.addressid = student_info[:AddressID].try(:to_s).try(:strip)
-        student.geo_code = student_info[:GeoCode]
-        student.address_verified = true
-        student.awc_invitation = student_info[:IsAWCEligible]
-
-        student.save!
-
-        # save the schools on the student
-
-        student.set_choice_schools!(choice_schools)
-
-        # return the student
-
-        student
-      end
     end
   end
 

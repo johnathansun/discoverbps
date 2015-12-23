@@ -18,12 +18,15 @@
 
         = form_tag(send_verification_choice_schools_path(token: params[:token]), method: "post") do
 
-          = radio_button_tag :contact_method, "text message"
-          617-444-xxxx
+          - if @email_1.present?
+            = radio_button_tag :contact_method, @email_1
+            = @email_1
 
-          %br/
-          = radio_button_tag :contact_method, "email"
-          joelmxxxxx@gmail.com
+          - if @email_2.present?
+            %br/
+            = radio_button_tag :contact_method, @email_2
+            = @email_2
+
 
           %div{ style: "margin-top: 2em;" }
             %div{ style: "display: inline-block;" }
