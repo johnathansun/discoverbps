@@ -28,8 +28,8 @@ class Student < ActiveRecord::Base
   serialize :ell_schools_json
   serialize :sped_schools_json
 
-  validates :street_number, :street_name, :zipcode, :grade_level, presence: true
-  validates :street_number, length: { maximum: 5 }
+  # validates :street_number, :street_name, :zipcode, :grade_level, presence: true
+  # validates :street_number, length: { maximum: 5 }
   validates :grade_level, inclusion: { in: %w(K0 K1 K2 1 2 3 4 5 6 7 8 9 10 11 12),
     message: "%{value} is not valid" }
 
@@ -42,7 +42,7 @@ class Student < ActiveRecord::Base
 
     if student_hash.try(:[], :Token) == token
 
-      student = Student.where(token: student_hash[:Token]).first_or_initialize
+      student = Student.where(token: token).first_or_initialize
 
       student.session_id = session_id
       student.session_token = session_token
