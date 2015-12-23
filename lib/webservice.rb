@@ -4,11 +4,7 @@ module Webservice
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help
 
 
-	##### CHOICE SCHOOLS #####
-
-	# {:Token=>"DC74E778-00E3-749A-56E3-001D7EAD42D0", :FirstName=>"Mario", :LastName=>"Haley", :StudentName=>"Haley, MarioStacey", :Grade=>"11", :AddressID=>348690,
-	# :Street=>"GARDNER ST", :Streetno=>"4", :City=>"Allston", :ZipCode=>"02134", :State=>"MA",
-	# :GeoCode=>"801", :Latitude=>"42.3536288141557", :Longitude=>"-71.1316370974287", :X=>"755735.124511719", :Y=>"2954106.35369873"}
+	####### CHOICE SCHOOLS FLOW #######
 
 	def self.get_parent(token)
 		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/getparentinfo"
@@ -45,29 +41,30 @@ module Webservice
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
-	def self.validate_session_token(session_token)
+	def self.validate_session_token(token)
 		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/authenticate/validatesessiontoken"
-		response = self.post(endpoint, { sessionToken: session_token }).body
+		response = self.post(endpoint, { sessionToken: token }).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
-	def self.get_choice_schools(session_token)
+	def self.get_choice_schools(token)
 		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/getchoiceschools"
-		params = { sessionToken: session_token, schyear: "2015" }.to_param
+		params = { sessionToken: token, schyear: "2015" }.to_param
 		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
-	##### SUBMIT RANKED CHOICE LIST #####
-
-	def self.save_choice_rank(session_token, schools)
+	def self.save_choice_rank(token, schools)
 		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/savechoicerank"
-		payload = { sessionToken: session_token }.merge(schools)
+		payload = { sessionToken: token }.merge(schools)
 		response = self.post(endpoint, payload).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
+
+
+	####### SCHOOLS FLOW #######
 
 	##### ADDRESS MATCHES #####
 
