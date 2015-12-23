@@ -4,7 +4,7 @@ class ChoiceSchoolsController < ApplicationController
 
   before_filter :redirect_if_student_token_invalid, only: [:verify, :confirmation]
   before_filter :find_student_by_session_token, only: [:list, :order, :summary, :submit, :success]
-  # before_filter :redirect_if_session_token_invalid, only: [:list, :order, :summary, :submit, :success]
+  before_filter :redirect_if_session_token_invalid, only: [:list, :order, :summary, :submit, :success]
 
   layout "choice_schools"
 
@@ -14,10 +14,9 @@ class ChoiceSchoolsController < ApplicationController
 
   # GET
   def verify
-    # TODO: this should be a "parent" endpoint
-    student_hash = Webservice.get_student(params[:token]) # TODO: hits this twice with before_filter
-    @email_1 = student_hash[:EmailAddress1]
-    @email_2 = student_hash[:EmailAddress2]
+    parent_hash = Webservice.get_parent(params[:token])
+    @email_1 = parent_hash[:EmailAddress1]
+    @email_2 = parent_hash[:EmailAddress2]
   end
 
   # POST
@@ -40,7 +39,7 @@ class ChoiceSchoolsController < ApplicationController
       redirect_to confirmation_choice_schools_path(token: params[:token]), alert: "Please enter your confirmation code:"
     else
       session_token = Webservice.generate_session_token(params[:token], params[:passcode])
-      if session_token # is valid
+      if session_token # has no errors
         student = Student.save_choice_student!(params[:token], session_token, session[:session_id])
         if student # is valid
           choice_schools = Webservice.get_choice_schools(session_token)
@@ -146,20 +145,19 @@ class ChoiceSchoolsController < ApplicationController
     end
   end
 
-  def find_student_by_session_token
-    # see if we can find a student with this token, which should have been
-    # saved on the authenticate method. if not, go back and get one
-    @student = Student.where(session_token: params[:token]).first
-  end
-
   def redirect_if_session_token_invalid
     # finding a student with the session token only tells us whether one has been
     # created in the past. we also need to verify that the token isn't expired
     if params[:token].blank? || @student.blank?
       redirect_to verify_choice_schools_path(token: @student.try(:token)), alert: "Please access this site from a valid URL found in your invitation email."
-    elsif Webservice.verify_session_token(params[:token]) == false
+    elsif Webservice.validate_session_token(params[:token]).try(:[], :messageCode) != "OK"
       redirect_to verify_choice_schools_path(token: @student.try(:token)), alert: "Your session token has expired. Please revalidate your account."
     end
   end
 
+  def find_student_by_session_token
+    # see if we can find a student with this token, which should have been
+    # saved on the authenticate method. if not, go back and get one
+    @student = Student.where(session_token: params[:token]).first
+  end
 end

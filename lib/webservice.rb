@@ -10,9 +10,16 @@ module Webservice
 	# :Street=>"GARDNER ST", :Streetno=>"4", :City=>"Allston", :ZipCode=>"02134", :State=>"MA",
 	# :GeoCode=>"801", :Latitude=>"42.3536288141557", :Longitude=>"-71.1316370974287", :X=>"755735.124511719", :Y=>"2954106.35369873"}
 
+	def self.get_parent(token)
+		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/getparentinfo"
+		params = { studentToken: token, schyear: "2015" }.to_param
+		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
+		MultiJson.load(response, symbolize_keys: true)
+	end
+
 	def self.get_student(token)
 		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/getstudent"
-		params = { token: token, schyear: "2015" }.to_param
+		params = { studentToken: token, schyear: "2015" }.to_param
 		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
 		MultiJson.load(response, symbolize_keys: true)
 	end
@@ -27,6 +34,20 @@ module Webservice
 	def self.generate_session_token(token, passcode)
 		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/authenticate/getsessiontoken"
 		response = self.post(endpoint, { studentToken: token, passCode: passcode }).body
+		Rails.logger.info "******************** #{response}"
+		MultiJson.load(response, symbolize_keys: true)
+	end
+
+	def self.validate_session_token(token)
+		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/authenticate/validatesessiontoken"
+		params = { sessionToken: token, schyear: "2015" }.to_param
+		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
+		MultiJson.load(response, symbolize_keys: true)
+	end
+
+	def self.validate_session_token(session_token)
+		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/authenticate/validatesessiontoken"
+		response = self.post(endpoint, { sessionToken: session_token }).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
