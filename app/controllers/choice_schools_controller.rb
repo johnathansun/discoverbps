@@ -15,8 +15,8 @@ class ChoiceSchoolsController < ApplicationController
   # GET
   def verify
     parent_hash = Webservice.get_parent(params[:token])
-    @email_1 = parent_hash[:EmailAddress1]
-    @email_2 = parent_hash[:EmailAddress2]
+    @email_1 = parent_hash[:emailAddress1]
+    @email_2 = parent_hash[:emailAddress2]
   end
 
   # POST
