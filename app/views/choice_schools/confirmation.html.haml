@@ -12,7 +12,7 @@
             = flash[:alert]
         - else
           %p
-            Please enter the confirmation code that you received via #{params[:contact_method]}:
+            We sent an email to #{params[:contact_method]}. Please enter the confirmation code into the form below (it may take a few minutes for the email to be delivered):
 
         = form_tag(authenticate_choice_schools_path(token: params[:token]), method: "post") do
 
