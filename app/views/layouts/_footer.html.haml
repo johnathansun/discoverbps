@@ -1,0 +1,21 @@
+.footer_top
+
+%footer.footer
+	.wrap
+		%section.content_wrap
+			%p.title_footer
+				= link_to "Boston Public Schools", 'http://bostonpublicschools.org', target: '_blank'
+				%br/
+				%span.copyright.light
+					Copyright &copy; 2011-#{ Date.today.year } Boston Public Schools.
+			.logo
+				= link_to image_tag("/bps_logo_white.png"), "http://bostonpublicschools.org", target: "_blank"
+			.clr
+
+:javascript
+	$("body").click(function(){
+	$(".dialog_box").fadeOut("fast").removeClass("active");
+	});
+	$(".dialog_box").click(function(e){
+	e.stopPropagation();
+	});

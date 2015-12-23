@@ -271,7 +271,7 @@ header {
  Footer
 ------------------------------------------------------------ */
 footer.footer {
-  background: #ffffff;
+  background: #111111;
   height: 60px;
   padding: 19px 0 25px;
   clear: both;
@@ -279,12 +279,15 @@ footer.footer {
   .title_footer {
 	  color: #0077cf;
 	  float: left;
-	  padding-top: 22px;
+	  padding-top: 20px;
 	  margin-bottom: 0;
-	  font-size: 14px;
+	  font-size: 16px;
 	  width: 450px;
 
-	  .copyright { color: #969696; }
+	  .copyright {
+      color: #dddddd;
+      font-size: 13px;
+    }
 	}
 
 	a {
@@ -295,11 +298,11 @@ footer.footer {
 	}
 
 	.logo {
-	  width: 142px;
+	  width: 166px;
 	  float: right;
 	}
 
-}// footer.footer
+}
 
 .footer_top {
   background: #0077cf;
