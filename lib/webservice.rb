@@ -57,7 +57,7 @@ module Webservice
 
 	def self.save_choice_rank(token, schools)
 		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/savechoicerank"
-		payload = { sessionToken: token }.merge(schools)
+		payload = { sessionToken: token, choiceList: schools }
 		response = self.post(endpoint, payload).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
