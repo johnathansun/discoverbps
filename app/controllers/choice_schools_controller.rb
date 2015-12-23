@@ -46,10 +46,12 @@ class ChoiceSchoolsController < ApplicationController
           student.set_choice_schools!(choice_schools)
           redirect_to list_choice_schools_path(token: session_token)
         else
-          # go back
+          Rails.logger.info "******************* didn't get a valid student"
+          redirect_to confirmation_choice_schools_path(token: params[:token]), alert: "Please try again"
         end
       else
-        # go back
+        Rails.logger.info "******************* didn't get a valid session token"
+        redirect_to confirmation_choice_schools_path(token: params[:token]), alert: "Please try again"
       end
     end
   end
@@ -150,7 +152,7 @@ class ChoiceSchoolsController < ApplicationController
     # created in the past. we also need to verify that the token isn't expired
     if params[:token].blank? || @student.blank?
       redirect_to verify_choice_schools_path(token: @student.try(:token)), alert: "Please access this site from a valid URL found in your invitation email."
-    elsif Webservice.validate_session_token(params[:token]).try(:[], :messageCode) != "OK"
+    elsif Webservice.validate_session_token(params[:token]).try(:[], :messageContent) != "Session token is valid"
       redirect_to verify_choice_schools_path(token: @student.try(:token)), alert: "Your session token has expired. Please revalidate your account."
     end
   end
