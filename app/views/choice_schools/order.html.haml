@@ -19,14 +19,17 @@
               Please use the form below to enter your schools in the order in which you would like to submit. When you are ready to submit your list to the school department, please click "Submit".
 
           = form_for(:schools, url: rank_choice_schools_path(token: params[:token]), html: {method: :post}) do |f|
-            - @choice_schools.each do |student_school|
-              %div{ style: "font-size: 20px; margin-bottom: 1em;" }
-                %div{ style: "display: inline-block; margin-right: 5px;" }
-                  = text_field_tag "schools[#{student_school.id}]", student_school.choice_rank, style: "font-size: 20px; text-align: center; padding: 5px; width: 25px;"
-                %div{ style: "display: inline-block;" }
-                  %h3
-                    = student_school.school.name
-                    = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
+            %table
+              - @choice_schools.each do |student_school|
+                %tr
+                  %td{ style: "font-size: 20px; padding: 0 10px 10px 0;" }
+                    = text_field_tag "schools[#{student_school.id}]", student_school.choice_rank, style: "font-size: 20px; text-align: center; padding: 5px; width: 25px;"
+                  %td{ style: "padding-top: 8px;" }
+                    %h3
+                      = student_school.school.name
+                      = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
+                  %td{ style: "padding-top: 8px;" }
+                    REG
 
             %div{ style: "margin: 3em 0 3em 0;" }
               %div{ style: "display: inline-block;" }

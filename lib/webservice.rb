@@ -20,6 +20,20 @@ module Webservice
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
+	def self.get_choice_student_and_schools(token)
+		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/getstudentschoolchoices"
+		response = self.post(endpoint, { sessionToken: token, schyear: "2015" }).body
+		Rails.logger.info "******************** #{response}"
+		MultiJson.load(response, symbolize_keys: true)
+	end
+
+	def self.get_choice_schools(token)
+		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/getchoiceschools"
+		params = { sessionToken: token, schyear: "2015" }.to_param
+		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
+		MultiJson.load(response, symbolize_keys: true)
+	end
+
 	def self.generate_passcode(token, email)
 		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/generatepasscode"
 		response = self.post(endpoint, { studentToken: token, contactEmail: email }).body
@@ -36,22 +50,8 @@ module Webservice
 
 	def self.validate_session_token(token)
 		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/authenticate/validatesessiontoken"
-		params = { sessionToken: token, schyear: "2015" }.to_param
-		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
-		MultiJson.load(response, symbolize_keys: true)
-	end
-
-	def self.validate_session_token(token)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/authenticate/validatesessiontoken"
 		response = self.post(endpoint, { sessionToken: token }).body
 		Rails.logger.info "******************** #{response}"
-		MultiJson.load(response, symbolize_keys: true)
-	end
-
-	def self.get_choice_schools(token)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/getchoiceschools"
-		params = { sessionToken: token, schyear: "2015" }.to_param
-		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
@@ -68,7 +68,10 @@ module Webservice
 
 	##### ADDRESS MATCHES #####
 
-	# {:Error=>[], :List=>[{:AddressID=>"248880", :ELLCluster=>"A", :GeoCode=>"097", :Lat=>"42.358620264041", :Lng=>"-71.0590099977779", :SPEDCluster=>"A", :SectionOfCity=>"Boston", :Street=>"Court St", :StreetNum=>"26", :X=>"775356.657775879", :Y=>"2956018.47106934", :ZipCode=>"02108", :Zone=>"N"}]}
+	# {:Error=>[], :List=>[{:AddressID=>"248880", :ELLCluster=>"A", :GeoCode=>"097",
+	# :Lat=>"42.358620264041", :Lng=>"-71.0590099977779", :SPEDCluster=>"A",
+	# :SectionOfCity=>"Boston", :Street=>"Court St", :StreetNum=>"26",
+	# :X=>"775356.657775879", :Y=>"2956018.47106934", :ZipCode=>"02108", :Zone=>"N"}]}
 
 	def self.get_address_matches(street_number, street_name, zipcode)
 		endpoint = "#{ENV['WEBSERVICE_URL']}/AddressMatches"

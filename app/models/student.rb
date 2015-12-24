@@ -37,10 +37,13 @@ class Student < ActiveRecord::Base
   before_save :strip_first_name, :strip_last_name, :strip_street_number, :strip_street_name, :strip_zipcode
 
 
-  def self.save_choice_student!(token, session_token, session_id)
-    student_hash = Webservice.get_student(token)
+  def self.save_choice_student_and_schools!(token, session_token, session_id)
+    response = Webservice.get_choice_student_and_schools(token)
+    Rails.logger.info "************************ #{response}"
+    student_hash = response[:studentInfo]
+    schools_array = response[:choiceList]
 
-    if student_hash.try(:[], :Token) == token
+    if student_hash.present? && schools_array.present?
 
       student = Student.where(token: token).first_or_initialize
 
@@ -63,9 +66,8 @@ class Student < ActiveRecord::Base
       student.awc_invitation = student_hash[:IsAWCEligible]
 
       if student.save
+        Student.set_choice_schools!(schools_array)
         student
-      else
-        nil
       end
     end
   end
@@ -104,8 +106,8 @@ class Student < ActiveRecord::Base
     end
   end
 
-  def set_choice_schools!(school_hash)
-    save_student_schools!(school_hash, 'choice')
+  def set_choice_schools!(schools_array)
+    save_student_schools!(schools_array, 'choice')
   end
 
   def set_home_schools!

@@ -40,13 +40,10 @@ class ChoiceSchoolsController < ApplicationController
     else
       session_token = Webservice.generate_session_token(params[:token], params[:passcode])
       if session_token # has no errors
-        student = Student.save_choice_student!(params[:token], session_token, session[:session_id])
-        if student # is valid
-          choice_schools = Webservice.get_choice_schools(session_token)
-          student.set_choice_schools!(choice_schools)
+        if Student.save_choice_student_and_schools!(params[:token], session_token, session[:session_id])
           redirect_to list_choice_schools_path(token: session_token)
         else
-          Rails.logger.info "******************* didn't get a valid student"
+          Rails.logger.info "******************* didn't get a valid choice_student_and_schools"
           redirect_to confirmation_choice_schools_path(token: params[:token]), alert: "Please try again"
         end
       else
