@@ -27,12 +27,12 @@ module Webservice
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
-	def self.get_choice_schools(token)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/getchoiceschools"
-		params = { sessionToken: token, schyear: "2015" }.to_param
-		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
-		MultiJson.load(response, symbolize_keys: true)
-	end
+	# def self.get_choice_schools(token, year)
+	# 	endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/getchoiceschools"
+	# 	params = { studentToken: token, schyear: year }.to_param
+	# 	response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
+	# 	MultiJson.load(response, symbolize_keys: true)
+	# end
 
 	def self.generate_passcode(token, email)
 		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/generatepasscode"
