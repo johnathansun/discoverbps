@@ -14,9 +14,9 @@ class ChoiceSchoolsController < ApplicationController
 
   # GET
   def verify
-    parent_hash = Webservice.get_parent(params[:token])
-    @email_1 = parent_hash[:emailAddress1]
-    @email_2 = parent_hash[:emailAddress2]
+    parent_response = Webservice.get_parent(params[:token])
+    @email_1 = parent_response[:emailAddress1]
+    @email_2 = parent_response[:emailAddress2]
   end
 
   # POST
@@ -24,8 +24,12 @@ class ChoiceSchoolsController < ApplicationController
     if params[:contact_method].blank? || params[:token].blank?
       redirect_to verify_choice_schools_path(token: params[:token]), alert: "Please choose a contact method:"
     else
-      Webservice.generate_passcode(params[:token], params[:contact_method]) # BPS sends the code to applicant
-      redirect_to confirmation_choice_schools_path(token: params[:token], contact_method: params[:contact_method])
+      passcode_response = Webservice.generate_passcode(params[:token], params[:contact_method]) # BPS sends the code to applicant
+      if passcode = passcode_response.try(:[], :passcode)
+        redirect_to confirmation_choice_schools_path(token: params[:token], contact_method: params[:contact_method])
+      else
+        redirect_to verify_choice_schools_path(token: params[:token]), alert: "Please choose a contact method:"
+      end
     end
   end
 
@@ -38,8 +42,8 @@ class ChoiceSchoolsController < ApplicationController
     if params[:passcode].blank? || params[:token].blank?
       redirect_to confirmation_choice_schools_path(token: params[:token]), alert: "Please enter your confirmation code:"
     else
-      session_token = Webservice.generate_session_token(params[:token], params[:passcode])
-      if session_token # has no errors
+      session_token_response = Webservice.generate_session_token(params[:token], params[:passcode])
+      if session_token = session_token_response.try(:[], :sessionToken)
         if Student.save_choice_student_and_schools!(params[:token], session_token, session[:session_id])
           redirect_to list_choice_schools_path(token: session_token)
         else
