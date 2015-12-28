@@ -38,7 +38,7 @@ class Student < ActiveRecord::Base
 
 
   def self.save_choice_student_and_schools!(token, session_token, session_id)
-    response = Webservice.get_choice_student_and_schools(token)
+    response = Webservice.get_choice_student_and_schools(session_token)
     Rails.logger.info "************************ #{response}"
     student_hash = response[:studentInfo]
     schools_array = response[:choiceList]
@@ -140,6 +140,28 @@ class Student < ActiveRecord::Base
       # loop through the schools returned from the API, find the matching schools in the db,
       # save the eligibility variables on student_schools, and collect the coordinates for the matrix search, below
 
+      # {:AssignmentWalkEligibilityStatus=>"N/A",
+      # :Eligibility=>"MH Option",
+      # :ChoiceGrade=>"K0",
+      # :IsAwc=>false,
+      # :IsExamSchool=>false,
+      # :IsSpecAdmissions=>false,
+      # :NumClasses=>"N/A",
+      # :ProgramCode=>"KED",
+      # :ProgramCodeDesription=>"Extended Day Program",
+      # :SchoolID=>"4285",
+      # :SchoolName=>"Mission Hill K-8 School",
+      # :SchoolYear=>"2015",
+      # :SortClause=>"3_Mission Hill K-8 School",
+      # :StraightLineDistance=>"1.16",
+      # :Tier=>"2",
+      # :TransEligible=>"C",
+      # :X=>"760540",
+      # :Y=>"2937075",
+      # :Latitude=>"42.3068357276765",
+      # :Longitude=>"-71.1141462768161",
+      # :CallID=>6313}
+
       if api_schools.present?
         self.send("#{school_list_type}_schools".to_sym).clear
         self.update_column("#{school_list_type}_schools_json".to_sym, api_schools.to_json) rescue nil
@@ -153,6 +175,7 @@ class Student < ActiveRecord::Base
             school_ids << school.id
             school_coordinates += "#{school.latitude},#{school.longitude}|"
             exam_school = (api_school[:IsExamSchool] == "0" ? false : true)
+
             self.student_schools.create(school_id: school.id,
               school_type: school_list_type,
               bps_id: api_school[:SchoolID],
