@@ -66,7 +66,7 @@ class Student < ActiveRecord::Base
       student.awc_invitation = student_hash[:IsAWCEligible]
 
       if student.save
-        Student.set_choice_schools!(schools_array)
+        student.set_choice_schools!(schools_array)
         student
       end
     end
