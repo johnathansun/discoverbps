@@ -54,7 +54,7 @@
                 .school_name.select.line
                   %span.middle
                     %span.sortable_school_name
-                      = school.name
+                      = student_school.school_name
                     - if @student.sibling_school_ids.present? && @student.sibling_school_ids.try(:include?, school.bps_id)
                       %span{:aria => {hidden: 'true'}, :class => "select_icon icon-DBPS-Dev-Assets-SRG-12"}
 

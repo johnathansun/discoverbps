@@ -8,7 +8,7 @@
           %p{style: 'color: red;'}
             = flash[:alert]
         %h2
-          2015/2016 School Choice
+          School Choice
         %br/
         %p
           Thank you for accessing the Discover website. This site will help you navigate the School Choice registration process.
@@ -24,4 +24,4 @@
           Superintendent
 
       %br/
-      = link_to "Continue", verify_choice_schools_path(token: params[:token]), id: "continue-button"
+      = link_to "Continue", verify_choice_schools_path(token: params[:token]), id: "continue-button", disable_with: 'Working...'

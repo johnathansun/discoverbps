@@ -171,50 +171,57 @@ class Student < ActiveRecord::Base
         api_schools.each do |api_school|
           school = School.where(bps_id: api_school[:SchoolID]).first
 
-          if school.present? && !school_ids.include?(school.id)
-            school_ids << school.id
-            school_coordinates += "#{school.latitude},#{school.longitude}|"
-            exam_school = (api_school[:IsExamSchool] == "0" ? false : true)
-
-            self.student_schools.create(school_id: school.id,
-              school_type: school_list_type,
-              bps_id: api_school[:SchoolID],
-              tier: api_school[:Tier],
-              eligibility: api_school[:Eligibility],
-              walk_zone_eligibility: api_school[:AssignmentWalkEligibilityStatus],
-              transportation_eligibility: api_school[:TransEligible],
-              distance: api_school[:StraightLineDistance],
-              exam_school: exam_school,
-              sped_cluster: api_school[:SPEDCluster],
-              sped_description: api_school[:Program],
-              ell_cluster: api_school[:ELLCluster],
-              ell_description: api_school[:ProgramDescription],
-              program_code: api_school[:ProgramCode],
-              call_id: api_school[:CallID]
-            )
+          if school.present? && (school_list_type == "choice" || !school_ids.include?(school.id))
+            parse_api_school(school, api_school, school_ids, school_coordinates, school_list_type)
           end
         end
 
-        # school_coordinates.gsub!(/\|$/,'')
-        # walk_matrix = Google.walk_times(self.latitude, self.longitude, school_coordinates)
-        # drive_matrix = Google.drive_times(self.latitude, self.longitude, school_coordinates)
+        school_coordinates.gsub!(/\|$/,'')
+        walk_matrix = Google.walk_times(self.latitude, self.longitude, school_coordinates)
+        drive_matrix = Google.drive_times(self.latitude, self.longitude, school_coordinates)
 
-        # # save distance, walk time and drive time on the student_schools join table
+        # save distance, walk time and drive time on the student_schools join table
 
-        # api_schools.each_with_index do |api_school, i|
-        #   school = School.where(bps_id: api_school[:SchoolID]).first
-        #   if school.present?
-        #     walk_time = walk_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
-        #     drive_time = drive_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
+        api_schools.each_with_index do |api_school, i|
+          school = School.where(bps_id: api_school[:SchoolID]).first
+          if school.present?
+            walk_time = walk_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
+            drive_time = drive_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
 
-        #     student_school = self.student_schools.where(school_id: school.id).first_or_initialize
-        #     student_school.update_attributes(walk_time: walk_time, drive_time: drive_time)
-        #   end
-        # end
+            student_school = self.student_schools.where(school_id: school.id).first_or_initialize
+            student_school.walk_time = walk_time
+            student_school.drive_time = drive_time
+            student_school.save
+          end
+        end
 
         self.update_column(:schools_last_updated_at, Time.now)
       end
     end
+  end
+
+  def parse_api_school(school, api_school, school_ids, school_coordinates, school_list_type)
+    school_ids << school.id
+    school_coordinates += "#{school.latitude},#{school.longitude}|"
+    exam_school = (api_school[:IsExamSchool] == "0" ? false : true)
+
+    self.student_schools.create(school_id: school.id,
+      school_name: api_school[:SchoolName],
+      school_type: school_list_type,
+      bps_id: api_school[:SchoolID],
+      tier: api_school[:Tier],
+      eligibility: api_school[:Eligibility],
+      walk_zone_eligibility: api_school[:AssignmentWalkEligibilityStatus],
+      transportation_eligibility: api_school[:TransEligible],
+      distance: api_school[:StraightLineDistance],
+      exam_school: exam_school,
+      sped_cluster: api_school[:SPEDCluster],
+      sped_description: api_school[:Program],
+      ell_cluster: api_school[:ELLCluster],
+      ell_description: api_school[:ProgramDescription],
+      program_code: api_school[:ProgramCode],
+      call_id: api_school[:CallID]
+    )
   end
 
 
