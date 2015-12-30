@@ -48,11 +48,11 @@ class ChoiceSchoolsController < ApplicationController
           redirect_to list_choice_schools_path(token: session_token)
         else
           Rails.logger.info "******************* didn't get a valid choice_student_and_schools"
-          redirect_to confirmation_choice_schools_path(token: params[:token]), alert: "Please try again"
+          redirect_to confirmation_choice_schools_path(token: params[:token]), alert: "Please try again:"
         end
       else
         Rails.logger.info "******************* didn't get a valid session token"
-        redirect_to confirmation_choice_schools_path(token: params[:token]), alert: "Please try again"
+        redirect_to confirmation_choice_schools_path(token: params[:token]), alert: "Please try again:"
       end
     end
   end
@@ -73,6 +73,8 @@ class ChoiceSchoolsController < ApplicationController
   def order
     if @student.choice_schools.blank?
       redirect_to choice_schools_path(token: params[:token]), alert: "There were no schools that matched your search. Please try again."
+    elsif Webservice.get_student(@student.token).try(:[], :HasRankedChoiceSubmitted) == true
+      redirect_to success_choice_schools_path(token: params[:token]), alert: "You have already submitted your school choice list for the current school year. Your choice list is as follows:"
     else
       if schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
         @choice_schools = schools
@@ -130,6 +132,7 @@ class ChoiceSchoolsController < ApplicationController
       @choice_schools.each do |student_school|
         payload << { "CallID" => student_school.call_id, "ProgramCode" => student_school.program_code, "SchoolID" => student_school.school.bps_id, "Rank" => student_school.choice_rank, "CreatedDateTime" => "", "SchoolRankID" => "" }
       end
+      @student.update_attributes(ranked: true, ranked_at: Time.now)
       Webservice.save_choice_rank(params[:token], payload)
       redirect_to success_choice_schools_path(token: params[:token])
     end

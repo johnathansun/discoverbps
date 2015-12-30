@@ -9,8 +9,12 @@
         Success
 
       .light
-        %p
-          Your choice list has been submitted. You will receive a confirmation email shortly.
+        - if flash[:alert].present?
+          %p{style: 'color: red; margin-bottom: 2em;'}
+            = flash[:alert]
+        - else
+          %p
+            Your choice list has been submitted. You will receive a confirmation email shortly.
 
         %ol{ style: "margin: 2em 0 0 1.3em;" }
           - @choice_schools.each do |school|

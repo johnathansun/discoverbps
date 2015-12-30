@@ -13,7 +13,6 @@
         - else
           %p
             Before we can display your choice list, we need to verify your identity.
-          %p
             How should we contact you?
 
         = form_tag(send_verification_choice_schools_path(token: params[:token]), method: "post") do

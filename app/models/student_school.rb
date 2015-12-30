@@ -9,5 +9,27 @@ class StudentSchool < ActiveRecord::Base
 									:ell_cluster, :ell_description, :sped_cluster, :sped_description, :call_id, :choice_rank,
                   :school_name, :program_code, :program_code_description
 
+  def self.create_from_api_response(student, school, school_hash, school_list_type)
+    Rails.logger.info "******************* #{school_hash}"
 
+    self.create!(student_id: student.id,
+      school_id: school.id,
+      school_name: school_hash[:SchoolName],
+      school_type: school_list_type,
+      bps_id: school_hash[:SchoolID],
+      tier: school_hash[:Tier],
+      eligibility: school_hash[:Eligibility],
+      walk_zone_eligibility: school_hash[:AssignmentWalkEligibilityStatus],
+      transportation_eligibility: school_hash[:TransEligible],
+      distance: school_hash[:StraightLineDistance],
+      exam_school: (school_hash[:IsExamSchool] == "0" ? false : true),
+      sped_cluster: school_hash[:SPEDCluster],
+      sped_description: school_hash[:Program],
+      ell_cluster: school_hash[:ELLCluster],
+      ell_description: school_hash[:ProgramDescription],
+      program_code: school_hash[:ProgramCode],
+      program_code_description: school_hash[:ProgramCodeDesription],
+      call_id: school_hash[:CallID]
+    )
+  end
 end
