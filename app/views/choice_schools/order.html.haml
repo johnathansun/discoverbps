@@ -30,7 +30,7 @@
                       = student_school.school.name
                       = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
                   %td{ style: "padding: 8px 20px 10px 0;" }
-                    = student_school.program_code
+                    = student_school.program_code_description
                   %td{ style: "padding: 8px 20px 10px 0;" }
                     = student_school.transportation_eligibility
                   %td{ style: "padding: 8px 20px 10px 0;" }

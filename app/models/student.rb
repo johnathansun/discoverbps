@@ -140,27 +140,27 @@ class Student < ActiveRecord::Base
       # loop through the schools returned from the API, find the matching schools in the db,
       # save the eligibility variables on student_schools, and collect the coordinates for the matrix search, below
 
-      # {:AssignmentWalkEligibilityStatus=>"N/A",
-      # :Eligibility=>"MH Option",
-      # :ChoiceGrade=>"K0",
+      # :AssignmentWalkEligibilityStatus=>"N/A",
+      # :Eligibility=>"Citywide",
+      # :ChoiceGrade=>"11",
       # :IsAwc=>false,
       # :IsExamSchool=>false,
       # :IsSpecAdmissions=>false,
       # :NumClasses=>"N/A",
-      # :ProgramCode=>"KED",
-      # :ProgramCodeDesription=>"Extended Day Program",
-      # :SchoolID=>"4285",
-      # :SchoolName=>"Mission Hill K-8 School",
+      # :ProgramCode=>"REG",
+      # :ProgramCodeDesription=>"Regular Program",
+      # :SchoolID=>"1256",
+      # :SchoolName=>"West Roxbury Academy",
       # :SchoolYear=>"2015",
-      # :SortClause=>"3_Mission Hill K-8 School",
-      # :StraightLineDistance=>"1.16",
-      # :Tier=>"2",
-      # :TransEligible=>"C",
-      # :X=>"760540",
-      # :Y=>"2937075",
-      # :Latitude=>"42.3068357276765",
-      # :Longitude=>"-71.1141462768161",
-      # :CallID=>6313}
+      # :SortClause=>"3_West Roxbury Academy",
+      # :StraightLineDistance=>"5.39",
+      # :Tier=>"NR",
+      # :TransEligible=>"O",
+      # :X=>"744292",
+      # :Y=>"2928051",
+      # :Latitude=>"42.2822592172622",
+      # :Longitude=>"-71.174339609069",
+      # :CallID=>6721
 
       if api_schools.present?
         self.send("#{school_list_type}_schools".to_sym).clear
@@ -220,6 +220,7 @@ class Student < ActiveRecord::Base
       ell_cluster: api_school[:ELLCluster],
       ell_description: api_school[:ProgramDescription],
       program_code: api_school[:ProgramCode],
+      program_code_description: api_school[:ProgramCodeDesription],
       call_id: api_school[:CallID]
     )
   end
