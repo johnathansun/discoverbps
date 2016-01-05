@@ -1,11 +1,21 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :enforce_https
   before_filter :set_current_student_from_params
   helper_method :zone_school_grades
   helper_method :current_student
   helper_method :current_user_students
 
   private
+
+  def enforce_https
+    unless request.ssl?
+      if request.domain == 'bostonpublicschools.org' && request.subdomain == 'discover'
+        redirect_to protocol: "https://"
+      end
+    end
+    return true
+  end
 
   # if a student_id is in the params, set session[:current_student_id] to match
   def set_current_student_from_params
