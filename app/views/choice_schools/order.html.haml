@@ -34,10 +34,9 @@
                     = student_school.program_code_description
                   %td{ style: "padding: 8px 20px 10px 0;" }
                     = student_school.transportation_eligibility
-                  %td{ style: "padding: 8px 20px 10px 0;" }
-                    = student_school.tier
-                  %td{ style: "padding: 8px 20px 10px 0;" }
-                    = special_application_helper(school.api_description.try(:[], :isspecialappprocedures))
+                  - unless ["09", "10", "11", "12"].include?(@student.grade_level)
+                    %td{ style: "padding: 8px 20px 10px 0;" }
+                      = student_school.tier
                   %td{ style: "padding: 8px 20px 10px 0;" }
                     - if school.api_hours.try(:[], :Description).present?
                       = truncate(student_school.school.api_hours.try(:[], :Description), length: 40)
