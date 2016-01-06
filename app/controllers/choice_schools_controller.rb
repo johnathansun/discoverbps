@@ -45,7 +45,8 @@ class ChoiceSchoolsController < ApplicationController
       session_token_response = Webservice.generate_session_token(params[:token], params[:passcode])
       if session_token = session_token_response.try(:[], :sessionToken)
         if Student.save_choice_student_and_schools!(params[:token], session_token, session[:session_id])
-          redirect_to list_choice_schools_path(token: session_token)
+          session[:session_token] = session_token
+          redirect_to list_choice_schools_path
         else
           Rails.logger.info "******************* didn't get a valid choice_student_and_schools"
           redirect_to confirmation_choice_schools_path(token: params[:token]), alert: "Please try again:"
@@ -154,9 +155,9 @@ class ChoiceSchoolsController < ApplicationController
   def redirect_if_session_token_invalid
     # finding a student with the session token only tells us whether one has been
     # created in the past. we also need to verify that the token isn't expired
-    if params[:token].blank? || @student.blank?
+    if session[:session_token].blank? || @student.blank?
       redirect_to verify_choice_schools_path(token: @student.try(:token)), alert: "Please access this site from a valid URL found in your invitation email."
-    elsif Webservice.validate_session_token(params[:token]).try(:[], :messageContent) != "Session token is valid"
+    elsif Webservice.validate_session_token(session[:session_token]).try(:[], :messageContent) != "Session token is valid"
       redirect_to verify_choice_schools_path(token: @student.try(:token)), alert: "Your session token has expired. Please revalidate your account."
     end
   end
@@ -164,6 +165,6 @@ class ChoiceSchoolsController < ApplicationController
   def find_student_by_session_token
     # see if we can find a student with this token, which should have been
     # saved on the authenticate method. if not, go back and get one
-    @student = Student.where(session_token: params[:token]).first
+    @student = Student.where(session_token: session[:session_token]).first
   end
 end
