@@ -35,7 +35,7 @@
                   %td{ style: "padding: 8px 20px 10px 0;" }
                     = student_school.transportation_eligibility
                   %td{ style: "padding: 8px 20px 10px 0;" }
-                    = spacer_helper(student_school.distance)
+                    #{spacer_helper(student_school.distance)}&nbsp;mi
                   - unless ["09", "10", "11", "12"].include?(@student.grade_level)
                     %td{ style: "padding: 8px 20px 10px 0;" }
                       = student_school.tier
