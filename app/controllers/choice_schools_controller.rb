@@ -97,8 +97,8 @@ class ChoiceSchoolsController < ApplicationController
 
   # POST
   def rank
-    if params[:schools].blank? || params[:schools].values.all? {|x| x.blank?}
-      redirect_to order_choice_schools_path(token: params[:token]), alert: "Please rank one or more schools and then submit your list:"
+    if params[:schools].blank? || params[:schools].values.all? {|x| x.blank?} || params[:schools].values.select {|x| x.present?}.count < 3
+      redirect_to order_choice_schools_path(token: params[:token]), alert: "Please rank three or more schools and then submit your list:"
     else
       rankings = params[:schools].values.select {|x| x.present?}
       properly_formatted = rankings.map {|x| x.try(:to_i)}.sort == (rankings.map {|x| x.try(:to_i)}.sort[0]..rankings.map {|x| x.try(:to_i)}.sort[-1]).to_a rescue false
