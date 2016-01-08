@@ -42,18 +42,18 @@
 	  <%= javascript_include_tag "application" %>
 	  <%= csrf_meta_tags %>
 	</head>
-	<body>
+	<body style="background-color: #00b080;">
 		<div class="sticky-footer-wrap">
 			<!-- partials are injected into this dialog box - don't delete -->
 			<div id='dialog_box' class='dialog_box dialog_box_discover' style='display:none;'></div>
 
-			<%= render partial: 'layouts/notifications' %>
 
 			<%= yield %>
 
 			<div class="sticky-footer-push"></div>
 		</div>
 
+		<div class="footer_top", style="background-color: #00b080;"></div>
 		<%= render partial: 'layouts/footer' %>
 		<%= render partial: 'layouts/analytics' %>
 
