@@ -127,15 +127,15 @@ class ChoiceSchoolsController < ApplicationController
     @choice_schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
 
     if @choice_schools.blank?
-      redirect_to order_choice_schools_path(token: params[:token]), alert: "Please rank one or more schools and then submit your list:"
+      redirect_to order_choice_schools_path, alert: "Please rank one or more schools and then submit your list:"
     else
       payload = []
       @choice_schools.each do |student_school|
         payload << { "CallID" => student_school.call_id, "ProgramCode" => student_school.program_code, "SchoolID" => student_school.school.bps_id, "Rank" => student_school.choice_rank, "CreatedDateTime" => "", "SchoolRankID" => "" }
       end
       @student.update_attributes(ranked: true, ranked_at: Time.now)
-      Webservice.save_choice_rank(params[:token], payload)
-      redirect_to success_choice_schools_path(token: params[:token])
+      Webservice.save_choice_rank(session[:session_token], payload)
+      redirect_to success_choice_schools_path(token: session[:session_token])
     end
   end
 
