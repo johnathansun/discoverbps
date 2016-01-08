@@ -83,7 +83,7 @@ module ApplicationHelper
 	def transportation_eligibility_icon_helper(student_school)
 		if ['WY', 'K'].include?(student_school.transportation_eligibility)
 			raw("<span aria-hidden='true' class='icon-DBPS-Dev-Assets-SRG-14 transportation_icon' style='font-size: 18px; color: #565656;'></span>")
-		elsif ['SY'].include?(student_school.transportation_eligibility)
+		elsif ['SY', 'C'].include?(student_school.transportation_eligibility)
 			raw("<span aria-hidden='true' class='icon-DBPS-Dev-Assets-SRG-15 transportation_icon' style='font-size: 18px; color: #565656;'></span>")
 		elsif ['T', 'O'].include?(student_school.transportation_eligibility)
 			raw("<span aria-hidden='true' class='icon-DBPS-Dev-Assets-SRG-16 transportation_icon' style='font-size: 18px; color: #565656;'></span>")
