@@ -12,7 +12,7 @@
       %div{id: 'home_schools_list', class: "schools_list #{(params[:list_type] == 'zone' || params[:list_type] == 'ell' || params[:list_type] == 'sped') ? 'hidden' : ''}"}
         .sort_schools.column_center.column.light{ style: "margin-bottom: 3em;" }
           - if flash[:alert].present?
-            %p{style: 'color: red; margin-bottom: 2em;'}
+            %h4.alert
               = flash[:alert]
           - else
             %p

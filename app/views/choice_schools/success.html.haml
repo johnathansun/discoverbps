@@ -10,7 +10,7 @@
 
       .light
         - if flash[:alert].present?
-          %p{style: 'color: red; margin-bottom: 2em;'}
+          %h4.alert
             = flash[:alert]
         - else
           %p

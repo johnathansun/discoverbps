@@ -8,7 +8,7 @@
 
       .light
         - if flash[:alert].present?
-          %p{style: 'color: red;'}
+          %h4.alert
             = flash[:alert]
         - else
           %p
