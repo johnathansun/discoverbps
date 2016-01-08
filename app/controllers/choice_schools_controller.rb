@@ -141,7 +141,8 @@ class ChoiceSchoolsController < ApplicationController
 
   # GET
   def success
-    @choice_schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
+    @choice_schools = Webservice.get_ranked_choices(@student.token)
+    # @choice_schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
   end
 
   private

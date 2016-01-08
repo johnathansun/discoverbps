@@ -82,8 +82,7 @@
                   .first_block.middle
                     %span.middle.sortable_distance
                       = transportation_eligibility_icon_helper(student_school, "18px")
-                      = spacer_helper(student_school.distance)
-                      mi
+                      #{spacer_helper(student_school.distance)}&nbsp;mi
 
                   .second_bloc.middle
                     %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14"}

@@ -81,7 +81,7 @@ module ApplicationHelper
 	end
 
 	def transportation_eligibility_icon_helper(student_school, font_size)
-		fontsize ||= font_size
+		font_size ||= "18px"
 		if ['WY', 'K'].include?(student_school.transportation_eligibility)
 			raw("<span aria-hidden='true' class='icon-DBPS-Dev-Assets-SRG-14 transportation_icon' style='font-size: #{fontsize}; color: #565656;'></span>")
 		elsif ['SY', 'C'].include?(student_school.transportation_eligibility)
