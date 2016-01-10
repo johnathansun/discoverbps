@@ -24,7 +24,7 @@
               - @choice_schools.each do |student_school|
                 - school = student_school.school
                 %tr
-                  %td{ style: "font-size: 20px; padding: 0 15px 10px 0;" }
+                  %td{ style: "font-size: 20px; padding: 0 15px 25px 0;" }
                     = text_field_tag "schools[#{student_school.id}]", student_school.choice_rank, style: "font-size: 20px; text-align: center; padding: 5px; width: 25px;"
                   %td{ style: "padding: 8px 20px 0 0;" }
                     %h3
