@@ -18,11 +18,21 @@
               %h3
                 = school.school.name
 
-        %p
-          If this list is correct, please click the "submit" button below to submit your official selection to the school department.
+        = form_for(:schools, url: submit_choice_schools_path, html: {method: :post}) do |f|
+          - if flash[:alert].present?
+            %h4.alert{ style: "margin-bottom: 14px;" }
+              = flash[:alert]
+          - else
+            %h4{ style: "margin-bottom: 14px;" }
+              Please type your full name into the text box below to attest that:
 
-        %div{ style: "margin: 3em 0 3em 0;" }
-          %div{ style: "display: inline-block;" }
-            = link_to "Back", order_choice_schools_path(token: params[:token]), id: "back-button"
-          %div{ style: "display: inline-block;" }
-            = button_to "Submit Choice List", submit_choice_schools_path(token: params[:token]), id: "continue-button", data: { confirm: "Are you ready to submit your official choice list to the school department?", disable_with: 'Submitting...' }
+          %p{ style: "margin: 0 0 20px 0;" }
+            "I live at #{@student.full_address} and am a legal guardian of #{@student.full_name}"
+
+          = text_field_tag :parent_name, nil, placeholder: "Your Name"
+
+          %div{ style: "margin: 3em 0 3em 0;" }
+            %div{ style: "display: inline-block;" }
+              = link_to "Back", order_choice_schools_path, id: "back-button"
+            %div{ style: "display: inline-block;" }
+              = f.submit "Submit Choice List", id: "continue-button", data: { confirm: "Are you ready to submit your official choice list to the school department?", disable_with: 'Submitting...' }

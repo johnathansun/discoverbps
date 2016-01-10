@@ -19,7 +19,8 @@ class Student < ActiveRecord::Base
                     :addressid, :user_id, :preference_ids, :school_ids, :sped_needs, :ell_language, :awc_invitation,
                     :schools_last_updated_at, :x_coordinate, :y_coordinate, :address_verified, :geo_code, :preferences_count,
                     :home_schools_json, :zone_schools_json, :ell_schools_json, :sped_schools_json, :favorite, :step,
-                    :ell_cluster, :sped_cluster, :zone, :token, :session_token, :student_id, :address_id, :ranked, :ranked_at
+                    :ell_cluster, :sped_cluster, :zone, :token, :session_token, :student_id, :address_id, :ranked, :ranked_at,
+                    :parent_name
 
   serialize :sibling_school_names
   serialize :sibling_school_ids
