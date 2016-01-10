@@ -31,9 +31,9 @@
     padding: 0 33px;
   }
 */
-  
-  
-  
+
+
+
   /* -------------------------------------------------
 	Page Header
   ---------------------------------------------------- */
@@ -81,9 +81,9 @@
     color: #ffffff;
   }
 
-  
-  
-  
+
+
+
   .wrap .single_school {
     padding-left: 2%;
     padding-right: 2%;
@@ -121,30 +121,30 @@
   .wrap .single_school .box.empty {
     display: none;
   }
-  
 
 
-  
+
+
   .wrap.global_map {
     height: 290px;
   }
   .wrap.global_map #googleMap {
     height: 290px;
   }
-  
-  
-  
-  
+
+
+
+
  	/* ----------------------------------------------------
 		Next Step Button
-	------------------------------------------------------- */   
+	------------------------------------------------------- */
 	.wrap .next_step {
 		margin: 12px 10px 12px 0;
 	}
-    
-    
-  
-  
+
+
+
+
   .wrap .menu_compare_name .flexible_content {
     width: auto !important;
   }
@@ -166,18 +166,18 @@
   .wrap .menu_compare_name .add_child {
     display: none;
   }
-  
-  
-  
-  
-  
+
+
+
+
+
   .wrap .preferences {
     display: none !important;
   }
   #school_list {
     margin: 10px 0 25px 10px;
     padding: 0;
-    
+
     .note {
 	    margin: 10px 50px 20px 0;
     }
@@ -189,12 +189,12 @@
     width: auto;
   }
 	#school_list {
-		
+
 		.list_content { overflow: hidden; }
-		
+
 		li {
 			.line {
-				
+
 				&.no_order {
 					width: 12%;
 					img { max-width: none }
@@ -279,12 +279,12 @@
     padding: 20px 0 ;
     margin-left: 0;
   }
-  
-  
-  
-  
+
+
+
+
   .dialog_box {
-		
+
 		&.dialog_box_discover {
 		  width: auto;
 			left: 100px;
@@ -293,8 +293,8 @@
 			padding: 20px;
 	  }
 	}
-  
-  
+
+
   .wrap .result {
     padding-bottom: 0;
   }
@@ -350,19 +350,19 @@
   .search .search_section_content .today {
     display: none !important;
   }
-  
+
   .search .user_lists { width: 93%; }
   .search .new_search_form_wrap { width: 75%; }
-  
+
 	/* Search Form
-	------------------------------------------------------------- */  
+	------------------------------------------------------------- */
   .form_line {
     margin-bottom: 0;
     height: auto;
     background: none;
     width: auto;
     float: none;
-	
+
 	  input {
 	    background: #ffffff;
 	    margin-bottom: 12px;
@@ -413,7 +413,7 @@
 	  .bloc_6 .arrow {
 	    right: 4%;
 	  }
-	
+
 	  .bloc_6 {
 	    float: none;
 	    width: 100%;
@@ -454,10 +454,10 @@
 	    width: 80%;
 	    text-align: left;
 	  }
-	  
+
 	}// .form_line
-  
-  
+
+
   .wrap .account #personnal_info .bloc_50 {
     width: 100%;
     margin-right: 0;
@@ -529,7 +529,7 @@
   .wrap .account #save {
     width: 100%;
   }
-  
+
 
 
   footer.footer {
@@ -576,7 +576,7 @@
   .wrap .photos {
     float: left;
   }
-  
+
 }
 
 @media screen and (max-width: 607px) {
@@ -588,17 +588,17 @@
     width: 100%;
     margin: 0;
   }
-  
-  
+
+
 	.dialog_box {
-		
+
 		&.dialog_box_discover {
 			left: 20px;
 			right: 20px;
 	  }
 	}
-  
-  
+
+
   .account_tab {
 		margin: 0;
 	}
@@ -616,8 +616,8 @@
   .timeline_menu nav.menu_nav ul li.register {
     margin-left: 0;
   }
-  
-	.wrap .next_step {		
+
+	.wrap .next_step {
 		.next { width: 25%; }
 		.text { width: 75%; }
 	}
@@ -640,7 +640,7 @@
   }
   .search .search_section.first .content_left {
     padding-bottom: 30px;
-    
+
     .home_intro { font-size: 100%; }
   }
   .search .logo.register {
@@ -650,16 +650,16 @@
     font-size: 47px;
   }
 
-	.steps .step { 
-		width: 50%; 
-		margin-bottom: 10px; 
-	
-		&.second .bar { 
+	.steps .step {
+		width: 50%;
+		margin-bottom: 10px;
+
+		&.second .bar {
 			margin: 0;
-			.arrow.front { display: none; }  
+			.arrow.front { display: none; }
 		}
-		&.third .bar { 
-			.arrow.back { display: none; }  
+		&.third .bar {
+			.arrow.back { display: none; }
 		}
 	}
 
@@ -676,8 +676,8 @@
 			}
 		}
 	}
-	
-	
+
+
 	.search .new_search_form_wrap {
 	  width: 100%;
   }
@@ -698,7 +698,7 @@
 
 
 	#school_list {
-				
+
 		li {
 			.line {
 				&.no_order {
@@ -739,28 +739,28 @@
 	}
 
 	.compare_list {
-		
+
 		.column.more_schools { margin: 0 0 0 20%; }
 		.column.labels { margin: 20px 0 0 }
-		
+
 		.label.rank { width: 20%; }
 		.label.name { width: 68%; margin-left: 12%; }
 		.label.your_fit { display: none; }
-		
+
 		.compare_list_content {
 			width: 80%;
 		}
-		
+
 		#ranks {
 			width: 20%;
 		}
-		
+
 		.sortable_school {
-			
+
 			.line {
-				
+
 				&.school_star {
-					width: 10%;	
+					width: 10%;
 					font-size: 32px;
 					img { width: 20px; height: auto; }
 				}
