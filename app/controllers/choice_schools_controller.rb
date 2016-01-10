@@ -73,9 +73,9 @@ class ChoiceSchoolsController < ApplicationController
   # GET
   def order
     if @student.choice_schools.blank?
-      redirect_to choice_schools_path(token: params[:token]), alert: "There were no schools that matched your search. Please try again."
+      redirect_to choice_schools_path, alert: "There were no schools that matched your search. Please try again."
     elsif Webservice.get_student(@student.token).try(:[], :HasRankedChoiceSubmitted) == true
-      redirect_to success_choice_schools_path(token: params[:token]), alert: "You have already submitted your school choice list for the current school year. Your choice list is as follows:"
+      redirect_to success_choice_schools_path, alert: "You have already submitted your school choice list for the current school year. Your choice list is as follows:"
     else
       if schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
         @choice_schools = schools
@@ -98,7 +98,7 @@ class ChoiceSchoolsController < ApplicationController
   # POST
   def rank
     if params[:schools].blank? || params[:schools].values.all? {|x| x.blank?} || params[:schools].values.select {|x| x.present?}.count < 3
-      redirect_to order_choice_schools_path(token: params[:token]), alert: "Please rank three or more schools and then submit your list"
+      redirect_to order_choice_schools_path, alert: "Please rank three or more schools and then submit your list"
     else
       rankings = params[:schools].values.select {|x| x.present?}
       properly_formatted = rankings.map {|x| x.try(:to_i)}.sort == (rankings.map {|x| x.try(:to_i)}.sort[0]..rankings.map {|x| x.try(:to_i)}.sort[-1]).to_a rescue false
@@ -110,9 +110,9 @@ class ChoiceSchoolsController < ApplicationController
             school.update_column(:choice_rank, rank)
           end
         end
-        redirect_to summary_choice_schools_path(token: params[:token])
+        redirect_to summary_choice_schools_path
       else
-        redirect_to order_choice_schools_path(token: params[:token]), alert: "Please ensure that your rankings are in order and start with '1'"
+        redirect_to order_choice_schools_path, alert: "Please ensure that your rankings are in order and start with '1'"
       end
     end
   end
@@ -137,7 +137,7 @@ class ChoiceSchoolsController < ApplicationController
       end
       @student.update_attributes(ranked: true, ranked_at: Time.now, parent_name: params[:parent_name])
       Webservice.save_choice_rank(session[:session_token], payload)
-      redirect_to success_choice_schools_path(token: session[:session_token])
+      redirect_to success_choice_schools_path
     end
   end
 
