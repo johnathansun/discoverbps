@@ -49,15 +49,15 @@ module Webservice
 	end
 
 	def self.get_ranked_choices(token)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/GetRankedChoiceByStudToken"
+		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/GetRankedChoice"
 		payload = { studentToken: token }
 		response = self.post(endpoint, payload).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
-	def self.save_choice_rank(token, schools)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/SaveChoiceRank"
+	def self.save_ranked_choices(token, schools)
+		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/SaveRankedChoices"
 		payload = { sessionToken: token, choiceList: schools }
 		response = self.post(endpoint, payload).body
 		Rails.logger.info "******************** #{response}"
