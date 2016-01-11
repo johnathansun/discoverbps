@@ -49,7 +49,7 @@ module Webservice
 	end
 
 	def self.get_ranked_choices(token)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/GetRankedChoice"
+		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/GetRankedChoices"
 		payload = { studentToken: token }
 		response = self.post(endpoint, payload).body
 		Rails.logger.info "******************** #{response}"
