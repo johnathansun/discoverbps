@@ -119,7 +119,11 @@ class ChoiceSchoolsController < ApplicationController
 
   # GET
   def summary
-    @choice_schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
+    if Webservice.get_student(@student.token).try(:[], :HasRankedChoiceSubmitted) == true
+      redirect_to success_choice_schools_path, alert: "You have already submitted your school choice list for the current school year. Your choice list is as follows:"
+    else
+      @choice_schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
+    end
   end
 
   # POST
