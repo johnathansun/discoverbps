@@ -3,7 +3,7 @@
 		%span{:aria => {hidden: 'true'}, :class => 'icon-DBPS-Dev-Assets-SRG-02'}
 
 	.text.clearfix
-		%p.yellow-buttons
+		%p.yellow-buttons  
 			= auto_link(TextSnippet.find('home-register-intro').try(:text))
 			= link_to 'Learn more', 'http://www.bostonpublicschools.org/register', title: 'Learn more', class: 'u', style: 'margin-bottom: 0;', target: '_blank'
 		.alignleft_half
@@ -13,7 +13,6 @@
 		.alignleft_half
 			%h2{style: 'margin-bottom: 15px;'}
 				Register
-			= link_to 'Pre-registration', 'https://sis.mybps.org/aspen/index.html', class: 'u', target: '_blank'	
-			%div.font13 Pre-registration for the 2016-2017 school year begins mid-December				
+			= link_to 'Pre-registration', 'https://sis.mybps.org/aspen/index.html', class: 'u', target: '_blank'							
 			= link_to 'Collect the required documents', 'http://www.bostonpublicschools.org/requireddocs', class: 'u', target: '_blank'
 			= link_to 'Plan a visit to a welcome center', 'http://www.bostonpublicschools.org/Page/653', class: 'u', target: '_blank'
