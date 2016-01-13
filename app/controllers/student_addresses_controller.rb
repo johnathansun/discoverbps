@@ -22,12 +22,9 @@ class StudentAddressesController < ApplicationController
     student.ell_cluster = address.try(:[], :ELLCluster)
     student.sped_cluster = address.try(:[], :SPEDCluster)
     student.zone = address.try(:[], :Zone)
-    Rails.logger.info "*********************** addressid = #{address.try(:[], :AddressID)}"
-
 
     respond_to do |format|
       if student.save!
-        Rails.logger.info "*********************** addressid = #{student.addressid}"
 
         if AWC_GRADES.include?(student.grade_level)
           format.js { render template: "student_awc_preferences/new" }
