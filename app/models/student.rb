@@ -93,6 +93,7 @@ class Student < ActiveRecord::Base
   end
 
   def set_home_schools!
+    Rails.logger.info "*********************** self.addressid = #{self.addressid}"
     api_schools = Webservice.get_home_schools(self.formatted_grade_level, self.addressid, self.awc_invitation, self.sibling_school_ids).try(:[], :List)
     save_student_schools!(api_schools, 'home')
   end

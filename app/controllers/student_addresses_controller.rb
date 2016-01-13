@@ -1,36 +1,40 @@
 class StudentAddressesController < ApplicationController
 
   def new
-    
+
   end
 
   def create
+    student = current_student
     address = response = MultiJson.load(params[:address], :symbolize_keys => true)
 
-    current_student.address_verified = true
-    current_student.street_number = address.try(:[], :StreetNum)
-    current_student.street_name = address.try(:[], :Street).try(:titleize)
-    current_student.neighborhood = address.try(:[], :SectionOfCity)
-    current_student.zipcode = address.try(:[], :ZipCode)
-    current_student.x_coordinate = address.try(:[], :X)
-    current_student.y_coordinate = address.try(:[], :Y)
-    current_student.latitude = address.try(:[], :Lat)
-    current_student.longitude = address.try(:[], :Lng)
-    current_student.geo_code = address.try(:[], :GeoCode)
-    current_student.addressid = address.try(:[], :AddressID)
-    current_student.ell_cluster = address.try(:[], :ELLCluster)
-    current_student.sped_cluster = address.try(:[], :SPEDCluster)
-    current_student.zone = address.try(:[], :Zone)
+    student.address_verified = true
+    student.street_number = address.try(:[], :StreetNum)
+    student.street_name = address.try(:[], :Street).try(:titleize)
+    student.neighborhood = address.try(:[], :SectionOfCity)
+    student.zipcode = address.try(:[], :ZipCode)
+    student.x_coordinate = address.try(:[], :X)
+    student.y_coordinate = address.try(:[], :Y)
+    student.latitude = address.try(:[], :Lat)
+    student.longitude = address.try(:[], :Lng)
+    student.geo_code = address.try(:[], :GeoCode)
+    student.addressid = address.try(:[], :AddressID)
+    student.ell_cluster = address.try(:[], :ELLCluster)
+    student.sped_cluster = address.try(:[], :SPEDCluster)
+    student.zone = address.try(:[], :Zone)
+    Rails.logger.info "*********************** addressid = #{address.try(:[], :AddressID)}"
+
 
     respond_to do |format|
-      if current_student && current_student.update_attributes(params[:student])
+      if student.save!
+        Rails.logger.info "*********************** addressid = #{student.addressid}"
 
-        if AWC_GRADES.include?(current_student.grade_level)
+        if AWC_GRADES.include?(student.grade_level)
           format.js { render template: "student_awc_preferences/new" }
           format.html { redirect_to new_student_awc_preferences_path }
         else
           # if we don't need to ask about AWC, we can set the home schools now
-          current_student.set_home_schools!
+          student.set_home_schools!
           format.js { render template: "student_ell_preferences/new" }
           format.html { redirect_to new_student_ell_preferences_path }
         end

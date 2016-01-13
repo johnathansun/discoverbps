@@ -1,9 +1,5 @@
 %div{id: 'home_schools_list', class: "schools_list #{(params[:list_type] == 'zone' || params[:list_type] == 'ell' || params[:list_type] == 'sped') ? 'hidden' : ''}"}
   .sort_schools.column_center.column
-    - @home_schools.each do |student_school|
-      %p
-        = student_school.school.name
-
     %ul#ranks.clearfix
       %li.rank 1
       %li.rank 2
