@@ -31,8 +31,24 @@
 
           = text_field_tag :parent_name, nil, placeholder: "Your Name"
 
+
+          %h4{ style: "margin-top: 2em;" }
+            Also, please note that:
+
+          %ul{ style: "margin: 1.5em 0 1em 1em; font-size:small; list-style-type: square;"}
+            %li
+              Students who are assigned to their first choice school are not eligible to be placed on any wait list.
+            %li
+              Students who are assigned to their second choice school may only be placed on the wait list for their first choice school.
+            %li
+              Students who are assigned to their third choice school may be placed on the wait lists for the first and second choice schools.
+            %li
+              Students who are assigned to a school lower than their third choice on their registration form are eligible to remain on the wait lists for up to three schools. The default schools for wait listing are the student’s top three choices.
+
+
           %div{ style: "margin: 3em 0 3em 0;" }
             %div{ style: "display: inline-block;" }
               = link_to "Back", order_choice_schools_path, id: "back-button"
             %div{ style: "display: inline-block;" }
               = f.submit "Submit Choice List", id: "continue-button", data: { confirm: "Are you ready to submit your official choice list to the school department?", disable_with: 'Submitting...' }
+
