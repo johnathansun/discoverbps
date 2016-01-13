@@ -14,11 +14,11 @@
 
 @font-face {
   font-family: 'DBPS-UI';
-	src:url('/assets/DBPS-UI.eot?trhj8k');
-	src:url('/assets/DBPS-UI.eot?#iefixtrhj8k') format('embedded-opentype'),
-		url('/assets/DBPS-UI.woff?trhj8k') format('woff'),
-		url('/assets/DBPS-UI.ttf?trhj8k') format('truetype'),
-		url('/assets/DBPS-UI.svg?trhj8k#DBPS-UI') format('svg');
+	src:url('/assets/DBPS-UI-v3.eot?trhj8k');
+	src:url('/assets/DBPS-UI-v3.eot?#iefixtrhj8k') format('embedded-opentype'),
+		url('/assets/DBPS-UI-v3.woff?trhj8k') format('woff'),
+		url('/assets/DBPS-UI-v3.ttf?trhj8k') format('truetype'),
+		url('/assets/DBPS-UI-v3.svg?trhj8k#DBPS-UI-v3') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -111,7 +111,6 @@ you can use the generic selector below, but it's slower:
 .icon-DBPS-Preferences-Icons-20130930-SRG_mcastier,
 .icon-DBPS-Preferences-Icons-20130930-SRG_enrollment,
 .icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners,
-.choose-icon,
 .icon-menu,
 .icon-info,
 .icon-close,
@@ -371,7 +370,4 @@ you can use the generic selector below, but it's slower:
 }
 .icon-DBPS-Dev-Assets-SRG-25:before {
 	content: "\e013";
-}
-.choose-icon:before {
-  content: "\e900";
 }
