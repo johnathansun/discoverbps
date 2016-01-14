@@ -1,25 +1,8 @@
 <!-- preferences menu side bar for shool listing -->
 <div id="preferences" class="preferences">
 
-<!-- header only in tablet -->
-	<div class="header_preferences">
-		<span class="font_17">Choose what matters to <%= current_student.first_name %>:
-<!--
-			<span id="hide_btn">Hide Criteria &nbsp;
-				<span aria-hidden="true" class="down_arrow icon-DBPS-Dev-Assets-SRG-41"></span>
-			</span>
--->
-<!--
-			<span id="show_btn">Show Criteria &nbsp;
-				<span aria-hidden="true" class="up_arrow icon-DBPS-Dev-Assets-SRG-39"></span>
-			</span>
--->
-		</span>
-	</div>
-	<!-- END header only in tablet -->
-
 	<!-- preferences list for desktop and tablet situation -->
-	<div id="preference_content" style="margin-top: 5em;">
+	<div>
 		<% if PreferenceCategory.active(current_student.grade_level).present? %>
 			<% @opening_tags = 0 %>
 			<% @closing_tags = 0 %>
