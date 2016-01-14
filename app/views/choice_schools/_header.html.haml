@@ -1,16 +1,21 @@
 .wrap.clearfix
   .account_tab
+    .language_box.menu_item
+      .btn_account
+        %span.icon.icon-DBPS-Dev-Assets-SRG-34{ style: "font-size: 13px;" }
+        = link_to "Discover", root_url, class: "no-decoration"
+
     = render partial: 'layouts/language_tab'
     = render partial: 'layouts/account_tab'
 
 .wrap.timeline_menu{ style: "margin-top: 0px;" }
   %section.logo_header.clearfix
     %nav.menu_nav
-      %span{ id: 'menu_nav_mobile', aria: { hidden: "true" }, class: "icon-DBPS-Dev-Assets-SRG-25" }
+      %span#menu_nav_mobile.icon-DBPS-Dev-Assets-SRG-25{ aria: { hidden: "true" } }
 
     .logo_choose
       %a{href: "/choice_schools", class:"no-decoration"}
-        %span{ aria: { hidden: "true" }, class: "choose-icon" }
+        %span.choose-icon{ aria: { hidden: "true" } }
 
 .clr
 

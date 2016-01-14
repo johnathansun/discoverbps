@@ -112,6 +112,7 @@ you can use the generic selector below, but it's slower:
 .icon-DBPS-Preferences-Icons-20130930-SRG_enrollment,
 .icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners,
 .choose-icon,
+.discover-icon-solid,
 .icon-menu,
 .icon-info,
 .icon-close,
@@ -372,6 +373,9 @@ you can use the generic selector below, but it's slower:
 .icon-DBPS-Dev-Assets-SRG-25:before {
 	content: "\e013";
 }
-.choose-icon:before {
+.discover-icon-solid:before {
   content: "\e900";
+}
+.choose-icon:before {
+  content: "\e901";
 }

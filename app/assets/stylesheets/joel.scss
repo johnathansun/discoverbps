@@ -311,6 +311,14 @@ h4.alert {
   font-size: 100px;
   position: relative;
   margin-left: 12px;
+  margin-top: -34px;
   float: left;
-  height: 110px;
+  height: 100px;
+}
+.discover_home_button {
+	font-size: 18px;
+	color: white;
+}
+.discover_home_button:hover {
+	color: $yellow;
 }
