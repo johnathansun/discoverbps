@@ -25,14 +25,13 @@
   $( document ).ready(function() {
 
     //Click on school name to open the full school description in the school line.
-    $("#school_list .sortable_school_name").click(function() {
+    $("#school_list .school_name").click(function() {
       $(this)
         .parents(".list_row")
         .toggleClass("descrip_open")
         .find(".school_descrip").toggle();
       }
     );
-
     // Hover a Your Fit icon to see its tooltip
     $('.your_fit_icon .icon').tooltip({
       track: false,
