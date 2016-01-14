@@ -7,49 +7,49 @@ module Webservice
 	####### CHOICE SCHOOLS FLOW #######
 
 	def self.get_parent(token)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/GetParentInfo"
+		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetParentInfo"
 		params = { studentToken: token, schyear: "2015" }.to_param
 		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	def self.get_student(token)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/GetStudent"
+		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudent"
 		params = { studentToken: token, schyear: "2015" }.to_param
 		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	def self.get_choice_student_and_schools(token)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/GetStudentSchoolChoices"
+		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudentSchoolChoices"
 		response = self.post(endpoint, { sessionToken: token, schyear: "2015" }).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	def self.generate_passcode(token, email)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/GeneratePasscode"
+		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GeneratePasscode"
 		response = self.post(endpoint, { studentToken: token, contactEmail: email }).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	def self.generate_session_token(token, passcode)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/authenticate/GetSessionToken"
+		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/authenticate/GetSessionToken"
 		response = self.post(endpoint, { studentToken: token, passCode: passcode }).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	def self.validate_session_token(token)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/authenticate/ValidateSessionToken"
+		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/authenticate/ValidateSessionToken"
 		response = self.post(endpoint, { sessionToken: token }).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	def self.get_ranked_choices(token)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/GetRankedChoices"
+		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetRankedChoices"
 		payload = { studentToken: token }
 		response = self.post(endpoint, payload).body
 		Rails.logger.info "******************** #{response}"
@@ -57,7 +57,7 @@ module Webservice
 	end
 
 	def self.save_ranked_choices(token, schools)
-		endpoint = "#{ENV['WEBSERVICE_STAGING_URL']}/student/SaveRankedChoices"
+		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/SaveRankedChoices"
 		payload = { sessionToken: token, choiceList: schools }
 		response = self.post(endpoint, payload).body
 		Rails.logger.info "******************** #{response}"
