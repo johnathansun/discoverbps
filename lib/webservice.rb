@@ -8,21 +8,21 @@ module Webservice
 
 	def self.get_parent(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetParentInfo"
-		params = { studentToken: token, schyear: "2015" }.to_param
+		params = { studentToken: token, schyear: "2016" }.to_param
 		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	def self.get_student(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudent"
-		params = { studentToken: token, schyear: "2015" }.to_param
+		params = { studentToken: token, schyear: "2016" }.to_param
 		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	def self.get_choice_student_and_schools(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudentSchoolChoices"
-		response = self.post(endpoint, { sessionToken: token, schyear: "2015" }).body
+		response = self.post(endpoint, { sessionToken: token, schyear: "2016" }).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
