@@ -38,14 +38,14 @@ class Student < ActiveRecord::Base
   before_save :strip_first_name, :strip_last_name, :strip_street_number, :strip_street_name, :strip_zipcode
 
 
-  def self.save_choice_student_and_schools!(token, session_token, session_id)
+  def self.save_choice_student_and_schools(token, session_token, session_id)
     response = Webservice.get_choice_student_and_schools(session_token)
 
     if response.try(:[], :studentInfo).present? && response.try(:[], :choiceList).present?
       student = Student.where(token: token).first_or_initialize
 
       if student.save_from_api_response(session_id, session_token, response[:studentInfo])
-        student.set_choice_schools!(response[:choiceList])
+        student.set_choice_schools(response[:choiceList])
       else
         false
       end
@@ -88,28 +88,28 @@ class Student < ActiveRecord::Base
     end
   end
 
-  def set_choice_schools!(schools_array)
-    save_student_schools!(schools_array, 'choice')
+  def set_choice_schools(schools_array)
+    save_student_schools(schools_array, 'choice')
   end
 
-  def set_home_schools!
+  def set_home_schools
     api_schools = Webservice.get_home_schools(self.formatted_grade_level, self.addressid, self.awc_invitation, self.sibling_school_ids).try(:[], :List)
-    save_student_schools!(api_schools, 'home')
+    save_student_schools(api_schools, 'home')
   end
 
-  def set_zone_schools!
+  def set_zone_schools
     api_schools = Webservice.get_zone_schools(self.formatted_grade_level, self.addressid, self.sibling_school_ids).try(:[], :List)
-    save_student_schools!(api_schools, 'zone')
+    save_student_schools(api_schools, 'zone')
   end
 
-  def set_ell_schools!
+  def set_ell_schools
     api_schools = Webservice.get_ell_schools(self.formatted_grade_level, self.addressid, self.ell_language)
-    save_student_schools!(api_schools, 'ell')
+    save_student_schools(api_schools, 'ell')
   end
 
-  def set_sped_schools!
+  def set_sped_schools
     api_schools = Webservice.get_sped_schools(self.formatted_grade_level, self.addressid)
-    save_student_schools!(api_schools, 'sped')
+    save_student_schools(api_schools, 'sped')
   end
 
   def save_from_api_response(session_id, session_token, student_hash)
@@ -143,7 +143,7 @@ class Student < ActiveRecord::Base
 
   # this method pulls a list of eligible schools from the GetSchoolChoices API,
   # saves the schools to student_schools, and fetches distance and walk/drive times from the Google Matrix API
-  def save_student_schools!(api_schools, school_list_type)
+  def save_student_schools(api_schools, school_list_type)
     if longitude.present? && latitude.present?
 
       # loop through the schools returned from the API, find the matching schools in the db,

@@ -44,7 +44,7 @@ class ChoiceSchoolsController < ApplicationController
     else
       session_token_response = Webservice.generate_session_token(params[:token], params[:passcode])
       if session_token = session_token_response.try(:[], :sessionToken)
-        if Student.save_choice_student_and_schools!(params[:token], session_token, session[:session_id])
+        if Student.save_choice_student_and_schools(params[:token], session_token, session[:session_id])
           session[:session_token] = session_token
           redirect_to list_choice_schools_path
         else

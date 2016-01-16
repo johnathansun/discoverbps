@@ -8,7 +8,7 @@ class StudentAwcPreferencesController < ApplicationController
       if current_student && current_student.update_attributes(params[:student])
 
         # the home schools call must always preceed zone schools
-        current_student.set_home_schools!
+        current_student.set_home_schools
 
         format.js { render template: "student_ell_preferences/new" }
         format.html { redirect_to new_student_ell_preferences_path }

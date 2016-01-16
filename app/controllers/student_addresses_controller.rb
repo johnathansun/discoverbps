@@ -31,7 +31,7 @@ class StudentAddressesController < ApplicationController
           format.html { redirect_to new_student_awc_preferences_path }
         else
           # if we don't need to ask about AWC, we can set the home schools now
-          student.set_home_schools!
+          student.set_home_schools
           format.js { render template: "student_ell_preferences/new" }
           format.html { redirect_to new_student_ell_preferences_path }
         end

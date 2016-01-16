@@ -1,7 +1,7 @@
 class StudentSpedPreferencesController < ApplicationController
 
   def new
-    
+
   end
 
   def create
@@ -10,7 +10,7 @@ class StudentSpedPreferencesController < ApplicationController
       if current_student && current_student.update_attributes(params[:student])
 
         if current_student.sped_needs == true
-          current_student.set_sped_schools!
+          current_student.set_sped_schools
         end
 
         format.html { redirect_to schools_path}
@@ -23,5 +23,5 @@ class StudentSpedPreferencesController < ApplicationController
       end
     end
   end
-  
+
 end

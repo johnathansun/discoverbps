@@ -13,20 +13,6 @@ module Webservice
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
-	def self.get_student(token)
-		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudent"
-		params = { studentToken: token, schyear: "2016" }.to_param
-		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
-		MultiJson.load(response, symbolize_keys: true)
-	end
-
-	def self.get_choice_student_and_schools(token)
-		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudentSchoolChoices"
-		response = self.post(endpoint, { sessionToken: token, schyear: "2016" }).body
-		Rails.logger.info "******************** #{response}"
-		MultiJson.load(response, symbolize_keys: true)
-	end
-
 	def self.generate_passcode(token, email)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GeneratePasscode"
 		response = self.post(endpoint, { studentToken: token, contactEmail: email }).body
@@ -48,6 +34,20 @@ module Webservice
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
+	def self.get_student(token)
+		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudent"
+		params = { studentToken: token, schyear: "2016" }.to_param
+		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
+		MultiJson.load(response, symbolize_keys: true)
+	end
+
+	def self.get_choice_student_and_schools(session_token)
+		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudentSchoolChoices"
+		response = self.post(endpoint, { sessionToken: session_token, schyear: "2016" }).body
+		Rails.logger.info "******************** #{response}"
+		MultiJson.load(response, symbolize_keys: true)
+	end
+
 	def self.get_ranked_choices(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetRankedChoices"
 		payload = { studentToken: token }
@@ -56,9 +56,9 @@ module Webservice
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
-	def self.save_ranked_choices(token, schools)
+	def self.save_ranked_choices(session_token, schools)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/SaveRankedChoices"
-		payload = { sessionToken: token, choiceList: schools }
+		payload = { sessionToken: session_token, choiceList: schools }
 		response = self.post(endpoint, payload).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
