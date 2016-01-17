@@ -14,7 +14,7 @@
           %p
             We sent an email to #{params[:contact_method]} (it may take a few minutes for the email to be delivered).
           %p
-            Please enter the confirmation code into the form below:
+            Please enter the confirmation code into the form below and then click "Continue" at the bottom of the page.
 
         = form_tag(authenticate_choice_schools_path(token: params[:token]), method: "post") do
 

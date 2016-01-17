@@ -119,27 +119,27 @@ class Student < ActiveRecord::Base
 
   def save_from_api_response(session_id, session_token, student_hash)
 
-    session_id = session_id
-    session_token = session_token
-    student_id = student_hash[:StudentID].try(:strip)
-    first_name = student_hash[:FirstName].try(:strip)
-    last_name = student_hash[:LastName].try(:strip)
-    grade_level = student_hash[:Grade].try(:strip).try(:gsub, /^0/, '')
-    address_id = student_hash[:AddressID]
-    street_number = student_hash[:Streetno].try(:strip)
-    street_name = student_hash[:Street].try(:strip).try(:titleize)
-    neighborhood = student_hash[:City].try(:strip).try(:titleize)
-    zipcode = student_hash[:ZipCode].try(:strip)
-    x_coordinate = student_hash[:X]
-    y_coordinate = student_hash[:Y]
-    latitude = student_hash[:Latitude]
-    longitude = student_hash[:Longitude]
-    addressid = student_hash[:AddressID].try(:to_s).try(:strip)
-    geo_code = student_hash[:GeoCode]
-    address_verified = true
-    awc_invitation = student_hash[:IsAWCEligible]
-    ranked = student_hash[:HasRankedChoiceSubmitted]
-    ranked_at = student_hash[:RankedChoiceSubmittedDate]
+    self.session_id = session_id
+    self.session_token = session_token
+    self.student_id = student_hash[:StudentID].try(:strip)
+    self.first_name = student_hash[:FirstName].try(:strip)
+    self.last_name = student_hash[:LastName].try(:strip)
+    self.grade_level = student_hash[:Grade].try(:strip).try(:gsub, /^0/, '')
+    self.address_id = student_hash[:AddressID]
+    self.street_number = student_hash[:Streetno].try(:strip)
+    self.street_name = student_hash[:Street].try(:strip).try(:titleize)
+    self.neighborhood = student_hash[:City].try(:strip).try(:titleize)
+    self.zipcode = student_hash[:ZipCode].try(:strip)
+    self.x_coordinate = student_hash[:X]
+    self.y_coordinate = student_hash[:Y]
+    self.latitude = student_hash[:Latitude]
+    self.longitude = student_hash[:Longitude]
+    self.addressid = student_hash[:AddressID].try(:to_s).try(:strip)
+    self.geo_code = student_hash[:GeoCode]
+    self.address_verified = true
+    self.awc_invitation = student_hash[:IsAWCEligible]
+    self.ranked = student_hash[:HasRankedChoiceSubmitted]
+    self.ranked_at = student_hash[:RankedChoiceSubmittedDate]
 
     self.save!
   end

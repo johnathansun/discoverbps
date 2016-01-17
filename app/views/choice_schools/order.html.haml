@@ -16,7 +16,7 @@
               = flash[:alert]
           - else
             %p
-              Please use the form below to enter your schools in the order in which you would like to submit. You must rank at least three schools. We recommend you make at least five school choices. Indicate your choices entering 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 etc. with 1 being your first choice school. Use each number only once. When you are ready to submit your list to the school department, please click "Submit".
+              Please use the form below to enter your schools in the order in which you would like to submit. You must rank at least three schools. We recommend you make at least five school choices. Indicate your choices entering 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 etc. with 1 being your first choice school. Use each number only once. When you are ready to submit your list to the school department, please click "Submit" at the bottom of the page.
             %br/
 
           = form_for(:schools, url: rank_choice_schools_path(token: params[:token]), html: {method: :post}) do |f|
@@ -46,9 +46,9 @@
 
             %div{ style: "margin: 3em 0 3em 0;" }
               %div{ style: "display: inline-block;" }
-                = link_to "Back", list_choice_schools_path(token: params[:token]), id: "back-button"
+                = link_to "Back", list_choice_schools_path, id: "back-button"
               %div{ style: "display: inline-block;" }
-                = f.submit 'Continue', id: "continue-button", data: { disable_with: 'Submitting...' }
+                = f.submit 'Continue', id: "continue-button"
 
 :javascript
 
