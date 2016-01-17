@@ -6,10 +6,10 @@
       .light
         - if flash[:alert].present?
           %h4.alert
-            = flash[:alert] 
+            = flash[:alert]
         %h2
           School Choice
-        %br/ 
+        %br/
         %p
           Thank you for accessing the Discover website. This site will help you navigate the 2016-2017 School Choice registration process.
         %p
@@ -24,4 +24,4 @@
           Superintendent
 
       %br/
-      = link_to "Continue", verify_choice_schools_path(token: params[:token]), id: "continue-button", disable_with: 'Working...'
+      = link_to "Continue", verify_choice_schools_path(token: params[:token]), id: "continue-button"

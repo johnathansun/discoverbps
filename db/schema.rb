@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160110021751) do
+ActiveRecord::Schema.define(:version => 20160117005618) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -284,6 +284,7 @@ ActiveRecord::Schema.define(:version => 20160110021751) do
     t.boolean  "ranked",                  :default => false
     t.datetime "ranked_at"
     t.string   "parent_name"
+    t.text     "choice_schools_json"
   end
 
   add_index "students", ["session_id"], :name => "index_students_on_session_id"

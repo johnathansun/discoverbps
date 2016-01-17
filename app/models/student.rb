@@ -20,7 +20,7 @@ class Student < ActiveRecord::Base
                     :schools_last_updated_at, :x_coordinate, :y_coordinate, :address_verified, :geo_code, :preferences_count,
                     :home_schools_json, :zone_schools_json, :ell_schools_json, :sped_schools_json, :favorite, :step,
                     :ell_cluster, :sped_cluster, :zone, :token, :session_token, :student_id, :address_id, :ranked, :ranked_at,
-                    :parent_name
+                    :parent_name, :choice_schools_json
 
   serialize :sibling_school_names
   serialize :sibling_school_ids
@@ -28,6 +28,7 @@ class Student < ActiveRecord::Base
   serialize :zone_schools_json
   serialize :ell_schools_json
   serialize :sped_schools_json
+  serialize :choice_schools_json
 
   # validates :street_number, :street_name, :zipcode, :grade_level, presence: true
   # validates :street_number, length: { maximum: 5 }
@@ -45,7 +46,11 @@ class Student < ActiveRecord::Base
       student = Student.where(token: token).first_or_initialize
 
       if student.save_from_api_response(session_id, session_token, response[:studentInfo])
-        student.set_choice_schools(response[:choiceList])
+        if student.set_choice_schools(response[:choiceList])
+          student
+        else
+          false
+        end
       else
         false
       end
@@ -114,27 +119,27 @@ class Student < ActiveRecord::Base
 
   def save_from_api_response(session_id, session_token, student_hash)
 
-    self.session_id = session_id
-    self.session_token = session_token
-    self.student_id = student_hash[:StudentID].try(:strip)
-    self.first_name = student_hash[:FirstName].try(:strip)
-    self.last_name = student_hash[:LastName].try(:strip)
-    self.grade_level = student_hash[:Grade].try(:strip).try(:gsub, /^0/, '')
-    self.address_id = student_hash[:AddressID]
-    self.street_number = student_hash[:Streetno].try(:strip)
-    self.street_name = student_hash[:Street].try(:strip).try(:titleize)
-    self.neighborhood = student_hash[:City].try(:strip).try(:titleize)
-    self.zipcode = student_hash[:ZipCode].try(:strip)
-    self.x_coordinate = student_hash[:X]
-    self.y_coordinate = student_hash[:Y]
-    self.latitude = student_hash[:Latitude]
-    self.longitude = student_hash[:Longitude]
-    self.addressid = student_hash[:AddressID].try(:to_s).try(:strip)
-    self.geo_code = student_hash[:GeoCode]
-    self.address_verified = true
-    self.awc_invitation = student_hash[:IsAWCEligible]
-    self.ranked = student_hash[:HasRankedChoiceSubmitted]
-    self.ranked_at = student_hash[:RankedChoiceSubmittedDate]
+    session_id = session_id
+    session_token = session_token
+    student_id = student_hash[:StudentID].try(:strip)
+    first_name = student_hash[:FirstName].try(:strip)
+    last_name = student_hash[:LastName].try(:strip)
+    grade_level = student_hash[:Grade].try(:strip).try(:gsub, /^0/, '')
+    address_id = student_hash[:AddressID]
+    street_number = student_hash[:Streetno].try(:strip)
+    street_name = student_hash[:Street].try(:strip).try(:titleize)
+    neighborhood = student_hash[:City].try(:strip).try(:titleize)
+    zipcode = student_hash[:ZipCode].try(:strip)
+    x_coordinate = student_hash[:X]
+    y_coordinate = student_hash[:Y]
+    latitude = student_hash[:Latitude]
+    longitude = student_hash[:Longitude]
+    addressid = student_hash[:AddressID].try(:to_s).try(:strip)
+    geo_code = student_hash[:GeoCode]
+    address_verified = true
+    awc_invitation = student_hash[:IsAWCEligible]
+    ranked = student_hash[:HasRankedChoiceSubmitted]
+    ranked_at = student_hash[:RankedChoiceSubmittedDate]
 
     self.save!
   end
@@ -144,32 +149,32 @@ class Student < ActiveRecord::Base
   # this method pulls a list of eligible schools from the GetSchoolChoices API,
   # saves the schools to student_schools, and fetches distance and walk/drive times from the Google Matrix API
   def save_student_schools(api_schools, school_list_type)
-    if longitude.present? && latitude.present?
 
-      # loop through the schools returned from the API, find the matching schools in the db,
-      # save the eligibility variables on student_schools, and collect the coordinates for the matrix search, below
+    # loop through the schools returned from the API, find the matching schools in the db,
+    # save the eligibility variables on student_schools, and collect the coordinates for the matrix search, below
 
-      if api_schools.present?
-        self.send("#{school_list_type}_schools".to_sym).clear
-        self.update_column("#{school_list_type}_schools_json".to_sym, api_schools.to_json) rescue nil
+    if api_schools.present?
+      self.send("#{school_list_type}_schools".to_sym).clear
+      self.update_column("#{school_list_type}_schools_json".to_sym, api_schools.to_json) rescue nil
 
-        # create the student schools
+      # create the student schools
 
-        school_coordinates = ''
-        school_ids = []
+      school_coordinates = ''
+      school_ids = []
 
-        api_schools.each do |api_school|
-          school = School.where(bps_id: api_school[:SchoolID]).first
+      api_schools.each do |api_school|
+        school = School.where(bps_id: api_school[:SchoolID]).first
 
-          if school.present? && (!school_ids.include?(school.id) || school_list_type == "choice")
-            school_ids << school.id
-            school_coordinates += "#{school.latitude},#{school.longitude}|"
+        if school.present? && (!school_ids.include?(school.id) || school_list_type == "choice")
+          school_ids << school.id
+          school_coordinates += "#{school.latitude},#{school.longitude}|"
 
-            StudentSchool.create_from_api_response(self, school, api_school, school_list_type)
-          end
+          StudentSchool.create_from_api_response(self, school, api_school, school_list_type)
         end
+      end
 
-        # save distance, walk time and drive time on student_schools
+      # save distance, walk time and drive time on student_schools
+      if longitude.present? && latitude.present?
 
         school_coordinates.gsub!(/\|$/,'')
         walk_matrix = Google.walk_times(latitude, longitude, school_coordinates)
@@ -190,6 +195,10 @@ class Student < ActiveRecord::Base
 
         self.update_column(:schools_last_updated_at, Time.now)
       end
+
+      return true
+    else
+      return false
     end
   end
 

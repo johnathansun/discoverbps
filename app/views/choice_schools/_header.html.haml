@@ -14,7 +14,8 @@
       %span#menu_nav_mobile.icon-DBPS-Dev-Assets-SRG-25{ aria: { hidden: "true" } }
 
     .logo_choose
-      %a{href: "/choice_schools", class:"no-decoration"}
+      - token = params[:token] || current_student.token
+      %a{href: "/choice_schools?token=#{token}", class:"no-decoration"}
         %span.choose-icon{ aria: { hidden: "true" } }
 
 .clr
