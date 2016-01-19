@@ -173,14 +173,3 @@
 			-# TIMELINE ---------------------
 			.content_right
 				= render partial: 'students/timeline'
-
-		-#%section.search_section.third
-
-			-# CONTENT ---------------------
-			.content_left
-				.logo.succeed
-					%span{:aria => {hidden: 'true'}, :class => 'icon-DBPS-Dev-Assets-SRG-03'}
-				.text
-					%p.yellow-buttons
-					= auto_link(TextSnippet.find('home-succeed-intro').text)
-					= link_to 'Explore', 'http://www.bostonpublicschools.org/transitionsupport', title: 'Explore', style: 'margin-bottom:0;', target: '_blank'
