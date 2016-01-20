@@ -141,7 +141,7 @@ class ChoiceSchoolsController < ApplicationController
         payload << { "CallID" => student_school.call_id, "ProgramCode" => student_school.program_code, "SchoolID" => student_school.school.bps_id, "Rank" => student_school.choice_rank, "CreatedDateTime" => "", "SchoolRankID" => "" }
       end
       @student.update_attributes(ranked: true, ranked_at: Time.now, parent_name: params[:parent_name])
-      Webservice.save_ranked_choices(session[:session_token], payload)
+      Webservice.save_ranked_choices(session[:session_token], payload, params[:parent_name])
       redirect_to success_choice_schools_path
     end
   end

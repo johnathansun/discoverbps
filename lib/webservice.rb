@@ -56,9 +56,9 @@ module Webservice
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
-	def self.save_ranked_choices(session_token, schools)
+	def self.save_ranked_choices(session_token, schools, name)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/SaveRankedChoices"
-		payload = { sessionToken: session_token, choiceList: schools }
+		payload = { sessionToken: session_token, choiceList: schools, verificationText: name }
 		response = self.post(endpoint, payload).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
