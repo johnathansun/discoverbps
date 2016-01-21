@@ -14,7 +14,7 @@ class StudentAwcPreferencesController < ApplicationController
         current_student.set_home_schools
 
         format.js { render template: "student_ell_preferences/new" }
-        format.html { redirect_to new_student_ell_preferences_path }
+        format.html { redirect_to new_student_ell_preference_path }
       else
         format.js { render template: "student_awc_preferences/new" }
         flash[:alert] = 'There were problems with your search. Please complete the required fields and try again.'
