@@ -148,7 +148,12 @@ class ChoiceSchoolsController < ApplicationController
 
   # GET
   def success
-    @choice_schools = Webservice.get_ranked_choices(@student.token)
+    if @student.token.present?
+      @choice_schools = Webservice.get_ranked_choices(@student.token)
+    else
+      @choice_schools = []
+    end
+    Rails.logger.info "*********************** success page schools = #{@choice_schools}"
     # @choice_schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
   end
 
