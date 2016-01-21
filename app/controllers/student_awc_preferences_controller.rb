@@ -1,6 +1,9 @@
 class StudentAwcPreferencesController < ApplicationController
 
   def new
+    if current_student.blank?
+      redirect_to root_url
+    end
   end
 
   def create

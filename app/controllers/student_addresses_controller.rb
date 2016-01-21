@@ -1,7 +1,17 @@
 class StudentAddressesController < ApplicationController
 
   def new
+    if current_student
+      street_number = current_student.street_number
+      street_name   = current_student.street_name
+      zipcode       = current_student.zipcode
 
+      api_response = Webservice.address_matches(street_number, street_name, zipcode)
+      @addresses = api_response.try(:[], :List)
+      @errors = api_response.try(:[], :Error).try(:[], 0)
+    else
+      redirect_to root_url
+    end
   end
 
   def create
