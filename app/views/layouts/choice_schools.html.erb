@@ -57,7 +57,9 @@
 		<div class="footer_top"></div>
 		<%= render partial: 'layouts/footer' %>
 		<%= render partial: 'layouts/analytics' %>
-		<%= render partial: 'layouts/uservoice' %>
+		<% if request.domain == "discover-bps-staging.herokuapp.com" %>
+			<%= render partial: 'layouts/uservoice' %>
+		<% end %>
 
 	</body>
 </html>
