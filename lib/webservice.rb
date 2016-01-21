@@ -9,7 +9,7 @@ module Webservice
 	def self.get_parent(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetParentInfo"
 		params = { studentToken: token, schyear: "2016" }.to_param
-		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
+		response = Faraday.new(url: "#{endpoint}?#{params}").get.body
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
