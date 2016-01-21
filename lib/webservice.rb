@@ -9,27 +9,27 @@ module Webservice
 	def self.get_parent(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetParentInfo"
 		params = { studentToken: token, schyear: "2016" }.to_param
-		response = Faraday.new(url: "#{endpoint}?#{params}").get.body
+		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	def self.generate_passcode(token, email)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GeneratePasscode"
-		response = self.new_post(endpoint, { studentToken: token, contactEmail: email }).body
+		response = self.post(endpoint, { studentToken: token, contactEmail: email }).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	def self.generate_session_token(token, passcode)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/authenticate/GetSessionToken"
-		response = self.new_post(endpoint, { studentToken: token, passCode: passcode }).body
+		response = self.post(endpoint, { studentToken: token, passCode: passcode }).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	def self.validate_session_token(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/authenticate/ValidateSessionToken"
-		response = self.new_post(endpoint, { sessionToken: token }).body
+		response = self.post(endpoint, { sessionToken: token }).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
@@ -37,13 +37,13 @@ module Webservice
 	def self.get_student(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudent"
 		params = { studentToken: token, schyear: "2016" }.to_param
-		response = Faraday.new(url: "#{endpoint}?#{params}").get.body
+		response = Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	def self.get_choice_student_and_schools(session_token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudentSchoolChoices"
-		response = self.new_post(endpoint, { sessionToken: session_token, schyear: "2016" }).body
+		response = self.post(endpoint, { sessionToken: session_token, schyear: "2016" }).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
@@ -51,7 +51,7 @@ module Webservice
 	def self.get_ranked_choices(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetRankedChoices"
 		payload = { studentToken: token }
-		response = self.new_post(endpoint, payload).body
+		response = self.post(endpoint, payload).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
@@ -59,7 +59,7 @@ module Webservice
 	def self.save_ranked_choices(session_token, schools, name)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/SaveRankedChoices"
 		payload = { sessionToken: session_token, choiceList: schools, verificationText: name }
-		response = self.new_post(endpoint, payload).body
+		response = self.post(endpoint, payload).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
@@ -277,13 +277,6 @@ module Webservice
 	end
 
 	private
-
-	def self.new_post(endpoint, payload)
-		Faraday.new(url: "#{endpoint}").post do |req|
-		  req.headers["Content-Type"] = "application/json"
-		  req.body = payload.to_json
-		end
-	end
 
 	def self.get(endpoint, params)
 		Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
