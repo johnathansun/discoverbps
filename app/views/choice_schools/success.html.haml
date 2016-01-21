@@ -20,4 +20,4 @@
           - @choice_schools.each do |school|
             %li
               %h3
-                = school[:SchoolName]
+                = school.try(:[], :SchoolName)
