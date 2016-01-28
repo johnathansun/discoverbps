@@ -286,11 +286,11 @@ module Webservice
 	end
 
 	def self.get(endpoint, params)
-		Faraday.new(url: "#{endpoint}?#{params}").get.body
+		Faraday.new(url: "#{endpoint}?#{params}", ssl: { version: :SSLv3 }).get.body
 	end
 
 	def self.post(endpoint, payload)
-		Faraday.new(url: "#{endpoint}").post do |req|
+		Faraday.new(url: "#{endpoint}", ssl: { version: :SSLv3 }).post do |req|
 		  req.headers["Content-Type"] = "application/json"
 		  req.body = payload.to_json
 		end
