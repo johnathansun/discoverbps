@@ -29,3 +29,9 @@
         %div{ style: "margin-top: 1em;" }
           Didn't reveive a confirmation code?
           = link_to "try again", verify_choice_schools_path(token: params[:token])
+
+
+      .light{ style: "font-style: italic; margin-top: 3em;" }
+        If you have questions about using this site, please visit our official
+        = link_to "Google Group", "https://groups.google.com/a/bostonpublicschools.org/forum/#!forum/onlinechoiceforum", target: "_blank"
+        for support.

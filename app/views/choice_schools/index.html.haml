@@ -23,5 +23,10 @@
           %br/
           Superintendent
 
-      %br/
-      = link_to "Continue", verify_choice_schools_path(token: params[:token]), id: "continue-button"
+        %br/
+        = link_to "Continue", verify_choice_schools_path(token: params[:token]), id: "continue-button"
+
+      .light{ style: "font-style: italic; margin-top: 3em;" }
+        If you have questions about using this site, please visit our official
+        = link_to "Google Group", "https://groups.google.com/a/bostonpublicschools.org/forum/#!forum/onlinechoiceforum", target: "_blank"
+        for support.
