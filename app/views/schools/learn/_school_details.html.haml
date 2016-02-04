@@ -10,7 +10,7 @@
 					$("##{school.bps_id}_photo_1").click(function(){
 						$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 0})}");
 						$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
-						$('#dialog_box').show();
+						$('#dialog_box_screen').show();
 						return false;
 					});
 
@@ -22,7 +22,7 @@
 					$("##{school.bps_id}_photo_2").click(function(){
 						$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 1})}");
 						$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
-						$('#dialog_box').show();
+						$('#dialog_box_screen').show();
 						return false;
 					});
 
@@ -34,7 +34,7 @@
 					$("##{school.bps_id}_photo_3").click(function(){
 						$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 2})}");
 						$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
-						$('#dialog_box').show();
+						$('#dialog_box_screen').show();
 						return false;
 					});
 
@@ -46,7 +46,7 @@
 					$("##{school.bps_id}_photo_4").click(function(){
 						$('#dialog_box').html("#{escape_javascript(render partial: 'schools/dialog_boxes/photo', locals: {school: school, photo_index: 3})}");
 						$('#dialog_box').css({"top": $(window).scrollTop() + ($(window).height() / 10)});
-						$('#dialog_box').show();
+						$('#dialog_box_screen').show();
 						return false;
 					});
 
@@ -183,7 +183,7 @@
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"}
 				Special Application
 			%p.descrip.light
-				= special_application_helper(school.api_description.try(:[], :isspecialappprocedures))
+				= special_admissions_helper(school.api_description.try(:[], :isspecialappprocedures))
 
 		.box
 			%p.title

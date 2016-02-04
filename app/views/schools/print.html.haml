@@ -131,7 +131,7 @@
 							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"}
 							Special Application
 						%p.descrip.light
-							= special_application_helper(@school.api_description.try(:[], :isspecialappprocedures))
+							= special_admissions_helper(@school.api_description.try(:[], :isspecialappprocedures))
 
 					.box
 						%p.title

@@ -59,7 +59,7 @@
       = school.total_seats(current_student.grade_level)
 
     .school_special_app.line.light
-      = special_application_helper(school.api_description.try(:[], :isspecialappprocedures))
+      = special_admissions_helper(school.api_description.try(:[], :isspecialappprocedures))
 
     .school_awc.line.light
       = awc_helper(school.api_basic_info.try(:[], :IsAWC))
@@ -88,21 +88,3 @@
     .school_comm_partners.line.long.light
       = truncate(partners_list_helper(school).try(:join, ', '), length: 240)
 
-
-:javascript
-
-  $('.star_unstarred').click(function(){
-    $.ajax({
-      url: '/student_schools/' + $(this).data('studentSchoolId') + '/star',
-      type: 'post',
-      dataType: 'script'
-    });
-  });
-
-  $('.star_starred').click(function(){
-    $.ajax({
-      url: '/student_schools/' + $(this).data('studentSchoolId') + '/unstar',
-      type: 'post',
-      dataType: 'script'
-    });
-  });

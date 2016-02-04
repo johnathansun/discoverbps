@@ -180,10 +180,10 @@ module SchoolsHelper
 		end
 	end
 
-	def special_application_helper(string)
-		if string.blank? || string == 'False'
+	def special_admissions_helper(string)
+		if string.blank? || string == 'False' || string == 'false'
 			'No'
-		elsif string == 'True'
+		if string == 'True' || string == 'true'
 			'Yes'
 		end
 	end

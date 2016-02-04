@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160117005618) do
+ActiveRecord::Schema.define(:version => 20160203213211) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -232,6 +232,7 @@ ActiveRecord::Schema.define(:version => 20160117005618) do
     t.integer  "choice_rank"
     t.string   "school_name"
     t.text     "program_code_description"
+    t.string   "special_admissions"
   end
 
   add_index "student_schools", ["bps_id"], :name => "index_student_schools_on_bps_id"
@@ -285,6 +286,7 @@ ActiveRecord::Schema.define(:version => 20160117005618) do
     t.datetime "ranked_at"
     t.string   "parent_name"
     t.text     "choice_schools_json"
+    t.string   "search_address"
   end
 
   add_index "students", ["session_id"], :name => "index_students_on_session_id"
