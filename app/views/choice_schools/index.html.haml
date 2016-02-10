@@ -12,19 +12,18 @@
         - if Date.today >= Date.parse("10-02-2016")
           %h4.alert
             As of February 10th, Round One of the school choice process has closed. We are no longer accepting choices on this system. If you would like to submit choices for the 2016-2017 school year, please visit a Welcome Center. Please note, any choices you submit after February 10th will be entered into round 2 of the lottery system and you will be notified of your child's school assignment in mid-May.
-        - else
-          %p
-            Thank you for accessing the Discover website. This site will help you navigate the 2016-2017 School Choice registration process.
-          %p
-            On the following screens, you will find a list of your eligible schools. You can learn about each school, and then rank the list in your desired order. Once you have ordered your list, you can submit to the School Department as your official School Choice selection.
-          %p
-            We know that choosing a school for your child is an important decision. If you have questions about school options or the assignment process, please visit one of the BPS Welcome Centers or call the BPS Hotline at 617-635-9046.
-          %p
-            Thank you for choosing the Boston Public Schools! for success through high school and beyond.
-          %p
-            Tommy Chang,
-            %br/
-            Superintendent
+        %p
+          Thank you for accessing the Discover website. This site will help you navigate the 2016-2017 School Choice registration process.
+        %p
+          On the following screens, you will find a list of your eligible schools. You can learn about each school, and then rank the list in your desired order. Once you have ordered your list, you can submit to the School Department as your official School Choice selection.
+        %p
+          We know that choosing a school for your child is an important decision. If you have questions about school options or the assignment process, please visit one of the BPS Welcome Centers or call the BPS Hotline at 617-635-9046.
+        %p
+          Thank you for choosing the Boston Public Schools! for success through high school and beyond.
+        %p
+          Tommy Chang,
+          %br/
+          Superintendent
 
         %br/
         = link_to "Continue", verify_choice_schools_path(token: params[:token]), id: "continue-button"
