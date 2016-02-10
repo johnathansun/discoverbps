@@ -181,9 +181,9 @@ module SchoolsHelper
 	end
 
 	def special_admissions_helper(string)
-		if string.blank? || string == 'False' || string == 'false'
+		if string.blank? || string == 'False' || string == 'false' || string == false
 			'No'
-		elsif string == 'True' || string == 'true'
+		elsif string == 'True' || string == 'true' || string == true
 			'Yes'
 		end
 	end
