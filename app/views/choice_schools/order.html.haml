@@ -21,36 +21,36 @@
               Please use the form below to enter your schools in the order in which you would like to submit. You must rank at least three schools. We recommend you make at least five school choices. Indicate your choices entering 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 etc. with 1 being your first choice school. Use each number only once. When you are ready to submit your list to the school department, please click "Submit" at the bottom of the page.
             %br/
 
-          = form_for(:schools, url: rank_choice_schools_path(token: params[:token]), html: {method: :post}) do |f|
-            %table
-              - @choice_schools.each do |student_school|
-                - school = student_school.school
-                %tr
-                  %td{ style: "font-size: 20px; padding: 0 15px 25px 0;" }
-                    = text_field_tag "schools[#{student_school.id}]", student_school.choice_rank, style: "font-size: 20px; text-align: center; padding: 5px; width: 25px;"
-                  %td{ style: "padding: 8px 20px 0 0;" }
-                    %h3
-                      = school.name
-                      = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
-                  %td.no_mobile{ style: "padding: 8px 20px 10px 0;" }
-                    = student_school.program_code_description
-                  %td.no_mobile{ style: "padding: 8px 20px 10px 0;" }
-                    = transportation_eligibility_icon_helper(student_school, "22px")
-                  %td.no_mobile{ style: "padding: 8px 20px 10px 0;" }
-                    #{spacer_helper(student_school.distance)}&nbsp;mi
-                  - unless ["09", "10", "11", "12"].include?(@student.grade_level)
+            = form_for(:schools, url: rank_choice_schools_path(token: params[:token]), html: {method: :post}) do |f|
+              %table
+                - @choice_schools.each do |student_school|
+                  - school = student_school.school
+                  %tr
+                    %td{ style: "font-size: 20px; padding: 0 15px 25px 0;" }
+                      = text_field_tag "schools[#{student_school.id}]", student_school.choice_rank, style: "font-size: 20px; text-align: center; padding: 5px; width: 25px;"
+                    %td{ style: "padding: 8px 20px 0 0;" }
+                      %h3
+                        = school.name
+                        = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
                     %td.no_mobile{ style: "padding: 8px 20px 10px 0;" }
-                      = student_school.tier
-                  %td.no_mobile{ style: "padding: 8px 20px 10px 0;" }
-                    - if school.api_hours.try(:[], :Description).present?
-                      = truncate(student_school.school.api_hours.try(:[], :Description), length: 40)
+                      = student_school.program_code_description
+                    %td.no_mobile{ style: "padding: 8px 20px 10px 0;" }
+                      = transportation_eligibility_icon_helper(student_school, "22px")
+                    %td.no_mobile{ style: "padding: 8px 20px 10px 0;" }
+                      #{spacer_helper(student_school.distance)}&nbsp;mi
+                    - unless ["09", "10", "11", "12"].include?(@student.grade_level)
+                      %td.no_mobile{ style: "padding: 8px 20px 10px 0;" }
+                        = student_school.tier
+                    %td.no_mobile{ style: "padding: 8px 20px 10px 0;" }
+                      - if school.api_hours.try(:[], :Description).present?
+                        = truncate(student_school.school.api_hours.try(:[], :Description), length: 40)
 
 
-            %div{ style: "margin: 3em 0 3em 0;" }
-              %div{ style: "display: inline-block;" }
-                = link_to "Back", list_choice_schools_path, id: "back-button"
-              %div{ style: "display: inline-block;" }
-                = f.submit 'Continue', id: "continue-button"
+              %div{ style: "margin: 3em 0 3em 0;" }
+                %div{ style: "display: inline-block;" }
+                  = link_to "Back", list_choice_schools_path, id: "back-button"
+                %div{ style: "display: inline-block;" }
+                  = f.submit 'Continue', id: "continue-button"
 
 
       .light{ style: "font-style: italic; margin-top: 3em;" }
