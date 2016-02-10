@@ -14,7 +14,7 @@
           - if flash[:alert].present?
             %h4.alert
               = flash[:alert]
-          - elsif Date.today >= Date.parse("11-02-2016")
+          - elsif Date.today > Date.parse("10-02-2016")
             As of February 11th, Round One of the school choice process has closed. We are no longer accepting choices on this system. If you would like to submit choices for the 2016-2017 school year, please visit a Welcome Center. Please note, any choices you submit after February 10th will be entered into round 2 of the lottery system and you will be notified of your child's school assignment in mid-May.
           - else
             %p
