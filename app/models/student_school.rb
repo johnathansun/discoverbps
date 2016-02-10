@@ -30,7 +30,7 @@ class StudentSchool < ActiveRecord::Base
       program_code: school_hash[:ProgramCode],
       program_code_description: school_hash[:ProgramCodeDesription],
       call_id: school_hash[:CallID],
-      special_admissions: school_hash[:IsSpecAdmissions].try(:titleize)
+      special_admissions: school_hash[:IsSpecAdmissions]
     )
   end
 end
