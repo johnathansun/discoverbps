@@ -171,34 +171,6 @@ ActiveRecord::Schema.define(:version => 20160203213211) do
 
   add_index "schools", ["slug"], :name => "index_schools_on_slug", :unique => true
 
-  create_table "searches", :force => true do |t|
-    t.string   "street_number"
-    t.string   "street_name"
-    t.string   "zipcode"
-    t.string   "iep"
-    t.string   "primary_language"
-    t.text     "session_key"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-    t.string   "sibling_school_name"
-    t.integer  "sibling_school_id"
-    t.string   "student_1_first_name"
-    t.string   "student_1_last_name"
-    t.string   "student_1_grade_level"
-    t.string   "student_2_first_name"
-    t.string   "student_2_last_name"
-    t.string   "student_2_grade_level"
-    t.string   "student_3_first_name"
-    t.string   "student_3_last_name"
-    t.string   "student_3_grade_level"
-    t.string   "student_4_first_name"
-    t.string   "student_4_last_name"
-    t.string   "student_4_grade_level"
-    t.string   "student_5_first_name"
-    t.string   "student_5_last_name"
-    t.string   "student_5_grade_level"
-  end
-
   create_table "stored_searches", :force => true do |t|
     t.text     "json"
     t.datetime "created_at", :null => false
@@ -286,7 +258,6 @@ ActiveRecord::Schema.define(:version => 20160203213211) do
     t.datetime "ranked_at"
     t.string   "parent_name"
     t.text     "choice_schools_json"
-    t.string   "search_address"
   end
 
   add_index "students", ["session_id"], :name => "index_students_on_session_id"
