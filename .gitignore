@@ -44,3 +44,5 @@ bower.json
 .DS_Store
 
 config/application.yml
+.powrc.swp
+.ruby-version
