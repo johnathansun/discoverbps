@@ -201,6 +201,13 @@
 
 		.box
 			%p.title
+				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
+				School Quality
+			%p.descrip.light
+				= link_to "Learn more", "http://dashboard.cityofboston.gov/views/TestBPSURLFilter/TestBPSURLFilter?:embed=y&School%20Code=#{school.bps_id}", target: "_blank", class: "text_B0"
+
+		.box
+			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
 				Uniform Policy
 			- if school.api_description.try(:[], :uniformpolicydesc).present?

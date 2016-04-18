@@ -119,6 +119,10 @@
 
                   .clr
 
+        %div{ style: "margin-bottom: 2em;" }
+          To learn more about your home schools, please visit the
+          = link_to "School Quality Framework website", "http://dashboard.cityofboston.gov/views/TestBPSURLFilter/TestBPSURLFilter?:embed=y&School%20Code=#{@home_school_ids}", target: "_blank", class: "text_B0"
+
         = render partial: 'layouts/schools/notice'
 
       - else
