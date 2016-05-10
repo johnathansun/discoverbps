@@ -125,44 +125,31 @@
 						%span.desktop
 							Discover schools
 
-						-#%span.tablette
-							= image_tag('yellow_point.png', class: 'point')
-
 					.event.Y
 						%span.desktop
 							Compare options
 
-						-#%span.tablette
-							= image_tag('yellow_point.png', class: 'point')
-
 					.event
 						%span.desktop
-							%span.light_blue Dec 3
+							%span.light_blue
+								= registration_date_helper(RegistrationDate.where(name: "School Previews and School Showcases Start").first)
 							%br/
 							%span.W
 								School Previews and
 								%br/
 								School Showcases start
 
-						-#%span.tablette
-							= image_tag('yellow_point.png', class: 'point')
-
 					.event.Y
 						%span.desktop
 							Create your list
 
-						-#%span.tablette
-							= image_tag('yellow_point.png', class: 'point')
-
 					.event
 						%span.desktop
-							%span.light_blue Dec 14
+							%span.light_blue
+								= registration_date_helper(RegistrationDate.where(name: "Pre-Register").first)
 							%br/
 							%span.W
 								Pre-register
-
-						-#%span.tablette
-							= image_tag('blue_point_white.png', class: 'point')
 
 
 		-# CONTENT ---------------------

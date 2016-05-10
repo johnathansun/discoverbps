@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160203213211) do
+ActiveRecord::Schema.define(:version => 20160510145845) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -130,6 +130,14 @@ ActiveRecord::Schema.define(:version => 20160203213211) do
   add_index "preferences_students", ["preference_id"], :name => "index_preferences_students_on_preference_id"
   add_index "preferences_students", ["student_id"], :name => "index_preferences_students_on_student_id"
 
+  create_table "registration_dates", :force => true do |t|
+    t.string   "name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "schools", :force => true do |t|
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
@@ -170,6 +178,34 @@ ActiveRecord::Schema.define(:version => 20160203213211) do
   end
 
   add_index "schools", ["slug"], :name => "index_schools_on_slug", :unique => true
+
+  create_table "searches", :force => true do |t|
+    t.string   "street_number"
+    t.string   "street_name"
+    t.string   "zipcode"
+    t.string   "iep"
+    t.string   "primary_language"
+    t.text     "session_key"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "sibling_school_name"
+    t.integer  "sibling_school_id"
+    t.string   "student_1_first_name"
+    t.string   "student_1_last_name"
+    t.string   "student_1_grade_level"
+    t.string   "student_2_first_name"
+    t.string   "student_2_last_name"
+    t.string   "student_2_grade_level"
+    t.string   "student_3_first_name"
+    t.string   "student_3_last_name"
+    t.string   "student_3_grade_level"
+    t.string   "student_4_first_name"
+    t.string   "student_4_last_name"
+    t.string   "student_4_grade_level"
+    t.string   "student_5_first_name"
+    t.string   "student_5_last_name"
+    t.string   "student_5_grade_level"
+  end
 
   create_table "stored_searches", :force => true do |t|
     t.text     "json"

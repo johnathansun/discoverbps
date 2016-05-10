@@ -17,14 +17,6 @@ audio,
 canvas,
 video {
   display: inline-block;
-  *display: inline;
-  *zoom: 1;
-}
-audio:not([controls]) {
-  display: none;
-}
-[hidden] {
-  display: none;
 }
 /* =============================================================================
    Base
@@ -35,9 +27,6 @@ audio:not([controls]) {
  * 3. Prevent iOS text size adjust on device orientation change, without disabling user zoom: h5bp.com/g
  */
 
-* {
-  margin: 0;
-}
 html {
   position: relative;
   min-height: 100%;
@@ -111,7 +100,6 @@ nav ol {
 img {
   border: 0;
   -ms-interpolation-mode: bicubic;
-  /*vertical-align: middle; */
 }
 /*
  * Correct overflow not hidden in IE9
@@ -256,18 +244,18 @@ td {
 .preregtext
 {
    font-weight: bold;
-    font-size: 13px;    
+    font-size: 13px;
     color: rgba(245, 9, 22, 0.88);
 }
 
 .font13
-{ 
-	font-size: 13px !important;  
+{
+	font-size: 13px !important;
 	white-space: pre;
     padding-bottom: 10px;
 }.font13
-{ 
-	font-size: 13px !important;  
+{
+	font-size: 13px !important;
 	white-space: pre;
-    padding-bottom: 10px;	
+    padding-bottom: 10px;
 }
