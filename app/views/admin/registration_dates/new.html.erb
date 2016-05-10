@@ -1,0 +1,44 @@
+<% if flash[:alert].present? %>
+	<div class="flash_alert"><%= flash[:alert] %></div>
+<% elsif flash[:notice].present? %>
+	<div class="flash_notice"><%= flash[:notice] %></div>
+<% end %>
+
+<h2>New Registration Date</h2>
+
+<%= form_for(:registration_date, :url => admin_registration_dates_path, :html => {:method => :post}) do |f| %>
+	<% if @registration_date.errors.any? %>
+	  <div class="alert alert-error">
+	    <h3><%= pluralize(@registration_date.errors.count, "error") %> prohibited this admin user from being saved:</h3>
+	    <ul>
+	      <% @registration_date.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	    </ul>
+	  </div>
+	<% end %>
+
+	<div class="field">
+	  <%= f.label :name %>
+	  <br />
+	  <%= f.text_field :name %>
+	</div>
+
+	<div class="field">
+	  <%= f.label :start_date %>
+	  <br />
+	  <%= f.date_select :start_date, {:include_blank => true, :default => nil} %>
+	</div>
+
+	<div class="field">
+	  <%= f.label :end_date %>
+	  <br />
+	  <%= f.date_select :end_date, {:include_blank => true, :default => nil} %>
+	</div>
+
+  <div class="actions">
+  	<%= f.submit 'Save', :class => 'add_button', :disable_with => "Please wait..." %>
+  	&nbsp;&nbsp;
+  	<%= link_to 'Cancel', admin_registration_dates_path %>
+  </div>
+<% end %>

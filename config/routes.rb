@@ -66,6 +66,7 @@ DiscoverBPS::Application.routes.draw do
       post 'sort', on: :collection
     end
     resources :notifications
+    resources :registration_dates
     resources :schools do
       post 'sync', on: :member
       post 'sync_all', on: :collection

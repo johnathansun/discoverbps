@@ -16,6 +16,36 @@ module ApplicationHelper
 
 	#####
 
+	def formatted_time(time)
+		time.strftime('%m/%d/%Y - %I:%M %P') if time.present?
+	end
+
+	def formatted_date(date)
+		date.strftime('%m/%d/%Y') if date.present?
+	end
+
+	def registration_date_helper(registration_date, format=nil)
+		if rd = registration_date
+			if rd.end_date.present?
+				if rd.start_date.month != rd.end_date.month
+					if format == "month_range"
+						"#{rd.start_date.strftime('%b')} - #{rd.end_date.strftime('%b')}"
+					else
+						"#{rd.start_date.strftime('%b %e')} - #{rd.end_date.strftime('%b %e')}"
+					end
+				else
+					"#{rd.start_date.strftime('%b %e')}-#{rd.end_date.strftime('%e')}"
+				end
+			else
+				if format == "full_month"
+					"#{rd.start_date.strftime('%B')} #{rd.start_date.strftime('%e')}"
+				else
+					"#{rd.start_date.strftime('%b')} #{rd.start_date.strftime('%e')}"
+				end
+			end
+		end
+	end
+
 	def current_school_year
 		if Date.today.month >= 11
 			"#{Date.today.years_ago(1).year}"

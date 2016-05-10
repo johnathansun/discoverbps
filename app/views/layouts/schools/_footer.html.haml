@@ -5,32 +5,27 @@
 			Visit Schools
 
 		%p
+			%span.big.dark_gray Visit Schools
+			%br/
 			Visiting is the best way to learn if a school is a good fit for your child.
-
 		%p
 			Check out
-			= link_to 'Showcase IN Our Schools on December 5', 'http://www.bostonpublicschools.org/Page/652', title: 'Showcase', target: "_blank"
-
+			= link_to "Showcase IN Our Schools on #{registration_date_helper(RegistrationDate.where(name: 'Showcase In Our Schools').first, 'full_month')}", 'http://www.bostonpublicschools.org/Page/652', title: 'Showcase', target: "_blank"
 		%p
 			View
 			= link_to 'School Preview Days for Grades K-8', 'http://www.bostonpublicschools.org/cms/lib07/MA01906464/Centricity/Domain/29/SPTK8-v2.pdf', title: 'High School Showcase', target: "_blank"
-
 		%p
 			View
 			= link_to 'School Preview Days for Grades 9-12', 'http://www.bostonpublicschools.org/cms/lib07/MA01906464/Centricity/Domain/29/SPTHigh1.pdf', title: 'High School Showcase', target: "_blank"
-
 		%p
 			Mark your calendar for the
-			= link_to 'High School Showcase on December 3', 'http://bostonpublicschools.org/Page/652', title: 'High School Showcase', target: "_blank"
-
-
+			= link_to "High School Showcase on #{registration_date_helper(RegistrationDate.where(name: 'High School Showcase').first, 'full_month')}", 'http://bostonpublicschools.org/Page/652', title: 'High School Showcase', target: "_blank"
 
 	.footer_center
 		%h2{style: 'margin-bottom: 1.5em;', class: 'dark_gray'}
 			Register
 		%p
 			= link_to 'Pre-Registration', 'https://sis.mybps.org/aspen/index.html',	target: "_blank", class: 'blue'
-
 		%p
 			= link_to 'Collect the required documents', "http://www.bostonpublicschools.org/requireddocs", title: "Collect the required documents", target: "_blank"
 		%p
@@ -40,10 +35,6 @@
 			= link_to 'www.bostonpublic schools.org/assignment', 'http://www.bostonpublicschools.org/assignment', title: 'Learn more about Home-Based Eligibility', target: '_blank'
 			or by watching a short video on
 			= link_to 'YouTube', 'http://www.youtube.com/watch?v=c13n5e-LJG4&feature=youtu.be', title: "What's the Home-Based School Choice Plan?", target: "_blank"
-
-
-
-
 
 	.footer_right
 		%h2{style: 'margin-bottom: 1.5em;', class: 'dark_gray'}
