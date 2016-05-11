@@ -37,7 +37,7 @@
 
             #sortable_eligibility_column.menu_bloc.sortable_column
               .column_title
-                Eligibility
+                Quality Tier
 
         %ul#sortable
           - @home_schools.each_with_index do |student_school, i|
@@ -105,8 +105,8 @@
                 .box.line.eligibility
                   .first_block.middle
                     %span.middle.sortable_eligibility
-                      - if student_school.eligibility.present?
-                        =raw truncate(eligibility_helper(spacer_helper(student_school.eligibility)), length: 30)
+                      - if student_school.tier.present?
+                        = school_tier_helper(student_school.tier)
                       - else
                         &nbsp;
 
