@@ -1,5 +1,5 @@
 class Notification < ActiveRecord::Base
-  attr_accessible :end_time, :message, :start_time, :home_page, :schools_page
+  attr_accessible :end_time, :message, :start_time, :home_page, :schools_page, :school_choice_pages
 
   validates :message, presence: true
   validate :start_time_precedes_end_time

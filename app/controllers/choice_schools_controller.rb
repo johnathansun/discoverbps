@@ -10,6 +10,7 @@ class ChoiceSchoolsController < ApplicationController
 
   # GET
   def index
+    @notifications = Notification.where(school_choice_pages: true)
   end
 
   # GET
@@ -73,6 +74,8 @@ class ChoiceSchoolsController < ApplicationController
 
   # GET
   def order
+    @notifications = Notification.where(school_choice_pages: true)
+
     if @student.choice_schools.blank?
       redirect_to choice_schools_path, alert: "There were no schools that matched your search. Please try again."
     elsif Webservice.get_student(@student.token).try(:[], :HasRankedChoiceSubmitted) == true
