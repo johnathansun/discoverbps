@@ -11,7 +11,7 @@
             = flash[:alert]
         - if Time.now > RegistrationDate.where(name: "School Choice Round 1").first.try(:end_date)
           %h4.alert
-            As of April 15th, Round One of the school choice process has closed. We are no longer accepting choices on this system. If you would like to submit choices for the 2016-2017 school year, please visit a Welcome Center. Please note, any choices you submit after February 10th will be entered into round 2 of the lottery system and you will be notified of your child's school assignment in mid-May.
+            As of #{formatted_date_name(RegistrationDate.where(name: "School Choice Round 1").first.try(:end_date))}, Round One of the school choice process has closed. We are no longer accepting choices on this system. If you would like to submit choices for the 2016-2017 school year, please visit a Welcome Center. Please note, any choices you submit after February 10th will be entered into round 2 of the lottery system and you will be notified of your child's school assignment in mid-May.
         %p
           Thank you for accessing the Discover website. This site will help you navigate the 2016-2017 School Choice registration process.
         %p

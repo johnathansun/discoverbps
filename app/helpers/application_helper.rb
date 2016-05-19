@@ -24,6 +24,10 @@ module ApplicationHelper
 		date.strftime('%m/%d/%Y') if date.present?
 	end
 
+	def formatted_date_name(date)
+		"#{date.strftime('%B')} #{(date.strftime('%d')).to_i.ordinalize}" if date.present?
+	end
+
 	def registration_date_helper(registration_date, format=nil)
 		if rd = registration_date
 			if rd.end_date.present?
