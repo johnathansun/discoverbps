@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160510145845) do
+ActiveRecord::Schema.define(:version => 20160519042932) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -74,10 +74,11 @@ ActiveRecord::Schema.define(:version => 20160510145845) do
     t.text     "message"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.boolean  "home_page",    :default => true
-    t.boolean  "schools_page", :default => true
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.boolean  "home_page",           :default => true
+    t.boolean  "schools_page",        :default => true
+    t.boolean  "school_choice_pages", :default => false
   end
 
   create_table "preference_categories", :force => true do |t|
@@ -294,6 +295,7 @@ ActiveRecord::Schema.define(:version => 20160510145845) do
     t.datetime "ranked_at"
     t.string   "parent_name"
     t.text     "choice_schools_json"
+    t.string   "search_address"
   end
 
   add_index "students", ["session_id"], :name => "index_students_on_session_id"

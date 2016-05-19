@@ -14,8 +14,10 @@
           - if flash[:alert].present?
             %h4.alert
               = flash[:alert]
-          - elsif Time.now > RegistrationDate.where(name: "School Choice Round 1").first.try(:end_date)
-            As of April 15th, Round One of the school choice process has closed. We are no longer accepting choices on this system. If you would like to submit choices for the 2016-2017 school year, please visit a Welcome Center. Please note, any choices you submit after February 10th will be entered into round 2 of the lottery system and you will be notified of your child's school assignment in mid-May.
+          - elsif @notifications.present?
+            - @notifications.each do |notification|
+              %h4.alert
+                = notification.message
           - else
             %p
               Please use the form below to enter your schools in the order in which you would like to submit. You must rank at least three schools. We recommend you make at least five school choices. Indicate your choices entering 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 etc. with 1 being your first choice school. Use each number only once. When you are ready to submit your list to the school department, please click "Submit" at the bottom of the page.
