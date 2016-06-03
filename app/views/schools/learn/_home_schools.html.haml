@@ -11,7 +11,9 @@
         Below is a list of your Home-Based schools.
         To see more information on each school, please click the 'i' icon.
         You can also click the star icon to highlight your favorites.
-
+  %div{ style: "margin-bottom: 2em;font-size:12pt;"  }
+    To explore the details about your home-based schools Quality Tier, please visit your
+    = link_to "Customized School Quality Report", "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFMock-Up3_6/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no", target: "_blank", class: "text_B0"
   .list_content
     .flexible_content
       - if @home_schools.present?
@@ -117,11 +119,7 @@
 
                     .clr
 
-                  .clr
-
-        %div{ style: "margin-bottom: 2em;" }
-          To learn more about your home-based schools, please visit the
-          = link_to "School Quality Framework website", "http://dashboard.cityofboston.gov/views/TestBPSURLFilter/TestBPSURLFilter?:embed=y&School%20Code=#{@home_school_ids}", target: "_blank", class: "text_B0"
+                  .clr       
 
         = render partial: 'layouts/schools/notice'
 

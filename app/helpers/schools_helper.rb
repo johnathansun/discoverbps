@@ -143,6 +143,22 @@ module SchoolsHelper
 		end
 	end
 
+	def school_validtier_helper(tier)
+		if tier.present?
+			if tier == 'NR'
+				return false
+			elsif tier == 'N/A'
+				return false
+			elsif tier == 'NA'
+				return false	
+			else
+				return true
+			end			
+		else
+			return ''
+		end
+	end	
+
 	def grade_levels_helper(array)
 		if array.present?
 			if array.length == 0

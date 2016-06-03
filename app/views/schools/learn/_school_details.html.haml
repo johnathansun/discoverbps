@@ -197,8 +197,9 @@
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
 				Quality Tier
 			%p.descrip.light
-				= school_tier_helper(student_school.tier)
-				= link_to "learn more", "http://dashboard.cityofboston.gov/views/TestBPSURLFilter/TestBPSURLFilter?:embed=y&School%20Code=#{school.bps_id}", target: "_blank", class: "text_B0"
+				= school_tier_helper(student_school.tier)				
+				- if school_validtier_helper(student_school.tier)
+					= link_to "View Quality Report", "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFMock-Up3_6/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{school.bps_id}", target: "_blank", class: "text_B0"
 
 		.box
 			%p.title
