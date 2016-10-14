@@ -81,8 +81,8 @@
                 .box.line.getting_there
                   .first_block.middle
                     %span.middle.sortable_distance
-                      = transportation_eligibility_icon_helper(student_school, "18px")
-                      #{spacer_helper(student_school.distance)}&nbsp;mi
+                     %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14 transportation_icon"}
+                      #{spacer_helper(student_school.walk_distance)}&nbsp;mi
 
                   .second_bloc.middle
                     %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
