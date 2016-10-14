@@ -108,10 +108,10 @@ class SchoolsController < ApplicationController
         @zone_schools = nil
         @ell_schools = nil
         @sped_schools = nil
-      end
+      end      
     end
 
-    def generate_csv
+    def generate_csv      
       require 'csv'
       csv_string = CSV.generate do |csv|
 
@@ -180,17 +180,16 @@ class SchoolsController < ApplicationController
 
     end
 
-    def csv_row(schools, csv)
-
+    def csv_row(schools, csv)      
       schools.each do |student_school|
         school = student_school.school
-
+                
         csv << [ '',
           school.name,
           eligibility_helper(student_school.eligibility),
           school.full_address,
           "#{student_school.distance} mi",
-          "#{student_school.walk_distance} mi",
+          school_distance_helper(student_school.walk_distance, student_school.distance),
           student_school.walk_time,
           student_school.drive_time,
           student_school.transportation_eligibility,

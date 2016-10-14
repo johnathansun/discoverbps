@@ -143,6 +143,14 @@ module SchoolsHelper
 		end
 	end
 
+	def school_distance_helper(walkdistance, distance)
+		if walkdistance.present?  && walkdistance.strip != '0.00'
+			return "#{walkdistance} mi"
+		else
+			return "#{distance} mi"
+		end		
+	end	
+
 	def grade_levels_helper(array)
 		if array.present?
 			if array.length == 0

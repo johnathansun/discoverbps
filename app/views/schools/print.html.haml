@@ -32,11 +32,16 @@
 
 						= mail_to @school.api_basic_info.try(:[], :schemail), @school.api_basic_info.try(:[], :schemail), class: "text_B0", title: "Email Address"
 
-					- if @student_school.try(:walk_distance).present?
+					- if @student_school.try(:walk_distance).present?  && @student_school.walk_distance.strip != '0.00'
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"}
 							= raw @student_school.try(:walk_distance)
 							mi from home
+					-else
+						%p.title
+							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"}
+							= raw @student_school.try(:distance)
+							mi from home		
 
 					%p.descrip.light
 						- if @student_school.try(:walk_time).present?
@@ -125,6 +130,7 @@
 							Eligibility
 						%p.descrip.light
 							= @student_school.try(:eligibility)
+							%br/
 							%b Distance:
 							%span{:aria => {hidden: 'true'}}
 							= raw @student_school.distance

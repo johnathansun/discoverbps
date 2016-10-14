@@ -66,7 +66,10 @@
 		-# Travel Time
 		%p.title
 			%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"}
-			= raw student_school.walk_distance
+			-if student_school.walk_distance.present? && student_school.walk_distance.strip != '0.00'
+				= raw student_school.walk_distance
+			-else
+				= raw student_school.distance		
 			mi from home
 		%p.descrip.light
 			%span{:aria => {hidden: 'true'}, :class => "icon icon_petit icon-DBPS-Dev-Assets-SRG-14"}
