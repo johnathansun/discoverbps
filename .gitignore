@@ -46,3 +46,4 @@ bower.json
 config/application.yml
 .powrc.swp
 .ruby-version
+discover.dump
