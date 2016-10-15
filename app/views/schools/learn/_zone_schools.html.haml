@@ -23,7 +23,7 @@
 
             #sortable_eligibility_column.menu_bloc.sortable_column
               .column_title
-                Eligibility
+                Quality Tier
 
             #getting_there.menu_bloc
               #sortable_distance_column.first_block.sortable_column
@@ -77,7 +77,10 @@
                 .box.line.eligibility
                   .first_block.middle
                     %span.middle.sortable_eligibility
-                      =raw eligibility_helper(spacer_helper(student_school.eligibility))
+                      - if student_school.tier.present?
+                        = school_tier_helper(student_school.tier)
+                      - else
+                        &nbsp;
 
                 .box.line.getting_there
                   .first_block.middle
