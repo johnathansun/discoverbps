@@ -122,7 +122,21 @@ module SchoolsHelper
 		end
 	end
 
-
+	def school_validtier_helper(tier)
+ 		if tier.present?
+ 			if tier == 'NR'
+ 				return false
+			elsif tier == 'N/A'
+ 				return false
+ 			elsif tier == 'NA'
+ 				return false	
+ 			else
+ 				return true
+ 			end			
+ 		else
+ 			return ''
+ 		end
+ 	end	
 
 	def eligibility_helper(tier)
 		tier.try(:gsub, /:/, ', ')
@@ -143,6 +157,7 @@ module SchoolsHelper
 		end
 	end
 
+	
 	def school_distance_helper(walkdistance, distance)
 		if walkdistance.present?  && walkdistance.strip != '0.00'
 			return "#{walkdistance} mi"
