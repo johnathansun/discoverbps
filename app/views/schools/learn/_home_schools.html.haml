@@ -83,11 +83,10 @@
                 .box.line.getting_there
                   .first_block.middle
                     %span.middle.sortable_distance
-                      -if student_school.walk_distance.present? && student_school.walk_distance.strip != '0.00'
-                        %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14 transportation_icon"}
+                      = transportation_eligibility_icon_helper(student_school, "18px")
+                      -if student_school.walk_distance.present? && student_school.walk_distance.strip != '0.00'                        
                         #{spacer_helper(student_school.walk_distance)}&nbsp;mi
-                      -else  
-                        = transportation_eligibility_icon_helper(student_school, "18px")
+                      -else                          
                         #{spacer_helper(student_school.distance)}&nbsp;mi
                       
 
