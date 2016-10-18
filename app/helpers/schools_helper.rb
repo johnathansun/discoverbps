@@ -231,8 +231,7 @@ module SchoolsHelper
 						when '4031' then '4033'
 						when '4193' then '4192'
 						when '4030' then '4410'
-						when '1140' then '4391'
-						when '4440' then '4671'
+						when '1140' then '4391'						
 						else schoolId
 					   end
 		end
