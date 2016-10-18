@@ -97,7 +97,7 @@ class SchoolsController < ApplicationController
           end
         # match the default sort order on the lean page (distance)
         else
-          @home_schools = current_student.home_schools.order(:distance)
+          @home_schools = current_student.home_schools.order(:walk_distance)
         end
 
         @zone_schools = current_student.zone_schools.order(:distance)
