@@ -208,7 +208,7 @@
 			%p.descrip.light
 				= school_tier_helper(student_school.tier)				
 				- if school_validtier_helper(student_school.tier)
-					= link_to "View Quality Report", "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFMock-Up3_6/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{school.bps_id}", target: "_blank", class: "text_B0"
+					= link_to "View Quality Report", sqf_helper_string(school.bps_id), target: "_blank", class: "text_B0"
 
 		.box
 			%p.title

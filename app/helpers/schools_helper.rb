@@ -223,4 +223,19 @@ module SchoolsHelper
 		raw string.try(:strip).try(:gsub, /\s/, '&nbsp;')
 	end
 
+	def sqf_helper_string(schoolId)
+		if schoolId.present?
+			schoolId = case schoolId 
+						when '4241' then '4242'
+						when '1441' then '1440'
+						when '4031' then '4033'
+						when '4193' then '4192'
+						when '4030' then '4410'
+						when '1140' then '4391'
+						when '4440' then '4671'
+						else schoolId
+					   end
+		end
+		return "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFMock-Up3_6/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{schoolId}"
+	end
 end
