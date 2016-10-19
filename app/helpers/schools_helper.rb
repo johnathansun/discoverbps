@@ -146,18 +146,17 @@ module SchoolsHelper
 		if tier.present?
 			if tier == 'NR'
 				tier_name = 'Not Ranked'
-			elsif tier == 'N/A'
+			elsif tier == 'N/A' || tier == 'NA'
 				tier_name = 'Not Applicable'
 			else
-				tier_name = "Tier #{tier}"
+				tier_name = tier
 			end
 			return tier_name
 		else
 			return ''
 		end
-	end
+	end	
 
-	
 	def school_distance_helper(walkdistance, distance)
 		if walkdistance.present?  && walkdistance.strip != '0.00'
 			return "#{walkdistance} mi"
