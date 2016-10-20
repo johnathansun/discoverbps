@@ -1,7 +1,7 @@
 module Webservice
 
 	# The following methods connect to endpoints on the BPS webservice. See:
-	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help
+	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10Staging/Schools.svc/help
 
 
 	####### CHOICE SCHOOLS FLOW #######
@@ -98,7 +98,7 @@ module Webservice
 
 	##### ZONE SCHOOLS #####
 
-	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc/GetSchoolInterestList?SchoolYear=2014-2015&Grade=03&ZipCode=02124&Geo=060&X=774444.562683105&Y=2961259.5579834&SiblingSchList=
+	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10Staging/schools.svc/GetSchoolInterestList?SchoolYear=2014-2015&Grade=03&ZipCode=02124&Geo=060&X=774444.562683105&Y=2961259.5579834&SiblingSchList=
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/ZoneSchools?SchYear=2014&Grade=07&SiblingSchList=&AddressID=68051
 
 	def self.get_zone_schools(grade_level, addressid, sibling_ids=[])
