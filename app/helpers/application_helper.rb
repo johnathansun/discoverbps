@@ -42,6 +42,9 @@ module ApplicationHelper
 						"#{rd.start_date.strftime('%b %e')} - #{rd.end_date.strftime('%b %e')}"
 					end
 				else
+					if format == "start_date_short"
+						"#{rd.start_date.strftime('%b')} #{rd.start_date.strftime('%d')}"
+					else	
 					"#{rd.start_date.strftime('%b %e')}-#{rd.end_date.strftime('%e')}"
 				end
 			else
