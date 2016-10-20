@@ -98,7 +98,8 @@
 
           .event
             %span.desktop
-              %span.light_blue =SCHOOL_PRE_REG_DATE
+              %span.light_blue 
+               = registration_date_helper(RegistrationDate.where(name: "Pre-Register").first, "start_date_short")
               %br/
               %span.W
                 Pre-register

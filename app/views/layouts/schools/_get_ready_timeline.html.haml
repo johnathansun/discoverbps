@@ -22,7 +22,7 @@
 	.event
 		%span.desktop
 			%span.light_blue 
-			= SCHOOL_SHOWCASE_DATE
+			= registration_date_helper(RegistrationDate.where(name: "School Previews and School Showcases Start").first, "start_date_short")
 			%br/
 			%span
 				School Previews and
@@ -42,7 +42,7 @@
 	.event
 		%span.desktop
 			%span.light_blue 
-			= SCHOOL_PRE_REG_DATE
+			= registration_date_helper(RegistrationDate.where(name: "Pre-Register").first, "start_date_short")
 			%br/
 			%span
 				Pre-register
@@ -63,7 +63,6 @@
 
 	.event.last_names.ai.green_bar
 		%span.light_blue
-			= REG_TRANSITION_GRADE_LASTNAME_AI
 		%br/
 		Last names A&ndash;I
 
@@ -71,7 +70,6 @@
 
 	.event.last_names.jq.green_bar
 		%span.light_blue
-			= REG_TRANSITION_GRADE_LASTNAME_JQ
 		%br/
 		Last names J&ndash;Q
 
@@ -79,7 +77,6 @@
 
 	.event.last_names.rz.green_bar
 		%span.light_blue
-			= REG_TRANSITION_GRADE_LASTNAME_RZ
 		%br/
 		Last names R&ndash;Z
 
@@ -87,7 +84,6 @@
 
 	.event.last_names.all.green_bar
 		%span.light_blue
-			= REG_TRANSITION_GRADE_LASTNAME_ALL
 		%br/
 		All last names
 
@@ -105,7 +101,7 @@
 	.event.dark_blue_bar
 		%span.desktop
 			%span.light_blue
-				= REG_ASSIGNMENT_MAILED
+				= registration_date_helper(RegistrationDate.where(name: "Assignments Mailed").first, "start_date_short")
 			%br/
 		%span
 			Assignments mailed
@@ -113,7 +109,7 @@
 	.event.last.light_gray_bar
 		%span.desktop
 			%span.light_blue 
-			= FIRST_DAY_OF_SCHOOL
+			= registration_date_helper(RegistrationDate.where(name: "First Day of School").first, "start_date_short")			
 			= image_tag('point_blue_onGray.png', class: 'point')
 			%br/
 			%span
