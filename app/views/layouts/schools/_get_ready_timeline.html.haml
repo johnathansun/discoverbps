@@ -63,6 +63,7 @@
 
 	.event.last_names.ai.green_bar
 		%span.light_blue
+			= registration_date_helper(RegistrationDate.where(name: "Last Names A-I").first, "full_month_date")
 		%br/
 		Last names A&ndash;I
 
@@ -70,6 +71,7 @@
 
 	.event.last_names.jq.green_bar
 		%span.light_blue
+			= registration_date_helper(RegistrationDate.where(name: "Last Names J-Q").first, "full_month_date")
 		%br/
 		Last names J&ndash;Q
 
@@ -77,6 +79,7 @@
 
 	.event.last_names.rz.green_bar
 		%span.light_blue
+			= registration_date_helper(RegistrationDate.where(name: "Last Names R-Z").first, "full_month_date")
 		%br/
 		Last names R&ndash;Z
 
@@ -84,6 +87,7 @@
 
 	.event.last_names.all.green_bar
 		%span.light_blue
+			= registration_date_helper(RegistrationDate.where(name: "All Last names").first, "full_month_date")
 		%br/
 		All last names
 
