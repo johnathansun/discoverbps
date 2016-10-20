@@ -66,7 +66,7 @@
 	.event.last.blue_bar
 		%span.desktop
 			%span.light_blue
-				= registration_date_helper(RegistrationDate.where(name: "First Day of School").first)
+				= registration_date_helper(RegistrationDate.where(name: "First Day of School").first, "start_date_short")
 			= image_tag('point_white_onBlue.png', class: 'point')
 			%br/
 			%span.W
