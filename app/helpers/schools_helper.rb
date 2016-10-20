@@ -130,6 +130,8 @@ module SchoolsHelper
  				return false
  			elsif tier == 'NA'
  				return false	
+			elsif tier == ''
+				return false 				
  			else
  				return true
  			end			
