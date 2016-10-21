@@ -226,16 +226,21 @@ module SchoolsHelper
 
 	def sql_helper_group_schoolId(schoolId, grade)
 		if schoolId.present?
-			schoolId = case schoolId 
-						when '4241' then '4242'
-						when '1441' then '1440'
-						when '4031' then '4033'
-						when '4193' then '4192'
-						when '4030' then '4410'
-						when '2440' then '4391'	
-						when '4391' && (grade == '09'|| grade == '10' || grade =='11' || grade == '12')	then '2440'				 
-						else schoolId
-					   end
+			if schoolId == '4241'
+				schoolId = '4242'
+			elsif schoolId == '1441'
+				schoolId = '1440'				
+			elsif schoolId == '4031'
+				schoolId = '4033'				
+			elsif schoolId == '4193'
+				schoolId = '4192'				
+			elsif schoolId == '4030'
+				schoolId = '4410'							
+			elsif schoolId == '2440'
+				schoolId = '4391'	
+			elsif (schoolId == '2440' || schoolId == '4391') && (grade == '09'|| grade == '10' || grade =='11' || grade == '12')
+				schoolId = '1140'				
+			end
 		end
 		return schoolId
 	end	
