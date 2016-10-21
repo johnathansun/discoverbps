@@ -159,7 +159,7 @@
 							SQF Tier -
 							= school_tier_helper(@student_school.tier)				
 							- if school_validtier_helper(@student_school.tier)
-								= link_to "View Quality Report", sqf_helper_string(@school.bps_id), target: "_blank", class: "text_B0"
+								= link_to "View Quality Report", sqf_helper_string(@school.bps_id, current_student.grade_level), target: "_blank", class: "text_B0"
 							%br
 							DESE Level -
 							= school_tier_helper(@student_school.dese_tier)				

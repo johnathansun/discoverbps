@@ -224,7 +224,7 @@ module SchoolsHelper
 		raw string.try(:strip).try(:gsub, /\s/, '&nbsp;')
 	end
 
-	def sql_helper_group_schoolId(schoolId)
+	def sql_helper_group_schoolId(schoolId, grade)
 		if schoolId.present?
 			schoolId = case schoolId 
 						when '4241' then '4242'
@@ -232,15 +232,16 @@ module SchoolsHelper
 						when '4031' then '4033'
 						when '4193' then '4192'
 						when '4030' then '4410'
-						when '1140' then '4391'						
+						when '2440' then '4391'	
+						when '4391' && (grade == '09'|| grade == '10' || grade =='11' || grade == '12')	then '2440'				 
 						else schoolId
 					   end
 		end
 		return schoolId
 	end	
 
-	def sqf_helper_string(schoolId)
-		@formatSchoolId = sql_helper_group_schoolId(schoolId)
+	def sqf_helper_string(schoolId, grade)
+		@formatSchoolId = sql_helper_group_schoolId(schoolId, grade)
 		return "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFMock-Up3_6/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{@formatSchoolId}"
 	end
 end
