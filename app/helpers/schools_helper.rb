@@ -238,8 +238,12 @@ module SchoolsHelper
 				schoolId = '4410'							
 			elsif schoolId == '2440'
 				schoolId = '4391'	
-			elsif (schoolId == '2440' || schoolId == '4391') && (grade == '09'|| grade == '10' || grade =='11' || grade == '12')
-				schoolId = '1140'				
+			elsif (schoolId == '2440' || schoolId == '4391')
+				if (grade == '09'|| grade == '10' || grade =='11' || grade == '12')
+					schoolId = '1140'
+				else
+					schoolId = '4391'	
+				end	
 			end
 		end
 		return schoolId
