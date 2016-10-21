@@ -2,47 +2,41 @@
 	.event.W.registration.green_bar
 		%span.desktop
 			= image_tag('point_green_white_open.png', class: 'point')
-			%span
+			%span.light_blue
+				= registration_date_helper(RegistrationDate.where(name: "All Last names").first)
+				%br/
+			%span.W
 				Registration begins
 				%br/
 				for K, 6 & 9
-
 			-#%span.tablette
 				= image_tag('blue_point_arrow.png', class: 'point_arrow')
 
 	.event.last_names.ai.green_bar
 		%span.light_blue
-			= registration_date_helper(RegistrationDate.where(name: "Last Names A-I").first, "full_month_date")
 		%br/
 		%span.W
-			Last names A&ndash;I
 
 	.seperator
 
 	.event.last_names.jq.green_bar
 		%span.light_blue
-			= registration_date_helper(RegistrationDate.where(name: "Last Names J-Q").first,"full_month_date")
 		%br/
 		%span.W
-			Last names J&ndash;Q
 
 	.seperator
 
 	.event.last_names.rz.green_bar
 		%span.light_blue
-			= registration_date_helper(RegistrationDate.where(name: "Last Names R-Z").first, "full_month_date")
 		%br/
 		%span.W
-			Last names R&ndash;Z
 
 	.seperator
 
 	.event.last_names.all.green_bar
 		%span.light_blue
-			= registration_date_helper(RegistrationDate.where(name: "All Last Names").first,"full_month_date")
 		%br/
 		%span.W
-			All last names
 
 	.event.blank.light_blue_bar
 
