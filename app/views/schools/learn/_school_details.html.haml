@@ -206,15 +206,16 @@
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
 				Quality
 			%p.descrip.light
-				SQF Tier -
+				BPS Quality Tier -
 				= school_tier_helper(student_school.tier)				
 				- if school_validtier_helper(student_school.tier)
 					= link_to "View Quality Report", sqf_helper_string(school.bps_id, current_student.grade_level), target: "_blank", class: "text_B0"
 				%br
-				DESE Level -
+				State Accountability Level -
 				= school_tier_helper(student_school.dese_tier)				
-				- if school_validtier_helper(student_school.dese_tier)
-					= link_to "More Info", "http://www.bostonpublicschools.org/schoolquality", target: "_blank", class: "text_B0"		
+				//- if school_validtier_helper(student_school.dese_tier)
+				%br
+				= link_to "More Info", "http://www.bostonpublicschools.org/schoolquality", target: "_blank", class: "text_B0"		
 
 		.box
 			%p.title
