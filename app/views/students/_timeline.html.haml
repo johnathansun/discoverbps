@@ -2,47 +2,42 @@
 	.event.W.registration.green_bar
 		%span.desktop
 			= image_tag('point_green_white_open.png', class: 'point')
-			%span
+			%span.light_blue
+				= registration_date_helper(RegistrationDate.where(name: "All Last names").first)
+				%br/
+			%span.W
 				Registration begins
 				%br/
 				for K, 6 & 9
-
 			-#%span.tablette
 				= image_tag('blue_point_arrow.png', class: 'point_arrow')
 
 	.event.last_names.ai.green_bar
-		%span.light_blue
-			= registration_date_helper(RegistrationDate.where(name: "Last Names A-I").first)
+		%span.light_blue			
 		%br/
-		%span.W
-			Last names A&ndash;I
+		%span.W			
 
 	.seperator
 
 	.event.last_names.jq.green_bar
-		%span.light_blue
-			= registration_date_helper(RegistrationDate.where(name: "Last Names J-Q").first)
+		%span.light_blue			
 		%br/
-		%span.W
-			Last names J&ndash;Q
+		%span.W			
 
 	.seperator
 
 	.event.last_names.rz.green_bar
 		%span.light_blue
-			= registration_date_helper(RegistrationDate.where(name: "Last Names R-Z").first)
+		
 		%br/
-		%span.W
-			Last names R&ndash;Z
+		%span.W			
 
 	.seperator
 
 	.event.last_names.all.green_bar
-		%span.light_blue
-			= registration_date_helper(RegistrationDate.where(name: "All Last Names").first)
+		%span.light_blue		
 		%br/
 		%span.W
-			All last names
 
 	.event.blank.light_blue_bar
 
@@ -50,7 +45,7 @@
 		%span.desktop
 			= image_tag('point_green_onBlue.png', class: 'point')
 			%span.light_blue
-				= registration_date_helper(RegistrationDate.where(name: "All Other Grades Registration").first)
+				= registration_date_helper(RegistrationDate.where(name: "All Other Grades Registration").first, "start_date_short")
 			%br/
 		%span.W
 			All other grades' registration
@@ -66,7 +61,7 @@
 	.event.last.blue_bar
 		%span.desktop
 			%span.light_blue
-				= registration_date_helper(RegistrationDate.where(name: "First Day of School").first)
+				= registration_date_helper(RegistrationDate.where(name: "First Day of School").first, "start_date_short")
 			= image_tag('point_white_onBlue.png', class: 'point')
 			%br/
 			%span.W

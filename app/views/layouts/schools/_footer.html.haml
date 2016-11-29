@@ -11,7 +11,7 @@
 
 		%p
 			Check out
-			= link_to "Showcase IN Our Schools on #{registration_date_helper(RegistrationDate.where(name: 'Showcase In Our Schools').first, 'full_month')}", 'http://www.bostonpublicschools.org/Page/652', title: 'Showcase', target: "_blank"
+			= link_to "Showcase IN Our Schools on #{registration_date_helper(RegistrationDate.where(name: 'Showcase In Our Schools').first, 'start_date_short')}", 'http://www.bostonpublicschools.org/Page/652', title: 'Showcase', target: "_blank"
 
 		%p
 			View
