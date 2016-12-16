@@ -133,7 +133,7 @@ class SchoolsController < ApplicationController
           'Transportation Eligibility',
           'Hours',
           'Grades Offered',
-          'Quality Tier',
+          'MCAS Tier',
           'Before School Programs',
           'After School Programs',
           'School Focus',
