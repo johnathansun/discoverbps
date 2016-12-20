@@ -15,7 +15,8 @@
 
     .logo_choose
       - token = params[:token] || current_student.try(:token)
-      %a{href: "/choice_schools?token=#{token}", class:"no-decoration"}
+      - caseid = params[:caseid] || current_student.try(:student_caseid)
+      %a{href: "/choice_schools?token=#{token}&caseid=#{caseid}", class:"no-decoration"}
         %span.choose-icon{ aria: { hidden: "true" } }
 .clr
 

@@ -39,14 +39,17 @@ class Student < ActiveRecord::Base
   before_save :strip_first_name, :strip_last_name, :strip_street_number, :strip_street_name, :strip_zipcode
 
 
-  def self.save_choice_student_and_schools(token, session_token, session_id)
-    response = Webservice.get_choice_student_and_schools(session_token)
+  def self.save_choice_student_and_schools(token, session_token, session_id, caseid)
+    
+    response = Webservice.get_student_homebased_choices(caseid, SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE)
 
-    if response.try(:[], :studentInfo).present? && response.try(:[], :choiceList).present?
+    studentInfo = Webservice.get_student(token)
+       
+    if response.present?
       student = Student.where(token: token).first_or_initialize
 
-      if student.save_from_api_response(session_id, session_token, response[:studentInfo])
-        if student.set_choice_schools(response[:choiceList])
+      if student.save_from_api_response(session_id, session_token, studentInfo, caseid)
+        if student.set_choice_schools(response)        
           student
         else
           false
@@ -117,7 +120,7 @@ class Student < ActiveRecord::Base
     save_student_schools(api_schools, 'sped')
   end
 
-  def save_from_api_response(session_id, session_token, student_hash)
+  def save_from_api_response(session_id, session_token, student_hash, caseid)
 
     self.session_id = session_id
     self.session_token = session_token
@@ -140,7 +143,7 @@ class Student < ActiveRecord::Base
     self.awc_invitation = student_hash[:IsAWCEligible]
     self.ranked = student_hash[:HasRankedChoiceSubmitted]
     self.ranked_at = student_hash[:RankedChoiceSubmittedDate]
-
+    self.student_caseid = caseid
     self.save!
   end
 
@@ -163,7 +166,9 @@ class Student < ActiveRecord::Base
       school_ids = []
 
       api_schools.each do |api_school|
-        school = School.where(bps_id: api_school[:SchoolID]).first
+        schoolId =(school_list_type == "choice") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
+
+        school = School.where(bps_id: schoolId).first
 
         if school.present? && (!school_ids.include?(school.id) || school_list_type == "choice")
           school_ids << school.id
@@ -181,7 +186,9 @@ class Student < ActiveRecord::Base
         drive_matrix = Google.drive_times(latitude, longitude, school_coordinates)
 
         api_schools.each_with_index do |api_school, i|
-          school = School.where(bps_id: api_school[:SchoolID]).first
+	        
+          schoolId =(school_list_type == "choice") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
+          school = School.where(bps_id: schoolId).first
           if school.present?
             walk_time = walk_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
             drive_time = drive_matrix.try(:[], i).try(:[], :duration).try(:[], :text)

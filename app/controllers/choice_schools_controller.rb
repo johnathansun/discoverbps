@@ -18,6 +18,7 @@ class ChoiceSchoolsController < ApplicationController
     parent_response = Webservice.get_parent(params[:token])
     @email_1 = parent_response[:emailAddress1]
     @email_2 = parent_response[:emailAddress2]
+    session[:caseid] = params[:caseid]
   end
 
   # POST
@@ -27,9 +28,9 @@ class ChoiceSchoolsController < ApplicationController
     else
       passcode_response = Webservice.generate_passcode(params[:token], params[:contact_method]) # BPS sends the code to applicant
       if passcode = passcode_response.try(:[], :passcode)
-        redirect_to confirmation_choice_schools_path(token: params[:token], contact_method: params[:contact_method])
+        redirect_to confirmation_choice_schools_path(token: params[:token], caseid: params[:caseid], contact_method: params[:contact_method])
       else
-        redirect_to verify_choice_schools_path(token: params[:token]), alert: "Please choose a contact method:"
+        redirect_to verify_choice_schools_path(token: params[:token], caseid: params[:caseid]), alert: "Please choose a contact method:"
       end
     end
   end
@@ -41,21 +42,21 @@ class ChoiceSchoolsController < ApplicationController
   # POST
   def authenticate
     if params[:passcode].blank? || params[:token].blank?
-      redirect_to confirmation_choice_schools_path(token: params[:token]), alert: "Please enter your confirmation code:"
+      redirect_to confirmation_choice_schools_path(token: params[:token], caseid: params[:caseid]), alert: "Please enter your confirmation code:"
     else
       session_token_response = Webservice.generate_session_token(params[:token], params[:passcode])
-      if session_token = session_token_response.try(:[], :sessionToken)
-        if student = Student.save_choice_student_and_schools(params[:token], session_token, session[:session_id])
+      if session_token = session_token_response.try(:[], :sessionToken)       
+        if student = Student.save_choice_student_and_schools(params[:token], session_token, session[:session_id], session[:caseid])
           session[:current_student_id] = student.id
           session[:session_token] = session_token
           redirect_to list_choice_schools_path
         else
           Rails.logger.info "******************* didn't get a valid choice_student_and_schools"
-          redirect_to confirmation_choice_schools_path(token: params[:token]), alert: "Please try again:"
+          redirect_to confirmation_choice_schools_path(token: params[:token], caseid: params[:caseid]), alert: "Please try again:"
         end
       else
         Rails.logger.info "******************* didn't get a valid session token"
-        redirect_to confirmation_choice_schools_path(token: params[:token]), alert: "Please try again:"
+        redirect_to confirmation_choice_schools_path(token: params[:token], caseid: params[:caseid]), alert: "Please try again:"
       end
     end
   end
@@ -163,7 +164,7 @@ class ChoiceSchoolsController < ApplicationController
   private
 
   def redirect_if_student_token_invalid
-    if params[:token].blank? || Webservice.get_student(params[:token]).try(:[], :Token) != params[:token]
+    if params[:token].blank? || Webservice.get_student(params[:token]).try(:[], :Token) != params[:token] || params[:caseid].blank?
       redirect_to choice_schools_path(token: params[:token]), alert: "Please access this site from a valid URL found in your invitation email."
     end
   end
@@ -171,7 +172,7 @@ class ChoiceSchoolsController < ApplicationController
   def redirect_if_session_token_invalid
     # finding a student with the session token only tells us whether one has been
     # created in the past. we also need to verify that the token isn't expired
-    if session[:session_token].blank? || @student.blank?
+    if session[:session_token].blank? || @student.blank? 
       redirect_to verify_choice_schools_path(token: @student.try(:token)), alert: "Please access this site from a valid URL found in your invitation email."
     elsif Webservice.validate_session_token(session[:session_token]).try(:[], :messageContent) != "Session token is valid"
       redirect_to verify_choice_schools_path(token: @student.try(:token)), alert: "Your session token has expired. Please revalidate your account."
