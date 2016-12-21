@@ -107,8 +107,9 @@ class ChoiceSchoolsController < ApplicationController
     else
       rankings = params[:schools].values.select {|x| x.present?}
       properly_formatted = rankings.map {|x| x.try(:to_i)}.sort == (rankings.map {|x| x.try(:to_i)}.sort[0]..rankings.map {|x| x.try(:to_i)}.sort[-1]).to_a rescue false
+      isRankings_Integer = rankings.all? {|i|i.to_i > 0 }
 
-      if properly_formatted
+      if properly_formatted && isRankings_Integer
         params[:schools].each do |id, rank|
           if rank.present?
             school = StudentSchool.find(id)
@@ -117,7 +118,7 @@ class ChoiceSchoolsController < ApplicationController
         end
         redirect_to summary_choice_schools_path
       else
-        redirect_to order_choice_schools_path, alert: "Please ensure that your rankings are in order and start with '1'"
+        redirect_to order_choice_schools_path, alert: "Please ensure that your rankings are numbers in order and start with '1'"
       end
     end
   end
