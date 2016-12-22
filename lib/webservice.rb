@@ -8,7 +8,7 @@ module Webservice
 
 	def self.get_parent(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetParentInfo"
-		params = { studentToken: token, schyear: "2016" }.to_param
+		params = { studentToken: token, schyear: SCHOOL_YEAR }.to_param
 		response = self.get(endpoint, params)
 		MultiJson.load(response, symbolize_keys: true)
 	end
@@ -44,17 +44,18 @@ module Webservice
 
 	def self.get_student(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudent"
-		params = { studentToken: token, schyear: "2016" }.to_param
+		params = { studentToken: token, schyear: SCHOOL_YEAR }.to_param
 		response = self.get(endpoint, params)
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	def self.get_choice_student_and_schools(session_token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudentSchoolChoices"
-		response = self.post(endpoint, { sessionToken: session_token, schyear: "2016" }).body
+		response = self.post(endpoint, { sessionToken: session_token, schyear: SCHOOL_YEAR }).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
+
 
 	def self.get_ranked_choices(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetRankedChoices"
