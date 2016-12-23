@@ -55,8 +55,8 @@
 				<div class="content_wrap">
 
 					<div class="account_tab menu_item_list">
-					<%= render partial: 'layouts/language_tab' %>
 					<%= render partial: 'layouts/account_tab' %>
+					<%= render partial: 'layouts/language_tab' %>
 					<script>
 						$('.menu_item').hover(
 							function() {								
@@ -68,7 +68,7 @@
 								$(this)
 									.removeClass('hovered')
 									.find('.menu_box')
-									.fadeOut(5000);
+									.fadeOut(1000);
 						});
 					</script>
 					</div>
