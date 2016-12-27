@@ -5,7 +5,7 @@
     #choice-layout
       .light
         %h2{ style: "margin-bottom: 1em;" }
-          School Choice 2016
+          School Choice 2017
         - if flash[:alert].present?
           %h4.alert
             = flash[:alert]
@@ -15,7 +15,7 @@
               = notification.message
 
         %p
-          Thank you for accessing the Discover website. This site will help you navigate the 2016-2017 School Choice registration process.
+          Thank you for accessing the Discover website. This site will help you navigate the 2017-2018 School Choice registration process.
         %p
           On the following screens, you will find a list of your eligible schools. You can learn about each school, and then rank the list in your desired order. Once you have ordered your list, you can submit to the School Department as your official School Choice selection.
         %p
@@ -28,7 +28,7 @@
           Superintendent
 
         %br/
-        = link_to "Continue", verify_choice_schools_path(token: params[:token]), id: "continue-button"
+        = link_to "Continue", verify_choice_schools_path(token: params[:token], caseid: params[:caseid]), id: "continue-button"
 
       .light{ style: "font-style: italic; margin-top: 3em;" }
         If you have questions about using this site, please visit our official

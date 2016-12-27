@@ -204,9 +204,19 @@
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
-				MCAS Tier
+				Quality
 			%p.descrip.light
-				= school_tier_helper(student_school.tier)
+				BPS MCAS Tier -
+				= school_tier_helper(student_school.tier)	
+				%br
+				State Accountability Level (DESE) -
+				= school_tier_helper(student_school.dese_tier)				
+				%br
+				- if school_validtier_helper(student_school.tier)
+					= link_to "View BPS Quality Report", sqf_helper_string(school.bps_id, current_student.grade_level), target: "_blank", class: "text_B0"							
+				//- if school_validtier_helper(student_school.dese_tier)
+				%br
+				= link_to "More information on school quality measures", "http://www.bostonpublicschools.org/schoolquality/faq#sqf_dese", target: "_blank", class: "text_B0"		
 
 		.box
 			%p.title

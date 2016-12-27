@@ -122,7 +122,23 @@ module SchoolsHelper
 		end
 	end
 
-
+	def school_validtier_helper(tier)
+ 		if tier.present?
+ 			if tier == 'NR'
+ 				return false
+			elsif tier == 'N/A'
+ 				return false
+ 			elsif tier == 'NA'
+ 				return false	
+			elsif tier == ''
+				return false 				
+ 			else
+ 				return true
+ 			end			
+ 		else
+ 			return ''
+ 		end
+ 	end	
 
 	def eligibility_helper(tier)
 		tier.try(:gsub, /:/, ', ')
@@ -132,16 +148,16 @@ module SchoolsHelper
 		if tier.present?
 			if tier == 'NR'
 				tier_name = 'Not Ranked'
-			elsif tier == 'N/A'
-				tier_name = 'Not Applicable'
+			elsif tier == 'N/A' || tier == 'NA'
+				tier_name = 'N/A'
 			else
-				tier_name = "Tier #{tier}"
+				tier_name = tier
 			end
 			return tier_name
 		else
 			return ''
 		end
-	end
+	end	
 
 	def school_distance_helper(walkdistance, distance)
 		if walkdistance.present?  && walkdistance.strip != '0.00'
@@ -208,4 +224,33 @@ module SchoolsHelper
 		raw string.try(:strip).try(:gsub, /\s/, '&nbsp;')
 	end
 
+	def sql_helper_group_schoolId(schoolId, grade)
+		if schoolId.present?
+			if schoolId == '4241'
+				schoolId = '4242'
+			elsif schoolId == '1441'
+				schoolId = '1440'				
+			elsif schoolId == '4031'
+				schoolId = '4033'				
+			elsif schoolId == '4193'
+				schoolId = '4192'				
+			elsif schoolId == '4030'
+				schoolId = '4410'							
+			elsif schoolId == '2440'
+				schoolId = '4391'	
+			elsif (schoolId == '2440' || schoolId == '4391' || schoolId == '1140')
+				if (grade == '09'|| grade == '10' || grade =='11' || grade == '12')
+					schoolId = '1140'
+				else
+					schoolId = '4391'	
+				end	
+			end
+		end
+		return schoolId
+	end	
+
+	def sqf_helper_string(schoolId, grade)
+		@formatSchoolId = sql_helper_group_schoolId(schoolId, grade)
+		return "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFMetricsDashboard/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{@formatSchoolId}"
+	end
 end

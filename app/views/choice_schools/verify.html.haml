@@ -15,7 +15,7 @@
             Before we can display your choice list, we need to verify your identity.
             Please select the best email address, below, and then click "Continue" at the bottom of the page.
 
-        = form_tag(send_verification_choice_schools_path(token: params[:token]), method: "post") do
+        = form_tag(send_verification_choice_schools_path(token: params[:token], caseid: params[:caseid]), method: "post") do
 
           - if @email_1.present?
             = radio_button_tag :contact_method, @email_1

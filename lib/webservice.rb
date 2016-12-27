@@ -1,14 +1,14 @@
 module Webservice
 
 	# The following methods connect to endpoints on the BPS webservice. See:
-	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10/Schools.svc/help
+	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10Staging/Schools.svc/help
 
 
 	####### CHOICE SCHOOLS FLOW #######
 
 	def self.get_parent(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetParentInfo"
-		params = { studentToken: token, schyear: "2016" }.to_param
+		params = { studentToken: token, schyear: SCHOOL_YEAR }.to_param
 		response = self.get(endpoint, params)
 		MultiJson.load(response, symbolize_keys: true)
 	end
@@ -27,6 +27,14 @@ module Webservice
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
+	def self.get_student_homebased_choices(caseid, schoolyearcontext, clientcode)		
+		endpoint = "#{ENV['WEBAPI_REG_CHOICE_URL']}/StudentSchool/Choices"
+		response =  self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, { SchoolYear: schoolyearcontext, ClientCode: clientcode, Type: clientcode, CaseId: caseid }).body
+		
+		MultiJson.load(response, symbolize_keys: true)
+	end
+
+
 	def self.validate_session_token(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/authenticate/ValidateSessionToken"
 		response = self.post(endpoint, { sessionToken: token }).body
@@ -36,17 +44,18 @@ module Webservice
 
 	def self.get_student(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudent"
-		params = { studentToken: token, schyear: "2016" }.to_param
+		params = { studentToken: token, schyear: SCHOOL_YEAR }.to_param
 		response = self.get(endpoint, params)
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	def self.get_choice_student_and_schools(session_token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudentSchoolChoices"
-		response = self.post(endpoint, { sessionToken: session_token, schyear: "2016" }).body
+		response = self.post(endpoint, { sessionToken: session_token, schyear: SCHOOL_YEAR }).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
+
 
 	def self.get_ranked_choices(token)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetRankedChoices"
@@ -98,7 +107,7 @@ module Webservice
 
 	##### ZONE SCHOOLS #####
 
-	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10/schools.svc/GetSchoolInterestList?SchoolYear=2014-2015&Grade=03&ZipCode=02124&Geo=060&X=774444.562683105&Y=2961259.5579834&SiblingSchList=
+	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10Staging/schools.svc/GetSchoolInterestList?SchoolYear=2014-2015&Grade=03&ZipCode=02124&Geo=060&X=774444.562683105&Y=2961259.5579834&SiblingSchList=
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/ZoneSchools?SchYear=2014&Grade=07&SiblingSchList=&AddressID=68051
 
 	def self.get_zone_schools(grade_level, addressid, sibling_ids=[])
@@ -285,6 +294,14 @@ module Webservice
 	def self.post(endpoint, payload)
 		Faraday.new(url: "#{endpoint}").post do |req|
 		  req.headers["Content-Type"] = "application/json"
+		  req.body = payload.to_json
+		end
+	end
+
+	def self.postWithHeader(headerKey, endpoint, payload)
+		Faraday.new(url: "#{endpoint}").post do |req|
+		  req.headers["Content-Type"] = "application/json"
+		  req.headers["BpsToken"] = headerKey
 		  req.body = payload.to_json
 		end
 	end
