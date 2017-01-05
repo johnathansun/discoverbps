@@ -135,7 +135,6 @@ class ChoiceSchoolsController < ApplicationController
   # POST
   def submit
     @choice_schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
-
     if @choice_schools.blank?
       redirect_to order_choice_schools_path, alert: "Please rank one or more schools and then submit your list"
     elsif params[:parent_name].blank?
@@ -143,18 +142,21 @@ class ChoiceSchoolsController < ApplicationController
     else
       payload = []
       @choice_schools.each do |student_school|
-        payload << { "CallID" => student_school.call_id, "ProgramCode" => student_school.program_code, "SchoolID" => student_school.school.bps_id, "Rank" => student_school.choice_rank, "CreatedDateTime" => "", "SchoolRankID" => "" }
+        payload << { "ProgramCode" => student_school.program_code, "SchoolLocalId" => student_school.school.bps_id, "Rank" => student_school.choice_rank, "Grade" => @student.formatted_grade_level}
       end
+      
       @student.update_attributes(ranked: true, ranked_at: Time.now, parent_name: params[:parent_name])
-      Webservice.save_ranked_choices(session[:session_token], payload, params[:parent_name])
+      rankedResponse = Webservice.save_ranked_choices(session[:session_token], payload, params[:parent_name], SERVICE_CLIENT_CODE, SCHOOL_YEAR_CONTEXT, session[:caseid])
+      Webservice.send_ranked_email(session[:session_token], @student.token, session[:caseid])
       redirect_to success_choice_schools_path
     end
   end
 
   # GET
   def success
+    Rails.logger.info "****student token #{@student.token}"
     if @student.token.present?
-      @choice_schools = Webservice.get_ranked_choices(@student.token)
+      @choice_schools = Webservice.get_ranked_choices(@student.token, session[:caseid])
     else
       @choice_schools = []
     end
