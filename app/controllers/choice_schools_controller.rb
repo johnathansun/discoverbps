@@ -49,6 +49,7 @@ class ChoiceSchoolsController < ApplicationController
         if student = Student.save_choice_student_and_schools(params[:token], session_token, session[:session_id], session[:caseid])
           session[:current_student_id] = student.id
           session[:session_token] = session_token
+          
           redirect_to list_choice_schools_path
         else
           Rails.logger.info "******************* didn't get a valid choice_student_and_schools"
@@ -70,7 +71,7 @@ class ChoiceSchoolsController < ApplicationController
       end
     else
       @choice_schools = @student.choice_schools
-    end
+    end   
   end
 
   # GET
