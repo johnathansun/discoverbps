@@ -28,7 +28,7 @@ class StudentSchool < ActiveRecord::Base
       ell_cluster: school_hash[:ELLCluster],
       ell_description: school_hash[:ProgramDescription],
       program_code:  (school_list_type == "choice") ? school_hash[:ProgramId] :  school_hash[:ProgramCode],
-      program_code_description: school_hash[:ProgramCodeDesription],
+      program_code_description: school_hash[:ProgramCodeDescription],
       call_id: (school_list_type == "choice") ? school_hash[:CallId] : school_hash[:CallID],
       special_admissions: school_hash[:IsSpecAdmissions],
       walk_distance: school_hash[:WalkLineDistance],
