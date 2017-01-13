@@ -165,6 +165,11 @@ class Student < ActiveRecord::Base
       school_coordinates = ''
       school_ids = []
 
+      if school_list_type == "choice"
+        Rails.logger.info "****sorting**"
+        api_schools.sort_by{|c| c[:SortOrder]}
+      end
+
       api_schools.each do |api_school|
         schoolId =(school_list_type == "choice") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
 
