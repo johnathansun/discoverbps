@@ -91,7 +91,7 @@ class ChoiceSchoolsController < ApplicationController
         @choice_schools = []
       end
 
-      @student.choice_schools.includes(:school).all.each do |student_school|
+      @student.choice_schools.includes(:school).order(:sort_order).all.each do |student_school|
         @choice_schools << student_school unless @choice_schools.include?(student_school)
       end
 
