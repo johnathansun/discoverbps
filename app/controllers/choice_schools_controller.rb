@@ -66,11 +66,11 @@ class ChoiceSchoolsController < ApplicationController
   def list
     if @student.starred_schools.present?
       @choice_schools = @student.starred_schools.all
-      @student.choice_schools.all.each do |school|
+      @student.choice_schools.rank(:sort_order).all.each do |school|
         @choice_schools << school unless @choice_schools.include?(school)
       end
     else
-      @choice_schools = @student.choice_schools
+      @choice_schools = @student.choice_schools.rank(:sort_order)
     end   
   end
 
