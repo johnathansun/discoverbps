@@ -25,7 +25,7 @@
 
             = form_for(:schools, url: rank_choice_schools_path(token: params[:token], caseid: params[:caseid]), html: {method: :post}) do |f|
               %table
-                - @choice_schools.each do |student_school|                    
+                - @choice_schools.order(:sort_order).each do |student_school|                    
                   - school = student_school.school
                   %tr
                     %td{ style: "font-size: 20px; padding: 0 15px 25px 0;" }
