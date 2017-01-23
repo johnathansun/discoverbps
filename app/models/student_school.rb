@@ -7,7 +7,7 @@ class StudentSchool < ActiveRecord::Base
   attr_accessible :distance, :drive_time, :school_id, :student_id, :tier, :eligibility, :transportation_eligibility,
 									:walk_time, :walk_zone_eligibility, :sort_order_position, :bps_id, :ranked, :exam_school, :school_type, :starred,
 									:ell_cluster, :ell_description, :sped_cluster, :sped_description, :call_id, :choice_rank,
-                  :school_name, :program_code, :program_code_description, :special_admissions,:walk_distance,:dese_tier
+                  :school_name, :program_code, :program_code_description, :special_admissions,:walk_distance,:dese_tier, :sort_order
 
   def self.create_from_api_response(student, school, school_hash, school_list_type)
     Rails.logger.info "******************* #{school_hash}"
@@ -28,7 +28,7 @@ class StudentSchool < ActiveRecord::Base
       ell_cluster: school_hash[:ELLCluster],
       ell_description: school_hash[:ProgramDescription],
       program_code:  (school_list_type == "choice") ? school_hash[:ProgramId] :  school_hash[:ProgramCode],
-      program_code_description: school_hash[:ProgramCodeDesription],
+      program_code_description: school_hash[:ProgramCodeDescription],
       call_id: (school_list_type == "choice") ? school_hash[:CallId] : school_hash[:CallID],
       special_admissions: school_hash[:IsSpecAdmissions],
       walk_distance: school_hash[:WalkLineDistance],

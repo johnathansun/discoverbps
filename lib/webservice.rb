@@ -57,22 +57,30 @@ module Webservice
 	end
 
 
-	def self.get_ranked_choices(token)
+	def self.get_ranked_choices(token, caseid)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetRankedChoices"
-		payload = { studentToken: token }
+		Rails.logger.info "***************************caseid******#{caseid}"
+		payload = { studentToken: token, caseId: caseid }
 		response = self.post(endpoint, payload).body
 		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
-	def self.save_ranked_choices(session_token, schools, name)
-		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/SaveRankedChoices"
-		payload = { sessionToken: session_token, choiceList: schools, verificationText: name }
-		response = self.post(endpoint, payload).body
-		Rails.logger.info "******************** #{response}"
+	def self.save_ranked_choices(session_token, schools, name, clientcode, schoolyearcontext, caseid)
+		endpoint = "#{ENV['WEBAPI_REG_CHOICE_URL']}/StudentSchool/RankChoices"
+		payload = { sessionToken: session_token, choiceList: schools, VerificationText: name, ClientCode: clientcode, CaseId: caseid, ContextYear: schoolyearcontext }
+		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, payload).body
+		Rails.logger.info "*******ranked choice response************* #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
+	def self.send_ranked_email(session_token, token, caseid)
+		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/SendRankedEmail"
+		payload = { sessionToken: session_token, studentToken: token, caseId: caseid}
+		response = self.post(endpoint, payload).body
+		Rails.logger.info "******************** #{response}"
+		MultiJson.load(response, symbolize_keys: true)
+	end	
 
 	####### SCHOOLS FLOW #######
 

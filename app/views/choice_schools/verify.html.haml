@@ -31,7 +31,7 @@
             %div{ style: "display: inline-block;" }
               = link_to "Back", choice_schools_path(token: params[:token]), id: "back-button"
             %div{ style: "display: inline-block;" }
-              = submit_tag "Continue", id: "continue-button"
+              = submit_tag "Continue", id: "continue-button", data: { disable_with: "Please wait..." }
 
       .light{ style: "font-style: italic; margin-top: 3em;" }
         If you have questions about using this site, please visit our official

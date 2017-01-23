@@ -40,7 +40,7 @@
                 Eligibility
 
         %ul#sortable
-          - @student.choice_schools.each_with_index do |student_school, i|
+          - @student.choice_schools.order(:sort_order).each_with_index do |student_school, i|
             - school = student_school.school
             %li{id: "#{@student.id}_#{school.bps_id}", class: "list_row home_school clearfix"}
               %div{id: "#{@student.id}_#{school.bps_id}_row", class: "li_frame"}
