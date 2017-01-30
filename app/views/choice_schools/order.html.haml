@@ -30,11 +30,11 @@
                   %tr
                     %td{ style: "font-size: 20px; padding: 0 15px 25px 0;" }
                       = text_field_tag "schools[#{student_school.id}]", student_school.choice_rank, style: "font-size: 20px; text-align: center; padding: 5px; width: 25px;"
-                    %td{ style: "padding: 8px 20px 0 0;" }
+                    %td{ style: "padding: 8px 10px 0 0;" }
                       %h3
                         = school.name
                         = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
-                    %td.no_mobile{ style: "padding: 8px 20px 10px 0;" }
+                    %td{ style: "padding: 8px 20px 10px 0;" }
                       = student_school.program_code_description
                     %td.no_mobile{ style: "padding: 8px 20px 10px 0;" }
                       = transportation_eligibility_icon_helper(student_school, "22px")
