@@ -10,7 +10,7 @@
 			Visiting is the best way to learn if a school is a good fit for your child.
 		%p
 			Check out
-			= link_to "Showcase IN Our Schools on #{registration_date_helper(RegistrationDate.where(name: 'Showcase In Our Schools').first, 'start_date_short')}", 'http://www.bostonpublicschools.org/Page/652', title: 'Showcase', target: "_blank"
+			= link_to "Showcase IN Our Schools on #{registration_date_helper(RegistrationDate.where(name: 'Showcase In Our Schools').first, 'start_date_short')}", 'http://www.bostonpublicschools.org/Page/schoolpreview', title: 'Showcase', target: "_blank"
 		%p
 			View
 			= link_to 'School Preview Days for Grades K-8', 'http://www.bostonpublicschools.org/cms/lib07/MA01906464/Centricity/Domain/29/ENGSPTK8-1.pdf', title: 'High School Showcase', target: "_blank"
@@ -19,7 +19,9 @@
 			= link_to 'School Preview Days for Grades 9-12', 'http://www.bostonpublicschools.org/cms/lib07/MA01906464/Centricity/Domain/29/ENGHSSPT.pdf', title: 'High School Showcase', target: "_blank"
 		%p
 			Mark your calendar for the
-			= link_to "High School Showcase on #{registration_date_helper(RegistrationDate.where(name: 'High School Showcase').first, 'start_date_short')}", 'http://bostonpublicschools.org/Page/652', title: 'High School Showcase', target: "_blank"
+
+			= link_to "High School Showcase on #{registration_date_helper(RegistrationDate.where(name: 'High School Showcase').first, 'start_date_short')}", 'http://bostonpublicschools.org/Page/schoolpreview', title: 'High School Showcase', target: "_blank"
+
 	.footer_center
 		%h2{style: 'margin-bottom: 1.5em;', class: 'dark_gray'}
 			Register

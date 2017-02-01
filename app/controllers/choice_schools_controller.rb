@@ -169,7 +169,7 @@ class ChoiceSchoolsController < ApplicationController
 
   def redirect_if_student_token_invalid
     if params[:token].blank? || Webservice.get_student(params[:token]).try(:[], :Token) != params[:token] || params[:caseid].blank?
-      redirect_to choice_schools_path(token: params[:token]), alert: "Please access this site from a valid URL found in your invitation email."
+      redirect_to choice_schools_path(token: params[:token], caseid: session[:caseid]), alert: "Please access this site from a valid URL found in your invitation email."
     end
   end
 
@@ -177,9 +177,9 @@ class ChoiceSchoolsController < ApplicationController
     # finding a student with the session token only tells us whether one has been
     # created in the past. we also need to verify that the token isn't expired
     if session[:session_token].blank? || @student.blank? 
-      redirect_to verify_choice_schools_path(token: @student.try(:token)), alert: "Please access this site from a valid URL found in your invitation email."
+      redirect_to verify_choice_schools_path(token: @student.try(:token), caseid: session[:caseid]), alert: "Please access this site from a valid URL found in your invitation email."
     elsif Webservice.validate_session_token(session[:session_token]).try(:[], :messageContent) != "Session token is valid"
-      redirect_to verify_choice_schools_path(token: @student.try(:token)), alert: "Your session token has expired. Please revalidate your account."
+      redirect_to verify_choice_schools_path(token: @student.try(:token), caseid: session[:caseid]), alert: "Your session token has expired. Please revalidate your account."
     end
   end
 
