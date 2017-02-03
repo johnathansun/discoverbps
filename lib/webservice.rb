@@ -42,9 +42,9 @@ module Webservice
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
-	def self.get_student(token)
+	def self.get_student(token, caseid)
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudent"
-		params = { studentToken: token, schyear: SCHOOL_YEAR }.to_param
+		params = { studentToken: token, schyear: SCHOOL_YEAR, caseId: caseid}.to_param
 		response = self.get(endpoint, params)
 		MultiJson.load(response, symbolize_keys: true)
 	end
