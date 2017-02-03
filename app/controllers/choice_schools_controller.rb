@@ -86,7 +86,7 @@ class ChoiceSchoolsController < ApplicationController
       redirect_to choice_schools_path, alert: "There were no schools that matched your search. Please try again."
     elsif @studentResponse.try(:[], :HasRankedChoiceSubmitted) == true
       redirect_to success_choice_schools_path, alert: "You have already submitted your school choice list for the current school year. Your choice list is as follows:"
-    elsif Time.now > @studentResponse.try(:[], :RoundEndDate)       
+    elsif @studentResponse.try(:[], :RoundEndDate).present? && Time.now > DateTime.parse(@studentResponse.try(:[], :RoundEndDate))       
       @RoundEndDate = @studentResponse.try(:[], :RoundEndDate) 
       redirect_to choice_schools_path(token: @student.token, caseid: session[:caseid]), alert: " As of #{Date.parse(@RoundEndDate).strftime("%B %d %Y")}, school choice process for the round is closed.  We are no longer accepting choices on this system. If you would like to submit choices for the #{SCHOOL_YEAR_CONTEXT} school year, please visit a Welcome Center."
     else
