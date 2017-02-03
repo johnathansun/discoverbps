@@ -12,14 +12,17 @@ class ChoiceSchoolsController < ApplicationController
   def index
     @RoundEndDate = Webservice.get_student(params[:token], params[:caseid]).try(:[], :RoundEndDate)   
     @notifications = Notification.where(school_choice_pages: true)
+    session[:caseid] = params[:caseid]
   end
 
   # GET
   def verify
     parent_response = Webservice.get_parent(params[:token])
     @email_1 = parent_response[:emailAddress1]
-    @email_2 = parent_response[:emailAddress2]
-    session[:caseid] = params[:caseid]
+    @email_2 = parent_response[:emailAddress2]  
+    if session[:caseid]
+      session[:caseid] = params[:caseid]       
+    end  
   end
 
   # POST
@@ -172,7 +175,7 @@ class ChoiceSchoolsController < ApplicationController
   private
 
   def redirect_if_student_token_invalid
-    if params[:token].blank? || Webservice.get_student(params[:token], session[:caseid]).try(:[], :Token) != params[:token] || params[:caseid].blank?
+    if params[:token].blank? || Webservice.get_student(params[:token], params[:caseid]).try(:[], :Token) != params[:token] || params[:caseid].blank?
       redirect_to choice_schools_path(token: params[:token], caseid: session[:caseid]), alert: "Please access this site from a valid URL found in your invitation email."
     end
   end
