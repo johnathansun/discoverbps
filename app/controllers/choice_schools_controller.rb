@@ -10,7 +10,7 @@ class ChoiceSchoolsController < ApplicationController
 
   # GET
   def index
-    @RoundEndDate = Webservice.get_student(params[:token], session[:caseid]).try(:[], :RoundEndDate)   
+    @RoundEndDate = Webservice.get_student(params[:token], params[:caseid]).try(:[], :RoundEndDate)   
     @notifications = Notification.where(school_choice_pages: true)
   end
 
