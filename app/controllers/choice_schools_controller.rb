@@ -10,15 +10,19 @@ class ChoiceSchoolsController < ApplicationController
 
   # GET
   def index
+    @RoundEndDate = Webservice.get_student(params[:token], params[:caseid]).try(:[], :RoundEndDate)   
     @notifications = Notification.where(school_choice_pages: true)
+    session[:caseid] = params[:caseid]
   end
 
   # GET
   def verify
     parent_response = Webservice.get_parent(params[:token])
     @email_1 = parent_response[:emailAddress1]
-    @email_2 = parent_response[:emailAddress2]
-    session[:caseid] = params[:caseid]
+    @email_2 = parent_response[:emailAddress2]  
+    if session[:caseid]
+      session[:caseid] = params[:caseid]       
+    end  
   end
 
   # POST
@@ -77,11 +81,14 @@ class ChoiceSchoolsController < ApplicationController
   # GET
   def order
     @notifications = Notification.where(school_choice_pages: true)
-
+    @studentResponse = Webservice.get_student(@student.token, session[:caseid])
     if @student.choice_schools.blank?
       redirect_to choice_schools_path, alert: "There were no schools that matched your search. Please try again."
-    elsif Webservice.get_student(@student.token).try(:[], :HasRankedChoiceSubmitted) == true
+    elsif @studentResponse.try(:[], :HasRankedChoiceSubmitted) == true
       redirect_to success_choice_schools_path, alert: "You have already submitted your school choice list for the current school year. Your choice list is as follows:"
+    elsif @studentResponse.try(:[], :RoundEndDate).present? && Time.now > DateTime.parse(@studentResponse.try(:[], :RoundEndDate))       
+      @RoundEndDate = @studentResponse.try(:[], :RoundEndDate) 
+      redirect_to choice_schools_path(token: @student.token, caseid: session[:caseid]), alert: " As of #{Date.parse(@RoundEndDate).strftime("%B %d %Y")}, school choice process for the round is closed.  We are no longer accepting choices on this system. If you would like to submit choices for the #{SCHOOL_YEAR_CONTEXT} school year, please visit a Welcome Center."
     else
       if schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
         @choice_schools = schools
@@ -126,7 +133,7 @@ class ChoiceSchoolsController < ApplicationController
 
   # GET
   def summary
-    if Webservice.get_student(@student.token).try(:[], :HasRankedChoiceSubmitted) == true
+    if Webservice.get_student(@student.token, session[:caseid]).try(:[], :HasRankedChoiceSubmitted) == true
       redirect_to success_choice_schools_path, alert: "You have already submitted your school choice list for the current school year. Your choice list is as follows:"
     else
       @choice_schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
@@ -168,7 +175,7 @@ class ChoiceSchoolsController < ApplicationController
   private
 
   def redirect_if_student_token_invalid
-    if params[:token].blank? || Webservice.get_student(params[:token]).try(:[], :Token) != params[:token] || params[:caseid].blank?
+    if params[:token].blank? || Webservice.get_student(params[:token], params[:caseid]).try(:[], :Token) != params[:token] || params[:caseid].blank?
       redirect_to choice_schools_path(token: params[:token], caseid: session[:caseid]), alert: "Please access this site from a valid URL found in your invitation email."
     end
   end

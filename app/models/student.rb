@@ -43,7 +43,7 @@ class Student < ActiveRecord::Base
     
     response = Webservice.get_student_homebased_choices(caseid, SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE)
 
-    studentInfo = Webservice.get_student(token)
+    studentInfo = Webservice.get_student(token, caseid)
        
     if response.present?
       student = Student.where(token: token).first_or_initialize
