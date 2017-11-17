@@ -197,11 +197,11 @@
 			$('#sortable_eligibility_column').css("color", "#0077cf")
 			if (!eligibility_ascending) {
 				$('ul#sortable>li').tsort('span.sortable_eligibility',{order:'asc'});
-				$('#sortable_eligibility_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">MCAS Tier</div>');
+				$('#sortable_eligibility_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-up"></div> <div class="column_title">Quality Tier</div>');
 				eligibility_ascending = true;
 			} else {
 				$('ul#sortable>li').tsort('span.sortable_eligibility',{order:'desc'});
-				$('#sortable_eligibility_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">MCAS Tier</div>');
+				$('#sortable_eligibility_column').html('<div aria-hidden="true" class="column_arrow icon-DBPS-Dev-Assets-arrow-down"></div> <div class="column_title">Quality Tier</div>');
 				eligibility_ascending = false;
 			}
 		});
