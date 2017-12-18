@@ -1,5 +1,6 @@
 <% for notification in Notification.order('start_time DESC').active(session[:removed_notifications]) %>
-	<% if notification.home_page? && params[:controller] == 'students' && params[:action] == 'index' %>
+
+	<% if notification.home_page? && params[:controller] == 'students' && (params[:action] == 'index' || params[:action] == 'new') %>
 		<div id="notification_<%= notification.id %>" class="notification" style="display: none;">
 			<div class="wrap">
 				<div class="content_wrap">

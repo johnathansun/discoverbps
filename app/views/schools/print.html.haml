@@ -32,11 +32,16 @@
 
 						= mail_to @school.api_basic_info.try(:[], :schemail), @school.api_basic_info.try(:[], :schemail), class: "text_B0", title: "Email Address"
 
-					- if @student_school.try(:distance).present?
+					- if @student_school.try(:walk_distance).present?  && @student_school.walk_distance.strip != '0.00'
+						%p.title
+							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"}
+							= raw @student_school.try(:walk_distance)
+							mi from home
+					-else
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"}
 							= raw @student_school.try(:distance)
-							mi from home
+							mi from home		
 
 					%p.descrip.light
 						- if @student_school.try(:walk_time).present?
@@ -125,6 +130,12 @@
 							Eligibility
 						%p.descrip.light
 							= @student_school.try(:eligibility)
+							%br/
+							%b Distance:
+							%span{:aria => {hidden: 'true'}}
+							= raw @student_school.distance
+							mi
+							%br/
 
 					.box
 						%p.title
@@ -143,9 +154,18 @@
 					.box
 						%p.title
 							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
-							MCAS Tier
+							Quality
 						%p.descrip.light
-							= school_tier_helper(@student_school.try(:tier))
+							BPS MCAS Tier -
+							= school_tier_helper(@student_school.tier)				
+							%br
+							State Accountability Level (DESE) -
+							= school_tier_helper(@student_school.dese_tier)	
+							%br
+							- if school_validtier_helper(@student_school.tier)
+								= link_to "View BPS Quality Report", sqf_helper_string(@school.bps_id, current_student.grade_level), target: "_blank", class: "text_B0"			
+							%br
+							= link_to "More information on school quality measures", "http://www.bostonpublicschools.org/schoolquality/faq#sqf_dese", target: "_blank", class: "text_B0"
 
 					.box
 						%p.title

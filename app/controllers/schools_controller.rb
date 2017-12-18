@@ -14,7 +14,7 @@ class SchoolsController < ApplicationController
         flash[:alert] = 'There were no schools that matched your search. Please try again.'
         redirect_to root_url
       else
-        @home_school_ids = @home_schools.collect {|x| x.school.bps_id}.join(',')
+        @home_school_ids = @home_schools.collect {|x| sql_helper_group_schoolId(x.school.bps_id, current_student.grade_level)}.join(',')
         respond_to do |format|
           format.html
           format.csv do
@@ -97,7 +97,7 @@ class SchoolsController < ApplicationController
           end
         # match the default sort order on the lean page (distance)
         else
-          @home_schools = current_student.home_schools.order(:distance)
+          @home_schools = current_student.home_schools.order(:walk_distance)
         end
 
         @zone_schools = current_student.zone_schools.order(:distance)
@@ -108,10 +108,10 @@ class SchoolsController < ApplicationController
         @zone_schools = nil
         @ell_schools = nil
         @sped_schools = nil
-      end
+      end      
     end
 
-    def generate_csv
+    def generate_csv      
       require 'csv'
       csv_string = CSV.generate do |csv|
 
@@ -127,12 +127,13 @@ class SchoolsController < ApplicationController
           'Eligibility',
           'Address',
           'Distance from Home',
+          'Walk Distance from home',
           'Walk Time',
           'Drive Time',
           'Transportation Eligibility',
           'Hours',
           'Grades Offered',
-          'MCAS Tier',
+          'Quality Tier',
           'Before School Programs',
           'After School Programs',
           'School Focus',
@@ -179,16 +180,16 @@ class SchoolsController < ApplicationController
 
     end
 
-    def csv_row(schools, csv)
-
+    def csv_row(schools, csv)      
       schools.each do |student_school|
         school = student_school.school
-
+                
         csv << [ '',
           school.name,
           eligibility_helper(student_school.eligibility),
           school.full_address,
           "#{student_school.distance} mi",
+          school_distance_helper(student_school.walk_distance, student_school.distance),
           student_school.walk_time,
           student_school.drive_time,
           student_school.transportation_eligibility,

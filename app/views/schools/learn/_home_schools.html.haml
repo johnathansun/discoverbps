@@ -11,7 +11,9 @@
         Below is a list of your Home-Based schools.
         To see more information on each school, please click the 'i' icon.
         You can also click the star icon to highlight your favorites.
-
+  %div{ style: "margin-bottom: 2em;font-size:12pt;"  }
+    To explore the details about the quality of your home-based schools, please visit your
+    = link_to "Customized School Quality Report", "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFMetricsDashboard/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}", target: "_blank", class: "text_B0"
   .list_content
     .flexible_content
       - if @home_schools.present?
@@ -82,7 +84,11 @@
                   .first_block.middle
                     %span.middle.sortable_distance
                       = transportation_eligibility_icon_helper(student_school, "18px")
-                      #{spacer_helper(student_school.distance)}&nbsp;mi
+                      -if student_school.walk_distance.present? && student_school.walk_distance.strip != '0.00'                        
+                        #{spacer_helper(student_school.walk_distance)}&nbsp;mi
+                      -else                          
+                        #{spacer_helper(student_school.distance)}&nbsp;mi
+                      
 
                   .second_bloc.middle
                     %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
@@ -117,11 +123,7 @@
 
                     .clr
 
-                  .clr
-
-        %div{ style: "margin-bottom: 2em;" }
-          To learn more about your home-based schools, please visit the
-          = link_to "School Quality Framework website", "http://dashboard.cityofboston.gov/views/TestBPSURLFilter/TestBPSURLFilter?:embed=y&School%20Code=#{@home_school_ids}", target: "_blank", class: "text_B0"
+                  .clr       
 
         = render partial: 'layouts/schools/notice'
 

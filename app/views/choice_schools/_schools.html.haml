@@ -40,7 +40,7 @@
                 Eligibility
 
         %ul#sortable
-          - @student.choice_schools.each_with_index do |student_school, i|
+          - @student.choice_schools.order(:sort_order).each_with_index do |student_school, i|
             - school = student_school.school
             %li{id: "#{@student.id}_#{school.bps_id}", class: "list_row home_school clearfix"}
               %div{id: "#{@student.id}_#{school.bps_id}_row", class: "li_frame"}
@@ -81,8 +81,12 @@
                 .box.line.getting_there
                   .first_block.middle
                     %span.middle.sortable_distance
+                    -if student_school.walk_distance.present? && student_school.walk_distance.strip != '0.00'
+                      %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14 transportation_icon"}
+                      #{spacer_helper(student_school.walk_distance)}&nbsp;mi
+                    -else
                       = transportation_eligibility_icon_helper(student_school, "18px")
-                      #{spacer_helper(student_school.distance)}&nbsp;mi
+                      #{spacer_helper(student_school.distance)}&nbsp;mi    
 
                   .second_bloc.middle
                     %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14"}

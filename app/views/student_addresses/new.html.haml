@@ -79,7 +79,8 @@
 
           .event
             %span.desktop
-              %span.light_blue Dec 3
+              %span.light_blue 
+              = registration_date_helper(RegistrationDate.where(name: "School Previews and School Showcases Start").first, "start_date_short")
               %br/
               %span.W
                 School Previews and
@@ -98,7 +99,8 @@
 
           .event
             %span.desktop
-              %span.light_blue Dec 14
+              %span.light_blue 
+               = registration_date_helper(RegistrationDate.where(name: "Pre-Register").first, "start_date_short")
               %br/
               %span.W
                 Pre-register

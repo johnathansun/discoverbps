@@ -5,32 +5,37 @@
     #choice-layout
       .light
         %h2{ style: "margin-bottom: 1em;" }
-          School Choice 2016
+          School Choice 2018
         - if flash[:alert].present?
           %h4.alert
-            = flash[:alert]
+            = flash[:alert] 
+        - elsif @RoundEndDate.present? && Time.now > Date.parse(@RoundEndDate)
+          %h4.alert
+            As of #{Date.parse(@RoundEndDate).strftime("%B %d %Y")}, school choice process for the round is closed.  We are no longer accepting choices on this system. If you would like to submit choices for the #{SCHOOL_YEAR_CONTEXT} school year, please visit a Welcome Center.                    
         - elsif @notifications.present?
           - @notifications.each do |notification|
             %h4.alert
               = notification.message
 
         %p
-          Thank you for accessing the Discover website. This site will help you navigate the 2016-2017 School Choice registration process.
+          Welcome to the Boston Public Schools’ new online choice form. At BPS, we are committed to providing your child with a high quality education. Whether your child will be entering sixth grade or ninth grade, we want to thank you for completing your school selections online and for choosing Boston Public Schools.
         %p
-          On the following screens, you will find a list of your eligible schools. You can learn about each school, and then rank the list in your desired order. Once you have ordered your list, you can submit to the School Department as your official School Choice selection.
+          On the following screens, you will find a list of your eligible schools. You can click on each school to learn more about its MCAS Tier, hours, uniform policy, extracurricular activities, and more. You can then rank your selection of preferred schools in your desired order. We encourage families to rank ALL listed options. Once you have ranked your schools and pressed submit, you're all set! There’s no need to complete any paper forms. You will receive a confirmation email with your rankings for your own records. 
         %p
-          We know that choosing a school for your child is an important decision. If you have questions about school options or the assignment process, please visit one of the BPS Welcome Centers or call the BPS Hotline at 617-635-9046.
+          We know that choosing a school for your child is an important decision. If you have questions about school options or the assignment process, please visit one of our Welcome Centers or call the BPS hotline at 617-635-9046.
         %p
-          Thank you for choosing the Boston Public Schools! for success through high school and beyond.
+          Thank you for choosing Boston Public Schools. We look forward to partnering with your family through high school and beyond.
         %p
-          Tommy Chang,
+          Best,
           %br/
-          Superintendent
+          Robbie Havdala
+          %br/
+          Senior Director, Welcome Services
 
         %br/
-        = link_to "Continue", verify_choice_schools_path(token: params[:token]), id: "continue-button"
+        = link_to "Continue", verify_choice_schools_path(token: params[:token], caseid: params[:caseid]), id: "continue-button"
 
       .light{ style: "font-style: italic; margin-top: 3em;" }
-        If you have questions about using this site, please visit our official
-        = link_to "Google Group", "https://groups.google.com/a/bostonpublicschools.org/forum/#!forum/onlinechoiceforum", target: "_blank"
+        If you have questions about using this site, please email
+        = link_to "onlinechoiceforum@bostonpublicschools.org", "mailto:onlinechoiceforum@bostonpublicschools.org", target: "_blank"
         for support.

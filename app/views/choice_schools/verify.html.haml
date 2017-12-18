@@ -15,25 +15,25 @@
             Before we can display your choice list, we need to verify your identity.
             Please select the best email address, below, and then click "Continue" at the bottom of the page.
 
-        = form_tag(send_verification_choice_schools_path(token: params[:token]), method: "post") do
+        = form_tag(send_verification_choice_schools_path(token: params[:token], caseid: params[:caseid]), method: "post") do
 
           - if @email_1.present?
-            = radio_button_tag :contact_method, @email_1
+            = radio_button_tag :contact_method, @email_1, true 
             = @email_1
 
           - if @email_2.present?
             %br/
-            = radio_button_tag :contact_method, @email_2
+            = radio_button_tag :contact_method, @email_2, @email_1.present? ? false : true
             = @email_2
 
 
           %div{ style: "margin-top: 2em;" }
             %div{ style: "display: inline-block;" }
-              = link_to "Back", choice_schools_path(token: params[:token]), id: "back-button"
+              = link_to "Back", choice_schools_path(token: params[:token], caseid: params[:caseid]), id: "back-button"
             %div{ style: "display: inline-block;" }
-              = submit_tag "Continue", id: "continue-button"
+              = submit_tag "Continue", id: "continue-button", data: { disable_with: "Please wait..." }
 
       .light{ style: "font-style: italic; margin-top: 3em;" }
-        If you have questions about using this site, please visit our official
-        = link_to "Google Group", "https://groups.google.com/a/bostonpublicschools.org/forum/#!forum/onlinechoiceforum", target: "_blank"
+        If you have questions about using this site, please email
+        = link_to "onlinechoiceforum@bostonpublicschools.org", "mailto:onlinechoiceforum@bostonpublicschools.org", target: "_blank"
         for support.

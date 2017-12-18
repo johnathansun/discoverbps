@@ -11,8 +11,6 @@ class SeedRegistrationDates < ActiveRecord::Migration
     RegistrationDate.create(name: "All Other Grades Registration", start_date: Date.parse("3-2-2016"))
     RegistrationDate.create(name: "Assignments Mailed", start_date: Date.parse("1-3-2016"), end_date: Date.parse("1-7-2016"))
     RegistrationDate.create(name: "First Day of School", start_date: Date.parse("8-9-2016"))
-    RegistrationDate.create(name: "School Choice Round 1", start_date: Date.parse("1-02-2016"), end_date: Date.parse("15-4-2016"))
-    RegistrationDate.create(name: "School Choice Round 2", start_date: Date.parse("16-04-2016"), end_date: Date.parse("15-05-2016"))
   end
 
   def down

@@ -30,10 +30,14 @@
                 %span{aria: {hidden: 'true'}, class: "select_icon icon-DBPS-Dev-Assets-SRG-12"}
 
           .box.line.getting_there{style: 'width: 52px;'}
-            - if student_school.distance.present?
+            - if student_school.walk_distance.present? && student_school.walk_distance.strip != '0.00'
+              %span.middle.sortable_distance
+                = spacer_helper(student_school.walk_distance)
+                &nbsp;mi
+            - else
               %span.middle.sortable_distance
                 = spacer_helper(student_school.distance)
-                &nbsp;mi
+                &nbsp;mi  
 
           .box.line.school_hours{style: 'width: 140px;'}
             %span.middle
@@ -45,3 +49,8 @@
           .box.line.surround_care
             .middle
               = eligibility_helper(student_school.eligibility)
+              %b Distance:
+              %span{:aria => {hidden: 'true'}}
+              = raw student_school.distance
+              mi
+              %br/

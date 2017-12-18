@@ -66,7 +66,10 @@
 		-# Travel Time
 		%p.title
 			%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"}
-			= raw student_school.distance
+			-if student_school.walk_distance.present? && student_school.walk_distance.strip != '0.00'
+				= raw student_school.walk_distance
+			-else
+				= raw student_school.distance		
 			mi from home
 		%p.descrip.light
 			%span{:aria => {hidden: 'true'}, :class => "icon icon_petit icon-DBPS-Dev-Assets-SRG-14"}
@@ -177,6 +180,12 @@
 				Eligibility
 			%p.descrip.light
 				= student_school.eligibility
+				%br/
+				%b Distance:
+				%span{:aria => {hidden: 'true'}}
+				= raw student_school.distance
+				mi
+				%br/
 
 		.box
 			%p.title
@@ -195,10 +204,19 @@
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}
-				Quality Tier
+				Quality
 			%p.descrip.light
-				= school_tier_helper(student_school.tier)
-				= link_to "learn more", "http://dashboard.cityofboston.gov/views/TestBPSURLFilter/TestBPSURLFilter?:embed=y&School%20Code=#{school.bps_id}", target: "_blank", class: "text_B0"
+				BPS Quality Tier -
+				= school_tier_helper(student_school.tier)	
+				%br
+				State Accountability Level (DESE) -
+				= school_tier_helper(student_school.dese_tier)				
+				%br
+				- if school_validtier_helper(student_school.tier)
+					= link_to "View BPS Quality Report", sqf_helper_string(school.bps_id, current_student.grade_level), target: "_blank", class: "text_B0"							
+				//- if school_validtier_helper(student_school.dese_tier)
+				%br
+				= link_to "More information on school quality measures", "http://www.bostonpublicschools.org/schoolquality/faq#sqf_dese", target: "_blank", class: "text_B0"		
 
 		.box
 			%p.title

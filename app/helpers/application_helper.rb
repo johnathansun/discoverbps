@@ -34,15 +34,27 @@ module ApplicationHelper
 				if rd.start_date.month != rd.end_date.month
 					if format == "month_range"
 						"#{rd.start_date.strftime('%b')} - #{rd.end_date.strftime('%b')}"
+					elsif format == "start_date_short"
+						"#{rd.start_date.strftime('%b')} #{rd.start_date.strftime('%d')}"		
+					elsif format == "start_date"
+						"#{rd.start_date.strftime('%B')} #{rd.start_date.strftime('%d')}"		
 					else
 						"#{rd.start_date.strftime('%b %e')} - #{rd.end_date.strftime('%b %e')}"
 					end
-				else
+				elsif format == "start_date_short"
+					"#{rd.start_date.strftime('%b')} #{rd.start_date.strftime('%d')}"					
+				else	
 					"#{rd.start_date.strftime('%b %e')}-#{rd.end_date.strftime('%e')}"
 				end
 			else
 				if format == "full_month"
 					"#{rd.start_date.strftime('%B')} #{rd.start_date.strftime('%e')}"
+				elsif format == "full_month_date"
+					"#{rd.start_date.strftime('%b %e')} - #{rd.end_date.strftime('%b %e')}"
+				elsif format == "start_date_short"
+					"#{rd.start_date.strftime('%b')} #{rd.start_date.strftime('%d')}"	
+				elsif format == "start_date"
+					"#{rd.start_date.strftime('%B')} #{rd.start_date.strftime('%d')}"		
 				else
 					"#{rd.start_date.strftime('%b')} #{rd.start_date.strftime('%e')}"
 				end
