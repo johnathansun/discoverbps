@@ -13,10 +13,6 @@ class Notification < ActiveRecord::Base
   	end
   end
 
-  def message?
-    self.message.html_safe
-  end
-
   private
 
   def start_time_precedes_end_time
