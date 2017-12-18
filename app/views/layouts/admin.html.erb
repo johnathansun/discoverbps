@@ -28,8 +28,8 @@
 		<!-- Deprecated IEs scripts & stylesheets =================== -->
 		 <!-- Chrome Frame for IE6 and under -->
 			<!--[if lte IE 6 ]>
-				<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-				<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+		<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+		<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
 			<![endif]-->
 
 		<!-- script pour Typekit  =================== -->
@@ -40,6 +40,18 @@
 		<!--[if lte IE 7]><script src="lte-ie7.js"></script><![endif]-->
 		<%= stylesheet_link_tag    "admin", :media => "all" %>
 		<%= javascript_include_tag "admin" %>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+
+		<!-- Include Editor style. -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.3/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.3/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.3/js/froala_editor.pkgd.min.js"></script>
+
+		<script> $(function() { $('textarea').froalaEditor() }); </script>
 		<%= yield :scripts %>
 
 		<%= csrf_meta_tags %>

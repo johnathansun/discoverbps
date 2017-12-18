@@ -4,12 +4,17 @@ class Notification < ActiveRecord::Base
   validates :message, presence: true
   validate :start_time_precedes_end_time
 
+
   def self.active(ids)
   	if ids.blank?
   		self.where('start_time < ? AND end_time > ?', Time.now, Time.now)
   	else
   		self.where('start_time < ? AND end_time > ? AND id NOT IN (?)', Time.now, Time.now, ids)
   	end
+  end
+
+  def message?
+    self.message.html_safe
   end
 
   private

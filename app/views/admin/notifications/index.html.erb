@@ -19,7 +19,7 @@
 	<tbody>
 		<% for notification in @notifications %>
 			<tr class="hover">
-				<td style="padding-right: 20px;"><%= notification.message %></td>
+				<td style="padding-right: 20px;"><%= notification.message? %></td>
 				<td width='100px'><%= notification.home_page %></td>
 				<td width='100px'><%= notification.schools_page %></td>
 				<td width='200px'><%= notification.start_time %></td>
