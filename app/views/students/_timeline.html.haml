@@ -1,7 +1,7 @@
 .timeline
 	.event.W.registration.green_bar
 		%span.desktop
-			= image_tag('point_green_white_open.png', class: 'point')
+			= image_tag('point_green_white_open.png', class: 'point test')
 			%span
 				Priority Registration
 				%br/
@@ -39,7 +39,7 @@
 
 	.event.last_names.all.green_bar
 		%span.light_blue
-			= registration_date_helper(RegistrationDate.where(name: "All Last Names").first)
+			= registration_date _helper(RegistrationDate.where(name: "All Last Names").first)
 		%br/
 		%span.W
 			All last names
