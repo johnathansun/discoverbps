@@ -39,7 +39,7 @@
 
 	.event.last_names.all.green_bar
 		%span.light_blue
-			= registration_date _helper(RegistrationDate.where(name: "All Last Names").first)
+			= registration_date_helper(RegistrationDate.where(name: "All Last Names").first)
 		%br/
 		%span.W
 			All last names
