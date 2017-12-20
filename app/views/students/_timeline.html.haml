@@ -2,10 +2,13 @@
 	.event.W.registration.green_bar
 		%span.desktop
 			= image_tag('point_green_white_open.png', class: 'point test')
-			%span
+			%span.light_blue
+				= registration_date_helper(RegistrationDate.where(name: "Last Names J-Q").first)
+			%span.W
 				Priority Registration
 				%br/
 				for grades K0, K1, 6, 7, & 9 begins
+				%br/
 
 			-#%span.tablet
 				= image_tag('blue_point_arrow.png', class: 'point_arrow')
@@ -41,6 +44,9 @@
 		%span.light_blue
 			= registration_date_helper(RegistrationDate.where(name: "All Last Names").first)
 		%br/
+		%span.light_blue
+			= registration_date_helper(RegistrationDate.where(name: "Last Names A-I").first)
+			%br/
 		%span.W
 			All last names
 
