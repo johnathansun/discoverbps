@@ -5,14 +5,14 @@
 	.text.clearfix
 		%p.yellow-buttons  
 			= auto_link(TextSnippet.find('home-register-intro').try(:text))
-			= link_to 'Learn more', 'http://www.bostonpublicschools.org/register', title: 'Learn more', class: 'u', style: 'margin-bottom: 0;', target: '_blank'
+			= auto_link(TextSnippet.find('footer-link-learn-more').try(:text))
 		.alignleft_half
 			%h2{style: 'margin-bottom: 15px;'}
 				Visit Schools
-			= link_to 'Learn about school preview opportunities', 'http://www.bostonpublicschools.org/schoolpreview', class: 'u', target: '_blank'
+				= auto_link(TextSnippet.find('footer-link-one').try(:text))
 		.alignleft_half
 			%h2{style: 'margin-bottom: 15px;'}
 				Register
-			= link_to 'Pre-registration', 'https://sis.mybps.org/aspen/index.html', class: 'u', target: '_blank'							
-			= link_to 'Collect the required documents', 'http://www.bostonpublicschools.org/residencypolicy', class: 'u', target: '_blank'
-			= link_to 'Plan a visit to a welcome center', 'http://www.bostonpublicschools.org/welcomecenters', class: 'u', target: '_blank'
+				= auto_link(TextSnippet.find('footer-link-two').try(:text))
+				= auto_link(TextSnippet.find('footer-link-three').try(:text))
+				= auto_link(TextSnippet.find('footer-link-four').try(:text))
