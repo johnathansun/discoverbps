@@ -3,16 +3,18 @@
 		%span{:aria => {hidden: 'true'}, :class => 'icon-DBPS-Dev-Assets-SRG-02'}
 
 	.text.clearfix
-		%p.yellow-buttons  
+		%p.yellow-buttons
 			= auto_link(TextSnippet.find('home-register-intro').try(:text))
 			= auto_link(TextSnippet.find('footer-link-learn-more').try(:text))
 		.alignleft_half
 			%h2{style: 'margin-bottom: 15px;'}
 				Visit Schools
+			%br
 				= auto_link(TextSnippet.find('footer-link-one').try(:text))
 		.alignleft_half
 			%h2{style: 'margin-bottom: 15px;'}
 				Register
+			%br
 				= auto_link(TextSnippet.find('footer-link-two').try(:text))
 				= auto_link(TextSnippet.find('footer-link-three').try(:text))
 				= auto_link(TextSnippet.find('footer-link-four').try(:text))
