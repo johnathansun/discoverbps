@@ -24,7 +24,7 @@
   <tbody>
     <% for datum in @demand_data %>
       <tr class="hover">
-        <td width='80px'><strong><%= link_to datum.bps_id, admin_school_path(datum.school) %></strong></td>
+        <td width='80px'><strong><%= link_to datum.bps_id, admin_school_path(datum.school_id) %></strong></td>
         <td><strong><%= datum.school.try(:name) %></strong></td>
         <td><%= datum.year %></td>
         <td><%= datum.grade_level %></td>
