@@ -3,7 +3,8 @@
 	.footer_left
 		%h2{style: 'margin-bottom: 1.5em;', class: 'dark_gray'}
 			Visit Schools
-
+		%p
+			= auto_link(TextSnippet.find('footer-link-one').try(:text))
 		%p
 			%span.big.dark_gray Visit Schools
 			%br/
