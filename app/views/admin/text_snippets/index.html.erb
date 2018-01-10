@@ -17,7 +17,7 @@
 		<% for text_snippet in @text_snippets %>
 			<tr class="hover">
 				<td width="150px" style="padding-right: 20px;"><%= text_snippet.slug %></td>
-				<td><%= text_snippet.text? %></td>
+				<td><%= text_snippet.text %></td>
 				<td width="70px" align="right"><%= link_to 'Edit', edit_admin_text_snippet_path(text_snippet), class: 'edit_button' %></td>
 			</tr>
 		<% end %>
