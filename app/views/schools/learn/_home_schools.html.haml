@@ -13,7 +13,13 @@
         You can also click the star icon to highlight your favorites.
   %div{ style: "margin-bottom: 2em;font-size:12pt;"  }
     To explore the details about the quality of your home-based schools, please visit your
-    = link_to "Customized School Quality Report", "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFMetricsDashboard/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}", target: "_blank", class: "text_B0"
+    .dropdown
+      %button.dropbtn Customized School Quality Report
+      .dropdown-content
+        %a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQF2015-16Spanish/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Spanish
+        %a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQF2015-16Portuguese/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Portuguese
+        %a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQF2015-16Haitian/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Haitian
+        %a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFMetricsDashboard/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} English
   .list_content
     .flexible_content
       - if @home_schools.present?
@@ -88,7 +94,7 @@
                         #{spacer_helper(student_school.walk_distance)}&nbsp;mi
                       -else                          
                         #{spacer_helper(student_school.distance)}&nbsp;mi
-                      
+
 
                   .second_bloc.middle
                     %span{:aria => {hidden: 'true'}, :class => "icon_petit icon-DBPS-Dev-Assets-SRG-14"}
@@ -123,7 +129,7 @@
 
                     .clr
 
-                  .clr       
+                  .clr
 
         = render partial: 'layouts/schools/notice'
 
