@@ -68,7 +68,8 @@ module DiscoverBPS
         'admin.css',
         'admin.js',
         'application.css',
-        'application.js'
+        'application.js',
+        'custom.css'
     ]
 
     config.sass.cache = false
