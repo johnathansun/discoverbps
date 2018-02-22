@@ -110,7 +110,7 @@ class ChoiceSchoolsController < ApplicationController
 
   # POST
   def rank
-    if params[:schools].blank? || params[:schools].values.all? {|x| x.blank?} || params[:schools].values.select {|x| x.present?}.count < 3
+    if params[:schools].blank? || params[:schools].values.all? {|x| x.blank?}
       redirect_to order_choice_schools_path, alert: "Please rank three or more schools and then submit your list"
     else
       rankings = params[:schools].values.select {|x| x.present?}
@@ -121,10 +121,14 @@ class ChoiceSchoolsController < ApplicationController
         params[:schools].each do |id, rank|
           if rank.present?
             school = StudentSchool.find(id)
+            if school.choice_rank.to_s == "1171" && school.program_code == "REG" || params[:schools].values.reject(&:empty?).count >= 2
+              redirect_to summary_choice_schools_path
+            else
+              redirect_to order_choice_schools_path, alert: "Conditions have not met"
+            end
             school.update_column(:choice_rank, rank)
           end
         end
-        redirect_to summary_choice_schools_path
       else
         redirect_to order_choice_schools_path, alert: "Please ensure that your rankings are numbers in order and start with '1'"
       end
