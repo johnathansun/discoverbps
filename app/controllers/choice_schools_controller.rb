@@ -122,9 +122,10 @@ class ChoiceSchoolsController < ApplicationController
           if rank.present?
             school = StudentSchool.find(id)
             if school.choice_rank.to_s == "1171" && school.program_code == "REG" || params[:schools].values.reject(&:empty?).count >= 2
-              redirect_to summary_choice_schools_path
+              # redirect_to summary_choice_schools_path
+              redirect_to(:action => :summary, :notice => "Successfully updated feature.") and return
             else
-              redirect_to order_choice_schools_path, alert: "Conditions have not met"
+              redirect_to order_choice_schools_path, alert: "Because you haven't selected your students current school please rank 3 schools"
             end
             school.update_column(:choice_rank, rank)
           end
