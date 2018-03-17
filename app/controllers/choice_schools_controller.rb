@@ -19,7 +19,7 @@ class ChoiceSchoolsController < ApplicationController
   def verify
     parent_response = Webservice.get_parent(params[:token])
     @email_1 = parent_response[:emailAddress1]
-    @email_2 = parent_response[:emailAddress2]  
+    @email_2 = parent_response[:emailAddress2]
     if session[:caseid]
       session[:caseid] = params[:caseid]       
     end  
@@ -44,6 +44,7 @@ class ChoiceSchoolsController < ApplicationController
   end
 
   # POST
+  #710456
   def authenticate
     if params[:passcode].blank? || params[:token].blank?
       redirect_to confirmation_choice_schools_path(token: params[:token], caseid: params[:caseid]), alert: "Please enter your confirmation code:"
@@ -108,7 +109,7 @@ class ChoiceSchoolsController < ApplicationController
     end
   end
 
-  # POST
+    # POST
   def rank
     if params[:schools].blank? || params[:schools].values.all? {|x| x.blank?}
       redirect_to order_choice_schools_path, alert: "Please rank three or more schools and then submit your list"
@@ -116,22 +117,34 @@ class ChoiceSchoolsController < ApplicationController
       rankings = params[:schools].values.select {|x| x.present?}
       properly_formatted = rankings.map {|x| x.try(:to_i)}.sort == (rankings.map {|x| x.try(:to_i)}.sort[0]..rankings.map {|x| x.try(:to_i)}.sort[-1]).to_a rescue false
       isRankings_Integer = rankings.all? {|i|i.to_i > 0 }
-
       if properly_formatted && isRankings_Integer
+        response = Webservice.get_student_homebased_choices(session[:caseid], SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE)
         params[:schools].each do |id, rank|
           if rank.present?
             school = StudentSchool.find(id)
-            if school.choice_rank.to_s == "1171" && school.program_code == "REG" || params[:schools].values.reject(&:empty?).count >= 2
-              # redirect_to summary_choice_schools_path
-              redirect_to(:action => :summary, :notice => "Successfully updated feature.") and return
+            if response.select{|key| key[:SchoolEligibility].include? "Student Sch"}.present?
+              response.select{|key| key[:SchoolEligibility].include? "Student Sch"}.each do |value|
+                if value[:SchoolLocalId].present? && value[:SchoolLocalId] == id || params[:schools].values.reject(&:empty?).count >= 3
+                  school.update_column(:choice_rank, rank)
+                  redirect_to summary_choice_schools_path and return
+                else
+                  school.update_column(:choice_rank, rank)
+                  redirect_to order_choice_schools_path, alert: "Because you haven't selected your students current school please rank 3 schools" and return
+                end
+              end
             else
-              redirect_to order_choice_schools_path, alert: "Because you haven't selected your students current school please rank 3 schools"
+              if params[:schools].values.reject(&:empty?).count >= 3
+                school.update_column(:choice_rank, rank)
+                redirect_to summary_choice_schools_path and return
+              else
+                school.update_column(:choice_rank, rank)
+                redirect_to order_choice_schools_path, alert: "Because you haven't selected your students current school please rank 3 schools" and return
+              end
             end
-            school.update_column(:choice_rank, rank)
+          else
+            redirect_to order_choice_schools_path, alert: "Please ensure that your rankings are numbers in order and start with '1'"
           end
         end
-      else
-        redirect_to order_choice_schools_path, alert: "Please ensure that your rankings are numbers in order and start with '1'"
       end
     end
   end
