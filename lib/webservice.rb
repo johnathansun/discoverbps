@@ -29,7 +29,8 @@ module Webservice
 
 	def self.get_student_homebased_choices(caseid, schoolyearcontext, clientcode)		
 		endpoint = "#{ENV['WEBAPI_REG_CHOICE_URL']}/StudentSchool/Choices"
-		response =  self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, { SchoolYear: schoolyearcontext, ClientCode: clientcode, Type: clientcode, CaseId: caseid }).body
+		response =  self.postWithHeader("4cwYs4b5STa8ww7uOaxwr+7zPkKgAw3I0B5Jfe8CON0=", endpoint, { SchoolYear: schoolyearcontext, ClientCode: clientcode, Type: clientcode, CaseId: caseid }).body
+
 		
 		MultiJson.load(response, symbolize_keys: true)
 	end
@@ -99,7 +100,7 @@ module Webservice
 		self.extract(response, endpoint, params, extract_from_array, nil)
 	end
 
-	##### HOME SCHOOLS #####
+	##### HOME SCHOOLS ####
 
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/schools.svc/HomeSchools?SchYear=2014&Grade=06&AddressID=68051&IsAwc=true&SiblingSchList=
 
@@ -111,7 +112,6 @@ module Webservice
 		response = self.get(endpoint, params)
 		self.extract(response, endpoint, params, extract_from_array, nil)
 	end
-
 
 	##### ZONE SCHOOLS #####
 
