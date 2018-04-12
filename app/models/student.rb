@@ -101,7 +101,8 @@ class Student < ActiveRecord::Base
   end
 
   def set_home_schools
-    api_schools = Webservice.get_home_schools(self.formatted_grade_level, self.addressid, self.awc_invitation, self.sibling_school_ids).try(:[], :List)
+    api_schools = Webservice.get_home_schools(self.formatted_grade_level, self.addressid, self.awc_invitation, self.sibling_school_ids)
+    # api_schools = Webservice.get_home_schools(self.formatted_grade_level, self.addressid, self.awc_invitation, self.sibling_school_ids).try(:[], :List)
     save_student_schools(api_schools, 'home')
   end
 
@@ -152,7 +153,6 @@ class Student < ActiveRecord::Base
   # this method pulls a list of eligible schools from the GetSchoolChoices API,
   # saves the schools to student_schools, and fetches distance and walk/drive times from the Google Matrix API
   def save_student_schools(api_schools, school_list_type)
-
     # loop through the schools returned from the API, find the matching schools in the db,
     # save the eligibility variables on student_schools, and collect the coordinates for the matrix search, below
 

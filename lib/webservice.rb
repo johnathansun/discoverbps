@@ -105,12 +105,12 @@ module Webservice
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/schools.svc/HomeSchools?SchYear=2014&Grade=06&AddressID=68051&IsAwc=true&SiblingSchList=
 
 	def self.get_home_schools(grade_level, addressid, awc, sibling_ids=[])
-		endpoint = "#{ENV['WEBSERVICE_URL']}/HomeSchools"
+		endpoint = "#{ENV['HOME_SCHOOLS_URL']}/StudentChoice/HomeBased"
 		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
-		params = { schyear: SCHOOL_YEAR, grade: grade_level, addressid: addressid, isawc: awc, siblingschlist: sibling_school_ids }.to_param
-		extract_from_array = false
-		response = self.get(endpoint, params)
-		self.extract(response, endpoint, params, extract_from_array, nil)
+		payload = { SchoolYear: SCHOOL_YEAR, Grade: grade_level, AddressId: addressid, IsAwc: awc, SiblingsList: sibling_school_ids }
+		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, payload).body
+		Rails.logger.info "********************HOME SCHOOLS: #{response}"
+		MultiJson.load(response, symbolize_keys: true)
 	end
 
 	##### ZONE SCHOOLS #####
