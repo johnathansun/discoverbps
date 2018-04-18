@@ -171,14 +171,14 @@ class Student < ActiveRecord::Base
       end
 
       api_schools.each do |api_school|
-        schoolId =(school_list_type == "choice") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
+        # schoolId =(school_list_type == "choice") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
+        schoolId = api_school[:SchoolLocalId]
 
         school = School.where(bps_id: schoolId).first
 
-        if school.present? && (!school_ids.include?(school.id) || school_list_type == "choice")
+        if school.present? && (!school_ids.include?(school.id))
           school_ids << school.id
           school_coordinates += "#{school.latitude},#{school.longitude}|"
-
           StudentSchool.create_from_api_response(self, school, api_school, school_list_type)
         end
       end
@@ -192,7 +192,7 @@ class Student < ActiveRecord::Base
 
         api_schools.each_with_index do |api_school, i|
 	        
-          schoolId =(school_list_type == "choice") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
+          schoolId = api_school[:SchoolLocalId]
           school = School.where(bps_id: schoolId).first
           if school.present?
             walk_time = walk_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
