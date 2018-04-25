@@ -104,11 +104,11 @@ module Webservice
 
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/schools.svc/HomeSchools?SchYear=2014&Grade=06&AddressID=68051&IsAwc=true&SiblingSchList=
 
-	def self.get_home_schools(grade_level, addressid, awc, sibling_ids=[])
-		endpoint = "#{ENV['HOME_SCHOOLS_URL']}/StudentChoice/HomeBased"
+	def self.get_home_schools(grade_level, addressid, sibling_ids=[], clientcode)
+		endpoint = "#{ENV['HOMESCHOOLS_URL']}/StudentSchool/Choices"
 		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
-		payload = { SchoolYear: SCHOOL_YEAR, Grade: grade_level, AddressId: addressid, IsAwc: awc, SiblingsList: sibling_school_ids }
-		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, payload).body
+		payload = { SchoolYear: SCHOOL_YEAR, Grade: grade_level, AddressId: addressid, Type: TYPE, IsAwc: "0", ClientCode: clientcode, siblingsList: sibling_school_ids }
+		response = self.postWithHeader("4cwYs4b5STa8ww7uOaxwr+7zPkKgAw3I0B5Jfe8CON0=", endpoint, payload).body
 		Rails.logger.info "********************HOME SCHOOLS: #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
@@ -307,10 +307,10 @@ module Webservice
 	end
 
 	def self.postWithHeader(headerKey, endpoint, payload)
-		Faraday.new(url: "#{endpoint}").post do |req|
+		Faraday.new(url: "#{endpoint}", request: {timeout: 500}).post do |req|
 		  req.headers["Content-Type"] = "application/json"
 		  req.headers["BpsToken"] = headerKey
-		  req.body = payload.to_json
+			req.body = payload.to_json
 		end
 	end
 

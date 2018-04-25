@@ -17,4 +17,5 @@ REG_TRANSITION_GRADE_LASTNAME_ALL = "Jan 23-27".freeze
 FIRST_DAY_OF_SCHOOL = "Sep 7".freeze
 SCHOOL_YEAR_CONTEXT = "2018-2019".freeze
 SERVICE_CLIENT_CODE = "Discover".freeze
+TYPE= "Discover".freeze
 
