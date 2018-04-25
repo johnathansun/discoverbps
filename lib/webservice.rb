@@ -108,7 +108,7 @@ module Webservice
 		endpoint = "#{ENV['HOMESCHOOLS_URL']}/StudentSchool/Choices"
 		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
 		payload = { SchoolYear: SCHOOL_YEAR, Grade: grade_level, AddressId: addressid, Type: TYPE, IsAwc: "0", ClientCode: clientcode, siblingsList: sibling_school_ids }
-		response = self.postWithHeader("4cwYs4b5STa8ww7uOaxwr+7zPkKgAw3I0B5Jfe8CON0=", endpoint, payload).body
+		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, payload).body
 		Rails.logger.info "********************HOME SCHOOLS: #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
