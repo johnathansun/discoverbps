@@ -28,8 +28,8 @@
 		<!-- Deprecated IEs scripts & stylesheets =================== -->
 		 <!-- Chrome Frame for IE6 and under -->
 			<!--[if lte IE 6 ]>
-				<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-				<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+		<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+		<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
 			<![endif]-->
 
 		<!-- script pour Typekit  =================== -->
@@ -40,6 +40,8 @@
 		<!--[if lte IE 7]><script src="lte-ie7.js"></script><![endif]-->
 		<%= stylesheet_link_tag    "admin", :media => "all" %>
 		<%= javascript_include_tag "admin" %>
+		<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+
 		<%= yield :scripts %>
 
 		<%= csrf_meta_tags %>

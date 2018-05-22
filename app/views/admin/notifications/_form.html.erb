@@ -9,11 +9,16 @@
   </div>
 <% end %>
 
+
 <div class="field">
   <%= f.label :message, "Message" %>
   <br />
-  <%= f.text_area :message, rows: 7, cols: 100 %>
+  <%= f.text_area :message,id: 'editor1', rows: 7, cols: 100 %>
+  <script>
+      CKEDITOR.replace( 'editor1' );
+  </script>
 </div>
+
 
 <div class="field">
   <%= f.label :start_time, "Start Time" %>

@@ -215,7 +215,6 @@ class School < ActiveRecord::Base
 	def open_seats(grade_level, school_year=nil)
 		grade = grade_level.try(:to_s).try(:strip).try(:gsub, /^0/, '').try(:upcase)
 		year = school_year.try(:to_s).try(:strip).try(:gsub, /\-.*/, '').try(:strip)
-
 		if year.present?
 			self.demand_data.where(grade_level: grade, year: year).last.try(:seats_before_round)
 		elsif grade.present?
@@ -229,11 +228,12 @@ class School < ActiveRecord::Base
 	def applicants_per_open_seat(grade_level, school_year=nil)
 		grade = grade_level.try(:to_s).try(:strip).try(:gsub, /^0/, '').try(:upcase)
 		year = school_year.try(:to_s).try(:strip).try(:gsub, /\-.*/, '').try(:strip)
-
-		if year.present?
-			self.demand_data.where(grade_level: grade, year: year).last.try(:applicants_per_open_seat).try(:round, 2)
-		elsif grade.present?
+		if grade.present?
 			self.demand_data.where(grade_level: grade).average(:applicants_per_open_seat).try(:round, 2)
+		elsif year.present?
+			self.demand_data.where(year: year).last.try(:applicants_per_open_seat).try(:round, 2)
+		elsif grade.present? && year.present?
+			self.demand_data.where(grade_level: grade, year: year).last.try(:applicants_per_open_seat).try(:round, 2)
 		else
 			nil
 		end

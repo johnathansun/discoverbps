@@ -14,10 +14,12 @@
           - if flash[:alert].present?
             %h4.alert
               = flash[:alert]
+            = link_to "Back", order_choice_schools_path, id: "back-button"
           - elsif @notifications.present?
             - @notifications.each do |notification|
               %h4.alert
                 = notification.message
+              = link_to "Back", order_choice_schools_path, id: "back-button"
           - else
             %p
               Please use the form below to enter your schools in the order in which you would like to submit. You must rank at least three schools. We recommend you make at least five school choices. Indicate your choices entering 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 etc. with 1 being your first choice school. Use each number only once. When you are ready to submit your list to the school department, please click "Submit" at the bottom of the page.

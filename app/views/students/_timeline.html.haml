@@ -1,42 +1,52 @@
 .timeline
 	.event.W.registration.green_bar
 		%span.desktop
-			= image_tag('point_green_white_open.png', class: 'point')
+			= image_tag('point_green_white_open.png', class: 'point test')
 			%span.light_blue
-				= registration_date_helper(RegistrationDate.where(name: "All Last names").first)
+				= registration_date_helper(RegistrationDate.where(name: "Priority Registration for grades K0, k1, 6, 7 & 9").first)
 				%br/
 			%span.W
-				Registration begins
+				Priority Registration
 				%br/
-				for K, 6 & 9
-			-#%span.tablette
+				for grades K0, K1, 6, 7, & 9 begins
+				%br/
+
+			-#%span.tablet
 				= image_tag('blue_point_arrow.png', class: 'point_arrow')
 
 	.event.last_names.ai.green_bar
 		%span.light_blue
+			= registration_date_helper(RegistrationDate.where(name: "Last Names A-I").first)
 		%br/
 		%span.W
+			Last names A&ndash;I
 
 	.seperator
 
 	.event.last_names.jq.green_bar
 		%span.light_blue
+			= registration_date_helper(RegistrationDate.where(name: "Last Names J-Q").first)
 		%br/
 		%span.W
+			Last names J&ndash;Q
 
 	.seperator
 
 	.event.last_names.rz.green_bar
 		%span.light_blue
+			= registration_date_helper(RegistrationDate.where(name: "Last Names R-Z").first)
 		%br/
 		%span.W
+			Last names R&ndash;Z
 
 	.seperator
 
 	.event.last_names.all.green_bar
 		%span.light_blue
+			= registration_date_helper(RegistrationDate.where(name: "All Last Names").first)
 		%br/
 		%span.W
+			All last names
 
 	.event.blank.light_blue_bar
 
@@ -44,10 +54,10 @@
 		%span.desktop
 			= image_tag('point_green_onBlue.png', class: 'point')
 			%span.light_blue
-				= registration_date_helper(RegistrationDate.where(name: "All Other Grades Registration").first, "start_date_short")
+				= registration_date_helper(RegistrationDate.where(name: "Priority Registration for K2 and all other grades begins").first)
 			%br/
 		%span.W
-			All other grades' registration
+			Priority Registration for K2 and all other grades begins
 
 	.event.dark_blue_bar
 		%span.desktop
@@ -60,7 +70,7 @@
 	.event.last.blue_bar
 		%span.desktop
 			%span.light_blue
-				= registration_date_helper(RegistrationDate.where(name: "First Day of School").first, "start_date_short")
+				= registration_date_helper(RegistrationDate.where(name: "First Day of School").first)
 			= image_tag('point_white_onBlue.png', class: 'point')
 			%br/
 			%span.W
