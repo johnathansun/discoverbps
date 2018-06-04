@@ -105,10 +105,10 @@ class Student < ActiveRecord::Base
     save_student_schools(api_schools, 'home')
   end
 
-  def set_zone_schools
-    api_schools = Webservice.get_zone_schools(self.formatted_grade_level, self.addressid, self.sibling_school_ids).try(:[], :List)
-    save_student_schools(api_schools, 'zone')
-  end
+  # def set_zone_schools
+  #   api_schools = Webservice.get_zone_schools(self.formatted_grade_level, self.addressid, self.sibling_school_ids).try(:[], :List)
+  #   save_student_schools(api_schools, 'zone')
+  # end
 
   def set_ell_schools
     api_schools = Webservice.get_ell_schools(self.formatted_grade_level, self.addressid, self.ell_language)

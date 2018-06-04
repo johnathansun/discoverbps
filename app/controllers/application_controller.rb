@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :enforce_https
   before_filter :set_current_student_from_params
-  helper_method :zone_school_grades
+  # helper_method :zone_school_grades
   helper_method :current_student
   helper_method :current_user_students
 
@@ -28,19 +28,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def zone_school_grades
-  	if Date.today > Date.parse('01-11-2017')
-  		[]
-  	elsif Date.today > Date.parse('01-11-2016')
-  		['5']
-		elsif Date.today > Date.parse('01-11-2015')
-  		['4', '5']
-  	elsif Date.today > Date.parse('01-11-2014')
-  		['3', '4', '5']
-  	elsif Date.today > Date.parse('01-11-2013')
-  		['2', '3', '4', '5', '8']
-  	end
-  end
+  # def zone_school_grades
+  # 	if Date.today > Date.parse('01-11-2017')
+  # 		[]
+  # 	elsif Date.today > Date.parse('01-11-2016')
+  # 		['5']
+		# elsif Date.today > Date.parse('01-11-2015')
+  # 		['4', '5']
+  # 	elsif Date.today > Date.parse('01-11-2014')
+  # 		['3', '4', '5']
+  # 	elsif Date.today > Date.parse('01-11-2013')
+  # 		['2', '3', '4', '5', '8']
+  # 	end
+  # end
 
   def current_student
   	if session[:current_student_id].present?

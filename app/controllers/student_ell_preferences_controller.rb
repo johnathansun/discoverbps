@@ -11,9 +11,9 @@ class StudentEllPreferencesController < ApplicationController
     respond_to do |format|
       if current_student && current_student.update_attributes(params[:student])
 
-        if zone_school_grades.include?(current_student.grade_level)
-          current_student.set_zone_schools
-        end
+        # if zone_school_grades.include?(current_student.grade_level)
+        #   current_student.set_zone_schools
+        # end
 
         unless current_student.ell_language.blank?
           current_student.set_ell_schools
