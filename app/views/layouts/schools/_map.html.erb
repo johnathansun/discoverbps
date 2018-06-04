@@ -221,16 +221,16 @@
 
 
 
-        <% if @zone_schools.present? %>
-          if ($('#zone_schools_tab').length > 0) {
-            google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
-              $.each(cityBoundaries, function (index, feature) {
-                map.data.add(feature);
-                map.data.overrideStyle(feature, {strokeWeight: 3});
-              });
-            });
-          }
-        <% end %>
+        <%# if @zone_schools.present? %>
+          // if ($('#zone_schools_tab').length > 0) {
+          //   google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
+          //     $.each(cityBoundaries, function (index, feature) {
+          //       map.data.add(feature);
+          //       map.data.overrideStyle(feature, {strokeWeight: 3});
+          //     });
+          //   });
+          // }
+        <%# end %>
 
         <% if @ell_schools.present? %>
           if ($('#ell_schools_tab').length > 0) {
@@ -275,15 +275,15 @@
             }
           <% end %>
 
-          <% if @zone_schools.present? %>
-            if ($('#zone_schools_tab').length > 0) {
-              google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
-                $.each(ellBoundary, function (index, feature) {
-                  map.data.remove(feature);
-                });
-              });
-            }
-          <% end %>
+          <%# if @zone_schools.present? %>
+            // if ($('#zone_schools_tab').length > 0) {
+            //   google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
+            //     $.each(ellBoundary, function (index, feature) {
+            //       map.data.remove(feature);
+            //     });
+            //   });
+            // }
+          <%# end %>
 
           <% if @ell_schools.present? %>
             if ($('#ell_schools_tab').length > 0) {
@@ -321,25 +321,25 @@
             });
           <% end %>
 
-          <% if @zone_schools.present? %>
-            if ($('#home_schools_tab').length > 0) {
-              google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
-                $.each(spedBoundary, function (index, feature) {
-                  map.data.remove(feature);
-                });
-              });
-            }
-          <% end %>
+          <%# if @zone_schools.present? %>
+            // if ($('#home_schools_tab').length > 0) {
+            //   google.maps.event.addDomListener(document.getElementById('home_schools_tab'), 'click', function () {
+            //     $.each(spedBoundary, function (index, feature) {
+            //       map.data.remove(feature);
+            //     });
+            //   });
+            // }
+          <%#end %>
 
-          <% if @zone_schools.present? %>
-            if ($('#zone_schools_tab').length > 0) {
-              google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
-                $.each(spedBoundary, function (index, feature) {
-                  map.data.remove(feature);
-                });
-              });
-            }
-          <% end %>
+          <%# if @zone_schools.present? %>
+            // if ($('#zone_schools_tab').length > 0) {
+            //   google.maps.event.addDomListener(document.getElementById('zone_schools_tab'), 'click', function () {
+            //     $.each(spedBoundary, function (index, feature) {
+            //       map.data.remove(feature);
+            //     });
+            //   });
+            // }
+          <%# end %>
 
           <% if @ell_schools.present? %>
             if ($('#ell_schools_tab').length > 0) {

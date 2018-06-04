@@ -17,8 +17,8 @@
         - if @home_schools.present?
           = render partial: 'schools/print/home_schools', locals: {schools: @home_schools}
 
-        - if @zone_schools.present?
-          = render partial: 'schools/print/zone_schools', locals: {schools: @zone_schools}
+        -#- if @zone_schools.present?
+        -#  = render partial: 'schools/print/zone_schools', locals: {schools: @zone_schools}
 
         - if @ell_schools.present?
           = render partial: 'schools/print/ell_schools', locals: {schools: @ell_schools}
