@@ -7,7 +7,7 @@ class Student < ActiveRecord::Base
   has_many :schools, through: :student_schools
   has_many :choice_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'choice']
   has_many :home_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'home']
-  has_many :zone_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'zone']
+  # has_many :zone_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'zone']
   has_many :ell_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'ell']
   has_many :sped_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'sped']
   has_many :starred_schools, class_name: 'StudentSchool', conditions: ['starred = ?', true]
@@ -18,14 +18,14 @@ class Student < ActiveRecord::Base
                     :sibling_school_names, :street_name, :street_number, :neighborhood, :zipcode, :latitude, :longitude,
                     :addressid, :user_id, :preference_ids, :school_ids, :sped_needs, :ell_language, :awc_invitation,
                     :schools_last_updated_at, :x_coordinate, :y_coordinate, :address_verified, :geo_code, :preferences_count,
-                    :home_schools_json, :zone_schools_json, :ell_schools_json, :sped_schools_json, :favorite, :step,
+                    :home_schools_json, :ell_schools_json, :sped_schools_json, :favorite, :step,
                     :ell_cluster, :sped_cluster, :zone, :token, :session_token, :student_id, :address_id, :ranked, :ranked_at,
                     :parent_name, :choice_schools_json
 
   serialize :sibling_school_names
   serialize :sibling_school_ids
   serialize :home_schools_json
-  serialize :zone_schools_json
+  # serialize :zone_schools_json
   serialize :ell_schools_json
   serialize :sped_schools_json
   serialize :choice_schools_json

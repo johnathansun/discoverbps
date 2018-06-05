@@ -100,12 +100,12 @@ class SchoolsController < ApplicationController
           @home_schools = current_student.home_schools.order(:walk_distance)
         end
 
-        @zone_schools = current_student.zone_schools.order(:distance)
+        # @zone_schools = current_student.zone_schools.order(:distance)
         @ell_schools = current_student.ell_schools.order(:distance)
         @sped_schools = current_student.sped_schools.order(:distance)
       else
         @home_schools = nil
-        @zone_schools = nil
+        # @zone_schools = nil
         @ell_schools = nil
         @sped_schools = nil
       end      
@@ -158,10 +158,10 @@ class SchoolsController < ApplicationController
           csv_row(@home_schools, csv)
         end
 
-        if @zone_schools.present?
-          csv << ['ZONE-BASED SCHOOLS']
-          csv_row(@zone_schools, csv)
-        end
+        # if @zone_schools.present?
+        #   csv << ['ZONE-BASED SCHOOLS']
+        #   csv_row(@zone_schools, csv)
+        # end
 
         if @ell_schools.present?
           csv << ['ELL SCHOOLS']
