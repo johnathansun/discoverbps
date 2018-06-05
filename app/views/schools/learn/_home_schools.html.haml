@@ -1,13 +1,6 @@
 %div{id: 'home_schools_list', class: "schools_list #{(params[:list_type] == 'ell' || params[:list_type] == 'sped' || params[:list_type] == 'zone') ? 'hidden' : ''}"}
   - if @home_schools.present?
     %div.light{ style: "margin: 0 3em 1em 0;" }
-      -#- if zone_school_grades.include?(current_student.grade_level)
-        The grade you selected
-        (#{current_student.formatted_grade_level_name})
-        is not guaranteed a home-based assignment. As such, if you are a new-to-Boston Public Schools applicant and an assignment from the home-based list below cannot be made, an assignment to a school in the former zone structure may be necessary. Use the Zone-based tab to see those results.
-        %a{href: '#', target: '_blank'}
-          Learn more
-      -#- else
       Below is a list of your Home-Based schools.
       To see more information on each school, please click the 'i' icon.
       You can also click the star icon to highlight your favorites.

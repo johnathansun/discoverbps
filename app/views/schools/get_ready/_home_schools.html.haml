@@ -101,10 +101,6 @@
 
                 -# .box.line.eligibility
                   .first_block.middle
-                    - if params[:action] == 'zone_schools'
-                      %span.middle.sortable_eligibility
-                        Zone
-                    - else
                       %span.middle.sortable_eligibility
                         =raw eligibility_helper(spacer_helper(student_school.eligibility))
 

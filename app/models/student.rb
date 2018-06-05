@@ -7,7 +7,6 @@ class Student < ActiveRecord::Base
   has_many :schools, through: :student_schools
   has_many :choice_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'choice']
   has_many :home_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'home']
-  # has_many :zone_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'zone']
   has_many :ell_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'ell']
   has_many :sped_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'sped']
   has_many :starred_schools, class_name: 'StudentSchool', conditions: ['starred = ?', true]
@@ -25,7 +24,6 @@ class Student < ActiveRecord::Base
   serialize :sibling_school_names
   serialize :sibling_school_ids
   serialize :home_schools_json
-  # serialize :zone_schools_json
   serialize :ell_schools_json
   serialize :sped_schools_json
   serialize :choice_schools_json
@@ -104,11 +102,6 @@ class Student < ActiveRecord::Base
     api_schools = Webservice.get_home_schools(self.formatted_grade_level, self.addressid, self.sibling_school_ids, SERVICE_CLIENT_CODE)
     save_student_schools(api_schools, 'home')
   end
-
-  # def set_zone_schools
-  #   api_schools = Webservice.get_zone_schools(self.formatted_grade_level, self.addressid, self.sibling_school_ids).try(:[], :List)
-  #   save_student_schools(api_schools, 'zone')
-  # end
 
   def set_ell_schools
     api_schools = Webservice.get_ell_schools(self.formatted_grade_level, self.addressid, self.ell_language)

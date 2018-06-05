@@ -113,20 +113,6 @@ module Webservice
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
-	##### ZONE SCHOOLS #####
-
-	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10Staging/schools.svc/GetSchoolInterestList?SchoolYear=2014-2015&Grade=03&ZipCode=02124&Geo=060&X=774444.562683105&Y=2961259.5579834&SiblingSchList=
-	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/ZoneSchools?SchYear=2014&Grade=07&SiblingSchList=&AddressID=68051
-
-	# def self.get_zone_schools(grade_level, addressid, sibling_ids=[])
-	# 	endpoint = "#{ENV['WEBSERVICE_URL']}/ZoneSchools"
-	# 	sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
-	# 	params = { schyear: SCHOOL_YEAR, grade: grade_level, addressid: addressid, siblingschlist: sibling_school_ids }.to_param
-	# 	extract_from_array = false
-	# 	response = self.get(endpoint, params)
-	# 	self.extract(response, endpoint, params, extract_from_array, nil)
-	# end
-
 	##### ELL SCHOOLS #####
 
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/ELLList?schyear=2014&addressID=68051&gradeLevel=07

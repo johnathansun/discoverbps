@@ -45,7 +45,6 @@ DiscoverBPS::Application.routes.draw do
 
   resources :schools do
     get 'home', on: :collection
-    # get 'zone_schools', on: :collection
     get 'print_lists', on: :collection
     get 'print', on: :member
     get 'compare', on: :collection
