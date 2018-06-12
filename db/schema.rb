@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161220135052) do
+ActiveRecord::Schema.define(:version => 20180609155620) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -280,7 +280,6 @@ ActiveRecord::Schema.define(:version => 20161220135052) do
     t.boolean  "awc_invitation",          :default => false
     t.string   "addressid"
     t.text     "home_schools_json"
-    t.text     "zone_schools_json"
     t.text     "ell_schools_json"
     t.text     "sped_schools_json"
     t.integer  "step",                    :default => 1
@@ -297,7 +296,6 @@ ActiveRecord::Schema.define(:version => 20161220135052) do
     t.datetime "ranked_at"
     t.string   "parent_name"
     t.text     "choice_schools_json"
-    t.string   "search_address"
     t.string   "student_caseid"
   end
 
