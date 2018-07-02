@@ -115,16 +115,30 @@ class ChoiceSchoolsController < ApplicationController
       redirect_to order_choice_schools_path, alert: "Please rank three or more schools and then submit your list"
     else
       rankings = params[:schools].values.select {|x| x.present?}
+
       properly_formatted = rankings.map {|x| x.try(:to_i)}.sort == (rankings.map {|x| x.try(:to_i)}.sort[0]..rankings.map {|x| x.try(:to_i)}.sort[-1]).to_a rescue false
       isRankings_Integer = rankings.all? {|i|i.to_i > 0 }
-      if properly_formatted && isRankings_Integer
-        response = Webservice.get_student_homebased_choices(session[:caseid], SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE)
-        params[:schools].each do |id, rank|
-          if rank.present?
-            school = StudentSchool.find(id)
-            if response.select{|key| key[:SchoolEligibility].include? "Student Sch"}.present?
-              response.select{|key| key[:SchoolEligibility].include? "Student Sch"}.each do |value|
-                if value[:SchoolLocalId].present? && value[:SchoolLocalId] == id || params[:schools].values.reject(&:empty?).count >= 3
+      duplicate_rankings = params[:schools].values.detect{ |e| params[:schools].values.count(e) > 1 }.present?
+      if duplicate_rankings
+        redirect_to order_choice_schools_path, alert: "Duplicate rankings are not allowed!"
+      else
+        if properly_formatted && isRankings_Integer
+          response = Webservice.get_student_homebased_choices(session[:caseid], SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE)
+          params[:schools].each do |id, rank|
+            if rank.present?
+              school = StudentSchool.find(id)
+              if response.select{|key| key[:SchoolEligibility].include? "Student Sch"}.present?
+                response.select{|key| key[:SchoolEligibility].include? "Student Sch"}.each do |value|
+                  if value[:SchoolLocalId].present? && value[:SchoolLocalId] == id || params[:schools].values.reject(&:empty?).count >= 3
+                    school.update_column(:choice_rank, rank)
+                    redirect_to summary_choice_schools_path and return
+                  else
+                    school.update_column(:choice_rank, rank)
+                    redirect_to order_choice_schools_path, alert: "Because you haven't selected your students current school please rank 3 schools" and return
+                  end
+                end
+              else
+                if params[:schools].values.reject(&:empty?).count >= 3
                   school.update_column(:choice_rank, rank)
                   redirect_to summary_choice_schools_path and return
                 else
@@ -133,16 +147,8 @@ class ChoiceSchoolsController < ApplicationController
                 end
               end
             else
-              if params[:schools].values.reject(&:empty?).count >= 3
-                school.update_column(:choice_rank, rank)
-                redirect_to summary_choice_schools_path and return
-              else
-                school.update_column(:choice_rank, rank)
-                redirect_to order_choice_schools_path, alert: "Because you haven't selected your students current school please rank 3 schools" and return
-              end
+              redirect_to order_choice_schools_path, alert: "Please ensure that your rankings are numbers in order and start with '1'"
             end
-          else
-            redirect_to order_choice_schools_path, alert: "Please ensure that your rankings are numbers in order and start with '1'"
           end
         end
       end
