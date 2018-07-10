@@ -105,12 +105,26 @@ module Webservice
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/schools.svc/HomeSchools?SchYear=2014&Grade=06&AddressID=68051&IsAwc=true&SiblingSchList=
 
 	def self.get_home_schools(grade_level, addressid, sibling_ids=[], clientcode)
-		endpoint = "https://api.mybps.org/BPSRegistrationService/api/StudentSchool/Choices"
+		endpoint = "#{ENV['HOMESCHOOLS_URL']}/StudentSchool/Choices"
 		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
 		payload = { SchoolYear: SCHOOL_YEAR, Grade: grade_level, AddressId: addressid, Type: TYPE, IsAwc: "0", ClientCode: clientcode, siblingsList: sibling_school_ids }
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, payload).body
 		Rails.logger.info "********************HOME SCHOOLS: #{response}"
 		MultiJson.load(response, symbolize_keys: true)
+	end
+
+	##### ZONE SCHOOLS #####
+
+	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10Staging/schools.svc/GetSchoolInterestList?SchoolYear=2014-2015&Grade=03&ZipCode=02124&Geo=060&X=774444.562683105&Y=2961259.5579834&SiblingSchList=
+	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/ZoneSchools?SchYear=2014&Grade=07&SiblingSchList=&AddressID=68051
+
+	def self.get_zone_schools(grade_level, addressid, sibling_ids=[])
+		endpoint = "#{ENV['WEBSERVICE_URL']}/ZoneSchools"
+		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
+		params = { schyear: SCHOOL_YEAR, grade: grade_level, addressid: addressid, siblingschlist: sibling_school_ids }.to_param
+		extract_from_array = false
+		response = self.get(endpoint, params)
+		self.extract(response, endpoint, params, extract_from_array, nil)
 	end
 
 	##### ELL SCHOOLS #####
