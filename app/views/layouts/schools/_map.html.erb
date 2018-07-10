@@ -425,10 +425,10 @@
       <% end %>
 
       // Display the appropriate markers on page load
-      <%# unless (params[:list_type] == 'zone' || params[:list_type] == 'ell' || params[:list_type] == 'sped') %>
+      <% unless (params[:list_type] == 'zone' || params[:list_type] == 'ell' || params[:list_type] == 'sped') %>
         clearMarkers();
         setMarkers(homeMarkers);
-      <%# end %>
+      <% end %>
 
       // Display the Home Schools on click
 
