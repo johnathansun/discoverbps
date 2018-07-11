@@ -345,15 +345,16 @@
             }
         }
 
-        var markerIcon = {
-            url: '/assets/map_pins/DBPS_MapPins_Large_Blue_Blank.png',
-            size: new google.maps.Size(19, 29),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(9, 25),
-            clickable: true
-        };
+      var markerIcon = {
+        url: '/assets/map_pins/DBPS_MapPins_Large_Blue_Blank.png',
+        size: new google.maps.Size(19, 29),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(9, 25),
+        clickable: true
+      };
 
         // Display the home schools
+
 
         <% current_student.home_schools.rank(:sort_order).each_with_index do |student_school, i| %>
         <% if student_school.school.latitude.present? && student_school.school.longitude.present? && student_school.school.latitude !=0 && student_school.school.longitude !=0 %>
