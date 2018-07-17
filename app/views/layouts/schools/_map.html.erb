@@ -356,10 +356,10 @@
         // Display the home schools
 
 
-        <% @home_schools.rank(:sort_order).each_with_index do |student_school, i| %>
+        <% current_student.home_schools.rank(:sort_order).each_with_index do |student_school, i| %>
+        console.log("HomeSchools: <%= student_school.school.try(:latitude) %>", "<%= student_school.school.try(:longitude) %>");
         <% if student_school.school.latitude.present? && student_school.school.longitude.present? && student_school.school.latitude !=0 && student_school.school.longitude !=0 %>
         var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
-        console.log("HomeSchools: <%= student_school.school.latitude %>", "<%= student_school.school.longitude %>");
         latlngbounds.extend(coordinates);
 
         var marker = new google.maps.Marker({
