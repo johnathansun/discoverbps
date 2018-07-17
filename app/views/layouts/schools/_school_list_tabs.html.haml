@@ -7,13 +7,6 @@
           Home-based
           %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
-    - if @zone_schools.present?
-      %div{id: 'zone_schools_tab', class: "school_list_tab #{params[:list_type] == 'zone' ? 'active' : '' }"}
-        = link_to schools_path(list_type: 'zone') do
-          %span.name
-            Zone-based
-            %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
-
     - if current_student.ell_language.present?
       %div{id: 'ell_schools_tab', class: "school_list_tab #{params[:list_type] == 'ell' ? 'active' : '' }"}
         = link_to schools_path(list_type: 'ell') do
@@ -39,15 +32,7 @@
         $('.schools_list').hide();
         $('#home_schools_list').show();
       });
-      $('#zone_schools_tab').click(function() {
-        event.preventDefault();
-        $('.school_list_tab').removeClass("active");
-        $('#zone_schools_tab').addClass("active");
-        $('#preferences').show();
-        $('#your_rank_row').hide();
-        $('.schools_list').hide();
-        $('#zone_schools_list').show();
-      });
+
       $('#ell_schools_tab').click(function() {
         event.preventDefault();
         $('.school_list_tab').removeClass("active");
