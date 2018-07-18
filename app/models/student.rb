@@ -114,7 +114,6 @@ class Student < ActiveRecord::Base
   end
 
   def save_from_api_response(session_id, session_token, student_hash, caseid)
-    p "Schools Lat|Long: #{student_hash[:Latitude]}- #{student_hash[:Longitude]}"
     self.session_id = session_id
     self.session_token = session_token
     self.student_id = student_hash[:StudentID].try(:strip)
@@ -181,11 +180,11 @@ class Student < ActiveRecord::Base
         school_coordinates.gsub!(/\|$/,'')
         walk_matrix = Google.walk_times(latitude, longitude, school_coordinates)
         drive_matrix = Google.drive_times(latitude, longitude, school_coordinates)
-
         api_schools.each_with_index do |api_school, i|
 	        
           schoolId = api_school[:SchoolLocalId]
           school = School.where(bps_id: schoolId).first
+          school.update_attributes(latitude: api_school[:Latitude], longitude: api_school[:Longitude])
           if school.present?
             walk_time = walk_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
             drive_time = drive_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
