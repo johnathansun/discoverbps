@@ -22,11 +22,8 @@ class StudentsController < ApplicationController
         params[:student][:sibling_school_ids] = School.where("name IN (?)", params[:student][:sibling_school_names].try(:compact).try(:reject, &:empty?)).collect {|x| x.bps_id}.uniq
 
         api_response = Webservice.get_address_matches(street_number, street_name, zipcode, SERVICE_CLIENT_CODE)
-
-        # @addresses = api_response.try(:[], :List)
-        # @errors = api_response.try(:[], :Error).try(:[], 0)
         @addresses = api_response
-        @errors = api_response[0][:Street].blank?
+        @errors = api_response.blank? || api_response[0].blank?
       end
     end
 
@@ -70,7 +67,6 @@ class StudentsController < ApplicationController
     zipcode       = params[:student].try(:[], :zipcode)
 
     api_response = Webservice.get_address_matches(street_number, street_name, zipcode, SERVICE_CLIENT_CODE)
-    binding.pry
     @addresses = api_response.try(:[], :List)
     @errors = api_response.try(:[], :Error).try(:[], 0)
 
