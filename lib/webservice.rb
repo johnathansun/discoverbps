@@ -94,10 +94,10 @@ module Webservice
 
 	def self.get_address_matches(street_number, street_name, zipcode, clientcode)
 		endpoint = "#{ENV['WEBSERVICE_URL']}/AddressMatches"
-		params = { streetnumber: street_number, street: street_name, zipcode: zipcode, ClientCode: clientcode }
+		params = { streetnumber: street_number, street: street_name, zipcode: zipcode }.to_param
 		extract_from_array = false
-		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, params).body
-		MultiJson.load(response, symbolize_keys: true)
+		response = self.get(endpoint, params)
+		self.extract(response, endpoint, params, extract_from_array, nil)
 	end
 
 
