@@ -114,7 +114,6 @@ class Student < ActiveRecord::Base
   end
 
   def save_from_api_response(session_id, session_token, student_hash, caseid)
-    sleep 3
     self.session_id = session_id
     self.session_token = session_token
     self.student_id = student_hash[:StudentID].try(:strip)

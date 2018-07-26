@@ -92,15 +92,14 @@ module Webservice
 	# :SectionOfCity=>"Boston", :Street=>"Court St", :StreetNum=>"26",
 	# :X=>"775356.657775879", :Y=>"2956018.47106934", :ZipCode=>"02108", :Zone=>"N"}]}
 
-	def self.get_address_matches(street_number, street_name, zipcode, clientcode)
-		endpoint = "https://api.mybps.org/BPSRegistrationService/api/Students/AddressMatches"
-		params = { streetnumber: street_number, street: street_name, zipcode: zipcode, ClientCode: clientcode }
+	def self.get_address_matches(street_number, street_name, zipcode)
+		endpoint = "#{ENV['WEBSERVICE_URL']}/AddressMatches"
+		params = { streetnumber: street_number, street: street_name, zipcode: zipcode }.to_param
 		extract_from_array = false
-		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, params).body
-		Rails.logger.info "*********ADDRESS MATCHES ENDPOINT: #{endpoint}"
-		Rails.logger.info "*********ADDRESS MATCHES RESPONSE: #{response}"
-		MultiJson.load(response, symbolize_keys: true)
+		response = self.get(endpoint, params)
+		self.extract(response, endpoint, params, extract_from_array, nil)
 	end
+
 
 
 	##### HOME SCHOOLS ####
@@ -114,7 +113,6 @@ module Webservice
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, payload).body
 		Rails.logger.info "********************HOME SCHOOLS ENDPOINT: #{endpoint}"
 		Rails.logger.info "********************HOME SCHOOLS RESPONSE: #{response}"
-		sleep 2
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
@@ -315,7 +313,7 @@ module Webservice
 	def self.postWithHeader(headerKey, endpoint, payload)
 		Faraday.new(url: "#{endpoint}").post do |req|
 		  req.headers["Content-Type"] = "application/json"
-			req.options[:timeout] = 5000
+			req.options[:timeout] = 500
 		  req.headers["BpsToken"] = headerKey
 			req.body = payload.to_json
 		end

@@ -2,8 +2,8 @@
 
 	- if index == 0
 		= radio_button_tag :address, address.to_json, true
-		#{address[:Streetno]} #{address[:Street].try(:titleize)}, #{address[:City]} #{address[:Zip]}
+		#{address[:StreetNum]} #{address[:Street].try(:titleize)}, #{address[:SectionOfCity]} #{address[:ZipCode]}
 
 	- else
 		= radio_button_tag :address, address.to_json
-		#{address[:Streetno]} #{address[:Street].try(:titleize)}, #{address[:City]} #{address[:Zip]}
+		#{address[:StreetNum]} #{address[:Street].try(:titleize)}, #{address[:SectionOfCity]} #{address[:ZipCode]}
