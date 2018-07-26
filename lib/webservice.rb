@@ -97,6 +97,8 @@ module Webservice
 		params = { streetnumber: street_number, street: street_name, zipcode: zipcode, ClientCode: clientcode }
 		extract_from_array = false
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, params).body
+		Rails.logger.info "*********ADDRESS MATCHES ENDPOINT: #{endpoint}"
+		Rails.logger.info "*********ADDRESS MATCHES RESPONSE: #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
