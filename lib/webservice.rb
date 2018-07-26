@@ -314,7 +314,6 @@ module Webservice
 	def self.postWithHeader(headerKey, endpoint, payload)
 		Faraday.new(url: "#{endpoint}").post do |req|
 		  req.headers["Content-Type"] = "application/json"
-			req.options[:timeout] = 500
 		  req.headers["BpsToken"] = headerKey
 			req.body = payload.to_json
 		end
