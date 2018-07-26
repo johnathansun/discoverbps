@@ -93,7 +93,7 @@ module Webservice
 	# :X=>"775356.657775879", :Y=>"2956018.47106934", :ZipCode=>"02108", :Zone=>"N"}]}
 
 	def self.get_address_matches(street_number, street_name, zipcode, clientcode)
-		endpoint = "#{ENV['WEBSERVICE_URL']}/AddressMatches"
+		endpoint = "https://api.mybps.org/BPSRegistrationService/api/Students/AddressMatches"
 		params = { streetnumber: street_number, street: street_name, zipcode: zipcode, ClientCode: clientcode }
 		extract_from_array = false
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, params).body
@@ -108,13 +108,13 @@ module Webservice
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/schools.svc/HomeSchools?SchYear=2014&Grade=06&AddressID=68051&IsAwc=true&SiblingSchList=
 
 	def self.get_home_schools(grade_level, addressid, sibling_ids=[], clientcode)
-		endpoint = "#{ENV['HOMESCHOOLS_URL']}/StudentSchool/Choices"
+		endpoint = "https://api.mybps.org/BPSRegistrationService/api/StudentSchool/Choices"
 		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
 		payload = { SchoolYear: SCHOOL_YEAR, Grade: grade_level, AddressId: addressid, Type: TYPE, IsAwc: "0", ClientCode: clientcode, siblingsList: sibling_school_ids }
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, payload).body
 		Rails.logger.info "********************HOME SCHOOLS ENDPOINT: #{endpoint}"
 		Rails.logger.info "********************HOME SCHOOLS RESPONSE: #{response}"
-		sleep 5
+		sleep 2
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
@@ -315,7 +315,7 @@ module Webservice
 	def self.postWithHeader(headerKey, endpoint, payload)
 		Faraday.new(url: "#{endpoint}").post do |req|
 		  req.headers["Content-Type"] = "application/json"
-			req.options[:timeout] = 3
+			req.options[:timeout] = 5
 		  req.headers["BpsToken"] = headerKey
 			req.body = payload.to_json
 		end
