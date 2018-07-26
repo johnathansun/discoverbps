@@ -114,6 +114,7 @@ module Webservice
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, payload).body
 		Rails.logger.info "********************HOME SCHOOLS ENDPOINT: #{endpoint}"
 		Rails.logger.info "********************HOME SCHOOLS RESPONSE: #{response}"
+		sleep 5
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
@@ -314,6 +315,7 @@ module Webservice
 	def self.postWithHeader(headerKey, endpoint, payload)
 		Faraday.new(url: "#{endpoint}").post do |req|
 		  req.headers["Content-Type"] = "application/json"
+			req.options[:timeout] = 3
 		  req.headers["BpsToken"] = headerKey
 			req.body = payload.to_json
 		end

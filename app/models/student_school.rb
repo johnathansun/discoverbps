@@ -10,6 +10,7 @@ class StudentSchool < ActiveRecord::Base
                   :school_name, :program_code, :program_code_description, :special_admissions,:walk_distance,:dese_tier, :sort_order
 
   def self.create_from_api_response(student, school, school_hash, school_list_type)
+    sleep 5
     Rails.logger.info "******************* #{school_hash}"
 
     self.create!(student_id: student.id,
