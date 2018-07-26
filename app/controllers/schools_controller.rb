@@ -15,7 +15,7 @@ class SchoolsController < ApplicationController
         redirect_to root_url
       else
         @home_school_ids = @home_schools.collect {|x| sql_helper_group_schoolId(x.school.bps_id, current_student.grade_level)}.join(',')
-        p "Home school ids ::::::::::::::::#{@home_schools}"
+        p "Home school ids ::::::::::::::::#{@home_schools_ids}"
         respond_to do |format|
           format.html
           format.csv do
