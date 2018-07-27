@@ -67,17 +67,17 @@
                   %span{id: "#{current_student.id}_#{school.bps_id}_icons", class: "middle"}
                     - tag_counter = 0
                     - PreferenceCategory.active(current_student.grade_level).each do |category|
-                    - if category.active_preferences(current_student.grade_level).length > 0
-                      - category.active_preferences(current_student.grade_level).each do |preference|
-                        - if school.has_preference?(preference)
-                          - if current_student.preference_ids.try(:include?, preference.id)
-                            %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: "['#{preference.name}']"}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", title: "#{preference.name}"}
-                            - tag_counter += 1
-                          - else
-                            %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: "['#{preference.name}']"}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", style: "display: none;", title: "#{preference.name}"}
+                      - if category.active_preferences(current_student.grade_level).length > 0
+                        - category.active_preferences(current_student.grade_level).each do |preference|
+                          - if school.has_preference?(preference)
+                            - if current_student.preference_ids.try(:include?, preference.id)
+                              %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: "['#{preference.name}']"}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", title: "#{preference.name}"}
+                              - tag_counter += 1
+                            - else
+                              %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: "['#{preference.name}']"}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", style: "display: none;", title: "#{preference.name}"}
 
-                    %span{id: "#{current_student.id}_#{school.bps_id}_icon_count", class: "sortable_fit fit_icon_count", style: "visibility: hidden;"}
-                      = tag_counter
+                      %span{id: "#{current_student.id}_#{school.bps_id}_icon_count", class: "sortable_fit fit_icon_count", style: "visibility: hidden;"}
+                        = tag_counter
 
 
                 .box.line.getting_there
