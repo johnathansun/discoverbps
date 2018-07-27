@@ -138,8 +138,9 @@ class School < ActiveRecord::Base
 			return false
 		else
 			@res = self.send(table)
-			p "Grades Offered ::::::::::::--------::::::::::::::#{@res[:GradesOffered]}"
+			p "Grades Offered ::::::::::::--------::::::::::::::#{@res.try(:[], key.to_sym)}"
 			p "Grades Offered value ::::::::::::--------::::::::::::::#{value}"
+			p "Response table:::::::::::::::::::::------ #{@res}"
 			#if self.send(table).present? && self.send(table).try(:[], key.to_sym).present? && self.send(table).try(:[], key.to_sym).try(:to_s) == value
 			if @res[:GradesOffered].present? && @res[:GradesOffered].to_s == value.to_s
 				return true
