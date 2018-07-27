@@ -165,7 +165,6 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
-    Rails.logger.info "**GET BASIC INFO** #{response}"
 		self.extract(response, endpoint, params, extract_from_array, bps_id, "basic_info")
 	end
 
