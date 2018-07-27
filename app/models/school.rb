@@ -141,10 +141,11 @@ class School < ActiveRecord::Base
 		if table.blank? || key.blank? || value.blank?
 			return false
 		else
-			if self.send(table).present? && some_method(self.send(table), ->(k,_) { k[/Grades/]}) == value
-				return true
-			else
-				return false
+			if self.send(table).present?
+				a = some_method(self.send(table), ->(k,_) { k[/Grades/]})
+				if a.eql? value
+					return true
+				end
 			end
 		end
 	end
