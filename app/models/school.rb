@@ -137,7 +137,9 @@ class School < ActiveRecord::Base
 		if table.blank? || key.blank? || value.blank?
 			return false
 		else
-			# @res = self.send(table)
+			@res = self.send(table)
+			p "Returned Array #{@res.is_a? Array}"
+			p "Returned Hash #{@res.is_a? Hash}"
 			# p "Grades Offered ::::::::::::--------::::::::::::::#{@res.try(:[], key.to_sym)}"
 			# p "Grades Offered value ::::::::::::--------::::::::::::::#{value}"
 			# p "Response table:::::::::::::::::::::------ #{@res}"q
