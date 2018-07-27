@@ -41,7 +41,7 @@
                 Quality Tier
 
         %ul#sortable
-          - @home_schools.each do |student_school|
+          - @home_schools.each_with_index do |student_school, i|
             - school = student_school.school
             %li{id: "#{current_student.id}_#{school.bps_id}", class: "list_row home_school clearfix"}
               %div{id: "#{current_student.id}_#{school.bps_id}_row", class: "li_frame"}
@@ -66,14 +66,14 @@
                 .box.line.your_fit_icon
                   %span{id: "#{current_student.id}_#{school.bps_id}_icons", class: "middle"}
                     - tag_counter = 0
-                    -#- PreferenceCategory.active(current_student.grade_level).each do |category|
-                    -#  - category.active_preferences(current_student.grade_level).each do |preference|
-                    -#    - if school.has_preference?(preference)
-                    -#      - if current_student.preference_ids.try(:include?, preference.id)
-                    -#        %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: "['#{preference.name}']"}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", title: "#{preference.name}"}
-                    -#        - tag_counter += 1
-                    -#      - else
-                    -#        %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: "['#{preference.name}']"}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", style: "display: none;", title: "#{preference.name}"}
+                    - PreferenceCategory.active(current_student.grade_level).each do |category|
+                      - category.active_preferences(current_student.grade_level).each do |preference|
+                        - if school.has_preference?(preference)
+                          - if current_student.preference_ids.try(:include?, preference.id)
+                            %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: "['#{preference.name}']"}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", title: "#{preference.name}"}
+                            - tag_counter += 1
+                          - else
+                            %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: "['#{preference.name}']"}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", style: "display: none;", title: "#{preference.name}"}
 
                     %span{id: "#{current_student.id}_#{school.bps_id}_icon_count", class: "sortable_fit fit_icon_count", style: "visibility: hidden;"}
                       = tag_counter
@@ -102,10 +102,10 @@
 
                 .box.line.school_hours
                   %span.middle.sortable_hours
-                    -#- if school.api_hours.try(:[], :Description).present?
-                    -#  = truncate(school.api_hours.try(:[], :Description), length: 18)
-                    -#- else
-                    -#  &nbsp;
+                    - if school.api_hours.try(:[], :Description).present?
+                      = truncate(school.api_hours.try(:[], :Description), length: 18)
+                    - else
+                      &nbsp;
 
                 .box.line.eligibility
                   .first_block.middle
@@ -118,7 +118,7 @@
                 .school_descrip
                   .right_side
 
-                    -#= render partial: 'schools/learn/school_details', locals: {school: school, student_school: student_school}
+                    = render partial: 'schools/learn/school_details', locals: {school: school, student_school: student_school}
 
                     .clr
 
