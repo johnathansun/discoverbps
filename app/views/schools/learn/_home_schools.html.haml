@@ -41,7 +41,7 @@
                 Quality Tier
 
         %ul#sortable
-          - @home_schools.each_with_index do |student_school, i|
+          - @home_schools.each do |student_school|
             - school = student_school.school
             %li{id: "#{current_student.id}_#{school.bps_id}", class: "list_row home_school clearfix"}
               %div{id: "#{current_student.id}_#{school.bps_id}_row", class: "li_frame"}
@@ -67,6 +67,7 @@
                   %span{id: "#{current_student.id}_#{school.bps_id}_icons", class: "middle"}
                     - tag_counter = 0
                     - PreferenceCategory.active(current_student.grade_level).each do |category|
+                    - if category.active_preferences(current_student.grade_level).length > 0
                       - category.active_preferences(current_student.grade_level).each do |preference|
                         - if school.has_preference?(preference)
                           - if current_student.preference_ids.try(:include?, preference.id)
