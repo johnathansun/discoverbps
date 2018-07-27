@@ -92,12 +92,14 @@ module Webservice
 	# :SectionOfCity=>"Boston", :Street=>"Court St", :StreetNum=>"26",
 	# :X=>"775356.657775879", :Y=>"2956018.47106934", :ZipCode=>"02108", :Zone=>"N"}]}
 
-	def self.get_address_matches(street_number, street_name, zipcode)
-		endpoint = "#{ENV['WEBSERVICE_URL']}/AddressMatches"
-		params = { streetnumber: street_number, street: street_name, zipcode: zipcode }.to_param
+	def self.get_address_matches(street_number, street_name, zipcode, clientcode)
+		endpoint = "https://api.mybps.org/BPSRegistrationService/api/Students/AddressMatches"
+		params = { streetnumber: street_number, street: street_name, zipcode: zipcode, ClientCode: clientcode }
 		extract_from_array = false
-		response = self.get(endpoint, params)
-		self.extract(response, endpoint, params, extract_from_array, nil)
+		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, params).body
+		Rails.logger.info "********************ADDRESS MATCHES ENDPOINT: #{endpoint}"
+		Rails.logger.info "********************ADDRESS MATCHES RESPONSE: #{response}"
+		MultiJson.load(response, symbolize_keys: true)
 	end
 
 
