@@ -21,10 +21,9 @@ class StudentsController < ApplicationController
 
         params[:student][:sibling_school_ids] = School.where("name IN (?)", params[:student][:sibling_school_names].try(:compact).try(:reject, &:empty?)).collect {|x| x.bps_id}.uniq
 
-        api_response = Webservice.get_address_matches(street_number, street_name, zipcode,SERVICE_CLIENT_CODE)
+        api_response = Webservice.get_address_matches(street_number, street_name, zipcode, SERVICE_CLIENT_CODE)
         @addresses = api_response
-        @errors = api_response.blank?
-
+        @errors = api_response.blank? || api_response[0].blank?
       end
     end
 
@@ -36,7 +35,7 @@ class StudentsController < ApplicationController
         format.html { redirect_to new_student_address_path }
       else
         if api_response.present?
-          if @errors
+          if @errors.present?
             @error_message = @errors
             flash[:alert] = "There were problems with your search. Please enter the required fields and try again."
           else
@@ -67,9 +66,9 @@ class StudentsController < ApplicationController
     street_name   = params[:student].try(:[], :street_name)
     zipcode       = params[:student].try(:[], :zipcode)
 
-    api_response = Webservice.get_address_matches(street_number, street_name, zipcode,SERVICE_CLIENT_CODE)
-    @addresses = api_response.present
-    @errors = api_response.blank?
+    api_response = Webservice.get_address_matches(street_number, street_name, zipcode, SERVICE_CLIENT_CODE)
+    @addresses = api_response
+    @errors = api_response.blank? || api_response[0].blank?
 
     respond_to do |format|
       if @addresses.present? && @student.update_attributes(params[:student])
