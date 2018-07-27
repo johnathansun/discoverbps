@@ -103,20 +103,19 @@
 			Surround Care
 
 		%p.descrip.light
-			- p "#{school.api_surround_care.is_a? Hash}"
-			- if school.api_surround_care.is_a? Hash && school.api_surround_care.try(:[], :BeforeSchPrograms).present?
+			- if school.api_surround_care.present? && school.api_surround_care.is_a?(Hash) && school.api_surround_care.try(:[], :BeforeSchPrograms).present?
 				%span.text_G1
 					Before:
 					= school.api_surround_care.try(:[], :BeforeSchPrograms)
 				%br/
 				%br/
 
-			- if school.api_surround_care.is_a? Hash && school.api_surround_care.try(:[], :AfterSchPrograms).present?
+			- if school.api_surround_care.present? && school.api_surround_care.is_a?(Hash) && school.api_surround_care.try(:[], :AfterSchPrograms).present?
 				%span.text_G1
 					After:
 					= school.api_surround_care.try(:[], :AfterSchPrograms)
 
-			- if school.api_surround_care.is_a? Hash && school.api_surround_care.try(:[], :BeforeSchPrograms).blank? && school.api_surround_care.try(:[], :AfterSchPrograms).blank?
+			- if school.api_surround_care.present? && school.api_surround_care.is_a?(Hash) && school.api_surround_care.try(:[], :BeforeSchPrograms).blank? && school.api_surround_care.try(:[], :AfterSchPrograms).blank?
 				%span.text_G1
 					None offered
 
@@ -132,7 +131,7 @@
 
 .column.column_right
 	.school_info
-
+		- if school.api_description.present? && school.api_description.is_a?(HASH)
 		- if school.api_description.try(:[], :schoolspecial).present?
 			.school_description.light
 				= school.api_description.try(:[], :schoolspecial)
@@ -208,16 +207,16 @@
 				Quality
 			%p.descrip.light
 				BPS Quality Tier -
-				= school_tier_helper(student_school.tier)	
+				= school_tier_helper(student_school.tier)
 				%br
 				State Accountability Level (DESE) -
-				= school_tier_helper(student_school.dese_tier)				
+				= school_tier_helper(student_school.dese_tier)
 				%br
 				- if school_validtier_helper(student_school.tier)
-					= link_to "View BPS Quality Report", sqf_helper_string(school.bps_id, current_student.grade_level), target: "_blank", class: "text_B0"							
+					= link_to "View BPS Quality Report", sqf_helper_string(school.bps_id, current_student.grade_level), target: "_blank", class: "text_B0"
 				//- if school_validtier_helper(student_school.dese_tier)
 				%br
-				= link_to "More information on school quality measures", "http://www.bostonpublicschools.org/schoolquality/faq#sqf_dese", target: "_blank", class: "text_B0"		
+				= link_to "More information on school quality measures", "http://www.bostonpublicschools.org/schoolquality/faq#sqf_dese", target: "_blank", class: "text_B0"
 
 		.box
 			%p.title
