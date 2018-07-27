@@ -103,19 +103,20 @@
 			Surround Care
 
 		%p.descrip.light
-			- if school.api_surround_care.try(:[], :BeforeSchPrograms).present?
+			- p "#{school.api_surround_care.is_a? Hash}"
+			- if school.api_surround_care.is_a? Hash && school.api_surround_care.try(:[], :BeforeSchPrograms).present?
 				%span.text_G1
 					Before:
 					= school.api_surround_care.try(:[], :BeforeSchPrograms)
 				%br/
 				%br/
 
-			- if school.api_surround_care.try(:[], :AfterSchPrograms).present?
+			- if school.api_surround_care.is_a? Hash && school.api_surround_care.try(:[], :AfterSchPrograms).present?
 				%span.text_G1
 					After:
 					= school.api_surround_care.try(:[], :AfterSchPrograms)
 
-			- if school.api_surround_care.try(:[], :BeforeSchPrograms).blank? && school.api_surround_care.try(:[], :AfterSchPrograms).blank?
+			- if school.api_surround_care.is_a? Hash && school.api_surround_care.try(:[], :BeforeSchPrograms).blank? && school.api_surround_care.try(:[], :AfterSchPrograms).blank?
 				%span.text_G1
 					None offered
 
