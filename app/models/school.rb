@@ -136,6 +136,8 @@ class School < ActiveRecord::Base
 
 		if table.blank? || key.blank? || value.blank?
 			return false
+		elsif self.send(table).is_a? Array
+			return false
 		else
 			@res = self.send(table)
 			p "Returned Array #{@res.is_a? Array}"
