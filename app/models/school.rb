@@ -129,6 +129,10 @@ class School < ActiveRecord::Base
 		end
 	end
 
+	def some_method(hash, matcher)
+		hash.select(&matcher).values.join('\t')
+	end
+
 	def has_preference?(preference)
 		table = preference.api_table_name
 		key = preference.api_table_key
@@ -137,8 +141,10 @@ class School < ActiveRecord::Base
 		if table.blank? || key.blank? || value.blank?
 			return false
 		else
-			if self.send(table).present? && self.send(table).try(:[], key.to_sym).present? && self.send(table).try(:[], key.to_sym).try(:to_s) == value
-				return true
+			if self.send(table).present?
+				if some_method(self.send(table), ->(k,_) { k[/Grades/]}) == value
+					return true
+				end
 			else
 				return false
 			end
