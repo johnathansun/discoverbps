@@ -137,12 +137,13 @@ class School < ActiveRecord::Base
 		if table.blank? || key.blank? || value.blank?
 			return false
 		else
-			@res = self.send(table)
-			p "Grades Offered ::::::::::::--------::::::::::::::#{@res.try(:[], key.to_sym)}"
-			p "Grades Offered value ::::::::::::--------::::::::::::::#{value}"
-			p "Response table:::::::::::::::::::::------ #{@res}"
-			#if self.send(table).present? && self.send(table).try(:[], key.to_sym).present? && self.send(table).try(:[], key.to_sym).try(:to_s) == value
-			if @res[:GradesOffered].present? && @res[:GradesOffered].to_s == value.to_s
+			# @res = self.send(table)
+			# p "Grades Offered ::::::::::::--------::::::::::::::#{@res.try(:[], key.to_sym)}"
+			# p "Grades Offered value ::::::::::::--------::::::::::::::#{value}"
+			# p "Response table:::::::::::::::::::::------ #{@res}"q
+			# binding.pry
+			if self.send(table).present? && self.send(table).try(:[], key.to_sym).present? && self.send(table).try(:[], key.to_sym).try(:to_s) == value
+			#if @res[:GradesOffered].present? && @res[:GradesOffered].to_s == value.to_s
 				return true
 			else
 				return false
