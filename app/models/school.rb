@@ -138,7 +138,7 @@ class School < ActiveRecord::Base
 			return false
 		else
 			#if self.send(table).present? && self.send(table).try(:[], key.to_sym).present? && self.send(table).try(:[], key.to_sym).try(:to_s) == value
-			if self.send(table).present? && self.send(table).has_value?(value)
+			if self.send(table).present? && self.send(table)[:GradesOffered] == value
 				return true
 			else
 				return false
