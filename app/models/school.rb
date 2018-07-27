@@ -137,8 +137,11 @@ class School < ActiveRecord::Base
 		if table.blank? || key.blank? || value.blank?
 			return false
 		else
+			@res = self.send(table)
+			p "Grades Offered ::::::::::::--------::::::::::::::#{@res[:GradesOffered]}"
+			p "Grades Offered value ::::::::::::--------::::::::::::::#{value}"
 			#if self.send(table).present? && self.send(table).try(:[], key.to_sym).present? && self.send(table).try(:[], key.to_sym).try(:to_s) == value
-			if self.send(table).present? && self.send(table)[:GradesOffered] == value
+			if @res[:GradesOffered].present? && @res[:GradesOffered].to_s == value.to_s
 				return true
 			else
 				return false
