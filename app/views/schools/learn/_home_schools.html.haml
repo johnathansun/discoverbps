@@ -42,7 +42,6 @@
 
         %ul#sortable
           - @home_schools.each_with_index do |student_school, i|
-          -binding.pry
             - school = student_school.school
             %li{id: "#{current_student.id}_#{school.bps_id}", class: "list_row home_school clearfix"}
               %div{id: "#{current_student.id}_#{school.bps_id}_row", class: "li_frame"}
