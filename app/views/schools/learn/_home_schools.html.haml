@@ -102,10 +102,10 @@
 
                 .box.line.school_hours
                   %span.middle.sortable_hours
-                    - if school.api_hours.try(:[], :Description).present?
-                      = truncate(school.api_hours.try(:[], :Description), length: 18)
-                    - else
-                      &nbsp;
+                    -#- if school.api_hours.try(:[], :Description).present?
+                    -#  = truncate(school.api_hours.try(:[], :Description), length: 18)
+                    -#- else
+                    -#  &nbsp;
 
                 .box.line.eligibility
                   .first_block.middle
