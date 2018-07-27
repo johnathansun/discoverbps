@@ -133,7 +133,6 @@ class School < ActiveRecord::Base
 		table = preference.api_table_name
 		key = preference.api_table_key
 		value = preference.api_table_value
-
 		if table.blank? || key.blank? || value.blank?
 			return false
 		else
