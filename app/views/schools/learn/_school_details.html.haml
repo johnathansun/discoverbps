@@ -69,7 +69,7 @@
 			-if student_school.walk_distance.present? && student_school.walk_distance.strip != '0.00'
 				= raw student_school.walk_distance
 			-else
-				= raw student_school.distance		
+				= raw student_school.distance
 			mi from home
 		%p.descrip.light
 			%span{:aria => {hidden: 'true'}, :class => "icon icon_petit icon-DBPS-Dev-Assets-SRG-14"}
@@ -103,19 +103,19 @@
 			Surround Care
 
 		%p.descrip.light
-			- if school.api_surround_care.present? && school.api_surround_care.is_a?(Hash) && school.api_surround_care.try(:[], :BeforeSchPrograms).present?
+			- if school.api_surround_care.try(:[], :BeforeSchPrograms).present?
 				%span.text_G1
 					Before:
 					= school.api_surround_care.try(:[], :BeforeSchPrograms)
 				%br/
 				%br/
 
-			- if school.api_surround_care.present? && school.api_surround_care.is_a?(Hash) && school.api_surround_care.try(:[], :AfterSchPrograms).present?
+			- if school.api_surround_care.try(:[], :AfterSchPrograms).present?
 				%span.text_G1
 					After:
 					= school.api_surround_care.try(:[], :AfterSchPrograms)
 
-			- if school.api_surround_care.present? && school.api_surround_care.is_a?(Hash) && school.api_surround_care.try(:[], :BeforeSchPrograms).blank? && school.api_surround_care.try(:[], :AfterSchPrograms).blank?
+			- if school.api_surround_care.try(:[], :BeforeSchPrograms).blank? && school.api_surround_care.try(:[], :AfterSchPrograms).blank?
 				%span.text_G1
 					None offered
 
@@ -131,7 +131,8 @@
 
 .column.column_right
 	.school_info
-		- if school.api_description.present? && school.api_description.is_a?(Hash) && school.api_description.try(:[], :schoolspecial).present?
+
+		- if school.api_description.try(:[], :schoolspecial).present?
 			.school_description.light
 				= school.api_description.try(:[], :schoolspecial)
 
@@ -191,7 +192,7 @@
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_specialapplication"}
 				Special Application
 			%p.descrip.light
-				= special_admissions_helper(school.api_description.try(:[], :isspecialappprocedures)) if school.api_description.present? && school.api_description.is_a?(Hash)
+				= special_admissions_helper(school.api_description.try(:[], :isspecialappprocedures))
 
 		.box
 			%p.title
@@ -221,45 +222,51 @@
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
 				Uniform Policy
-			- if school.api_description.present? && school.api_description.is_a?(Hash) && school.api_description.try(:[], :uniformpolicydesc).present?
+			- if school.api_description.try(:[], :uniformpolicydesc).present?
 				%p.descrip.light
 					= school.api_description.try(:[], :uniformpolicydesc)
 			- else
 				%p.descrip.light
-					= school.api_description.present? && school.api_description.is_a?(Hash) && school.api_description.try(:[], :uniformpolicy)
+					= school.api_description.try(:[], :uniformpolicy)
 
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolfocus"}
 				School Focus
 			%p.descrip.light
-				= school.api_description.try(:[], :schfocus) if school.api_description.present? && school.api_description.is_a?(Hash)
+				= school.api_description.try(:[], :schfocus)
 
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
 				Programs
 			%p.descrip.light
-				= programs_list_helper(school).try(:join, ', ') if school.api_programs.present? && school.api_programs.is_a?(Hash)
+				= programs_list_helper(school).try(:join, ', ')
 
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
 				Facility Features
 			%p.descrip.light
-				= facilities_list_helper(school).try(:join, ', ') if school.api_programs.present? && school.api_programs.is_a?(Hash)
+				= facilities_list_helper(school).try(:join, ', ')
 
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
 				Student Support
 			%p.descrip.light
-				=raw student_support_list_helper(school).try(:join, ', ') if school.api_student_support.present? && school.api_student_support.is_a?(Hash)
+				=raw student_support_list_helper(school).try(:join, ', ')
 
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
 				Sports
 			%p.descrip.light
-				= sports_list_helper(school).try(:join, ', ') if school.api_sports.present? && school.api_sports.is_a?(Hash)
+				= sports_list_helper(school).try(:join, ', ')
 
+		.box
+			%p.title
+				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
+				Community Partners
+			%p.descrip.light
+				= partners_list_helper(school).try(:join, ', ')

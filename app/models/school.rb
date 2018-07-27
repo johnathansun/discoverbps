@@ -136,18 +136,8 @@ class School < ActiveRecord::Base
 
 		if table.blank? || key.blank? || value.blank?
 			return false
-		elsif self.send(table).is_a? Array
-			return false
 		else
-			@res = self.send(table)
-			p "Returned Array #{@res.is_a? Array}"
-			p "Returned Hash #{@res.is_a? Hash}"
-			# p "Grades Offered ::::::::::::--------::::::::::::::#{@res.try(:[], key.to_sym)}"
-			# p "Grades Offered value ::::::::::::--------::::::::::::::#{value}"
-			# p "Response table:::::::::::::::::::::------ #{@res}"q
-			# binding.pry
 			if self.send(table).present? && self.send(table).try(:[], key.to_sym).present? && self.send(table).try(:[], key.to_sym).try(:to_s) == value
-			#if @res[:GradesOffered].present? && @res[:GradesOffered].to_s == value.to_s
 				return true
 			else
 				return false
