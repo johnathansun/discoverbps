@@ -137,7 +137,8 @@ class School < ActiveRecord::Base
 		if table.blank? || key.blank? || value.blank?
 			return false
 		else
-			if self.send(table).present? && self.send(table).try(:[], key.to_sym) == value
+			#if self.send(table).present? && self.send(table).try(:[], key.to_sym).present? && self.send(table).try(:[], key.to_sym).try(:to_s) == value
+			if self.send(table).present? && self.send(table).has_value?(value)
 				return true
 			else
 				return false
