@@ -240,32 +240,32 @@
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schooltype"}
 				Programs
 			%p.descrip.light
-				= programs_list_helper(school).try(:join, ', ') if school.api_description.present? && school.api_description.is_a?(Hash)
+				= programs_list_helper(school).try(:join, ', ') if school.api_programs.present? && school.api_programs.is_a?(Hash)
 
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_facilityfeatures"}
 				Facility Features
 			%p.descrip.light
-				= facilities_list_helper(school).try(:join, ', ') if school.api_description.present? && school.api_description.is_a?(Hash)
+				= facilities_list_helper(school).try(:join, ', ') if school.api_programs.present? && school.api_programs.is_a?(Hash)
 
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_healthandwellness"}
 				Student Support
 			%p.descrip.light
-				=raw student_support_list_helper(school).try(:join, ', ') if school.api_description.present? && school.api_description.is_a?(Hash)
+				=raw student_support_list_helper(school).try(:join, ', ') if school.api_programs.present? && school.api_programs.is_a?(Hash)
 
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_sports"}
 				Sports
 			%p.descrip.light
-				= sports_list_helper(school).try(:join, ', ') if school.api_description.present? && school.api_description.is_a?(Hash)
+				= sports_list_helper(school).try(:join, ', ') if school.api_programs.present? && school.api_programs.is_a?(Hash)
 
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_communitypartners"}
 				Community Partners
 			%p.descrip.light
-				= partners_list_helper(school).try(:join, ', ') if school.api_description.present? && school.api_description.is_a?(Hash)
+				= partners_list_helper(school).try(:join, ', ') if school.api_programs.present? && school.api_programs.is_a?(Hash)
