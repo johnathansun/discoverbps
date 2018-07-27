@@ -129,6 +129,7 @@ class School < ActiveRecord::Base
 		end
 	end
 
+
 	def some_method(hash, matcher)
 		hash.select(&matcher).values.join('\t')
 	end
@@ -141,11 +142,10 @@ class School < ActiveRecord::Base
 		if table.blank? || key.blank? || value.blank?
 			return false
 		else
-			if self.send(table).present?
-				a = some_method(self.send(table), ->(k,_) { k[/Grades/]})
-				if a.eql? value
-					return true
-				end
+			if self.send(table).present? && some_method(self.send(table), ->(k,_) { k[key]}) == value
+				return true
+			else
+				return false
 			end
 		end
 	end
