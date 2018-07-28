@@ -5,31 +5,34 @@ module SchoolData
   def self.update_basic_info!(school_id=nil)
     schools = self.find_schools(school_id)
 
-    # schools.each do |school|
-    #   response = Webservice.get_basic_info(school.bps_id)
-    #   if response.present?
-    #     school.update_attributes(name: response[:schname_23], latitude: response[:Latitude], longitude: response[:Longitude], api_basic_info: response, last_sync: Time.now, last_sync_basic_info: Time.now)
-    #   end
-    # end
+    schools.each do |school|
+      response = Webservice.get_basic_info(school.bps_id)
+      binding.pry
+      if response.present?
+        school.update_attributes(name: response[:schname_23], latitude: response[:Latitude], longitude: response[:Longitude], api_basic_info: response, last_sync: Time.now, last_sync_basic_info: Time.now)
+      end
+    end
   end
 
   ##### UPDATE AWARDS #####
 
   def self.update_awards!(school_id=nil)
     schools = self.find_schools(school_id)
+    binding.pry
 
-    # schools.each do |school|
-    #   response = Webservice.get_awards(school.bps_id)
-    #   if response.present?
-    #     school.update_attributes(api_awards: response, last_sync: Time.now, last_sync_awards: Time.now)
-    #   end
-    # end
+    schools.each do |school|
+      response = Webservice.get_awards(school.bps_id)
+      if response.present?
+        school.update_attributes(api_awards: response, last_sync: Time.now, last_sync_awards: Time.now)
+      end
+    end
   end
 
   ##### UPDATE DESCRIPTIONS #####
 
   def self.update_descriptions!(school_id=nil)
     schools = self.find_schools(school_id)
+    binding.pry
 
     # schools.each do |school|
     #   response = Webservice.get_description(school.bps_id)
