@@ -93,7 +93,7 @@ module Webservice
 	# :X=>"775356.657775879", :Y=>"2956018.47106934", :ZipCode=>"02108", :Zone=>"N"}]}
 
 	def self.get_address_matches(street_number, street_name, zipcode, clientcode)
-		endpoint = "#{ENV['ADDRESS_MATCHES']}/AddressMatches"
+		endpoint = "#{ENV['ADDRESS_MATCHES']}/Students/AddressMatches"
 		params = { streetnumber: street_number, street: street_name, zipcode: zipcode, ClientCode: clientcode }
 		extract_from_array = false
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, params).body
