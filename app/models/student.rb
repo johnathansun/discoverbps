@@ -186,6 +186,7 @@ class Student < ActiveRecord::Base
 	        
           schoolId = api_school[:SchoolLocalId]
           school = School.where(bps_id: schoolId).first
+          school.update_attributes(latitude: api_school[:Latitude], longitude: api_school[:Longitude])
           if school.present?
             walk_time = walk_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
             drive_time = drive_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
