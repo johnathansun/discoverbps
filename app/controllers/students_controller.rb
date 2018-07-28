@@ -28,8 +28,8 @@ class StudentsController < ApplicationController
     end
 
     respond_to do |format|
-
       if @addresses.present? && @student.present? && @student.update_attributes(params[:student])
+        @student.update_attributes(latitude: api_response[0][:Latitude], longitude: api_response[0][:Longitude])
         session[:current_student_id] = @student.id
         format.js { render template: "student_addresses/new" }
         format.html { redirect_to new_student_address_path }
