@@ -19,19 +19,19 @@ class StudentAddressesController < ApplicationController
     address = response = MultiJson.load(params[:address], :symbolize_keys => true)
 
     student.address_verified = true
-    student.street_number = address.try(:[], :StreetNum)
+    student.street_number = address.try(:[], :Streetno)
     student.street_name = address.try(:[], :Street).try(:titleize)
-    student.neighborhood = address.try(:[], :SectionOfCity)
-    student.zipcode = address.try(:[], :ZipCode)
-    student.x_coordinate = address.try(:[], :X)
-    student.y_coordinate = address.try(:[], :Y)
-    student.latitude = address.try(:[], :Lat)
-    student.longitude = address.try(:[], :Lng)
-    student.geo_code = address.try(:[], :GeoCode)
+    student.neighborhood = address.try(:[], :City)
+    student.zipcode = address.try(:[], :Zip)
+    student.x_coordinate = address.try(:[], :CityOfBostonX)
+    student.y_coordinate = address.try(:[], :CityOfBostonY)
+    student.latitude = address.try(:[], :Latitude)
+    student.longitude = address.try(:[], :Longitude)
+    student.geo_code = address.try(:[], :Geo)
     student.addressid = address.try(:[], :AddressID)
     student.ell_cluster = address.try(:[], :ELLCluster)
     student.sped_cluster = address.try(:[], :SPEDCluster)
-    student.zone = address.try(:[], :Zone)
+    student.zone = address.try(:[], :HZone)
 
     respond_to do |format|
       if student.save!
