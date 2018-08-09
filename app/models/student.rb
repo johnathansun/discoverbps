@@ -147,7 +147,6 @@ class Student < ActiveRecord::Base
   def save_student_schools(api_schools, school_list_type)
     # loop through the schools returned from the API, find the matching schools in the db,
     # save the eligibility variables on student_schools, and collect the coordinates for the matrix search, below
-
     if api_schools.present?
       self.send("#{school_list_type}_schools".to_sym).clear
       self.update_column("#{school_list_type}_schools_json".to_sym, api_schools.to_json) rescue nil
@@ -163,9 +162,7 @@ class Student < ActiveRecord::Base
       end
 
       api_schools.each do |api_school|
-        # schoolId =(school_list_type == "choice") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
-        schoolId = api_school[:SchoolLocalId]
-
+        schoolId = (school_list_type == "choice" || school_list_type == "home") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
         school = School.where(bps_id: schoolId).first
 
         if school.present? && (!school_ids.include?(school.id))
@@ -174,7 +171,6 @@ class Student < ActiveRecord::Base
           StudentSchool.create_from_api_response(self, school, api_school, school_list_type)
         end
       end
-
       # save distance, walk time and drive time on student_schools
       if longitude.present? && latitude.present?
 
@@ -183,8 +179,8 @@ class Student < ActiveRecord::Base
         drive_matrix = Google.drive_times(latitude, longitude, school_coordinates)
 
         api_schools.each_with_index do |api_school, i|
-	        
-          schoolId = api_school[:SchoolLocalId]
+
+          schoolId = (school_list_type == "choice" || school_list_type == "home") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
           school = School.where(bps_id: schoolId).first
           school.update_attributes(latitude: api_school[:Latitude], longitude: api_school[:Longitude])
           if school.present?
