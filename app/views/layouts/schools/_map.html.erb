@@ -387,9 +387,8 @@
         <% end %>
 
         <% current_student.ell_schools.rank(:sort_order).each_with_index do |student_school, i| %>
-        <% if student_school.school.latitude.present? && student_school.school.longitude.present? && student_school.school.latitude !=0 && student_school.school.longitude !=0 %>
-        console.log("Ell Schools: <%= student_school.school.latitude %>", "<%= student_school.school.longitude %>");
-        var coordinates = new google.maps.LatLng(<%= student_school.school.latitude %>, <%= student_school.school.longitude %>);
+        <% if student_school.school.api_basic_info[:Latitude].present? && student_school.school.api_basic_info[:Longitude].present? && student_school.school.api_basic_info[:Latitude] !=0 && student_school.school.api_basic_info[:Longitude] !=0 %>
+        var coordinates = new google.maps.LatLng(<%= student_school.school.api_basic_info[:Latitude] %>, <%= student_school.school.api_basic_info[:Longitude] %>);
         latlngbounds.extend(coordinates);
 
         var marker = new google.maps.Marker({
