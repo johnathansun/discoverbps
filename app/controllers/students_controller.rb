@@ -48,12 +48,9 @@ class StudentsController < ApplicationController
         elsif zipcode_length == false
           @error_message = "Zip code must be a 5-digit number. Please try again."
           flash[:alert] = "Zip code must be a 5-digit number. Please try again."
-        elsif api_response.empty?
-          @error_message = "Address could not be found. Please try again."
-          flash[:alert] = "Address could not be found. Please try again."
         else
-          @error_message = "Please enter the required search fields and try again."
-          flash[:alert] = "Please enter the required search fields and try again."
+          @error_message = "Address could not be found OR required search fields are missing"
+          flash[:alert] = "Address could not be found OR required search fields are missing"
         end
 
         format.js { render template: "students/errors/errors" }
