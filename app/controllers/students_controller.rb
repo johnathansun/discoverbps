@@ -36,11 +36,11 @@ class StudentsController < ApplicationController
       else
         if api_response.present?
           if @errors.present?
-            @error_message = "We couldn't find any addresses in Boston that match your search. Please try again."
-            flash[:alert] = "We couldn't find any addresses in Boston that match your search. Please try again."
-          else
             @error_message = @errors
             flash[:alert] = "There were problems with your search. Please enter the required fields and try again."
+          else
+            @error_message = "We couldn't find any addresses in Boston that match your search. Please try again."
+            flash[:alert] = "We couldn't find any addresses in Boston that match your search. Please try again."
           end
         elsif street_number_numeric == false
           @error_message = "Street number must be a number. Please try again."
@@ -48,6 +48,9 @@ class StudentsController < ApplicationController
         elsif zipcode_length == false
           @error_message = "Zip code must be a 5-digit number. Please try again."
           flash[:alert] = "Zip code must be a 5-digit number. Please try again."
+        elsif api_response.empty?
+          @error_message = "Address could not be found. Please try again."
+          flash[:alert] = "Address could not be found. Please try again."
         else
           @error_message = "Please enter the required search fields and try again."
           flash[:alert] = "Please enter the required search fields and try again."
