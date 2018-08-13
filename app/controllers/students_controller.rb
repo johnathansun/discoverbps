@@ -36,11 +36,11 @@ class StudentsController < ApplicationController
       else
         if api_response.present?
           if @errors.present?
-            @error_message = @errors
-            flash[:alert] = "There were problems with your search. Please enter the required fields and try again."
-          else
             @error_message = "We couldn't find any addresses in Boston that match your search. Please try again."
             flash[:alert] = "We couldn't find any addresses in Boston that match your search. Please try again."
+          else
+            @error_message = @errors
+            flash[:alert] = "There were problems with your search. Please enter the required fields and try again."
           end
         elsif street_number_numeric == false
           @error_message = "Street number must be a number. Please try again."
