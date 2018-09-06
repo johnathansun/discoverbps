@@ -16,7 +16,7 @@ class StudentSchool < ActiveRecord::Base
       school_id: school.id,
       school_name: school_hash[:SchoolName],
       school_type: school_list_type,
-      bps_id: school_hash[:SchoolLocalId],
+      bps_id: (school_list_type == "ell" ? school_hash[:SchoolId] : school_hash[:SchoolLocalId]),
       tier: school_hash[:Tier],
       eligibility: school_hash[:SchoolEligibility],
       walk_zone_eligibility: school_hash[:AssignmentWalkEligibilityStatus],
@@ -25,14 +25,17 @@ class StudentSchool < ActiveRecord::Base
       exam_school: (school_hash[:IsExamSchool] == "0" ? false : true),
       sped_cluster: school_hash[:SPEDCluster],
       sped_description: school_hash[:Program],
-      ell_cluster: school_hash[:ELLCluster],
+      ell_cluster: school_hash[:EllCluster],
       ell_description: school_hash[:ProgramDescription],
-      program_code: school_hash[:ProgramId],
+      program_code: (school_list_type == "ell" ? school_hash[:ProgramCode] : school_hash[:ProgramId]),
       program_code_description: school_hash[:ProgramCodeDescription],
       call_id: school_hash[:CallId],
       special_admissions: school_hash[:IsSpecAdmissions],
-      walk_distance: school_hash[:WalkLineDistance],
-      dese_tier: school_hash[:DeseTier]
+      walk_distance: school_hash[:WalkDistance],
+      dese_tier: school_hash[:DeseTier],
+      #TODO: was not included before. Verify once
+      # sort_order: school_hash[:SortOrder]
+      choice_rank: school_hash[:ChoiceRank]
     )
   end
 end

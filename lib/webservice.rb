@@ -93,7 +93,7 @@ module Webservice
 	# :X=>"775356.657775879", :Y=>"2956018.47106934", :ZipCode=>"02108", :Zone=>"N"}]}
 
 	def self.get_address_matches(street_number, street_name, zipcode, clientcode)
-		endpoint = "#{ENV['ADDRESS_MATCHES']}/Students/AddressMatches"
+		endpoint = "https://api.mybps.org/BPSRegistrationService/api/Students/AddressMatches"
 		params = { streetnumber: street_number, street: street_name, zipcode: zipcode, ClientCode: clientcode }
 		extract_from_array = false
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, params).body
@@ -109,7 +109,7 @@ module Webservice
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/schools.svc/HomeSchools?SchYear=2014&Grade=06&AddressID=68051&IsAwc=true&SiblingSchList=
 
 	def self.get_home_schools(grade_level, addressid, sibling_ids=[], clientcode)
-		endpoint = "#{ENV['HOMESCHOOLS_URL']}/StudentSchool/Choices"
+		endpoint = "https://api.mybps.org/BPSRegistrationService/api/StudentSchool/Choices"
 		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
 		payload = { SchoolYear: SCHOOL_YEAR, Grade: grade_level, AddressId: addressid, Type: TYPE, IsAwc: "0", LepStatus:"N", ClientCode: clientcode, siblingsList: sibling_school_ids }
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, payload).body
@@ -137,17 +137,14 @@ module Webservice
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/ELLList?schyear=2014&addressID=68051&gradeLevel=07
 
 	def self.get_ell_schools(grade_level, addressid, language)
-		endpoint = "#{ENV['WEBSERVICE_URL']}/ELLSchools"
-		params = { schyear: SCHOOL_YEAR, gradelevel: grade_level, addressid: addressid, language: language }.to_param
+		endpoint = "https://api.mybps.org/BPSRegistrationService/api/Students/EllSchools"
+		params = { addressId: addressid, grade: grade_level, language: language }.to_param
 		extract_from_array = false
-		response = self.get(endpoint, params)
+		response = self.getWithHeader(ENV['SERVICE_HEADER_KEY'],endpoint, params)
 		self.extract(response, endpoint, params, extract_from_array, nil)
 	end
 
-
 	##### SPED SCHOOLS #####
-
-	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/SPEDList?schyear=2014&addressID=68051&gradeLevel=07
 
 	def self.get_sped_schools(grade_level, addressid)
 		endpoint = "#{ENV['WEBSERVICE_URL']}/SPEDSchools"
@@ -303,6 +300,18 @@ module Webservice
 	def self.get(endpoint, params)
 		Faraday.new(url: "#{endpoint}?#{params}").get.body
 	end
+
+	def self.getWithHeader(headerKey, endpoint, params)
+		con = Faraday.new
+
+		res = con.get do |req|
+			req.url "#{endpoint}?#{params}"
+			req.headers["BpsToken"] = headerKey
+		end
+		puts "Ell Schools GetWithHeaders body: #{res.body}"
+		return res.body
+	end
+
 
 	def self.post(endpoint, payload)
 		Faraday.new(url: "#{endpoint}").post do |req|

@@ -162,7 +162,14 @@ class Student < ActiveRecord::Base
       end
 
       api_schools.each do |api_school|
-        schoolId = (school_list_type == "choice" || school_list_type == "home") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
+        # schoolId = (school_list_type == "choice" || school_list_type == "home") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
+        if school_list_type == "choice" || school_list_type == "home"
+          schoolId = api_school[:SchoolLocalId]
+        elsif school_list_type == "ell"
+          schoolId = api_school[:SchoolId]
+        else
+          schoolId = api_school[:SchoolID]
+        end
         school = School.where(bps_id: schoolId).first
 
         if school.present? && (!school_ids.include?(school.id))
@@ -180,9 +187,18 @@ class Student < ActiveRecord::Base
 
         api_schools.each_with_index do |api_school, i|
 
-          schoolId = (school_list_type == "choice" || school_list_type == "home") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
+          # schoolId = (school_list_type == "choice" || school_list_type == "home") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
+          if school_list_type == "choice" || school_list_type == "home"
+            schoolId = api_school[:SchoolLocalId]
+          elsif school_list_type == "ell"
+            schoolId = api_school[:SchoolId]
+          else
+            schoolId = api_school[:SchoolID]
+          end
           school = School.where(bps_id: schoolId).first
-          school.update_attributes(latitude: api_school[:Latitude], longitude: api_school[:Longitude])
+          if school_list_type == "choice" || school_list_type == "home"
+            school.update_attributes(latitude: api_school[:Latitude], longitude: api_school[:Longitude])
+          end
           if school.present?
             walk_time = walk_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
             drive_time = drive_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
