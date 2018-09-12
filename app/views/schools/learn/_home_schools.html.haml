@@ -83,10 +83,10 @@
                   .first_block.middle
                     %span.middle.sortable_distance
                       = transportation_eligibility_icon_helper(student_school, "18px")
-                      -if student_school.walk_distance.present? && student_school.walk_distance.strip != '0.00'                        
-                        #{spacer_helper(student_school.walk_distance)}&nbsp;mi
+                      -if student_school.walk_distance.present? && student_school.walk_distance.strip != '0.00'
+                        #{spacer_helper(number_with_precision student_school.walk_distance, :precision => 2)}&nbsp;mi
                       -else                          
-                        #{spacer_helper(student_school.distance)}&nbsp;mi
+                        #{spacer_helper(number_with_precision student_school.distance, :precision => 2)}&nbsp;mi
 
 
                   .second_bloc.middle
