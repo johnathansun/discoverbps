@@ -138,9 +138,7 @@ module Webservice
 
 	def self.get_ell_schools(grade_level, addressid, language)
 		endpoint = "#{ENV['WEBAPI_REG_CHOICE_URL']}/Students/EllSchools"
-		binding.pry
-		# addressId=68563&grade=01&language=chinese
-		params = { addressId: "68563", grade: "01", language: "chinese" }.to_param
+		params = { addressId: addressid, grade: grade_level, language: language }.to_param
 		extract_from_array = false
 		response = self.getWithHeader(ENV['SERVICE_HEADER_KEY'],endpoint, params)
 		self.extract(response, endpoint, params, extract_from_array, nil)
