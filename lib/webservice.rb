@@ -93,7 +93,7 @@ module Webservice
 	# :X=>"775356.657775879", :Y=>"2956018.47106934", :ZipCode=>"02108", :Zone=>"N"}]}
 
 	def self.get_address_matches(street_number, street_name, zipcode, clientcode)
-		endpoint = "https://api.mybps.org/BPSRegistrationService/api/Students/AddressMatches"
+		endpoint = "#{ENV['WEBAPI_REG_CHOICE_URL']}/Students/AddressMatches"
 		params = { streetnumber: street_number, street: street_name, zipcode: zipcode, ClientCode: clientcode }
 		extract_from_array = false
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, params).body
@@ -109,7 +109,7 @@ module Webservice
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/schools.svc/HomeSchools?SchYear=2014&Grade=06&AddressID=68051&IsAwc=true&SiblingSchList=
 
 	def self.get_home_schools(grade_level, addressid, sibling_ids=[], clientcode)
-		endpoint = "https://api.mybps.org/BPSRegistrationService/api/StudentSchool/Choices"
+		endpoint = "#{ENV['WEBAPI_REG_CHOICE_URL']}/StudentSchool/Choices"
 		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
 		payload = { SchoolYear: SCHOOL_YEAR, Grade: grade_level, AddressId: addressid, Type: TYPE, IsAwc: "0", LepStatus:"N", ClientCode: clientcode, siblingsList: sibling_school_ids }
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, payload).body
@@ -137,8 +137,10 @@ module Webservice
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/ELLList?schyear=2014&addressID=68051&gradeLevel=07
 
 	def self.get_ell_schools(grade_level, addressid, language)
-		endpoint = "https://api.mybps.org/BPSRegistrationService/api/Students/EllSchools"
-		params = { addressId: addressid, grade: grade_level, language: language }.to_param
+		endpoint = "#{ENV['WEBAPI_REG_CHOICE_URL']}/Students/EllSchools"
+		binding.pry
+		# addressId=68563&grade=01&language=chinese
+		params = { addressId: "68563", grade: "01", language: "chinese" }.to_param
 		extract_from_array = false
 		response = self.getWithHeader(ENV['SERVICE_HEADER_KEY'],endpoint, params)
 		self.extract(response, endpoint, params, extract_from_array, nil)
