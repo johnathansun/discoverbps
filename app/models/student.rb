@@ -104,7 +104,7 @@ class Student < ActiveRecord::Base
   end
 
   def set_ell_schools
-    api_schools = Webservice.get_ell_schools(self.formatted_grade_level, self.addressid, self.ell_language)
+    api_schools = Webservice.get_ell_schools(self.formatted_grade_level, self.addressid, self.ell_language, SERVICE_CLIENT_CODE)
     save_student_schools(api_schools, 'ell')
   end
 
@@ -166,6 +166,7 @@ class Student < ActiveRecord::Base
         if school_list_type == "choice" || school_list_type == "home"
           schoolId = api_school[:SchoolLocalId]
         elsif school_list_type == "ell"
+          binding.pry
           schoolId = api_school[:SchoolId]
         else
           schoolId = api_school[:SchoolID]
@@ -191,6 +192,7 @@ class Student < ActiveRecord::Base
           if school_list_type == "choice" || school_list_type == "home"
             schoolId = api_school[:SchoolLocalId]
           elsif school_list_type == "ell"
+            binding.pry
             schoolId = api_school[:SchoolId]
           else
             schoolId = api_school[:SchoolID]

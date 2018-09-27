@@ -136,12 +136,12 @@ module Webservice
 
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/ELLList?schyear=2014&addressID=68051&gradeLevel=07
 
-	def self.get_ell_schools(grade_level, addressid, language)
+	def self.get_ell_schools(grade_level, addressid, language, clientcode)
 		endpoint = "#{ENV['WEBAPI_REG_CHOICE_URL']}/Students/EllSchools"
-		params = { addressId: addressid, grade: grade_level, language: language }.to_param
+		payload = { AddressId: addressid, Grade: grade_level, Language: language, ClientCode: clientcode}
 		extract_from_array = false
-		response = self.getWithHeader(ENV['SERVICE_HEADER_KEY'],endpoint, params)
-		self.extract(response, endpoint, params, extract_from_array, nil)
+		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'],endpoint, payload).body
+		self.extract(response, endpoint, payload, extract_from_array, nil)
 	end
 
 	##### SPED SCHOOLS #####
