@@ -144,7 +144,7 @@ class SchoolsController < ApplicationController
           'Uniform Policy',
           'School Email',
           "#{current_student.formatted_grade_level_name} Demand (#{current_school_year_range})",
-          "Open Seats",
+          "Open Seats for next year registrations",
           "Applicants",
           "Applicants/Open Seat"
 
