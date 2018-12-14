@@ -199,9 +199,12 @@
       %p.descrip.light
         BPS Quality Tier :  
         = school_tier_helper(student_school.tier)
+        = student_school.dese_tier if student_school.dese_tier.present?
         %br/
         State Accountability Level (DESE):
         = school_tier_helper(student_school.dese_tier)
+        = student_school.school_dese_accountability if student_school.school_dese_accountability.present?
+
 
     .box
       %p.title

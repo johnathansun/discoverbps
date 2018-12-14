@@ -7,9 +7,11 @@ class StudentSchool < ActiveRecord::Base
   attr_accessible :distance, :drive_time, :school_id, :student_id, :tier, :eligibility, :transportation_eligibility,
 									:walk_time, :walk_zone_eligibility, :sort_order_position, :bps_id, :ranked, :exam_school, :school_type, :starred,
 									:ell_cluster, :ell_description, :sped_cluster, :sped_description, :call_id, :choice_rank,
-                  :school_name, :program_code, :program_code_description, :special_admissions,:walk_distance,:dese_tier, :sort_order
+                  :school_name, :program_code, :program_code_description, :special_admissions,:walk_distance,:dese_tier, :sort_order,
+                  :tier_explanation, :school_dese_accountability
 
   def self.create_from_api_response(student, school, school_hash, school_list_type)
+
     Rails.logger.info "******************* #{school_hash}"
 
     self.create!(student_id: student.id,
@@ -35,7 +37,9 @@ class StudentSchool < ActiveRecord::Base
       dese_tier: school_hash[:DeseTier],
       #TODO: was not included before. Verify once
       # sort_order: school_hash[:SortOrder]
-      choice_rank: school_hash[:ChoiceRank]
+      choice_rank: school_hash[:ChoiceRank],
+      tier_explanation: school_hash[:TierExplanation],
+      school_dese_accountability: school_hash[:SchoolDESEAccountability]
     )
   end
 end
