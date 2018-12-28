@@ -166,7 +166,6 @@ class Student < ActiveRecord::Base
         if school_list_type == "choice" || school_list_type == "home"
           schoolId = api_school[:SchoolLocalId]
         elsif school_list_type == "ell"
-          binding.pry
           schoolId = api_school[:SchoolId]
         else
           schoolId = api_school[:SchoolID]
@@ -192,7 +191,6 @@ class Student < ActiveRecord::Base
           if school_list_type == "choice" || school_list_type == "home"
             schoolId = api_school[:SchoolLocalId]
           elsif school_list_type == "ell"
-            binding.pry
             schoolId = api_school[:SchoolId]
           else
             schoolId = api_school[:SchoolID]
