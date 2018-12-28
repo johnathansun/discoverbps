@@ -28,7 +28,7 @@ module Webservice
 	end
 
 	def self.get_student_homebased_choices(caseid, schoolyearcontext, clientcode)		
-		endpoint = "https://stageapi.mybps.org/BPSRegistrationService/api/StudentSchool/Choices"
+		endpoint = "#{ENV['WEBAPI_REG_CHOICE_URL']}/StudentSchool/Choices"
 		response =  self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, { SchoolYear: schoolyearcontext, ClientCode: clientcode, Type: clientcode, CaseId: caseid }).body
 		Rails.logger.info "******************** #{endpoint}"
 		Rails.logger.info "******************** #{response}"
