@@ -129,7 +129,6 @@ class ChoiceSchoolsController < ApplicationController
           params[:schools].each do |id, rank|
             if rank.present?
               school = StudentSchool.find(id)
-              binding.pry
               if response.select{|key| key[:SchoolEligibility].include?("Student Sch")|| key[:SchoolEligibility].include?("Student current sch")}.present?
                 response.select{|key| key[:SchoolEligibility].include?("Student Sch")|| key[:SchoolEligibility].include?("Student current sch")}.each do |value|
                   if value[:SchoolLocalId].present? && value[:SchoolLocalId] == id || params[:schools].values.reject(&:empty?).count >= 3
