@@ -125,13 +125,20 @@ class ChoiceSchoolsController < ApplicationController
       else
         if properly_formatted && isRankings_Integer && order_ranking
           response = Webservice.get_student_homebased_choices(session[:caseid], SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE)
-          count = params[:schools].values.reject(&:empty?).count
+          school_ranking = params[:schools].values.reject(&:empty?).count
+          count = school_ranking
+          school_eligibility = response.select{|key| key[:SchoolEligibility].include?("Student Sch")|| key[:SchoolEligibility].include?("Student current sch") || key[:SchoolEligibility].include?("Exam Applicant")}
           params[:schools].each do |id, rank|
             if rank.present?
               school = StudentSchool.find(id)
-              if response.select{|key| key[:SchoolEligibility].include?("Student Sch")|| key[:SchoolEligibility].include?("Student current sch")}.present?
-                response.select{|key| key[:SchoolEligibility].include?("Student Sch")|| key[:SchoolEligibility].include?("Student current sch")}.each do |value|
-                  if value[:SchoolLocalId].present? && value[:SchoolLocalId] == id || params[:schools].values.reject(&:empty?).count >= 3
+              if school_eligibility.present?
+                school_eligibility.each do |value|
+                  school_local_id_check = value[:SchoolLocalId].present? && value[:SchoolLocalId] == id
+                  if school_local_id_check || school_ranking >= 1
+                    school.update_column(:choice_rank, rank)
+                    count = count - 1
+                    redirect_to summary_choice_schools_path and return if count == 0
+                  elsif school_ranking >= 3
                     school.update_column(:choice_rank, rank)
                     count = count - 1
                     redirect_to summary_choice_schools_path and return if count == 0
@@ -141,7 +148,7 @@ class ChoiceSchoolsController < ApplicationController
                   end
                 end
               else
-                if params[:schools].values.reject(&:empty?).count >= 3
+                if school_ranking >= 3
                   school.update_column(:choice_rank, rank)
                   count = count - 1
                   redirect_to summary_choice_schools_path and return if count == 0
