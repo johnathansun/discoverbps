@@ -111,6 +111,7 @@ class ChoiceSchoolsController < ApplicationController
 
     # POST
   def rank
+    current_student.choice_schools.update_all(choice_rank: 0)
     if params[:schools].blank? || params[:schools].values.all? {|x| x.blank?}
       redirect_to order_choice_schools_path, alert: "Please rank three or more schools and then submit your list"
     else
@@ -119,6 +120,7 @@ class ChoiceSchoolsController < ApplicationController
       properly_formatted = rankings.map {|x| x.try(:to_i)}.sort == (rankings.map {|x| x.try(:to_i)}.sort[0]..rankings.map {|x| x.try(:to_i)}.sort[-1]).to_a rescue false
       isRankings_Integer = rankings.all? {|i|i.to_i > 0 }
 
+      session[:student_schools] = {}
       duplicate_rankings = params[:schools].values.detect{ |e| params[:schools].values.count(e) > 1 }.present?
       if duplicate_rankings
         redirect_to order_choice_schools_path, alert: "Duplicate rankings are not allowed!"
@@ -127,10 +129,11 @@ class ChoiceSchoolsController < ApplicationController
           response = Webservice.get_student_homebased_choices(session[:caseid], SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE)
           school_ranking = params[:schools].values.reject(&:empty?).count
           count = school_ranking
-          school_eligibility = response.select{|key| key[:SchoolEligibility].include?("Student Sch")|| key[:SchoolEligibility].include?("Student current sch") || key[:SchoolEligibility].include?("Exam Applicant")}
           params[:schools].each do |id, rank|
             if rank.present?
+              session[:student_schools][id] = rank
               school = StudentSchool.find(id)
+              school_eligibility = response.select{|key| key[:SchoolEligibility].include?("Student Sch")|| key[:SchoolEligibility].include?("Student current sch") || key[:SchoolEligibility].include?("Exam Applicant") if key[:SchoolName] == school.school_name}
               if school_eligibility.present?
                 school_eligibility.each do |value|
                   school_local_id_check = value[:SchoolLocalId].present? && value[:SchoolLocalId] == id
@@ -139,7 +142,8 @@ class ChoiceSchoolsController < ApplicationController
                     count = count - 1
                     redirect_to summary_choice_schools_path and return if count == 0
                   elsif school_ranking >= 3
-                    school.update_column(:choice_rank, rank)
+                    school.update_column(
+                        :choice_rank, rank)
                     count = count - 1
                     redirect_to summary_choice_schools_path and return if count == 0
                   else
@@ -177,6 +181,7 @@ class ChoiceSchoolsController < ApplicationController
 
   # POST
   def submit
+    session[:student_schools].clear
     @choice_schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
     if @choice_schools.blank?
       redirect_to order_choice_schools_path, alert: "Please rank one or more schools and then submit your list"
