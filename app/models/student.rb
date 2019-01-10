@@ -19,7 +19,7 @@ class Student < ActiveRecord::Base
                     :schools_last_updated_at, :x_coordinate, :y_coordinate, :address_verified, :geo_code, :preferences_count,
                     :home_schools_json, :ell_schools_json, :sped_schools_json, :favorite, :step,
                     :ell_cluster, :sped_cluster, :zone, :token, :session_token, :student_id, :address_id, :ranked, :ranked_at,
-                    :parent_name, :choice_schools_json
+                    :parent_name, :choice_schools_json, :custom_school_name
 
   serialize :sibling_school_names
   serialize :sibling_school_ids
@@ -155,6 +155,7 @@ class Student < ActiveRecord::Base
 
       school_coordinates = ''
       school_ids = []
+      custom_school_name = []
 
       if school_list_type == "choice"
         Rails.logger.info "****sorting**"
@@ -171,9 +172,9 @@ class Student < ActiveRecord::Base
           schoolId = api_school[:SchoolID]
         end
         school = School.where(bps_id: schoolId).first
-
-        if school.present? && (!school_ids.include?(school.id))
+        if school.present? && ((!school_ids.include?(school.id)) || (!custom_school_name.include?(api_school[:SchoolName])))
           school_ids << school.id
+          custom_school_name << custom_school_name.push(api_school[:SchoolName])
           school_coordinates += "#{school.latitude},#{school.longitude}|"
           StudentSchool.create_from_api_response(self, school, api_school, school_list_type)
         end
@@ -186,7 +187,6 @@ class Student < ActiveRecord::Base
         drive_matrix = Google.drive_times(latitude, longitude, school_coordinates)
 
         api_schools.each_with_index do |api_school, i|
-
           # schoolId = (school_list_type == "choice" || school_list_type == "home") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
           if school_list_type == "choice" || school_list_type == "home"
             schoolId = api_school[:SchoolLocalId]
