@@ -21,15 +21,15 @@ class StudentsController < ApplicationController
 
         params[:student][:sibling_school_ids] = School.where("name IN (?)", params[:student][:sibling_school_names].try(:compact).try(:reject, &:empty?)).collect {|x| x.bps_id}.uniq
 
-        api_response = Webservice.get_address_matches(street_number, street_name, zipcode)
-        @addresses = api_response.try(:[], :List)
-        @errors = api_response.try(:[], :Error).try(:[], 0)
+        api_response = Webservice.get_address_matches(street_number, street_name, zipcode, SERVICE_CLIENT_CODE)
+        @addresses = api_response
+        @errors = api_response.blank? || api_response[0].blank?
       end
     end
 
     respond_to do |format|
-
       if @addresses.present? && @student.present? && @student.update_attributes(params[:student])
+        # @student.update_attributes(latitude: api_response[0][:Latitude], longitude: api_response[0][:Longitude])
         session[:current_student_id] = @student.id
         format.js { render template: "student_addresses/new" }
         format.html { redirect_to new_student_address_path }
@@ -49,8 +49,8 @@ class StudentsController < ApplicationController
           @error_message = "Zip code must be a 5-digit number. Please try again."
           flash[:alert] = "Zip code must be a 5-digit number. Please try again."
         else
-          @error_message = "Please enter the required search fields and try again."
-          flash[:alert] = "Please enter the required search fields and try again."
+          @error_message = "Address could not be found OR required search fields are missing"
+          flash[:alert] = "Address could not be found OR required search fields are missing"
         end
 
         format.js { render template: "students/errors/errors" }
@@ -66,9 +66,9 @@ class StudentsController < ApplicationController
     street_name   = params[:student].try(:[], :street_name)
     zipcode       = params[:student].try(:[], :zipcode)
 
-    api_response = Webservice.get_address_matches(street_number, street_name, zipcode)
-    @addresses = api_response.try(:[], :List)
-    @errors = api_response.try(:[], :Error).try(:[], 0)
+    api_response = Webservice.get_address_matches(street_number, street_name, zipcode, SERVICE_CLIENT_CODE)
+    @addresses = api_response
+    @errors = api_response.blank? || api_response[0].blank?
 
     respond_to do |format|
       if @addresses.present? && @student.update_attributes(params[:student])

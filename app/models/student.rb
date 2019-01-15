@@ -7,7 +7,6 @@ class Student < ActiveRecord::Base
   has_many :schools, through: :student_schools
   has_many :choice_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'choice']
   has_many :home_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'home']
-  has_many :zone_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'zone']
   has_many :ell_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'ell']
   has_many :sped_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'sped']
   has_many :starred_schools, class_name: 'StudentSchool', conditions: ['starred = ?', true]
@@ -18,14 +17,13 @@ class Student < ActiveRecord::Base
                     :sibling_school_names, :street_name, :street_number, :neighborhood, :zipcode, :latitude, :longitude,
                     :addressid, :user_id, :preference_ids, :school_ids, :sped_needs, :ell_language, :awc_invitation,
                     :schools_last_updated_at, :x_coordinate, :y_coordinate, :address_verified, :geo_code, :preferences_count,
-                    :home_schools_json, :zone_schools_json, :ell_schools_json, :sped_schools_json, :favorite, :step,
+                    :home_schools_json, :ell_schools_json, :sped_schools_json, :favorite, :step,
                     :ell_cluster, :sped_cluster, :zone, :token, :session_token, :student_id, :address_id, :ranked, :ranked_at,
                     :parent_name, :choice_schools_json
 
   serialize :sibling_school_names
   serialize :sibling_school_ids
   serialize :home_schools_json
-  serialize :zone_schools_json
   serialize :ell_schools_json
   serialize :sped_schools_json
   serialize :choice_schools_json
@@ -101,17 +99,12 @@ class Student < ActiveRecord::Base
   end
 
   def set_home_schools
-    api_schools = Webservice.get_home_schools(self.formatted_grade_level, self.addressid, self.awc_invitation, self.sibling_school_ids).try(:[], :List)
+    api_schools = Webservice.get_home_schools(self.formatted_grade_level, self.addressid, self.sibling_school_ids, SERVICE_CLIENT_CODE)
     save_student_schools(api_schools, 'home')
   end
 
-  def set_zone_schools
-    api_schools = Webservice.get_zone_schools(self.formatted_grade_level, self.addressid, self.sibling_school_ids).try(:[], :List)
-    save_student_schools(api_schools, 'zone')
-  end
-
   def set_ell_schools
-    api_schools = Webservice.get_ell_schools(self.formatted_grade_level, self.addressid, self.ell_language)
+    api_schools = Webservice.get_ell_schools(self.formatted_grade_level, self.addressid, self.ell_language, SERVICE_CLIENT_CODE)
     save_student_schools(api_schools, 'ell')
   end
 
@@ -152,10 +145,8 @@ class Student < ActiveRecord::Base
   # this method pulls a list of eligible schools from the GetSchoolChoices API,
   # saves the schools to student_schools, and fetches distance and walk/drive times from the Google Matrix API
   def save_student_schools(api_schools, school_list_type)
-
     # loop through the schools returned from the API, find the matching schools in the db,
     # save the eligibility variables on student_schools, and collect the coordinates for the matrix search, below
-
     if api_schools.present?
       self.send("#{school_list_type}_schools".to_sym).clear
       self.update_column("#{school_list_type}_schools_json".to_sym, api_schools.to_json) rescue nil
@@ -164,6 +155,8 @@ class Student < ActiveRecord::Base
 
       school_coordinates = ''
       school_ids = []
+      program_codes = []
+      school_names = []
 
       if school_list_type == "choice"
         Rails.logger.info "****sorting**"
@@ -171,18 +164,23 @@ class Student < ActiveRecord::Base
       end
 
       api_schools.each do |api_school|
-        schoolId =(school_list_type == "choice") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
-
+        # schoolId = (school_list_type == "choice" || school_list_type == "home") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
+        if school_list_type == "choice" || school_list_type == "home"
+          schoolId = api_school[:SchoolLocalId]
+        elsif school_list_type == "ell"
+          schoolId = api_school[:SchoolId]
+        else
+          schoolId = api_school[:SchoolID]
+        end
         school = School.where(bps_id: schoolId).first
-
-        if school.present? && (!school_ids.include?(school.id) || school_list_type == "choice")
+        if school.present? && (!school_ids.include?(school.id)) || api_schools.map{|x| true if program_codes.include?(x[:ProgramId]) && school_names.include?(x[:SchoolName])}
           school_ids << school.id
+          school_names.push(api_school[:SchoolName])
+          program_codes.push(api_school[:ProgramId])
           school_coordinates += "#{school.latitude},#{school.longitude}|"
-
           StudentSchool.create_from_api_response(self, school, api_school, school_list_type)
         end
       end
-
       # save distance, walk time and drive time on student_schools
       if longitude.present? && latitude.present?
 
@@ -191,9 +189,18 @@ class Student < ActiveRecord::Base
         drive_matrix = Google.drive_times(latitude, longitude, school_coordinates)
 
         api_schools.each_with_index do |api_school, i|
-	        
-          schoolId =(school_list_type == "choice") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
+          # schoolId = (school_list_type == "choice" || school_list_type == "home") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
+          if school_list_type == "choice" || school_list_type == "home"
+            schoolId = api_school[:SchoolLocalId]
+          elsif school_list_type == "ell"
+            schoolId = api_school[:SchoolId]
+          else
+            schoolId = api_school[:SchoolID]
+          end
           school = School.where(bps_id: schoolId).first
+          if school_list_type == "choice" || school_list_type == "home"
+            school.update_attributes(latitude: api_school[:Latitude], longitude: api_school[:Longitude])
+          end
           if school.present?
             walk_time = walk_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
             drive_time = drive_matrix.try(:[], i).try(:[], :duration).try(:[], :text)

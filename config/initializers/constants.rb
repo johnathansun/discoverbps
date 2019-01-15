@@ -1,4 +1,4 @@
-SCHOOL_YEAR  = "2018".freeze
+SCHOOL_YEAR  = TextSnippet.find_by_location("School Year").try(:text)
 AWC_GRADES = ['4', '5', '6'].freeze
 TRANSITION_GRADES = ['K0', 'K1', 'K2', '6', '9'].freeze
 NON_TRANSITION_GRADES = ['1', '2', '3', '4', '5', '7', '8', '10', '11', '12'].freeze
@@ -15,6 +15,7 @@ REG_TRANSITION_GRADE_LASTNAME_JQ = "Jan 9-13".freeze
 REG_TRANSITION_GRADE_LASTNAME_RZ = "Jan 16-20".freeze
 REG_TRANSITION_GRADE_LASTNAME_ALL = "Jan 23-27".freeze
 FIRST_DAY_OF_SCHOOL = "Sep 7".freeze
-SCHOOL_YEAR_CONTEXT = "2018-2019".freeze
+SCHOOL_YEAR_CONTEXT = "2019-2020".freeze
 SERVICE_CLIENT_CODE = "Discover".freeze
+TYPE= "Discover".freeze
 

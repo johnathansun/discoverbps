@@ -10,7 +10,7 @@
 	= render partial: 'layouts/schools/school_list_tabs'
 
 .wrap
-	%a.next_step{:href => "#{compare_schools_path}"}
+	%a.next_step{:href => "#{compare_schools_path}", :style=> "right:128px!important;"}
 		%span.next
 			= 'Next'
 		%span.text
@@ -23,7 +23,6 @@
 
 		#school_list
 			= render partial: 'schools/learn/home_schools'
-			= render partial: 'schools/learn/zone_schools'
 			= render partial: 'schools/learn/ell_schools'
 			= render partial: 'schools/learn/sped_schools'
 

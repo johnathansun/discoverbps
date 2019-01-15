@@ -5,10 +5,13 @@
     #choice-layout
       .light
         %h2{ style: "margin-bottom: 1em;" }
-          School Choice 2018
+          School Choice 2019
         - if flash[:alert].present?
           %h4.alert
-            = flash[:alert] 
+            = flash[:alert]
+            %br/
+            %br/
+            %a{:href => "https://docs.google.com/document/d/1odT-wPvJ12sJG8IicROXCB9fJeFMK7hb-ZZTzQaNZWo/edit#bookmark=id.p3nefkgsax79", :style => 'color:#2636b5', :target => "_blank"} Need help with a code?
         - elsif @RoundEndDate.present? && Time.now > Date.parse(@RoundEndDate)
           %h4.alert
             As of #{Date.parse(@RoundEndDate).strftime("%B %d %Y")}, school choice process for the round is closed.  We are no longer accepting choices on this system. If you would like to submit choices for the #{SCHOOL_YEAR_CONTEXT} school year, please visit a Welcome Center.                    
@@ -18,7 +21,7 @@
               = notification.message
 
         %p
-          Welcome to the Boston Public Schools’ new online choice form. At BPS, we are committed to providing your child with a high quality education. Whether your child will be entering sixth grade or ninth grade, we want to thank you for completing your school selections online and for choosing Boston Public Schools.
+          Welcome to the Boston Public Schools’ online choice form. At BPS, we are committed to providing your child with a high quality education. We want to thank you for completing your school selections online and for choosing Boston Public Schools.
         %p
           On the following screens, you will find a list of your eligible schools. You can click on each school to learn more about its SQF Tier, hours, uniform policy, extracurricular activities, and more. You can then rank your selection of preferred schools in your desired order. We encourage families to rank ALL listed options. Once you have ranked your schools and pressed submit, you're all set! There’s no need to complete any paper forms. You will receive a confirmation email with your rankings for your own records.
         %p

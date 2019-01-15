@@ -100,12 +100,10 @@ class SchoolsController < ApplicationController
           @home_schools = current_student.home_schools.order(:walk_distance)
         end
 
-        @zone_schools = current_student.zone_schools.order(:distance)
         @ell_schools = current_student.ell_schools.order(:distance)
         @sped_schools = current_student.sped_schools.order(:distance)
       else
         @home_schools = nil
-        @zone_schools = nil
         @ell_schools = nil
         @sped_schools = nil
       end      
@@ -146,7 +144,7 @@ class SchoolsController < ApplicationController
           'Uniform Policy',
           'School Email',
           "#{current_student.formatted_grade_level_name} Demand (#{current_school_year_range})",
-          "Open Seats",
+          "Open Seats for Next Year Registration",
           "Applicants",
           "Applicants/Open Seat"
 
@@ -156,11 +154,6 @@ class SchoolsController < ApplicationController
         if @home_schools.present?
           csv << ['HOME-BASED SCHOOLS']
           csv_row(@home_schools, csv)
-        end
-
-        if @zone_schools.present?
-          csv << ['ZONE-BASED SCHOOLS']
-          csv_row(@zone_schools, csv)
         end
 
         if @ell_schools.present?

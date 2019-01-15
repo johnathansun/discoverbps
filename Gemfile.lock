@@ -43,6 +43,7 @@ GEM
     clockwork (0.7.5)
       activesupport
       tzinfo
+    coderay (1.1.2)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -95,6 +96,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    method_source (0.9.0)
     mime-types (1.25.1)
     multi_json (1.11.2)
     multi_xml (0.5.5)
@@ -126,6 +128,11 @@ GEM
     orm_adapter (0.5.0)
     pg (0.17.1)
     polyglot (0.3.5)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-rails (0.3.6)
+      pry (>= 0.10.4)
     puma (2.15.3)
     rack (1.4.7)
     rack-cache (1.5.1)
@@ -147,6 +154,8 @@ GEM
       rails_stdout_logging
     rails_autolink (1.1.5)
       rails (> 3.1)
+    rails_autoscale_agent (0.4.0)
+      activesupport (>= 3.2)
     rails_serve_static_assets (0.0.2)
     rails_stdout_logging (0.0.3)
     railties (3.2.22)
@@ -211,10 +220,12 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-twitter
   pg
+  pry-rails
   puma
   rails (= 3.2.22)
   rails_12factor
   rails_autolink
+  rails_autoscale_agent
   rake (~> 10.3.1)
   ranked-model
   sass-rails (~> 3.2.3)
@@ -225,4 +236,4 @@ RUBY VERSION
    ruby 2.0.0p648
 
 BUNDLED WITH
-   1.13.3
+   1.16.0

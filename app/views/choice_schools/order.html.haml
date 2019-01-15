@@ -8,7 +8,6 @@
     .result.clearfix
       %h2{ style: "margin-bottom: 1em;" }
         Rank Your Schools
-
       %div{id: 'home_schools_list', class: "schools_list #{(params[:list_type] == 'zone' || params[:list_type] == 'ell' || params[:list_type] == 'sped') ? 'hidden' : ''}"}
         .sort_schools.column_center.column.light{ style: "margin-bottom: 3em;" }
           - if flash[:alert].present?
@@ -27,14 +26,15 @@
 
             = form_for(:schools, url: rank_choice_schools_path(token: params[:token], caseid: params[:caseid]), html: {method: :post}) do |f|
               %table
-                - @choice_schools.each do |student_school|                    
+                - @choice_schools.each do |student_school|
                   - school = student_school.school
                   %tr
                     %td{ style: "font-size: 20px; padding: 0 15px 25px 0;" }
-                      = text_field_tag "schools[#{student_school.id}]", student_school.choice_rank, style: "font-size: 20px; text-align: center; padding: 5px; width: 25px;"
+                      = text_field_tag "schools[#{student_school.id}]", session[:student_schools] && session[:student_schools][student_school.id.to_s].to_i != 0 ? session[:student_schools][student_school.id.to_s].to_i : '', style: "font-size: 20px; text-align: center; padding: 5px; width: 25px;"
                     %td{ style: "padding: 8px 10px 0 0;" }
                       %h3
-                        = school.name
+                        = student_school.school_name
+                        -#= school.name
                         = image_tag('star_starred.png', id: "star_#{student_school.id}_starred", class: 'star_starred', style: "display: #{student_school.starred? ? 'inline' : 'none'}; cursor: pointer;", data: {student_school_id: student_school.id})
                     %td{ style: "padding: 8px 20px 10px 0;" }
                       = student_school.program_code_description

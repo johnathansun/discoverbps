@@ -30,7 +30,8 @@ module Webservice
 	def self.get_student_homebased_choices(caseid, schoolyearcontext, clientcode)		
 		endpoint = "#{ENV['WEBAPI_REG_CHOICE_URL']}/StudentSchool/Choices"
 		response =  self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, { SchoolYear: schoolyearcontext, ClientCode: clientcode, Type: clientcode, CaseId: caseid }).body
-		
+		Rails.logger.info "******************** #{endpoint}"
+		Rails.logger.info "******************** #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
@@ -91,30 +92,33 @@ module Webservice
 	# :SectionOfCity=>"Boston", :Street=>"Court St", :StreetNum=>"26",
 	# :X=>"775356.657775879", :Y=>"2956018.47106934", :ZipCode=>"02108", :Zone=>"N"}]}
 
-	def self.get_address_matches(street_number, street_name, zipcode)
-		endpoint = "#{ENV['WEBSERVICE_URL']}/AddressMatches"
-		params = { streetnumber: street_number, street: street_name, zipcode: zipcode }.to_param
+	def self.get_address_matches(street_number, street_name, zipcode, clientcode)
+		endpoint = "#{ENV['WEBAPI_REG_CHOICE_URL']}/Students/AddressMatches"
+		params = { streetnumber: street_number, street: street_name, zipcode: zipcode, ClientCode: clientcode }
 		extract_from_array = false
-		response = self.get(endpoint, params)
-		self.extract(response, endpoint, params, extract_from_array, nil)
+		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, params).body
+		Rails.logger.info "********************ADDRESS MATCHES ENDPOINT: #{endpoint}"
+		Rails.logger.info "********************ADDRESS MATCHES RESPONSE: #{response}"
+		response.present? ? MultiJson.load(response, symbolize_keys: true) : response
 	end
 
-	##### HOME SCHOOLS #####
+
+
+	##### HOME SCHOOLS ####
 
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/schools.svc/HomeSchools?SchYear=2014&Grade=06&AddressID=68051&IsAwc=true&SiblingSchList=
 
-	def self.get_home_schools(grade_level, addressid, awc, sibling_ids=[])
-		endpoint = "#{ENV['WEBSERVICE_URL']}/HomeSchools"
+	def self.get_home_schools(grade_level, addressid, sibling_ids=[], clientcode)
+    endpoint = "#{ENV['WEBAPI_REG_CHOICE_URL']}/StudentSchool/Choices"
 		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
-		params = { schyear: SCHOOL_YEAR, grade: grade_level, addressid: addressid, isawc: awc, siblingschlist: sibling_school_ids }.to_param
-		extract_from_array = false
-		response = self.get(endpoint, params)
-		self.extract(response, endpoint, params, extract_from_array, nil)
+		payload = { SchoolYear: SCHOOL_YEAR, Grade: grade_level, AddressId: addressid, Type: TYPE, IsAwc: "0", LepStatus:"N", ClientCode: clientcode, siblingsList: sibling_school_ids }
+		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, payload).body
+		Rails.logger.info "********************HOME SCHOOLS ENDPOINT: #{endpoint}"
+		Rails.logger.info "********************HOME SCHOOLS RESPONSE: #{response}"
+		MultiJson.load(response, symbolize_keys: true)
 	end
 
-
 	##### ZONE SCHOOLS #####
-
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10Staging/schools.svc/GetSchoolInterestList?SchoolYear=2014-2015&Grade=03&ZipCode=02124&Geo=060&X=774444.562683105&Y=2961259.5579834&SiblingSchList=
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/ZoneSchools?SchYear=2014&Grade=07&SiblingSchList=&AddressID=68051
 
@@ -131,18 +135,15 @@ module Webservice
 
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/ELLList?schyear=2014&addressID=68051&gradeLevel=07
 
-	def self.get_ell_schools(grade_level, addressid, language)
-		endpoint = "#{ENV['WEBSERVICE_URL']}/ELLSchools"
-		params = { schyear: SCHOOL_YEAR, gradelevel: grade_level, addressid: addressid, language: language }.to_param
+	def self.get_ell_schools(grade_level, addressid, language, clientcode)
+		endpoint = "#{ENV['WEBAPI_REG_CHOICE_URL']}/Students/EllSchools"
+		payload = { AddressId: addressid, Grade: grade_level, Language: language, ClientCode: clientcode}
 		extract_from_array = false
-		response = self.get(endpoint, params)
-		self.extract(response, endpoint, params, extract_from_array, nil)
+		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'],endpoint, payload).body
+		self.extract(response, endpoint, payload, extract_from_array, nil)
 	end
 
-
 	##### SPED SCHOOLS #####
-
-	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/Schools.svc/SPEDList?schyear=2014&addressID=68051&gradeLevel=07
 
 	def self.get_sped_schools(grade_level, addressid)
 		endpoint = "#{ENV['WEBSERVICE_URL']}/SPEDSchools"
@@ -299,6 +300,18 @@ module Webservice
 		Faraday.new(url: "#{endpoint}?#{params}").get.body
 	end
 
+	def self.getWithHeader(headerKey, endpoint, params)
+		con = Faraday.new
+
+		res = con.get do |req|
+			req.url "#{endpoint}?#{params}"
+			req.headers["BpsToken"] = headerKey
+		end
+		puts "Ell Schools GetWithHeaders body: #{res.body}"
+		return res.body
+	end
+
+
 	def self.post(endpoint, payload)
 		Faraday.new(url: "#{endpoint}").post do |req|
 		  req.headers["Content-Type"] = "application/json"
@@ -309,8 +322,9 @@ module Webservice
 	def self.postWithHeader(headerKey, endpoint, payload)
 		Faraday.new(url: "#{endpoint}").post do |req|
 		  req.headers["Content-Type"] = "application/json"
+			req.options[:timeout] = 500
 		  req.headers["BpsToken"] = headerKey
-		  req.body = payload.to_json
+			req.body = payload.to_json
 		end
 	end
 
