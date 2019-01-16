@@ -140,11 +140,12 @@ class ChoiceSchoolsController < ApplicationController
                   if school_local_id_check || school_ranking >= 1
                     school.update_column(:choice_rank, rank)
                     count = count - 1
+                    break true if count != 0
                     redirect_to summary_choice_schools_path and return if count == 0
                   elsif school_ranking >= 3
-                    school.update_column(
-                        :choice_rank, rank)
+                    school.update_column(:choice_rank, rank)
                     count = count - 1
+                    break true if count != 0
                     redirect_to summary_choice_schools_path and return if count == 0
                   else
                     school.update_column(:choice_rank, rank)
@@ -155,6 +156,12 @@ class ChoiceSchoolsController < ApplicationController
                 if school_ranking >= 3
                   school.update_column(:choice_rank, rank)
                   count = count - 1
+                  redirect_to summary_choice_schools_path and return if count == 0
+                elsif school_ranking == 2
+                  school.update_column(:choice_rank, rank)
+                  count = count - 1
+                  school_ranking = school_ranking - 1
+                  next if count != 0
                   redirect_to summary_choice_schools_path and return if count == 0
                 else
                   school.update_column(:choice_rank, rank)
@@ -181,7 +188,6 @@ class ChoiceSchoolsController < ApplicationController
 
   # POST
   def submit
-    session[:student_schools].clear
     @choice_schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
     if @choice_schools.blank?
       redirect_to order_choice_schools_path, alert: "Please rank one or more schools and then submit your list"
@@ -192,10 +198,10 @@ class ChoiceSchoolsController < ApplicationController
       @choice_schools.each do |student_school|
         payload << { "ProgramCode" => student_school.program_code, "SchoolLocalId" => student_school.school.bps_id, "Rank" => student_school.choice_rank, "Grade" => @student.formatted_grade_level}
       end
-      
       @student.update_attributes(ranked: true, ranked_at: Time.now, parent_name: params[:parent_name])
       rankedResponse = Webservice.save_ranked_choices(session[:session_token], payload, params[:parent_name], SERVICE_CLIENT_CODE, SCHOOL_YEAR_CONTEXT, session[:caseid])
       Webservice.send_ranked_email(session[:session_token], @student.token, session[:caseid])
+      session[:student_schools].clear
       redirect_to success_choice_schools_path
     end
   end

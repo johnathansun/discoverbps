@@ -21,6 +21,9 @@
             %li
               %h3
                 = school.try(:[], :SchoolName)
+                = "-"
+                = school.try(:[], :ProgramCode)
+
 
       .light{ style: "font-style: italic; margin-top: 3em;" }
         If you have questions about using this site, please email
