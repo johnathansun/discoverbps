@@ -17,6 +17,8 @@
             %li
               %h3
                 = school.school.name
+                = "-"
+                = school.program_code
 
         = form_for(:schools, url: submit_choice_schools_path, html: {method: :post}) do |f|
           - if flash[:alert].present?

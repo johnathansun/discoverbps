@@ -140,11 +140,12 @@ class ChoiceSchoolsController < ApplicationController
                   if school_local_id_check || school_ranking >= 1
                     school.update_column(:choice_rank, rank)
                     count = count - 1
+                    break true if count != 0
                     redirect_to summary_choice_schools_path and return if count == 0
                   elsif school_ranking >= 3
-                    school.update_column(
-                        :choice_rank, rank)
+                    school.update_column(:choice_rank, rank)
                     count = count - 1
+                    break true if count != 0
                     redirect_to summary_choice_schools_path and return if count == 0
                   else
                     school.update_column(:choice_rank, rank)
@@ -155,6 +156,12 @@ class ChoiceSchoolsController < ApplicationController
                 if school_ranking >= 3
                   school.update_column(:choice_rank, rank)
                   count = count - 1
+                  redirect_to summary_choice_schools_path and return if count == 0
+                elsif school_ranking == 2
+                  school.update_column(:choice_rank, rank)
+                  count = count - 1
+                  school_ranking = school_ranking - 1
+                  next if count != 0
                   redirect_to summary_choice_schools_path and return if count == 0
                 else
                   school.update_column(:choice_rank, rank)
