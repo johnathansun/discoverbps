@@ -188,7 +188,6 @@ class ChoiceSchoolsController < ApplicationController
 
   # POST
   def submit
-    session[:student_schools].clear
     @choice_schools = @student.choice_schools.select { |x| x.choice_rank.present? }.sort_by {|x| x.choice_rank }
     if @choice_schools.blank?
       redirect_to order_choice_schools_path, alert: "Please rank one or more schools and then submit your list"
@@ -203,6 +202,7 @@ class ChoiceSchoolsController < ApplicationController
       @student.update_attributes(ranked: true, ranked_at: Time.now, parent_name: params[:parent_name])
       rankedResponse = Webservice.save_ranked_choices(session[:session_token], payload, params[:parent_name], SERVICE_CLIENT_CODE, SCHOOL_YEAR_CONTEXT, session[:caseid])
       Webservice.send_ranked_email(session[:session_token], @student.token, session[:caseid])
+      session[:student_schools].clear
       redirect_to success_choice_schools_path
     end
   end
