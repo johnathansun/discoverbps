@@ -47,6 +47,7 @@ module Webservice
 		endpoint = "#{ENV['WEBSERVICE_CHOICE_URL']}/student/GetStudent"
 		params = { studentToken: token, schyear: SCHOOL_YEAR, caseId: caseid}.to_param
 		response = self.get(endpoint, params)
+		Rails.logger.info "********* GET STUDENT ********* #{response}"
 		MultiJson.load(response, symbolize_keys: true)
 	end
 
