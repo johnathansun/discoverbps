@@ -112,6 +112,7 @@ module Webservice
 	def self.get_home_schools(grade_level, addressid, sibling_ids=[], clientcode)
     endpoint = "#{ENV['WEBAPI_REG_CHOICE_URL']}/StudentSchool/Choices"
 		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
+		grade_level == "04" || "05" || "06" ? is_awc = "Y" : is_awc = "0"
 		payload = { SchoolYear: SCHOOL_YEAR, Grade: grade_level, AddressId: addressid, Type: TYPE, IsAwc: "0", LepStatus:"N", ClientCode: clientcode, siblingsList: sibling_school_ids }
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, payload).body
 		Rails.logger.info "********************HOME SCHOOLS ENDPOINT: #{endpoint}"
