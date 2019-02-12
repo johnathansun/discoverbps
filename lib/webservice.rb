@@ -109,11 +109,11 @@ module Webservice
 
 	# https://apps.mybps.org/WebServiceDiscoverBPSv1.10DEV/schools.svc/HomeSchools?SchYear=2014&Grade=06&AddressID=68051&IsAwc=true&SiblingSchList=
 
-	def self.get_home_schools(grade_level, addressid, sibling_ids=[], clientcode)
+	def self.get_home_schools(grade_level, addressid, sibling_ids=[], clientcode, is_awc)
     endpoint = "#{ENV['WEBAPI_REG_CHOICE_URL']}/StudentSchool/Choices"
 		sibling_school_ids = sibling_ids.try(:compact).try(:join, ",")
-		grade_level == "04" || "05" || "06" ? is_awc = "Y" : is_awc = "0"
-		payload = { SchoolYear: SCHOOL_YEAR, Grade: grade_level, AddressId: addressid, Type: TYPE, IsAwc: is_awc, LepStatus:"N", ClientCode: clientcode, siblingsList: sibling_school_ids }
+		check_is_awc = is_awc == 'Y' ? is_awc : "N"
+		payload = { SchoolYear: SCHOOL_YEAR, Grade: grade_level, AddressId: addressid, Type: TYPE, IsAwc: check_is_awc, LepStatus:"N", ClientCode: clientcode, siblingsList: sibling_school_ids }
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, payload).body
 		Rails.logger.info "********************HOME SCHOOLS ENDPOINT: #{endpoint}"
 		Rails.logger.info "********************HOME SCHOOLS RESPONSE: #{response}"

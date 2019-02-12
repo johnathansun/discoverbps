@@ -98,8 +98,8 @@ class Student < ActiveRecord::Base
     save_student_schools(schools_array, 'choice')
   end
 
-  def set_home_schools
-    api_schools = Webservice.get_home_schools(self.formatted_grade_level, self.addressid, self.sibling_school_ids, SERVICE_CLIENT_CODE)
+  def set_home_schools(is_awc)
+    api_schools = Webservice.get_home_schools(self.formatted_grade_level, self.addressid, self.sibling_school_ids, SERVICE_CLIENT_CODE, is_awc)
     save_student_schools(api_schools, 'home')
   end
 
