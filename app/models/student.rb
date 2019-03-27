@@ -173,12 +173,14 @@ class Student < ActiveRecord::Base
           schoolId = api_school[:SchoolID]
         end
         school = School.where(bps_id: schoolId).first
-        if school.present? && (!school_ids.include?(school.id)) || api_schools.map{|x| true if program_codes.include?(x[:ProgramId]) && school_names.include?(x[:SchoolName])}
-          school_ids << school.id
-          school_names.push(api_school[:SchoolName])
-          program_codes.push(api_school[:ProgramId])
-          school_coordinates += "#{school.latitude},#{school.longitude}|"
-          StudentSchool.create_from_api_response(self, school, api_school, school_list_type)
+        if school.present?
+          if (!school_ids.include?(school.id)) || api_schools.map{|x| true if program_codes.include?(x[:ProgramId]) && school_names.include?(x[:SchoolName])}
+            school_ids << school.id
+            school_names.push(api_school[:SchoolName])
+            program_codes.push(api_school[:ProgramId])
+            school_coordinates += "#{school.latitude},#{school.longitude}|"
+            StudentSchool.create_from_api_response(self, school, api_school, school_list_type)
+          end
         end
       end
       # save distance, walk time and drive time on student_schools
