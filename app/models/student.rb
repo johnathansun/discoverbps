@@ -183,6 +183,7 @@ class Student < ActiveRecord::Base
           end
         end
       end
+
       # save distance, walk time and drive time on student_schools
       if longitude.present? && latitude.present?
 
