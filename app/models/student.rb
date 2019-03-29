@@ -173,13 +173,15 @@ class Student < ActiveRecord::Base
           schoolId = api_school[:SchoolID]
         end
         school = School.where(bps_id: schoolId).first
-        if school.present?
-          if (!school_ids.include?(school.id)) || api_schools.map{|x| true if program_codes.include?(x[:ProgramId]) && school_names.include?(x[:SchoolName])}
-            school_ids << school.id
+        if school_list_type == "home"
+          if school.present? && (!school_ids.include?(school.id))
+            schools_with_school_list_type school, api_school,school_list_type, school_ids, school_coordinates
+          end
+        elsif school_list_type == "choice"
+          if school.present? && (!school_ids.include?(school.id)) || api_schools.map{|x| true if program_codes.include?(x[:ProgramId]) && school_names.include?(x[:SchoolName])}
             school_names.push(api_school[:SchoolName])
             program_codes.push(api_school[:ProgramId])
-            school_coordinates += "#{school.latitude},#{school.longitude}|"
-            StudentSchool.create_from_api_response(self, school, api_school, school_list_type)
+            schools_with_school_list_type school, api_school,school_list_type, school_ids, school_coordinates
           end
         end
       end
@@ -222,6 +224,12 @@ class Student < ActiveRecord::Base
     else
       return false
     end
+  end
+
+  def schools_with_school_list_type school, api_school, school_list_type, school_ids, school_coordinates
+    school_ids << school.id
+    school_coordinates += "#{school.latitude},#{school.longitude}|"
+    StudentSchool.create_from_api_response(self, school, api_school, school_list_type)
   end
 
   def strip_first_name
