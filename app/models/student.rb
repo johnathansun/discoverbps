@@ -98,8 +98,8 @@ class Student < ActiveRecord::Base
     save_student_schools(schools_array, 'choice')
   end
 
-  def set_home_schools
-    api_schools = Webservice.get_home_schools(self.formatted_grade_level, self.addressid, self.sibling_school_ids, SERVICE_CLIENT_CODE)
+  def set_home_schools(is_awc)
+    api_schools = Webservice.get_home_schools(self.formatted_grade_level, self.addressid, self.sibling_school_ids, SERVICE_CLIENT_CODE, is_awc)
     save_student_schools(api_schools, 'home')
   end
 
@@ -173,14 +173,19 @@ class Student < ActiveRecord::Base
           schoolId = api_school[:SchoolID]
         end
         school = School.where(bps_id: schoolId).first
-        if school.present? && (!school_ids.include?(school.id)) || api_schools.map{|x| true if program_codes.include?(x[:ProgramId]) && school_names.include?(x[:SchoolName])}
-          school_ids << school.id
-          school_names.push(api_school[:SchoolName])
-          program_codes.push(api_school[:ProgramId])
-          school_coordinates += "#{school.latitude},#{school.longitude}|"
-          StudentSchool.create_from_api_response(self, school, api_school, school_list_type)
+        if school_list_type == "home"
+          if school.present? && (!school_ids.include?(school.id))
+            schools_with_school_list_type school, api_school,school_list_type, school_ids, school_coordinates
+          end
+        elsif school_list_type == "choice"
+          if school.present? && (!school_ids.include?(school.id)) || api_schools.map{|x| true if program_codes.include?(x[:ProgramId]) && school_names.include?(x[:SchoolName])}
+            school_names.push(api_school[:SchoolName])
+            program_codes.push(api_school[:ProgramId])
+            schools_with_school_list_type school, api_school,school_list_type, school_ids, school_coordinates
+          end
         end
       end
+
       # save distance, walk time and drive time on student_schools
       if longitude.present? && latitude.present?
 
@@ -219,6 +224,12 @@ class Student < ActiveRecord::Base
     else
       return false
     end
+  end
+
+  def schools_with_school_list_type school, api_school, school_list_type, school_ids, school_coordinates
+    school_ids << school.id
+    school_coordinates += "#{school.latitude},#{school.longitude}|"
+    StudentSchool.create_from_api_response(self, school, api_school, school_list_type)
   end
 
   def strip_first_name
