@@ -156,8 +156,8 @@ class Student < ActiveRecord::Base
       school_coordinates = ''
       school_ids = []
       program_codes = []
-      school_names = []
       mid_codes = []
+      school_names = []
 
       if school_list_type == "choice"
         Rails.logger.info "****sorting**"
