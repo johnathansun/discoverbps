@@ -156,6 +156,7 @@ class Student < ActiveRecord::Base
       school_coordinates = ''
       school_ids = []
       program_codes = []
+      mid_codes = []
       school_names = []
 
       if school_list_type == "choice"
@@ -173,10 +174,16 @@ class Student < ActiveRecord::Base
           schoolId = api_school[:SchoolID]
         end
         school = School.where(bps_id: schoolId).first
-        if school_list_type == "home"
+        if school_list_type == "home" || school_list_type == "ell"
           if school.present? && (!school_ids.include?(school.id))
             schools_with_school_list_type school, api_school,school_list_type, school_ids, school_coordinates
           end
+        elsif school_list_type == "sped"
+         if school.present? && ( !school_ids.include?(school.id) || api_schools.map{ |mid_code| true if (!mid_codes.include?(mid_code[:MidCode]) ) } )
+           mid_codes.push(api_school[:MidCode])
+            schools_with_school_list_type school, api_school,school_list_type, school_ids, school_coordinates
+         end
+
         elsif school_list_type == "choice"
           if school.present? && (!school_ids.include?(school.id)) || api_schools.map{|x| true if program_codes.include?(x[:ProgramId]) && school_names.include?(x[:SchoolName])}
             school_names.push(api_school[:SchoolName])
