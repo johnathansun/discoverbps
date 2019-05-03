@@ -14,7 +14,6 @@ class StudentAwcPreferencesController < ApplicationController
         # the home schools call must always preceed zone schools
         current_student.set_home_schools(session[:is_AWC])
         session[:is_AWC] = nil
-        binding.pry
 
         format.js { render template: "student_ell_preferences/new" }
         format.html { redirect_to new_student_ell_preference_path }
