@@ -7,12 +7,20 @@
   %div{ style: "margin-bottom: 2em;font-size:12pt;"  }
     To explore the details about the quality of your home-based schools, please visit your
     .dropdown
-      %button.dropbtn Customized School Quality Report
+      %button.dropbtn Customized School Quality Report >
       .dropdown-content
-        %a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQF2015-16Spanish/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Spanish
-        %a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQF2015-16Portuguese/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Portuguese
-        %a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQF2015-16Haitian/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Haitian
-        %a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFMetricsDashboard/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} English
+        %a{target: "_blank", class: "text_B0", :href => "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFEnglish/FullInteractive?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} English
+        %a{target: "_blank", class: "text_B0", :href => "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFSpanish/FullInteractive?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Spanish
+        %a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFArabic/Landing1v2Printable.pdf?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Arabic
+        %a{target: "_blank", class: "text_B0", :href => "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFCapeVerdean/FullInteractive?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Cape Verdean
+        %a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFChinese/Landing1v2Printable.pdf?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Chinese
+        %a{target: "_blank", class: "text_B0", :href => "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFFrench/FullInteractive?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} French
+        %a{target: "_blank", class: "text_B0", :href => "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFHaitian/FullInteractive?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Haitian
+        %a{target: "_blank", class: "text_B0", :href => "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFPortuguese/FullInteractive?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Portuguese
+        %a{target: "_blank", class: "text_B0", :href => "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFSomali/FullInteractive?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Somali
+        %a{target: "_blank", class: "text_B0", :href => "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFVietnamese/FullInteractive?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Vietnamese
+
+
   .list_content
     .flexible_content
       - if @home_schools.present?
