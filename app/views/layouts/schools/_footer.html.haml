@@ -30,6 +30,22 @@
 		%p
 			= link_to 'Print', print_lists_schools_path, title: "Print"
 
+		%p
+			.dropdown
+				= link_to 'Print School Quality report', title: "Print School Quality Report"
+				.dropdown-content{ style: 'right: 61%; top: -264px;'}
+					%a{target: "_blank", class: "text_B0", :href => "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFEnglish/Landing1v2Printable.pdf?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} English
+					%a{target: "_blank", class: "text_B0", :href => "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFSpanish/Landing1v2Printable.pdf?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Spanish
+					%a{target: "_blank", class: "text_B0", :href => "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFArabic/Landing1v2Printable?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Arabic
+					%a{target: "_blank", class: "text_B0", :href => "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFCapeVerdean/Landing1v2Printable.pdf?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Cape Verdean
+					%a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFChinese/Landing1v2Printable.pdf?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Chinese
+					%a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFFrench/Landing1v2Printable.pdf?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} French
+					%a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFHaitian/Landing1v2Printable.pdf?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Haitian
+					%a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFPortuguese/Landing1v2Printable.pdf?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Portuguese
+					%a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFSomali/Landing1v2Printable.pdf?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Somali
+					%a{target: "_blank", class: "text_B0", :href => "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFVietnamese/Landing1v2Printable.pdf?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@home_school_ids}"} Vietnamese
+
+
 		- if current_user.blank?
 			%p
 				= link_to 'Save Your Lists', "#", id: "footer_save_button", title: "Save"
