@@ -251,6 +251,6 @@ module SchoolsHelper
 
 	def sqf_helper_string(schoolId, grade)
 		@formatSchoolId = sql_helper_group_schoolId(schoolId, grade)
-		return "http://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFMetricsDashboard/Scores?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no&School%20Code=#{@formatSchoolId}"
+		return "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFEnglish/FullInteractive?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@formatSchoolId}"
 	end
 end
