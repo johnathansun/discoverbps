@@ -262,7 +262,7 @@ class School < ActiveRecord::Base
 		SchoolData.update_hours!(school_id)
 		SchoolData.update_languages!(school_id)
 		SchoolData.update_partners!(school_id)
-		SchoolData.update_photos!(school_id)
+		#SchoolData.update_photos!(school_id)
 		SchoolData.update_preview_dates!(school_id)
 		SchoolData.update_programs!(school_id)
 		SchoolData.update_sports!(school_id)
