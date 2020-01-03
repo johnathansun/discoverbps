@@ -30,7 +30,7 @@ class StudentSchool < ActiveRecord::Base
                  ell_cluster: school_hash[:EllCluster],
                  ell_description: school_hash[:ProgramDescription],
                  program_code: ( school_list_type == "ell" ? school_hash[:ProgramCode] : school_list_type == "sped" ? school_hash[:MidCode] : school_hash[:ProgramId]),
-                 program_code_description: ( school_list_type == "sped" ? school_hash[:ProgramDescription] : [:ProgramCodeDescription] ),
+                 program_code_description: ( school_list_type == "sped" ? school_hash[:ProgramDescription] : school_hash[:ProgramCodeDescription] ),
                  call_id: school_hash[:CallId],
                  special_admissions: school_hash[:IsSpecAdmissions],
                  walk_distance: school_hash[:WalkDistance],
