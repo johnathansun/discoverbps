@@ -42,10 +42,16 @@ class Student < ActiveRecord::Base
     response = Webservice.get_student_homebased_choices(caseid, SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE)
 
     studentInfo = Webservice.get_student(token, caseid)
-       
-    if response.present?
-      student = Student.where(token: token).first_or_initialize
+    student = Student.where(token: token).first_or_initialize
 
+    old_case_error_response = response[:Message]
+    if old_case_error_response
+      old_case_id = student.student_caseid
+
+      Rails.logger.info "Error: #{old_case_error_response}"
+      Rails.logger.info "Old URL: https://discover.bostonpublicschools.org/choice_schools?token=#{token}&caseid=#{old_case_id}"
+      false
+    elsif response.present?
       if student.save_from_api_response(session_id, session_token, studentInfo, caseid)
         if student.set_choice_schools(response)        
           student
@@ -114,7 +120,6 @@ class Student < ActiveRecord::Base
   end
 
   def save_from_api_response(session_id, session_token, student_hash, caseid)
-
     self.session_id = session_id
     self.session_token = session_token
     self.student_id = student_hash[:StudentID].try(:strip)
