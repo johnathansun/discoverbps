@@ -39,7 +39,7 @@ class Student < ActiveRecord::Base
 
   def self.save_choice_student_and_schools(token, session_token, session_id, caseid)
     
-    response = Webservice.get_student_homebased_choices(caseid, SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE)
+    response = Webservice.get_student_homebased_choices(caseid, SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE, token)
 
     studentInfo = Webservice.get_student(token, caseid)
        
