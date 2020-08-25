@@ -13,7 +13,6 @@ class StudentSchool < ActiveRecord::Base
   def self.create_from_api_response(student, school, school_hash, school_list_type)
 
     Rails.logger.info "******************* #{school_hash}"
-
     self.create!(student_id: student.id,
                  school_id: school.id,
                  school_name: school_hash[:SchoolName],
