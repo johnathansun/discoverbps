@@ -43,8 +43,8 @@ class Student < ActiveRecord::Base
 
     studentInfo = Webservice.get_student(token, caseid)
     student = Student.where(token: token).first_or_initialize
-    old_case_error_response = response[:Message]
-    if old_case_error_response
+    old_case_error_response = response.map{|x| x[:Message]}
+    if old_case_error_response.any?
       old_case_id = student.student_caseid
 
       Rails.logger.info "Error: #{old_case_error_response}"
