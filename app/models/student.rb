@@ -43,16 +43,16 @@ class Student < ActiveRecord::Base
 
     studentInfo = Webservice.get_student(token, caseid)
     student = Student.where(token: token).first_or_initialize
-    old_case_error_response = response[:Message]
+    old_case_error_response = response.is_a?(Hash) && response[:Message]
     if old_case_error_response
       old_case_id = student.student_caseid
 
       Rails.logger.info "Error: #{old_case_error_response}"
-      Rails.logger.info "Old URL: https://discover.bostonpublicschools.org/choice_schools?token=#{token}&caseid=#{old_case_id}"
+      Rails.logger.info "Old URL: https://discover-bps-staging.herokuapp.com/choice_schools?token=#{token}&caseid=#{old_case_id}"
       false
     elsif response.present?
       if student.save_from_api_response(session_id, session_token, studentInfo, caseid)
-        if student.set_choice_schools(response[:choices])
+        if student.set_choice_schools(response)
           student
         else
           false
