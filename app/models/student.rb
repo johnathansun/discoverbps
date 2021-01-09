@@ -187,10 +187,12 @@ class Student < ActiveRecord::Base
             schools_with_school_list_type school, api_school,school_list_type, school_ids, school_coordinates
           end
         elsif school_list_type == "choice"
-          if school.present? && (!school_ids.include?(school.id)) || api_schools.map{|x| true if program_codes.include?(x[:ProgramId]) && school_names.include?(x[:SchoolName])}
-            school_names.push(api_school[:SchoolName])
-            program_codes.push(api_school[:ProgramId])
-            schools_with_school_list_type school, api_school,school_list_type, school_ids, school_coordinates
+          if school.present?
+            if !school_ids.include?(school.id) || api_schools.map{|x| true if (program_codes.include?(x[:ProgramId]) && school_names.include?(x[:SchoolName]))}.include?(true)
+              school_names.push(api_school[:SchoolName])
+              program_codes.push(api_school[:ProgramId])
+              schools_with_school_list_type school, api_school,school_list_type, school_ids, school_coordinates
+            end
           end
         end
       end
@@ -213,7 +215,9 @@ class Student < ActiveRecord::Base
           end
           school = School.where(bps_id: schoolId).first
           if school_list_type == "choice" || school_list_type == "home"
-            school.update_attributes(latitude: api_school[:Latitude], longitude: api_school[:Longitude])
+            if school.present?
+              school.update_attributes(latitude: api_school[:Latitude], longitude: api_school[:Longitude])
+            end
           end
           if school.present?
             walk_time = walk_matrix.try(:[], i).try(:[], :duration).try(:[], :text)
