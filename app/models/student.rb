@@ -39,15 +39,20 @@ class Student < ActiveRecord::Base
 
   def self.save_choice_student_and_schools(token, session_token, session_id, caseid)
     
-    response = Webservice.get_student_homebased_choices(caseid, SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE)
+    response = Webservice.get_student_homebased_choices(caseid, SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE, token)
 
     studentInfo = Webservice.get_student(token, caseid)
-       
-    if response.present?
-      student = Student.where(token: token).first_or_initialize
+    student = Student.where(token: token).first_or_initialize
+    old_case_error_response = response.map{|x| x[:Message]}
+    if old_case_error_response.any?
+      old_case_id = student.student_caseid
 
+      Rails.logger.info "Error: #{old_case_error_response}"
+      Rails.logger.info "Old URL: https://discover.bostonpublicschools.org/choice_schools?token=#{token}&caseid=#{old_case_id}"
+      false
+    elsif response.present?
       if student.save_from_api_response(session_id, session_token, studentInfo, caseid)
-        if student.set_choice_schools(response)        
+        if student.set_choice_schools(response)
           student
         else
           false
@@ -114,7 +119,6 @@ class Student < ActiveRecord::Base
   end
 
   def save_from_api_response(session_id, session_token, student_hash, caseid)
-
     self.session_id = session_id
     self.session_token = session_token
     self.student_id = student_hash[:StudentID].try(:strip)
@@ -156,13 +160,13 @@ class Student < ActiveRecord::Base
       school_coordinates = ''
       school_ids = []
       program_codes = []
+      mid_codes = []
       school_names = []
 
       if school_list_type == "choice"
         Rails.logger.info "****sorting**"
         api_schools.sort_by{|c| c[:SortOrder]}
       end
-
       api_schools.each do |api_school|
         # schoolId = (school_list_type == "choice" || school_list_type == "home") ? api_school[:SchoolLocalId] : api_school[:SchoolID]
         if school_list_type == "choice" || school_list_type == "home"
@@ -173,8 +177,13 @@ class Student < ActiveRecord::Base
           schoolId = api_school[:SchoolID]
         end
         school = School.where(bps_id: schoolId).first
-        if school_list_type == "home"
+        if school_list_type == "home" || school_list_type == "ell"
           if school.present? && (!school_ids.include?(school.id))
+            schools_with_school_list_type school, api_school,school_list_type, school_ids, school_coordinates
+          end
+        elsif school_list_type == "sped"
+          if school.present? && (!school_ids.include?(school.id) || api_schools.map{ |mid_code| true if (!mid_codes.include?(mid_code[:MidCode]) )} )
+            mid_codes.push(api_school[:MidCode])
             schools_with_school_list_type school, api_school,school_list_type, school_ids, school_coordinates
           end
         elsif school_list_type == "choice"

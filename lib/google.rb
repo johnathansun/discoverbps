@@ -1,12 +1,12 @@
 module Google
 
   def self.walk_times(home_latitude, home_longitude, school_coordinates)
-    url = "http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{home_latitude},#{home_longitude}&destinations=#{school_coordinates}&mode=walking&units=imperial&sensor=false"
+    url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=#{home_latitude},#{home_longitude}&destinations=#{school_coordinates}&mode=walking&units=imperial&sensor=false"
     self.get_results(url)
   end
 
   def self.drive_times(home_latitude, home_longitude, school_coordinates)
-    url = "http://maps.googleapis.com/maps/api/distancematrix/json?origins=#{home_latitude},#{home_longitude}&destinations=#{school_coordinates}&mode=driving&units=imperial&sensor=false"
+    url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=#{home_latitude},#{home_longitude}&destinations=#{school_coordinates}&mode=driving&units=imperial&sensor=false"
     self.get_results(url)
   end
 
