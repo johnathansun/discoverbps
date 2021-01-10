@@ -126,7 +126,7 @@ class ChoiceSchoolsController < ApplicationController
         redirect_to order_choice_schools_path, alert: "Duplicate rankings are not allowed!"
       else
         if properly_formatted && isRankings_Integer && order_ranking
-          response = Webservice.get_student_homebased_choices(session[:caseid], SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE)
+          response = Webservice.get_student_homebased_choices(session[:caseid], SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE, session[:session_token])
           school_ranking = params[:schools].values.reject(&:empty?).count
           count = school_ranking
           params[:schools].each do |id, rank|
