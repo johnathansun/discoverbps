@@ -14,7 +14,7 @@
             %a{:href => "https://docs.google.com/document/d/1odT-wPvJ12sJG8IicROXCB9fJeFMK7hb-ZZTzQaNZWo/edit#bookmark=id.p3nefkgsax79", :style => 'color:#2636b5', :target => "_blank"} Need help with a code?
         - elsif @RoundEndDate.present? && Time.now > Date.parse(@RoundEndDate)
           %h4.alert
-            As of #{Date.parse(@RoundEndDate).strftime("%B %d %Y")}, school choice process for the round is closed.  We are no longer accepting choices on this system. If you would like to submit choices for the #{SCHOOL_YEAR_CONTEXT} school year, please visit a Welcome Center.                    
+            As of #{Date.parse(@RoundEndDate).strftime("%B %d %Y")}, school choice process for the round is closed.  We are no longer accepting choices on this system. If you would like to submit choices for the #{SCHOOL_YEAR_CONTEXT} school year, please contact a Welcome Center.
         - elsif @notifications.present?
           - @notifications.each do |notification|
             %h4.alert
