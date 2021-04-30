@@ -7,4 +7,8 @@ class TextSnippet < ActiveRecord::Base
 	def text?
 		self.text.html_safe
 	end
+
+	def self.find(obj)
+		friendly.find(obj)
+	end
 end

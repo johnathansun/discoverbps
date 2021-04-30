@@ -34,6 +34,10 @@ class School < ActiveRecord::Base
 	# after_validation :geocode
 	before_save :strip_bps_id
 
+	def self.find(obj)
+		friendly.find(obj)
+	end
+	
 	def full_address
 		"#{api_basic_info[:campus1address1]} #{api_basic_info[:campus1city]} #{api_basic_info[:campus1state]} #{api_basic_info[:campus1zip]} "
 	end

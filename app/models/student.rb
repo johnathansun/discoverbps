@@ -2,16 +2,16 @@ class Student < ActiveRecord::Base
   acts_as_paranoid
 
   belongs_to :user
-	has_and_belongs_to_many :preferences, uniq: true, after_add: :count_preferences, after_remove: :count_preferences
-	has_many :student_schools, uniq: true
+	has_and_belongs_to_many :preferences,-> {distinct}, after_add: :count_preferences, after_remove: :count_preferences
+	has_many :student_schools,-> {distinct}
   has_many :schools, through: :student_schools
-  has_many :choice_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'choice']
-  has_many :home_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'home']
-  has_many :ell_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'ell']
-  has_many :sped_schools, class_name: 'StudentSchool', conditions: ['school_type = ?', 'sped']
-  has_many :starred_schools, class_name: 'StudentSchool', conditions: ['starred = ?', true]
+  has_many :choice_schools, -> { where('school_type = ?', 'choice') }, class_name: 'StudentSchool'
+  has_many :home_schools, -> { where('school_type = ?', 'home') }, class_name: 'StudentSchool'
+  has_many :ell_schools, -> { where('school_type = ?', 'ell') }, class_name: 'StudentSchool'
+  has_many :sped_schools, -> { where('school_type = ?', 'sped') }, class_name: 'StudentSchool'
+  has_many :starred_schools, -> { where('starred = ?', true) }, class_name: 'StudentSchool'
 
-  scope :verified, where(address_verified: true)
+  scope :verified, -> { where(address_verified: true) }
 
   attr_accessible   :first_name, :last_name, :grade_level, :primary_language, :session_id, :sibling_school_ids,
                     :sibling_school_names, :street_name, :street_number, :neighborhood, :zipcode, :latitude, :longitude,
@@ -152,6 +152,7 @@ class Student < ActiveRecord::Base
     # loop through the schools returned from the API, find the matching schools in the db,
     # save the eligibility variables on student_schools, and collect the coordinates for the matrix search, below
     if api_schools.present?
+      api_schools = api_schools[:choices]
       self.send("#{school_list_type}_schools".to_sym).clear
       self.update_column("#{school_list_type}_schools_json".to_sym, api_schools.to_json) rescue nil
 
