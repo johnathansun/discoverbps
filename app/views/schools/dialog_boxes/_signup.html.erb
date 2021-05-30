@@ -26,8 +26,8 @@
 
 	<p>You may also register with your Facebook or Twitter account:</p>
 
-	<div class="btn_facebook"><%= link_to image_tag('/assets/buttons/facebook.png'), user_omniauth_authorize_path(:facebook) %></div>
-	<div class="btn_twitter"><%= link_to image_tag('/assets/buttons/twitter.png'), user_omniauth_authorize_path(:twitter) %></div>
+	<div class="btn_facebook"><%= link_to image_tag('/assets/buttons/facebook.png'), user_facebook_omniauth_authorize_path  %></div>
+	<div class="btn_twitter"><%= link_to image_tag('/assets/buttons/twitter.png'), user_twitter_omniauth_authorize_path  %></div>
 
 </div>
 <script>
