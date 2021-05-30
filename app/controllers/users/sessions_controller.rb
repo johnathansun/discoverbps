@@ -2,7 +2,8 @@ class Users::SessionsController < Devise::SessionsController
 	prepend_before_filter :require_no_authentication, only: [ :new, :create ]
 	prepend_before_filter :allow_params_authentication!, only: :create
 	prepend_before_filter :verify_signed_out_user, only: :destroy
-	prepend_before_filter only: [ :create, :destroy ] { request.env["devise.skip_timeout"] = true }
+	prepend_before_action -> { request.env["devise.skip_timeout"] = true }, only: [:create, :destroy]
+	#prepend_before_filter only: [ :create, :destroy ] { request.env["devise.skip_timeout"] = true }
 
 	# GET /resource/sign_in
 	def new
