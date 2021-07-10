@@ -152,7 +152,6 @@ class Student < ActiveRecord::Base
     # loop through the schools returned from the API, find the matching schools in the db,
     # save the eligibility variables on student_schools, and collect the coordinates for the matrix search, below
     if api_schools.present?
-      api_schools = api_schools[:choices]
       self.send("#{school_list_type}_schools".to_sym).clear
       self.update_column("#{school_list_type}_schools_json".to_sym, api_schools.to_json) rescue nil
 
