@@ -117,7 +117,8 @@ module Webservice
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, payload).body
 		Rails.logger.info "********************HOME SCHOOLS ENDPOINT: #{endpoint}"
 		Rails.logger.info "********************HOME SCHOOLS RESPONSE: #{response}"
-		MultiJson.load(response, symbolize_keys: true)
+		resp = MultiJson.load(response, symbolize_keys: true)
+		resp[:choices]
 	end
 
 	##### ZONE SCHOOLS #####
