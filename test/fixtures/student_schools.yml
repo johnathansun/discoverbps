@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+  id: 1
   student_id: 1
   school_id: 1
   tier: MyString
@@ -9,8 +10,11 @@ one:
   distance: MyString
   walk_time: MyString
   drive_time: MyString
+  ranked: true
+  school_type: home
 
 two:
+  id: 2
   student_id: 1
   school_id: 1
   tier: MyString
