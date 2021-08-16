@@ -44,6 +44,8 @@ gem 'test-unit'
 gem 'byebug'
 gem 'protected_attributes'
 gem 'pg', '~> 0.20'
+gem 'rails-perftest'
+gem 'ruby-prof'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

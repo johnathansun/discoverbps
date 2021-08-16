@@ -118,7 +118,7 @@ module Webservice
 		Rails.logger.info "********************HOME SCHOOLS ENDPOINT: #{endpoint}"
 		Rails.logger.info "********************HOME SCHOOLS RESPONSE: #{response}"
 		resp = MultiJson.load(response, symbolize_keys: true)
-		resp[:choices]
+		resp#[:choices]
 	end
 
 	##### ZONE SCHOOLS #####

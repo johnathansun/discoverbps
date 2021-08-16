@@ -9,5 +9,18 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :all
 
+  # def sign_in(user:, password:)
+  #   post user_session_path \
+  #     "user[email]"    => user.email,
+  #     "user[password]" => password
+  #   # post "/users/sign_in" #user_session_path, params: { email: user.email, password: password }
+  # end
+
+  def sign_in(user:, password:)
+    post user_session_path \
+      'user[email]'    => user.email,
+      'user[password]' => password
+  end
+  
   # Add more helper methods to be used by all tests here...
 end
