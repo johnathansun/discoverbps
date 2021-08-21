@@ -100,7 +100,7 @@ module Webservice
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, params).body
 		Rails.logger.info "********************ADDRESS MATCHES ENDPOINT: #{endpoint}"
 		Rails.logger.info "********************ADDRESS MATCHES RESPONSE: #{response}"
-		response.present? ? MultiJson.load(response, symbolize_keys: true) : response
+		response.present? ? MultiJson.load(response, symbolize_keys: true).uniq : response
 	end
 
 

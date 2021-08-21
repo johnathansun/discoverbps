@@ -4,13 +4,13 @@
 
   .menu_list
     .li_frame
-      %div{class: "choice menu_bloc", style: "width: 193px;"}
+      %div{class: "choice menu_bloc", style: "width: 180px;"}
         School Name
 
-      .menu_bloc{style: 'width: 52px;'}
+      .menu_bloc{style: 'width: 81px;'}
         Transit
 
-      .menu_bloc{style: 'width: 140px;'}
+      .menu_bloc{style: 'width: 135px;'}
         Hours
 
       .menu_bloc
@@ -29,7 +29,7 @@
               - if current_student.sibling_school_ids.present? && current_student.sibling_school_ids.include?(school.bps_id)
                 %span{aria: {hidden: 'true'}, class: "select_icon icon-DBPS-Dev-Assets-SRG-12"}
 
-          .box.line.getting_there{style: 'width: 52px;'}
+          .box.line.getting_there{style: 'width: 81px;'}
             - if student_school.walk_distance.present? && student_school.walk_distance.strip != '0.00'
               %span.middle.sortable_distance
                 = spacer_helper(student_school.walk_distance)
@@ -39,7 +39,7 @@
                 = spacer_helper(student_school.distance)
                 &nbsp;mi  
 
-          .box.line.school_hours{style: 'width: 140px;'}
+          .box.line.school_hours{style: 'width: 135px;'}
             %span.middle
               = truncate(school.api_hours.try(:[], :Description), length: 34)
               %br/

@@ -44,7 +44,7 @@
 
                 .school_name.select.line
                   %span.middle
-                    %span.sortable_school_name
+                    %span.sortable_school_name{style: 'font-size: 16px;'}
                       = school.name
                     - if current_student.sibling_school_ids.present? && current_student.sibling_school_ids.try(:include?, school.bps_id)
                       %span{:aria => {hidden: 'true'}, :class => "select_icon icon-DBPS-Dev-Assets-SRG-12"}
@@ -120,7 +120,6 @@
                     %br/
                     .max_range
                       %div{class: 'ajust_range', style: "margin-left: #{school_hours_start_time_helper(school.api_hours.try(:[], :Description))}%; margin-right: #{school_hours_end_time_helper(school.api_hours.try(:[], :Description))}%;"}
-
                 .clr
 
       - else

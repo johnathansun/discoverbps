@@ -3387,11 +3387,16 @@ Print1
   width: 16px;
 }
 .print1 #school_list ul li .school_name {
-  width: 192px;
+  // width: 192px;
+  // font-size: 10px;
+  // line-height: 11px;
+  // padding-left: 9px;
+  width: 180px;
   font-size: 10px;
-  line-height: 11px;
-  padding-left: 9px;
+  line-height: 11px!important;
+  padding-left: 8px;
 }
+
 .print1 #school_list ul li .school_name .select_icon {
   font-size: 15px;
 }
@@ -3419,6 +3424,7 @@ Print1
   padding-left: 9px;
   width: 95px;
 }
+
 .print1 .wrap .box .title {
   font-size: 13px;
   margin-bottom: .5em;
