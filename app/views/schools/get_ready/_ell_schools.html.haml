@@ -41,6 +41,11 @@
                 -#.box.ell_cluster.line
                   .first_block.middle
                     = student_school.ell_cluster
+                  
+                .school_descrip
+                  .right_side
+
+                    = render partial: 'schools/learn/school_details', locals: {school: school, student_school: student_school}
 
                 .clr
 
