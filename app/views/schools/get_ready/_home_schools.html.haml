@@ -120,6 +120,11 @@
                     %br/
                     .max_range
                       %div{class: 'ajust_range', style: "margin-left: #{school_hours_start_time_helper(school.api_hours.try(:[], :Description))}%; margin-right: #{school_hours_end_time_helper(school.api_hours.try(:[], :Description))}%;"}
+                      
+                .school_descrip
+                  .right_side
+
+                    = render partial: 'schools/learn/school_details', locals: {school: school, student_school: student_school}
                 .clr
 
       - else
