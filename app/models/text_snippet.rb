@@ -2,7 +2,7 @@ class TextSnippet < ActiveRecord::Base
 	extend FriendlyId
 	friendly_id :location, use: :slugged
 
-  attr_accessible :location, :text
+  attr_accessible :location, :text, :slug
 
 	def text?
 		self.text.html_safe

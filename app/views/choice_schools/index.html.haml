@@ -5,7 +5,7 @@
     #choice-layout
       .light
         %h2{ style: "margin-bottom: 1em;" }
-          School Choice 2022
+          School Choice #{SCHOOL_CHOICE_YEAR}
         - if flash[:alert].present?
           %h4.alert
             = flash[:alert]
@@ -25,7 +25,7 @@
         %p
           On the following screens, you will find a list of your eligible schools. You can click on each school to learn more about its SQF Tier, hours, uniform policy, extracurricular activities, and more. You can then rank your selection of preferred schools in your desired order. We encourage families to rank ALL listed options. Once you have ranked your schools and pressed submit, you're all set! There’s no need to complete any paper forms. You will receive a confirmation email with your rankings for your own records.
         %p
-          We know that choosing a school for your child is an important decision. If you have questions about school options or the assignment process, please visit one of our Welcome Centers or call the BPS hotline at 617-635-9046.
+          We know that choosing a school for your child is an important decision. If you have questions about school options or the assignment process, please visit one of our Welcome Centers or call the BPS hotline at #{auto_link(BPS_HOTLINE)}.
         %p
           Thank you for choosing Boston Public Schools. We look forward to partnering with your family through high school and beyond.
         %p
@@ -39,6 +39,10 @@
         = link_to "Continue", verify_choice_schools_path(token: params[:token], caseid: params[:caseid]), id: "continue-button"
 
       .light{ style: "font-style: italic; margin-top: 3em;" }
+        For a guide to filling out your online choice form, please click
+        = link_to 'here', "#{PARENT_GUIDE_FORM}", :target => '_blank'
+        %br/
+        %br/
         If you have questions about using this site, please email
         = link_to "onlinechoiceforum@bostonpublicschools.org", "mailto:onlinechoiceforum@bostonpublicschools.org", target: "_blank"
         for support.
