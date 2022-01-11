@@ -34,8 +34,7 @@ class StudentSchool < ActiveRecord::Base
                  special_admissions: school_hash[:IsSpecAdmissions],
                  walk_distance: school_hash[:WalkDistance],
                  dese_tier: school_hash[:DeseTier],
-                 #TODO: was not included before. Verify once
-                 # sort_order: school_hash[:SortOrder]
+                 sort_order: school_hash[:SortOrder],
                  choice_rank: school_hash[:ChoiceRank],
                  tier_explanation: school_hash[:TierExplanation],
                  school_dese_accountability: school_hash[:SchoolDESEAccountability]
