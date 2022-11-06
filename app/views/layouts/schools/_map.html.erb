@@ -1,7 +1,6 @@
 <div id='googleMap' style="width: <%= width %>;"></div>
 
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7fozd7ob9IPH1lgjaP8xDbOwm0udlOPY"></script>
+<script src="<%= ENV['GOOGLE_MAP_URL'] %>"></script>
 
 <script>
     function initialize(){
