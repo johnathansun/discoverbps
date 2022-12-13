@@ -118,7 +118,6 @@ class SchoolsController < ApplicationController
         csv << [current_student.full_address]
         csv << ["ELL: #{current_student.ell_language}"]
         csv << ["SPED: #{current_student.sped_needs}"]
-        csv << ["AWC: #{current_student.awc_invitation}"]
         csv << []
         csv << ['',
           'Name',
