@@ -100,7 +100,7 @@ module Webservice
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, params).body
 		Rails.logger.info "********************ADDRESS MATCHES ENDPOINT: #{endpoint}"
 		Rails.logger.info "********************ADDRESS MATCHES RESPONSE: #{response}"
-		response.present? ? MultiJson.load(response, symbolize_keys: true) : response
+		response.present? ? MultiJson.load(response, symbolize_keys: true).uniq : response
 	end
 
 
@@ -117,7 +117,8 @@ module Webservice
 		response = self.postWithHeader(ENV['SERVICE_HEADER_KEY'], endpoint, payload).body
 		Rails.logger.info "********************HOME SCHOOLS ENDPOINT: #{endpoint}"
 		Rails.logger.info "********************HOME SCHOOLS RESPONSE: #{response}"
-		MultiJson.load(response, symbolize_keys: true)
+		resp = MultiJson.load(response, symbolize_keys: true)
+		resp#[:choices]
 	end
 
 	##### ZONE SCHOOLS #####
@@ -130,6 +131,7 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, grade: grade_level, addressid: addressid, siblingschlist: sibling_school_ids }.to_param
 		extract_from_array = false
 		response = self.get(endpoint, params)
+		Rails.logger.info "********************ZONE SCHOOLS RESPONSE: #{response}"
 		self.extract(response, endpoint, params, extract_from_array, nil)
 	end
 
@@ -163,6 +165,7 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
+		Rails.logger.info "******************** BASIC INFO: #{response}"
 		self.extract(response, endpoint, params, extract_from_array, bps_id, "basic_info")
 	end
 
@@ -173,6 +176,7 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil }.to_param
 		extract_from_array = false
 		response = self.get(endpoint, params)
+		Rails.logger.info "******************** AWARDS INFO: #{response}"
 		self.extract(response, endpoint, params, extract_from_array, bps_id, "awards")
 	end
 
@@ -183,6 +187,7 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
+		Rails.logger.info "******************** DESCRIPTION INFO: #{response}"
 		self.extract(response, endpoint, params, extract_from_array, bps_id, "descriptions")
 	end
 
@@ -193,6 +198,7 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
+		Rails.logger.info "******************** FACILITIES INFO: #{response}"
 		self.extract(response, endpoint, params, extract_from_array, bps_id, "facilities")
 	end
 
@@ -203,6 +209,7 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = false
 		response = self.get(endpoint, params)
+		Rails.logger.info "******************** GRADES INFO: #{response}"
 		self.extract(response, endpoint, params, extract_from_array, bps_id, "grades")
 	end
 
@@ -213,6 +220,7 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
+		Rails.logger.info "******************** HOURS INFO: #{response}"
 		self.extract(response, endpoint, params, extract_from_array, bps_id, "hours")
 	end
 
@@ -223,6 +231,7 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
+		Rails.logger.info "******************** LANGUAGES INFO: #{response}"
 		self.extract(response, endpoint, params, extract_from_array, bps_id, "languages")
 	end
 
@@ -233,6 +242,7 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil }.to_param
 		extract_from_array = false
 		response = self.get(endpoint, params)
+		Rails.logger.info "******************** PARTNERS INFO: #{response}"
 		self.extract(response, endpoint, params, extract_from_array, bps_id, "partners")
 	end
 
@@ -243,6 +253,7 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = false
 		response = self.get(endpoint, params)
+		Rails.logger.info "******************** PHOTOS INFO: #{response}"
 		self.extract(response, endpoint, params, extract_from_array, bps_id, "photos")
 	end
 
@@ -253,6 +264,7 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
+		Rails.logger.info "******************** PREVIEW DATES INFO: #{response}"
 		self.extract(response, endpoint, params, extract_from_array, bps_id, "preview_dates")
 	end
 
@@ -263,6 +275,7 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
+		Rails.logger.info "******************** PROGRAMS INFO: #{response}"
 		self.extract(response, endpoint, params, extract_from_array, bps_id, "programs")
 	end
 
@@ -273,6 +286,7 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
+		Rails.logger.info "******************** SPORTS INFO: #{response}"
 		self.extract(response, endpoint, params, extract_from_array, bps_id, "sports")
 	end
 
@@ -283,6 +297,7 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
+		Rails.logger.info "******************** STUDENT SUPPORT INFO: #{response}"
 		self.extract(response, endpoint, params, extract_from_array, bps_id, "student_support")
 	end
 
@@ -293,6 +308,7 @@ module Webservice
 		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
+		Rails.logger.info "******************** SURROUND CARE INFO: #{response}"
 		self.extract(response, endpoint, params, extract_from_array, bps_id, "surround_care")
 	end
 

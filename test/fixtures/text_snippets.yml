@@ -1,9 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  text: MyText
+  id: 1
+  location: View BPS Quality Report
+  text: BPS Quality Report
+  slug: view-bps-quality-report
 
-two:
-  name: MyString
-  text: MyText
+two: 
+  id: 2
+  location: Footer Intro
+  text: If you have questions or concerns about your list, we encourage you to reach out to us by emailing&nbsp;<a href=\"mailto:discoverbps@bostonpublicschools.org\" target=\"_blank\">discoverbps@bostonpublicschools.org</a>&nbsp;with the address and grade level you are using to search. We will respond within 24 hours and will soon be posting frequently ask questions &amp; answers<br />\r\n<br />\r\nSelecting the Right School for your Child in BPS https://www.youtube.com/watch?v=1oUi00AiiTo
+  slug: footer-intro
+
+three: 
+  id: 3
+  location: footer-link-one
+  text: <big><small><a href=\"https://www.bostonpublicschools.org/Page/6522\">School Preview Days</a></small></big>
+  slug: footer-link-one

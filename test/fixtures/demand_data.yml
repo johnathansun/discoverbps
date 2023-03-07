@@ -4,12 +4,12 @@ one:
   school_id: 1
   bps_id: MyString
   grade_level: MyString
-  applicants: 1
-  open_seats: 1
+  total_applicants: 1
+  applicants_per_open_seat: 1
 
 two:
   school_id: 1
   bps_id: MyString
   grade_level: MyString
-  applicants: 1
-  open_seats: 1
+  total_applicants: 1
+  applicants_per_open_seat: 1

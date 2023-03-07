@@ -1,29 +1,30 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  user_id: 1
-  session_id: MyString
-  first_name: MyString
-  last_name: MyString
-  grade_level: MyString
-  street_number: MyString
-  street_name: MyString
-  zipcode: MyString
-  iep: MyString
-  primary_language: MyString
-  sibling_school_name: MyString
-  sibling_school_id: 1
+# one:
+#   user_id: 1
+#   session_id: MyString
+#   first_name: MyString
+#   last_name: MyString
+#   grade_level: MyString
+#   street_number: MyString
+#   street_name: MyString
+#   zipcode: MyString
+#   primary_language: MyString
+#   sibling_school_names: MyString
+#   sibling_school_ids: 1
 
-two:
+one:
+  id: 1
   user_id: 1
   session_id: MyString
   first_name: MyString
   last_name: MyString
-  grade_level: MyString
+  grade_level: 1
   street_number: MyString
   street_name: MyString
   zipcode: MyString
-  iep: MyString
   primary_language: MyString
-  sibling_school_name: MyString
-  sibling_school_id: 1
+  sibling_school_names: MyString
+  sibling_school_ids: 1
+  address_verified: true
+  ranked: true

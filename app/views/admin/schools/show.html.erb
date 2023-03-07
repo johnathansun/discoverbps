@@ -3,7 +3,7 @@
 	<div id='map-canvas' style="width: 100%;"></div>
 	<!-- END zone where google map in integrated -->
 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADECHQCo4HcnrkfFa1i5h33URo7Ba7o6w&sensor=false"></script>
+	<script src="<%= ENV['GOOGLE_MAP_ADMIN_URL'] + '&sensor=false' %>"></script>
 
 	<script>
 		function initialize(){
@@ -387,6 +387,7 @@
 <% end %>
 
 <h3>Preview Dates</h3>
+<p>(P) In-Person Session; (V) - Virtual Session</p>
 <% if @school.api_preview_dates.present? && @school.api_preview_dates.is_a?(Hash) %>
 	<ul class="with_bullets">
 		<% @school.api_preview_dates.each_pair do |key, value| %>

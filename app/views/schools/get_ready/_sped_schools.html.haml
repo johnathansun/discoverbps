@@ -26,7 +26,7 @@
 
                 .school_name.select.line
                   %span.middle
-                    %span.sortable_school_name
+                    %span.sortable_school_name{style: 'font-size: 16px;'}
                       = school.name
                     - if current_student.sibling_school_ids.present? && current_student.sibling_school_ids.try(:include?, school.bps_id)
                       %span{:aria => {hidden: 'true'}, :class => "select_icon icon-DBPS-Dev-Assets-SRG-12"}
@@ -41,7 +41,11 @@
                 -#.box.sped_cluster.line
                   .first_block.middle
                     = student_school.ell_cluster
+                
+                .school_descrip
+                  .right_side
 
+                    = render partial: 'schools/learn/school_details', locals: {school: school, student_school: student_school}
                 .clr
 
 

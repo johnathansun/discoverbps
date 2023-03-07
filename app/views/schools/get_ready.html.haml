@@ -6,17 +6,17 @@
 .wrap.get_ready
 	.result.clearfix
 
-		#footer_content.column.column_left
+		#footer_content.column.column_left{style: 'width: 22%;'}
 			= render partial: 'layouts/schools/footer'
 
-		#school_list.column.column_center
+		#school_list.column.column_center{style: 'width: 60%;'}
 			= render partial: 'layouts/schools/school_list_tabs'
 
 			= render partial: 'schools/get_ready/home_schools'
 			= render partial: 'schools/get_ready/ell_schools'
 			= render partial: 'schools/get_ready/sped_schools'
 
-		#timeline_wrap.column.column_right
+		#timeline_wrap.column.column_right{style: 'width: 18%;'}
 			= render partial: 'layouts/schools/get_ready_timeline'
 
 	= render partial: 'layouts/schools/footer'
@@ -26,7 +26,7 @@
 	$( document ).ready(function() {
 		//Click on school name to open the full school description in the school line
 		$("#school_list li .li_frame > .school_name").click(function() {
-			$(this).parent().parent().addClass("descrip_open");
+			$(this).parent().parent().toggleClass("descrip_open");
 			$(this).parent().parent().find(".school_descrip").toggle();
 			}
 		);

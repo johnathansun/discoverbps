@@ -110,7 +110,7 @@
                   .first_block.middle
                     %span.middle.sortable_eligibility
                       - if student_school.eligibility.present?
-                        =raw truncate(eligibility_helper(spacer_helper(student_school.eligibility)), length: 30)
+                        = truncate(student_school.eligibility, length: 18)
                       - else
                         &nbsp;
 

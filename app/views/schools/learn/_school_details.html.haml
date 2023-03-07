@@ -91,6 +91,7 @@
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolhours"}
 				Preview Dates
 			%p.descrip.light
+				(P) In-Person Session; (V) - Virtual Session <br/>
 				- preview_dates_list_helper(school).each do |date|
 					•
 					= date
@@ -193,14 +194,6 @@
 				Special Application
 			%p.descrip.light
 				= special_admissions_helper(school.api_description.try(:[], :isspecialappprocedures))
-
-		.box
-			%p.title
-				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_schoolawards"}
-				Advanced Work Class (AWC)
-			%p.descrip.light
-				= awc_helper(school.api_basic_info.try(:[], :IsAWC))
-
 		.box
 			%p.title
 				%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_mcastier"}

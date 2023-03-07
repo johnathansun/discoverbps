@@ -24,7 +24,7 @@
             %div{ style: "display: inline-block;" }
               = link_to "Back", verify_choice_schools_path(token: params[:token]), id: "back-button"
             %div{ style: "display: inline-block;" }
-              = submit_tag :submit, :id => 'continue-button', disable_with: "Please wait..."
+              = submit_tag :submit, id: 'continue-button', data: { disable_with: "Please wait..." }
 
         %div{ style: "margin-top: 1em;" }
           Didn't reveive a confirmation code?

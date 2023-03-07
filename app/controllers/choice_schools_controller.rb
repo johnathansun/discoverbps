@@ -89,7 +89,7 @@ class ChoiceSchoolsController < ApplicationController
       redirect_to success_choice_schools_path, alert: "You have already submitted your school choice list for the current school year. Your choice list is as follows:"
     elsif @studentResponse.try(:[], :RoundEndDate).present? && Time.now > DateTime.parse(@studentResponse.try(:[], :RoundEndDate))       
       @RoundEndDate = @studentResponse.try(:[], :RoundEndDate) 
-      redirect_to choice_schools_path(token: @student.token, caseid: session[:caseid]), alert: " As of #{Date.parse(@RoundEndDate).strftime("%B %d %Y")}, school choice process for the round is closed.  We are no longer accepting choices on this system. If you would like to submit choices for the #{SCHOOL_YEAR_CONTEXT} school year, please visit a Welcome Center."
+      redirect_to choice_schools_path(token: @student.token, caseid: session[:caseid]), alert: " As of #{Date.parse(@RoundEndDate).strftime("%B %d %Y")}, school choice process for the round is closed.  We are no longer accepting choices on this system. If you would like to submit choices for the #{SCHOOL_YEAR_CONTEXT} school year, please contact a Welcome Center."
     else
       if schools = @student.choice_schools.select { |x| x.choice_rank.present? if x.choice_rank != 0 }.sort_by {|x| x.choice_rank }
         @choice_schools = schools
@@ -126,7 +126,7 @@ class ChoiceSchoolsController < ApplicationController
         redirect_to order_choice_schools_path, alert: "Duplicate rankings are not allowed!"
       else
         if properly_formatted && isRankings_Integer && order_ranking
-          response = Webservice.get_student_homebased_choices(session[:caseid], SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE)
+          response = Webservice.get_student_homebased_choices(session[:caseid], SCHOOL_YEAR_CONTEXT, SERVICE_CLIENT_CODE, session[:session_token])
           school_ranking = params[:schools].values.reject(&:empty?).count
           count = school_ranking
           params[:schools].each do |id, rank|
