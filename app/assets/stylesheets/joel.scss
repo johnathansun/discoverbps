@@ -232,13 +232,13 @@ input, select {
 	cursor: pointer !important;
 }
 h4.alert {
-	color: $red;
+	color: #e71c26;
 	margin-bottom: 2em;
 }
 .flash_alert {
 	font-size: 16px;
 	color: white;
-	background-color: $red;
+	background-color: #e71c26;
 	padding: 20px;
 	margin-bottom: 30px;
 }
@@ -279,7 +279,7 @@ h4.alert {
 	color: white;
 	text-decoration: none;
 	border: none;
-	background-color: $med_gray;
+	background-color: #999;
 	padding: 10px 15px 10px 15px;
 	margin-right: 2px;
 }
@@ -290,17 +290,17 @@ h4.alert {
 	color: white;
 	text-decoration: none;
 	border: none;
-	background-color: $orange;
+	background-color: #FC5B00;
 	padding: 10px 15px 10px 15px;
 }
 
 #continue-button:hover {
-	background-color: $light_orange;
+	background-color: #FC7B33;
 }
 
 .sortable_school_name {
 	cursor: pointer;
-	color: $blue;
+	color: #0077CF;
 }
 
 .sortable_school_name:hover {
@@ -320,5 +320,5 @@ h4.alert {
 	color: white;
 }
 .discover_home_button:hover {
-	color: $yellow;
+	color: #FF0;
 }
