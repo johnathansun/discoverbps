@@ -1,3 +1,4 @@
+- @student_school = StudentSchool.last
 .wrap.global_map{style: 'margin-top: 30px; padding: 0px;'}
 	= render partial: 'layouts/schools/map', locals: {students_list: [current_student], school: @school, map_controls: false, width: '100%'}
 
@@ -102,21 +103,17 @@
 							= grade_levels_helper(@school.grade_levels)
 
 					.box
-						- if TRANSITION_GRADES.include?(current_student.grade_level)
-							%p.title
-								%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
-								= "#{current_student.formatted_grade_level_name} Demand (#{current_school_year_range})"
-							%p.descrip.light
-								= @school.open_seats(current_student.grade_level)
-								open seats
-								%br/
-								= @school.applicants(current_student.grade_level)
-								applicants
-								%br/
-								= @school.applicants_per_open_seat(current_student.grade_level, last_school_year)
-								applicants/open seat
-							.max_range
-								%div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
+						%p.title
+							%span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_enrollment"}
+							= 'Demand Reports'
+						%p.descrip.light
+							See Seat and applicant data :
+							%br/
+							= link_to 'Latest Demand Report', latest_demand_data('latest-demand-report'), target: "_blank", class: "text_B0"
+							%br/
+							= link_to 'Historic Demand Data', 'https://www.bostonpublicschools.org/Page/6484', target: '_blank', class: "text_B0"
+						.max_range
+							%div{class: 'ajust_range', style: "margin-left: 0; margin-right: 50%;"}
 
 						%p.title
 							- unless TRANSITION_GRADES.include?(current_student.grade_level)

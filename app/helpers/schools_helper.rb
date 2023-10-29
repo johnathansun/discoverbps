@@ -253,4 +253,8 @@ module SchoolsHelper
 		@formatSchoolId = sql_helper_group_schoolId(schoolId, grade)
 		return "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFEnglish/FullInteractive?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@formatSchoolId}"
 	end
+
+	def latest_demand_data(slug)
+		TextSnippet.find_by(slug: slug).try(:text)
+	end
 end
