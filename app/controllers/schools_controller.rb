@@ -141,11 +141,7 @@ class SchoolsController < ApplicationController
           'Sports',
           'Special Application',
           'Uniform Policy',
-          'School Email',
-          "Open Seats for Next Year Registration",
-          "Applicants",
-          "Applicants/Open Seat"
-
+          'School Email'
           ]
         csv << []
 
