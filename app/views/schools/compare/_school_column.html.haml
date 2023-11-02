@@ -18,19 +18,6 @@
             - else
               %span{:aria => {hidden: 'true'}, id: "school_#{school.id}", data: {tags: "['#{preference.name}']"}, :class => "icon category_icon preference_#{preference.id}_icon #{category.glyph_class}", style: "display: none;", title: "#{preference.name}"}
 
-
-    - if TRANSITION_GRADES.include?(current_student.grade_level)
-      .school_demand.line.light
-        = school.open_seats(current_student.grade_level)
-        open seats
-        %br/
-        = school.applicants(current_student.grade_level)
-        applicants
-        %br/
-        = school.applicants_per_open_seat(current_student.grade_level, last_school_year)
-        applicants/open seat
-
-
     .school_travel.line.light
       -if student_school.walk_distance.present? && student_school.walk_distance.strip != '0.00'
         = spacer_helper(student_school.walk_distance)
@@ -38,7 +25,7 @@
       -else  
         = spacer_helper(student_school.distance)
         &nbsp;mi       
-        
+
 
     .school_eligibility.line.light
       =raw eligibility_helper(spacer_helper(student_school.eligibility))
