@@ -194,10 +194,7 @@ class SchoolsController < ApplicationController
           school.api_description.try(:[], :specialapplicationnarrative),
           school.api_description.try(:[], :uniformpolicy),
           school.api_basic_info.try(:[], :schemail),
-          '',
-          school.open_seats(current_student.grade_level),
-          school.applicants(current_student.grade_level),
-          school.applicants_per_open_seat(current_student.grade_level, last_school_year)
+          ''
           ]
       end
       csv << []

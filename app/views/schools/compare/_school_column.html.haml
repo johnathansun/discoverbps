@@ -46,9 +46,6 @@
     .school_grades.line.light
       = grade_levels_helper(school.grade_levels)
 
-    .school_enrollment.line.light
-      = school.total_seats(current_student.grade_level)
-
     .school_special_app.line.light
       = special_admissions_helper(school.api_description.try(:[], :isspecialappprocedures))
 
