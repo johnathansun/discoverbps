@@ -20,12 +20,11 @@
 
     .school_travel.line.light
       -if student_school.walk_distance.present? && student_school.walk_distance.strip != '0.00'
-        = spacer_helper(student_school.walk_distance)
+        #{spacer_helper(number_with_precision student_school.walk_distance, :precision => 2)}
         &nbsp;mi
       -else  
-        = spacer_helper(student_school.distance)
-        &nbsp;mi       
-
+        #{spacer_helper(number_with_precision student_school.walk_distance, :precision => 2)}
+        &nbsp;mi
 
     .school_eligibility.line.light
       =raw eligibility_helper(spacer_helper(student_school.eligibility))
