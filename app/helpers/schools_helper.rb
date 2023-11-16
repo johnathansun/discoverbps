@@ -1,3 +1,5 @@
+require 'uri'
+require 'base64'
 module SchoolsHelper
 
 	def facilities_list_helper(school)
@@ -252,6 +254,30 @@ module SchoolsHelper
 	def sqf_helper_string(schoolId, grade)
 		@formatSchoolId = sql_helper_group_schoolId(schoolId, grade)
 		return "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFEnglish/FullInteractive?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@formatSchoolId}"
+	end
+
+	def generate_reporting_links(reporting_ids, home_school_ids)
+		{
+			english: encode_url(reporting_ids[:english], home_school_ids),
+			spanish: encode_url(reporting_ids[:spanish], home_school_ids),
+			arabic: encode_url(reporting_ids[:arabic], home_school_ids),
+			cape_verdean: encode_url(reporting_ids[:cape_verdean], home_school_ids),
+			chinese: encode_url(reporting_ids[:chinese], home_school_ids),
+			french: encode_url(reporting_ids[:french], home_school_ids),
+			haitian: encode_url(reporting_ids[:haitian], home_school_ids),
+			portuguese: encode_url(reporting_ids[:portuguese], home_school_ids),
+			somali: encode_url(reporting_ids[:somali], home_school_ids),
+			vietnamese: encode_url(reporting_ids[:vietnamese], home_school_ids)
+		}
+	end
+
+	def encode_url(reporting_id, values)
+		# Encode the reporting_id and values
+		encoded_reporting_id = URI.encode_www_form_component(reporting_id)
+		encoded_values = Base64.urlsafe_encode64(values)
+
+		# Construct the URL with encoded values
+		"https://lookerstudio.google.com/reporting/#{encoded_reporting_id}/page/pzCYD?params=%7B%22df29%22:%22include%25EE%2580%25801%25EE%2580%2580IN%25EE%2580%2580#{encoded_values}%22%7D"
 	end
 
 	def latest_demand_data(slug)

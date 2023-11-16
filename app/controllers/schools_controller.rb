@@ -15,6 +15,7 @@ class SchoolsController < ApplicationController
         redirect_to root_url
       else
         @home_school_ids = @home_schools.collect {|x| sql_helper_group_schoolId(x.school.bps_id, current_student.grade_level)}.join(',')
+        looker_studio_links
         respond_to do |format|
           format.html
           format.csv do
@@ -200,4 +201,20 @@ class SchoolsController < ApplicationController
       csv << []
     end
 
+  def looker_studio_links
+    @reporting_ids = {
+      english: 'adb1bf7f-dcaf-41d1-bcb6-f8a25867a65b',
+      spanish: '38279aff-cfec-48d0-8195-ad49ed12a53b',
+      arabic: 'cd01cbbb-7554-40c2-9ee4-a4bbe12f563d',
+      cape_verdean: 'ce2342e5-24ba-4531-bd1b-2d3672ae1f8e',
+      chinese: '694b8f3e-2b1f-43a3-bada-9bf8b7a4a9aa',
+      french: '5fbfca78-31a2-44d7-9135-f25fd185d39',
+      haitian: '29be5199-3e4e-4c40-8c71-93dac18f64af',
+      portuguese: 'ee0b4501-a808-494f-8ed4-6e805840aa9d',
+      somali: '756c7d79-2423-4af2-9563-e599c6f47b65',
+      vietnamese: '31095212-f51d-492c-a228-eb985aaa1ff2'
+    }
+
+    @reporting_links = generate_reporting_links(@reporting_ids, @home_school_ids)
+  end
 end
