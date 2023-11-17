@@ -272,11 +272,14 @@ module SchoolsHelper
 	end
 
 	def encode_url(reporting_id, values)
-		# Encode the reporting_id and values
+		values_array = values.is_a?(Array) ? values : values.split(',')
+		# Encode the reporting_id
 		encoded_reporting_id = URI.encode_www_form_component(reporting_id)
-		encoded_values = Base64.urlsafe_encode64(values)
 
-		# Construct the URL with encoded values
+		# Format and encode the dynamic values
+		encoded_values = values_array.map { |value| URI.encode_www_form_component(value) }.join('%25EE%2580%2580')
+
+		# Construct the URL
 		"https://lookerstudio.google.com/reporting/#{encoded_reporting_id}/page/pzCYD?params=%7B%22df29%22:%22include%25EE%2580%25801%25EE%2580%2580IN%25EE%2580%2580#{encoded_values}%22%7D"
 	end
 
@@ -284,3 +287,6 @@ module SchoolsHelper
 		TextSnippet.find_by(slug: slug).try(:text)
 	end
 end
+
+
+
