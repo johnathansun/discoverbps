@@ -287,6 +287,3 @@ module SchoolsHelper
 		TextSnippet.find_by(slug: slug).try(:text)
 	end
 end
-
-
-
