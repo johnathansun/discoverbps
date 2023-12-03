@@ -238,22 +238,24 @@ module SchoolsHelper
 				schoolId = '4192'				
 			elsif schoolId == '4030'
 				schoolId = '4410'							
-			elsif schoolId == '2440'
-				schoolId = '4391'	
-			elsif (schoolId == '2440' || schoolId == '4391' || schoolId == '1140')
-				if (grade == '09'|| grade == '10' || grade =='11' || grade == '12')
+			elsif schoolId == '4670'
+				schoolId = '4151'
+			elsif schoolId == '1194'
+				schoolId = '‘1195’'
+			elsif schoolId == '4391' || schoolId == '1140'
+				if grade == '09'|| grade == '10' || grade =='11' || grade == '12'
 					schoolId = '1140'
 				else
 					schoolId = '4391'	
 				end	
 			end
 		end
-		return schoolId
+		schoolId
 	end	
 
-	def sqf_helper_string(schoolId, grade)
-		@formatSchoolId = sql_helper_group_schoolId(schoolId, grade)
-		return "https://dashboard.cityofboston.gov/t/BostonPublicSchool/views/SQFEnglish/FullInteractive?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no&School%20Code=#{@formatSchoolId}"
+	def sqf_helper_string(school_id, grade)
+		format_school_id = sql_helper_group_schoolId(school_id, grade)
+		"https://lookerstudio.google.com/reporting/#{@reporting_ids[:english]}/page/pzCYD?params=%7B%22df29%22:%22include%25EE%2580%25801%25EE%2580%2580IN%25EE%2580%2580#{format_school_id}%22%7D"
 	end
 
 	def generate_reporting_links(reporting_ids, home_school_ids)
