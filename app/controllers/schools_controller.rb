@@ -202,6 +202,7 @@ class SchoolsController < ApplicationController
     end
 
   def looker_studio_links
+    # TODO: Move these values to admin site
     @reporting_ids = {
       english: 'adb1bf7f-dcaf-41d1-bcb6-f8a25867a65b',
       spanish: '38279aff-cfec-48d0-8195-ad49ed12a53b',

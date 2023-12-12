@@ -1,6 +1,7 @@
 require 'uri'
 require 'base64'
 module SchoolsHelper
+	ENGLISH = 'adb1bf7f-dcaf-41d1-bcb6-f8a25867a65b'.freeze
 
 	def facilities_list_helper(school)
 		facilities = school.api_facilities
@@ -255,7 +256,9 @@ module SchoolsHelper
 
 	def sqf_helper_string(school_id, grade)
 		format_school_id = sql_helper_group_schoolId(school_id, grade)
-		"https://lookerstudio.google.com/reporting/#{@reporting_ids[:english]}/page/pzCYD?params=%7B%22df29%22:%22include%25EE%2580%25801%25EE%2580%2580IN%25EE%2580%2580#{format_school_id}%22%7D"
+		# @reporting_ids from controller was not accessible without passing as an argument
+		# moved to constant
+		"https://lookerstudio.google.com/reporting/#{ENGLISH}/page/pzCYD?params=%7B%22df29%22:%22include%25EE%2580%25801%25EE%2580%2580IN%25EE%2580%2580#{format_school_id}%22%7D"
 	end
 
 	def generate_reporting_links(reporting_ids, home_school_ids)
