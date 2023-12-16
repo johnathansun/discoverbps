@@ -1,4 +1,3 @@
-- @student_school = StudentSchool.last
 .wrap.global_map{style: 'margin-top: 30px; padding: 0px;'}
 	= render partial: 'layouts/schools/map', locals: {students_list: [current_student], school: @school, map_controls: false, width: '100%'}
 
@@ -36,12 +35,12 @@
 					- if @student_school.try(:walk_distance).present?  && @student_school.walk_distance.strip != '0.00'
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"}
-							= raw @student_school.try(:walk_distance)
+							= raw (number_with_precision @student_school.try(:walk_distance))
 							mi from home
 					-else
 						%p.title
 							%span{aria: {hidden: 'true'}, class: "fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_distance"}
-							= raw @student_school.try(:distance)
+							= raw (number_with_precision @student_school.try(:distance))
 							mi from home		
 
 					%p.descrip.light
