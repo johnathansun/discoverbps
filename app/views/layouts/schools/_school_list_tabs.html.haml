@@ -7,12 +7,13 @@
           Home-based
           %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
-    - if current_student.ell_language.present?
-      %div{id: 'ell_schools_tab', class: "school_list_tab #{params[:list_type] == 'ell' ? 'active' : '' }"}
-        = link_to schools_path(list_type: 'ell') do
-          %span.name
-            ELL
-            %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
+    -# HIDE ELL TAB, keeping it commented for until further notice
+    -# - if current_student.ell_language.present?
+    -#   %div{id: 'ell_schools_tab', class: "school_list_tab #{params[:list_type] == 'ell' ? 'active' : '' }"}
+    -#     = link_to schools_path(list_type: 'ell') do
+    -#       %span.name
+    -#         ELL
+    -#         %span{aria: {hidden: 'true'}, class: "indicator icon-DBPS-Dev-Assets-SRG-08"}
 
     - if current_student.sped_needs.present?
       %div{id: 'sped_schools_tab', class: "school_list_tab #{params[:list_type] == 'sped' ? 'active' : '' }"}
@@ -33,15 +34,17 @@
         $('#home_schools_list').show();
       });
 
-      $('#ell_schools_tab').click(function() {
-        event.preventDefault();
-        $('.school_list_tab').removeClass("active");
-        $('#ell_schools_tab').addClass("active");
-        $('#preferences').hide();
-        $('#your_rank_row').hide();
-        $('.schools_list').hide();
-        $('#ell_schools_list').show();
-      });
+      // HIDE ELL TAB
+      // $('#ell_schools_tab').click(function() {
+      //   event.preventDefault();
+      //   $('.school_list_tab').removeClass("active");
+      //   $('#ell_schools_tab').addClass("active");
+      //   $('#preferences').hide();
+      //   $('#your_rank_row').hide();
+      //   $('.schools_list').hide();
+      //   $('#ell_schools_list').show();
+      // });
+
       $('#sped_schools_tab').click(function() {
         event.preventDefault();
         $('.school_list_tab').removeClass("active");
