@@ -315,7 +315,15 @@ module Webservice
 	private
 
 	def self.get(endpoint, params)
-		Faraday.new(url: "#{endpoint}?#{params}").get.body
+		connection = Faraday.new(url: "#{endpoint}?#{params}") do |conn|
+			conn.options.timeout = 15 # seconds
+			conn.options.open_timeout = 10 # seconds
+		end
+		connection.get.body
+		rescue Faraday::ConnectionFailed => e
+			Rails.logger.error "**** Connection failed: #{e.message}"
+		rescue Faraday::TimeoutError => e
+			Rails.logger.error "**** Timeout error: #{e.message}"
 	end
 
 	def self.getWithHeader(headerKey, endpoint, params)
