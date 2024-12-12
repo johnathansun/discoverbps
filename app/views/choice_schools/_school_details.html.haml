@@ -197,12 +197,6 @@
         BPS Quality Tier :  
         = school_tier_helper(student_school.tier)
         = student_school.tier_explanation if student_school.tier_explanation.present?
-        %br/
-        State Accountability Level (DESE):
-        = school_tier_helper(student_school.dese_tier)
-        = student_school.school_dese_accountability if student_school.school_dese_accountability.present?
-
-
     .box
       %p.title
         %span{:aria => {hidden: 'true'}, :class => "icon fit_icon icon-DBPS-Preferences-Icons-20130930-SRG_uniformpolicy"}
