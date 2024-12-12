@@ -199,10 +199,6 @@
 				= school_tier_helper(student_school.tier)
 				= "- #{student_school.tier_explanation}" if student_school.tier_explanation.present?
 				%br
-				State Accountability Level (DESE) -
-				= school_tier_helper(student_school.dese_tier)
-				= student_school.school_dese_accountability if student_school.school_dese_accountability.present?
-				%br
 				- if school_validtier_helper(student_school.tier)
 					= link_to TextSnippet.find('view-bps-quality-report').try(:text), sqf_helper_string(school.bps_id, current_student.grade_level), target: "_blank", class: "text_B0"
 				//- if school_validtier_helper(student_school.dese_tier)
