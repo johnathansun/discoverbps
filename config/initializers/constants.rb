@@ -1,6 +1,7 @@
 SCHOOL_YEAR  = TextSnippet.find_by_location("School Year").try(:text)
 SCHOOL_CHOICE_YEAR = TextSnippet.find_by_slug('school-choice-year').try(:text)
 SCHOOL_YEAR_CONTEXT = TextSnippet.find_by_slug('school-year-context').try(:text)
+LEGACY_SCHOOL_YEAR = TextSnippet.find_by_slug('legacy-school-year').try(:text)
 AWC_GRADES = ['4', '5', '6'].freeze
 TRANSITION_GRADES = ['K0', 'K1', 'K2', '6', '9'].freeze
 NON_TRANSITION_GRADES = ['1', '2', '3', '4', '5', '7', '8', '10', '11', '12'].freeze

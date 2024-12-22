@@ -184,7 +184,7 @@ module Webservice
 
 	def self.get_description(bps_id)
   	endpoint = "#{ENV['WEBSERVICE_URL']}/Description"
-		params = { schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil }.to_param
+		params = { schyear: LEGACY_SCHOOL_YEAR, sch: bps_id, translationlanguage: nil }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
 		Rails.logger.info "******************** DESCRIPTION INFO: #{response}"
@@ -195,7 +195,7 @@ module Webservice
 
 	def self.get_facilities(bps_id)
 		endpoint = "#{ENV['WEBSERVICE_URL']}/Facilities"
-		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
+		params = { schyear: LEGACY_SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
 		Rails.logger.info "******************** FACILITIES INFO: #{response}"
@@ -206,7 +206,7 @@ module Webservice
 
 	def self.get_grades(bps_id)
 		endpoint = "#{ENV['WEBSERVICE_URL']}/Grades"
-		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
+		params = { schyear: LEGACY_SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = false
 		response = self.get(endpoint, params)
 		Rails.logger.info "******************** GRADES INFO: #{response}"
@@ -217,7 +217,7 @@ module Webservice
 
 	def self.get_hours(bps_id)
 		endpoint  = "#{ENV['WEBSERVICE_URL']}/Hours"
-		params = { schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil }.to_param
+		params = { schyear: LEGACY_SCHOOL_YEAR, sch: bps_id, translationlanguage: nil }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
 		Rails.logger.info "******************** HOURS INFO: #{response}"
@@ -228,7 +228,7 @@ module Webservice
 
 	def self.get_languages(bps_id)
 		endpoint = "#{ENV['WEBSERVICE_URL']}/Languages"
-		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
+		params = { schyear: LEGACY_SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
 		Rails.logger.info "******************** LANGUAGES INFO: #{response}"
@@ -239,7 +239,7 @@ module Webservice
 
 	def self.get_partners(bps_id)
 		endpoint = "#{ENV['WEBSERVICE_URL']}/Partners"
-		params = { schyear: SCHOOL_YEAR, sch: bps_id, translationlanguage: nil }.to_param
+		params = { schyear: LEGACY_SCHOOL_YEAR, sch: bps_id, translationlanguage: nil }.to_param
 		extract_from_array = false
 		response = self.get(endpoint, params)
 		Rails.logger.info "******************** PARTNERS INFO: #{response}"
@@ -250,7 +250,7 @@ module Webservice
 
 	def self.get_photos(bps_id)
 		endpoint = "#{ENV['WEBSERVICE_URL']}/Photos"
-		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
+		params = { schyear: LEGACY_SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = false
 		response = self.get(endpoint, params)
 		Rails.logger.info "******************** PHOTOS INFO: #{response}"
@@ -261,7 +261,7 @@ module Webservice
 
 	def self.get_preview_dates(bps_id)
 		endpoint = "#{ENV['WEBSERVICE_URL']}/PreviewDates"
-		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
+		params = { schyear: LEGACY_SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
 		Rails.logger.info "******************** PREVIEW DATES INFO: #{response}"
@@ -272,7 +272,7 @@ module Webservice
 
 	def self.get_programs(bps_id)
 		endpoint = "#{ENV['WEBSERVICE_URL']}/Programs"
-		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
+		params = { schyear: LEGACY_SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
 		Rails.logger.info "******************** PROGRAMS INFO: #{response}"
@@ -283,7 +283,7 @@ module Webservice
 
 	def self.get_sports(bps_id)
 		endpoint = "#{ENV['WEBSERVICE_URL']}/Sports"
-		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
+		params = { schyear: LEGACY_SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
 		Rails.logger.info "******************** SPORTS INFO: #{response}"
@@ -294,7 +294,7 @@ module Webservice
 
 	def self.get_student_support(bps_id)
 		endpoint = "#{ENV['WEBSERVICE_URL']}/StudentSupport"
-		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
+		params = { schyear: LEGACY_SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
 		Rails.logger.info "******************** STUDENT SUPPORT INFO: #{response}"
@@ -305,7 +305,7 @@ module Webservice
 
 	def self.get_surround_care(bps_id)
 		endpoint = "#{ENV['WEBSERVICE_URL']}/SurroundCare"
-		params = { schyear: SCHOOL_YEAR, sch: bps_id }.to_param
+		params = { schyear: LEGACY_SCHOOL_YEAR, sch: bps_id }.to_param
 		extract_from_array = true
 		response = self.get(endpoint, params)
 		Rails.logger.info "******************** SURROUND CARE INFO: #{response}"
