@@ -1,11 +1,15 @@
 .search
 	.logo.discover
-		%span{:aria => {hidden: 'true'}, :class => 'icon-DBPS-Dev-Assets-SRG-01'}
+		%span{ aria: { hidden: 'true' }, class: 'icon-DBPS-Dev-Assets-SRG-01' }
+
 	.search_header
 		.title_bloc
 			%h1
 				Welcome to Boston Public Schools Registration
-			-#= image_tag('logo_beta.png', class: 'logo_beta', alt: 'beta')
+			%div#redirect-banner
+				Discover BPS has been replaced by
+				= link_to "Great Starts.", "https://boston.explore.avela.org", id: "great-starts-link"
+				You will be re-directed shortly.
 
 	.search_section_content
 		%section.search_section.first
@@ -160,3 +164,21 @@
 			-# TIMELINE ---------------------
 			.content_right
 				= render partial: 'students/timeline'
+
+
+:javascript
+	document.addEventListener("DOMContentLoaded", function() {
+		var banner = document.getElementById('redirect-banner');
+		banner.style.opacity = 0;
+		banner.style.transition = "opacity 2s ease-in-out";
+		setTimeout(function() {
+			banner.style.opacity = 1;
+		}, 100);
+
+		setTimeout(function() {
+			var link = document.getElementById('great-starts-link');
+			if (link) {
+				window.location.href = link.href;
+			}
+		}, 10000);
+	});
